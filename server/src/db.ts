@@ -6,6 +6,10 @@ if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is required — set it in .env or Replit Secrets");
 }
 
+// DATABASE_URL must use the Supabase Transaction Pooler (port 6543,
+// host *.pooler.supabase.com). The direct connection host
+// (db.*.supabase.co, port 5432) requires IPv6 and will fail on Replit.
+// Get the pooler URL from: Supabase dashboard → Connect → Transaction pooler.
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
