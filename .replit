@@ -1,0 +1,22 @@
+run = "npm install && npm run build --workspace=client && npm run start --workspace=server"
+modules = ["nodejs-20"]
+
+[nix]
+channel = "stable-25_05"
+
+[[ports]]
+localPort = 5000
+externalPort = 80
+
+[deployment]
+run = ["sh", "-c", "npm install && npm run build --workspace=client && npm run start --workspace=server"]
+deploymentTarget = "cloudrun"
+
+[agent]
+expertMode = true
+
+[userenv]
+
+# ⚠️ SÉCURITÉ — Ne JAMAIS mettre de secrets en clair ici (ce fichier est versionné).
+# Les secrets (DATABASE_URL, JWT_SECRET, ANTHROPIC_API_KEY) doivent être
+# renseignés dans l'onglet "Secrets" de Replit (Tools → Secrets).
