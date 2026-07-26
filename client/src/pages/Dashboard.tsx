@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
-import { Link } from "react-router-dom";
-import { api, type DeckSummary, type DocumentSummary } from "../api";
+import { api, type DocumentSummary } from "../api";
 import { useAuth } from "../auth";
 import { useLang } from "../i18n";
 
@@ -8,15 +7,11 @@ export function Dashboard() {
   const { t, lang, setLang } = useLang();
   const { user, logout } = useAuth();
   const [documents, setDocuments] = useState<DocumentSummary[]>([]);
-  const [decks, setDecks] = useState<DeckSummary[]>([]);
-  const [busyDocId, setBusyDocId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
 
   async function refresh() {
-    const [docs, deckList] = await Promise.all([api.listDocuments(), api.listDecks()]);
-    setDocuments(docs);
-    setDecks(deckList);
+    setDocuments(await api.listDocuments());
   }
 
   useEffect(() => {
@@ -34,19 +29,6 @@ export function Dashboard() {
       setError((err as Error).message);
     } finally {
       if (fileInput.current) fileInput.current.value = "";
-    }
-  }
-
-  async function onGenerate(documentId: number) {
-    setBusyDocId(documentId);
-    setError(null);
-    try {
-      await api.generate(documentId);
-      await refresh();
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setBusyDocId(null);
     }
   }
 
@@ -85,24 +67,12 @@ export function Dashboard() {
         <p>{t.noDocuments}</p>
       ) : (
         <ul className="document-list">
-          {documents.map((doc) => {
-            const deck = decks.find((d) => d.document_id === doc.id);
-            return (
-              <li key={doc.id} className="document-row">
-                <span>{doc.filename}</span>
-                {deck ? (
-                  <div className="row-actions">
-                    <Link to={`/deck/${deck.id}`}>{t.viewDeck}</Link>
-                    <Link to={`/document/${doc.id}/synthesis`}>{t.viewSynthesis}</Link>
-                  </div>
-                ) : (
-                  <button onClick={() => onGenerate(doc.id)} disabled={busyDocId === doc.id}>
-                    {busyDocId === doc.id ? t.generating : t.generate}
-                  </button>
-                )}
-              </li>
-            );
-          })}
+          {documents.map((doc) => (
+            <li key={doc.id} className="document-row">
+              <span>{doc.filename}</span>
+              <button disabled>{t.aiComingSoon}</button>
+            </li>
+          ))}
         </ul>
       )}
     </div>
