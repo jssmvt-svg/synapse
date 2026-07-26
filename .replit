@@ -1,5 +1,5 @@
 run = "npm install && npm run build --workspace=client && npm run start --workspace=server"
-modules = ["nodejs-20"]
+modules = ["nodejs-20", "web"]
 
 [nix]
 channel = "stable-25_05"
