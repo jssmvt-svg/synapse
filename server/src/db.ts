@@ -84,11 +84,34 @@ const SCHEMA = `
   );
 `;
 
+const MAX_RETRIES = 5;
+const RETRY_DELAY_MS = 2000;
+
 export const db = {
   prepare(sql: string) {
     return statement(sql);
   },
   async init() {
-    await pool.query(SCHEMA);
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        await pool.query(SCHEMA);
+        if (attempt > 1) {
+          console.log(`Database connected successfully on attempt ${attempt}.`);
+        }
+        return;
+      } catch (err) {
+        lastError = err;
+        const delay = RETRY_DELAY_MS * attempt;
+        console.error(
+          `Database connection attempt ${attempt}/${MAX_RETRIES} failed. Retrying in ${delay / 1000}s…`,
+          err instanceof Error ? err.message : err,
+        );
+        if (attempt < MAX_RETRIES) {
+          await new Promise((resolve) => setTimeout(resolve, delay));
+        }
+      }
+    }
+    throw lastError;
   },
 };

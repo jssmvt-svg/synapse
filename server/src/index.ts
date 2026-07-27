@@ -49,6 +49,9 @@ db.init()
     });
   })
   .catch((err) => {
-    console.error("Échec de l'initialisation de la base de données", err);
+    console.error(
+      "Failed to initialise the database after all retry attempts. Shutting down.",
+      err,
+    );
     process.exit(1);
   });
