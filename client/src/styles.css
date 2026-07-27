@@ -71,7 +71,7 @@ button:disabled {
 }
 
 .dashboard {
-  max-width: 720px;
+  max-width: 1280px;
   margin: 2rem auto;
   padding: 0 1rem;
 }
@@ -104,6 +104,116 @@ button:disabled {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 8px;
+  cursor: pointer;
+}
+
+.document-row.selected {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--card-bg));
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+}
+
+.col {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem;
+  min-height: 320px;
+}
+
+.col h2 {
+  margin-top: 0;
+  font-size: 1.05rem;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.col-chat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.mascot-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+
+.mascot-avatar {
+  font-size: 3rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--accent) 12%, var(--card-bg));
+  border-radius: 50%;
+}
+
+.mascot-bubble {
+  max-width: 26rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.chat-input-row input {
+  flex: 1;
+}
+
+.studio-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.studio-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 1rem;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: #888;
+  font-weight: normal;
+  text-align: center;
 }
 
 .row-actions {
