@@ -3,6 +3,8 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./auth";
 import { Dashboard } from "./pages/Dashboard";
 import { DeckView } from "./pages/DeckView";
+import { Library } from "./pages/Library";
+import { LibraryChapterView } from "./pages/LibraryChapterView";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { SynthesisView } from "./pages/SynthesisView";
@@ -40,6 +42,22 @@ export function App() {
         element={
           <RequireAuth>
             <SynthesisView />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/library"
+        element={
+          <RequireAuth>
+            <Library />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/library/chapter/:id"
+        element={
+          <RequireAuth>
+            <LibraryChapterView />
           </RequireAuth>
         }
       />

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type ChangeEvent } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api, type DocumentSummary } from "../api";
 import { useAuth } from "../auth";
 import { useLang } from "../i18n";
@@ -55,6 +55,9 @@ export function Dashboard() {
       <header className="dashboard-header">
         <h1>{t.appName}</h1>
         <div className="header-actions">
+          <Link to="/library" className="library-link">
+            {t.libraryTitle}
+          </Link>
           <button
             className="lang-toggle"
             onClick={() => {

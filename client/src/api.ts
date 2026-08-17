@@ -64,6 +64,34 @@ export interface Synthesis {
   content_en: string;
 }
 
+export interface LibraryChapter {
+  id: number;
+  annee: number;
+  semestre: number;
+  matiere: string;
+  ordre: number;
+  titre_fr: string;
+  titre_en: string;
+  description_fr: string;
+  description_en: string;
+  icone: string;
+}
+
+export interface LibraryMatiere {
+  matiere: string;
+  chapitres: LibraryChapter[];
+}
+
+export interface LibrarySemestre {
+  semestre: number;
+  matieres: LibraryMatiere[];
+}
+
+export interface LibraryAnnee {
+  annee: number;
+  semestres: LibrarySemestre[];
+}
+
 export const api = {
   register: (email: string, password: string, langPref: "fr" | "en") =>
     request<{ token: string; user: User }>("/auth/register", {
@@ -99,4 +127,7 @@ export const api = {
   listDecks: () => request<DeckSummary[]>("/decks"),
   getDeck: (id: number) => request<DeckSummary>(`/decks/${id}`),
   getFlashcards: (id: number) => request<Flashcard[]>(`/decks/${id}/flashcards`),
+  getLibrary: () => request<LibraryAnnee[]>("/library"),
+  getLibraryFlashcards: (chapterId: number) =>
+    request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),
 };

@@ -39,6 +39,10 @@ const DICT = {
     cardProgress: (i: number, total: number) => `Carte ${i}/${total}`,
     haveAccount: "Déjà un compte ?",
     noAccount: "Pas encore de compte ?",
+    libraryTitle: "Bibliothèque",
+    libraryComingSoon: "Contenu à venir",
+    anneeLabel: (n: number) => `Année ${n}`,
+    semestreLabel: (n: number) => `Semestre ${n}`,
   },
   en: {
     appName: "Synapse",
@@ -76,6 +80,10 @@ const DICT = {
     cardProgress: (i: number, total: number) => `Card ${i}/${total}`,
     haveAccount: "Already have an account?",
     noAccount: "No account yet?",
+    libraryTitle: "Library",
+    libraryComingSoon: "Content coming soon",
+    anneeLabel: (n: number) => `Year ${n}`,
+    semestreLabel: (n: number) => `Semester ${n}`,
   },
 } as const;
 

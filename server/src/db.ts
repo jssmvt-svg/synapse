@@ -82,6 +82,37 @@ const SCHEMA = `
     content_en TEXT NOT NULL,
     created_at BIGINT NOT NULL
   );
+
+  -- Bibliothèque de contenu officiel (pré-rédigé), distincte des documents
+  -- uploadés par les utilisateurs. Organisée annee > semestre > matiere >
+  -- chapitre, sur le modèle dénormalisé utilisé par Medbyjes (grille_chapitres) :
+  -- pas de tables de lookup séparées pour annee/semestre/matiere, ce sont de
+  -- simples colonnes portées par le chapitre.
+  CREATE TABLE IF NOT EXISTS library_chapters (
+    id SERIAL PRIMARY KEY,
+    annee INTEGER NOT NULL,
+    semestre INTEGER NOT NULL,
+    matiere TEXT NOT NULL,
+    ordre INTEGER NOT NULL DEFAULT 0,
+    titre_fr TEXT NOT NULL,
+    titre_en TEXT NOT NULL,
+    description_fr TEXT NOT NULL DEFAULT '',
+    description_en TEXT NOT NULL DEFAULT '',
+    icone TEXT NOT NULL DEFAULT '',
+    created_at BIGINT NOT NULL,
+    UNIQUE (annee, semestre, matiere, ordre)
+  );
+
+  CREATE TABLE IF NOT EXISTS library_flashcards (
+    id SERIAL PRIMARY KEY,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    ordre INTEGER NOT NULL DEFAULT 0,
+    question_fr TEXT NOT NULL,
+    question_en TEXT NOT NULL,
+    answer_fr TEXT NOT NULL,
+    answer_en TEXT NOT NULL,
+    created_at BIGINT NOT NULL
+  );
 `;
 
 const MAX_RETRIES = 5;
