@@ -1,8 +1,10 @@
 import { db } from "./db.js";
 import { BIOCHIMIE_S1 } from "./library-content/biochimie-s1.js";
 
-// Amorce le contenu officiel de la bibliothèque (Année 1). Idempotent :
-// une matière déjà présente (annee, semestre, matiere) n'est jamais réinsérée.
+// Amorce le contenu officiel de la bibliothèque (Année 1). Remplace toujours
+// le contenu existant d'une matière (delete + réinsertion) plutôt que de
+// sauter si déjà présent, pour que les mises à jour du fichier de contenu
+// source se répercutent au prochain déploiement.
 export async function seedLibrary(): Promise<void> {
   await seedMatiere(1, 1, "Biochimie", BIOCHIMIE_S1);
 }
@@ -13,12 +15,9 @@ async function seedMatiere(
   matiere: string,
   chapters: typeof BIOCHIMIE_S1,
 ): Promise<void> {
-  const existing = await db
-    .prepare(
-      "SELECT COUNT(*)::int AS n FROM library_chapters WHERE annee = ? AND semestre = ? AND matiere = ?",
-    )
-    .get(annee, semestre, matiere);
-  if ((existing?.n ?? 0) > 0) return;
+  await db
+    .prepare("DELETE FROM library_chapters WHERE annee = ? AND semestre = ? AND matiere = ?")
+    .run(annee, semestre, matiere);
 
   const now = Date.now();
   for (const chapter of chapters) {
