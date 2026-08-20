@@ -49,9 +49,11 @@ body {
 input,
 button {
   font-size: 1rem;
-  padding: 0.5rem;
+  padding: 0.6rem 0.75rem;
   border-radius: 8px;
   border: 1px solid var(--border);
+  min-height: 44px;
+  box-sizing: border-box;
 }
 
 button {
@@ -59,6 +61,7 @@ button {
   color: white;
   border: none;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 button:disabled {
@@ -335,4 +338,130 @@ button:disabled {
 .chapitre-description {
   font-size: 0.85rem;
   color: #888;
+}
+
+/* ── Mobile responsive styles (375px–768px) ─────────────────────────── */
+@media (max-width: 768px) {
+  .auth-page {
+    max-width: 100%;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  .auth-form {
+    padding: 1.25rem;
+  }
+
+  .dashboard {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+    box-sizing: border-box;
+  }
+
+  .dashboard-header {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .document-row {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .document-row span {
+    flex: 1 1 100%;
+    word-break: break-word;
+  }
+
+  .row-actions {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .row-actions button {
+    flex: 1 1 auto;
+  }
+
+  .deck-view,
+  .synthesis-view {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+    box-sizing: border-box;
+  }
+
+  .flashcard {
+    min-height: 180px;
+    padding: 1.25rem;
+    font-size: 1.1rem;
+  }
+
+  .card-nav {
+    gap: 0.75rem;
+  }
+
+  .card-nav button {
+    flex: 1 1 auto;
+  }
+
+  .synthesis-content {
+    padding: 1rem;
+  }
+
+  .library {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+    box-sizing: border-box;
+  }
+
+  .library-semestre {
+    padding-left: 0.4rem;
+  }
+
+  .chapitre-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workspace {
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .col {
+    padding: 1rem;
+    min-height: 0;
+  }
+
+  .chat-input-row {
+    align-items: stretch;
+  }
+
+  .chat-input-row button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-page {
+    margin: 1.25rem auto;
+  }
+
+  .dashboard-header h1 {
+    font-size: 1.25rem;
+  }
+
+  input,
+  button {
+    font-size: 0.95rem;
+  }
 }
