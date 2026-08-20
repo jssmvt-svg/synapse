@@ -31,17 +31,22 @@ export function Login() {
 
   return (
     <div className="auth-page">
-      <h1>{t.appName}</h1>
+      <div className="auth-brand">
+        <span className="brand-mark" aria-hidden="true">S</span>
+        <span>{t.appName}</span>
+      </div>
+      <p className="auth-intro">{t.authIntro}</p>
       <form onSubmit={onSubmit} className="auth-form">
         <h2>{t.login}</h2>
         <label>
           {t.email}
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+          <input type="email" autoComplete="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
         <label>
           {t.password}
           <input
             type="password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required

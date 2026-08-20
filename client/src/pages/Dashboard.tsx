@@ -101,26 +101,57 @@ export function Dashboard() {
 
   return (
     <div className="dashboard">
+      <div className="top-banner">
+        <span className="status-dot" aria-hidden="true" />
+        {t.onlineBadge}
+      </div>
       <header className="dashboard-header">
-        <h1>{t.appName}</h1>
+        <Link to="/dashboard" className="brand-lockup">
+          <span className="brand-mark" aria-hidden="true">S</span>
+          <span>
+            <strong>{t.appName}</strong>
+            <small>{t.brandPromise}</small>
+          </span>
+        </Link>
         <div className="header-actions">
-          <Link to="/library" className="library-link">
+          <Link to="/library" className="header-nav-link">
             {t.libraryTitle}
           </Link>
-          <button
-            className="lang-toggle"
-            onClick={() => {
-              const next = lang === "fr" ? "en" : "fr";
-              setLang(next);
-              api.setLang(next).catch(() => {});
-            }}
-          >
-            {lang === "fr" ? "EN" : "FR"}
-          </button>
-          <span>{user?.email}</span>
-          <button onClick={logout}>{t.logout}</button>
+          <div className="language-switcher" aria-label="Language">
+            <button
+              className={lang === "fr" ? "selected" : ""}
+              onClick={() => {
+                setLang("fr");
+                api.setLang("fr").catch(() => {});
+              }}
+            >
+              FR
+            </button>
+            <button
+              className={lang === "en" ? "selected" : ""}
+              onClick={() => {
+                setLang("en");
+                api.setLang("en").catch(() => {});
+              }}
+            >
+              EN
+            </button>
+          </div>
+          <span className="user-chip">{user?.email}</span>
+          <button className="logout-button" onClick={logout}>{t.logout}</button>
         </div>
       </header>
+
+      <section className="dashboard-hero">
+        <div>
+          <p className="eyebrow">{t.studySpace}</p>
+          <h1>{t.dashboardGreeting}</h1>
+          <p>{t.dashboardIntro}</p>
+        </div>
+        <Link to="/library" className="hero-library-link">
+          {t.libraryTitle} <span aria-hidden="true">→</span>
+        </Link>
+      </section>
 
       <section className="progress-dashboard" aria-labelledby="study-progress-title">
         <div className="progress-section-heading">
@@ -262,9 +293,7 @@ export function Dashboard() {
         <section className="col col-chat">
           <h2>{t.chatTitle}</h2>
           <div className="mascot-card">
-            <div className="mascot-avatar" aria-hidden="true">
-              🐱
-            </div>
+            <div className="mascot-avatar" aria-hidden="true">S</div>
             <p className="mascot-bubble">{t.sageIntro}</p>
           </div>
           <div className="chat-input-row">

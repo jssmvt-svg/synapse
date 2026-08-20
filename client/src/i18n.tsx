@@ -25,7 +25,7 @@ const DICT = {
     studioTitle: "Studio",
     comingSoon: "Bientôt disponible",
     sageIntro:
-      "Bonjour, je suis Sage 🐱. Bientôt je pourrai répondre à tes questions sur tes cours de santé. Patience, jeune étudiant.",
+      "Bonjour, je suis Sage. Bientôt je pourrai répondre à tes questions sur tes cours de santé. Patience, jeune étudiant.",
     chatPlaceholder: "Pose une question à Sage…",
     chatSend: "Envoyer",
     studioFlashcards: "Flashcards",
@@ -106,6 +106,12 @@ const DICT = {
     chapterProgress: "Avancement par chapitre",
     noAttempts: "Pas encore de tentative",
     lastActivity: "Dernière activité",
+    brandPromise: "Apprendre mieux. Réussir sereinement.",
+    studySpace: "ESPACE D'ÉTUDE",
+    dashboardGreeting: "Ton parcours, au même endroit",
+    dashboardIntro: "Cours, QCM et flashcards réunis pour t'aider à avancer chaque jour.",
+    onlineBadge: "Ton espace d'apprentissage est en ligne",
+    authIntro: "Ton espace personnel pour apprendre, réviser et progresser.",
   },
   en: {
     appName: "Synapse",
@@ -129,7 +135,7 @@ const DICT = {
     studioTitle: "Studio",
     comingSoon: "Coming soon",
     sageIntro:
-      "Hi, I'm Sage 🐱. Soon I'll be able to answer your questions about your health courses. Patience, young student.",
+      "Hi, I'm Sage. Soon I'll be able to answer your questions about your health courses. Patience, young student.",
     chatPlaceholder: "Ask Sage a question…",
     chatSend: "Send",
     studioFlashcards: "Flashcards",
@@ -210,6 +216,12 @@ const DICT = {
     chapterProgress: "Progress by chapter",
     noAttempts: "No attempts yet",
     lastActivity: "Last activity",
+    brandPromise: "Learn better. Succeed with confidence.",
+    studySpace: "STUDY SPACE",
+    dashboardGreeting: "Your path, all in one place",
+    dashboardIntro: "Courses, QCMs, and flashcards brought together to help you move forward every day.",
+    onlineBadge: "Your learning space is online",
+    authIntro: "Your personal space to learn, review, and make progress.",
   },
 } as const;
 
