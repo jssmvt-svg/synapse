@@ -1,0 +1,207 @@
+# Brief de développement — Module « Mon deck » (Synapses)
+
+> À coller tel quel dans l'agent. Avant de l'envoyer, vérifie les 3 lignes de la section 0 et corrige-les si besoin.
+
+---
+
+## 0. Contexte à adapter avant envoi
+
+- **Stack front** : Vanilla JS + HTML/CSS *(remplace par « React » si Synapses est en React)*
+- **Backend / base** : Supabase (Postgres + Auth + RLS)
+- **Schéma existant** : tables `subjects`, `modules`, `notions`, `lessons`, `questions`, `question_options`, `flashcards`, `attempts`, `attempt_answers`, `flashcard_states`, vue `notion_mastery`
+
+---
+
+## 1. Ce qu'on construit et pourquoi
+
+Synapses est une plateforme d'apprentissage pour la première année de médecine. Elle fournit un **socle essentiel et volontairement court** : cours synthétiques, notions structurées, QCM corrigés, flashcards officielles. Elle ne remplace pas le cours du professeur.
+
+Le module « Mon deck » permet à l'étudiant de **fabriquer ses propres flashcards à partir de son propre cours**, en passant par l'IA qu'il utilise déjà (ChatGPT gratuit, Claude, Gemini, peu importe).
+
+**Contrainte absolue : la plateforme n'appelle aucune API d'IA et ne stocke aucune clé API.** Le fonctionnement repose sur un copier-coller dans les deux sens. Aucun coût, aucune clé, aucun quota à gérer côté Synapses.
+
+Ne propose pas d'intégration d'API en alternative. Ce n'est pas un compromis technique, c'est une décision produit.
+
+---
+
+## 2. Parcours utilisateur (3 écrans)
+
+**Écran 1 — Choix de la source**
+Depuis la page d'un module, bouton « Créer mes flashcards ». Deux options :
+- *À partir de mon cours* → zone de texte où l'étudiant colle son polycopié
+- *À partir de la fiche Synapses* → le contenu du module est utilisé automatiquement
+
+**Écran 2 — Prompt à copier**
+Affichage du prompt complet, généré, en lecture seule, avec un bouton « Copier le prompt ». Sous le bouton, trois liens vers ChatGPT, Claude et Gemini, et une instruction courte : *« Colle ce prompt dans ton IA, puis reviens coller sa réponse ici. »*
+
+**Écran 3 — Import et aperçu**
+Zone de texte « Colle ici la réponse de ton IA », bouton « Analyser ». Affichage d'un **aperçu éditable** : chaque carte détectée avec recto, verso, notion (menu déroulant), et une case à cocher pour l'inclure. L'étudiant corrige puis clique « Ajouter à mon deck ».
+
+**L'enregistrement en base ne se fait jamais sans passer par l'aperçu.**
+
+---
+
+## 3. Modèle de données à ajouter
+
+```sql
+create table user_flashcards (
+  id           uuid primary key default gen_random_uuid(),
+  user_id      uuid not null references auth.users(id) on delete cascade,
+  module_id    uuid references modules(id) on delete set null,
+  notion_id    uuid references notions(id) on delete set null,
+  type         flashcard_type not null default 'qa',
+  front        text not null,
+  back         text not null,
+  source       text not null default 'ai_import'
+               check (source in ('ai_import','manual')),
+  source_model text,                      -- saisi par l'étudiant, optionnel
+  status       text not null default 'private'
+               check (status in ('private','proposed')),
+  created_at   timestamptz not null default now()
+);
+
+create index on user_flashcards(user_id, module_id);
+create index on user_flashcards(user_id, notion_id);
+
+alter table user_flashcards enable row level security;
+create policy "own user flashcards" on user_flashcards
+  for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+```
+
+Étendre `flashcard_states` pour qu'elle accepte aussi les cartes personnelles :
+
+```sql
+alter table flashcard_states
+  add column user_flashcard_id uuid references user_flashcards(id) on delete cascade,
+  alter column flashcard_id drop not null,
+  add constraint one_card_source check (
+    (flashcard_id is not null) <> (user_flashcard_id is not null)
+  );
+```
+
+Objectif : une carte personnelle suit **exactement le même système** d'états « connu / à revoir / difficile » et alimente la même progression par notion que les cartes officielles.
+
+---
+
+## 4. Le générateur de prompt
+
+Fonction `buildFlashcardPrompt({ moduleTitle, notions, courseText })` qui retourne une chaîne de caractères.
+
+`notions` est la liste des notions du module (slug + label), récupérée en base. **Elle doit obligatoirement être injectée dans le prompt** : c'est ce qui permet de rattacher chaque carte importée à une notion, et donc de faire remonter le deck personnel dans le tableau de bord et l'analyse des erreurs.
+
+Template exact à produire :
+
+```
+Tu es un assistant d'apprentissage pour un étudiant en première année de médecine.
+
+À partir du COURS ci-dessous, génère entre 15 et 25 flashcards de révision.
+
+RÈGLES STRICTES :
+- Utilise UNIQUEMENT le contenu du cours fourni. N'ajoute aucune information
+  extérieure, même si tu la crois exacte. Si une notion est absente du cours,
+  ne crée pas de carte dessus.
+- Une carte = une seule idée. Recto court (une question ou un terme),
+  verso court (2 phrases maximum).
+- Privilégie les définitions, les mécanismes, les chiffres clés, les pièges
+  et les distinctions faciles à confondre.
+- Écris en français.
+
+FORMAT DE SORTIE — une carte par ligne, exactement ainsi :
+recto :: verso :: notion
+
+Sans numérotation, sans tirets, sans texte avant ou après la liste.
+
+NOTIONS DISPONIBLES (recopie le mot-clé exact dans la 3e colonne) :
+{{liste des notions : "slug — label", une par ligne}}
+
+Si une carte ne correspond à aucune notion de la liste, écris : autre
+
+EXEMPLE :
+Hélice alpha : entre quels résidus se fait la liaison hydrogène ? :: CO du résidu i et NH du résidu i+4. :: helice-alpha
+
+COURS :
+{{courseText}}
+```
+
+**Ne pas demander de JSON.** Les modèles gratuits produisent du JSON invalide bien plus souvent que des lignes séparées par `::`. Le format ligne est le format cible.
+
+Si `courseText` dépasse ~15 000 caractères, afficher un avertissement invitant l'étudiant à découper son cours en deux, plutôt que de tronquer silencieusement.
+
+---
+
+## 5. Le parseur d'import
+
+C'est la pièce la plus critique du module. **S'il casse à la première réponse mal formatée, la fonctionnalité est abandonnée par l'étudiant.** Il doit être tolérant.
+
+Fonction `parseFlashcardImport(rawText, notions)` → `{ cards: [], warnings: [] }`
+
+Règles de nettoyage, dans cet ordre :
+
+1. Supprimer les blocs de code (```` ``` ````, ```` ```json ````) en gardant leur contenu.
+2. Ignorer toute ligne vide, ou qui ne contient aucun séparateur.
+3. Retirer en début de ligne : numérotation (`1.`, `1)`, `Q1 :`), puces (`-`, `*`, `•`), et guillemets ouvrants.
+4. Séparateurs acceptés, par ordre de priorité : `::`, puis `|`, puis ` — ` (tiret cadratin entouré d'espaces). Ne **jamais** découper sur une simple virgule ou un `:` simple.
+5. Si la ligne donne 2 champs → recto + verso, notion = `null`. Si 3 champs → recto + verso + notion.
+6. Faire correspondre la notion au slug exact, sinon au label sans tenir compte de la casse et des accents, sinon `null`.
+7. Nettoyer les espaces, supprimer les `**` markdown.
+
+Filtres et garde-fous :
+
+- Rejeter une carte si recto vide, verso vide, ou verso > 600 caractères → ajouter un avertissement.
+- Dédoublonner sur le recto normalisé, à l'intérieur de l'import **et** contre les cartes déjà en base pour cet étudiant et ce module.
+- Plafonner à 100 cartes par import.
+- **Accepter aussi un tableau JSON** en secours : si le texte nettoyé parse en JSON et contient des objets avec des clés reconnaissables (`front`/`recto`/`question` et `back`/`verso`/`reponse`), les convertir dans le même format de sortie.
+- Si zéro carte détectée, ne pas afficher une erreur brute : afficher un rappel du format attendu et un exemple.
+
+`warnings` est affiché sous l'aperçu, jamais bloquant.
+
+---
+
+## 6. Écran d'aperçu
+
+Tableau ou liste de cartes, chacune avec :
+- Recto et verso **éditables sur place** (textarea)
+- Menu déroulant de notion, pré-sélectionné, avec option « aucune »
+- Case à cocher « inclure », cochée par défaut
+- Bouton de suppression
+
+En haut : « X cartes détectées, Y seront ajoutées ». En bas : « Ajouter à mon deck » (désactivé si zéro carte cochée).
+
+Insertion en une seule requête groupée, avec `source = 'ai_import'`.
+
+---
+
+## 7. Séparation des deux bibliothèques
+
+Point de sécurité pédagogique, à ne pas négliger : Synapses est une application de médecine, une carte générée peut être fausse.
+
+- Deux onglets distincts sur la page du module : **« Fiches Synapses »** et **« Mon deck »**.
+- Les cartes personnelles portent un badge visible « Généré par IA — non vérifié », y compris pendant la révision.
+- Les cartes personnelles sont **privées par défaut** et ne sont jamais visibles par un autre utilisateur ni mélangées aux cartes officielles dans une même session de révision, sauf action explicite de l'étudiant.
+- Le champ `status = 'proposed'` existe pour une future modération, mais **aucune interface de proposition dans cette version**.
+
+---
+
+## 8. À ne pas faire
+
+- Pas d'appel à une API d'IA, pas de champ de saisie de clé API, pas de proxy serveur.
+- Pas d'insertion en base sans passage par l'écran d'aperçu.
+- Pas de parseur strict qui rejette tout l'import à cause d'une ligne malformée.
+- Pas de mélange entre cartes officielles et cartes personnelles.
+- Pas de `localStorage` pour stocker les cartes : elles vont en base, rattachées au compte.
+
+---
+
+## 9. Critères d'acceptation
+
+Le module est considéré terminé quand ces cas passent :
+
+1. Le prompt généré contient bien la liste des notions du module et le texte de cours choisi.
+2. Un import de 20 lignes propres au format `recto :: verso :: notion` produit 20 cartes correctement rattachées.
+3. Un import où l'IA a ajouté « Voici tes flashcards : » en introduction, une numérotation `1.` à chaque ligne et un bloc ``` autour → produit quand même les bonnes cartes.
+4. Un import au format tableau JSON → produit les bonnes cartes.
+5. Un import contenant une ligne sans séparateur → cette ligne est ignorée, un avertissement s'affiche, les autres cartes passent.
+6. Une notion inconnue ou `autre` → carte importée avec notion vide, modifiable dans l'aperçu.
+7. Un doublon exact d'une carte déjà en base → signalé et décoché par défaut.
+8. Un étudiant A ne voit jamais les cartes d'un étudiant B (test RLS).
+9. Une carte personnelle marquée « à revoir » réapparaît dans la session suivante, comme une carte officielle.
