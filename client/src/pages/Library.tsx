@@ -16,6 +16,20 @@ export function Library() {
 
   return (
     <div className="library">
+      <div className="platform-header">
+        <Link to="/dashboard" className="brand-lockup">
+          <span className="brand-mark" aria-hidden="true">S</span>
+          <span>
+            <strong>{t.appName}</strong>
+            <small>{t.brandPromise}</small>
+          </span>
+        </Link>
+        <nav className="platform-nav" aria-label="Navigation">
+          <Link to="/dashboard">{t.dashboard}</Link>
+          <Link to="/library" className="active">{t.libraryTitle}</Link>
+          <Link to="/statistics">{t.statistics}</Link>
+        </nav>
+      </div>
       <header className="library-header">
         <Link to="/dashboard">← {t.dashboard}</Link>
         <h1>{t.libraryTitle}</h1>

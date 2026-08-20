@@ -5,9 +5,11 @@ import { Dashboard } from "./pages/Dashboard";
 import { DeckView } from "./pages/DeckView";
 import { Library } from "./pages/Library";
 import { LibraryChapterView } from "./pages/LibraryChapterView";
+import { Landing } from "./pages/Landing";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { SynthesisView } from "./pages/SynthesisView";
+import { Statistics } from "./pages/Statistics";
 
 function RequireAuth({ children }: { children: ReactElement }) {
   const { user, loading } = useAuth();
@@ -16,11 +18,40 @@ function RequireAuth({ children }: { children: ReactElement }) {
   return children;
 }
 
+function PublicOnly({ children }: { children: ReactElement }) {
+  const { user, loading } = useAuth();
+  if (loading) return <p>...</p>;
+  if (user) return <Navigate to="/dashboard" replace />;
+  return children;
+}
+
 export function App() {
   return (
     <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
+      <Route
+        path="/"
+        element={
+          <PublicOnly>
+            <Landing />
+          </PublicOnly>
+        }
+      />
+      <Route
+        path="/login"
+        element={
+          <PublicOnly>
+            <Login />
+          </PublicOnly>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <PublicOnly>
+            <Register />
+          </PublicOnly>
+        }
+      />
       <Route
         path="/dashboard"
         element={
@@ -61,7 +92,15 @@ export function App() {
           </RequireAuth>
         }
       />
-      <Route path="*" element={<Navigate to="/dashboard" replace />} />
+      <Route
+        path="/statistics"
+        element={
+          <RequireAuth>
+            <Statistics />
+          </RequireAuth>
+        }
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

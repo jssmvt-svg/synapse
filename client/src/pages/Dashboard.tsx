@@ -117,6 +117,9 @@ export function Dashboard() {
           <Link to="/library" className="header-nav-link">
             {t.libraryTitle}
           </Link>
+          <Link to="/statistics" className="header-nav-link">
+            {t.statistics}
+          </Link>
           <div className="language-switcher" aria-label="Language">
             <button
               className={lang === "fr" ? "selected" : ""}
