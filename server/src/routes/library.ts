@@ -105,9 +105,15 @@ libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
     db
       .prepare(
         `SELECT id, ordre, question_fr, question_en, answer_fr, answer_en
-         FROM library_flashcards WHERE chapter_id = ? AND is_active = true ORDER BY ordre ASC`,
+         FROM library_flashcards f
+         LEFT JOIN student_flashcard_mastery m
+           ON m.flashcard_id = f.id AND m.user_id = ? AND m.chapter_id = ?
+         WHERE f.chapter_id = ? AND f.is_active = true
+         ORDER BY
+           CASE WHEN m.mastery IN (1, 3) THEN 0 WHEN m.mastery IS NULL THEN 1 ELSE 2 END,
+           m.last_reviewed_at ASC NULLS FIRST, f.ordre ASC`,
       )
-      .all(chapterId),
+      .all(req.userId, chapterId, chapterId),
     db
       .prepare(
         `SELECT q.id, q.ordre, q.resource_id, q.prompt_fr, q.prompt_en, q.explanation_fr,
@@ -148,9 +154,15 @@ libraryRouter.get("/chapters/:id/flashcards", async (req: AuthedRequest, res) =>
   const cards = await db
     .prepare(
       `SELECT id, question_fr, question_en, answer_fr, answer_en
-       FROM library_flashcards WHERE chapter_id = ? AND is_active = true ORDER BY ordre ASC`,
+        FROM library_flashcards f
+        LEFT JOIN student_flashcard_mastery m
+          ON m.flashcard_id = f.id AND m.user_id = ? AND m.chapter_id = ?
+        WHERE f.chapter_id = ? AND f.is_active = true
+        ORDER BY
+          CASE WHEN m.mastery IN (1, 3) THEN 0 WHEN m.mastery IS NULL THEN 1 ELSE 2 END,
+          m.last_reviewed_at ASC NULLS FIRST, f.ordre ASC`,
     )
-    .all(chapterId);
+      .all(req.userId, chapterId, chapterId);
   res.json(cards);
 });
 
@@ -265,15 +277,57 @@ libraryRouter.post("/chapters/:id/exams/:examId/start", async (req: AuthedReques
     .get(examId, chapterId);
   if (!exam) return res.status(404).json({ error: "Examen introuvable pour ce chapitre" });
 
-  const startedAt = Date.now();
-  const expiresAt = startedAt + exam.duration_seconds * 1000;
-  const session = await db
+  const now = Date.now();
+  const existingSession = await db
     .prepare(
-      `INSERT INTO student_exam_sessions
-         (user_id, chapter_id, exam_id, started_at, expires_at)
-       VALUES (?, ?, ?, ?, ?) RETURNING id`,
+      `SELECT id, started_at, expires_at
+       FROM student_exam_sessions
+       WHERE user_id = ? AND chapter_id = ? AND exam_id = ? AND submitted_at IS NULL
+       ORDER BY started_at DESC LIMIT 1`,
     )
-    .get(req.userId, chapterId, examId, startedAt, expiresAt);
+    .get(req.userId, chapterId, examId);
+  if (existingSession && existingSession.expires_at > now) {
+    return res.json({
+      sessionId: existingSession.id,
+      startedAt: existingSession.started_at,
+      expiresAt: existingSession.expires_at,
+      questionOrders: JSON.parse(exam.question_orders),
+    });
+  }
+  if (existingSession) {
+    await db
+      .prepare("UPDATE student_exam_sessions SET submitted_at = ? WHERE id = ? AND submitted_at IS NULL")
+      .run(existingSession.expires_at, existingSession.id);
+  }
+
+  const startedAt = now;
+  const expiresAt = startedAt + exam.duration_seconds * 1000;
+  let session;
+  try {
+    session = await db
+      .prepare(
+        `INSERT INTO student_exam_sessions
+           (user_id, chapter_id, exam_id, started_at, expires_at)
+         VALUES (?, ?, ?, ?, ?) RETURNING id`,
+      )
+      .get(req.userId, chapterId, examId, startedAt, expiresAt);
+  } catch (error) {
+    const concurrentSession = await db
+      .prepare(
+        `SELECT id, started_at, expires_at
+         FROM student_exam_sessions
+         WHERE user_id = ? AND chapter_id = ? AND exam_id = ? AND submitted_at IS NULL
+         ORDER BY started_at DESC LIMIT 1`,
+      )
+      .get(req.userId, chapterId, examId);
+    if (!concurrentSession) throw error;
+    return res.json({
+      sessionId: concurrentSession.id,
+      startedAt: concurrentSession.started_at,
+      expiresAt: concurrentSession.expires_at,
+      questionOrders: JSON.parse(exam.question_orders),
+    });
+  }
   res.status(201).json({
     sessionId: session.id,
     startedAt,
@@ -300,7 +354,7 @@ libraryRouter.post("/chapters/:id/exams/:examId/attempts", async (req: AuthedReq
     )
     .get(sessionId, req.userId, chapterId, examId);
   if (!session) return res.status(404).json({ error: "Session d'examen introuvable ou déjà remise" });
-  if (now > session.expires_at) return res.status(400).json({ error: "Temps imparti dépassé" });
+  const timedOut = now > session.expires_at;
 
   const exam = await db
     .prepare(
@@ -312,7 +366,8 @@ libraryRouter.post("/chapters/:id/exams/:examId/attempts", async (req: AuthedReq
 
   const questions = await db
     .prepare(
-      `SELECT q.id, q.ordre, array_agg(o.option_key ORDER BY o.option_key) AS valid,
+      `SELECT q.id, q.ordre, q.prompt_fr, q.prompt_en, q.explanation_fr, q.explanation_en,
+        array_agg(o.option_key ORDER BY o.option_key) AS valid,
         array_agg(o.option_key ORDER BY o.option_key)
        FILTER (WHERE o.is_correct = true) AS correct
        FROM library_qcm_questions q
@@ -320,17 +375,30 @@ libraryRouter.post("/chapters/:id/exams/:examId/attempts", async (req: AuthedReq
         WHERE q.chapter_id = ? AND q.is_active = true
           AND q.ordre IN (SELECT json_array_elements_text(?::json)::int)
        GROUP BY q.id ORDER BY q.ordre ASC`,
-    )
+     )
     .all(chapterId, exam.question_orders);
+
+  const questionOrders = JSON.parse(exam.question_orders) as number[];
+  const questionOrder = new Map<number, number>(
+    questionOrders.map((ordre, index) => [ordre, index]),
+  );
+  (questions as any[]).sort(
+    (first, second) =>
+      (questionOrder.get(Number(first.ordre)) ?? 0) - (questionOrder.get(Number(second.ordre)) ?? 0),
+  );
 
   const allowedQuestionIds = new Set((questions as any[]).map((question) => String(question.id)));
   if (Object.keys(answers).some((key) => !allowedQuestionIds.has(key))) {
     return res.status(400).json({ error: "Une réponse cible une question hors de cet examen" });
   }
 
+  const scoredAnswers = timedOut
+    ? Object.fromEntries((questions as any[]).map((question) => [String(question.id), []]))
+    : answers;
+
   let correctCount = 0;
   for (const item of questions as any[]) {
-    const selected = selectedKeys(answers[item.id]);
+    const selected = selectedKeys(scoredAnswers[item.id]);
     if (!selected || selected.some((key) => !(item.valid ?? []).includes(key))) {
       return res.status(400).json({ error: "Une réponse ne correspond pas aux options de cet examen" });
     }
@@ -354,6 +422,22 @@ libraryRouter.post("/chapters/:id/exams/:examId/attempts", async (req: AuthedReq
          (user_id, chapter_id, exam_id, answers_json, score, started_at, completed_at)
        VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id`,
     )
-    .get(req.userId, chapterId, examId, JSON.stringify(answers), score, session.started_at, now);
-  res.status(201).json({ id: attempt.id, score, correctCount, questionCount: questions.length, completedAt: now });
+    .get(req.userId, chapterId, examId, JSON.stringify(scoredAnswers), score, session.started_at, now);
+  res.status(201).json({
+    id: attempt.id,
+    score,
+    correctCount,
+    questionCount: questions.length,
+    timedOut,
+    completedAt: now,
+    review: (questions as any[]).map((item) => ({
+      questionId: item.id,
+      prompt_fr: item.prompt_fr,
+      prompt_en: item.prompt_en,
+      selectedOptionKeys: selectedKeys(scoredAnswers[item.id]) ?? [],
+      correctOptionKeys: item.correct ?? [],
+      explanation_fr: item.explanation_fr,
+      explanation_en: item.explanation_en,
+    })),
+  });
 });

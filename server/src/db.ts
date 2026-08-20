@@ -230,6 +230,38 @@ const SCHEMA = `
     submitted_at BIGINT
   );
 
+  WITH ranked_exam_sessions AS (
+    SELECT
+      id,
+      expires_at,
+      ROW_NUMBER() OVER (
+        PARTITION BY user_id, chapter_id, exam_id
+        ORDER BY
+          CASE
+            WHEN expires_at > (EXTRACT(EPOCH FROM clock_timestamp()) * 1000)::BIGINT THEN 0
+            ELSE 1
+          END,
+          started_at DESC
+      ) AS session_rank
+    FROM student_exam_sessions
+    WHERE submitted_at IS NULL
+  )
+  UPDATE student_exam_sessions AS session
+  SET submitted_at = LEAST(
+    session.expires_at,
+    (EXTRACT(EPOCH FROM clock_timestamp()) * 1000)::BIGINT
+  )
+  FROM ranked_exam_sessions AS ranked
+  WHERE session.id = ranked.id
+    AND (
+      ranked.session_rank > 1
+      OR session.expires_at <= (EXTRACT(EPOCH FROM clock_timestamp()) * 1000)::BIGINT
+    );
+
+  CREATE UNIQUE INDEX IF NOT EXISTS student_exam_sessions_one_active_per_exam
+    ON student_exam_sessions (user_id, chapter_id, exam_id)
+    WHERE submitted_at IS NULL;
+
   ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_course_resources ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;

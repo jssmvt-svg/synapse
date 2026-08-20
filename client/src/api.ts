@@ -77,6 +77,119 @@ export interface LibraryChapter {
   icone: string;
 }
 
+export interface LibraryResource {
+  id: number;
+  ordre: number;
+  resource_type: "course" | "revision" | string;
+  titre_fr: string;
+  titre_en: string;
+  content_fr: string;
+  content_en: string;
+  source_label: string;
+}
+
+export interface LibraryQcmOption {
+  id: number;
+  key: string;
+  label_fr: string;
+  label_en: string;
+}
+
+export interface LibraryQcmQuestion {
+  id: number;
+  ordre: number;
+  resource_id: number | null;
+  prompt_fr: string;
+  prompt_en: string;
+  explanation_fr: string;
+  explanation_en: string;
+  multiple_answers: boolean;
+  source_label: string;
+  options: LibraryQcmOption[];
+}
+
+export interface LibraryExam {
+  id: number;
+  titre_fr: string;
+  titre_en: string;
+  duration_seconds: number;
+  question_count: number;
+  question_orders: number[] | string;
+  source_label: string;
+}
+
+export interface LibraryProgress {
+  resources: Array<{ resource_id: number; completed_at: number | null; updated_at: number }>;
+  flashcards: Array<{
+    flashcard_id: number;
+    mastery: number;
+    review_count: number;
+    last_reviewed_at: number | null;
+  }>;
+  qcmAttempts: Array<{
+    question_id: number;
+    selected_option_keys: string;
+    is_correct: boolean;
+    score: number;
+    attempted_at: number;
+  }>;
+  examAttempts: Array<{
+    id: number;
+    exam_id: number;
+    score: number;
+    started_at: number;
+    completed_at: number;
+  }>;
+}
+
+export interface LibraryChapterDetail {
+  chapter: LibraryChapter;
+  resources: LibraryResource[];
+  flashcards: Flashcard[];
+  qcm: LibraryQcmQuestion[];
+  exams: LibraryExam[];
+  progress: LibraryProgress;
+}
+
+export interface QcmAttemptResult {
+  id: number;
+  isCorrect: boolean;
+  score: number;
+  correction: {
+    correctOptionKeys: string[];
+    explanation_fr: string;
+    explanation_en: string;
+  };
+  attemptedAt: number;
+}
+
+export interface ExamStart {
+  sessionId: number;
+  startedAt: number;
+  expiresAt: number;
+  questionOrders: number[];
+}
+
+export interface ExamReviewItem {
+  questionId: number;
+  prompt_fr: string;
+  prompt_en: string;
+  selectedOptionKeys: string[];
+  correctOptionKeys: string[];
+  explanation_fr: string;
+  explanation_en: string;
+}
+
+export interface ExamAttemptResult {
+  id: number;
+  score: number;
+  correctCount: number;
+  questionCount: number;
+  timedOut: boolean;
+  completedAt: number;
+  review: ExamReviewItem[];
+}
+
 export interface LibraryMatiere {
   matiere: string;
   chapitres: LibraryChapter[];
@@ -130,4 +243,28 @@ export const api = {
   getLibrary: () => request<LibraryAnnee[]>("/library"),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),
+  getLibraryChapter: (chapterId: number) =>
+    request<LibraryChapterDetail>(`/library/chapters/${chapterId}`),
+  completeLibraryResource: (chapterId: number, resourceId: number, completed: boolean) =>
+    request<{ resourceId: number; completed: boolean }>(`/library/chapters/${chapterId}/course-progress`, {
+      method: "POST",
+      body: JSON.stringify({ resourceId, completed }),
+    }),
+  rateLibraryFlashcard: (chapterId: number, flashcardId: number, mastery: number) =>
+    request<{ flashcardId: number; mastery: number }>(`/library/chapters/${chapterId}/flashcard-mastery`, {
+      method: "POST",
+      body: JSON.stringify({ flashcardId, mastery }),
+    }),
+  submitQcmAttempt: (chapterId: number, questionId: number, selectedOptionKeys: string[]) =>
+    request<QcmAttemptResult>(`/library/chapters/${chapterId}/qcm-attempts`, {
+      method: "POST",
+      body: JSON.stringify({ questionId, selectedOptionKeys }),
+    }),
+  startChapterExam: (chapterId: number, examId: number) =>
+    request<ExamStart>(`/library/chapters/${chapterId}/exams/${examId}/start`, { method: "POST" }),
+  submitChapterExam: (chapterId: number, examId: number, sessionId: number, answers: Record<string, string[]>) =>
+    request<ExamAttemptResult>(`/library/chapters/${chapterId}/exams/${examId}/attempts`, {
+      method: "POST",
+      body: JSON.stringify({ sessionId, answers }),
+    }),
 };
