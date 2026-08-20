@@ -190,6 +190,58 @@ export interface ExamAttemptResult {
   review: ExamReviewItem[];
 }
 
+export interface ProgressChapter {
+  id: number;
+  ordre: number;
+  titre_fr: string;
+  titre_en: string;
+  description_fr: string;
+  description_en: string;
+  resource_total: number;
+  resources_completed: number;
+  flashcard_total: number;
+  flashcards_reviewed: number;
+  flashcards_mastered: number;
+  flashcards_to_review: number;
+  qcm_attempts: number;
+  qcm_average_score: number;
+  exam_attempts: number;
+  exam_average_score: number;
+}
+
+export interface ProgressSummary {
+  overall: {
+    resourceTotal: number;
+    resourcesCompleted: number;
+    flashcardTotal: number;
+    flashcardsReviewed: number;
+    flashcardsMastered: number;
+    qcmAttempts: number;
+    qcmScoreSum: number;
+    qcmAverageScore: number;
+    examAttempts: number;
+  };
+  chapters: ProgressChapter[];
+  recommendation: {
+    kind: "resource" | "flashcards" | "qcm" | "exam";
+    chapterId: number;
+    resourceId?: number;
+    title_fr: string;
+    title_en: string;
+    reason: string;
+  } | null;
+  recentActivity: Array<{
+    type: "resource" | "flashcard" | "qcm" | "exam";
+    occurred_at: number;
+    chapter_id: number;
+    titre_fr: string;
+    titre_en: string;
+    item_fr: string | null;
+    item_en: string | null;
+    score: number | null;
+  }>;
+}
+
 export interface LibraryMatiere {
   matiere: string;
   chapitres: LibraryChapter[];
@@ -241,6 +293,7 @@ export const api = {
   getDeck: (id: number) => request<DeckSummary>(`/decks/${id}`),
   getFlashcards: (id: number) => request<Flashcard[]>(`/decks/${id}/flashcards`),
   getLibrary: () => request<LibraryAnnee[]>("/library"),
+  getProgressSummary: () => request<ProgressSummary>("/library/progress-summary"),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),
   getLibraryChapter: (chapterId: number) =>

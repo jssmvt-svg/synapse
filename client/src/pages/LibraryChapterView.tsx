@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
   api,
   type ExamAttemptResult,
@@ -484,6 +484,7 @@ function TimedExam({
 
 export function LibraryChapterView() {
   const { id } = useParams<{ id: string }>();
+  const [searchParams] = useSearchParams();
   const { t, lang } = useLang();
   const [detail, setDetail] = useState<LibraryChapterDetail | null>(null);
   const [activity, setActivity] = useState<Activity>("hub");
@@ -497,6 +498,17 @@ export function LibraryChapterView() {
       .then(setDetail)
       .catch((err) => setError((err as Error).message));
   }, [id]);
+
+  useEffect(() => {
+    const requestedActivity = searchParams.get("activity");
+    if (requestedActivity === "resource" || requestedActivity === "qcm" || requestedActivity === "flashcards" || requestedActivity === "exam") {
+      setActivity(requestedActivity);
+    }
+    const requestedResource = Number(searchParams.get("resourceId"));
+    if (Number.isInteger(requestedResource) && requestedResource > 0) {
+      setResourceId(requestedResource);
+    }
+  }, [searchParams]);
 
   if (error) return <main className="learning-shell"><p className="error">{error}</p></main>;
   if (!detail) return <main className="learning-shell"><p className="loading-state">{t.loading}</p></main>;

@@ -90,6 +90,180 @@ libraryRouter.get("/", async (_req: AuthedRequest, res) => {
   res.json(tree);
 });
 
+libraryRouter.get("/progress-summary", async (req: AuthedRequest, res) => {
+  const chapters = await db
+    .prepare(
+      `SELECT
+        c.id, c.ordre, c.titre_fr, c.titre_en, c.description_fr, c.description_en,
+        (SELECT COUNT(*) FROM library_course_resources r
+          WHERE r.chapter_id = c.id AND r.is_active = true) AS resource_total,
+        (SELECT COUNT(*) FROM student_course_progress cp
+          JOIN library_course_resources r ON r.id = cp.resource_id AND r.is_active = true
+          WHERE cp.user_id = ? AND cp.chapter_id = c.id AND cp.completed_at IS NOT NULL) AS resources_completed,
+        (SELECT COUNT(*) FROM library_flashcards f
+          WHERE f.chapter_id = c.id AND f.is_active = true) AS flashcard_total,
+        (SELECT COUNT(*) FROM student_flashcard_mastery fm
+          JOIN library_flashcards f ON f.id = fm.flashcard_id AND f.is_active = true
+          WHERE fm.user_id = ? AND fm.chapter_id = c.id) AS flashcards_reviewed,
+        (SELECT COUNT(*) FROM student_flashcard_mastery fm
+          JOIN library_flashcards f ON f.id = fm.flashcard_id AND f.is_active = true
+          WHERE fm.user_id = ? AND fm.chapter_id = c.id AND fm.mastery >= 5) AS flashcards_mastered,
+        (SELECT COUNT(*) FROM student_flashcard_mastery fm
+          WHERE fm.user_id = ? AND fm.chapter_id = c.id AND fm.mastery IN (1, 3)) AS flashcards_to_review,
+        (SELECT COUNT(*) FROM student_qcm_attempts qa
+          WHERE qa.user_id = ? AND qa.chapter_id = c.id) AS qcm_attempts,
+        (SELECT AVG(qa.score) FROM student_qcm_attempts qa
+          WHERE qa.user_id = ? AND qa.chapter_id = c.id) AS qcm_average_score,
+        (SELECT COUNT(*) FROM student_exam_attempts ea
+          WHERE ea.user_id = ? AND ea.chapter_id = c.id) AS exam_attempts,
+        (SELECT AVG(ea.score) FROM student_exam_attempts ea
+          WHERE ea.user_id = ? AND ea.chapter_id = c.id) AS exam_average_score
+       FROM library_chapters c
+       WHERE c.matiere = 'Biochimie' AND c.is_active = true
+       ORDER BY c.ordre ASC`,
+    )
+    .all(
+      req.userId,
+      req.userId,
+      req.userId,
+      req.userId,
+      req.userId,
+      req.userId,
+      req.userId,
+      req.userId,
+    );
+
+  const normalizedChapters = (chapters as any[]).map((chapter) => ({
+    ...chapter,
+    resource_total: Number(chapter.resource_total),
+    resources_completed: Number(chapter.resources_completed),
+    flashcard_total: Number(chapter.flashcard_total),
+    flashcards_reviewed: Number(chapter.flashcards_reviewed),
+    flashcards_mastered: Number(chapter.flashcards_mastered),
+    flashcards_to_review: Number(chapter.flashcards_to_review),
+    qcm_attempts: Number(chapter.qcm_attempts),
+    qcm_average_score: Number(chapter.qcm_average_score ?? 0),
+    exam_attempts: Number(chapter.exam_attempts),
+    exam_average_score: Number(chapter.exam_average_score ?? 0),
+  }));
+
+  const incompleteResource = await db
+    .prepare(
+      `SELECT c.id AS chapter_id, r.id AS resource_id, r.titre_fr, r.titre_en
+       FROM library_chapters c
+       JOIN library_course_resources r ON r.chapter_id = c.id AND r.is_active = true
+       LEFT JOIN student_course_progress cp
+         ON cp.resource_id = r.id AND cp.user_id = ? AND cp.completed_at IS NOT NULL
+       WHERE c.matiere = 'Biochimie' AND c.is_active = true AND cp.resource_id IS NULL
+       ORDER BY c.ordre ASC, r.ordre ASC
+       LIMIT 1`,
+    )
+    .get(req.userId);
+
+  let recommendation: Record<string, unknown> | null = null;
+  if (incompleteResource) {
+    recommendation = {
+      kind: "resource",
+      chapterId: incompleteResource.chapter_id,
+      resourceId: incompleteResource.resource_id,
+      title_fr: incompleteResource.titre_fr,
+      title_en: incompleteResource.titre_en,
+      reason: "resource_incomplete",
+    };
+  } else {
+    const weakChapter = normalizedChapters.find((chapter) => chapter.flashcards_to_review > 0);
+    const lowQcmChapter = normalizedChapters.find(
+      (chapter) => chapter.qcm_attempts === 0 || chapter.qcm_average_score < 70,
+    );
+    const lowExamChapter = normalizedChapters.find(
+      (chapter) => chapter.exam_attempts === 0 || chapter.exam_average_score < 70,
+    );
+    const selected = weakChapter ?? lowQcmChapter ?? lowExamChapter;
+    if (selected) {
+      recommendation = {
+        kind: weakChapter ? "flashcards" : lowQcmChapter ? "qcm" : "exam",
+        chapterId: selected.id,
+        title_fr: selected.titre_fr,
+        title_en: selected.titre_en,
+        reason: weakChapter ? "flashcards_to_review" : lowQcmChapter ? "qcm_to_practice" : "exam_to_retry",
+      };
+    }
+  }
+
+  const recentActivity = await db
+    .prepare(
+      `SELECT * FROM (
+        SELECT 'resource' AS type, cp.updated_at AS occurred_at, c.id AS chapter_id,
+          c.titre_fr, c.titre_en, r.titre_fr AS item_fr, r.titre_en AS item_en, NULL::NUMERIC AS score
+        FROM student_course_progress cp
+        JOIN library_chapters c ON c.id = cp.chapter_id
+          AND c.matiere = 'Biochimie' AND c.is_active = true
+        JOIN library_course_resources r ON r.id = cp.resource_id AND r.is_active = true
+        WHERE cp.user_id = ? AND cp.completed_at IS NOT NULL
+        UNION ALL
+        SELECT 'flashcard' AS type, fm.last_reviewed_at AS occurred_at, c.id AS chapter_id,
+          c.titre_fr, c.titre_en, NULL AS item_fr, NULL AS item_en, fm.mastery::NUMERIC AS score
+        FROM student_flashcard_mastery fm
+        JOIN library_chapters c ON c.id = fm.chapter_id
+          AND c.matiere = 'Biochimie' AND c.is_active = true
+        WHERE fm.user_id = ?
+        UNION ALL
+        SELECT 'qcm' AS type, qa.attempted_at AS occurred_at, c.id AS chapter_id,
+          c.titre_fr, c.titre_en, NULL AS item_fr, NULL AS item_en, qa.score
+        FROM student_qcm_attempts qa
+        JOIN library_chapters c ON c.id = qa.chapter_id
+          AND c.matiere = 'Biochimie' AND c.is_active = true
+        WHERE qa.user_id = ?
+        UNION ALL
+        SELECT 'exam' AS type, ea.completed_at AS occurred_at, c.id AS chapter_id,
+          c.titre_fr, c.titre_en, NULL AS item_fr, NULL AS item_en, ea.score
+        FROM student_exam_attempts ea
+        JOIN library_chapters c ON c.id = ea.chapter_id
+          AND c.matiere = 'Biochimie' AND c.is_active = true
+        WHERE ea.user_id = ?
+      ) activity
+      ORDER BY occurred_at DESC
+      LIMIT 8`,
+    )
+    .all(req.userId, req.userId, req.userId, req.userId);
+
+  const overall = normalizedChapters.reduce(
+    (summary, chapter) => ({
+      resourceTotal: summary.resourceTotal + chapter.resource_total,
+      resourcesCompleted: summary.resourcesCompleted + chapter.resources_completed,
+      flashcardTotal: summary.flashcardTotal + chapter.flashcard_total,
+      flashcardsReviewed: summary.flashcardsReviewed + chapter.flashcards_reviewed,
+      flashcardsMastered: summary.flashcardsMastered + chapter.flashcards_mastered,
+      qcmAttempts: summary.qcmAttempts + chapter.qcm_attempts,
+      qcmScoreSum: summary.qcmScoreSum + chapter.qcm_average_score * chapter.qcm_attempts,
+      examAttempts: summary.examAttempts + chapter.exam_attempts,
+    }),
+    {
+      resourceTotal: 0,
+      resourcesCompleted: 0,
+      flashcardTotal: 0,
+      flashcardsReviewed: 0,
+      flashcardsMastered: 0,
+      qcmAttempts: 0,
+      qcmScoreSum: 0,
+      examAttempts: 0,
+    },
+  );
+
+  res.json({
+    overall: {
+      ...overall,
+      qcmAverageScore: overall.qcmAttempts ? overall.qcmScoreSum / overall.qcmAttempts : 0,
+    },
+    chapters: normalizedChapters,
+    recommendation,
+    recentActivity: (recentActivity as any[]).map((activity) => ({
+      ...activity,
+      score: activity.score === null ? null : Number(activity.score),
+    })),
+  });
+});
+
 libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
   const chapter = await getChapter(chapterId);
