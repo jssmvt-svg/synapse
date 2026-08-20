@@ -7,6 +7,35 @@ export const libraryRouter = Router();
 libraryRouter.use(authMiddleware);
 
 const KNOWN_STRUCTURE = [{ annee: 1, semestres: [1, 2] }];
+const SUBJECTS = [
+  {
+    slug: "anatomie",
+    matiere: "Anatomie",
+    titre_fr: "Anatomie",
+    titre_en: "Anatomy",
+    description_fr: "Structure et organisation du corps humain.",
+    description_en: "Structure and organization of the human body.",
+    accent: "coral",
+  },
+  {
+    slug: "physiologie",
+    matiere: "Physiologie",
+    titre_fr: "Physiologie",
+    titre_en: "Physiology",
+    description_fr: "Fonctionnement des systèmes et grands équilibres du corps.",
+    description_en: "How body systems work and maintain their balance.",
+    accent: "teal",
+  },
+  {
+    slug: "biochimie",
+    matiere: "Biochimie",
+    titre_fr: "Biochimie",
+    titre_en: "Biochemistry",
+    description_fr: "Les bases moléculaires essentielles pour comprendre le vivant.",
+    description_en: "Essential molecular foundations for understanding life.",
+    accent: "violet",
+  },
+] as const;
 
 function selectedKeys(value: unknown): string[] | null {
   if (!Array.isArray(value) || value.some((key) => typeof key !== "string")) return null;
@@ -88,6 +117,41 @@ libraryRouter.get("/", async (_req: AuthedRequest, res) => {
   }));
 
   res.json(tree);
+});
+
+libraryRouter.get("/subjects", async (_req: AuthedRequest, res) => {
+  const chapters = await db
+    .prepare(
+      `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
+              description_fr, description_en, icone
+       FROM library_chapters WHERE is_active = true
+       ORDER BY annee ASC, semestre ASC, ordre ASC`,
+    )
+    .all();
+
+  res.json(
+    SUBJECTS.map((subject) => ({
+      ...subject,
+      chapters: (chapters as any[]).filter((chapter) => chapter.matiere === subject.matiere),
+    })),
+  );
+});
+
+libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
+  const subject = SUBJECTS.find((candidate) => candidate.slug === req.params.slug);
+  if (!subject) return res.status(404).json({ error: "Matière introuvable" });
+
+  const chapters = await db
+    .prepare(
+      `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
+              description_fr, description_en, icone
+       FROM library_chapters
+       WHERE matiere = ? AND is_active = true
+       ORDER BY annee ASC, semestre ASC, ordre ASC`,
+    )
+    .all(subject.matiere);
+
+  res.json({ ...subject, chapters });
 });
 
 libraryRouter.get("/progress-summary", async (req: AuthedRequest, res) => {

@@ -5,6 +5,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { DeckView } from "./pages/DeckView";
 import { Library } from "./pages/Library";
 import { LibraryChapterView } from "./pages/LibraryChapterView";
+import { LibrarySubjectView } from "./pages/LibrarySubjectView";
 import { Landing } from "./pages/Landing";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -89,6 +90,14 @@ export function App() {
         element={
           <RequireAuth>
             <LibraryChapterView />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/library/subject/:slug"
+        element={
+          <RequireAuth>
+            <LibrarySubjectView />
           </RequireAuth>
         }
       />

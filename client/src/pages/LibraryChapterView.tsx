@@ -28,6 +28,10 @@ function formatTime(seconds: number): string {
   return `${minutes}:${remainder.toString().padStart(2, "0")}`;
 }
 
+function subjectSlug(matiere: string): string {
+  return matiere.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
 function ResourceReader({
   resource,
   lang,
@@ -545,7 +549,9 @@ export function LibraryChapterView() {
   return (
     <main className="learning-shell">
       <header className="learning-header">
-        <Link to="/library" className="back-link">{t.backToLibrary}</Link>
+        <Link to={`/library/subject/${subjectSlug(detail.chapter.matiere)}`} className="back-link">
+          {t.backToSubject(detail.chapter.matiere)}
+        </Link>
         <div>
           <p className="eyebrow">{detail.chapter.matiere}</p>
           <h1>{localized(lang, detail.chapter.titre_fr, detail.chapter.titre_en)}</h1>

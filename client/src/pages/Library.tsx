@@ -1,18 +1,19 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api, type LibraryAnnee } from "../api";
+import { api, type LibrarySubject } from "../api";
 import { useLang } from "../i18n";
 
 export function Library() {
   const { t, lang } = useLang();
-  const [tree, setTree] = useState<LibraryAnnee[]>([]);
+  const [subjects, setSubjects] = useState<LibrarySubject[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    api.getLibrary().then(setTree).catch((err) => setError((err as Error).message));
+    api.getLibrarySubjects().then(setSubjects).catch((err) => setError((err as Error).message));
   }, []);
 
-  if (error) return <p className="error">{error}</p>;
+  if (error) return <main className="library"><p className="error">{error}</p></main>;
+  if (!subjects) return <main className="library"><p className="loading-state">{t.loading}</p></main>;
 
   return (
     <div className="library">
@@ -31,50 +32,34 @@ export function Library() {
         </nav>
       </div>
       <header className="library-header">
-        <Link to="/dashboard">← {t.dashboard}</Link>
+        <p className="eyebrow">{t.libraryEyebrow}</p>
         <h1>{t.libraryTitle}</h1>
+        <p>{t.libraryIntro}</p>
       </header>
 
-      {tree.map((annee) => (
-        <section key={annee.annee} className="library-annee">
-          <h2>{t.anneeLabel(annee.annee)}</h2>
-
-          {annee.semestres.map((semestre) => (
-            <div key={semestre.semestre} className="library-semestre">
-              <h3>{t.semestreLabel(semestre.semestre)}</h3>
-
-              {semestre.matieres.length === 0 ? (
-                <p className="hint">{t.libraryComingSoon}</p>
-              ) : (
-                semestre.matieres.map((matiere) => (
-                  <div key={matiere.matiere} className="library-matiere">
-                    <h4>{matiere.matiere}</h4>
-                    <div className="chapitre-grid">
-                      {matiere.chapitres.map((chapitre) => (
-                        <Link
-                          key={chapitre.id}
-                          to={`/library/chapter/${chapitre.id}`}
-                          className="chapitre-card"
-                        >
-                          <span className="chapitre-icone" aria-hidden="true">
-                            {chapitre.icone}
-                          </span>
-                          <span className="chapitre-titre">
-                            {lang === "fr" ? chapitre.titre_fr : chapitre.titre_en}
-                          </span>
-                          <span className="chapitre-description">
-                            {lang === "fr" ? chapitre.description_fr : chapitre.description_en}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
-          ))}
-        </section>
-      ))}
+      <section className="subject-grid" aria-label={t.libraryTitle}>
+        {subjects.map((subject, index) => {
+          const title = lang === "fr" ? subject.titre_fr : subject.titre_en;
+          const description = lang === "fr" ? subject.description_fr : subject.description_en;
+          const hasContent = subject.chapters.length > 0;
+          return (
+            <Link
+              key={subject.slug}
+              to={`/library/subject/${subject.slug}`}
+              className={`subject-card subject-card-${subject.accent}`}
+            >
+              <span className="subject-card-index">0{index + 1}</span>
+              <span className="subject-card-orb" aria-hidden="true">{title.charAt(0)}</span>
+              <h2>{title}</h2>
+              <p>{description}</p>
+              <div className="subject-card-footer">
+                <span>{hasContent ? t.subjectChapterCount(subject.chapters.length) : t.libraryComingSoon}</span>
+                <strong>{hasContent ? t.subjectExplore : t.subjectView}</strong>
+              </div>
+            </Link>
+          );
+        })}
+      </section>
     </div>
   );
 }

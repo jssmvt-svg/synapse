@@ -257,6 +257,17 @@ export interface LibraryAnnee {
   semestres: LibrarySemestre[];
 }
 
+export interface LibrarySubject {
+  slug: string;
+  matiere: string;
+  titre_fr: string;
+  titre_en: string;
+  description_fr: string;
+  description_en: string;
+  accent: "coral" | "teal" | "violet";
+  chapters: LibraryChapter[];
+}
+
 export const api = {
   register: (email: string, password: string, langPref: "fr" | "en") =>
     request<{ token: string; user: User }>("/auth/register", {
@@ -293,6 +304,8 @@ export const api = {
   getDeck: (id: number) => request<DeckSummary>(`/decks/${id}`),
   getFlashcards: (id: number) => request<Flashcard[]>(`/decks/${id}/flashcards`),
   getLibrary: () => request<LibraryAnnee[]>("/library"),
+  getLibrarySubjects: () => request<LibrarySubject[]>("/library/subjects"),
+  getLibrarySubject: (slug: string) => request<LibrarySubject>(`/library/subjects/${encodeURIComponent(slug)}`),
   getProgressSummary: () => request<ProgressSummary>("/library/progress-summary"),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),
