@@ -60,6 +60,57 @@ export interface Flashcard {
   answer_en: string;
 }
 
+export interface PersonalDeckNotion {
+  slug: string;
+  label: string;
+}
+
+export interface PersonalDeckContext {
+  chapter: Pick<LibraryChapter, "id" | "titre_fr" | "titre_en" | "matiere">;
+  notions: PersonalDeckNotion[];
+  courseText: string;
+  courseWarning: string | null;
+}
+
+export interface PersonalDeckPreviewCard {
+  front: string;
+  back: string;
+  notionSlug: string | null;
+  included: boolean;
+  duplicate: boolean;
+}
+
+export interface PersonalDeckPreview {
+  previewToken: string;
+  cards: PersonalDeckPreviewCard[];
+  warnings: string[];
+}
+
+export interface PersonalDeckCard {
+  id: number;
+  front: string;
+  back: string;
+  notion_slug: string | null;
+  source: "ai_import" | "manual";
+  created_at: number;
+  mastery: number | null;
+  review_count: number | null;
+  last_reviewed_at: number | null;
+}
+
+export interface PersonalDeckCards {
+  cards: PersonalDeckCard[];
+  notions: PersonalDeckNotion[];
+  progress: Array<{
+    notionSlug: string;
+    label: string;
+    total: number;
+    reviewed: number;
+    mastered: number;
+    toReview: number;
+  }>;
+}
+
 export interface Synthesis {
   content_fr: string;
   content_en: string;
@@ -343,6 +394,30 @@ export const api = {
   listDecks: () => request<DeckSummary[]>("/decks"),
   getDeck: (id: number) => request<DeckSummary>(`/decks/${id}`),
   getFlashcards: (id: number) => request<Flashcard[]>(`/decks/${id}/flashcards`),
+  getPersonalDeckContext: (chapterId: number) =>
+    request<PersonalDeckContext>(`/personal-deck/chapters/${chapterId}/context`),
+  createPersonalDeckPrompt: (chapterId: number, courseText: string) =>
+    request<{ prompt: string; warning: string | null }>(`/personal-deck/chapters/${chapterId}/prompt`, {
+      method: "POST",
+      body: JSON.stringify({ courseText }),
+    }),
+  previewPersonalDeckImport: (chapterId: number, rawText: string) =>
+    request<PersonalDeckPreview>(`/personal-deck/chapters/${chapterId}/preview`, {
+      method: "POST",
+      body: JSON.stringify({ rawText }),
+    }),
+  savePersonalDeckCards: (chapterId: number, previewToken: string, cards: PersonalDeckPreviewCard[]) =>
+    request<{ addedCount: number; skippedCount: number }>(`/personal-deck/chapters/${chapterId}/cards`, {
+      method: "POST",
+      body: JSON.stringify({ previewToken, cards }),
+    }),
+  getPersonalDeckCards: (chapterId: number) =>
+    request<PersonalDeckCards>(`/personal-deck/chapters/${chapterId}/cards`),
+  ratePersonalDeckCard: (chapterId: number, cardId: number, mastery: number) =>
+    request<{ cardId: number; mastery: number }>(`/personal-deck/chapters/${chapterId}/cards/${cardId}/mastery`, {
+      method: "POST",
+      body: JSON.stringify({ mastery }),
+    }),
   getLibrary: () => request<LibraryAnnee[]>("/library"),
   getLibrarySubjects: () => request<LibrarySubject[]>("/library/subjects"),
   getLibrarySubject: (slug: string) => request<LibrarySubject>(`/library/subjects/${encodeURIComponent(slug)}`),

@@ -237,6 +237,46 @@ const SCHEMA = `
     PRIMARY KEY (user_id, flashcard_id)
   );
 
+  -- Cartes strictement personnelles : elles ne partagent jamais les tables
+  -- officielles de bibliothèque, même lorsque leur état de révision est similaire.
+  CREATE TABLE IF NOT EXISTS user_flashcards (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER REFERENCES library_chapters(id) ON DELETE SET NULL,
+    notion_slug TEXT,
+    front TEXT NOT NULL,
+    back TEXT NOT NULL,
+    front_key TEXT NOT NULL,
+    source TEXT NOT NULL DEFAULT 'ai_import' CHECK (source IN ('ai_import', 'manual')),
+    source_model TEXT,
+    status TEXT NOT NULL DEFAULT 'private' CHECK (status IN ('private', 'proposed')),
+    created_at BIGINT NOT NULL,
+    UNIQUE (user_id, chapter_id, front_key)
+  );
+
+  CREATE INDEX IF NOT EXISTS user_flashcards_user_chapter_idx
+    ON user_flashcards (user_id, chapter_id);
+  CREATE INDEX IF NOT EXISTS user_flashcards_user_notion_idx
+    ON user_flashcards (user_id, notion_slug);
+
+  CREATE TABLE IF NOT EXISTS student_personal_flashcard_mastery (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    user_flashcard_id INTEGER NOT NULL REFERENCES user_flashcards(id) ON DELETE CASCADE,
+    mastery INTEGER NOT NULL DEFAULT 0 CHECK (mastery BETWEEN 0 AND 5),
+    review_count INTEGER NOT NULL DEFAULT 0,
+    last_reviewed_at BIGINT NOT NULL,
+    PRIMARY KEY (user_id, user_flashcard_id)
+  );
+
+  -- Un import doit obligatoirement être analysé avant de pouvoir être sauvegardé.
+  CREATE TABLE IF NOT EXISTS personal_deck_previews (
+    token TEXT PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    expires_at BIGINT NOT NULL
+  );
+
   CREATE TABLE IF NOT EXISTS student_qcm_attempts (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,

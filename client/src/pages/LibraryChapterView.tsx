@@ -587,6 +587,12 @@ export function LibraryChapterView() {
               <strong>{detail.flashcards.length} cartes</strong>
               <small>{t.continueAction}</small>
             </button>
+            <Link to={`/library/chapter/${detail.chapter.id}/my-deck`} className="activity-card activity-card-personal">
+              <span className="activity-icon">✦</span>
+              <span className="eyebrow">Mon deck</span>
+              <strong>Créer mes flashcards</strong>
+              <small>Privé · IA non vérifiée</small>
+            </Link>
             {exam && (
               <button type="button" className="activity-card activity-card-accent" onClick={() => setActivity("exam")}>
                 <span className="activity-icon">⏱</span>

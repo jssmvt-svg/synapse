@@ -14,6 +14,7 @@ import { Statistics } from "./pages/Statistics";
 import { LibrarySemesterView } from "./pages/LibrarySemesterView";
 import { Membership } from "./pages/Membership";
 import { Admin } from "./pages/Admin";
+import { MyDeck } from "./pages/MyDeck";
 
 function RequireAuth({ children }: { children: ReactElement }) {
   const { user, loading } = useAuth();
@@ -95,6 +96,10 @@ export function App() {
             <LibraryChapterView />
           </RequireAuth>
         }
+      />
+      <Route
+        path="/library/chapter/:id/my-deck"
+        element={<RequireAuth><MyDeck /></RequireAuth>}
       />
       <Route
         path="/library/subject/:slug"

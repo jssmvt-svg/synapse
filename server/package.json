@@ -8,7 +8,7 @@
     "dev": "tsx watch src/index.ts",
     "start": "tsx src/index.ts",
     "typecheck": "tsc --noEmit",
-    "test:auth-policy": "tsx --test src/authPolicy.test.ts",
+    "test:auth-policy": "tsx --test src/authPolicy.test.ts src/personalDeck.test.ts",
     "provision:admin": "tsx ../scripts/provision-admin.ts"
   },
   "dependencies": {

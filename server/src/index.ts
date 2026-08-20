@@ -15,6 +15,7 @@ import { authRouter } from "./routes/auth.js";
 import { documentsRouter } from "./routes/documents.js";
 import { decksRouter } from "./routes/decks.js";
 import { libraryRouter } from "./routes/library.js";
+import { personalDeckRouter } from "./routes/personalDeck.js";
 import { seedLibrary } from "./seed-library.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -52,6 +53,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/documents", documentsRouter);
 app.use("/api/decks", decksRouter);
 app.use("/api/library", libraryRouter);
+app.use("/api/personal-deck", personalDeckRouter);
 app.use("/api/billing", billingRouter);
 app.use("/api/admin", adminRouter);
 
