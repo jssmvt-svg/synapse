@@ -1571,6 +1571,219 @@ input:focus {
   }
 }
 
+/* ── UMFT year-one access ──────────────────────────────────────────────── */
+.semester-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.semester-card {
+  min-height: 250px;
+  padding: 1.55rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #dbe4f4;
+  border-radius: 20px;
+  color: #273651;
+  background: linear-gradient(135deg, #ffffff, #f3f6ff);
+  box-shadow: 0 12px 28px rgba(34, 53, 93, 0.07);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.semester-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 35px rgba(38, 61, 123, 0.13);
+}
+
+.semester-card-open::after,
+.semester-card-locked::after {
+  width: 11rem;
+  height: 11rem;
+  position: absolute;
+  right: -4rem;
+  top: -4.5rem;
+  border-radius: 50%;
+  content: "";
+}
+
+.semester-card-open::after {
+  background: radial-gradient(circle, rgba(87, 70, 219, 0.24), transparent 67%);
+}
+
+.semester-card-locked {
+  background: linear-gradient(135deg, #fff, #fbfbfe);
+}
+
+.semester-card-locked::after {
+  background: radial-gradient(circle, rgba(125, 137, 160, 0.2), transparent 67%);
+}
+
+.semester-card-number {
+  color: #5364d5;
+  font-size: 3.3rem;
+  font-weight: 850;
+  letter-spacing: -0.09em;
+  line-height: 0.9;
+}
+
+.semester-card-kicker {
+  margin-top: 0.7rem;
+  color: #6c7c95;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.semester-card h2 {
+  margin: 0.5rem 0 0;
+  font-size: 1.7rem;
+  letter-spacing: -0.05em;
+}
+
+.semester-card p {
+  max-width: 29rem;
+  margin: 0.6rem 0;
+  color: #66758d;
+  line-height: 1.55;
+}
+
+.semester-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 0.85rem;
+  margin-top: auto;
+  color: #66758d;
+  font-size: 0.78rem;
+}
+
+.semester-card-footer strong { color: var(--accent-deep); text-align: right; }
+
+.semester-header,
+.access-message,
+.membership-card,
+.admin-shell > header {
+  padding: 2rem;
+  border: 1px solid #d9e4f7;
+  border-radius: 22px;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(92, 70, 219, 0.16), transparent 13rem),
+    linear-gradient(135deg, #fff, #f5f7ff);
+  box-shadow: 0 14px 30px rgba(34, 53, 93, 0.07);
+}
+
+.semester-header { margin-top: 0.25rem; }
+.semester-header h1,
+.access-message h1,
+.membership-card h1,
+.admin-shell h1 {
+  margin: 0.35rem 0 0;
+  color: #253452;
+  font-size: clamp(2rem, 4vw, 3rem);
+  letter-spacing: -0.06em;
+}
+
+.semester-header > p:not(.eyebrow),
+.access-message > p:not(.eyebrow),
+.admin-shell > header > p:not(.eyebrow) {
+  max-width: 44rem;
+  color: #62718a;
+  line-height: 1.6;
+}
+
+.membership-shell,
+.admin-shell {
+  width: min(100% - 2rem, 880px);
+  margin: 2rem auto 4rem;
+}
+
+.membership-card { max-width: 640px; margin: 1rem auto 0; }
+.membership-lead { max-width: 33rem; color: #65748b; line-height: 1.6; }
+.membership-price { display: flex; align-items: baseline; gap: 0.5rem; margin: 1.7rem 0 1rem; }
+.membership-price strong { color: #3945bb; font-size: 2.5rem; letter-spacing: -0.07em; }
+.membership-price span { color: #65748b; font-weight: 700; }
+.membership-features { padding: 0; display: grid; gap: 0.65rem; list-style: none; color: #42516b; }
+.membership-features li { padding-left: 1.45rem; position: relative; }
+.membership-features li::before { position: absolute; left: 0; color: #3f59cf; content: "✓"; font-weight: 900; }
+.membership-card button,
+.admin-actions button {
+  margin-top: 1.45rem;
+  background: linear-gradient(120deg, var(--accent-deep), var(--accent));
+}
+
+.success-note {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #bfe3d3;
+  border-radius: 10px;
+  color: #247456;
+  background: #f1fbf7;
+  font-weight: 650;
+}
+
+.admin-shell > header { margin-top: 1rem; }
+.admin-semester-list { display: grid; gap: 0.9rem; margin-top: 1rem; }
+.admin-semester-row {
+  padding: 1.35rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  border: 1px solid #dce5f3;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 9px 22px rgba(34, 53, 93, 0.05);
+}
+.admin-semester-row .eyebrow { margin: 0 0 0.2rem; }
+.admin-semester-row h2 { margin: 0; color: #293852; font-size: 1.22rem; }
+.admin-semester-row p:not(.eyebrow) { max-width: 39rem; margin: 0.35rem 0 0; color: #687790; line-height: 1.45; }
+.admin-actions { min-width: 10.5rem; display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; }
+.admin-actions strong { color: #53627a; font-size: 0.85rem; }
+.admin-actions button { min-width: 9.7rem; margin-top: 0.35rem; }
+.admin-semester-row .status-dot { display: inline-block; margin: 0 0.5rem 0.12rem 0; background: #a7b3c5; box-shadow: none; }
+.admin-semester-row .status-dot.is-open { background: #28a776; box-shadow: 0 0 0 4px rgba(40, 167, 118, 0.13); }
+
+.prearrival-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
+  gap: 2rem;
+  align-items: end;
+  margin: 1.2rem 0;
+  padding: 2rem;
+  border-radius: 22px;
+  color: #eef2ff;
+  background: linear-gradient(125deg, #263563, #4a43a3);
+  box-shadow: 0 18px 34px rgba(43, 51, 123, 0.18);
+}
+.prearrival-section .eyebrow { color: #b9c7ff; }
+.prearrival-section h2 { margin: 0.35rem 0 0; font-size: clamp(1.7rem, 3vw, 2.35rem); letter-spacing: -0.05em; }
+.prearrival-section > div > p:not(.eyebrow) { max-width: 37rem; margin: 0.7rem 0 0; color: #d4dbf7; line-height: 1.6; }
+.prearrival-steps { display: grid; gap: 0.45rem; margin: 0; padding: 0; list-style: none; }
+.prearrival-steps li { display: flex; align-items: center; gap: 0.7rem; padding: 0.72rem 0; border-bottom: 1px solid rgba(255,255,255,0.15); }
+.prearrival-steps strong { color: #ffbf7b; font-size: 0.78rem; }
+.prearrival-steps span { font-weight: 750; }
+.prearrival-section .landing-outline { grid-column: 2; justify-self: start; border-color: rgba(255,255,255,0.45); color: #fff; }
+
+@media (max-width: 760px) {
+  .semester-grid { grid-template-columns: 1fr; }
+  .prearrival-section { grid-template-columns: 1fr; padding: 1.45rem; }
+  .prearrival-section .landing-outline { grid-column: auto; }
+  .admin-semester-row { flex-direction: column; }
+  .admin-actions { align-items: flex-start; }
+}
+
+@media (max-width: 520px) {
+  .membership-shell, .admin-shell { width: min(100% - 1.25rem, 880px); margin-top: 1.25rem; }
+  .membership-card, .semester-header, .access-message, .admin-shell > header { padding: 1.35rem; border-radius: 17px; }
+  .semester-card { min-height: 220px; padding: 1.25rem; }
+  .semester-card-footer { align-items: start; flex-direction: column; }
+  .semester-card-footer strong { text-align: left; }
+}
+
 /* ── Statistics ───────────────────────────────────────────────────────── */
 .platform-header {
   min-height: 74px;

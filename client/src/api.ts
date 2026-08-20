@@ -35,6 +35,7 @@ export interface User {
   id: number;
   email: string;
   langPref: "fr" | "en";
+  role: "student" | "admin";
 }
 
 export interface DocumentSummary {
@@ -268,6 +269,45 @@ export interface LibrarySubject {
   chapters: LibraryChapter[];
 }
 
+export interface StudySemester {
+  id: number;
+  year_number: number;
+  semester_number: number;
+  title_fr: string;
+  title_en: string;
+  description_fr: string;
+  description_en: string;
+  is_published: boolean;
+  subject_count: number;
+  chapter_count: number;
+  has_access: boolean;
+}
+
+export interface StudySemesterDetail {
+  semester: Omit<StudySemester, "subject_count" | "chapter_count" | "has_access">;
+  subjects: LibrarySubject[];
+}
+
+export interface BillingStatus {
+  role: "student" | "admin";
+  subscriptionStatus: "active" | "trialing" | "inactive";
+  subscriptionPeriodEnd: number | null;
+  hasYearOneAccess: boolean;
+  billingAvailable: boolean;
+  billingMessage: string;
+}
+
+export interface AdminSemester {
+  id: number;
+  year_number: number;
+  semester_number: number;
+  title_fr: string;
+  title_en: string;
+  description_fr: string;
+  description_en: string;
+  is_published: boolean;
+}
+
 export const api = {
   register: (email: string, password: string, langPref: "fr" | "en") =>
     request<{ token: string; user: User }>("/auth/register", {
@@ -306,6 +346,17 @@ export const api = {
   getLibrary: () => request<LibraryAnnee[]>("/library"),
   getLibrarySubjects: () => request<LibrarySubject[]>("/library/subjects"),
   getLibrarySubject: (slug: string) => request<LibrarySubject>(`/library/subjects/${encodeURIComponent(slug)}`),
+  getStudySemesters: () => request<StudySemester[]>("/library/semesters"),
+  getStudySemester: (semester: number) => request<StudySemesterDetail>(`/library/semesters/${semester}`),
+  getBillingStatus: () => request<BillingStatus>("/billing/status"),
+  startCheckout: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
+  openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
+  getAdminSemesters: () => request<AdminSemester[]>("/admin/semesters"),
+  setSemesterPublished: (semester: number, isPublished: boolean) =>
+    request<AdminSemester>(`/admin/semesters/${semester}`, {
+      method: "PATCH",
+      body: JSON.stringify({ isPublished }),
+    }),
   getProgressSummary: () => request<ProgressSummary>("/library/progress-summary"),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),

@@ -13,6 +13,8 @@ if (!process.env.DATABASE_URL) {
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
+  connectionTimeoutMillis: 10_000,
+  query_timeout: 15_000,
 });
 
 function toPositional(sql: string): string {
@@ -45,8 +47,45 @@ const SCHEMA = `
     password_hash TEXT NOT NULL,
     session_token TEXT,
     lang_pref TEXT NOT NULL DEFAULT 'fr',
+    role TEXT NOT NULL DEFAULT 'student' CHECK (role IN ('student', 'admin')),
+    stripe_customer_id TEXT,
+    stripe_subscription_id TEXT,
+    subscription_status TEXT NOT NULL DEFAULT 'inactive',
+    subscription_period_end BIGINT,
+    stripe_subscription_event_created BIGINT NOT NULL DEFAULT 0,
+    pending_checkout_key TEXT,
+    pending_checkout_expires_at BIGINT,
     created_at BIGINT NOT NULL
   );
+
+  CREATE TABLE IF NOT EXISTS study_semesters (
+    id SERIAL PRIMARY KEY,
+    year_number INTEGER NOT NULL,
+    semester_number INTEGER NOT NULL CHECK (semester_number IN (1, 2)),
+    title_fr TEXT NOT NULL,
+    title_en TEXT NOT NULL,
+    description_fr TEXT NOT NULL,
+    description_en TEXT NOT NULL,
+    is_published BOOLEAN NOT NULL DEFAULT FALSE,
+    UNIQUE (year_number, semester_number)
+  );
+
+  INSERT INTO study_semesters (
+    year_number, semester_number, title_fr, title_en, description_fr, description_en, is_published
+  ) VALUES
+    (
+      1, 1, 'Semestre 1', 'Semester 1',
+      'Découvre les fondations médicales et les premières matières de la première année.',
+      'Discover the medical foundations and the first subjects of year one.',
+      TRUE
+    ),
+    (
+      1, 2, 'Semestre 2', 'Semester 2',
+      'Poursuis ton parcours avec les contenus, révisions et entraînements du second semestre.',
+      'Continue your path with second-semester courses, revisions, and practice.',
+      FALSE
+    )
+  ON CONFLICT (year_number, semester_number) DO NOTHING;
 
   CREATE TABLE IF NOT EXISTS documents (
     id SERIAL PRIMARY KEY,
@@ -268,6 +307,14 @@ const SCHEMA = `
   ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_qcm_options ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_chapter_exams ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT 'student';
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_status TEXT NOT NULL DEFAULT 'inactive';
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_period_end BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_event_created BIGINT NOT NULL DEFAULT 0;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_key TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_expires_at BIGINT;
 
   DO $$
   BEGIN

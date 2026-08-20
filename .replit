@@ -25,6 +25,8 @@ expertMode = true
 
 [userenv]
 
+[userenv.shared]
+
 [workflows]
 runButton = "Project"
 

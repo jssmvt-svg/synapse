@@ -11,6 +11,9 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { SynthesisView } from "./pages/SynthesisView";
 import { Statistics } from "./pages/Statistics";
+import { LibrarySemesterView } from "./pages/LibrarySemesterView";
+import { Membership } from "./pages/Membership";
+import { Admin } from "./pages/Admin";
 
 function RequireAuth({ children }: { children: ReactElement }) {
   const { user, loading } = useAuth();
@@ -100,6 +103,22 @@ export function App() {
             <LibrarySubjectView />
           </RequireAuth>
         }
+      />
+      <Route
+        path="/library/semester/:semester"
+        element={<RequireAuth><LibrarySemesterView /></RequireAuth>}
+      />
+      <Route
+        path="/library/semester/:semester/subject/:slug"
+        element={<RequireAuth><LibrarySubjectView /></RequireAuth>}
+      />
+      <Route
+        path="/membership"
+        element={<RequireAuth><Membership /></RequireAuth>}
+      />
+      <Route
+        path="/admin"
+        element={<RequireAuth><Admin /></RequireAuth>}
       />
       <Route
         path="/statistics"

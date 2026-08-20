@@ -549,7 +549,7 @@ export function LibraryChapterView() {
   return (
     <main className="learning-shell">
       <header className="learning-header">
-        <Link to={`/library/subject/${subjectSlug(detail.chapter.matiere)}`} className="back-link">
+        <Link to={`/library/semester/${detail.chapter.semestre}/subject/${subjectSlug(detail.chapter.matiere)}`} className="back-link">
           {t.backToSubject(detail.chapter.matiere)}
         </Link>
         <div>

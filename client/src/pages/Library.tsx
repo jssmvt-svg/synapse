@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api, type LibrarySubject } from "../api";
+import { useAuth } from "../auth";
+import { api, type StudySemester } from "../api";
 import { useLang } from "../i18n";
 
 export function Library() {
   const { t, lang } = useLang();
-  const [subjects, setSubjects] = useState<LibrarySubject[] | null>(null);
+  const { user } = useAuth();
+  const [semesters, setSemesters] = useState<StudySemester[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    api.getLibrarySubjects().then(setSubjects).catch((err) => setError((err as Error).message));
+    api.getStudySemesters().then(setSemesters).catch((err) => setError((err as Error).message));
   }, []);
 
   if (error) return <main className="library"><p className="error">{error}</p></main>;
-  if (!subjects) return <main className="library"><p className="loading-state">{t.loading}</p></main>;
+  if (!semesters) return <main className="library"><p className="loading-state">{t.loading}</p></main>;
 
   return (
     <div className="library">
@@ -29,32 +31,40 @@ export function Library() {
           <Link to="/dashboard">{t.dashboard}</Link>
           <Link to="/library" className="active">{t.libraryTitle}</Link>
           <Link to="/statistics">{t.statistics}</Link>
+          <Link to="/membership">{lang === "fr" ? "Mon abonnement" : "My membership"}</Link>
+          {user?.role === "admin" && <Link to="/admin">{lang === "fr" ? "Administration" : "Admin"}</Link>}
         </nav>
       </div>
       <header className="library-header">
         <p className="eyebrow">{t.libraryEyebrow}</p>
         <h1>{t.libraryTitle}</h1>
-        <p>{t.libraryIntro}</p>
+        <p>{lang === "fr"
+          ? "Première année UMFT : choisis ton semestre, puis avance à ton rythme dans chaque matière."
+          : "UMFT year one: choose your semester, then progress through every subject at your own pace."}</p>
       </header>
 
-      <section className="subject-grid" aria-label={t.libraryTitle}>
-        {subjects.map((subject, index) => {
-          const title = lang === "fr" ? subject.titre_fr : subject.titre_en;
-          const description = lang === "fr" ? subject.description_fr : subject.description_en;
-          const hasContent = subject.chapters.length > 0;
+      <section className="semester-grid" aria-label={t.libraryTitle}>
+        {semesters.map((semester) => {
+          const title = lang === "fr" ? semester.title_fr : semester.title_en;
+          const description = lang === "fr" ? semester.description_fr : semester.description_en;
+          const destination = semester.has_access ? `/library/semester/${semester.semester_number}` : "/membership";
           return (
             <Link
-              key={subject.slug}
-              to={`/library/subject/${subject.slug}`}
-              className={`subject-card subject-card-${subject.accent}`}
+              key={semester.id}
+              to={destination}
+              className={`semester-card ${semester.has_access ? "semester-card-open" : "semester-card-locked"}`}
             >
-              <span className="subject-card-index">0{index + 1}</span>
-              <span className="subject-card-orb" aria-hidden="true">{title.charAt(0)}</span>
+              <span className="semester-card-number">0{semester.semester_number}</span>
+              <span className="semester-card-kicker">{lang === "fr" ? "Première année" : "Year one"}</span>
               <h2>{title}</h2>
               <p>{description}</p>
-              <div className="subject-card-footer">
-                <span>{hasContent ? t.subjectChapterCount(subject.chapters.length) : t.libraryComingSoon}</span>
-                <strong>{hasContent ? t.subjectExplore : t.subjectView}</strong>
+              <div className="semester-card-footer">
+                <span>{semester.subject_count} {lang === "fr" ? "matières" : "subjects"} · {semester.chapter_count} {lang === "fr" ? "chapitres" : "chapters"}</span>
+                <strong>{semester.has_access
+                  ? (lang === "fr" ? "Ouvrir le semestre →" : "Open semester →")
+                  : (semester.is_published
+                    ? (lang === "fr" ? "Abonnement requis →" : "Subscription required →")
+                    : (lang === "fr" ? "Bientôt disponible" : "Coming soon"))}</strong>
               </div>
             </Link>
           );

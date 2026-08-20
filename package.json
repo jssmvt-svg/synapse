@@ -9,12 +9,17 @@
   "scripts": {
     "dev": "concurrently \"PORT=3001 npm run dev --workspace=server\" \"npm run dev --workspace=client\"",
     "build": "npm run build --workspace=client",
-    "start": "npm run start --workspace=server"
+    "start": "npm run start --workspace=server",
+    "seed:umft-year-one": "tsx scripts/seed-synapse-umft-year-one.ts"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"
   },
   "engines": {
     "node": ">=20"
+  },
+  "dependencies": {
+    "stripe": "^22.5.0",
+    "stripe-replit-sync": "^1.0.0"
   }
 }

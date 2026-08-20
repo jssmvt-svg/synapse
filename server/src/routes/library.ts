@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { db } from "../db.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
+import { canOpenStudyContent } from "../studyAccessPolicy.js";
 
 export const libraryRouter = Router();
 
@@ -52,6 +53,49 @@ async function getChapter(chapterId: number) {
     .get(chapterId);
 }
 
+async function canAccessSemester(
+  userId: number,
+  yearNumber: number,
+  semesterNumber: number,
+): Promise<boolean> {
+  const [user, semester] = await Promise.all([
+    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(userId),
+    db
+      .prepare(
+        `SELECT is_published FROM study_semesters
+         WHERE year_number = ? AND semester_number = ?`,
+      )
+      .get(yearNumber, semesterNumber),
+  ]);
+  return canOpenStudyContent({
+    role: user?.role,
+    subscriptionStatus: user?.subscription_status,
+    yearNumber,
+    semesterNumber,
+    semesterPublished: Boolean(semester?.is_published),
+  });
+}
+
+async function requireChapterAccess(
+  req: AuthedRequest,
+  res: { status: (code: number) => { json: (payload: unknown) => unknown } },
+  chapterId: number,
+) {
+  const chapter = await getChapter(chapterId);
+  if (!chapter) {
+    res.status(404).json({ error: "Chapitre introuvable" });
+    return null;
+  }
+  if (!(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) {
+    res.status(403).json({
+      error: "Un abonnement actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
+      code: "SEMESTER_ACCESS_REQUIRED",
+    });
+    return null;
+  }
+  return chapter;
+}
+
 async function getProgress(userId: number, chapterId: number) {
   const [resources, cards, qcm, exams] = await Promise.all([
     db
@@ -85,7 +129,7 @@ async function getProgress(userId: number, chapterId: number) {
   return { resources, flashcards: cards, qcmAttempts: qcm, examAttempts: exams };
 }
 
-libraryRouter.get("/", async (_req: AuthedRequest, res) => {
+libraryRouter.get("/", async (req: AuthedRequest, res) => {
   const chapters = await db
     .prepare(
       `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
@@ -95,10 +139,14 @@ libraryRouter.get("/", async (_req: AuthedRequest, res) => {
     )
     .all();
 
+  const visibleChapters: any[] = [];
+  for (const chapter of chapters as any[]) {
+    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+  }
   const tree = KNOWN_STRUCTURE.map((annee) => ({
     annee: annee.annee,
     semestres: annee.semestres.map((semestre) => {
-      const chaptersForSemestre = chapters.filter(
+      const chaptersForSemestre = visibleChapters.filter(
         (chapter: any) => chapter.annee === annee.annee && chapter.semestre === semestre,
       );
       const matieres = new Map<string, any[]>();
@@ -119,7 +167,83 @@ libraryRouter.get("/", async (_req: AuthedRequest, res) => {
   res.json(tree);
 });
 
-libraryRouter.get("/subjects", async (_req: AuthedRequest, res) => {
+libraryRouter.get("/semesters", async (req: AuthedRequest, res) => {
+  const [semesters, chapters, user] = await Promise.all([
+    db
+      .prepare(
+        `SELECT id, year_number, semester_number, title_fr, title_en, description_fr, description_en, is_published
+         FROM study_semesters WHERE year_number = 1 ORDER BY semester_number ASC`,
+      )
+      .all(),
+    db
+      .prepare(
+        `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone
+         FROM library_chapters WHERE is_active = true ORDER BY semestre ASC, matiere ASC, ordre ASC`,
+      )
+      .all(),
+    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(req.userId),
+  ]);
+  res.json(
+    (semesters as any[]).map((semester) => {
+      const semesterChapters = (chapters as any[]).filter(
+        (chapter) => chapter.annee === semester.year_number && chapter.semestre === semester.semester_number,
+      );
+      const subjectCount = new Set(semesterChapters.map((chapter) => chapter.matiere)).size || SUBJECTS.length;
+      const hasAccess =
+        canOpenStudyContent({
+          role: user?.role,
+          subscriptionStatus: user?.subscription_status,
+          yearNumber: semester.year_number,
+          semesterNumber: semester.semester_number,
+          semesterPublished: Boolean(semester.is_published),
+        });
+      return {
+        ...semester,
+        subject_count: subjectCount,
+        chapter_count: semesterChapters.length,
+        has_access: hasAccess,
+      };
+    }),
+  );
+});
+
+libraryRouter.get("/semesters/:number", async (req: AuthedRequest, res) => {
+  const semesterNumber = Number(req.params.number);
+  if (!Number.isInteger(semesterNumber) || ![1, 2].includes(semesterNumber)) {
+    return res.status(404).json({ error: "Semestre introuvable" });
+  }
+  const semester = await db
+    .prepare(
+      `SELECT id, year_number, semester_number, title_fr, title_en, description_fr, description_en, is_published
+       FROM study_semesters WHERE year_number = 1 AND semester_number = ?`,
+    )
+    .get(semesterNumber);
+  if (!semester) return res.status(404).json({ error: "Semestre introuvable" });
+  if (!(await canAccessSemester(req.userId!, 1, semesterNumber))) {
+    return res.status(403).json({
+      error: "Ce semestre sera disponible dès que ton abonnement sera actif et que Jessica l'aura ouvert.",
+      code: "SEMESTER_ACCESS_REQUIRED",
+    });
+  }
+
+  const chapters = await db
+    .prepare(
+      `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone
+       FROM library_chapters
+       WHERE annee = 1 AND semestre = ? AND is_active = true
+       ORDER BY matiere ASC, ordre ASC`,
+    )
+    .all(semesterNumber);
+  res.json({
+    semester,
+    subjects: SUBJECTS.map((subject) => ({
+      ...subject,
+      chapters: (chapters as any[]).filter((chapter) => chapter.matiere === subject.matiere),
+    })),
+  });
+});
+
+libraryRouter.get("/subjects", async (req: AuthedRequest, res) => {
   const chapters = await db
     .prepare(
       `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
@@ -129,10 +253,14 @@ libraryRouter.get("/subjects", async (_req: AuthedRequest, res) => {
     )
     .all();
 
+  const visibleChapters: any[] = [];
+  for (const chapter of chapters as any[]) {
+    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+  }
   res.json(
     SUBJECTS.map((subject) => ({
       ...subject,
-      chapters: (chapters as any[]).filter((chapter) => chapter.matiere === subject.matiere),
+      chapters: visibleChapters.filter((chapter) => chapter.matiere === subject.matiere),
     })),
   );
 });
@@ -151,7 +279,11 @@ libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
     )
     .all(subject.matiere);
 
-  res.json({ ...subject, chapters });
+  const visibleChapters: any[] = [];
+  for (const chapter of chapters as any[]) {
+    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+  }
+  res.json({ ...subject, chapters: visibleChapters });
 });
 
 libraryRouter.get("/progress-summary", async (req: AuthedRequest, res) => {
@@ -330,8 +462,8 @@ libraryRouter.get("/progress-summary", async (req: AuthedRequest, res) => {
 
 libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
-  const chapter = await getChapter(chapterId);
-  if (!chapter) return res.status(404).json({ error: "Chapitre introuvable" });
+  const chapter = await requireChapterAccess(req, res, chapterId);
+  if (!chapter) return;
 
   const [resources, flashcards, qcm, exams, progress] = await Promise.all([
     db
@@ -386,8 +518,8 @@ libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
 
 libraryRouter.get("/chapters/:id/flashcards", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
-  const chapter = await getChapter(chapterId);
-  if (!chapter) return res.status(404).json({ error: "Chapitre introuvable" });
+  const chapter = await requireChapterAccess(req, res, chapterId);
+  if (!chapter) return;
 
   const cards = await db
     .prepare(
@@ -406,6 +538,7 @@ libraryRouter.get("/chapters/:id/flashcards", async (req: AuthedRequest, res) =>
 
 libraryRouter.post("/chapters/:id/course-progress", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
+  if (!(await requireChapterAccess(req, res, chapterId))) return;
   const resourceId = Number(req.body?.resourceId);
   const completed = Boolean(req.body?.completed);
   const resource = await db
@@ -428,6 +561,7 @@ libraryRouter.post("/chapters/:id/course-progress", async (req: AuthedRequest, r
 
 libraryRouter.post("/chapters/:id/flashcard-mastery", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
+  if (!(await requireChapterAccess(req, res, chapterId))) return;
   const flashcardId = Number(req.body?.flashcardId);
   const mastery = Number(req.body?.mastery);
   if (!Number.isInteger(mastery) || mastery < 0 || mastery > 5) {
@@ -456,6 +590,7 @@ libraryRouter.post("/chapters/:id/flashcard-mastery", async (req: AuthedRequest,
 
 libraryRouter.post("/chapters/:id/qcm-attempts", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
+  if (!(await requireChapterAccess(req, res, chapterId))) return;
   const questionId = Number(req.body?.questionId);
   const answers = selectedKeys(req.body?.selectedOptionKeys);
   if (!answers) return res.status(400).json({ error: "selectedOptionKeys doit être une liste de lettres" });
@@ -506,6 +641,7 @@ libraryRouter.post("/chapters/:id/qcm-attempts", async (req: AuthedRequest, res)
 
 libraryRouter.post("/chapters/:id/exams/:examId/start", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
+  if (!(await requireChapterAccess(req, res, chapterId))) return;
   const examId = Number(req.params.examId);
   const exam = await db
     .prepare(
@@ -576,6 +712,7 @@ libraryRouter.post("/chapters/:id/exams/:examId/start", async (req: AuthedReques
 
 libraryRouter.post("/chapters/:id/exams/:examId/attempts", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
+  if (!(await requireChapterAccess(req, res, chapterId))) return;
   const examId = Number(req.params.examId);
   const sessionId = Number(req.body?.sessionId);
   const answers = req.body?.answers;

@@ -1,20 +1,34 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { api, type LibrarySubject } from "../api";
+import { api, type LibrarySubject, type StudySemesterDetail } from "../api";
 import { useLang } from "../i18n";
 
 export function LibrarySubjectView() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug, semester } = useParams<{ slug: string; semester?: string }>();
   const { t, lang } = useLang();
   const [subject, setSubject] = useState<LibrarySubject | null>(null);
+  const [semesterDetail, setSemesterDetail] = useState<StudySemesterDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!slug) return;
     setSubject(null);
     setError(null);
+    const semesterNumber = Number(semester);
+    if (Number.isInteger(semesterNumber)) {
+      api
+        .getStudySemester(semesterNumber)
+        .then((detail) => {
+          setSemesterDetail(detail);
+          const found = detail.subjects.find((candidate) => candidate.slug === slug);
+          if (!found) throw new Error("Matière introuvable");
+          setSubject(found);
+        })
+        .catch((err) => setError((err as Error).message));
+      return;
+    }
     api.getLibrarySubject(slug).then(setSubject).catch((err) => setError((err as Error).message));
-  }, [slug]);
+  }, [slug, semester]);
 
   if (error) return <main className="library"><p className="error">{error}</p></main>;
   if (!subject) return <main className="library"><p className="loading-state">{t.loading}</p></main>;
@@ -40,7 +54,11 @@ export function LibrarySubjectView() {
       </div>
 
       <header className={`subject-header subject-header-${subject.accent}`}>
-        <Link to="/library" className="back-link">{t.backToSubjects}</Link>
+        <Link to={semesterDetail ? `/library/semester/${semesterDetail.semester.semester_number}` : "/library"} className="back-link">
+          {semesterDetail
+            ? (lang === "fr" ? "← Retour aux matières" : "← Back to subjects")
+            : t.backToSubjects}
+        </Link>
         <p className="eyebrow">{t.libraryTitle}</p>
         <h1>{title}</h1>
         <p>{description}</p>
@@ -51,7 +69,9 @@ export function LibrarySubjectView() {
           <span className="subject-empty-mark" aria-hidden="true">+</span>
           <h2>{t.subjectEmptyTitle}</h2>
           <p>{t.subjectEmptyCopy(title)}</p>
-          <Link to="/library" className="hero-library-link">{t.backToSubjects}</Link>
+          <Link to={semesterDetail ? `/library/semester/${semesterDetail.semester.semester_number}` : "/library"} className="hero-library-link">
+            {semesterDetail ? (lang === "fr" ? "Retour aux matières" : "Back to subjects") : t.backToSubjects}
+          </Link>
         </section>
       ) : (
         <section aria-labelledby="subject-chapters-heading">
