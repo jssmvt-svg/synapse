@@ -99,6 +99,7 @@ const SCHEMA = `
     description_fr TEXT NOT NULL DEFAULT '',
     description_en TEXT NOT NULL DEFAULT '',
     icone TEXT NOT NULL DEFAULT '',
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
     created_at BIGINT NOT NULL,
     UNIQUE (annee, semestre, matiere, ordre)
   );
@@ -111,8 +112,140 @@ const SCHEMA = `
     question_en TEXT NOT NULL,
     answer_fr TEXT NOT NULL,
     answer_en TEXT NOT NULL,
-    created_at BIGINT NOT NULL
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at BIGINT NOT NULL,
+    CONSTRAINT library_flashcards_chapter_ordre_key UNIQUE (chapter_id, ordre)
   );
+
+  -- Ressources de cours officielles. Le contenu français est toujours stocké
+  -- séparément : l'interface peut être en anglais sans jamais masquer la
+  -- source pédagogique fournie en français.
+  CREATE TABLE IF NOT EXISTS library_course_resources (
+    id SERIAL PRIMARY KEY,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    ordre INTEGER NOT NULL DEFAULT 0,
+    resource_type TEXT NOT NULL CHECK (resource_type IN ('course', 'revision')),
+    titre_fr TEXT NOT NULL,
+    titre_en TEXT NOT NULL DEFAULT '',
+    content_fr TEXT NOT NULL,
+    content_en TEXT NOT NULL DEFAULT '',
+    source_label TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at BIGINT NOT NULL,
+    UNIQUE (chapter_id, resource_type)
+  );
+
+  CREATE TABLE IF NOT EXISTS library_qcm_questions (
+    id SERIAL PRIMARY KEY,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    resource_id INTEGER REFERENCES library_course_resources(id) ON DELETE SET NULL,
+    ordre INTEGER NOT NULL,
+    prompt_fr TEXT NOT NULL,
+    prompt_en TEXT NOT NULL DEFAULT '',
+    explanation_fr TEXT NOT NULL,
+    explanation_en TEXT NOT NULL DEFAULT '',
+    multiple_answers BOOLEAN NOT NULL DEFAULT FALSE,
+    source_label TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at BIGINT NOT NULL,
+    UNIQUE (chapter_id, ordre)
+  );
+
+  CREATE TABLE IF NOT EXISTS library_qcm_options (
+    id SERIAL PRIMARY KEY,
+    question_id INTEGER NOT NULL REFERENCES library_qcm_questions(id) ON DELETE CASCADE,
+    option_key TEXT NOT NULL,
+    label_fr TEXT NOT NULL,
+    label_en TEXT NOT NULL DEFAULT '',
+    is_correct BOOLEAN NOT NULL DEFAULT FALSE,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at BIGINT NOT NULL,
+    UNIQUE (question_id, option_key)
+  );
+
+  -- Une configuration d'examen référence les QCM du chapitre par ordre.
+  -- La liste JSON conserve la configuration sans dupliquer les questions.
+  CREATE TABLE IF NOT EXISTS library_chapter_exams (
+    id SERIAL PRIMARY KEY,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    titre_fr TEXT NOT NULL,
+    titre_en TEXT NOT NULL DEFAULT '',
+    duration_seconds INTEGER NOT NULL CHECK (duration_seconds > 0),
+    question_count INTEGER NOT NULL CHECK (question_count > 0),
+    question_orders TEXT NOT NULL,
+    source_label TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at BIGINT NOT NULL,
+    UNIQUE (chapter_id, titre_fr)
+  );
+
+  CREATE TABLE IF NOT EXISTS student_course_progress (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    resource_id INTEGER NOT NULL REFERENCES library_course_resources(id) ON DELETE CASCADE,
+    completed_at BIGINT,
+    updated_at BIGINT NOT NULL,
+    PRIMARY KEY (user_id, resource_id)
+  );
+
+  CREATE TABLE IF NOT EXISTS student_flashcard_mastery (
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    flashcard_id INTEGER NOT NULL REFERENCES library_flashcards(id) ON DELETE CASCADE,
+    mastery INTEGER NOT NULL DEFAULT 0 CHECK (mastery BETWEEN 0 AND 5),
+    review_count INTEGER NOT NULL DEFAULT 0,
+    last_reviewed_at BIGINT NOT NULL,
+    PRIMARY KEY (user_id, flashcard_id)
+  );
+
+  CREATE TABLE IF NOT EXISTS student_qcm_attempts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    question_id INTEGER NOT NULL REFERENCES library_qcm_questions(id) ON DELETE CASCADE,
+    selected_option_keys TEXT NOT NULL,
+    is_correct BOOLEAN NOT NULL,
+    score NUMERIC(5,2) NOT NULL,
+    attempted_at BIGINT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS student_exam_attempts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    exam_id INTEGER NOT NULL REFERENCES library_chapter_exams(id) ON DELETE CASCADE,
+    answers_json TEXT NOT NULL,
+    score NUMERIC(5,2) NOT NULL,
+    started_at BIGINT NOT NULL,
+    completed_at BIGINT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS student_exam_sessions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    exam_id INTEGER NOT NULL REFERENCES library_chapter_exams(id) ON DELETE CASCADE,
+    started_at BIGINT NOT NULL,
+    expires_at BIGINT NOT NULL,
+    submitted_at BIGINT
+  );
+
+  ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE library_course_resources ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE library_qcm_options ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE library_chapter_exams ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+
+  DO $$
+  BEGIN
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint WHERE conname = 'library_flashcards_chapter_ordre_key'
+    ) THEN
+      ALTER TABLE library_flashcards
+        ADD CONSTRAINT library_flashcards_chapter_ordre_key UNIQUE (chapter_id, ordre);
+    END IF;
+  END $$;
 `;
 
 const MAX_RETRIES = 5;

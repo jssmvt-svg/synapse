@@ -1,3 +1,8 @@
+import {
+  COMPOSITION_PROTEINS_LEARNING,
+  STRUCTURE_PROTEINS_LEARNING,
+} from "./biochimie-proteines.js";
+
 // Contenu officiel pré-rédigé : Biochimie, Année 1, Semestre 1.
 // Extrait du notebook NotebookLM "Lecture Biochem S1" (11 lectures / sources)
 // de l'utilisateur — un chapitre par lecture, dans l'ordre du cours.
@@ -17,6 +22,34 @@ export interface LibraryChapterSeed {
   description_en: string;
   icone: string;
   cards: LibraryCardSeed[];
+  learning?: LibraryLearningSeed;
+}
+
+export interface LibraryQcmOptionSeed {
+  key: string;
+  label_fr: string;
+  correct: boolean;
+}
+
+export interface LibraryQcmSeed {
+  prompt_fr: string;
+  explanation_fr: string;
+  multiple_answers: boolean;
+  options: LibraryQcmOptionSeed[];
+}
+
+export interface LibraryLearningSeed {
+  resource: {
+    resource_type: "course" | "revision";
+    titre_fr: string;
+    source_label: string;
+    content_fr: string;
+  };
+  qcm: LibraryQcmSeed[];
+  exam: {
+    titre_fr: string;
+    duration_seconds: number;
+  };
 }
 
 export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
@@ -73,6 +106,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Les 20 acides aminés, liaison peptidique et structure primaire des protéines",
     description_en: "The 20 amino acids, peptide bond and primary protein structure",
     icone: "🧬",
+    learning: COMPOSITION_PROTEINS_LEARNING,
     cards: [
       {
         question_fr: "De quels composants est constitué un acide alpha-aminé ?",
@@ -119,6 +153,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Structures secondaire, tertiaire et quaternaire, repliement et modifications post-traductionnelles",
     description_en: "Secondary, tertiary and quaternary structure, folding and post-translational modifications",
     icone: "🔗",
+    learning: STRUCTURE_PROTEINS_LEARNING,
     cards: [
       {
         question_fr: "Quel type de liaison stabilise la structure secondaire en hélice alpha ?",

@@ -90,7 +90,7 @@ const DICT = {
 interface LangContextValue {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  t: (typeof DICT)["fr"];
+  t: (typeof DICT)["fr"] | (typeof DICT)["en"];
 }
 
 const LangContext = createContext<LangContextValue | null>(null);

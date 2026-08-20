@@ -1,7 +1,6 @@
 import mammoth from "mammoth";
 import { Router } from "express";
 import multer from "multer";
-// @ts-expect-error — pdf-parse has no bundled types export path that matches its CJS default
 import pdfParse from "pdf-parse";
 import { db } from "../db.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
