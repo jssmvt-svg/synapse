@@ -156,6 +156,27 @@ export function Dashboard() {
         </Link>
       </section>
 
+      <section className="dashboard-feature-grid" aria-label={t.studyProgress}>
+        <Link to="/library" className="dashboard-feature-card">
+          <span className="feature-index">01</span>
+          <h2>{t.dashboardFeatureCourse}</h2>
+          <p>{t.dashboardFeatureCourseCopy}</p>
+          <small>{t.libraryTitle} →</small>
+        </Link>
+        <Link to="/library" className="dashboard-feature-card">
+          <span className="feature-index feature-index-violet">02</span>
+          <h2>{t.dashboardFeatureExam}</h2>
+          <p>{t.dashboardFeatureExamCopy}</p>
+          <small>{t.chapterExam} →</small>
+        </Link>
+        <Link to="/statistics" className="dashboard-feature-card">
+          <span className="feature-index feature-index-warm">03</span>
+          <h2>{t.dashboardFeatureStats}</h2>
+          <p>{t.dashboardFeatureStatsCopy}</p>
+          <small>{t.statistics} →</small>
+        </Link>
+      </section>
+
       <section className="progress-dashboard" aria-labelledby="study-progress-title">
         <div className="progress-section-heading">
           <div>

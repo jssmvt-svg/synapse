@@ -140,6 +140,12 @@ const DICT = {
     landingExplore: "Explorer",
     landingMethodTitle: "Tout ce dont tu as besoin pour savoir quoi faire ensuite.",
     landingMethodCopy: "Synapse garde la trace de tes cours terminés, de tes révisions et de tes résultats pour te guider vers la prochaine action utile.",
+    dashboardFeatureCourse: "Chapitres guidés",
+    dashboardFeatureCourseCopy: "Accède aux cours, fiches et ressources officielles, chapitre après chapitre.",
+    dashboardFeatureExam: "Examen blanc",
+    dashboardFeatureExamCopy: "Simule les conditions réelles avec un examen chronométré et une correction complète.",
+    dashboardFeatureStats: "Statistiques",
+    dashboardFeatureStatsCopy: "Suis ta progression et identifie les activités qui méritent une nouvelle révision.",
   },
   en: {
     appName: "Synapse",
@@ -278,6 +284,12 @@ const DICT = {
     landingExplore: "Explore",
     landingMethodTitle: "Everything you need to know what to do next.",
     landingMethodCopy: "Synapse keeps track of your completed courses, reviews, and results to guide you toward the next useful action.",
+    dashboardFeatureCourse: "Guided chapters",
+    dashboardFeatureCourseCopy: "Access official courses, revision sheets, and resources chapter by chapter.",
+    dashboardFeatureExam: "Mock exam",
+    dashboardFeatureExamCopy: "Simulate real conditions with a timed exam and a complete review.",
+    dashboardFeatureStats: "Statistics",
+    dashboardFeatureStatsCopy: "Track your progress and find the activities that deserve another review.",
   },
 } as const;
 
