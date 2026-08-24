@@ -3,17 +3,21 @@ import { Link, useParams } from "react-router-dom";
 import { api, type LibrarySubject, type StudySemesterDetail } from "../api";
 import { useLang } from "../i18n";
 
+type ChapterSection = "cours" | "laboratoire";
+
 export function LibrarySubjectView() {
   const { slug, semester } = useParams<{ slug: string; semester?: string }>();
   const { t, lang } = useLang();
   const [subject, setSubject] = useState<LibrarySubject | null>(null);
   const [semesterDetail, setSemesterDetail] = useState<StudySemesterDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [activeSection, setActiveSection] = useState<ChapterSection | null>(null);
 
   useEffect(() => {
     if (!slug) return;
     setSubject(null);
     setError(null);
+    setActiveSection(null);
     const semesterNumber = Number(semester);
     if (Number.isInteger(semesterNumber)) {
       api
@@ -73,29 +77,102 @@ export function LibrarySubjectView() {
             {semesterDetail ? (lang === "fr" ? "Retour aux matières" : "Back to subjects") : t.backToSubjects}
           </Link>
         </section>
+      ) : activeSection === null ? (
+        <SubjectSectionPicker
+          chapters={subject.chapters}
+          onSelect={setActiveSection}
+        />
       ) : (
-        <section aria-labelledby="subject-chapters-heading">
-          <div className="section-title-row">
-            <div>
-              <p className="eyebrow">{t.subjectChapterCount(subject.chapters.length)}</p>
-              <h2 id="subject-chapters-heading">{t.subjectChapters}</h2>
-            </div>
-          </div>
-          <div className="subject-chapter-grid">
-            {subject.chapters.map((chapter) => (
-              <Link key={chapter.id} to={`/library/chapter/${chapter.id}`} className="subject-chapter-card">
-                <span className="chapter-number">{String(chapter.ordre).padStart(2, "0")}</span>
-                <span className="chapter-context">
-                  {t.anneeLabel(chapter.annee)} · {t.semestreLabel(chapter.semestre)}
-                </span>
-                <h3>{lang === "fr" ? chapter.titre_fr : chapter.titre_en}</h3>
-                <p>{lang === "fr" ? chapter.description_fr : chapter.description_en}</p>
-                <small>{t.subjectOpenChapter} →</small>
-              </Link>
-            ))}
-          </div>
-        </section>
+        <SectionChapterGrid
+          chapters={subject.chapters.filter((chapter) => (chapter.section ?? "cours") === activeSection)}
+          section={activeSection}
+          lang={lang}
+          onBack={() => setActiveSection(null)}
+        />
       )}
     </main>
+  );
+}
+
+function SubjectSectionPicker({
+  chapters,
+  onSelect,
+}: {
+  chapters: LibrarySubject["chapters"];
+  onSelect: (section: ChapterSection) => void;
+}) {
+  const { t } = useLang();
+  const coursCount = chapters.filter((chapter) => (chapter.section ?? "cours") === "cours").length;
+  const laboCount = chapters.filter((chapter) => chapter.section === "laboratoire").length;
+
+  return (
+    <section aria-labelledby="subject-section-heading">
+      <div className="section-title-row">
+        <div>
+          <h2 id="subject-section-heading">{t.subjectChapters}</h2>
+        </div>
+      </div>
+      <div className="subject-section-grid">
+        <button type="button" className="subject-section-card" onClick={() => onSelect("cours")}>
+          <span className="chapter-number">{String(coursCount).padStart(2, "0")}</span>
+          <h3>{t.sectionCours}</h3>
+          <p>{t.sectionCoursCopy}</p>
+          <small>{t.subjectExplore} →</small>
+        </button>
+        <button type="button" className="subject-section-card" onClick={() => onSelect("laboratoire")}>
+          <span className="chapter-number">{String(laboCount).padStart(2, "0")}</span>
+          <h3>{t.sectionLaboratoires}</h3>
+          <p>{t.sectionLaboratoiresCopy}</p>
+          <small>{t.subjectExplore} →</small>
+        </button>
+      </div>
+    </section>
+  );
+}
+
+function SectionChapterGrid({
+  chapters,
+  section,
+  lang,
+  onBack,
+}: {
+  chapters: LibrarySubject["chapters"];
+  section: ChapterSection;
+  lang: "fr" | "en";
+  onBack: () => void;
+}) {
+  const { t } = useLang();
+
+  return (
+    <section aria-labelledby="subject-chapters-heading">
+      <div className="section-title-row">
+        <div>
+          <button type="button" className="text-button" onClick={onBack}>
+            {t.sectionBack}
+          </button>
+          <p className="eyebrow">{t.subjectChapterCount(chapters.length)}</p>
+          <h2 id="subject-chapters-heading">
+            {section === "cours" ? t.sectionCours : t.sectionLaboratoires}
+          </h2>
+        </div>
+      </div>
+      {chapters.length === 0 ? (
+        <p className="hint">{t.sectionEmptyLabo}</p>
+      ) : (
+        <div className="subject-chapter-grid">
+          {chapters.map((chapter) => (
+            <Link key={chapter.id} to={`/library/chapter/${chapter.id}`} className="subject-chapter-card">
+              <span className="chapter-number">{String(chapter.ordre).padStart(2, "0")}</span>
+              <span className="chapter-context">
+                {t.anneeLabel(chapter.annee)} · {t.semestreLabel(chapter.semestre)}
+              </span>
+              <h3>{lang === "fr" ? chapter.titre_fr : chapter.titre_en}</h3>
+              <p>{lang === "fr" ? chapter.description_fr : chapter.description_en}</p>
+              <small>{t.subjectOpenChapter} →</small>
+            </Link>
+          ))}
+        </div>
+      )}
+    </section>
   );
 }

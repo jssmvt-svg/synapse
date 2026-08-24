@@ -228,7 +228,7 @@ libraryRouter.get("/semesters/:number", async (req: AuthedRequest, res) => {
 
   const chapters = await db
     .prepare(
-      `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone
+      `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, section
        FROM library_chapters
        WHERE annee = 1 AND semestre = ? AND is_active = true
        ORDER BY matiere ASC, ordre ASC`,
@@ -247,7 +247,7 @@ libraryRouter.get("/subjects", async (req: AuthedRequest, res) => {
   const chapters = await db
     .prepare(
       `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
-              description_fr, description_en, icone
+              description_fr, description_en, icone, section
        FROM library_chapters WHERE is_active = true
        ORDER BY annee ASC, semestre ASC, ordre ASC`,
     )
@@ -272,7 +272,7 @@ libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
   const chapters = await db
     .prepare(
       `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
-              description_fr, description_en, icone
+              description_fr, description_en, icone, section
        FROM library_chapters
        WHERE matiere = ? AND is_active = true
        ORDER BY annee ASC, semestre ASC, ordre ASC`,

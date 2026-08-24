@@ -30,6 +30,9 @@ export interface LibraryChapterSeed {
   // Référence vers un widget interactif de chapitre (ex. "hb-o2-curve"),
   // affiché comme carte supplémentaire dans le hub du chapitre.
   widget_key?: string;
+  // "cours" par défaut si omis ; "laboratoire" pour les chapitres de labo,
+  // affichés dans une carte séparée sur la page de la matière.
+  section?: "cours" | "laboratoire";
 }
 
 export interface LibraryQcmOptionSeed {

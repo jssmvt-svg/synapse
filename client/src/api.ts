@@ -129,6 +129,7 @@ export interface LibraryChapter {
   description_en: string;
   icone: string;
   widget_key?: string;
+  section?: "cours" | "laboratoire";
 }
 
 export interface LibraryResource {

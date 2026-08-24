@@ -343,6 +343,7 @@ const SCHEMA = `
 
   ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS widget_key TEXT;
+  ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS section TEXT NOT NULL DEFAULT 'cours';
   ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS visual_key TEXT;
   ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS visual_key TEXT;

@@ -25,8 +25,8 @@ async function seedMatiere(
     const inserted = await db
       .prepare(
         `INSERT INTO library_chapters
-           (annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, widget_key, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+           (annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, widget_key, section, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT (annee, semestre, matiere, ordre) DO UPDATE SET
            titre_fr = EXCLUDED.titre_fr,
            titre_en = EXCLUDED.titre_en,
@@ -34,6 +34,7 @@ async function seedMatiere(
            description_en = EXCLUDED.description_en,
            icone = EXCLUDED.icone,
            widget_key = EXCLUDED.widget_key,
+           section = EXCLUDED.section,
            is_active = true
          RETURNING id`,
       )
@@ -48,6 +49,7 @@ async function seedMatiere(
         chapter.description_en,
         chapter.icone,
         chapter.widget_key ?? null,
+        chapter.section ?? "cours",
         now,
       );
 
