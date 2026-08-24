@@ -93,14 +93,16 @@ const SCHEMA = `
     annee INTEGER NOT NULL,
     semestre INTEGER NOT NULL,
     matiere TEXT NOT NULL,
+    section TEXT NOT NULL DEFAULT 'cours',
     ordre INTEGER NOT NULL DEFAULT 0,
     titre_fr TEXT NOT NULL,
     titre_en TEXT NOT NULL,
     description_fr TEXT NOT NULL DEFAULT '',
     description_en TEXT NOT NULL DEFAULT '',
     icone TEXT NOT NULL DEFAULT '',
+    widget_key TEXT,
     created_at BIGINT NOT NULL,
-    UNIQUE (annee, semestre, matiere, ordre)
+    UNIQUE (annee, semestre, matiere, section, ordre)
   );
 
   CREATE TABLE IF NOT EXISTS library_flashcards (
@@ -111,8 +113,27 @@ const SCHEMA = `
     question_en TEXT NOT NULL,
     answer_fr TEXT NOT NULL,
     answer_en TEXT NOT NULL,
+    visual_key TEXT,
     created_at BIGINT NOT NULL
   );
+
+  -- Migrations idempotentes pour les déploiements existants (colonnes/contrainte
+  -- ajoutées après la création initiale des tables ci-dessus).
+  ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS section TEXT NOT NULL DEFAULT 'cours';
+  ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS widget_key TEXT;
+  ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS visual_key TEXT;
+  ALTER TABLE library_chapters DROP CONSTRAINT IF EXISTS library_chapters_annee_semestre_matiere_ordre_key;
+
+  DO $$
+  BEGIN
+    IF NOT EXISTS (
+      SELECT 1 FROM pg_constraint WHERE conname = 'library_chapters_annee_semestre_matiere_section_ordre_key'
+    ) THEN
+      ALTER TABLE library_chapters
+        ADD CONSTRAINT library_chapters_annee_semestre_matiere_section_ordre_key
+        UNIQUE (annee, semestre, matiere, section, ordre);
+    END IF;
+  END $$;
 `;
 
 const MAX_RETRIES = 5;

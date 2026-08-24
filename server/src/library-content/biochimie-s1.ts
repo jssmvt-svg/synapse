@@ -7,6 +7,9 @@ export interface LibraryCardSeed {
   question_en: string;
   answer_fr: string;
   answer_en: string;
+  // Référence vers un schéma SVG interne (résolu côté client via VISUAL_REGISTRY),
+  // ex. "amino/ALA", "hb-quaternary", "vitamin/B1". Absent = carte texte pure.
+  visual_key?: string;
 }
 
 export interface LibraryChapterSeed {
@@ -16,6 +19,11 @@ export interface LibraryChapterSeed {
   description_fr: string;
   description_en: string;
   icone: string;
+  // "cours" par défaut si omis ; "laboratoire" pour les futurs chapitres de labo.
+  section?: "cours" | "laboratoire";
+  // Référence vers un widget interactif de chapitre (résolu côté client via
+  // WIDGET_REGISTRY), ex. "amino-acid-quiz", "hb-o2-curve". Absent = pas de widget.
+  widget_key?: string;
   cards: LibraryCardSeed[];
 }
 
@@ -73,6 +81,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Les 20 acides aminés, liaison peptidique et structure primaire des protéines",
     description_en: "The 20 amino acids, peptide bond and primary protein structure",
     icone: "🧬",
+    widget_key: "amino-acid-quiz",
     cards: [
       {
         question_fr: "De quels composants est constitué un acide alpha-aminé ?",
@@ -109,6 +118,146 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "Define the zwitterion form of an amino acid.",
         answer_fr: "Ion dipolaire avec le groupe amino protoné (-NH3+) et le groupe carboxyle déprotoné (-COO-)",
         answer_en: "Dipolar ion with protonated amino (-NH3+) and deprotonated carboxyl (-COO-) groups",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Glycine (Gly, G) — hydrophobe. Le plus petit acide aminé, sans carbone chiral.",
+        answer_en: "Glycine (Gly, G) — hydrophobic. The smallest amino acid, no chiral carbon.",
+        visual_key: "amino/Gly",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Alanine (Ala, A) — hydrophobe. Chaîne latérale méthyle, simple et peu encombrante.",
+        answer_en: "Alanine (Ala, A) — hydrophobic. Methyl side chain, small and unhindered.",
+        visual_key: "amino/Ala",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Valine (Val, V) — hydrophobe. Chaîne ramifiée, typique des cœurs hydrophobes.",
+        answer_en: "Valine (Val, V) — hydrophobic. Branched chain, typical of hydrophobic cores.",
+        visual_key: "amino/Val",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Leucine (Leu, L) — hydrophobe. Chaîne ramifiée, très fréquente dans les hélices alpha.",
+        answer_en: "Leucine (Leu, L) — hydrophobic. Branched chain, very common in alpha helices.",
+        visual_key: "amino/Leu",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Isoleucine (Ile, I) — hydrophobe. Chaîne ramifiée avec un second centre chiral.",
+        answer_en: "Isoleucine (Ile, I) — hydrophobic. Branched chain with a second chiral center.",
+        visual_key: "amino/Ile",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Proline (Pro, P) — hydrophobe. Seul imino-acide : la chaîne reboucle sur l'azote, rigidifie le squelette.",
+        answer_en: "Proline (Pro, P) — hydrophobic. Only imino acid: the chain loops back to the nitrogen, rigidifying the backbone.",
+        visual_key: "amino/Pro",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Méthionine (Met, M) — hydrophobe. Contient un soufre thioéther ; premier acide aminé de toute chaîne.",
+        answer_en: "Methionine (Met, M) — hydrophobic. Contains a thioether sulfur; first amino acid of every chain.",
+        visual_key: "amino/Met",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Phénylalanine (Phe, F) — hydrophobe, aromatique. Cycle phényle sans hydroxyle.",
+        answer_en: "Phenylalanine (Phe, F) — hydrophobic, aromatic. Phenyl ring with no hydroxyl.",
+        visual_key: "amino/Phe",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Tryptophane (Trp, W) — hydrophobe, aromatique. Le plus volumineux des 20 ; groupe indole.",
+        answer_en: "Tryptophan (Trp, W) — hydrophobic, aromatic. The bulkiest of the 20; indole group.",
+        visual_key: "amino/Trp",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Sérine (Ser, S) — polaire. Groupe hydroxyle, souvent phosphorylé.",
+        answer_en: "Serine (Ser, S) — polar. Hydroxyl group, often phosphorylated.",
+        visual_key: "amino/Ser",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Thréonine (Thr, T) — polaire. Groupe hydroxyle sur un carbone chiral supplémentaire.",
+        answer_en: "Threonine (Thr, T) — polar. Hydroxyl group on an additional chiral carbon.",
+        visual_key: "amino/Thr",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Tyrosine (Tyr, Y) — polaire, aromatique. Cycle avec hydroxyle phénolique, souvent phosphorylé.",
+        answer_en: "Tyrosine (Tyr, Y) — polar, aromatic. Ring with phenolic hydroxyl, often phosphorylated.",
+        visual_key: "amino/Tyr",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Cystéine (Cys, C) — polaire. Thiol capable de former un pont disulfure.",
+        answer_en: "Cysteine (Cys, C) — polar. Thiol capable of forming a disulfide bond.",
+        visual_key: "amino/Cys",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Asparagine (Asn, N) — polaire. Amide de l'acide aspartique.",
+        answer_en: "Asparagine (Asn, N) — polar. Amide of aspartic acid.",
+        visual_key: "amino/Asn",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Glutamine (Gln, Q) — polaire. Amide de l'acide glutamique.",
+        answer_en: "Glutamine (Gln, Q) — polar. Amide of glutamic acid.",
+        visual_key: "amino/Gln",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Acide aspartique (Asp, D) — chargé négativement. Carboxyle latéral déprotoné.",
+        answer_en: "Aspartate (Asp, D) — negatively charged. Deprotonated side-chain carboxyl.",
+        visual_key: "amino/Asp",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Acide glutamique (Glu, E) — chargé négativement. Carboxyle latéral déprotoné.",
+        answer_en: "Glutamate (Glu, E) — negatively charged. Deprotonated side-chain carboxyl.",
+        visual_key: "amino/Glu",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Lysine (Lys, K) — chargée positivement. Amine primaire protonée.",
+        answer_en: "Lysine (Lys, K) — positively charged. Protonated primary amine.",
+        visual_key: "amino/Lys",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Arginine (Arg, R) — chargée positivement. Groupe guanidinium.",
+        answer_en: "Arginine (Arg, R) — positively charged. Guanidinium group.",
+        visual_key: "amino/Arg",
+      },
+      {
+        question_fr: "Identifie cet acide aminé à partir de sa structure.",
+        question_en: "Identify this amino acid from its structure.",
+        answer_fr: "Histidine (His, H) — chargée positivement. Imidazole, pKa ≈ 6, rôle catalytique fréquent.",
+        answer_en: "Histidine (His, H) — positively charged. Imidazole, pKa ≈ 6, frequent catalytic role.",
+        visual_key: "amino/His",
       },
     ],
   },
@@ -165,7 +314,21 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Transport de l'oxygène par la myoglobine et l'hémoglobine, effet Bohr, pathologies moléculaires",
     description_en: "Oxygen transport by myoglobin and hemoglobin, Bohr effect, molecular pathologies",
     icone: "🩸",
+    widget_key: "hb-o2-curve",
     cards: [
+      {
+        question_fr: "Quelle est la structure quaternaire de l'hémoglobine ?",
+        question_en: "What is the quaternary structure of hemoglobin?",
+        answer_fr: "Un tétramère α2β2 : 2 chaînes alpha identiques + 2 chaînes bêta identiques, chacune portant un groupe hème",
+        answer_en: "An α2β2 tetramer: 2 identical alpha chains + 2 identical beta chains, each carrying a heme group",
+        visual_key: "hb-quaternary",
+      },
+      {
+        question_fr: "Quelles sont les valeurs approximatives de P50 pour l'hémoglobine et la myoglobine ?",
+        question_en: "What are the approximate P50 values for hemoglobin and myoglobin?",
+        answer_fr: "Hémoglobine ≈ 26 torr (coopérative, courbe sigmoïde) ; myoglobine ≈ 2 torr (non coopérative, courbe hyperbolique)",
+        answer_en: "Hemoglobin ≈ 26 torr (cooperative, sigmoid curve); myoglobin ≈ 2 torr (non-cooperative, hyperbolic curve)",
+      },
       {
         question_fr: "Quelle protéine assure le stockage de l'oxygène dans les muscles ?",
         question_en: "Which protein ensures oxygen storage in muscles?",
@@ -447,12 +610,14 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What is the active cofactor of vitamin B1 (thiamine)?",
         answer_fr: "Le pyrophosphate de thiamine (TPP)",
         answer_en: "Thiamin pyrophosphate (TPP)",
+        visual_key: "vitamin/B1",
       },
       {
         question_fr: "Quelle maladie résulte d'une carence sévère en niacine (B3) ?",
         question_en: "What disease results from a severe niacin (B3) deficiency?",
         answer_fr: "La pellagre, caractérisée par les « 4 D » (Dermatite, Diarrhée, Dépression, Décès)",
         answer_en: "Pellagra, characterized by the \"4 D's\" (Dermatitis, Diarrhea, Depression, Death)",
+        visual_key: "vitamin/B3",
       },
       {
         question_fr: "Quelle protéine gastrique est indispensable à l'absorption de la vitamine B12 ?",
@@ -471,12 +636,14 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What is the major biochemical function of vitamin C?",
         answer_fr: "Agent réducteur et hydroxylation de la proline pour la synthèse du collagène",
         answer_en: "Reducing agent and hydroxylation of proline for collagen synthesis",
+        visual_key: "vitamin/C",
       },
       {
         question_fr: "Quel est le rôle métabolique principal de la biotine (B7/H) ?",
         question_en: "What is the main metabolic role of biotin (B7/H)?",
         answer_fr: "Cofacteur pour les réactions de carboxylation (transfert de CO2)",
         answer_en: "Cofactor for carboxylation reactions (CO2 transfer)",
+        visual_key: "vitamin/B7",
       },
     ],
   },
@@ -493,6 +660,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What are the three active forms of vitamin A?",
         answer_fr: "Rétinol, rétinal et acide rétinoïque",
         answer_en: "Retinol, retinal, and retinoic acid",
+        visual_key: "vitamin/A",
       },
       {
         question_fr: "Quelle vitamine est une hormone synthétisée dans la peau via les rayons UV ?",
@@ -505,12 +673,14 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What is the primary function of vitamin E (tocopherols)?",
         answer_fr: "Antioxydant protégeant les acides gras polyinsaturés membranaires de la peroxydation",
         answer_en: "Antioxidant protecting membrane polyunsaturated fatty acids from peroxidation",
+        visual_key: "vitamin/E",
       },
       {
         question_fr: "Pour quel processus la vitamine K est-elle un cofacteur essentiel ?",
         question_en: "For which process is vitamin K an essential cofactor?",
         answer_fr: "La gamma-carboxylation des résidus glutamate pour la coagulation",
         answer_en: "Gamma-carboxylation of glutamate residues for coagulation",
+        visual_key: "vitamin/K",
       },
       {
         question_fr: "Quel est le rôle de l'ubiquinone (CoQ10) dans la mitochondrie ?",

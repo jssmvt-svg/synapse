@@ -57,6 +57,7 @@ export interface Flashcard {
   question_en: string;
   answer_fr: string;
   answer_en: string;
+  visual_key?: string;
 }
 
 export interface Synthesis {
@@ -64,22 +65,31 @@ export interface Synthesis {
   content_en: string;
 }
 
+export type LibrarySectionKind = "cours" | "laboratoire";
+
 export interface LibraryChapter {
   id: number;
   annee: number;
   semestre: number;
   matiere: string;
+  section: LibrarySectionKind;
   ordre: number;
   titre_fr: string;
   titre_en: string;
   description_fr: string;
   description_en: string;
   icone: string;
+  widget_key?: string;
+}
+
+export interface LibrarySection {
+  section: LibrarySectionKind;
+  chapitres: LibraryChapter[];
 }
 
 export interface LibraryMatiere {
   matiere: string;
-  chapitres: LibraryChapter[];
+  sections: LibrarySection[];
 }
 
 export interface LibrarySemestre {
@@ -128,6 +138,7 @@ export const api = {
   getDeck: (id: number) => request<DeckSummary>(`/decks/${id}`),
   getFlashcards: (id: number) => request<Flashcard[]>(`/decks/${id}/flashcards`),
   getLibrary: () => request<LibraryAnnee[]>("/library"),
+  getLibraryChapter: (chapterId: number) => request<LibraryChapter>(`/library/chapters/${chapterId}`),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),
 };

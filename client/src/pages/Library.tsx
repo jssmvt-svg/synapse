@@ -35,25 +35,36 @@ export function Library() {
                 semestre.matieres.map((matiere) => (
                   <div key={matiere.matiere} className="library-matiere">
                     <h4>{matiere.matiere}</h4>
-                    <div className="chapitre-grid">
-                      {matiere.chapitres.map((chapitre) => (
-                        <Link
-                          key={chapitre.id}
-                          to={`/library/chapter/${chapitre.id}`}
-                          className="chapitre-card"
-                        >
-                          <span className="chapitre-icone" aria-hidden="true">
-                            {chapitre.icone}
-                          </span>
-                          <span className="chapitre-titre">
-                            {lang === "fr" ? chapitre.titre_fr : chapitre.titre_en}
-                          </span>
-                          <span className="chapitre-description">
-                            {lang === "fr" ? chapitre.description_fr : chapitre.description_en}
-                          </span>
-                        </Link>
-                      ))}
-                    </div>
+                    {matiere.sections.map((sectionGroup) => (
+                      <div key={sectionGroup.section} className="library-section">
+                        <h5 className="library-section-titre">
+                          {sectionGroup.section === "cours" ? t.sectionCours : t.sectionLaboratoires}
+                        </h5>
+                        {sectionGroup.chapitres.length === 0 ? (
+                          <p className="hint">{t.libraryComingSoon}</p>
+                        ) : (
+                          <div className="chapitre-grid">
+                            {sectionGroup.chapitres.map((chapitre) => (
+                              <Link
+                                key={chapitre.id}
+                                to={`/library/chapter/${chapitre.id}`}
+                                className="chapitre-card"
+                              >
+                                <span className="chapitre-icone" aria-hidden="true">
+                                  {chapitre.icone}
+                                </span>
+                                <span className="chapitre-titre">
+                                  {lang === "fr" ? chapitre.titre_fr : chapitre.titre_en}
+                                </span>
+                                <span className="chapitre-description">
+                                  {lang === "fr" ? chapitre.description_fr : chapitre.description_en}
+                                </span>
+                              </Link>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
                   </div>
                 ))
               )}

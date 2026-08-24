@@ -15,29 +15,38 @@ async function seedMatiere(
   matiere: string,
   chapters: typeof BIOCHIMIE_S1,
 ): Promise<void> {
-  await db
-    .prepare("DELETE FROM library_chapters WHERE annee = ? AND semestre = ? AND matiere = ?")
-    .run(annee, semestre, matiere);
+  // Groupé par section pour ne supprimer/réinsérer que la section concernée : un
+  // futur seed des chapitres "laboratoire" ne doit pas effacer les chapitres "cours"
+  // déjà en place (et vice versa).
+  const sections = new Set(chapters.map((c) => c.section ?? "cours"));
+  for (const section of sections) {
+    await db
+      .prepare("DELETE FROM library_chapters WHERE annee = ? AND semestre = ? AND matiere = ? AND section = ?")
+      .run(annee, semestre, matiere, section);
+  }
 
   const now = Date.now();
   for (const chapter of chapters) {
+    const section = chapter.section ?? "cours";
     const inserted = await db
       .prepare(
         `INSERT INTO library_chapters
-           (annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+           (annee, semestre, matiere, section, ordre, titre_fr, titre_en, description_fr, description_en, icone, widget_key, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          RETURNING id`,
       )
       .get(
         annee,
         semestre,
         matiere,
+        section,
         chapter.ordre,
         chapter.titre_fr,
         chapter.titre_en,
         chapter.description_fr,
         chapter.description_en,
         chapter.icone,
+        chapter.widget_key ?? null,
         now,
       );
 
@@ -47,10 +56,19 @@ async function seedMatiere(
       await db
         .prepare(
           `INSERT INTO library_flashcards
-             (chapter_id, ordre, question_fr, question_en, answer_fr, answer_en, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?)`,
+             (chapter_id, ordre, question_fr, question_en, answer_fr, answer_en, visual_key, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
         )
-        .run(inserted.id, cardOrdre, card.question_fr, card.question_en, card.answer_fr, card.answer_en, now);
+        .run(
+          inserted.id,
+          cardOrdre,
+          card.question_fr,
+          card.question_en,
+          card.answer_fr,
+          card.answer_en,
+          card.visual_key ?? null,
+          now,
+        );
     }
   }
 }

@@ -43,6 +43,16 @@ const DICT = {
     libraryComingSoon: "Contenu à venir",
     anneeLabel: (n: number) => `Année ${n}`,
     semestreLabel: (n: number) => `Semestre ${n}`,
+    sectionCours: "Cours",
+    sectionLaboratoires: "Laboratoires",
+    tabFlashcards: "Flashcards",
+    quizScore: (score: number, total: number) => `Score : ${score}/${total}`,
+    quizRestart: "Recommencer",
+    quizNextQuestion: "Suivant",
+    quizQuestionProgress: (i: number, total: number) => `Question ${i}/${total}`,
+    quizCorrect: "Bonne réponse !",
+    quizIncorrect: "Pas tout à fait.",
+    aminoAcidQuizTitle: "Identifie l'acide aminé",
   },
   en: {
     appName: "Synapse",
@@ -84,13 +94,23 @@ const DICT = {
     libraryComingSoon: "Content coming soon",
     anneeLabel: (n: number) => `Year ${n}`,
     semestreLabel: (n: number) => `Semester ${n}`,
+    sectionCours: "Courses",
+    sectionLaboratoires: "Labs",
+    tabFlashcards: "Flashcards",
+    quizScore: (score: number, total: number) => `Score: ${score}/${total}`,
+    quizRestart: "Restart",
+    quizNextQuestion: "Next",
+    quizQuestionProgress: (i: number, total: number) => `Question ${i}/${total}`,
+    quizCorrect: "Correct!",
+    quizIncorrect: "Not quite.",
+    aminoAcidQuizTitle: "Identify the amino acid",
   },
 } as const;
 
 interface LangContextValue {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  t: (typeof DICT)["fr"];
+  t: (typeof DICT)[Lang];
 }
 
 const LangContext = createContext<LangContextValue | null>(null);
