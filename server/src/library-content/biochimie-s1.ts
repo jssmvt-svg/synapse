@@ -3,6 +3,7 @@ import {
   STRUCTURE_PROTEINS_LEARNING,
 } from "./biochimie-proteines.js";
 import { HEMOGLOBIN_LEARNING } from "./biochimie-hemoglobine.js";
+import { GLUCIDES_LEARNING } from "./biochimie-glucides.js";
 import { LAB2_LEARNING, LAB6_LEARNING, TEST_A_LEARNING } from "./biochimie-labo-2-6-testA.js";
 import { LAB3_LEARNING, LAB4_LEARNING, LAB5_LEARNING } from "./biochimie-labo-3-4-5.js";
 import { LAB7_LEARNING, LAB8_LEARNING, LAB9_LEARNING } from "./biochimie-labo-7-8-9.js";
@@ -408,6 +409,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Structure des monosaccharides, disaccharides, polysaccharides et glycoprotéines",
     description_en: "Structure of monosaccharides, disaccharides, polysaccharides and glycoproteins",
     icone: "🍬",
+    learning: GLUCIDES_LEARNING,
     cards: [
       {
         question_fr: "Quelle est la principale différence structurale entre l'amidon et la cellulose ?",

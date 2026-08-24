@@ -24,6 +24,17 @@ const COMPOSITION_COURSE = `# Chapitre 2 — Composition et structure des proté
 | Aromatiques | Phe, Tyr, Trp |
 | Imino-acide | Pro |
 
+### Formules des 20 chaînes latérales (groupement R)
+Le squelette commun est H₂N–CH(R)–COOH ; seul le groupement R change d'un acide aminé à l'autre.
+
+- **Aliphatiques** : Glycine R=H · Alanine R=CH₃ · Valine R=CH(CH₃)₂ · Leucine R=CH₂CH(CH₃)₂ · Isoleucine R=CH(CH₃)CH₂CH₃.
+- **Hydroxylées** : Sérine R=CH₂OH · Thréonine R=CH(OH)CH₃.
+- **Soufrées** : Cystéine R=CH₂SH · Méthionine R=CH₂CH₂SCH₃.
+- **Acides et amides** : Acide aspartique R=CH₂COOH · Asparagine R=CH₂CONH₂ · Acide glutamique R=CH₂CH₂COOH · Glutamine R=CH₂CH₂CONH₂.
+- **Basiques** : Lysine R=(CH₂)₄NH₂ · Arginine R=(CH₂)₃NH–C(=NH)NH₂ (groupe guanidinium) · Histidine R=CH₂–(cycle imidazole).
+- **Aromatiques** : Phénylalanine R=CH₂–C₆H₅ · Tyrosine R=CH₂–C₆H₄OH · Tryptophane R=CH₂–(cycle indole).
+- **Imino-acide** : Proline — la chaîne latérale reboucle sur l'azote de la fonction amine, formant un cycle pyrrolidine qui remplace tout le groupe NH₂ habituel.
+
 ### Classes fonctionnelles et pKa
 - Hydrophobes : Gly, Ala, Pro, Val, Leu, Ile, Met, Trp, Phe. Polaires non chargés : Ser, Thr, Tyr, Asn, Gln, Cys. Positifs : Lys, Arg, His. Négatifs : Asp, Glu.
 - Les groupes ionisables typiques : α-carboxyle 3,1 ; Asp/Glu 4,1 ; His 6,0 ; α-amino 8,0 ; Cys 8,3 ; Tyr 10,0 ; Lys 10,4 ; Arg 12,5.
