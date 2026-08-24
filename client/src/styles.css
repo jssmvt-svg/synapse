@@ -697,6 +697,16 @@ button:disabled {
   margin: 1.25rem 0;
 }
 
+.card-visual {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.chart-container {
+  margin-top: 1rem;
+}
+
 .option-list {
   display: grid;
   gap: 0.65rem;

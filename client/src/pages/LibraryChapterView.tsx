@@ -11,8 +11,10 @@ import {
   type QcmAttemptResult,
 } from "../api";
 import { useLang } from "../i18n";
+import { resolveVisualKey } from "../library-widgets/visual-registry";
+import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
 
-type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam";
+type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget";
 
 function localized(
   lang: "fr" | "en",
@@ -142,6 +144,7 @@ function QcmPractice({
       </div>
       <div className="question-heading">
         <p className="eyebrow">{t.practice}</p>
+        {question.visual_key && <div className="card-visual">{resolveVisualKey(question.visual_key)}</div>}
         <h2>{localized(lang, question.prompt_fr, question.prompt_en)}</h2>
         <p className="hint">{question.multiple_answers ? t.chooseSeveral : t.chooseOne}</p>
       </div>
@@ -244,6 +247,7 @@ function FlashcardReview({
       </div>
       <p className="eyebrow">{t.flashcards}</p>
       <p className="hint">{t.prioritizeHint}</p>
+      {card.visual_key && <div className="card-visual">{resolveVisualKey(card.visual_key)}</div>}
       <button
         type="button"
         className={`study-flashcard ${flipped ? "flipped" : ""}`}
@@ -450,6 +454,7 @@ function TimedExam({
         </strong>
       </div>
       <p className="eyebrow">{t.chapterExam}</p>
+      {examQuestion.visual_key && <div className="card-visual">{resolveVisualKey(examQuestion.visual_key)}</div>}
       <h2>{localized(lang, examQuestion.prompt_fr, examQuestion.prompt_en)}</h2>
       <p className="hint">{examQuestion.multiple_answers ? t.chooseSeveral : t.chooseOne}</p>
       <div className="option-list">
@@ -587,6 +592,14 @@ export function LibraryChapterView() {
               <strong>{detail.flashcards.length} cartes</strong>
               <small>{t.continueAction}</small>
             </button>
+            {detail.chapter.widget_key === "hb-o2-curve" && (
+              <button type="button" className="activity-card" onClick={() => setActivity("widget")}>
+                <span className="activity-icon">📈</span>
+                <span className="eyebrow">{t.oxygenCurve}</span>
+                <strong>{t.oxygenCurveHint}</strong>
+                <small>{t.continueAction}</small>
+              </button>
+            )}
             <Link to={`/library/chapter/${detail.chapter.id}/my-deck`} className="activity-card activity-card-personal">
               <span className="activity-icon">✦</span>
               <span className="eyebrow">Mon deck</span>
@@ -621,6 +634,18 @@ export function LibraryChapterView() {
       )}
       {activity === "exam" && exam && (
         <TimedExam chapter={detail} exam={exam} questions={detail.qcm} lang={lang} onBack={() => setActivity("hub")} />
+      )}
+      {activity === "widget" && detail.chapter.widget_key === "hb-o2-curve" && (
+        <section className="learning-panel">
+          <div className="panel-topline">
+            <button type="button" className="text-button" onClick={() => setActivity("hub")}>
+              {t.backToLibrary}
+            </button>
+          </div>
+          <p className="eyebrow">{t.oxygenCurve}</p>
+          <h2>{t.oxygenCurveHint}</h2>
+          <OxygenSaturationChart />
+        </section>
       )}
     </main>
   );

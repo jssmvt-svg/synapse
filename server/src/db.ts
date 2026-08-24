@@ -342,7 +342,10 @@ const SCHEMA = `
     WHERE submitted_at IS NULL;
 
   ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE library_chapters ADD COLUMN IF NOT EXISTS widget_key TEXT;
   ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
+  ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS visual_key TEXT;
+  ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS visual_key TEXT;
   ALTER TABLE library_course_resources ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_qcm_options ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;

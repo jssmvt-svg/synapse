@@ -1,39 +1,5 @@
 import type { LibraryLearningSeed } from "./biochimie-s1.js";
-
-const letters = ["A", "B", "C", "D", "E"];
-
-function question(
-  prompt_fr: string,
-  correct: string[],
-  explanation_fr: string,
-  options: string[],
-  multiple_answers: boolean,
-) {
-  return {
-    prompt_fr,
-    explanation_fr,
-    multiple_answers,
-    options: options.map((label_fr, index) => ({
-      key: letters[index],
-      label_fr,
-      correct: correct.includes(letters[index]),
-    })),
-  };
-}
-
-const multi = (
-  prompt: string,
-  correct: string[],
-  explanation: string,
-  options: string[],
-) => question(prompt, correct, explanation, options, true);
-
-const single = (
-  prompt: string,
-  correct: string,
-  explanation: string,
-  options: string[],
-) => question(prompt, [correct], explanation, options, false);
+import { multi, single, visualSingle } from "./qcm-helpers.js";
 
 const COMPOSITION_COURSE = `# Chapitre 2 — Composition et structure des protéines
 
@@ -151,8 +117,31 @@ export const COMPOSITION_PROTEINS_LEARNING: LibraryLearningSeed = {
     multi("Angles de torsion du squelette polypeptidique :", ["A", "B", "C", "E"], "φ est la rotation N–Cα, ψ celle Cα–carbonyle ; les valeurs vont de −180° à +180° mais les couples stériquement gênés sont exclus.", ["L'angle φ décrit la rotation autour de la liaison N–Cα.", "L'angle ψ décrit la rotation autour de la liaison Cα–carbonyle.", "Ces angles varient de −180° à +180°.", "Toutes les combinaisons d'angles φ et ψ sont permises.", "Le diagramme de Ramachandran représente les couples sans encombrement stérique."]),
     multi("Le glutathion :", ["A", "B", "C", "D"], "Le GSH est γ-Glu–Cys–Gly. Le NADPH de la voie des pentoses régénère le GSH ; un déficit en G6PD rend au contraire sensible au stress oxydatif.", ["C'est un tripeptide γ-glutamyl-cystéinyl-glycine.", "Il protège contre les espèces réactives de l'oxygène.", "Le GSSG est converti en GSH par la glutathion réductase, aux dépens du NADPH.", "Le NADPH nécessaire provient de la voie des pentoses phosphates.", "Un déficit en glucose-6-phosphate déshydrogénase protège du stress oxydatif."]),
     multi("Hormones peptidiques :", ["A", "B", "D", "E"], "L'ocytocine et la vasopressine comptent 9 aa ; l'angiotensine II (8 aa) augmente la pression, la calcitonine abaisse la calcémie, la PTH l'augmente et l'ANP baisse la pression.", ["L'ocytocine et la vasopressine comptent chacune 9 acides aminés.", "L'angiotensine II compte 8 acides aminés et élève la pression artérielle.", "La calcitonine élève la calcémie.", "La parathormone compte 84 acides aminés et élève la calcémie.", "Le peptide natriurétique auriculaire abaisse la pression artérielle."]),
+    // Identification visuelle des 20 acides aminés à partir de leur structure
+    // (squelette zwitterion + groupement R), en complément du QCM conceptuel
+    // ci-dessus — cf. client/src/library-data/amino-acids.ts pour le rendu SVG.
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Glycine (Gly, G) — hydrophobe. Le plus petit acide aminé, sans carbone chiral.", ["Glycine", "Alanine", "Sérine", "Cystéine"], "amino/Gly"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Alanine (Ala, A) — hydrophobe. Chaîne latérale méthyle, simple et peu encombrante.", ["Alanine", "Valine", "Glycine", "Thréonine"], "amino/Ala"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Valine (Val, V) — hydrophobe. Chaîne ramifiée, typique des cœurs hydrophobes.", ["Valine", "Leucine", "Isoleucine", "Alanine"], "amino/Val"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Leucine (Leu, L) — hydrophobe. Chaîne ramifiée, très fréquente dans les hélices alpha.", ["Leucine", "Isoleucine", "Valine", "Méthionine"], "amino/Leu"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Isoleucine (Ile, I) — hydrophobe. Chaîne ramifiée avec un second centre chiral.", ["Isoleucine", "Leucine", "Valine", "Thréonine"], "amino/Ile"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Proline (Pro, P) — hydrophobe. Seul imino-acide : la chaîne reboucle sur l'azote, rigidifie le squelette.", ["Proline", "Glycine", "Cystéine", "Sérine"], "amino/Pro"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Méthionine (Met, M) — hydrophobe. Contient un soufre thioéther ; premier acide aminé de toute chaîne.", ["Méthionine", "Cystéine", "Leucine", "Isoleucine"], "amino/Met"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Phénylalanine (Phe, F) — hydrophobe, aromatique. Cycle phényle sans hydroxyle.", ["Phénylalanine", "Tyrosine", "Tryptophane", "Histidine"], "amino/Phe"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Tryptophane (Trp, W) — hydrophobe, aromatique. Le plus volumineux des 20 ; groupe indole.", ["Tryptophane", "Phénylalanine", "Tyrosine", "Histidine"], "amino/Trp"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Sérine (Ser, S) — polaire. Groupe hydroxyle, souvent phosphorylé.", ["Sérine", "Thréonine", "Cystéine", "Asparagine"], "amino/Ser"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Thréonine (Thr, T) — polaire. Groupe hydroxyle sur un carbone chiral supplémentaire.", ["Thréonine", "Sérine", "Valine", "Isoleucine"], "amino/Thr"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Tyrosine (Tyr, Y) — polaire, aromatique. Cycle avec hydroxyle phénolique, souvent phosphorylé.", ["Tyrosine", "Phénylalanine", "Tryptophane", "Sérine"], "amino/Tyr"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Cystéine (Cys, C) — polaire. Thiol capable de former un pont disulfure.", ["Cystéine", "Méthionine", "Sérine", "Glycine"], "amino/Cys"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Asparagine (Asn, N) — polaire. Amide de l'acide aspartique.", ["Asparagine", "Glutamine", "Acide aspartique", "Acide glutamique"], "amino/Asn"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Glutamine (Gln, Q) — polaire. Amide de l'acide glutamique.", ["Glutamine", "Asparagine", "Acide glutamique", "Acide aspartique"], "amino/Gln"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Acide aspartique (Asp, D) — chargé négativement. Carboxyle latéral déprotoné.", ["Acide aspartique", "Acide glutamique", "Asparagine", "Glutamine"], "amino/Asp"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Acide glutamique (Glu, E) — chargé négativement. Carboxyle latéral déprotoné.", ["Acide glutamique", "Acide aspartique", "Glutamine", "Asparagine"], "amino/Glu"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Lysine (Lys, K) — chargée positivement. Amine primaire protonée.", ["Lysine", "Arginine", "Histidine", "Glutamine"], "amino/Lys"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Arginine (Arg, R) — chargée positivement. Groupe guanidinium.", ["Arginine", "Lysine", "Histidine", "Asparagine"], "amino/Arg"),
+    visualSingle("Identifie cet acide aminé à partir de sa structure.", "A", "Histidine (His, H) — chargée positivement. Imidazole, pKa ≈ 6, rôle catalytique fréquent.", ["Histidine", "Arginine", "Lysine", "Tryptophane"], "amino/His"),
   ],
-  exam: { titre_fr: "Examen chronométré — Composition et structure des protéines", duration_seconds: 1_500 },
+  exam: { titre_fr: "Examen chronométré — Composition et structure des protéines", duration_seconds: 2_400 },
 };
 
 export const STRUCTURE_PROTEINS_LEARNING: LibraryLearningSeed = {

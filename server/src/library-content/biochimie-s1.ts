@@ -2,6 +2,7 @@ import {
   COMPOSITION_PROTEINS_LEARNING,
   STRUCTURE_PROTEINS_LEARNING,
 } from "./biochimie-proteines.js";
+import { HEMOGLOBIN_LEARNING } from "./biochimie-hemoglobine.js";
 
 // Contenu officiel pré-rédigé : Biochimie, Année 1, Semestre 1.
 // Extrait du notebook NotebookLM "Lecture Biochem S1" (11 lectures / sources)
@@ -12,6 +13,9 @@ export interface LibraryCardSeed {
   question_en: string;
   answer_fr: string;
   answer_en: string;
+  // Référence vers un schéma SVG interne (résolu côté client via resolveVisualKey),
+  // ex. "vitamin/B1". Absent = carte texte pure.
+  visual_key?: string;
 }
 
 export interface LibraryChapterSeed {
@@ -23,6 +27,9 @@ export interface LibraryChapterSeed {
   icone: string;
   cards: LibraryCardSeed[];
   learning?: LibraryLearningSeed;
+  // Référence vers un widget interactif de chapitre (ex. "hb-o2-curve"),
+  // affiché comme carte supplémentaire dans le hub du chapitre.
+  widget_key?: string;
 }
 
 export interface LibraryQcmOptionSeed {
@@ -36,6 +43,9 @@ export interface LibraryQcmSeed {
   explanation_fr: string;
   multiple_answers: boolean;
   options: LibraryQcmOptionSeed[];
+  // Référence vers un schéma SVG interne affiché au-dessus de l'énoncé,
+  // ex. "amino/Gly", "hb-quaternary".
+  visual_key?: string;
 }
 
 export interface LibraryLearningSeed {
@@ -200,6 +210,8 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Transport de l'oxygène par la myoglobine et l'hémoglobine, effet Bohr, pathologies moléculaires",
     description_en: "Oxygen transport by myoglobin and hemoglobin, Bohr effect, molecular pathologies",
     icone: "🩸",
+    learning: HEMOGLOBIN_LEARNING,
+    widget_key: "hb-o2-curve",
     cards: [
       {
         question_fr: "Quelle protéine assure le stockage de l'oxygène dans les muscles ?",
@@ -482,12 +494,14 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What is the active cofactor of vitamin B1 (thiamine)?",
         answer_fr: "Le pyrophosphate de thiamine (TPP)",
         answer_en: "Thiamin pyrophosphate (TPP)",
+        visual_key: "vitamin/B1",
       },
       {
         question_fr: "Quelle maladie résulte d'une carence sévère en niacine (B3) ?",
         question_en: "What disease results from a severe niacin (B3) deficiency?",
         answer_fr: "La pellagre, caractérisée par les « 4 D » (Dermatite, Diarrhée, Dépression, Décès)",
         answer_en: "Pellagra, characterized by the \"4 D's\" (Dermatitis, Diarrhea, Depression, Death)",
+        visual_key: "vitamin/B3",
       },
       {
         question_fr: "Quelle protéine gastrique est indispensable à l'absorption de la vitamine B12 ?",
@@ -506,12 +520,14 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What is the major biochemical function of vitamin C?",
         answer_fr: "Agent réducteur et hydroxylation de la proline pour la synthèse du collagène",
         answer_en: "Reducing agent and hydroxylation of proline for collagen synthesis",
+        visual_key: "vitamin/C",
       },
       {
         question_fr: "Quel est le rôle métabolique principal de la biotine (B7/H) ?",
         question_en: "What is the main metabolic role of biotin (B7/H)?",
         answer_fr: "Cofacteur pour les réactions de carboxylation (transfert de CO2)",
         answer_en: "Cofactor for carboxylation reactions (CO2 transfer)",
+        visual_key: "vitamin/B7",
       },
     ],
   },
@@ -528,6 +544,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What are the three active forms of vitamin A?",
         answer_fr: "Rétinol, rétinal et acide rétinoïque",
         answer_en: "Retinol, retinal, and retinoic acid",
+        visual_key: "vitamin/A",
       },
       {
         question_fr: "Quelle vitamine est une hormone synthétisée dans la peau via les rayons UV ?",
@@ -540,12 +557,14 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
         question_en: "What is the primary function of vitamin E (tocopherols)?",
         answer_fr: "Antioxydant protégeant les acides gras polyinsaturés membranaires de la peroxydation",
         answer_en: "Antioxidant protecting membrane polyunsaturated fatty acids from peroxidation",
+        visual_key: "vitamin/E",
       },
       {
         question_fr: "Pour quel processus la vitamine K est-elle un cofacteur essentiel ?",
         question_en: "For which process is vitamin K an essential cofactor?",
         answer_fr: "La gamma-carboxylation des résidus glutamate pour la coagulation",
         answer_en: "Gamma-carboxylation of glutamate residues for coagulation",
+        visual_key: "vitamin/K",
       },
       {
         question_fr: "Quel est le rôle de l'ubiquinone (CoQ10) dans la mitochondrie ?",

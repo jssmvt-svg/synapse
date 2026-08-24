@@ -58,6 +58,7 @@ export interface Flashcard {
   question_en: string;
   answer_fr: string;
   answer_en: string;
+  visual_key?: string;
 }
 
 export interface PersonalDeckNotion {
@@ -127,6 +128,7 @@ export interface LibraryChapter {
   description_fr: string;
   description_en: string;
   icone: string;
+  widget_key?: string;
 }
 
 export interface LibraryResource {
@@ -157,6 +159,7 @@ export interface LibraryQcmQuestion {
   explanation_en: string;
   multiple_answers: boolean;
   source_label: string;
+  visual_key?: string;
   options: LibraryQcmOption[];
 }
 

@@ -47,7 +47,7 @@ async function getChapter(chapterId: number) {
   return db
     .prepare(
       `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
-              description_fr, description_en, icone
+              description_fr, description_en, icone, widget_key
        FROM library_chapters WHERE id = ? AND is_active = true`,
     )
     .get(chapterId);
@@ -474,7 +474,7 @@ libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
       .all(chapterId),
     db
       .prepare(
-        `SELECT id, ordre, question_fr, question_en, answer_fr, answer_en
+        `SELECT id, ordre, question_fr, question_en, answer_fr, answer_en, visual_key
          FROM library_flashcards f
          LEFT JOIN student_flashcard_mastery m
            ON m.flashcard_id = f.id AND m.user_id = ? AND m.chapter_id = ?
@@ -487,7 +487,7 @@ libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
     db
       .prepare(
         `SELECT q.id, q.ordre, q.resource_id, q.prompt_fr, q.prompt_en, q.explanation_fr,
-                q.explanation_en, q.multiple_answers, q.source_label,
+                q.explanation_en, q.multiple_answers, q.source_label, q.visual_key,
                 COALESCE(
                   json_agg(
                     json_build_object(
@@ -523,7 +523,7 @@ libraryRouter.get("/chapters/:id/flashcards", async (req: AuthedRequest, res) =>
 
   const cards = await db
     .prepare(
-      `SELECT id, question_fr, question_en, answer_fr, answer_en
+      `SELECT id, question_fr, question_en, answer_fr, answer_en, visual_key
         FROM library_flashcards f
         LEFT JOIN student_flashcard_mastery m
           ON m.flashcard_id = f.id AND m.user_id = ? AND m.chapter_id = ?

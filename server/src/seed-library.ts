@@ -25,14 +25,15 @@ async function seedMatiere(
     const inserted = await db
       .prepare(
         `INSERT INTO library_chapters
-           (annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+           (annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, widget_key, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT (annee, semestre, matiere, ordre) DO UPDATE SET
            titre_fr = EXCLUDED.titre_fr,
            titre_en = EXCLUDED.titre_en,
            description_fr = EXCLUDED.description_fr,
            description_en = EXCLUDED.description_en,
            icone = EXCLUDED.icone,
+           widget_key = EXCLUDED.widget_key,
            is_active = true
          RETURNING id`,
       )
@@ -46,6 +47,7 @@ async function seedMatiere(
         chapter.description_fr,
         chapter.description_en,
         chapter.icone,
+        chapter.widget_key ?? null,
         now,
       );
 
@@ -54,13 +56,14 @@ async function seedMatiere(
       await db
         .prepare(
           `INSERT INTO library_flashcards
-             (chapter_id, ordre, question_fr, question_en, answer_fr, answer_en, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?)
+             (chapter_id, ordre, question_fr, question_en, answer_fr, answer_en, visual_key, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)
            ON CONFLICT (chapter_id, ordre) DO UPDATE SET
              question_fr = EXCLUDED.question_fr,
              question_en = EXCLUDED.question_en,
              answer_fr = EXCLUDED.answer_fr,
              answer_en = EXCLUDED.answer_en,
+             visual_key = EXCLUDED.visual_key,
              is_active = true`,
         )
         .run(
@@ -70,6 +73,7 @@ async function seedMatiere(
           card.question_en,
           card.answer_fr,
           card.answer_en,
+          card.visual_key ?? null,
           now,
         );
     }
@@ -125,14 +129,15 @@ async function seedLearningContent(
     const seededQuestion = await db
       .prepare(
         `INSERT INTO library_qcm_questions
-           (chapter_id, resource_id, ordre, prompt_fr, explanation_fr, multiple_answers, source_label, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+           (chapter_id, resource_id, ordre, prompt_fr, explanation_fr, multiple_answers, source_label, visual_key, created_at)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
          ON CONFLICT (chapter_id, ordre) DO UPDATE SET
            resource_id = EXCLUDED.resource_id,
            prompt_fr = EXCLUDED.prompt_fr,
            explanation_fr = EXCLUDED.explanation_fr,
            multiple_answers = EXCLUDED.multiple_answers,
            source_label = EXCLUDED.source_label,
+           visual_key = EXCLUDED.visual_key,
            is_active = true
          RETURNING id`,
       )
@@ -144,6 +149,7 @@ async function seedLearningContent(
         qcm.explanation_fr,
         qcm.multiple_answers,
         learning.resource.source_label,
+        qcm.visual_key ?? null,
         now,
       );
 
