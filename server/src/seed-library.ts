@@ -1,11 +1,13 @@
 import { db } from "./db.js";
 import { BIOCHIMIE_S1, type LibraryLearningSeed } from "./library-content/biochimie-s1.js";
+import { BIOCHIMIE_S2 } from "./library-content/biochimie-s2.js";
 
 // Les entrées sont mises à jour par leur clé stable (chapitre + ordre). Ainsi,
 // redémarrer le serveur reflète les mises à jour de contenu sans effacer les
 // identifiants et l'activité des étudiants.
 export async function seedLibrary(): Promise<void> {
   await seedMatiere(1, 1, "Biochimie", BIOCHIMIE_S1);
+  await seedMatiere(1, 2, "Biochimie", BIOCHIMIE_S2);
 }
 
 async function seedMatiere(
