@@ -23,6 +23,20 @@ import {
   GLYCOGENESIS_LEARNING,
   GLYCOGENESIS_FLASHCARDS,
 } from "./biochimie-s2-etc.js";
+import {
+  GLYCOGENOLYSIS_LEARNING,
+  GLYCOGENOLYSIS_FLASHCARDS,
+  GLYCOGEN_METABOLISM_REGULATION_LEARNING,
+  GLYCOGEN_METABOLISM_REGULATION_FLASHCARDS,
+} from "./biochimie-s2-glycogenolyse.js";
+import {
+  GLUCONEOGENESIS_LEARNING,
+  GLUCONEOGENESIS_FLASHCARDS,
+  GLUCONEOGENESIS_REGULATION_LEARNING,
+  GLUCONEOGENESIS_REGULATION_FLASHCARDS,
+  FATTY_ACID_SYNTHESIS_1_LEARNING,
+  FATTY_ACID_SYNTHESIS_1_FLASHCARDS,
+} from "./biochimie-s2-neoglucogenese.js";
 
 // Contenu officiel pré-rédigé : Biochimie, Année 1, Semestre 2.
 // Synthèse de la playlist "Metabolism" de Ninja Nerd (31 vidéos), reformulée
@@ -128,5 +142,55 @@ export const BIOCHIMIE_S2: LibraryChapterSeed[] = [
     icone: "🧵",
     learning: GLYCOGENESIS_LEARNING,
     cards: GLYCOGENESIS_FLASHCARDS,
+  },
+  {
+    ordre: 11,
+    titre_fr: "Glycogénolyse",
+    titre_en: "Glycogenolysis",
+    description_fr: "Dégradation du glycogène : glycogène phosphorylase, enzyme débranchante et devenir tissulaire du glucose-6-phosphate",
+    description_en: "Glycogen breakdown: glycogen phosphorylase, the debranching enzyme, and the tissue fate of glucose-6-phosphate",
+    icone: "🧶",
+    learning: GLYCOGENOLYSIS_LEARNING,
+    cards: GLYCOGENOLYSIS_FLASHCARDS,
+  },
+  {
+    ordre: 12,
+    titre_fr: "Régulation du métabolisme du glycogène",
+    titre_en: "Regulation of Glycogen Metabolism",
+    description_fr: "Cascade hormonale glucagon/adrénaline, rôle du calcium musculaire et régulation croisée synthase/phosphorylase",
+    description_en: "Glucagon/adrenaline hormonal cascade, the role of muscle calcium, and cross-regulation of synthase/phosphorylase",
+    icone: "🎚️",
+    learning: GLYCOGEN_METABOLISM_REGULATION_LEARNING,
+    cards: GLYCOGEN_METABOLISM_REGULATION_FLASHCARDS,
+  },
+  {
+    ordre: 13,
+    titre_fr: "Néoglucogenèse",
+    titre_en: "Gluconeogenesis",
+    description_fr: "Synthèse du glucose à partir du lactate, de l'alanine et du glycérol, en contournant les étapes irréversibles de la glycolyse",
+    description_en: "Glucose synthesis from lactate, alanine, and glycerol, bypassing the irreversible steps of glycolysis",
+    icone: "🏗️",
+    learning: GLUCONEOGENESIS_LEARNING,
+    cards: GLUCONEOGENESIS_FLASHCARDS,
+  },
+  {
+    ordre: 14,
+    titre_fr: "Régulation de la néoglucogenèse",
+    titre_en: "Regulation of Gluconeogenesis",
+    description_fr: "Contrôle de la pyruvate carboxylase, de la PEPCK et de la FBPase-1, et rôle croisé du fructose-2,6-bisphosphate",
+    description_en: "Control of pyruvate carboxylase, PEPCK, and FBPase-1, and the cross-regulatory role of fructose-2,6-bisphosphate",
+    icone: "🎛️",
+    learning: GLUCONEOGENESIS_REGULATION_LEARNING,
+    cards: GLUCONEOGENESIS_REGULATION_FLASHCARDS,
+  },
+  {
+    ordre: 15,
+    titre_fr: "Synthèse des acides gras (1)",
+    titre_en: "Fatty Acid Synthesis (1)",
+    description_fr: "Navette du citrate, acétyl-CoA carboxylase et complexe acide gras synthase",
+    description_en: "The citrate shuttle, acetyl-CoA carboxylase, and the fatty acid synthase complex",
+    icone: "🫧",
+    learning: FATTY_ACID_SYNTHESIS_1_LEARNING,
+    cards: FATTY_ACID_SYNTHESIS_1_FLASHCARDS,
   },
 ];
