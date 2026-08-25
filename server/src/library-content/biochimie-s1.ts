@@ -9,6 +9,11 @@ import {
   CATALYTIC_STRATEGIES_LEARNING,
   REGULATION_STRATEGIES_LEARNING,
 } from "./biochimie-enzymes.js";
+import {
+  LIPIDS_MEMBRANES_LEARNING,
+  WATER_SOLUBLE_VITAMINS_LEARNING,
+  FAT_SOLUBLE_VITAMINS_LEARNING,
+} from "./biochimie-lipides-vitamines.js";
 import { LAB2_LEARNING, LAB6_LEARNING, TEST_A_LEARNING } from "./biochimie-labo-2-6-testA.js";
 import { LAB3_LEARNING, LAB4_LEARNING, LAB5_LEARNING } from "./biochimie-labo-3-4-5.js";
 import { LAB7_LEARNING, LAB8_LEARNING, LAB9_LEARNING } from "./biochimie-labo-7-8-9.js";
@@ -464,6 +469,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Acides gras, lipides membranaires, architecture et dynamique des membranes",
     description_en: "Fatty acids, membrane lipids, membrane architecture and dynamics",
     icone: "🧈",
+    learning: LIPIDS_MEMBRANES_LEARNING,
     cards: [
       {
         question_fr: "Quelle est l'épaisseur typique d'une membrane biologique ?",
@@ -510,6 +516,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Propriétés, métabolisme et rôles des vitamines du groupe B et de la vitamine C",
     description_en: "Properties, metabolism and roles of B vitamins and vitamin C",
     icone: "💊",
+    learning: WATER_SOLUBLE_VITAMINS_LEARNING,
     cards: [
       {
         question_fr: "Quel est le cofacteur actif de la vitamine B1 (thiamine) ?",
@@ -560,6 +567,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Vitamines A, D, E, K et cofacteurs apparentés (CoQ10, carnitine)",
     description_en: "Vitamins A, D, E, K and related cofactors (CoQ10, carnitine)",
     icone: "🌞",
+    learning: FAT_SOLUBLE_VITAMINS_LEARNING,
     cards: [
       {
         question_fr: "Quelles sont les trois formes actives de la vitamine A ?",
