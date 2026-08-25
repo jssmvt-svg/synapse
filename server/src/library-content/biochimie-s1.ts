@@ -4,6 +4,11 @@ import {
 } from "./biochimie-proteines.js";
 import { HEMOGLOBIN_LEARNING } from "./biochimie-hemoglobine.js";
 import { GLUCIDES_LEARNING } from "./biochimie-glucides.js";
+import {
+  ENZYME_BASICS_LEARNING,
+  CATALYTIC_STRATEGIES_LEARNING,
+  REGULATION_STRATEGIES_LEARNING,
+} from "./biochimie-enzymes.js";
 import { LAB2_LEARNING, LAB6_LEARNING, TEST_A_LEARNING } from "./biochimie-labo-2-6-testA.js";
 import { LAB3_LEARNING, LAB4_LEARNING, LAB5_LEARNING } from "./biochimie-labo-3-4-5.js";
 import { LAB7_LEARNING, LAB8_LEARNING, LAB9_LEARNING } from "./biochimie-labo-7-8-9.js";
@@ -271,6 +276,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Catalyse enzymatique, énergie d'activation, cinétique de Michaelis-Menten",
     description_en: "Enzymatic catalysis, activation energy, Michaelis-Menten kinetics",
     icone: "⚗️",
+    learning: ENZYME_BASICS_LEARNING,
     cards: [
       {
         question_fr: "Quel est l'effet d'une enzyme sur l'énergie d'activation (ΔG‡) d'une réaction ?",
@@ -317,6 +323,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Mécanismes chimiques et classification des réactions enzymatiques",
     description_en: "Chemical mechanisms and classification of enzymatic reactions",
     icone: "🔬",
+    learning: CATALYTIC_STRATEGIES_LEARNING,
     cards: [
       {
         question_fr: "Quelle est la fonction des enzymes de la classe 7 (Translocases) ?",
@@ -363,6 +370,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_fr: "Modes de régulation de l'activité enzymatique : allostérie, modification covalente, zymogènes",
     description_en: "Modes of enzyme activity regulation: allostery, covalent modification, zymogens",
     icone: "🎛️",
+    learning: REGULATION_STRATEGIES_LEARNING,
     cards: [
       {
         question_fr: "Quelle est la forme de la courbe de vitesse d'une enzyme allostérique ?",
