@@ -6,8 +6,13 @@ import { BIOCHIMIE_S2 } from "./library-content/biochimie-s2.js";
 // redémarrer le serveur reflète les mises à jour de contenu sans effacer les
 // identifiants et l'activité des étudiants.
 export async function seedLibrary(): Promise<void> {
+  const startedAt = Date.now();
+  console.log("[seed-library] Demarrage du seed de la bibliotheque...");
   await seedMatiere(1, 1, "Biochimie", BIOCHIMIE_S1);
+  console.log(`[seed-library] Biochimie S1 seedee (${BIOCHIMIE_S1.length} chapitres).`);
   await seedMatiere(1, 2, "Biochimie", BIOCHIMIE_S2);
+  console.log(`[seed-library] Biochimie S2 seedee (${BIOCHIMIE_S2.length} chapitres).`);
+  console.log(`[seed-library] Seed termine en ${Math.round((Date.now() - startedAt) / 1000)}s.`);
 }
 
 async function seedMatiere(
