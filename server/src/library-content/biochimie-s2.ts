@@ -51,6 +51,20 @@ import {
   FATTY_ACID_OXIDATION_2_LEARNING,
   FATTY_ACID_OXIDATION_2_FLASHCARDS,
 } from "./biochimie-s2-lipolyse-oxydation.js";
+import {
+  AMINO_ACID_METABOLISM_LEARNING,
+  AMINO_ACID_METABOLISM_FLASHCARDS,
+  UREA_CYCLE_LEARNING,
+  UREA_CYCLE_FLASHCARDS,
+} from "./biochimie-s2-acides-amines-uree.js";
+import {
+  KETONE_METABOLISM_LEARNING,
+  KETONE_METABOLISM_FLASHCARDS,
+  PENTOSE_PHOSPHATE_PATHWAY_LEARNING,
+  PENTOSE_PHOSPHATE_PATHWAY_FLASHCARDS,
+  PPP_REGULATION_LEARNING,
+  PPP_REGULATION_FLASHCARDS,
+} from "./biochimie-s2-cetones-ppp.js";
 
 // Contenu officiel pré-rédigé : Biochimie, Année 1, Semestre 2.
 // Synthèse de la playlist "Metabolism" de Ninja Nerd (31 vidéos), reformulée
@@ -256,5 +270,55 @@ export const BIOCHIMIE_S2: LibraryChapterSeed[] = [
     icone: "⚗️",
     learning: FATTY_ACID_OXIDATION_2_LEARNING,
     cards: FATTY_ACID_OXIDATION_2_FLASHCARDS,
+  },
+  {
+    ordre: 21,
+    titre_fr: "Métabolisme des acides aminés",
+    titre_en: "Amino Acid Metabolism",
+    description_fr: "Transamination, désamination oxydative, et classification glucoformatrice/cétogène des acides aminés",
+    description_en: "Transamination, oxidative deamination, and the glucogenic/ketogenic classification of amino acids",
+    icone: "🧬",
+    learning: AMINO_ACID_METABOLISM_LEARNING,
+    cards: AMINO_ACID_METABOLISM_FLASHCARDS,
+  },
+  {
+    ordre: 22,
+    titre_fr: "Le cycle de l'urée",
+    titre_en: "Urea Cycle",
+    description_fr: "Détoxification de l'ammoniac en urée, les 5 réactions du cycle hépatique et les hyperammoniémies",
+    description_en: "Detoxification of ammonia into urea, the 5 reactions of the hepatic cycle, and hyperammonemias",
+    icone: "🚽",
+    learning: UREA_CYCLE_LEARNING,
+    cards: UREA_CYCLE_FLASHCARDS,
+  },
+  {
+    ordre: 23,
+    titre_fr: "Métabolisme des corps cétoniques",
+    titre_en: "Ketone Metabolism",
+    description_fr: "Cétogenèse hépatique, cétolyse périphérique, et acidocétose diabétique",
+    description_en: "Hepatic ketogenesis, peripheral ketolysis, and diabetic ketoacidosis",
+    icone: "🍊",
+    learning: KETONE_METABOLISM_LEARNING,
+    cards: KETONE_METABOLISM_FLASHCARDS,
+  },
+  {
+    ordre: 24,
+    titre_fr: "La voie des pentoses phosphates",
+    titre_en: "Pentose Phosphate Pathway",
+    description_fr: "Phase oxydative et non oxydative, production de NADPH et de ribose-5-phosphate",
+    description_en: "Oxidative and non-oxidative phases, NADPH and ribose-5-phosphate production",
+    icone: "🧪",
+    learning: PENTOSE_PHOSPHATE_PATHWAY_LEARNING,
+    cards: PENTOSE_PHOSPHATE_PATHWAY_FLASHCARDS,
+  },
+  {
+    ordre: 25,
+    titre_fr: "Régulation de la voie des pentoses phosphates",
+    titre_en: "Regulation of the Pentose Phosphate Pathway",
+    description_fr: "Contrôle de la G6PD, flexibilité NADPH/ribose-5-phosphate, et déficit en G6PD",
+    description_en: "Control of G6PD, NADPH/ribose-5-phosphate flexibility, and G6PD deficiency",
+    icone: "🩸",
+    learning: PPP_REGULATION_LEARNING,
+    cards: PPP_REGULATION_FLASHCARDS,
   },
 ];
