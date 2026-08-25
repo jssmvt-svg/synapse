@@ -37,6 +37,20 @@ import {
   FATTY_ACID_SYNTHESIS_1_LEARNING,
   FATTY_ACID_SYNTHESIS_1_FLASHCARDS,
 } from "./biochimie-s2-neoglucogenese.js";
+import {
+  FATTY_ACID_SYNTHESIS_2_LEARNING,
+  FATTY_ACID_SYNTHESIS_2_FLASHCARDS,
+  TRIGLYCERIDE_SYNTHESIS_LEARNING,
+  TRIGLYCERIDE_SYNTHESIS_FLASHCARDS,
+} from "./biochimie-s2-fa-synthesis2.js";
+import {
+  TRIGLYCERIDE_MOBILIZATION_LEARNING,
+  TRIGLYCERIDE_MOBILIZATION_FLASHCARDS,
+  FATTY_ACID_OXIDATION_1_LEARNING,
+  FATTY_ACID_OXIDATION_1_FLASHCARDS,
+  FATTY_ACID_OXIDATION_2_LEARNING,
+  FATTY_ACID_OXIDATION_2_FLASHCARDS,
+} from "./biochimie-s2-lipolyse-oxydation.js";
 
 // Contenu officiel pré-rédigé : Biochimie, Année 1, Semestre 2.
 // Synthèse de la playlist "Metabolism" de Ninja Nerd (31 vidéos), reformulée
@@ -192,5 +206,55 @@ export const BIOCHIMIE_S2: LibraryChapterSeed[] = [
     icone: "🫧",
     learning: FATTY_ACID_SYNTHESIS_1_LEARNING,
     cards: FATTY_ACID_SYNTHESIS_1_FLASHCARDS,
+  },
+  {
+    ordre: 16,
+    titre_fr: "Synthèse des acides gras (2)",
+    titre_en: "Fatty Acid Synthesis (2)",
+    description_fr: "Le cycle d'élongation du complexe FAS, la formation du palmitate, l'élongation et la désaturation ultérieures",
+    description_en: "The FAS elongation cycle, palmitate formation, and further elongation and desaturation",
+    icone: "🔗",
+    learning: FATTY_ACID_SYNTHESIS_2_LEARNING,
+    cards: FATTY_ACID_SYNTHESIS_2_FLASHCARDS,
+  },
+  {
+    ordre: 17,
+    titre_fr: "Synthèse des triglycérides",
+    titre_en: "Triglyceride Synthesis",
+    description_fr: "Voie du glycérol phosphate : GPAT, AGPAT, phosphatase et DGAT, et devenir des triglycérides synthétisés",
+    description_en: "The glycerol phosphate pathway: GPAT, AGPAT, phosphatase, and DGAT, and the fate of synthesized triglycerides",
+    icone: "💧",
+    learning: TRIGLYCERIDE_SYNTHESIS_LEARNING,
+    cards: TRIGLYCERIDE_SYNTHESIS_FLASHCARDS,
+  },
+  {
+    ordre: 18,
+    titre_fr: "Mobilisation des triglycérides",
+    titre_en: "Mobilization of Triglycerides",
+    description_fr: "La cascade lipolytique ATGL-HSL-MGL, la régulation hormonale et le devenir des acides gras et du glycérol libérés",
+    description_en: "The ATGL-HSL-MGL lipolytic cascade, hormonal regulation, and the fate of released fatty acids and glycerol",
+    icone: "💦",
+    learning: TRIGLYCERIDE_MOBILIZATION_LEARNING,
+    cards: TRIGLYCERIDE_MOBILIZATION_FLASHCARDS,
+  },
+  {
+    ordre: 19,
+    titre_fr: "Oxydation des acides gras (1)",
+    titre_en: "Fatty Acid Oxidation (1)",
+    description_fr: "Activation cytosolique, navette de la carnitine (CPT1/CPT2) et cycle de la β-oxydation",
+    description_en: "Cytosolic activation, the carnitine shuttle (CPT1/CPT2), and the beta-oxidation cycle",
+    icone: "🔥",
+    learning: FATTY_ACID_OXIDATION_1_LEARNING,
+    cards: FATTY_ACID_OXIDATION_1_FLASHCARDS,
+  },
+  {
+    ordre: 20,
+    titre_fr: "Oxydation des acides gras (2)",
+    titre_en: "Fatty Acid Oxidation (2)",
+    description_fr: "Bilan énergétique du palmitate, acides gras à nombre impair de carbones, régulation et corrélations cliniques",
+    description_en: "Palmitate's energy balance, odd-chain fatty acids, regulation, and clinical correlations",
+    icone: "⚗️",
+    learning: FATTY_ACID_OXIDATION_2_LEARNING,
+    cards: FATTY_ACID_OXIDATION_2_FLASHCARDS,
   },
 ];
