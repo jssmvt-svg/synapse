@@ -65,6 +65,24 @@ import {
   PPP_REGULATION_LEARNING,
   PPP_REGULATION_FLASHCARDS,
 } from "./biochimie-s2-cetones-ppp.js";
+import {
+  METABOLIC_MAP_CARBS_LEARNING,
+  METABOLIC_MAP_CARBS_FLASHCARDS,
+  METABOLIC_MAP_LIPIDS_LEARNING,
+  METABOLIC_MAP_LIPIDS_FLASHCARDS,
+  METABOLIC_MAP_PROTEINS_LEARNING,
+  METABOLIC_MAP_PROTEINS_FLASHCARDS,
+} from "./biochimie-s2-cartes-metaboliques.js";
+import {
+  CHOLESTEROL_METABOLISM_LEARNING,
+  CHOLESTEROL_METABOLISM_FLASHCARDS,
+  LIPOPROTEIN_METABOLISM_LEARNING,
+  LIPOPROTEIN_METABOLISM_FLASHCARDS,
+} from "./biochimie-s2-cholesterol-lipoproteines.js";
+import {
+  NUCLEOTIDE_SYNTHESIS_LEARNING,
+  NUCLEOTIDE_SYNTHESIS_FLASHCARDS,
+} from "./biochimie-s2-nucleotides.js";
 
 // Contenu officiel pré-rédigé : Biochimie, Année 1, Semestre 2.
 // Synthèse de la playlist "Metabolism" de Ninja Nerd (31 vidéos), reformulée
@@ -320,5 +338,65 @@ export const BIOCHIMIE_S2: LibraryChapterSeed[] = [
     icone: "🩸",
     learning: PPP_REGULATION_LEARNING,
     cards: PPP_REGULATION_FLASHCARDS,
+  },
+  {
+    ordre: 26,
+    titre_fr: "Carte métabolique — Glucides",
+    titre_en: "Metabolic Map — Carbohydrates",
+    description_fr: "Synthèse intégrée : glucose-6-phosphate et pyruvate, carrefours centraux du métabolisme glucidique",
+    description_en: "Integrated synthesis: glucose-6-phosphate and pyruvate, the central crossroads of carbohydrate metabolism",
+    icone: "🗺️",
+    learning: METABOLIC_MAP_CARBS_LEARNING,
+    cards: METABOLIC_MAP_CARBS_FLASHCARDS,
+  },
+  {
+    ordre: 27,
+    titre_fr: "Carte métabolique — Lipides",
+    titre_en: "Metabolic Map — Lipids",
+    description_fr: "Synthèse intégrée : le malonyl-CoA comme interrupteur central entre lipogenèse et β-oxydation",
+    description_en: "Integrated synthesis: malonyl-CoA as the central switch between lipogenesis and beta-oxidation",
+    icone: "🗺️",
+    learning: METABOLIC_MAP_LIPIDS_LEARNING,
+    cards: METABOLIC_MAP_LIPIDS_FLASHCARDS,
+  },
+  {
+    ordre: 28,
+    titre_fr: "Carte métabolique — Protéines",
+    titre_en: "Metabolic Map — Proteins",
+    description_fr: "Synthèse intégrée : le glutamate et le fumarate, carrefours entre catabolisme azoté et cycle de Krebs",
+    description_en: "Integrated synthesis: glutamate and fumarate, crossroads between nitrogen catabolism and the Krebs cycle",
+    icone: "🗺️",
+    learning: METABOLIC_MAP_PROTEINS_LEARNING,
+    cards: METABOLIC_MAP_PROTEINS_FLASHCARDS,
+  },
+  {
+    ordre: 29,
+    titre_fr: "Métabolisme du cholestérol",
+    titre_en: "Cholesterol Metabolism",
+    description_fr: "Synthèse hépatique via la HMG-CoA réductase, régulation par SREBP-2, et devenirs biologiques du cholestérol",
+    description_en: "Hepatic synthesis via HMG-CoA reductase, SREBP-2 regulation, and the biological fates of cholesterol",
+    icone: "🥚",
+    learning: CHOLESTEROL_METABOLISM_LEARNING,
+    cards: CHOLESTEROL_METABOLISM_FLASHCARDS,
+  },
+  {
+    ordre: 30,
+    titre_fr: "Métabolisme des lipoprotéines",
+    titre_en: "Lipoprotein Metabolism",
+    description_fr: "Voies exogène et endogène (chylomicrons, VLDL, LDL) et transport inverse du cholestérol par les HDL",
+    description_en: "Exogenous and endogenous pathways (chylomicrons, VLDL, LDL) and reverse cholesterol transport by HDL",
+    icone: "🚚",
+    learning: LIPOPROTEIN_METABOLISM_LEARNING,
+    cards: LIPOPROTEIN_METABOLISM_FLASHCARDS,
+  },
+  {
+    ordre: 31,
+    titre_fr: "Synthèse des nucléotides",
+    titre_en: "Nucleotide Synthesis",
+    description_fr: "Voies de novo des purines et pyrimidines, formation des désoxyribonucléotides, et syndromes de Lesch-Nyhan et de déficit en ADA",
+    description_en: "De novo purine and pyrimidine pathways, deoxyribonucleotide formation, and Lesch-Nyhan and ADA deficiency syndromes",
+    icone: "🧬",
+    learning: NUCLEOTIDE_SYNTHESIS_LEARNING,
+    cards: NUCLEOTIDE_SYNTHESIS_FLASHCARDS,
   },
 ];
