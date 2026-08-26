@@ -13,6 +13,7 @@ import {
 import { useLang } from "../i18n";
 import { resolveVisualKey } from "../library-widgets/visual-registry";
 import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
+import { MarkdownContent } from "../components/MarkdownContent";
 
 type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget";
 
@@ -63,11 +64,7 @@ function ResourceReader({
         )}
       </div>
       {content ? (
-        <div className="course-copy">
-          {content.split(/\n{2,}/).map((paragraph, index) => (
-            <p key={`${resource.id}-${index}`}>{paragraph}</p>
-          ))}
-        </div>
+        <MarkdownContent content={content} className="course-copy" />
       ) : (
         <p className="hint">{t.noContent}</p>
       )}

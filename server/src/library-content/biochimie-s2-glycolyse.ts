@@ -11,14 +11,17 @@ const KREBS_CYCLE_COURSE = `# Le cycle de Krebs
 - Comme 2 acétyl-CoA sont produits par glucose, le cycle tourne **deux fois par glucose** : bilan total = **6 NADH, 2 FADH₂, 2 ATP/GTP, 4 CO₂**.
 
 ## 2. Les 8 réactions du cycle
-1. **Citrate synthase** : acétyl-CoA + oxaloacétate → citrate (+ CoA libéré). Irréversible, première étape régulatrice.
-2. **Aconitase** : citrate → isocitrate (isomérisation via un intermédiaire cis-aconitate).
-3. **Isocitrate déshydrogénase** : isocitrate + NAD⁺ → α-cétoglutarate + CO₂ + NADH. Irréversible, étape régulatrice majeure (1er CO₂ libéré).
-4. **α-cétoglutarate déshydrogénase** (complexe multienzymatique semblable au PDH) : α-cétoglutarate + CoA + NAD⁺ → succinyl-CoA + CO₂ + NADH. Irréversible (2e CO₂ libéré) ; mêmes cofacteurs que le PDH (TPP, acide lipoïque, FAD, CoA, NAD⁺).
-5. **Succinyl-CoA synthétase** : succinyl-CoA + Pi + GDP(ADP) → succinate + CoA + GTP(ATP). Seule phosphorylation au niveau du substrat du cycle.
-6. **Succinate déshydrogénase** : succinate → fumarate + FADH₂. Seule enzyme du cycle ancrée dans la membrane mitochondriale interne ; correspond au **complexe II** de la chaîne respiratoire.
-7. **Fumarase** : fumarate + H₂O → malate (hydratation).
-8. **Malate déshydrogénase** : malate + NAD⁺ → oxaloacétate + NADH. Régénère l'oxaloacétate, fermant le cycle.
+
+| # | Enzyme | Réaction | Cofacteur produit | Note |
+| --- | --- | --- | --- | --- |
+| 1 | **Citrate synthase** | Acétyl-CoA + oxaloacétate → citrate | — | Irréversible, 1ère étape régulatrice |
+| 2 | **Aconitase** | Citrate → isocitrate | — | Isomérisation (via cis-aconitate) |
+| 3 | **Isocitrate déshydrogénase** | Isocitrate + NAD⁺ → α-cétoglutarate + CO₂ | NADH | Irréversible, étape régulatrice majeure (1er CO₂) |
+| 4 | **α-cétoglutarate déshydrogénase** | α-cétoglutarate + CoA + NAD⁺ → succinyl-CoA + CO₂ | NADH | Irréversible (2e CO₂) ; cofacteurs du PDH (TPP, acide lipoïque, FAD, CoA, NAD⁺) |
+| 5 | **Succinyl-CoA synthétase** | Succinyl-CoA + Pi + GDP(ADP) → succinate + CoA | GTP(ATP) | Seule phosphorylation au niveau du substrat du cycle |
+| 6 | **Succinate déshydrogénase** | Succinate → fumarate | FADH₂ | Ancrée dans la membrane interne = **complexe II** de la chaîne respiratoire |
+| 7 | **Fumarase** | Fumarate + H₂O → malate | — | Hydratation |
+| 8 | **Malate déshydrogénase** | Malate + NAD⁺ → oxaloacétate | NADH | Régénère l'oxaloacétate, ferme le cycle |
 
 ## 3. Bilan par tour de cycle (par acétyl-CoA)
 - **3 NADH** (isocitrate déshydrogénase, α-cétoglutarate déshydrogénase, malate déshydrogénase)

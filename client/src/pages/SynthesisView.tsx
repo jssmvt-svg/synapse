@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, type Synthesis } from "../api";
 import { useLang } from "../i18n";
+import { MarkdownContent } from "../components/MarkdownContent";
 
 export function SynthesisView() {
   const { id } = useParams<{ id: string }>();
@@ -26,9 +27,7 @@ export function SynthesisView() {
     <div className="synthesis-view">
       <Link to="/dashboard">← {t.dashboard}</Link>
       <div className="synthesis-content">
-        {content.split("\n").map((line, i) => (
-          <p key={i}>{line}</p>
-        ))}
+        <MarkdownContent content={content} />
       </div>
     </div>
   );
