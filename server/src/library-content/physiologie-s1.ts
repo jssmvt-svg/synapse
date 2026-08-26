@@ -1,4 +1,4 @@
-import type { LibraryChapterSeed } from "./biochimie-s1.js";
+import type { LibraryChapterSeed, LibraryLearningSeed, LibraryCardSeed } from "./biochimie-s1.js";
 import {
   CELL_MEMBRANE_LEARNING,
   CELL_MEMBRANE_FLASHCARDS,
@@ -35,6 +35,53 @@ import {
   GI_MOTILITY_LEARNING,
   GI_MOTILITY_FLASHCARDS,
 } from "./physiologie-digestif.js";
+import {
+  OSMOLARITY_LEARNING,
+  OSMOLARITY_FLASHCARDS,
+  IONOGRAMME_LEARNING,
+  IONOGRAMME_FLASHCARDS,
+  HEMATOGRAMME_LEARNING,
+  HEMATOGRAMME_FLASHCARDS,
+} from "./physiologie-labo-s1-lotA.js";
+import {
+  ABB_LEARNING,
+  ABB_FLASHCARDS,
+  HEMOSTASIS_PARTIAL_LEARNING,
+  HEMOSTASIS_PARTIAL_FLASHCARDS,
+} from "./physiologie-labo-s1-lotB.js";
+import {
+  PROTEINOGRAM_LEARNING,
+  PROTEINOGRAM_FLASHCARDS,
+  URINE_FORMULA_LEARNING as URINE_FORMULA_LEARNING_1_8,
+  URINE_FORMULA_FLASHCARDS as URINE_FORMULA_FLASHCARDS_1_8,
+} from "./physiologie-labo-s1-lotC.js";
+import {
+  LEUKOGRAM_LEARNING,
+  LEUKOGRAM_FLASHCARDS,
+  URINE_FORMULA_LEARNING as URINE_FORMULA_LEARNING_9_10,
+  URINE_FORMULA_FLASHCARDS as URINE_FORMULA_FLASHCARDS_9_10,
+  ANEMIA_DIFFERENTIAL_LEARNING,
+  ANEMIA_DIFFERENTIAL_FLASHCARDS,
+} from "./physiologie-labo-s1-lotD.js";
+import {
+  REFERENCE_VALUES_LEARNING,
+  REFERENCE_VALUES_FLASHCARDS,
+  INTERPRETATION_PATTERNS_LEARNING,
+  INTERPRETATION_PATTERNS_FLASHCARDS,
+} from "./physiologie-labo-s1-lotE.js";
+
+// Le quiz "Formule Urine" (10 questions) a ete capture en deux morceaux
+// (Q1-8 dans le lot C, Q9-10 dans le lot D) : on les fusionne en un seul
+// chapitre de laboratoire.
+const URINE_FORMULA_LEARNING: LibraryLearningSeed = {
+  resource: URINE_FORMULA_LEARNING_1_8.resource,
+  qcm: [...URINE_FORMULA_LEARNING_1_8.qcm, ...URINE_FORMULA_LEARNING_9_10.qcm],
+  exam: {
+    titre_fr: URINE_FORMULA_LEARNING_1_8.exam.titre_fr,
+    duration_seconds: URINE_FORMULA_LEARNING_1_8.exam.duration_seconds + URINE_FORMULA_LEARNING_9_10.exam.duration_seconds,
+  },
+};
+const URINE_FORMULA_FLASHCARDS: LibraryCardSeed[] = [...URINE_FORMULA_FLASHCARDS_1_8, ...URINE_FORMULA_FLASHCARDS_9_10];
 
 // Contenu officiel pré-rédigé : Physiologie, Année 1, Semestre 1.
 // Extrait des cours magistraux (UMFT "V. Babes" Timisoara, Department of
@@ -180,5 +227,130 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🌀",
     learning: GI_MOTILITY_LEARNING,
     cards: GI_MOTILITY_FLASHCARDS,
+  },
+
+  // Chapitres de laboratoire (section "laboratoire") : fiches pratiques
+  // preparees pour le TP/examen pratique a partir des quiz personnels de
+  // l'utilisatrice (bases sur ses propres notes de laboratoire).
+  {
+    ordre: 101,
+    section: "laboratoire",
+    titre_fr: "TP — Osmolarité",
+    titre_en: "Lab — Osmolarity",
+    description_fr: "Osmolarité sanguine normale et calcul de l'osmolarité plasmatique",
+    description_en: "Normal blood osmolarity and calculation of plasma osmolarity",
+    icone: "💧",
+    learning: OSMOLARITY_LEARNING,
+    cards: OSMOLARITY_FLASHCARDS,
+  },
+  {
+    ordre: 102,
+    section: "laboratoire",
+    titre_fr: "TP — Ionogramme",
+    titre_en: "Lab — Ionogram",
+    description_fr: "Valeurs normales de l'ionogramme sanguin (Na⁺, K⁺, Ca²⁺, Mg²⁺, Cl⁻)",
+    description_en: "Normal blood ionogram values (Na⁺, K⁺, Ca²⁺, Mg²⁺, Cl⁻)",
+    icone: "🧪",
+    learning: IONOGRAMME_LEARNING,
+    cards: IONOGRAMME_FLASHCARDS,
+  },
+  {
+    ordre: 103,
+    section: "laboratoire",
+    titre_fr: "TP — Hématogramme",
+    titre_en: "Lab — Complete Blood Count",
+    description_fr: "Valeurs normales de l'hémogramme (hémoglobine, hématocrite, indices érythrocytaires)",
+    description_en: "Normal complete blood count values (hemoglobin, hematocrit, red cell indices)",
+    icone: "🩸",
+    learning: HEMATOGRAMME_LEARNING,
+    cards: HEMATOGRAMME_FLASHCARDS,
+  },
+  {
+    ordre: 104,
+    section: "laboratoire",
+    titre_fr: "TP — Équilibre acido-basique (gaz du sang)",
+    titre_en: "Lab — Acid-Base Balance (Blood Gases)",
+    description_fr: "Interprétation normale et pathologique des gaz du sang",
+    description_en: "Normal and pathological interpretation of blood gases",
+    icone: "🫁",
+    learning: ABB_LEARNING,
+    cards: ABB_FLASHCARDS,
+  },
+  {
+    ordre: 105,
+    section: "laboratoire",
+    titre_fr: "TP — Hémostase (fiche partielle)",
+    titre_en: "Lab — Hemostasis (Partial Sheet)",
+    description_fr: "Valeurs normales et pathologiques de l'hémostase — fiche partielle, certaines questions sources manquantes",
+    description_en: "Normal and pathological hemostasis values — partial sheet, some source questions missing",
+    icone: "🩹",
+    learning: HEMOSTASIS_PARTIAL_LEARNING,
+    cards: HEMOSTASIS_PARTIAL_FLASHCARDS,
+  },
+  {
+    ordre: 106,
+    section: "laboratoire",
+    titre_fr: "TP — Protéinogramme",
+    titre_en: "Lab — Protein Electrophoresis",
+    description_fr: "Fractions normales du protéinogramme (albumine, α1, α2, β, γ-globulines)",
+    description_en: "Normal protein electrophoresis fractions (albumin, α1, α2, β, γ-globulins)",
+    icone: "📊",
+    learning: PROTEINOGRAM_LEARNING,
+    cards: PROTEINOGRAM_FLASHCARDS,
+  },
+  {
+    ordre: 107,
+    section: "laboratoire",
+    titre_fr: "TP — Formules de physiologie rénale",
+    titre_en: "Lab — Renal Physiology Formulas",
+    description_fr: "Fraction de filtration, débit plasmatique rénal, trou anionique urinaire et débit de filtration glomérulaire",
+    description_en: "Filtration fraction, renal plasma flow, urinary anion gap, and glomerular filtration rate",
+    icone: "🧮",
+    learning: URINE_FORMULA_LEARNING,
+    cards: URINE_FORMULA_FLASHCARDS,
+  },
+  {
+    ordre: 108,
+    section: "laboratoire",
+    titre_fr: "TP — Leucogramme",
+    titre_en: "Lab — Leukogram",
+    description_fr: "Valeurs normales et anormales de la formule leucocytaire",
+    description_en: "Normal and abnormal white blood cell differential values",
+    icone: "🛡️",
+    learning: LEUKOGRAM_LEARNING,
+    cards: LEUKOGRAM_FLASHCARDS,
+  },
+  {
+    ordre: 109,
+    section: "laboratoire",
+    titre_fr: "TP — Diagnostic différentiel des anémies",
+    titre_en: "Lab — Differential Diagnosis of Anemias",
+    description_fr: "Classification des anémies par les indices érythrocytaires",
+    description_en: "Classification of anemias by red cell indices",
+    icone: "🔬",
+    learning: ANEMIA_DIFFERENTIAL_LEARNING,
+    cards: ANEMIA_DIFFERENTIAL_FLASHCARDS,
+  },
+  {
+    ordre: 110,
+    section: "laboratoire",
+    titre_fr: "TP — Valeurs de référence (synthèse)",
+    titre_en: "Lab — Reference Values (Summary)",
+    description_fr: "Synthèse des valeurs normales de tous les examens de laboratoire du semestre",
+    description_en: "Summary of normal values across all lab examinations of the semester",
+    icone: "📋",
+    learning: REFERENCE_VALUES_LEARNING,
+    cards: REFERENCE_VALUES_FLASHCARDS,
+  },
+  {
+    ordre: 111,
+    section: "laboratoire",
+    titre_fr: "TP — Tableaux d'interprétation (synthèse)",
+    titre_en: "Lab — Interpretation Patterns (Summary)",
+    description_fr: "Schémas d'interprétation clinique : dysprotéinémies, hémostase pathologique, fonction rénale, désordres acido-basiques",
+    description_en: "Clinical interpretation patterns: dysproteinemias, pathological hemostasis, renal function, acid-base disorders",
+    icone: "🗺️",
+    learning: INTERPRETATION_PATTERNS_LEARNING,
+    cards: INTERPRETATION_PATTERNS_FLASHCARDS,
   },
 ];
