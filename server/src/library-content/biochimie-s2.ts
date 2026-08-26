@@ -141,6 +141,7 @@ export const BIOCHIMIE_S2: LibraryChapterSeed[] = [
     description_en: "The 8 reactions of the citric acid cycle, production of NADH, FADH2 and GTP/ATP",
     icone: "🔄",
     learning: KREBS_CYCLE_LEARNING,
+    widget_key: "krebs-cycle",
     cards: KREBS_CYCLE_FLASHCARDS,
   },
   {

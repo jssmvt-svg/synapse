@@ -13,6 +13,7 @@ import {
 import { useLang } from "../i18n";
 import { resolveVisualKey } from "../library-widgets/visual-registry";
 import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
+import { KrebsCycleDiagram } from "../components/KrebsCycleDiagram";
 import { MarkdownContent } from "../components/MarkdownContent";
 
 type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget";
@@ -597,6 +598,14 @@ export function LibraryChapterView() {
                 <small>{t.continueAction}</small>
               </button>
             )}
+            {detail.chapter.widget_key === "krebs-cycle" && (
+              <button type="button" className="activity-card" onClick={() => setActivity("widget")}>
+                <span className="activity-icon">🔄</span>
+                <span className="eyebrow">Schéma animé</span>
+                <strong>Le cycle de Krebs</strong>
+                <small>{t.continueAction}</small>
+              </button>
+            )}
             <Link to={`/library/chapter/${detail.chapter.id}/my-deck`} className="activity-card activity-card-personal">
               <span className="activity-icon">✦</span>
               <span className="eyebrow">Mon deck</span>
@@ -642,6 +651,18 @@ export function LibraryChapterView() {
           <p className="eyebrow">{t.oxygenCurve}</p>
           <h2>{t.oxygenCurveHint}</h2>
           <OxygenSaturationChart />
+        </section>
+      )}
+      {activity === "widget" && detail.chapter.widget_key === "krebs-cycle" && (
+        <section className="learning-panel widget-panel-centered">
+          <div className="panel-topline">
+            <button type="button" className="text-button" onClick={() => setActivity("hub")}>
+              {t.backToLibrary}
+            </button>
+          </div>
+          <p className="eyebrow">Schéma animé</p>
+          <h2>Le cycle de Krebs</h2>
+          <KrebsCycleDiagram />
         </section>
       )}
     </main>
