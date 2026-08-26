@@ -39,6 +39,7 @@ import {
   FEMALE_GENITAL_ORGANS_LEARNING,
   FEMALE_GENITAL_ORGANS_FLASHCARDS,
 } from "./anatomie-s1-lot5.js";
+import { UPPER_LIMB_OSTEOLOGY_LEARNING, LOWER_LIMB_OSTEOLOGY_LEARNING } from "./anatomie-labo-osteo.js";
 
 // Contenu officiel pré-rédigé : Anatomie, Année 1, Semestre 1.
 // Cours magistraux reels (diaporamas .pptx) fournis par l'utilisatrice --
@@ -194,5 +195,31 @@ export const ANATOMIE_S1: LibraryChapterSeed[] = [
     icone: "🌸",
     learning: FEMALE_GENITAL_ORGANS_LEARNING,
     cards: FEMALE_GENITAL_ORGANS_FLASHCARDS,
+  },
+
+  // Chapitres de laboratoire (section "laboratoire") : fiches pratiques
+  // d'osteologie pour la preparation du TP/examen pratique d'anatomie S1,
+  // a partir des videos d'identification fournies par l'utilisatrice.
+  {
+    ordre: 101,
+    section: "laboratoire",
+    titre_fr: "TP — Ostéologie du membre supérieur",
+    titre_en: "Lab — Upper Limb Osteology",
+    description_fr: "Reliefs osseux du membre supérieur pour l'identification pratique (squelette appendiculaire)",
+    description_en: "Bony landmarks of the upper limb for practical identification (appendicular skeleton)",
+    icone: "🦴",
+    learning: UPPER_LIMB_OSTEOLOGY_LEARNING,
+    cards: [],
+  },
+  {
+    ordre: 102,
+    section: "laboratoire",
+    titre_fr: "TP — Ostéologie du membre inférieur",
+    titre_en: "Lab — Lower Limb Osteology",
+    description_fr: "Reliefs osseux du membre inférieur pour l'identification pratique (squelette appendiculaire)",
+    description_en: "Bony landmarks of the lower limb for practical identification (appendicular skeleton)",
+    icone: "🦴",
+    learning: LOWER_LIMB_OSTEOLOGY_LEARNING,
+    cards: [],
   },
 ];
