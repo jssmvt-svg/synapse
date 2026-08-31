@@ -113,14 +113,15 @@ function PersonalReview({
 }) {
   const { lang } = useLang();
   const text = copy[lang];
+  // Snapshotted once per review session: rating a card refreshes `cards` in the
+  // parent (new mastery order), and re-deriving the queue from that live prop
+  // would shuffle the deck mid-session and could re-show the same card. The
+  // queue only refreshes the next time this component mounts (re-entering review).
+  const [queue] = useState(cards);
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [saving, setSaving] = useState(false);
-  const card = cards[index];
-
-  useEffect(() => {
-    setIndex((current) => Math.min(current, Math.max(cards.length - 1, 0)));
-  }, [cards.length]);
+  const card = queue[index];
 
   if (!card) return <p className="hint">{text.empty}</p>;
 
@@ -129,7 +130,7 @@ function PersonalReview({
     try {
       await api.ratePersonalDeckCard(chapterId, card.id, mastery);
       setFlipped(false);
-      setIndex((current) => (cards.length ? (current + 1) % cards.length : 0));
+      setIndex((current) => (queue.length ? (current + 1) % queue.length : 0));
       onRated();
     } finally {
       setSaving(false);
@@ -140,7 +141,7 @@ function PersonalReview({
     <section className="personal-review">
       <div className="panel-topline">
         <span className="ai-unverified-badge">{text.unverified}</span>
-        <span className="progress-label">{index + 1} / {cards.length}</span>
+        <span className="progress-label">{index + 1} / {queue.length}</span>
       </div>
       <button type="button" className={`study-flashcard ${flipped ? "flipped" : ""}`} onClick={() => setFlipped((value) => !value)}>
         <span className="flashcard-face">{flipped ? card.back : card.front}</span>
