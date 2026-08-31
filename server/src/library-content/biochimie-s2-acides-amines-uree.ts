@@ -16,9 +16,12 @@ const AMINO_ACID_METABOLISM_COURSE = `# Métabolisme des acides aminés
 - C'est la principale voie par laquelle l'azote aminé converge vers l'ammoniac, destiné à être détoxifié par le **cycle de l'urée**.
 
 ## 4. Classification glucoformateur / cétogène
-- **Glucoformateurs** : leur squelette carboné est converti en pyruvate ou en intermédiaires du cycle de Krebs (oxaloacétate, α-cétoglutarate, succinyl-CoA, fumarate), pouvant alimenter la néoglucogenèse.
-- **Cétogènes** : leur squelette carboné est converti en acétyl-CoA ou acétoacétyl-CoA, ne pouvant pas contribuer nettement à la néoglucogenèse (**leucine** et **lysine** sont exclusivement cétogènes).
-- Certains acides aminés sont **mixtes** (glucoformateurs ET cétogènes), par exemple phénylalanine, tyrosine, tryptophane, isoleucine.
+
+| Catégorie | Devenir du squelette carboné | Exemples |
+| --- | --- | --- |
+| **Glucoformateurs** | Converti en pyruvate ou en intermédiaires du cycle de Krebs (oxaloacétate, α-cétoglutarate, succinyl-CoA, fumarate) — alimente la néoglucogenèse | Majorité des acides aminés |
+| **Cétogènes** | Converti en acétyl-CoA ou acétoacétyl-CoA — pas de contribution nette à la néoglucogenèse | Leucine, lysine (les 2 seuls exclusifs) |
+| **Mixtes** | Glucoformateur ET cétogène selon la portion du squelette | Phénylalanine, tyrosine, tryptophane, isoleucine |
 
 ## 5. Acides aminés essentiels
 - Neuf acides aminés ne peuvent pas être synthétisés par l'organisme humain et doivent provenir de l'alimentation : **phénylalanine, valine, thréonine, tryptophane, méthionine, leucine, isoleucine, lysine, histidine**.
@@ -84,11 +87,14 @@ const UREA_CYCLE_COURSE = `# Le cycle de l'urée
 - Se déroule dans le **foie**, à cheval sur la **mitochondrie** (2 premières réactions) et le **cytosol** (3 réactions suivantes).
 
 ## 2. Les 5 réactions du cycle
-1. **Carbamoyl phosphate synthétase I (CPS1)**, mitochondrie : NH₃ + CO₂ + **2 ATP** → carbamoyl phosphate. Étape **limitante et régulatrice**, nécessite le **N-acétylglutamate (NAG)** comme activateur allostérique obligatoire.
-2. **Ornithine transcarbamylase (OTC)**, mitochondrie : carbamoyl phosphate + ornithine → **citrulline** (exportée vers le cytosol).
-3. **Argininosuccinate synthétase**, cytosol : citrulline + aspartate + **ATP** → argininosuccinate. C'est ici que le **second atome d'azote** (provenant de l'aspartate) entre dans le cycle.
-4. **Argininosuccinate lyase**, cytosol : argininosuccinate → arginine + **fumarate**. Le fumarate peut rejoindre le cycle de Krebs.
-5. **Arginase**, cytosol : arginine + H₂O → **urée** + **ornithine** (régénérée, retourne dans la mitochondrie pour un nouveau tour).
+
+| # | Enzyme | Lieu | Réaction | Note |
+| --- | --- | --- | --- | --- |
+| 1 | **CPS1** (carbamoyl phosphate synthétase I) | Mitochondrie | NH₃ + CO₂ + 2 ATP → carbamoyl phosphate | Étape limitante et régulatrice ; nécessite le **NAG** (activateur allostérique obligatoire) |
+| 2 | **OTC** (ornithine transcarbamylase) | Mitochondrie | Carbamoyl phosphate + ornithine → citrulline | Citrulline exportée vers le cytosol |
+| 3 | **Argininosuccinate synthétase** | Cytosol | Citrulline + aspartate + ATP → argininosuccinate | Entrée du **2e atome d'azote** (aspartate) |
+| 4 | **Argininosuccinate lyase** | Cytosol | Argininosuccinate → arginine + fumarate | Le fumarate rejoint le cycle de Krebs |
+| 5 | **Arginase** | Cytosol | Arginine + H₂O → urée + ornithine | Ornithine régénérée, retourne en mitochondrie |
 
 ## 3. Bilan
 - **2 atomes d'azote** (1 depuis NH₃, 1 depuis l'aspartate) + **1 CO₂** → **1 urée**, au coût de **4 liaisons phosphate riches en énergie** (2 ATP consommés par la CPS1 comptent pour 2, l'ATP de l'argininosuccinate synthétase est hydrolysé en AMP + PPi, équivalent à 2 liaisons supplémentaires).

@@ -187,6 +187,20 @@ const WATER_SOLUBLE_VITAMINS_COURSE = `# Les vitamines hydrosolubles
 ## 11. Vitamine P — Bioflavonoïdes
 - Glycosides polyphénoliques (agrumes, baies, thé vert). Activité antioxydante ; contribue à l'intégrité des vaisseaux sanguins, en synergie avec la vitamine C.
 
+## Tableau récapitulatif des vitamines hydrosolubles
+
+| Vitamine | Forme active | Rôle clé | Carence caractéristique |
+| --- | --- | --- | --- |
+| B1 — Thiamine | TPP | Décarboxylation oxydative des α-cétoacides, transcétolase | Béribéri, Wernicke-Korsakoff |
+| B2 — Riboflavine | FMN / FAD | Cofacteur redox des flavoprotéines | Glossite, chéilite, photophobie |
+| B3 — Niacine (PP) | NAD⁺ / NADP⁺ | Déshydrogénases/oxydoréductases | Pellagre (4D) |
+| B5 — Acide pantothénique | Coenzyme A / ACP | Transport des radicaux acyles | Très rare |
+| B6 — Pyridoxine | PLP | Transamination, décarboxylation, synthèse de l'hème | Anémie sidéroblastique |
+| B9 — Acide folique | Tétrahydrofolate (FolH4) | Transport de groupements à 1 carbone, synthèse ADN | Spina bifida, anémie mégaloblastique |
+| B12 — Cobalamine | Méthylcobalamine / adénosylcobalamine | Méthionine synthase, méthylmalonyl-CoA mutase | Anémie de Biermer, démyélinisation |
+| C — Acide ascorbique | Acide ascorbique | Hydroxylation de la proline (collagène), antioxydant | Scorbut |
+| B7/H — Biotine | Biotine liée aux carboxylases | Carboxylation (acétyl-CoA, pyruvate) | Rare (avidine du blanc d'œuf cru) |
+
 ## Points à retenir
 - Hydrosolubles = non stockées, apport alimentaire continu, excès généralement éliminé dans les urines.
 - Formes actives à connaître : TPP (B1), FMN/FAD (B2), NAD⁺/NADP⁺ (B3), CoA/ACP (B5), PLP (B6), FolH4 (B9), méthylcobalamine/adénosylcobalamine (B12).
@@ -268,6 +282,15 @@ const FAT_SOLUBLE_VITAMINS_COURSE = `# Vitamines liposolubles (A, D, E, K) et co
 - **L-Carnitine** : synthétisée à partir de la lysine et de la méthionine. Transporte les acides gras à longue chaîne à travers la membrane mitochondriale interne (indispensable à la β-oxydation) ; le muscle cardiaque/squelettique ne peut pas la synthétiser. Carence : fatigue musculaire, cardiomyopathie, accumulation de lipides neutres dans muscle/cœur/foie.
 - **Acide α-lipoïque** : cofacteur des complexes multienzymatiques de décarboxylation des α-cétoacides (pyruvate déshydrogénase, α-cétoglutarate déshydrogénase), avec TPP, CoA, FAD, NAD.
 - **Tétrahydrobioptérine (BH4)** : synthétisée à partir du GTP ; cofacteur de la phénylalanine-4-hydroxylase (Phe → Tyr — son déficit cause la phénylcétonurie), de la tyrosine-3-hydroxylase et de la NO synthase.
+
+## Tableau récapitulatif des vitamines liposolubles
+
+| Vitamine | Forme active | Rôle clé | Carence caractéristique |
+| --- | --- | --- | --- |
+| A — Rétinol | Rétinol, rétinal, acide rétinoïque | Vision (rhodopsine), contrôle génique (RARE), transferrine | Héméralopie puis xérophtalmie |
+| D — Calciférol | Calcitriol (1,25-(OH)₂D3) | Absorption intestinale du calcium (calbindine) | Rachitisme (enfant) / ostéomalacie (adulte) |
+| E — Tocophérol | α-tocophérol | Antioxydant membranaire, protège les AGPI | Anémie hémolytique |
+| K — Phylloquinone/ménaquinone | Forme hydroquinone | γ-carboxylation des facteurs II, VII, IX, X | Maladie hémorragique du nouveau-né |
 
 ## Points à retenir
 - Liposolubles = A, D, E, K ; D est en réalité une pro-hormone. Absorption bile-dépendante, stockage hépatique (A, D, K) ou adipeux (E).

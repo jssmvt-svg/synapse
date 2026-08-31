@@ -40,9 +40,11 @@ const LAB_S2_11_COURSE = `# Labo 11 — Métabolisme des protéines : dosage de 
 ## 6. L'ictère : classification clinique
 Toute perturbation de la production, la conjugaison ou l'excrétion de la bilirubine entraîne une hyperbilirubinémie, cliniquement visible sous forme d'**ictère** (du français « jaune »).
 
-- **Ictère pré-hépatique (hémolytique)** : hémolyse excessive dépassant la capacité de conjugaison hépatique (anémies hémolytiques héréditaires — sphérocytose, drépanocytose, déficit en G6PD —, hémolyse auto-immune ou infectieuse). Bilirubine indirecte élevée dans le plasma, **absence de bilirubine dans les urines** (non conjuguée, liée à l'albumine, non filtrée) — d'où le terme « ictère acholurique ». Urobilinogène urinaire augmenté ; selles de couleur normale.
-- **Ictère hépatique (hépatocellulaire)** : altération de la conjugaison/excrétion (hépatite virale, hépatopathie alcoolique, toxicité médicamenteuse, cirrhose). Bilirubine directe ET indirecte souvent élevées ; urines pouvant contenir de la bilirubine conjuguée (urines foncées) ; urobilinogène urinaire généralement augmenté ; selles normales ou pâles.
-- **Ictère post-hépatique (obstructif)** : obstacle mécanique à l'écoulement biliaire après conjugaison (calculs biliaires, tumeurs pancréatiques/biliaires, sténoses). Forte élévation de la bilirubine directe, bilirubinurie (urines foncées), urobilinogène urinaire absent ou très bas, **selles pâles/décolorées** (absence de stercobiline).
+| Type d'ictère | Cause | Bilirubine plasmatique | Bilirubine urinaire | Urobilinogène urinaire | Selles |
+| --- | --- | --- | --- | --- | --- |
+| Pré-hépatique (hémolytique) | Hémolyse excessive (sphérocytose, drépanocytose, déficit G6PD, hémolyse auto-immune/infectieuse) | Indirecte ↑ | Absente (« acholurique ») | Augmenté | Normales |
+| Hépatique (hépatocellulaire) | Hépatite virale, alcool, toxicité médicamenteuse, cirrhose | Directe ET indirecte ↑ | Présente (urines foncées) | Généralement augmenté | Normales ou pâles |
+| Post-hépatique (obstructif) | Calculs biliaires, tumeurs pancréatiques/biliaires, sténoses | Directe ↑↑ | Présente (urines foncées) | Absent ou très bas | Pâles/décolorées |
 - **Ictère néonatal** : très fréquent (jusqu'à 60 % des nouveau-nés à terme, 80 % des prématurés), le plus souvent physiologique (hémolyse accrue + système de conjugaison immature). L'hyperbilirubinémie **non conjuguée** est le type le plus fréquent (physiologique, ictère de l'allaitement, hémolyse) ; l'hyperbilirubinémie **conjuguée** est toujours pathologique (atrésie biliaire, hépatite néonatale, maladie métabolique) et nécessite une investigation urgente. Une hyperbilirubinémie non conjuguée sévère non traitée expose à l'encéphalopathie bilirubinique (**ictère nucléaire/kernictère**), aux séquelles neurologiques irréversibles.
 
 ## 7. Désordres génétiques de la bilirubine
@@ -206,12 +208,28 @@ const LAB_S2_13_COURSE = `# Labo 13 — Analyse métabolique intégrative et sys
 - Rotors à usage unique pouvant contenir jusqu'à **14 tests biochimiques** ; résultats obtenus en **environ 12 minutes**.
 - Système intégré **iQC** (Intelligent Quality Control) : contrôle l'analyseur, le rotor de réactifs et l'échantillon à chaque analyse pour garantir la fiabilité électronique et chimique des résultats.
 - 13 panels disponibles ; trois exemples :
-  - **Panel métabolique complet (CMP)** : ALAT, albumine, phosphatase alcaline, ASAT, calcium, chlorure, créatinine, glucose, potassium, sodium, bilirubine totale, CO₂ total, protéines totales, urée sanguine (BUN).
-  - **General Chemistry 13** : ALAT, albumine, phosphatase alcaline, amylase, ASAT, calcium, créatinine, gamma-GT, glucose, bilirubine totale, protéines totales, acide urique, BUN.
-  - **Lipid Panel Plus** : cholestérol total, HDL, triglycérides, ALAT, ASAT, glucose ; paramètres calculés : LDL, VLDL, ratio cholestérol total/HDL.
+
+| Panel | Tests inclus |
+| --- | --- |
+| Panel métabolique complet (CMP) | ALAT, albumine, phosphatase alcaline, ASAT, calcium, chlorure, créatinine, glucose, potassium, sodium, bilirubine totale, CO₂ total, protéines totales, BUN |
+| General Chemistry 13 | ALAT, albumine, phosphatase alcaline, amylase, ASAT, calcium, créatinine, gamma-GT, glucose, bilirubine totale, protéines totales, acide urique, BUN |
+| Lipid Panel Plus | Cholestérol total, HDL, triglycérides, ALAT, ASAT, glucose (+ calculés : LDL, VLDL, ratio cholestérol total/HDL) |
 - **Procédure** : connecter l'appareil, ouvrir le compartiment, injecter ~120 µL de sang dans le rotor (côté blanc vers le haut) avec la seringue dédiée, refermer, saisir l'identifiant patient, lancer l'analyse (~12 min), imprimer le résultat automatiquement.
 - L'appareil détecte aussi si l'échantillon est **hémolysé, lipémique ou ictérique** (échelle 0 à 4+ pour chaque paramètre), ce qui peut invalider certains résultats.
-- Quelques valeurs normales du panel : Na⁺ 128-145 mmol/L ; K⁺ 3,6-5,1 mmol/L ; Cl⁻ 98-108 mmol/L ; glucose 73-118 mg/dL ; BUN 7-22 mg/dL ; créatinine 0,6-1,2 mg/dL ; ALAT 10-47 U/L ; ASAT 11-38 U/L ; bilirubine totale 0,2-1,6 mg/dL ; protéines totales 6,4-8,1 g/dL.
+- Quelques valeurs normales du panel :
+
+| Paramètre | Plage normale |
+| --- | --- |
+| Na⁺ | 128–145 mmol/L |
+| K⁺ | 3,6–5,1 mmol/L |
+| Cl⁻ | 98–108 mmol/L |
+| Glucose | 73–118 mg/dL |
+| BUN | 7–22 mg/dL |
+| Créatinine | 0,6–1,2 mg/dL |
+| ALAT | 10–47 U/L |
+| ASAT | 11–38 U/L |
+| Bilirubine totale | 0,2–1,6 mg/dL |
+| Protéines totales | 6,4–8,1 g/dL |
 
 ## Points à retenir
 - L'acétyl-CoA est le carrefour métabolique commun aux glucides, lipides et protéines, alimentant le cycle du TCA et la production d'ATP.

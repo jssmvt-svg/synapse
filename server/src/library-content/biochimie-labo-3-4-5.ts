@@ -19,9 +19,11 @@ const LAB3_COURSE = `# Lab 3 — Solutions : concentrations, dilutions et soluti
 ## 3. Solutions isotoniques
 - L'osmose est la migration de l'eau à travers une membrane semi-perméable, du compartiment le moins concentré vers le plus concentré, jusqu'à équilibre des pressions osmotiques.
 - L'osmolarité dépend du nombre de particules dissoutes, pas de leur nature : 1 molécule de glucose = 1 particule, alors qu'1 molécule de NaCl se dissocie en 2 particules (Na⁺ et Cl⁻).
-- Une solution **isotonique** a la même osmolarité que le plasma sanguin : elle n'a aucun effet sur la morphologie des globules rouges (GR).
-- Une solution **hypotonique** (osmolarité < plasma) fait gonfler les GR par entrée d'eau (risque d'hémolyse) ; une solution **hypertonique** (osmolarité > plasma) fait sortir l'eau des GR, qui se rétractent (crénelure).
-- Exemples : NaCl 0,9 % et glucose 5 % sont isotoniques ; NaCl 3 % ou glucose 30 % sont hypertoniques.
+| Type | Osmolarité vs plasma | Effet sur les globules rouges | Exemple |
+| --- | --- | --- | --- |
+| Isotonique | Identique | Aucun effet | NaCl 0,9 %, glucose 5 % |
+| Hypotonique | Inférieure | Entrée d'eau → gonflement (risque d'hémolyse) | Eau distillée |
+| Hypertonique | Supérieure | Sortie d'eau → rétraction (crénelure) | NaCl 3 %, glucose 30 % |
 
 ## Points à retenir
 - La concentration % (m/v), les ppt/ppm et la molarité sont les principales façons d'exprimer une concentration en solution.
@@ -64,11 +66,15 @@ const LAB4_COURSE = `# Lab 4 — Acides, bases et titration acide-base
 
 ## 2. Acides et bases
 - Un acide génère des ions H⁺ en solution aqueuse (il donne un proton) : HA ⇌ H⁺ + A⁻ (A⁻ = base conjuguée). Sa force est caractérisée par la constante d'acidité **Ka = [H⁺][A⁻]/[HA]**.
-  - Acides forts (Ka ≫ 1) : dissociation complète — HCl, HBr, HI, H2SO4, HNO3, HClO4.
-  - Acides faibles (Ka < 1) : dissociation incomplète (équilibre) — HNO2, H3PO4, H2CO3, H2SO3, CH3COOH.
 - Une base génère des ions OH⁻ (elle accepte un proton) : BOH ⇌ B⁺ + OH⁻ (B⁺ = acide conjugué). Sa force est caractérisée par **Kb = [B⁺][OH⁻]/[BOH]**.
-  - Bases fortes (Kb ≫ 1) : NaOH, KOH, Ca(OH)2.
-  - Bases faibles (Kb < 1) : NH3/NH4OH, NaHCO3.
+
+| Force | Type | Exemples |
+| --- | --- | --- |
+| Ka ≫ 1 (dissociation complète) | Acide fort | HCl, HBr, HI, H2SO4, HNO3, HClO4 |
+| Ka < 1 (dissociation incomplète) | Acide faible | HNO2, H3PO4, H2CO3, H2SO3, CH3COOH |
+| Kb ≫ 1 (dissociation complète) | Base forte | NaOH, KOH, Ca(OH)2 |
+| Kb < 1 (dissociation incomplète) | Base faible | NH3/NH4OH, NaHCO3 |
+
 - Si [H⁺] > [OH⁻] (soit [H⁺] > 10⁻⁷ M), la solution est acide ; si [H⁺] < [OH⁻], elle est basique (alcaline).
 
 ## 3. Le pH
@@ -123,17 +129,22 @@ const LAB5_COURSE = `# Lab 5 — pH des fluides biologiques et point isoélectri
 Sur une échelle de 0 à 14 : [H⁺] < [OH⁻] au-dessus de 7 (basique), [H⁺] = [OH⁻] à 7 (neutre), [H⁺] > [OH⁻] en dessous de 7 (acide). Chaque unité de pH représente un facteur **10** sur la concentration en H⁺ (ex. le suc gastrique, pH ≈ 1, est environ 10⁴ fois plus acide que l'urine, pH ≈ 5).
 
 Valeurs typiques des fluides biologiques :
-- Sécrétions pancréatique, intestinale, bile (riches en NaHCO₃) : pH ≈ 8.
-- Sang, liquide extracellulaire (ECF), liquide intracellulaire (ICF) : pH ≈ 7,35–7,45.
-- Sueur, salive, lait maternel : pH ≈ 6.
-- Urine, sécrétions vaginales : pH ≈ 5,5–6,5.
-- Suc gastrique (HCl) : pH ≈ 1.
+
+| Fluide biologique | pH typique |
+| --- | --- |
+| Sécrétions pancréatique, intestinale, bile (riches en NaHCO₃) | ≈ 8 |
+| Sang, liquide extracellulaire (ECF), liquide intracellulaire (ICF) | 7,35–7,45 |
+| Sueur, salive, lait maternel | ≈ 6 |
+| Urine, sécrétions vaginales | 5,5–6,5 |
+| Suc gastrique (HCl) | ≈ 1 |
 
 ## 2. Calculs de pH
-- **Acide fort** (dissociation totale, HA → A⁻ + H⁺) : [H⁺] = C (concentration initiale), donc **pH = −log(C)**.
-- **Base forte** (dissociation totale, BOH → B⁺ + OH⁻) : [OH⁻] = C, pOH = −log(C), donc **pH = 14 − pOH**.
-- **Acide faible** (équilibre HA ⇌ A⁻ + H⁺, Ka = [A⁻][H⁺]/[HA]) : en approximant [HA] ≈ C (dissociation faible), [H⁺] ≈ √(Ka·C), donc **pH = −log√(Ka·C)**.
-- **Base faible** (équilibre, Kb) : par symétrie, **pH = 14 + log√(Kb·C)**.
+| Type | Hypothèse | Formule du pH |
+| --- | --- | --- |
+| Acide fort | Dissociation totale, [H⁺] = C | **pH = −log(C)** |
+| Base forte | Dissociation totale, [OH⁻] = C | **pH = 14 − pOH**, avec pOH = −log(C) |
+| Acide faible | [HA] ≈ C, [H⁺] ≈ √(Ka·C) | **pH = −log√(Ka·C)** |
+| Base faible | Par symétrie avec l'acide faible | **pH = 14 + log√(Kb·C)** |
 
 ## 3. Méthodes de détermination du pH
 - **Papier pH** : méthode qualitative/semi-quantitative rapide, par comparaison colorimétrique.

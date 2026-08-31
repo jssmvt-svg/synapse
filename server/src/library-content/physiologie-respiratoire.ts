@@ -47,6 +47,18 @@ const RESPIRATORY_MECHANICS_COURSE = `# Physiologie respiratoire — Lecture 1 :
 - La ventilation est l'échange d'air entre l'atmosphère et les alvéoles ; le cycle ventilatoire = inhalation suivie d'exhalation. L'évaluation se fait par mesure des volumes et débits d'air (spiromètres informatisés).
 - Les volumes/capacités pulmonaires sont des paramètres statiques mesurés à des moments précis du cycle respiratoire ; ils varient avec l'âge (diminution), le sexe (F < H d'environ 20-25 %) et le développement physique.
 - **Volumes pulmonaires** (mesurés directement par spirométrie, sauf VR) :
+
+| Volume/Capacité | % de référence | Valeur normale |
+| --- | --- | --- |
+| TV (volume courant) | 15 % de la CV | ≈ 500 mL |
+| VRI (réserve inspiratoire) | 50 % de la CV | ≈ 3000 mL |
+| VRE (réserve expiratoire) | 35 % de la CV | ≈ 1200 mL |
+| VR (résiduel) | 25 % de la CPT | ≈ 1200 mL |
+| CPT (capacité pulmonaire totale) | CI + CRF = CV + VR | ≈ 6000 mL |
+| CI (capacité inspiratoire) | 50 % de la CPT | ≈ 3600 mL |
+| CV (capacité vitale) | 75 % de la CPT | ≈ 4500 mL |
+| CRF (capacité résiduelle fonctionnelle) | 50 % de la CPT | ≈ 2500 mL |
+
   - **Volume courant (TV)** : volume inhalé/exhalé à chaque respiration calme ; 15 % de la CV ; TV ≈ 500 mL.
   - **Volume de réserve inspiratoire (VRI)** : volume additionnel inhalé après une inspiration calme, jusqu'à la position inspiratoire maximale ; 50 % de la CV ; ≈ 3000 mL.
   - **Volume de réserve expiratoire (VRE)** : volume additionnel exhalé après l'expiration normale du TV, jusqu'à la position expiratoire maximale ; 35 % de la CV ; ≈ 1200 mL.
@@ -156,6 +168,11 @@ const PULMONARY_VENTILATION_COURSE = `# Physiologie respiratoire — Lecture 2 :
   - **DEF25%, DEF50%, DEF75%** : débits instantanés mesurés sur la boucle débit-volume aux volumes exhalés de 25 %, 50 % et 75 % de la CVF. Effort-indépendants, dépendent des propriétés viscoélastiques du poumon (résistance des voies aériennes, recul élastique). Diminués dans le syndrome obstructif distal.
   - **DEF25-75%** (débit expiratoire moyen entre 25 et 75 % de la CVF) : effort-indépendant, dépend uniquement des propriétés viscoélastiques du poumon. Normal si ≥ 65 % des valeurs idéales ; diminué (< 65 %) dans le syndrome obstructif distal (petites voies aériennes, asthme/emphysème précoces, alors que le VEMS peut rester normal).
 - **Interprétation des tests ventilatoires** : CV, VEMS, VEMS/CV%, V_max sont les paramètres ventilométriques de routine. La sévérité est établie sur le degré de diminution du VEMS : légère (70-80 % de l'idéal), modérée (60-69 %), modérée-sévère (50-59 %), sévère (35-49 %), très sévère (< 35 %).
+| Type de dysfonction | CVF | VEMS | VEMS/CVF% |
+| --- | --- | --- | --- |
+| Obstructive (asthme, bronchite chronique) | Normale | Diminué | Diminué |
+| Restrictive (pneumonie, résection) | Diminuée | Diminué | Normal ou augmenté |
+
   - **DV obstructive** (ex. bronchite chronique, asthme) : CVF normale, VEMS diminué, VEMS/CVF% diminué.
   - **DV restrictive** (ex. pneumonie, résection pulmonaire) : CVF diminuée, VEMS diminué, VEMS/CVF% normal ou augmenté.
   - **DV mixte** (ex. BPCO) : les trois paramètres sont diminués.

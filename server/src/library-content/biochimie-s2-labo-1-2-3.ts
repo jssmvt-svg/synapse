@@ -77,7 +77,14 @@ const LAB_S2_1_COURSE = `# Labo 1 — Métabolisme des glucides : dosage du gluc
 
 ## 9. Test de Brewer (dépistage du déficit en G6PD)
 - **Principe** : évalue la capacité des GR à réduire la méthémoglobine (Hb oxydée, Fe³⁺, ne fixant pas l'O₂) en hémoglobine fonctionnelle, via le NADPH produit par la PPP. Le nitrite de sodium oxyde l'Hb en méthémoglobine ; le bleu de méthylène, accepteur d'électrons artificiel réduit par le NADPH, permet normalement de restaurer l'hémoglobine.
-- **Procédure** : 3 tubes (sang seul ; sang + nitrite ; sang + nitrite + bleu de méthylène), incubation 3 h à 37 °C.
+- **Procédure** : incubation 3 h à 37 °C de 3 tubes témoins/test :
+
+| Tube | Composition | Rôle |
+| --- | --- | --- |
+| 1 | Sang seul | Témoin (couleur rouge de référence) |
+| 2 | Sang + nitrite de sodium | Témoin (méthémoglobine, couleur brune de référence) |
+| 3 | Sang + nitrite + bleu de méthylène | Test |
+
 - **Interprétation** : tube 3 rouge (comme le témoin sang seul) = PPP fonctionnelle (NADPH normal) ; tube 3 brun (comme le témoin nitrite) = déficit en G6PD suspecté (méthémoglobine persistante).
 - **Intérêt clinique** : dépistage du déficit en G6PD, notamment dans les populations méditerranéennes, africaines et asiatiques, avant prescription de médicaments oxydants.`;
 
@@ -127,8 +134,15 @@ const LAB_S2_2_COURSE = `# Labo 2 — Métabolisme des glucides : régulation de
 
 ## 3. Régulation hormonale de la glycémie
 - Plage physiologique à jeun : **70–100 mg/dL**.
-- **Hormone hypoglycémiante : insuline** (cellules β pancréatiques) — stimule la captation de glucose (tissus insulino-dépendants), la glycogenèse, la lipogenèse et la synthèse protéique ; inhibe néoglucogenèse, glycogénolyse et lipolyse.
-- **Hormones hyperglycémiantes** : glucagon, adrénaline, cortisol (glucocorticoïdes), thyroxine (T4), hormone de croissance (STH) — s'opposent à l'insuline, notamment en jeûne/stress.
+
+| Hormone | Effet sur la glycémie | Mécanisme principal |
+| --- | --- | --- |
+| Insuline (cellules β) | Hypoglycémiante | Stimule captation, glycogenèse, lipogenèse, synthèse protéique ; inhibe néoglucogenèse/glycogénolyse/lipolyse |
+| Glucagon | Hyperglycémiante | Glycogénolyse et néoglucogenèse hépatiques |
+| Adrénaline | Hyperglycémiante | Glycogénolyse, lipolyse, s'oppose à l'insuline en stress |
+| Cortisol | Hyperglycémiante | Néoglucogenèse, résistance périphérique à l'insuline |
+| Thyroxine (T4) | Hyperglycémiante | Augmente le métabolisme basal et l'absorption intestinale de glucose |
+| Hormone de croissance (STH) | Hyperglycémiante | Réduit la captation périphérique de glucose |
 
 ## 4. Phases postprandiales
 - **Phase précoce (0–2 h après repas)** : glycémie élevée → sécrétion d'insuline → translocation GLUT4, glycogenèse hépatique/musculaire, lipogenèse (excès de glucose vers la synthèse d'acides gras puis triglycérides).
@@ -150,7 +164,14 @@ const LAB_S2_2_COURSE = `# Labo 2 — Métabolisme des glucides : régulation de
   1. **Base de Schiff (aldimine)** labile et réversible entre le glucose et la valine N-terminale de la chaîne β de l'hémoglobine A — dépend directement de la glycémie ambiante.
   2. **Réarrangement d'Amadori** (cétoamine) : produit stable sur plusieurs jours, c'est cette forme qui est mesurée comme HbA1c (la base de Schiff labile, trop sensible aux variations alimentaires récentes, n'est pas incluse).
 - **Estimation de la glycémie moyenne (eAG)** : eAG (mg/dL) = 28,7 × HbA1c(%) − 46,7. Exemples : HbA1c 6 % → eAG 126 mg/dL ; HbA1c 9 % → eAG 212 mg/dL.
-- **Fréquence de surveillance** : diabète type 1 sous traitement conventionnel, tous les 3–4 mois (tous les 1–2 mois si traitement intensif) ; diabète type 2 stable, tous les 6 mois ; grossesse diabétique, tous les 1–2 mois.
+- **Fréquence de surveillance** :
+
+| Contexte | Fréquence |
+| --- | --- |
+| Diabète type 1, traitement conventionnel | Tous les 3–4 mois |
+| Diabète type 1, traitement intensif | Tous les 1–2 mois |
+| Diabète type 2 stable | Tous les 6 mois |
+| Grossesse diabétique | Tous les 1–2 mois |
 - **Avantages** vs glycémie ponctuelle : pas besoin d'être à jeun, meilleure stabilité pré-analytique, moindre variabilité biologique individuelle, moins sensible au stress aigu.
 - **Limites** : coût plus élevé, disponibilité limitée, non fiable en cas de renouvellement anormal des GR (anémies hémolytiques ou ferriprives), absence de corrélation fiable dans certains contextes (obésité, hypothyroïdie, hémolyse, hémopathies malignes) — le diagnostic repose alors sur la seule glycémie.
 - **Interprétation** : diabète bien contrôlé si HbA1c < 7 % ; peut atteindre 20 % en cas de mauvais contrôle prolongé ; diminue progressivement sur plusieurs mois à mesure que les GR âgés sont remplacés.
@@ -160,7 +181,14 @@ const LAB_S2_2_COURSE = `# Labo 2 — Métabolisme des glucides : régulation de
 - **Principe** : après hémolyse, des protéases libèrent la valine glyquée des chaînes β. La **fructosyl-valine oxydase (FVO)** agit sur ces valines glyquées, générant du H₂O₂, qui réagit avec un chromogène en présence de peroxydase pour former un composé coloré (lecture à 660 nm).
 - **Calcul** : concentration d'HbA1c (%) = 94,34 × ΔA + 3,13 (ΔA = A finale − A initiale), par extrapolation sur la courbe de calibration.
 - **Standardisation** : les résultats peuvent être exprimés selon la norme NGSP ou IFCC ; %HbA1c-NGSP = (0,9148 × %HbA1c-IFCC) + 2,152.
-- **Interprétation clinique (NGSP)** : normal 4–6 % ; intolérance au glucose 6–6,5 % ; diabète bien traité 6,5–8 % ; diabète mal contrôlé > 8 %.`;
+- **Interprétation clinique (NGSP)** :
+
+| Catégorie | HbA1c (NGSP) |
+| --- | --- |
+| Normal | 4–6 % |
+| Intolérance au glucose | 6–6,5 % |
+| Diabète bien traité | 6,5–8 % |
+| Diabète mal contrôlé | > 8 % |`;
 
 export const LAB_S2_2_LEARNING: LibraryLearningSeed = {
   resource: {
@@ -224,9 +252,12 @@ const LAB_S2_3_COURSE = `# Labo 3 — Métabolisme lipidique : dosage des trigly
 ## 4. Corps cétoniques
 - La **cétogenèse** se déroule exclusivement dans le foie (mitochondries des hépatocytes) à partir des acides gras (et de certains acides aminés cétogènes) : source d'énergie alternative en jeûne, exercice prolongé, ou déficit insulinique.
 - Trois corps cétoniques :
-  - **Acétoacétate** — premier produit formé.
-  - **β-hydroxybutyrate** — issu de la réduction de l'acétoacétate.
-  - **Acétone** — sous-produit volatil, exhalé (odeur fruitée caractéristique de l'acidocétose).
+
+| Corps cétonique | Origine |
+| --- | --- |
+| Acétoacétate | Premier produit formé |
+| β-hydroxybutyrate | Issu de la réduction de l'acétoacétate |
+| Acétone | Sous-produit volatil, exhalé (odeur fruitée caractéristique de l'acidocétose) |
 - Le foie **ne peut pas utiliser** l'acétoacétate qu'il produit (absence de succinyl-CoA-acétoacétate-CoA transférase) ; ce sont les **tissus extra-hépatiques** (muscle, cœur, rein, et le cerveau en jeûne prolongé) qui les utilisent comme carburant.
 - **Rôle physiologique** : en cas de faible disponibilité en glucose, la cétogenèse épargne le glucose pour les tissus strictement glucodépendants (GR, certaines zones cérébrales).
 

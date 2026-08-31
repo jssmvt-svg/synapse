@@ -10,10 +10,13 @@ const GLUCONEOGENESIS_COURSE = `# Néoglucogenèse
 - Globalement l'inverse de la glycolyse, mais **n'est pas une simple réversion** : les 3 étapes irréversibles de la glycolyse sont contournées par **4 réactions distinctes**, catalysées par des enzymes différentes.
 
 ## 2. Les 4 réactions contournant les étapes irréversibles de la glycolyse
-1. **Pyruvate → Oxaloacétate** : catalysée par la **pyruvate carboxylase** (mitochondrie), dépendante de la **biotine**, consomme 1 ATP, activée allostériquement par l'acétyl-CoA.
-2. **Oxaloacétate → Phosphoénolpyruvate (PEP)** : catalysée par la **PEP carboxykinase (PEPCK)**, consomme 1 GTP, libère du CO₂. L'oxaloacétate, incapable de traverser la membrane mitochondriale, est d'abord converti en **malate** puis réexporté vers le cytosol, où il est reconverti en oxaloacétate.
-3. **Fructose-1,6-bisphosphate → Fructose-6-phosphate** : catalysée par la **fructose-1,6-bisphosphatase (FBPase-1)**, simple hydrolyse (sans production d'ATP).
-4. **Glucose-6-phosphate → Glucose** : catalysée par la **glucose-6-phosphatase**, présente uniquement dans le **foie et le rein**, simple hydrolyse.
+
+| # | Réaction | Enzyme | Détail |
+| --- | --- | --- | --- |
+| 1 | Pyruvate → Oxaloacétate | **Pyruvate carboxylase** (mitochondrie) | Dépendante de la **biotine**, consomme 1 ATP, activée allostériquement par l'acétyl-CoA |
+| 2 | Oxaloacétate → Phosphoénolpyruvate (PEP) | **PEP carboxykinase (PEPCK)** | Consomme 1 GTP, libère du CO₂ ; l'oxaloacétate est d'abord converti en **malate** pour être exporté vers le cytosol, puis reconverti en oxaloacétate |
+| 3 | Fructose-1,6-bisphosphate → Fructose-6-phosphate | **Fructose-1,6-bisphosphatase (FBPase-1)** | Simple hydrolyse (sans production d'ATP) |
+| 4 | Glucose-6-phosphate → Glucose | **Glucose-6-phosphatase** | Présente uniquement dans le **foie et le rein**, simple hydrolyse |
 
 Les 7 autres réactions de la glycolyse sont réversibles et communes aux deux voies (simplement inversées).
 
@@ -21,11 +24,15 @@ Les 7 autres réactions de la glycolyse sont réversibles et communes aux deux v
 - Convertir 2 pyruvates en 1 glucose coûte : **4 ATP** (2× pyruvate carboxylase + 2× PEPCK, GTP compté comme équivalent ATP) + **2 GTP** + **2 NADH**, soit un coût net d'environ **6 nucléotides triphosphates équivalents** par glucose synthétisé.
 
 ## 4. Précurseurs de la néoglucogenèse
-- **Lactate** : via le **cycle de Cori** (muscle → lactate → foie → glucose → muscle).
-- **Alanine** : via le **cycle glucose-alanine** (muscle → alanine → foie → glucose), transportant à la fois du carbone et de l'azote depuis le muscle vers le foie.
-- **Glycérol** : issu de la lipolyse du tissu adipeux, phosphorylé en glycérol-3-phosphate puis oxydé en dihydroxyacétone phosphate (DHAP), qui entre directement dans la voie.
-- **Acides aminés glucoformateurs** : dégradés en intermédiaires du cycle de Krebs (ex. propionyl-CoA → succinyl-CoA) convertibles en oxaloacétate.
-- Les **acides gras** (via l'acétyl-CoA) ne peuvent **pas** servir de précurseurs nets du glucose, car la réaction du complexe pyruvate déshydrogénase est irréversible.
+
+| Précurseur | Voie / mécanisme |
+| --- | --- |
+| **Lactate** | Cycle de Cori (muscle → lactate → foie → glucose → muscle) |
+| **Alanine** | Cycle glucose-alanine (muscle → alanine → foie → glucose), transporte à la fois carbone et azote |
+| **Glycérol** | Issu de la lipolyse du tissu adipeux, phosphorylé en glycérol-3-phosphate puis oxydé en DHAP, qui entre directement dans la voie |
+| **Acides aminés glucoformateurs** | Dégradés en intermédiaires du cycle de Krebs (ex. propionyl-CoA → succinyl-CoA), convertibles en oxaloacétate |
+
+Les **acides gras** (via l'acétyl-CoA) ne peuvent **pas** servir de précurseurs nets du glucose, car la réaction du complexe pyruvate déshydrogénase est irréversible.
 
 ## Points à retenir
 - 4 réactions contournent les 3 étapes irréversibles de la glycolyse : pyruvate carboxylase, PEP carboxykinase, fructose-1,6-bisphosphatase, glucose-6-phosphatase.
@@ -96,24 +103,23 @@ const GLUCONEOGENESIS_REGULATION_COURSE = `# Régulation de la néoglucogenèse
 - La néoglucogenèse est régulée en **sens opposé** de la glycolyse, par les mêmes signaux hormonaux (**glucagon** l'active, **insuline** l'inhibe) et métaboliques.
 - Trois enzymes clés sont régulées : **pyruvate carboxylase**, **PEP carboxykinase (PEPCK)**, **fructose-1,6-bisphosphatase (FBPase-1)**.
 
-## 2. Régulation de la pyruvate carboxylase
-- Activée allostériquement par l'**acétyl-CoA** : une β-oxydation intense des acides gras (jeûne) génère un excès d'acétyl-CoA, qui **inhibe simultanément le complexe PDH** (épargnant le pyruvate) et **active la pyruvate carboxylase** (orientant le pyruvate vers la néoglucogenèse).
+## 2. Régulation des trois enzymes clés
 
-## 3. Régulation de la PEP carboxykinase (PEPCK)
-- Régulée principalement au niveau de sa **transcription génique** (régulation à long terme) : le glucagon (via PKA et le facteur de transcription CREB) stimule sa transcription ; l'insuline l'inhibe.
-- Pas de régulation allostérique rapide majeure connue pour cette enzyme.
+| Enzyme | Régulateur | Effet | Contexte |
+| --- | --- | --- | --- |
+| **Pyruvate carboxylase** | Acétyl-CoA | Active | Excès généré par la β-oxydation (jeûne) ; inhibe aussi le complexe PDH, orientant le pyruvate vers la néoglucogenèse |
+| **PEP carboxykinase (PEPCK)** | Glucagon (via PKA/CREB) | Stimule la transcription | Régulation principalement transcriptionnelle (long terme), pas de régulation allostérique rapide majeure connue |
+| **PEP carboxykinase (PEPCK)** | Insuline | Inhibe la transcription | idem |
+| **Fructose-1,6-bisphosphatase (FBPase-1)** | Fructose-2,6-bisphosphate (F2,6BP) | Inhibe | Effet miroir inversé de son activation de la PFK-1 en glycolyse |
+| **Fructose-1,6-bisphosphatase (FBPase-1)** | AMP | Inhibe | Signal de faible charge énergétique : pas de dépense d'ATP pour la néoglucogenèse si l'énergie manque déjà |
+| **Fructose-1,6-bisphosphatase (FBPase-1)** | Citrate | Active | — |
 
-## 4. Régulation de la fructose-1,6-bisphosphatase (FBPase-1)
-- **Inhibée** par le **fructose-2,6-bisphosphate (F2,6BP)** — effet miroir inversé de son action activatrice sur la PFK-1 en glycolyse.
-- **Inhibée** par l'**AMP** (signal de faible charge énergétique : la cellule ne doit pas dépenser d'ATP pour synthétiser du glucose si elle en manque déjà).
-- **Activée** par le **citrate**.
-
-## 5. Le rôle central du F2,6BP — régulateur croisé glycolyse/néoglucogenèse
+## 3. Le rôle central du F2,6BP — régulateur croisé glycolyse/néoglucogenèse
 - Contrôlé par l'enzyme bifonctionnelle **PFK-2/FBPase-2**.
 - **Glucagon (jeûne)** → F2,6BP bas → **PFK-1 inhibée** (glycolyse freinée) **ET FBPase-1 désinhibée** (néoglucogenèse stimulée) : double effet coordonné par un seul signal.
 - **Insuline (état nourri)** → F2,6BP élevé → **PFK-1 stimulée** (glycolyse active) **ET FBPase-1 inhibée** (néoglucogenèse freinée).
 
-## 6. Coordination avec la pyruvate kinase glycolytique
+## 4. Coordination avec la pyruvate kinase glycolytique
 - L'inactivation de la pyruvate kinase hépatique par le glucagon (voir régulation de la glycolyse) empêche un **cycle futile** où le PEP nouvellement formé par la PEPCK serait immédiatement reconverti en pyruvate.
 
 ## Points à retenir
@@ -185,9 +191,14 @@ const FATTY_ACID_SYNTHESIS_1_COURSE = `# Synthèse des acides gras (partie 1) �
 ## 3. L'acétyl-CoA carboxylase (ACC) — enzyme limitante
 - Catalyse la carboxylation de l'acétyl-CoA en **malonyl-CoA**, consommant 1 ATP et du CO₂ (sous forme de bicarbonate), avec la **biotine** comme cofacteur.
 - C'est l'étape **limitante et la plus régulée** de toute la voie de synthèse des acides gras.
-- **Activée** allostériquement par le **citrate** (favorise la polymérisation de l'ACC en une forme filamenteuse active).
-- **Inhibée** allostériquement par le **palmitoyl-CoA** (produit final de la voie, rétro-inhibition).
-- Régulée hormonalement par phosphorylation : **inactivée** par phosphorylation via l'**AMPK** (activée par un AMP élevé) et par le **glucagon** (via la PKA) ; **activée** par déphosphorylation sous l'effet de l'**insuline**.
+
+| Régulateur | Effet | Mécanisme |
+| --- | --- | --- |
+| Citrate | Active | Favorise la polymérisation de l'ACC en une forme filamenteuse active |
+| Palmitoyl-CoA | Inhibe | Produit final de la voie, rétro-inhibition |
+| AMPK (activée par un AMP élevé) | Inactive | Phosphorylation |
+| Glucagon (via la PKA) | Inactive | Phosphorylation |
+| Insuline | Active | Déphosphorylation |
 
 ## 4. Le complexe acide gras synthase (FAS)
 - Chez les mammifères, un complexe multienzymatique unique : un seul polypeptide homodimérique portant plusieurs activités catalytiques distinctes.

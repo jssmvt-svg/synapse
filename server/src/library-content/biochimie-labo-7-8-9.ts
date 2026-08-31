@@ -77,11 +77,14 @@ const LAB8_COURSE = `# Labo 8 — Chromatographie et séparation des acides amin
 - **Selon le mécanisme d'interaction analyte/phases** : adsorption, partition, échange d'ions, exclusion stérique (gel filtration/tamis moléculaire), affinité.
 
 ## 3. Les cinq mécanismes de séparation
-1. **Adsorption** : séparation par polarité. SP solide, MP liquide. Rémanence si l'analyte a une polarité proche de la SP ; élution si sa polarité est proche de la MP.
-2. **Partition** : séparation par polarité/solubilité. SP et MP sont deux liquides non miscibles de polarités opposées. Rémanence si l'analyte est plus soluble dans la SP ; élution s'il est plus soluble dans la MP.
-3. **Échange d'ions** : séparation par charge. SP solide (résine échangeuse d'anions ou de cations), MP liquide. Rémanence si l'analyte a une charge opposée à la SP ; élution si sa charge est proche de celle de la SP.
-4. **Exclusion stérique (tamis moléculaire)** : séparation par taille. SP solide poreuse (gel), MP liquide. Les petites molécules pénètrent les pores et sont retenues plus longtemps ; les grosses molécules sont exclues et éluées en premier.
-5. **Affinité** : séparation par reconnaissance spécifique ligand/partenaire (enzyme-substrat, récepteur-hormone, antigène-anticorps, ADN-protéine liante). Élution en déplaçant l'analyte par un excès de ligand libre, le partenaire le plus spécifique étant le dernier élué.
+
+| # | Mécanisme | Base de séparation | Phases (SP / MP) | Rémanence |
+| --- | --- | --- | --- | --- |
+| 1 | Adsorption | Polarité | SP solide, MP liquide | Si l'analyte a une polarité proche de la SP (élution si proche de la MP) |
+| 2 | Partition | Polarité / solubilité | SP et MP liquides non miscibles, polarités opposées | Si l'analyte est plus soluble dans la SP (élution si plus soluble dans la MP) |
+| 3 | Échange d'ions | Charge | SP solide (résine échangeuse), MP liquide | Si l'analyte a une charge opposée à la SP (élution si charge proche de la SP) |
+| 4 | Exclusion stérique (tamis moléculaire) | Taille | SP solide poreuse (gel), MP liquide | Petites molécules retenues (pénètrent les pores) ; grosses molécules éluées en premier |
+| 5 | Affinité | Reconnaissance spécifique ligand/partenaire (enzyme-substrat, récepteur-hormone, antigène-anticorps, ADN-protéine liante) | — | Élution par excès de ligand libre ; le partenaire le plus spécifique est le dernier élué |
 
 ## 4. Travail expérimental : séparation d'acides aminés par chromatographie sur papier
 - Phase stationnaire : cellulose du papier (–OH, hydrophile) → forte polarité.
@@ -140,9 +143,12 @@ const LAB9_COURSE = `# Labo 9 — Protéines : dialyse et électrophorèse
 - À t = 0, le sac de dialyse contient : albumine, NH4+, SO4²⁻.
 - À t = 1 (après équilibre), le sac ne retient que l'**albumine** ; le dialysat externe contient **NH4+ et SO4²⁻** (petits ions ayant diffusé).
 - Tests de détection utilisés :
-  - Albumine + réactif de **Biuret** (CuSO4, bleu) → coloration **violette** (liaison peptidique).
-  - NH4+ + réactif de **Nessler** (K2HgI4, jaune) → précipité **brun**.
-  - SO4²⁻ + **chlorure de baryum** (BaCl2, incolore) → précipité **blanc**.
+
+| Analyte | Réactif | Aspect du réactif | Résultat positif |
+| --- | --- | --- | --- |
+| Albumine | Biuret (CuSO4) | Bleu | Coloration violette (liaison peptidique) |
+| NH4+ | Nessler (K2HgI4) | Jaune | Précipité brun |
+| SO4²⁻ | Chlorure de baryum (BaCl2) | Incolore | Précipité blanc |
 
 ## 4. L'électrophorèse (ELFO)
 - Méthode de séparation des molécules chargées sous l'effet d'un **champ électrique**, selon trois facteurs : la **charge**, la **taille** et la **conformation** des particules.
@@ -160,11 +166,15 @@ const LAB9_COURSE = `# Labo 9 — Protéines : dialyse et électrophorèse
 - Convention : le pôle positif est l'**anode**, le pôle négatif est la **cathode**.
 
 ## 6. Application médicale : électrophorèse des protéines sériques
-- L'électrophorégramme sépare les protéines sériques en bandes, de l'anode vers la cathode : **albumine, α1, α2, β, γ**.
-- **α1** : α1-antitrypsine, TBG (thyroxine binding globulin).
-- **α2** : haptoglobine, céruloplasmine (transporteur du cuivre).
-- **β** : transferrine, composants du complément (C3, C4).
-- **γ** : immunoglobulines (IgG, IgM, IgA, IgE).
+L'électrophorégramme sépare les protéines sériques en bandes, de l'anode vers la cathode : **albumine, α1, α2, β, γ**.
+
+| Fraction | Protéines principales |
+| --- | --- |
+| Albumine | Albumine sérique |
+| α1 | α1-antitrypsine, TBG (thyroxine binding globulin) |
+| α2 | Haptoglobine, céruloplasmine (transporteur du cuivre) |
+| β | Transferrine, composants du complément (C3, C4) |
+| γ | Immunoglobulines (IgG, IgM, IgA, IgE) |
 
 ## Points à retenir
 - La dialyse sépare selon la taille (via une membrane semi-perméable) ; l'électrophorèse sépare selon la charge, la taille et la conformation (via un champ électrique).

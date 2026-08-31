@@ -5,10 +5,13 @@ const FATTY_ACID_SYNTHESIS_2_COURSE = `# Synthèse des acides gras (partie 2) �
 
 ## 1. Le cycle d'élongation du complexe FAS
 Chaque cycle comprend **4 réactions successives**, répétées **7 fois** pour synthétiser le **palmitate** (16C) à partir de 8 acétyl-CoA :
-1. **Condensation** : la β-cétoacyl synthase condense le malonyl-ACP avec le groupe acyle en croissance (porté par l'ACP), libérant du CO₂, formant un β-cétoacyl-ACP (allongé de 2 carbones).
-2. **Réduction** : la β-cétoacyl réductase réduit le groupe cétone en groupe hydroxyle, consommant 1 **NADPH**, formant un β-hydroxyacyl-ACP.
-3. **Déshydratation** : la β-hydroxyacyl déshydratase élimine une molécule d'eau, formant une double liaison (énoyl-ACP).
-4. **Réduction** : l'énoyl réductase réduit la double liaison, consommant 1 **NADPH**, formant un acyl-ACP saturé, allongé de 2 carbones.
+
+| # | Étape | Enzyme | Réaction |
+| --- | --- | --- | --- |
+| 1 | Condensation | β-cétoacyl synthase | Condense le malonyl-ACP avec la chaîne en croissance, libère du CO₂, forme un β-cétoacyl-ACP (+2C) |
+| 2 | Réduction | β-cétoacyl réductase | Réduit la cétone en hydroxyle, consomme 1 NADPH, forme un β-hydroxyacyl-ACP |
+| 3 | Déshydratation | β-hydroxyacyl déshydratase | Élimine une molécule d'eau, forme une double liaison (énoyl-ACP) |
+| 4 | Réduction | Énoyl réductase | Réduit la double liaison, consomme 1 NADPH, forme un acyl-ACP saturé (+2C) |
 
 ## 2. Bilan de la synthèse du palmitate (16 carbones)
 - 1 acétyl-CoA (amorce) + 7 malonyl-CoA (fournissant 14 carbones) → **palmitate** (16C).
@@ -94,10 +97,13 @@ const TRIGLYCERIDE_SYNTHESIS_COURSE = `# Synthèse des triglycérides
 - Dans le **tissu adipeux** : dépourvu de glycérol kinase significative, le glycérol-3-phosphate provient presque exclusivement de la réduction du **DHAP** (intermédiaire de la glycolyse) par la glycérol-3-phosphate déshydrogénase.
 
 ## 3. Les étapes de la synthèse (voie du glycérol phosphate)
-1. **Glycérol-3-phosphate + acyl-CoA → acide lysophosphatidique** (1 acide gras estérifié), catalysée par la **glycérol-3-phosphate acyltransférase (GPAT)**.
-2. **Acide lysophosphatidique + acyl-CoA → acide phosphatidique** (2 acides gras estérifiés), catalysée par l'**acylglycérophosphate acyltransférase (AGPAT)**.
-3. **Acide phosphatidique → diacylglycérol (DAG)**, par déphosphorylation (**phosphatidate phosphatase**).
-4. **Diacylglycérol + acyl-CoA → triacylglycérol** (3 acides gras estérifiés), catalysée par la **diacylglycérol acyltransférase (DGAT)**, enzyme finale et spécifique de la voie.
+
+| # | Réaction | Enzyme | Note |
+| --- | --- | --- | --- |
+| 1 | Glycérol-3-phosphate + acyl-CoA → acide lysophosphatidique | **Glycérol-3-phosphate acyltransférase (GPAT)** | 1 acide gras estérifié |
+| 2 | Acide lysophosphatidique + acyl-CoA → acide phosphatidique | **Acylglycérophosphate acyltransférase (AGPAT)** | 2 acides gras estérifiés |
+| 3 | Acide phosphatidique → diacylglycérol (DAG) | **Phosphatidate phosphatase** | Déphosphorylation |
+| 4 | Diacylglycérol + acyl-CoA → triacylglycérol | **Diacylglycérol acyltransférase (DGAT)** | 3 acides gras estérifiés ; enzyme finale et spécifique de la voie |
 
 ## 4. Devenir des triglycérides synthétisés
 - Dans le **foie** : incorporés dans des lipoprotéines **VLDL**, sécrétées dans la circulation pour livrer les triglycérides aux tissus périphériques.

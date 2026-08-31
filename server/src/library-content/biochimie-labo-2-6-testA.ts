@@ -13,7 +13,16 @@ const LAB2_COURSE = `# Lab 2 — Unités de mesure : masse, volume et densité
 ## 2. Mesures de masse
 - Instruments : balances mécaniques ou électroniques.
 - Qualités attendues d'une balance : **exactitude** (proximité avec la vraie valeur), **précision** (reproductibilité des mesures), **capacité** (charge maximale supportée).
-- Classes de balances de laboratoire, de la moins à la plus précise : technique (10⁻²), chromatique (10⁻³), analytique (10⁻⁴), semi-macro (10⁻⁵), microbalance (10⁻⁶), ultramicrobalance (10⁻⁹).
+- Classes de balances de laboratoire, de la moins à la plus précise :
+
+| Classe | Précision (g) |
+| --- | --- |
+| Technique | 10⁻² |
+| Chromatique | 10⁻³ |
+| Analytique | 10⁻⁴ |
+| Semi-macro | 10⁻⁵ |
+| Microbalance | 10⁻⁶ |
+| Ultramicrobalance | 10⁻⁹ |
 
 ## 3. Mesures de volume
 - Le volume dépend de la température et de la pression : une hausse de température ou une baisse de pression augmente le volume d'un gaz/liquide.
@@ -29,10 +38,13 @@ const LAB2_COURSE = `# Lab 2 — Unités de mesure : masse, volume et densité
 - L'urine est composée d'eau et de solutés (composés azotés comme l'urée et la créatinine, ions Na⁺/K⁺/Cl⁻/HPO₄²⁻, urobilinogène, acide urique).
 - La densité urinaire (SG, specific gravity) est la densité relative à celle de l'eau pure (SG = 1,000, sans dimension).
 - Valeurs de référence et interprétation clinique :
-  - **Normosthénurie** : SG 1,015–1,025 (normal).
-  - **Hyposthénurie** : SG < 1,015 — évoque une hyperhydratation ou un diabète insipide.
-  - **Isosthénurie** : SG ≈ 1,010 (proche du plasma) — évoque une insuffisance rénale chronique (IRC/ESRD), le rein ayant perdu sa capacité à concentrer ou diluer l'urine.
-  - **Hypersthénurie** : SG > 1,025 — causée par un excès de solutés (glucose, protéines, corps cétoniques, hémoglobinurie, myoglobinurie) ou une déshydratation/restriction hydrique/brûlures/acidocétose diabétique.`;
+
+| Catégorie | Densité (SG) | Interprétation |
+| --- | --- | --- |
+| Normosthénurie | 1,015–1,025 | Normal |
+| Hyposthénurie | < 1,015 | Hyperhydratation ou diabète insipide |
+| Isosthénurie | ≈ 1,010 (proche du plasma) | Insuffisance rénale chronique (IRC/ESRD) — le rein a perdu sa capacité à concentrer/diluer l'urine |
+| Hypersthénurie | > 1,025 | Excès de solutés (glucose, protéines, corps cétoniques, hémoglobinurie, myoglobinurie) ou déshydratation/restriction hydrique/brûlures/acidocétose diabétique |`;
 
 export const LAB2_LEARNING: LibraryLearningSeed = {
   resource: {
@@ -73,18 +85,21 @@ const LAB6_COURSE = `# Lab 6 — Systèmes tampons biologiques
 ## 2. Systèmes tampons biologiques du sang
 Le pH sanguin normal est étroitement régulé à **7,35–7,45** ([H⁺] ≈ 40 nM). Quatre systèmes tampons principaux coexistent :
 
-- **Protéines plasmatiques** (albumine notamment) : les groupes ionisables des chaînes latérales (histidine, groupes amine/carboxyle) captent ou libèrent des protons (Protéine-H⁺ ⇌ Protéine + H⁺).
-- **Hémoglobine** : le tétramère Hb (2α2β) tamponne les protons produits par l'hydratation du CO₂ tissulaire, couplé au transport du CO₂ sous forme de bicarbonate (effet Bohr — cf. chapitre Hémoglobine).
-- **Système phosphate** (H₂PO₄⁻/HPO₄²⁻, pKa ≈ 6,8) : le ratio HPO₄²⁻/H₂PO₄⁻ est d'environ 4:1 dans le sang, mais varie fortement dans l'urine, où il contribue de façon importante au tamponnage.
-- **Système bicarbonate** (CO₂/HCO₃⁻, pKa ≈ 6,1) : c'est le tampon extracellulaire majeur. L'anhydrase carbonique catalyse CO₂ + H₂O ⇌ H₂CO₃ ⇌ HCO₃⁻ + H⁺. Au pH physiologique de 7,4, le ratio [HCO₃⁻]/[CO₂ dissous] est d'environ **20:1** (pH = 6,1 + log₁₀(20) ≈ 7,4). Ce système est particulièrement efficace car les poumons (élimination du CO₂) et les reins (réabsorption/excrétion du HCO₃⁻) peuvent ajuster chacun des deux termes indépendamment.
+| Système | pKa | Mécanisme / rôle |
+| --- | --- | --- |
+| Protéines plasmatiques (albumine) | — | Les groupes ionisables des chaînes latérales (histidine, groupes amine/carboxyle) captent ou libèrent des protons (Protéine-H⁺ ⇌ Protéine + H⁺) |
+| Hémoglobine | — | Le tétramère Hb (2α2β) tamponne les protons produits par l'hydratation du CO₂ tissulaire, couplé au transport du CO₂ sous forme de bicarbonate (effet Bohr — cf. chapitre Hémoglobine) |
+| Système phosphate (H₂PO₄⁻/HPO₄²⁻) | ≈ 6,8 | Ratio HPO₄²⁻/H₂PO₄⁻ d'environ 4:1 dans le sang, mais varie fortement dans l'urine où il contribue de façon importante au tamponnage |
+| Système bicarbonate (CO₂/HCO₃⁻) | ≈ 6,1 | Tampon extracellulaire majeur. L'anhydrase carbonique catalyse CO₂ + H₂O ⇌ H₂CO₃ ⇌ HCO₃⁻ + H⁺. Au pH physiologique de 7,4, le ratio [HCO₃⁻]/[CO₂ dissous] ≈ **20:1**. Poumons (CO₂) et reins (HCO₃⁻) ajustent chacun des deux termes indépendamment |
 
 ## 3. Déséquilibres acido-basiques
-- **Alcalose** (pH > 7,45) :
-  - *Métabolique* (↑ HCO₃⁻) : vomissements, diurétiques, hyperaldostéronisme. Compensation respiratoire : hypoventilation (↑ CO₂).
-  - *Respiratoire* (↓ CO₂) : hyperventilation (anxiété, fièvre, haute altitude). Compensation rénale : excrétion accrue de HCO₃⁻.
-- **Acidose** (pH < 7,35) :
-  - *Métabolique* (↓ HCO₃⁻) : insuffisance rénale, acidocétose diabétique, diarrhée, acidose lactique. Compensation respiratoire : hyperventilation (↓ CO₂).
-  - *Respiratoire* (↑ CO₂) : hypoventilation (BPCO, surdosage aux opioïdes). Compensation rénale : réabsorption accrue de HCO₃⁻.`;
+
+| Type | Origine | Causes typiques | Compensation |
+| --- | --- | --- | --- |
+| Alcalose métabolique (pH > 7,45) | ↑ HCO₃⁻ | Vomissements, diurétiques, hyperaldostéronisme | Respiratoire : hypoventilation (↑ CO₂) |
+| Alcalose respiratoire (pH > 7,45) | ↓ CO₂ | Hyperventilation (anxiété, fièvre, haute altitude) | Rénale : excrétion accrue de HCO₃⁻ |
+| Acidose métabolique (pH < 7,35) | ↓ HCO₃⁻ | Insuffisance rénale, acidocétose diabétique, diarrhée, acidose lactique | Respiratoire : hyperventilation (↓ CO₂) |
+| Acidose respiratoire (pH < 7,35) | ↑ CO₂ | Hypoventilation (BPCO, surdosage aux opioïdes) | Rénale : réabsorption accrue de HCO₃⁻ |`;
 
 export const LAB6_LEARNING: LibraryLearningSeed = {
   resource: {

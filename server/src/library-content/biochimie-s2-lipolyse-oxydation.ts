@@ -8,9 +8,12 @@ const TRIGLYCERIDE_MOBILIZATION_COURSE = `# Mobilisation des triglycérides (lip
 - Stimulée par le **glucagon**, l'**adrénaline** (et plus généralement les catécholamines) ; inhibée par l'**insuline**.
 
 ## 2. Les trois lipases séquentielles
-1. **ATGL (adipose triglyceride lipase)** : hydrolyse le **premier** acide gras du triglycéride, formant un diacylglycérol. Elle initie typiquement la lipolyse, activée par une protéine co-activatrice, **CGI-58**.
-2. **Lipase hormono-sensible (HSL)** : hydrolyse le **second** acide gras du diacylglycérol, formant un monoacylglycérol. C'est l'enzyme **la plus régulée** de la cascade.
-3. **Monoacylglycérol lipase (MGL)** : hydrolyse le **dernier** acide gras, libérant le **glycérol libre**.
+
+| # | Lipase | Substrat → Produit | Note |
+| --- | --- | --- | --- |
+| 1 | **ATGL** (adipose triglyceride lipase) | Triglycéride → diacylglycérol (1er acide gras libéré) | Initie typiquement la lipolyse, activée par la protéine co-activatrice **CGI-58** |
+| 2 | **Lipase hormono-sensible (HSL)** | Diacylglycérol → monoacylglycérol (2e acide gras libéré) | Enzyme **la plus régulée** de la cascade |
+| 3 | **Monoacylglycérol lipase (MGL)** | Monoacylglycérol → glycérol libre (dernier acide gras libéré) | — |
 
 ## 3. Régulation hormonale de la HSL
 - Cascade : glucagon/adrénaline → récepteur couplé aux protéines G → **adénylate cyclase** → **AMPc** → **PKA** → phosphoryle et active la **HSL**, ET phosphoryle la **périlipine** (protéine de surface des gouttelettes lipidiques), qui expose alors les triglycérides à l'action des lipases.
@@ -79,17 +82,24 @@ const FATTY_ACID_OXIDATION_1_COURSE = `# Oxydation des acides gras (partie 1) �
 - Dans le **cytosol**, l'**acyl-CoA synthétase** (thiokinase) active l'acide gras en **acyl-CoA**, en consommant 2 liaisons phosphate riches en énergie (ATP → AMP + 2 Pi, équivalent au coût de **2 ATP**).
 
 ## 2. La navette de la carnitine (transport mitochondrial)
-- Les acides gras à **longue chaîne** (>12C) ne peuvent pas traverser directement la membrane mitochondriale interne sous forme d'acyl-CoA.
-1. **CPT1** (carnitine palmitoyltransférase 1, membrane mitochondriale **externe**) : transfère le groupe acyle du CoA à la carnitine, formant l'**acylcarnitine**. C'est l'étape **limitante et régulatrice** de toute la β-oxydation.
-2. **Translocase** : échange l'acylcarnitine (entrante) contre la carnitine libre (sortante) à travers la membrane interne.
-3. **CPT2** (membrane mitochondriale **interne**, face matricielle) : reforme l'acyl-CoA à partir de l'acylcarnitine, libérant la carnitine (recyclée vers le cytosol).
-- Les acides gras à chaîne **courte et moyenne** (<12C) traversent directement la membrane, sans besoin de la navette.
+Les acides gras à **longue chaîne** (>12C) ne peuvent pas traverser directement la membrane mitochondriale interne sous forme d'acyl-CoA :
+
+| # | Étape | Localisation | Réaction |
+| --- | --- | --- | --- |
+| 1 | **CPT1** (carnitine palmitoyltransférase 1) | Membrane mitochondriale **externe** | Transfère le groupe acyle du CoA à la carnitine → **acylcarnitine** ; étape **limitante et régulatrice** de toute la β-oxydation |
+| 2 | **Translocase** | Membrane interne | Échange l'acylcarnitine (entrante) contre la carnitine libre (sortante) |
+| 3 | **CPT2** | Membrane interne, face matricielle | Reforme l'acyl-CoA à partir de l'acylcarnitine, libère la carnitine (recyclée vers le cytosol) |
+
+Les acides gras à chaîne **courte et moyenne** (<12C) traversent directement la membrane, sans besoin de la navette.
 
 ## 3. Le cycle de la β-oxydation (4 réactions, répétées)
-1. **Acyl-CoA déshydrogénase** : forme une double liaison (trans-Δ2-énoyl-CoA), transfère 2 électrons au **FAD** (FADH₂).
-2. **Énoyl-CoA hydratase** : ajoute une molécule d'eau, formant un β-hydroxyacyl-CoA.
-3. **β-hydroxyacyl-CoA déshydrogénase** : oxyde le groupe hydroxyle en cétone, produit du **NADH**.
-4. **Thiolase** (β-cétothiolase) : clive la liaison entre C2 et C3, libérant un **acétyl-CoA** et un acyl-CoA raccourci de 2 carbones, qui répète le cycle.
+
+| # | Enzyme | Réaction | Produit |
+| --- | --- | --- | --- |
+| 1 | **Acyl-CoA déshydrogénase** | Forme une double liaison (trans-Δ2-énoyl-CoA), transfère 2 électrons au FAD | **FADH₂** |
+| 2 | **Énoyl-CoA hydratase** | Ajoute une molécule d'eau | β-hydroxyacyl-CoA |
+| 3 | **β-hydroxyacyl-CoA déshydrogénase** | Oxyde le groupe hydroxyle en cétone | **NADH** |
+| 4 | **Thiolase** (β-cétothiolase) | Clive la liaison entre C2 et C3 | **Acétyl-CoA** + acyl-CoA raccourci de 2 carbones (répète le cycle) |
 
 ## Points à retenir
 - Activation cytosolique (acyl-CoA synthétase, coût de 2 ATP-équivalents), puis import mitochondrial via la navette carnitine (**CPT1** = étape limitante, translocase, **CPT2**).
@@ -163,8 +173,11 @@ const FATTY_ACID_OXIDATION_2_COURSE = `# Oxydation des acides gras (partie 2) �
 - L'**AMPK**, activée par une faible charge énergétique, inhibe l'**ACC** (réduisant le malonyl-CoA), ce qui lève l'inhibition de CPT1 et favorise la β-oxydation.
 
 ## 4. Importance clinique
-- **Déficit en CPT1** : hypoglycémie hypocétosique à jeun, l'organisme ne pouvant pas mobiliser les acides gras comme carburant alternatif.
-- **Déficit en acyl-CoA déshydrogénase des acides gras à chaîne moyenne (MCAD)** : l'une des erreurs innées du métabolisme les plus fréquentes, provoquant hypoglycémie hypocétosique, léthargie, voire décès subit du nourrisson en cas de jeûne prolongé (souvent révélée par une maladie intercurrente réduisant l'alimentation).
+
+| Déficit | Conséquences cliniques |
+| --- | --- |
+| **CPT1** | Hypoglycémie hypocétosique à jeun ; incapacité à mobiliser les acides gras comme carburant alternatif |
+| **Acyl-CoA déshydrogénase à chaîne moyenne (MCAD)** | L'une des erreurs innées du métabolisme les plus fréquentes ; hypoglycémie hypocétosique, léthargie, voire décès subit du nourrisson en cas de jeûne prolongé (souvent révélée par une maladie intercurrente réduisant l'alimentation) |
 
 ## Points à retenir
 - Le palmitate génère environ **106 ATP nets** via 7 cycles de β-oxydation + oxydation complète des 8 acétyl-CoA.

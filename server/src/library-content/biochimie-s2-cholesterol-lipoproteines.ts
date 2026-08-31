@@ -8,10 +8,13 @@ const CHOLESTEROL_METABOLISM_COURSE = `# Métabolisme du cholestérol
 - Synthétisé principalement dans le **foie**, à partir d'**acétyl-CoA**, essentiellement dans le cytosol et le réticulum endoplasmique.
 
 ## 2. Les étapes clés de la synthèse
-1. **Thiolase** : 2 acétyl-CoA → acétoacétyl-CoA (cytosol).
-2. **HMG-CoA synthase** (isoforme cytosolique, distincte de celle de la cétogenèse) : acétoacétyl-CoA + acétyl-CoA → **HMG-CoA**.
-3. **HMG-CoA réductase** (réticulum endoplasmique) : HMG-CoA + 2 NADPH → **mévalonate**. Étape **limitante et régulatrice** de toute la voie ; cible pharmacologique des **statines**.
-4. Une série de réactions convertit le mévalonate en isopentényl pyrophosphate (IPP), puis en **squalène** (condensation de plusieurs unités isopréniques), puis en lanostérol, et enfin en **cholestérol** après de multiples modifications enzymatiques.
+
+| # | Étape/Enzyme | Lieu | Réaction | Note |
+| --- | --- | --- | --- | --- |
+| 1 | Thiolase | Cytosol | 2 acétyl-CoA → acétoacétyl-CoA | — |
+| 2 | HMG-CoA synthase (isoforme cytosolique) | Cytosol | Acétoacétyl-CoA + acétyl-CoA → HMG-CoA | Distincte de l'isoforme mitochondriale de la cétogenèse |
+| 3 | **HMG-CoA réductase** | Réticulum endoplasmique | HMG-CoA + 2 NADPH → mévalonate | Étape limitante et régulatrice ; cible des statines |
+| 4 | Réactions successives | — | Mévalonate → IPP → squalène → lanostérol → cholestérol | Multiples modifications enzymatiques |
 
 ## 3. Régulation de la HMG-CoA réductase
 - **Régulation transcriptionnelle** : le cholestérol intracellulaire, via le facteur de transcription **SREBP-2**, régule l'expression du gène de la HMG-CoA réductase et du **récepteur LDL** — un cholestérol intracellulaire bas stimule leur expression (davantage de synthèse et de captation).
@@ -83,7 +86,15 @@ const LIPOPROTEIN_METABOLISM_COURSE = `# Métabolisme des lipoprotéines
 
 ## 1. Vue d'ensemble
 - Les **lipoprotéines** transportent les lipides (triglycérides, cholestérol) insolubles dans le plasma aqueux, sous forme de particules sphériques : un cœur lipidique (triglycérides, esters de cholestérol) entouré d'une monocouche de phospholipides et d'**apolipoprotéines**.
-- Classées par **densité croissante** (et taille décroissante) : **chylomicrons, VLDL, IDL, LDL, HDL**.
+- Classées par **densité croissante** (et taille décroissante) :
+
+| Lipoprotéine | Origine | Apoprotéine principale | Cargo dominant |
+| --- | --- | --- | --- |
+| Chylomicrons | Intestin (voie exogène) | ApoB-48 | Triglycérides alimentaires |
+| VLDL | Foie (voie endogène) | ApoB-100 | Triglycérides hépatiques |
+| IDL | VLDL après action de la LPL | ApoB-100, ApoE | Intermédiaire triglycérides/cholestérol |
+| LDL | IDL après lipase hépatique | ApoB-100 | Cholestérol estérifié |
+| HDL | Foie et intestin | ApoA-I | Transport inverse du cholestérol |
 
 ## 2. Voie exogène (chylomicrons)
 - Les triglycérides et le cholestérol alimentaires sont absorbés par les entérocytes, réassemblés, incorporés dans des **chylomicrons** (apoB-48), sécrétés dans la lymphe puis le sang.

@@ -18,14 +18,21 @@ const ETC_COMPLEX_IV_ATP_SYNTHASE_COURSE = `# Chaîne de transport des électron
 - Environ **3 à 4 protons** doivent traverser l'ATP synthase pour produire **1 ATP**.
 
 ## 3. Régulation et inhibiteurs
-- L'**oligomycine** inhibe spécifiquement le canal à protons de F₀, bloquant la synthèse d'ATP tout en laissant intact le transport d'électrons (jusqu'à ce que le gradient devienne trop élevé et ralentisse indirectement la chaîne, sauf en présence d'un découplant).
-- Les **découplants** (DNP, protéines UCP) court-circuitent le gradient de protons sans passer par l'ATP synthase, dissociant le transport d'électrons de la production d'ATP.
-- Le **cyanure** et le **monoxyde de carbone** inhibent le complexe IV en se liant au fer de l'hème a3, empêchant la réduction de l'O₂ — d'où leur toxicité systémique rapide (blocage complet de la phosphorylation oxydative).
+
+| Agent | Cible | Effet |
+| --- | --- | --- |
+| **Oligomycine** | Canal à protons de F₀ | Bloque la synthèse d'ATP, transport d'électrons intact |
+| **Découplants** (DNP, UCP) | Gradient de protons | Court-circuitent le gradient sans passer par l'ATP synthase : transport et synthèse d'ATP dissociés |
+| **Cyanure, monoxyde de carbone** | Fer de l'hème a3 (complexe IV) | Empêchent la réduction de l'O₂ → blocage complet de la phosphorylation oxydative, toxicité rapide |
 
 ## 4. Bilan global de la phosphorylation oxydative
-- Par NADH oxydé (complexes I, III, IV) : ~10 protons pompés/consommés au total → ~2,5 ATP.
-- Par FADH₂ oxydé (complexes II, III, IV) : ~6 protons pompés/consommés → ~1,5 ATP.
-- Ce ratio protons/ATP explique pourquoi le rendement énergétique diffère entre le NADH et le FADH₂.
+
+| Cofacteur oxydé | Complexes traversés | Protons pompés/consommés | ATP produit |
+| --- | --- | --- | --- |
+| NADH | I, III, IV | ~10 | ~2,5 |
+| FADH₂ | II, III, IV | ~6 | ~1,5 |
+
+Ce ratio protons/ATP explique pourquoi le rendement énergétique diffère entre le NADH et le FADH₂.
 
 ## Points à retenir
 - Le complexe IV réduit l'O₂ en H₂O au niveau du site hème a3–CuB, et pompe des protons supplémentaires.
@@ -101,7 +108,14 @@ const ETC_COMPLEX_II_III_COURSE = `# Chaîne de transport des électrons (partie
 - Le cycle Q permet le transfert net de 2 électrons de l'ubiquinol au cytochrome c, tout en pompant **4 protons** par paire d'électrons (2 lors de l'oxydation de l'ubiquinol côté espace intermembranaire, 2 supplémentaires via un cycle de recyclage impliquant une seconde molécule d'ubiquinone).
 - Le cycle Q illustre un mécanisme de **bifurcation électronique** : les deux électrons de l'ubiquinol empruntent des voies différentes (l'un vers la protéine de Rieske puis le cytochrome c1, l'autre vers les cytochromes b puis une seconde ubiquinone).
 
-## 3. Importance clinique et toxicologique
+## 3. Comparatif complexes II et III
+
+| Complexe | Donneur d'électrons | Accepteur final | Protons pompés | Particularité |
+| --- | --- | --- | --- | --- |
+| **II** (succinate DH) | Succinate (via FAD) | Ubiquinone | 0 | Aussi enzyme du cycle de Krebs |
+| **III** (cytochrome bc1) | Ubiquinol | Cytochrome c | 4 (par paire d'électrons) | Mécanisme du cycle Q, bifurcation électronique |
+
+## 4. Importance clinique et toxicologique
 - L'**antimycine A** inhibe spécifiquement le complexe III en bloquant le site Qi (réduction de l'ubiquinone côté matrice), empêchant le recyclage du cycle Q.
 - Comme le complexe I, le complexe III est un site de production de radicaux libres (superoxide), notamment lorsque le cycle Q est perturbé.
 - Des mutations touchant le cytochrome b (codé par l'ADN mitochondrial) sont associées à des myopathies mitochondriales et à certaines cardiomyopathies.
@@ -250,13 +264,16 @@ const ETC_OVERVIEW_COURSE = `# Chaîne de transport des électrons — Vue d'ens
 - Ce gradient est utilisé par l'**ATP synthase** (complexe V) pour produire de l'ATP par **chimiosmose** — c'est la **phosphorylation oxydative**.
 
 ## 2. Les composants de la chaîne
-- **Complexe I** (NADH déshydrogénase) : reçoit les électrons du NADH, les transfère à l'ubiquinone, pompe des protons.
-- **Complexe II** (succinate déshydrogénase) : reçoit les électrons du FADH₂ (directement issu du cycle de Krebs), les transfère à l'ubiquinone ; **ne pompe pas** de protons.
-- **Ubiquinone (coenzyme Q)** : transporteur mobile liposoluble, relaie les électrons des complexes I et II vers le complexe III.
-- **Complexe III** (cytochrome bc1) : transfère les électrons de l'ubiquinone au cytochrome c, pompe des protons.
-- **Cytochrome c** : petite protéine mobile hydrosoluble, relaie les électrons du complexe III au complexe IV.
-- **Complexe IV** (cytochrome c oxydase) : transfère les électrons finaux à l'O₂, formant H₂O ; pompe des protons.
-- **Complexe V** (ATP synthase) : n'est pas un transporteur d'électrons mais utilise le gradient de protons pour synthétiser l'ATP.
+
+| Composant | Rôle | Pompe des protons ? |
+| --- | --- | --- |
+| **Complexe I** (NADH déshydrogénase) | Reçoit les électrons du NADH, les transfère à l'ubiquinone | Oui |
+| **Complexe II** (succinate DH) | Reçoit les électrons du FADH₂ (cycle de Krebs), les transfère à l'ubiquinone | Non |
+| **Ubiquinone (CoQ)** | Transporteur mobile liposoluble, relaie I et II vers III | — |
+| **Complexe III** (cytochrome bc1) | Transfère les électrons de l'ubiquinone au cytochrome c | Oui |
+| **Cytochrome c** | Petite protéine mobile hydrosoluble, relaie III vers IV | — |
+| **Complexe IV** (cytochrome c oxydase) | Transfère les électrons finaux à l'O₂, formant H₂O | Oui |
+| **Complexe V** (ATP synthase) | Utilise le gradient de protons pour synthétiser l'ATP | — (consommateur du gradient) |
 
 ## 3. Rendement énergétique
 - Chaque **NADH** oxydé via les complexes I, III, IV génère environ **2,5 ATP**.
@@ -264,7 +281,14 @@ const ETC_OVERVIEW_COURSE = `# Chaîne de transport des électrons — Vue d'ens
 
 ## 4. Découplage et inhibiteurs
 - Des **protéines découplantes (UCP)**, comme la thermogénine du tissu adipeux brun, dissipent le gradient de protons sous forme de chaleur plutôt que de l'utiliser pour produire de l'ATP — c'est la **thermogenèse sans frisson**.
-- **Inhibiteurs classiques** : roténone (complexe I), antimycine A (complexe III), cyanure et monoxyde de carbone (complexe IV), oligomycine (ATP synthase).
+- **Inhibiteurs classiques** :
+
+| Inhibiteur | Cible |
+| --- | --- |
+| Roténone | Complexe I |
+| Antimycine A | Complexe III |
+| Cyanure, monoxyde de carbone | Complexe IV |
+| Oligomycine | ATP synthase |
 - Le **2,4-dinitrophénol (DNP)** est un découplant chimique qui dissipe directement le gradient de protons à travers la membrane, augmentant la consommation d'oxygène sans production d'ATP correspondante (utilisé historiquement, et dangereusement, comme « coupe-faim »).
 
 ## Points à retenir
@@ -343,20 +367,27 @@ const GLYCOGENESIS_COURSE = `# Glycogénogenèse
 - Stimulée par l'**insuline** (état nourri) ; inhibée par le **glucagon** et l'**adrénaline** (jeûne, stress, effort).
 
 ## 2. Les étapes de la synthèse
-1. **Glucose → Glucose-6-phosphate** (hexokinase, ou glucokinase dans le foie).
-2. **Glucose-6-phosphate → Glucose-1-phosphate**, catalysée par la **phosphoglucomutase**.
-3. **Glucose-1-phosphate + UTP → UDP-glucose + PPi**, catalysée par l'**UDP-glucose pyrophosphorylase**. Réaction rendue irréversible par l'hydrolyse rapide et quasi-immédiate du pyrophosphate (PPi) par une pyrophosphatase, déplaçant l'équilibre.
-4. **UDP-glucose + chaîne de glycogène → chaîne allongée (+1 résidu, liaison α1→4) + UDP**, catalysée par la **glycogène synthase**. C'est l'enzyme limitante et la plus régulée de la voie.
-5. **Enzyme branchante** (amylo-(1,4→1,6)-transglycosylase) : transfère un segment d'environ 7 résidus depuis l'extrémité d'une chaîne linéaire vers une position plus interne, créant une liaison **α1→6** — ces branchements augmentent le nombre d'extrémités non réductrices, accélérant la synthèse et la dégradation ultérieures.
+
+| # | Enzyme | Réaction | Note |
+| --- | --- | --- | --- |
+| 1 | Hexokinase (glucokinase au foie) | Glucose → Glucose-6-phosphate | — |
+| 2 | Phosphoglucomutase | G6P → Glucose-1-phosphate | — |
+| 3 | UDP-glucose pyrophosphorylase | G1P + UTP → UDP-glucose + PPi | Rendue irréversible par l'hydrolyse rapide du PPi |
+| 4 | **Glycogène synthase** | UDP-glucose + chaîne → chaîne +1 résidu (liaison α1→4) + UDP | Enzyme limitante, la plus régulée |
+| 5 | Enzyme branchante | Transfère ~7 résidus vers une position interne, créant une liaison α1→6 | Multiplie les extrémités non réductrices |
 
 ## 3. Le rôle amorceur de la glycogénine
 - La glycogène synthase ne peut pas initier une nouvelle chaîne de novo : elle nécessite une amorce glucidique préexistante.
 - La **glycogénine** est une protéine auto-glycosylante qui amorce la synthèse en fixant les premiers résidus de glucose sur l'un de ses propres résidus **tyrosine**, formant le cœur central autour duquel se construit la particule de glycogène.
 
 ## 4. Régulation de la glycogène synthase
-- **Activée** par déphosphorylation : l'insuline stimule la protéine phosphatase 1 (PP1), qui déphosphoryle et active l'enzyme. Le **glucose-6-phosphate** est également un activateur allostérique direct.
-- **Inhibée** par phosphorylation : le glucagon et l'adrénaline activent la PKA, et la **glycogène synthase kinase 3 (GSK3)** phosphoryle et inactive l'enzyme.
-- Cette régulation est en miroir inversé de celle de la glycogène phosphorylase (enzyme de la glycogénolyse) : lorsque l'une est activée, l'autre est inhibée, évitant un cycle futile de synthèse/dégradation simultanées.
+
+| État | Déclencheur | Mécanisme | Effet |
+| --- | --- | --- | --- |
+| Activation | Insuline, G6P | PP1 déphosphoryle l'enzyme (ou G6P, activateur allostérique direct) | Synthase **active** |
+| Inhibition | Glucagon, adrénaline | PKA et GSK3 phosphorylent l'enzyme | Synthase **inactive** |
+
+Cette régulation est en miroir inversé de celle de la glycogène phosphorylase (enzyme de la glycogénolyse) : lorsque l'une est activée, l'autre est inhibée, évitant un cycle futile de synthèse/dégradation simultanées.
 
 ## 5. Importance clinique
 - Les **glycogénoses** (maladies de surcharge en glycogène) regroupent plusieurs déficits enzymatiques touchant la synthèse ou la dégradation du glycogène (ex. maladie de von Gierke — déficit en glucose-6-phosphatase ; maladie de McArdle — déficit en glycogène phosphorylase musculaire).

@@ -10,18 +10,17 @@ const RED_BLOOD_CELLS_COURSE = `# Milieu intérieur et physiologie des globules 
 - **Taille** : diamètre moyen 6,8-7,7 µm. **Couleur** : donnée par l'hémoglobine (Hb) ; un érythrocyte de coloration normale est dit **normochrome**.
 
 ## 2. Constantes érythrocytaires (hémogramme)
-**Constantes directes** (mesurées) :
-- Numération des GR : ~4,5 millions/mm³ (Homme 4,9 ± 0,7 ; Femme 4,3 ± 0,6)
-- Hémoglobine (Hb) : Homme 15 ± 2 g%, Femme 14 ± 2 g%
-- Hématocrite (Hct) : Homme 45 ± 7%, Femme 42 ± 5%
-- **Diminution** = anémie (carence en fer → anémie ferriprive ; carence en vitamine B12/folates → anémie mégaloblastique ; insuffisance médullaire → anémie aplasique)
-- **Augmentation** = polyglobulie (primitive = maladie de Vaquez ; secondaire = polyglobulie d'altitude)
+| Constante | Type | Valeur normale | Interprétation |
+| --- | --- | --- | --- |
+| Numération des GR | Directe | ~4,5 M/mm³ (H 4,9 ± 0,7 ; F 4,3 ± 0,6) | ↓ anémie ; ↑ polyglobulie |
+| Hémoglobine (Hb) | Directe | H 15 ± 2 g% ; F 14 ± 2 g% | ↓ anémie ; ↑ polyglobulie |
+| Hématocrite (Hct) | Directe | H 45 ± 7% ; F 42 ± 5% | ↓ anémie ; ↑ polyglobulie |
+| VGM | Indirecte (calculée) | 80-100 µm³ | Normal = normocytose ; ↓ microcytose ; ↑ macrocytose |
+| CCMH | Indirecte (calculée) | 32-36 g% | Concentration corpusculaire moyenne en Hb |
+| TCMH | Indirecte (calculée) | 27-31 pg | Normal = normochromie ; ↓ hypochromie |
+| IDR/RDW | Indirecte (calculée) | 11,5-14,5% | ↑ anisocytose |
 
-**Constantes indirectes** (calculées) :
-- VGM (volume globulaire moyen) = 80-100 µm³ : normal = normocytose ; diminué = microcytose ; augmenté = macrocytose
-- CCMH (concentration corpusculaire moyenne en Hb) = 32-36 g%
-- TCMH (teneur corpusculaire moyenne en Hb) = 27-31 pg : normal = normochromie ; diminué = hypochromie
-- IDR/RDW (indice de distribution des GR) = 11,5-14,5% ; augmenté = anisocytose
+Anémie : carence en fer → ferriprive ; carence en B12/folates → mégaloblastique ; insuffisance médullaire → aplasique. Polyglobulie : primitive (maladie de Vaquez) ou secondaire (altitude).
 
 **Orientation diagnostique par l'hémogramme** :
 | Type d'anémie | VGM | TCMH/CCMH | Réticulocytes | Cause |
@@ -246,12 +245,13 @@ const HEMATOPOIESIS_LEUKOCYTES_COURSE = `# Volémie, hématopoïèse et rôle de
 - Besoins : Homme 10 mg/jour, Femme 15 mg/jour. Pertes ~1 mg/jour (selles, urines, cheveux ; en plus règles/grossesse chez la femme).
 - La carence en fer induit une anémie microcytaire hypochrome.
 
-**Vitamines nécessaires à l'érythropoïèse** :
-- **Vitamine B12 (cyanocobalamine)** : besoins 1-3 µg/jour ; absorption iléale dépendante du facteur intrinsèque ; transport plasmatique lié à la transcobalamine II. Sa carence (ainsi que celle des folates) entraîne une anémie normochrome macrocytaire (mégaloblastique), avec retard de maturation nucléaire et mégaloblastes médullaires.
-- **Acide folique** : besoins 50-100 µg/jour (augmentés en grossesse/allaitement) ; absorption intestinale sous forme monoglutamate, bloquée par les contraceptifs oraux et l'alcool ; réserve hépatique de 10-20 mg (suffisante 3-4 mois) ; rôle dans la synthèse d'ADN.
-- **Vitamine B6 (pyridoxine)** : 2-5 mg/jour, indispensable à la synthèse de l'hème ; sa carence (alcoolisme, malnutrition) entraîne une anémie sidéroblastique.
-- **Vitamine C (acide ascorbique)** : 50-75 mg/jour, facteur réducteur (Fe3+→Fe2+) favorisant l'absorption intestinale du fer, facteur antioxydant limitant la formation de métHb.
-- **Vitamine E (tocophérol)** : 12-15 UI/jour, facteur antioxydant, protège la vitamine C de l'oxydation.
+| Vitamine | Besoins/jour | Rôle | Carence |
+| --- | --- | --- | --- |
+| **B12 (cyanocobalamine)** | 1-3 µg | Absorption iléale (facteur intrinsèque), transport par transcobalamine II | Anémie normochrome macrocytaire (mégaloblastique) |
+| **Acide folique** | 50-100 µg | Synthèse d'ADN ; réserve hépatique 10-20 mg (3-4 mois) | Anémie mégaloblastique (idem B12) |
+| **B6 (pyridoxine)** | 2-5 mg | Synthèse de l'hème | Anémie sidéroblastique |
+| **C (acide ascorbique)** | 50-75 mg | Réduit Fe3+→Fe2+ (absorption du fer), antioxydant | Limite la formation de métHb si carence |
+| **E (tocophérol)** | 12-15 UI | Antioxydant, protège la vitamine C | — |
 
 ### 2.2 Leucopoïèse
 - **Définition** : formation des leucocytes adultes à partir de la cellule souche pluripotente : granulocytopoïèse (granulocytes), monocytopoïèse (monocytes), lymphocytopoïèse (lymphocytes).
@@ -264,7 +264,16 @@ const HEMATOPOIESIS_LEUKOCYTES_COURSE = `# Volémie, hématopoïèse et rôle de
 **(c) Lymphopoïèse** : stade médullaire (cellule souche pluripotente → cellule souche lymphoïde → lymphoblastes B/NK/T) puis stade thymique pour les lymphoblastes T (organes lymphoïdes centraux : MO + thymus).
 
 **Régulation de la leucopoïèse** :
-- Facteurs de croissance (effet paracrine) : facteurs stimulant les colonies (CSF) — GM-CSF (granulocytes/monocytes), G-CSF (neutrophiles), M-CSF (monocytes) ; interleukines — IL-3/IL-6 (cellule souche pluripotente), IL-4 (basophiles/lymphocytes), IL-5 (éosinophiles/lymphocytes).
+- Facteurs de croissance (effet paracrine) :
+
+| Facteur | Cible |
+| --- | --- |
+| GM-CSF | Granulocytes / monocytes |
+| G-CSF | Neutrophiles |
+| M-CSF | Monocytes |
+| IL-3 / IL-6 | Cellule souche pluripotente |
+| IL-4 | Basophiles / lymphocytes |
+| IL-5 | Éosinophiles / lymphocytes |
 - Mécanisme hormonal : GH, hormones thyroïdiennes, testostérone stimulent la granulocytopoïèse ; ACTH et cortisol modulent neutrophiles/éosinophiles/basophiles/lymphocytes.
 
 ### 2.3 Thrombopoïèse
@@ -298,7 +307,14 @@ const HEMATOPOIESIS_LEUKOCYTES_COURSE = `# Volémie, hématopoïèse et rôle de
 
 ### Les leucocytes granulocytaires
 
-**Neutrophiles (PNN)** : 56-68% (3000-7000/mm³) chez l'adulte ; diamètre 10-15 µm, noyau segmenté (2-5 lobes), cytoplasme peu acidophile, granulations neutrophiles.
+| Type | Proportion | Cinétique (moelle / sang / tissu) | Fonction principale |
+| --- | --- | --- | --- |
+| **Neutrophiles (PNN)** | 56-68% (3000-7000/mm³) | 6-9 j / 4-9 h / 4-5 j | Phagocytose (explosion respiratoire) |
+| **Éosinophiles (EO)** | 1-3% (100-400/mm³) | 6-9 j / 6 h / 8-12 j | Cytotoxicité anti-parasitaire, allergie |
+| **Basophiles (BA)** | 0-1% (20-50/mm³) | 3-7 j / qq heures / semaines-mois | Libération d'héparine et d'histamine (IgE) |
+| **Monocytes/macrophages** | 4-10% (100-700/mm³) | 5-6 j / 3 j / plusieurs mois | Macrophagocytose, sécrétion, présentation d'antigène |
+
+**Neutrophiles (PNN)** : diamètre 10-15 µm, noyau segmenté (2-5 lobes), cytoplasme peu acidophile, granulations neutrophiles.
 - Propriétés : mobilité, margination, diapédèse, chimiotactisme.
 - Cinétique : stade médullaire 6-9 jours (production 10¹¹/jour, réserve médullaire 10× la quantité circulante), stade sanguin 4-9 heures, stade tissulaire 4-5 jours (peau, muqueuses des voies aériennes/digestives/urinaires).
 - Fonctions : phagocytose (opsonisation → attachement → engloutissement/phagosome → bactéricidie/digestion [mécanisme O2-dépendant = « explosion respiratoire » via NADPH-oxydase/SOD/myéloperoxydase ; mécanisme O2-indépendant = enzymes lysosomales, protéines cationiques, lysozyme, lactoferrine] → exocytose des fragments non digérés = pus) ; sécrétion (dégranulation libérant enzymes lysosomales, métabolites de l'acide arachidonique, IL-1 pyrogène).

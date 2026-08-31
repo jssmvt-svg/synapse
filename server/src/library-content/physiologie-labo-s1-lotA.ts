@@ -122,24 +122,25 @@ export const IONOGRAMME_FLASHCARDS: LibraryCardSeed[] = [
 
 const HEMATOGRAMME_COURSE = `# TP — Hématogramme (numération formule sanguine)
 
-## 1. Hémoglobine (HGB)
-- Valeur normale chez l'homme adulte : **15 ± 2 g/dL**.
-- Valeur normale chez la femme adulte : **14 ± 2 g/dL**.
+## 1. Hémoglobine, globules rouges et hématocrite
 
-## 2. Numération des globules rouges (RBC)
-- Homme adulte : **4,9 ± 0,7 millions/mm³**.
-- Femme adulte : **4,3 ± 0,6 millions/mm³** (plus basse que chez l'homme).
+| Paramètre | Homme adulte | Femme adulte |
+| --- | --- | --- |
+| Hémoglobine (HGB) | 15 ± 2 g/dL | 14 ± 2 g/dL |
+| Globules rouges (RBC) | 4,9 ± 0,7 millions/mm³ | 4,3 ± 0,6 millions/mm³ |
+| Hématocrite (Ht) | 45 ± 7 % | 42 ± 5 % |
 
-## 3. Hématocrite (Ht)
-- Proportion du volume sanguin occupée par les globules rouges.
-- Homme adulte : **45 ± 7 %**.
-- Femme adulte : **42 ± 5 %**.
+- Ces trois valeurs sont systématiquement plus basses chez la femme que chez l'homme.
+- L'hématocrite représente la proportion du volume sanguin occupée par les globules rouges.
 
-## 4. Indices érythrocytaires
-- **VGM (MCV, volume globulaire moyen)** : 80 – 100 μm³ → définit un globule rouge **normocytaire**.
-- **TCMH (MCH, teneur corpusculaire moyenne en hémoglobine)** : 27 – 32 pg (mesure en picogrammes, quantité absolue d'hémoglobine par globule rouge).
-- **CCMH (MCHC, concentration corpusculaire moyenne en hémoglobine)** : 32 – 36 g/dL (concentration relative d'hémoglobine dans un volume donné de globules rouges tassés).
-- **IDR (RDW, indice de distribution des globules rouges)** : 11,5 – 14,5 % (mesure la variation de taille entre globules rouges — l'anisocytose).
+## 2. Indices érythrocytaires
+
+| Indice | Valeur normale | Signification |
+| --- | --- | --- |
+| VGM (MCV) | 80 – 100 μm³ | Volume globulaire moyen → définit un globule rouge **normocytaire** |
+| TCMH (MCH) | 27 – 32 pg | Quantité absolue d'hémoglobine par globule rouge |
+| CCMH (MCHC) | 32 – 36 g/dL | Concentration relative d'hémoglobine dans un volume donné de globules rouges tassés |
+| IDR (RDW) | 11,5 – 14,5 % | Variation de taille entre globules rouges (anisocytose) |
 
 ## 5. Réticulocytes
 - Précurseurs immatures des globules rouges, reflet de l'activité de régénération médullaire.

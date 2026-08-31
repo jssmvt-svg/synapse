@@ -258,7 +258,14 @@ L'activité enzymatique est régulée selon 5 grands mécanismes : (1) contrôle
 - Les **protéines kinases** attachent un phosphate sur une sérine, thréonine ou tyrosine, en utilisant l'ATP comme donneur. Les **protéines phosphatases** retirent ce phosphate (hydrolyse, libération de Pi).
 - Ces deux réactions sont énergétiquement irréversibles dans les conditions cellulaires (kinase et phosphatase empruntent des voies distinctes), ce qui permet un contrôle fin et rapide.
 - Pourquoi la phosphorylation est un excellent mode de régulation : grande énergie libre de phosphorylation ; modification forte des interactions électrostatiques ; formation de liaisons hydrogène ; rapidité ; amplification du signal (cascades) ; l'ATP est la monnaie énergétique universelle.
-- Exemples de kinases sérine/thréonine et leurs signaux activateurs : PKA (AMPc), PKG (GMPc), kinase Ca²⁺-calmoduline, AMPK (AMP), PKC (diacylglycérol).
+
+| Kinase sérine/thréonine | Signal activateur |
+| --- | --- |
+| PKA | AMPc |
+| PKG | GMPc |
+| Kinase Ca²⁺-calmoduline | Ca²⁺-calmoduline |
+| AMPK | AMP |
+| PKC | Diacylglycérol |
 
 ### La protéine kinase A (PKA)
 - L'épinéphrine (adrénaline) déclenche la réponse « combat ou fuite » et induit la synthèse d'AMPc dans les cellules musculaires.

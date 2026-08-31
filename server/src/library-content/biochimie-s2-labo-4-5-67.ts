@@ -20,10 +20,13 @@ const LAB_S2_4_COURSE = `# Labo 4 — Métabolisme des lipides : lipoprotéines 
 ## 4. Les lipoprotéines plasmatiques
 - Complexes transportant les lipides (insolubles dans l'eau) dans le sang : un cœur lipidique (triglycérides, cholestérol, phospholipides) entouré d'apoprotéines et de groupes polaires en surface, assurant la solubilité aqueuse.
 - Par densité croissante : **chylomicrons < VLDL < IDL < LDL < HDL**. Plus le ratio protéines/lipides est élevé, plus la lipoprotéine est dense.
-- **Chylomicrons** : les moins denses, apolipoprotéine B-48 spécifique, acquièrent les apo C et E depuis les HDL circulantes ; cœur riche en triglycérides exogènes (alimentaires), transportent les lipides du repas depuis l'intestin. Les résidus (remnants) riches en cholestérol sont captés par le foie.
-- **VLDL** : synthétisées par le foie à partir des lipides endogènes (surtout triglycérides), transportées vers les tissus périphériques ; converties en IDL puis en LDL dans la circulation.
-- **LDL** : principal transporteur du cholestérol sanguin, apo B100 unique reconnue par les récepteurs LDL périphériques (« mauvais cholestérol »). La synthèse des récepteurs LDL est régulée par les protéines **SREBP** : un cholestérol intracellulaire élevé supprime la production de récepteurs LDL (et inversement).
-- **HDL** : assurent le transport inverse du cholestérol (des tissus vers le foie pour excrétion), « bon cholestérol » ; un taux élevé de HDL est associé à un meilleur pronostic cardiovasculaire, un taux bas à la progression de l'athérosclérose.
+
+| Lipoprotéine | Apolipoprotéine | Origine | Rôle |
+| --- | --- | --- | --- |
+| Chylomicrons | Apo B-48 (+ apo C/E acquises) | Intestin, cœur riche en TG exogènes | Transport des lipides alimentaires ; remnants captés par le foie |
+| VLDL | — | Foie, à partir des lipides endogènes | Transport des TG endogènes vers les tissus périphériques ; converties en IDL puis LDL |
+| LDL | Apo B100 | Issues des VLDL/IDL | Principal transporteur du cholestérol (« mauvais cholestérol »), reconnu par les récepteurs LDL périphériques |
+| HDL | — | Foie et intestin | Transport inverse du cholestérol vers le foie (« bon cholestérol ») |
 
 ## 5. Méthodes de séparation des lipoprotéines
 - **Ultracentrifugation** : séparation selon la densité (champ ~100 000 g) ; dans un tampon de densité 1,063 g/cm³, 4 fractions : chylomicrons (d ≤ 0,96), VLDL (0,96-1,006), LDL (1,006-1,063), HDL (1,063-1,21 g/cm³).
@@ -49,7 +52,12 @@ const LAB_S2_4_COURSE = `# Labo 4 — Métabolisme des lipides : lipoprotéines 
 
 ## 9. Calcul du cholestérol LDL — équation de Friedewald
 - LDL = Cholestérol total − (HDL + VLDL), où VLDL ≈ Triglycérides / 5.
-- **Valeurs normales** : < 150 mg/100 mL = aucun traitement nécessaire ; 150-190 mg/100 mL = risque modéré d'athérosclérose ; > 190 mg/100 mL = risque élevé, traitement nécessaire.
+
+| LDL (mg/100 mL) | Interprétation |
+| --- | --- |
+| < 150 | Aucun traitement nécessaire |
+| 150–190 | Risque modéré d'athérosclérose |
+| > 190 | Risque élevé, traitement nécessaire |
 
 ## 10. Dyslipidémies et athérosclérose
 - **Dyslipidémies primaires** : d'origine génétique/familiale (défauts du métabolisme des lipoprotéines).
@@ -112,10 +120,12 @@ const LAB_S2_5_COURSE = `# Labo 5 — Métabolisme minéral : pH, capacité tamp
 ## 4. Les 4 désordres acide-base
 - **Type primaire** déterminé par le facteur initial perturbant l'équilibre : trouble **métabolique** = variation initiale du bicarbonate ; trouble **respiratoire** = variation initiale de la pCO₂.
 - **Compensé** (pH inchangé) vs **non compensé** (pH < 7,35 = acidose non compensée ; pH > 7,45 = alcalose non compensée). pH < 6,9 ou > 7,9 = incompatible avec la vie.
-- **Acidose respiratoire** : hypoventilation/échange gazeux altéré (ex. BPCO) → ↑ pCO₂ primaire → ↓ pH ; compensation rénale par ↑ réabsorption du bicarbonate.
-- **Alcalose respiratoire** : hyperventilation (anxiété, douleur, altitude, fièvre) → ↓ pCO₂ primaire → ↑ pH ; compensation rénale par ↑ excrétion du bicarbonate.
-- **Acidose métabolique** : acidocétose diabétique, insuffisance rénale chronique, diarrhée sévère → ↓ bicarbonate primaire → ↓ pH ; compensation respiratoire par hyperventilation (↓ pCO₂).
-- **Alcalose métabolique** : vomissements prolongés, excès d'administration de bicarbonate → ↑ bicarbonate primaire → ↑ pH ; compensation respiratoire par hypoventilation (↑ pCO₂).
+| Désordre | Cause primaire | Variation primaire | Exemples | Compensation |
+| --- | --- | --- | --- | --- |
+| Acidose respiratoire | Hypoventilation/échange gazeux altéré | ↑ pCO₂ → ↓ pH | BPCO | Rénale : ↑ réabsorption du bicarbonate |
+| Alcalose respiratoire | Hyperventilation | ↓ pCO₂ → ↑ pH | Anxiété, douleur, altitude, fièvre | Rénale : ↑ excrétion du bicarbonate |
+| Acidose métabolique | ↓ bicarbonate primaire | ↓ pH | Acidocétose diabétique, IRC, diarrhée sévère | Respiratoire : hyperventilation (↓ pCO₂) |
+| Alcalose métabolique | ↑ bicarbonate primaire | ↑ pH | Vomissements prolongés, excès de bicarbonate | Respiratoire : hypoventilation (↑ pCO₂) |
 
 ## 5. Réserve alcaline et méthodes de mesure
 - **Réserve alcaline** : quantité de bases disponibles dans le sang comme tampon, estimée par la quantité de CO₂ (mL) contenue dans 100 mL de plasma à 0 °C et 760 mmHg (méthode de **Van Slyke**) — méthode informative, à interpréter avec les autres données cliniques.
@@ -127,15 +137,21 @@ const LAB_S2_5_COURSE = `# Labo 5 — Métabolisme minéral : pH, capacité tamp
 - **Diagramme de Gamble** : le nombre total de cations égale le nombre total d'anions. En extracellulaire, cation principal Na⁺, anion principal Cl⁻ ; en intracellulaire, cation principal K⁺, anion principal HPO₄²⁻. Osmolarité plasmatique normale ≈ 300 mOsm/kg ; urinaire ≈ 1200 mOsm/kg.
 
 ### Cations
-- **Sodium (Na⁺)**, 135-145 mEq/L : principal cation extracellulaire, régule la pression osmotique, le volume plasmatique et l'équilibre acide-base (tampon bicarbonate/acide carbonique 20/1) ; rôle dans l'influx nerveux, activateur enzymatique (alpha-amylase, bêta-galactosidase), pompe Na⁺/K⁺-ATPase ; régulé par l'aldostérone. Hyponatrémie : diarrhée sévère, sudation massive, brûlures, néphrite chronique, diurétiques, insuffisance corticosurrénalienne. Hypernatrémie : sténose du pylore, hyperaldostéronisme, corticothérapie, fièvre prolongée.
-- **Potassium (K⁺)**, 3,8-5,4 mEq/L : principal cation intracellulaire, rôle dans l'influx nerveux et l'excitabilité musculaire, activateur enzymatique (pyruvate kinase, carbamoyl-phosphate synthase), pompe Na⁺/K⁺-ATPase. Hypokaliémie : occlusion intestinale haute, sténose du pylore, alcalose, coma diabétique/hypoglycémique, syndrome de Cushing, néphropathies tubulaires. Hyperkaliémie : destruction cellulaire (hémolyse, choc toxi-septique, brûlures étendues), insuffisance rénale.
-- **Calcium (Ca²⁺)**, 4,5-5,5 mEq/L (9-11 mg/dL) : 60 % libre (diffusible), 40 % lié aux protéines. Varie avec l'équilibre acide-base (↑ en acidose, ↓ en alcalose) ; rôle dans la coagulation, la perméabilité membranaire au Na⁺/K⁺, la contraction musculaire, l'excitabilité neuromusculaire ; 99 % stocké dans les os/dents. Hypocalcémie : hyperparathyroïdie (tétanie, scorbut), hyperthyroïdie, insuffisance rénale chronique, excès de calcitonine. Hypercalcémie : destruction osseuse massive, hyperthyroïdie, hypervitaminose D.
-- **Magnésium (Mg²⁺)**, 1,9-2,5 mg/dL : surtout intracellulaire, activateur enzymatique (kinases, phosphatases), synthèse des acides nucléiques, constituant osseux, indicateur de fonction rénale. Hypomagnésémie : vomissements, diarrhée, cirrhose, coma diabétique, scorbut. Hypermagnésémie : insuffisance rénale, hyperthyroïdie, maladie d'Addison.
-- **Fer**, 50-180 µg/dL : synthèse de l'hémoglobine et de systèmes enzymatiques redox ; constituant de l'Hb, de la myoglobine, de la catalase, de la peroxydase ; stocké sous forme de ferritine, transporté par la transferrine. Hyposidérémie : anémie ferriprive, anémie post-hémorragique, infections aiguës. Hypersidérémie : hémochromatose idiopathique, anémies mégaloblastique/aplastique/hémolytique.
+
+| Ion | Plage normale | Rôle principal | Hypo- (causes) | Hyper- (causes) |
+| --- | --- | --- | --- | --- |
+| Sodium (Na⁺) | 135–145 mEq/L | Cation extracellulaire principal, pression osmotique, équilibre acide-base, influx nerveux, régulé par l'aldostérone | Diarrhée sévère, sudation massive, brûlures, néphrite chronique, diurétiques, insuffisance corticosurrénalienne | Sténose du pylore, hyperaldostéronisme, corticothérapie, fièvre prolongée |
+| Potassium (K⁺) | 3,8–5,4 mEq/L | Cation intracellulaire principal, influx nerveux, excitabilité musculaire, pompe Na⁺/K⁺-ATPase | Occlusion intestinale haute, sténose du pylore, alcalose, coma diabétique/hypoglycémique, Cushing, néphropathies tubulaires | Hémolyse, choc toxi-septique, brûlures étendues, insuffisance rénale |
+| Calcium (Ca²⁺) | 4,5–5,5 mEq/L (9–11 mg/dL) | Coagulation, perméabilité membranaire, contraction musculaire, excitabilité neuromusculaire (99 % osseux/dentaire) | Hyperparathyroïdie, hyperthyroïdie, insuffisance rénale chronique, excès de calcitonine | Destruction osseuse massive, hyperthyroïdie, hypervitaminose D |
+| Magnésium (Mg²⁺) | 1,9–2,5 mg/dL | Surtout intracellulaire, activateur enzymatique, synthèse des acides nucléiques, constituant osseux | Vomissements, diarrhée, cirrhose, coma diabétique, scorbut | Insuffisance rénale, hyperthyroïdie, maladie d'Addison |
+| Fer | 50–180 µg/dL | Synthèse Hb/myoglobine/catalase/peroxydase, stocké en ferritine, transporté par transferrine | Anémie ferriprive, anémie post-hémorragique, infections aiguës | Hémochromatose idiopathique, anémies mégaloblastique/aplastique/hémolytique |
 
 ### Anions
-- **Phosphore**, 3-4,5 mg/dL : principal anion intracellulaire avec les protéines ; rôle dans la formation osseuse, le stockage/transfert d'énergie, les métabolismes glucidique et lipidique, l'équilibre acide-base. Hypophosphatémie : scorbut, maladie cœliaque, hyperparathyroïdie. Hyperphosphatémie : hypoparathyroïdie, insuffisance rénale, hypervitaminose D.
-- **Chlore**, 98-110 mEq/L : anion prédominant en extracellulaire, composant du suc gastrique, équilibre hydro-électrolytique. Hyperchlorémie : acidose métabolique. Hypochlorémie : alcalose métabolique.`;
+
+| Ion | Plage normale | Rôle principal | Hypo- (causes) | Hyper- (causes) |
+| --- | --- | --- | --- | --- |
+| Phosphore | 3–4,5 mg/dL | Anion intracellulaire principal, formation osseuse, stockage/transfert d'énergie | Scorbut, maladie cœliaque, hyperparathyroïdie | Hypoparathyroïdie, insuffisance rénale, hypervitaminose D |
+| Chlore | 98–110 mEq/L | Anion prédominant en extracellulaire, composant du suc gastrique | Alcalose métabolique | Acidose métabolique |`;
 
 export const LAB_S2_5_LEARNING: LibraryLearningSeed = {
   resource: {

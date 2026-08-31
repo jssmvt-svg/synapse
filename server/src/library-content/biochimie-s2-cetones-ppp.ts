@@ -8,10 +8,14 @@ const KETONE_METABOLISM_COURSE = `# Métabolisme des corps cétoniques
 - Ils constituent un **carburant alternatif** au glucose pour de nombreux tissus, notamment le **cerveau** après quelques jours de jeûne.
 
 ## 2. La cétogenèse (synthèse hépatique)
-1. **Thiolase** : 2 acétyl-CoA → acétoacétyl-CoA.
-2. **HMG-CoA synthase** (mitochondriale, spécifique de la cétogenèse) : acétoacétyl-CoA + acétyl-CoA → **HMG-CoA** (3-hydroxy-3-méthylglutaryl-CoA). Étape **limitante et régulatrice**.
-3. **HMG-CoA lyase** : HMG-CoA → **acétoacétate** + acétyl-CoA.
-4. L'acétoacétate est ensuite soit **réduit** en **β-hydroxybutyrate** (β-hydroxybutyrate déshydrogénase, consommant du NADH), soit spontanément **décarboxylé** (non enzymatique) en **acétone** (éliminée par voie pulmonaire, responsable de l'haleine cétonique caractéristique).
+
+| # | Enzyme | Réaction | Note |
+| --- | --- | --- | --- |
+| 1 | **Thiolase** | 2 acétyl-CoA → acétoacétyl-CoA | — |
+| 2 | **HMG-CoA synthase** (mitochondriale) | Acétoacétyl-CoA + acétyl-CoA → HMG-CoA | Étape limitante et régulatrice |
+| 3 | **HMG-CoA lyase** | HMG-CoA → acétoacétate + acétyl-CoA | — |
+| 4a | β-hydroxybutyrate déshydrogénase | Acétoacétate → β-hydroxybutyrate | Consomme du NADH |
+| 4b | (non enzymatique) | Acétoacétate → acétone (décarboxylation spontanée) | Élimination pulmonaire, haleine cétonique |
 
 ## 3. Utilisation périphérique (cétolyse)
 - Le **foie ne peut pas utiliser** les corps cétoniques qu'il produit : il est dépourvu de l'enzyme clé, la **succinyl-CoA:acétoacétate CoA transférase (thiophorase/SCOT)**.
@@ -88,10 +92,14 @@ const PENTOSE_PHOSPHATE_PATHWAY_COURSE = `# La voie des pentoses phosphates
 - Deux phases : une phase **oxydative** (irréversible) et une phase **non oxydative** (réversible).
 
 ## 2. Phase oxydative
-1. **Glucose-6-phosphate déshydrogénase (G6PD)** : G6P + NADP⁺ → 6-phosphogluconolactone + **NADPH**. Étape **limitante et régulatrice** de toute la voie.
-2. **6-phosphogluconolactonase** : hydrolyse la lactone en 6-phosphogluconate.
-3. **6-phosphogluconate déshydrogénase** : 6-phosphogluconate + NADP⁺ → ribulose-5-phosphate + **NADPH** + **CO₂**.
-- Bilan de la phase oxydative : 1 G6P → 1 ribulose-5-phosphate + **2 NADPH** + 1 CO₂. Irréversible.
+
+| # | Enzyme | Réaction | Note |
+| --- | --- | --- | --- |
+| 1 | **G6PD** (glucose-6-P déshydrogénase) | G6P + NADP⁺ → 6-phosphogluconolactone + NADPH | Étape limitante et régulatrice de toute la voie |
+| 2 | **6-phosphogluconolactonase** | Hydrolyse la lactone en 6-phosphogluconate | — |
+| 3 | **6-phosphogluconate déshydrogénase** | 6-phosphogluconate + NADP⁺ → ribulose-5-phosphate + NADPH + CO₂ | — |
+
+Bilan de la phase oxydative : 1 G6P → 1 ribulose-5-phosphate + **2 NADPH** + 1 CO₂. Irréversible.
 
 ## 3. Phase non oxydative
 - Une **isomérase** et une **épimérase** convertissent le ribulose-5-phosphate en **ribose-5-phosphate** (précurseur des nucléotides) ou en xylulose-5-phosphate, selon les besoins cellulaires.

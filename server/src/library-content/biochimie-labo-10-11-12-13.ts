@@ -73,17 +73,36 @@ const LAB11_COURSE = `# Lab 11 — Enzymes, cofacteurs enzymatiques et test opti
 ### Test optique simple (suivi direct du NADH)
 - Utilisé pour LDH (lactate déshydrogénase), MDH (malate déshydrogénase), GDH (glutamate déshydrogénase).
 - Réaction catalysée par la LDH : pyruvate + NADH + H⁺ ⇌ lactate + NAD⁺.
-- La LDH est un **tétramère** de sous-unités H et M, avec **5 isoenzymes** : LDH1 (HHHH, myocarde, globules rouges), LDH2 (HHHM), LDH3 (HHMM, pancréas, placenta, poumon), LDH4 (HMMM, muscle, foie), LDH5 (MMMM, muscle, foie).
+- La LDH est un **tétramère** de sous-unités H et M, avec **5 isoenzymes** :
+
+| Isoenzyme | Composition | Tissu principal |
+| --- | --- | --- |
+| LDH1 | HHHH | Myocarde, globules rouges |
+| LDH2 | HHHM | — |
+| LDH3 | HHMM | Pancréas, placenta, poumon |
+| LDH4 | HMMM | Muscle, foie |
+| LDH5 | MMMM | Muscle, foie |
+
 - LDH augmentée : infarctus du myocarde, hémolyse, pancréatite, hépatite, dystrophie musculaire.
 
 ### Test optique + réaction indicatrice (transaminases)
-- **GPT/ALAT** (glutamate pyruvate transaminase / alanine aminotransférase) : alanine + α-cétoglutarate ⇌ pyruvate + glutamate — présente surtout dans le **foie**.
-- **GOT/ASAT** (glutamate oxaloacétate transaminase / aspartate aminotransférase) : aspartate + α-cétoglutarate ⇌ oxaloacétate + glutamate — présente dans le foie, le muscle, le myocarde, les globules rouges.
+| Enzyme | Réaction catalysée | Tissu(s) principal(aux) |
+| --- | --- | --- |
+| GPT/ALAT (glutamate pyruvate transaminase / alanine aminotransférase) | Alanine + α-cétoglutarate ⇌ pyruvate + glutamate | Foie (surtout) |
+| GOT/ASAT (glutamate oxaloacétate transaminase / aspartate aminotransférase) | Aspartate + α-cétoglutarate ⇌ oxaloacétate + glutamate | Foie, muscle, myocarde, globules rouges |
+
 - GOT et GPT augmentées ensemble : hépatite. GOT seule augmentée : lésion musculaire, hémolyse, infarctus du myocarde.
 - La réaction indicatrice couplée (ex. oxaloacétate + NADH + H⁺ → malate + NAD⁺) permet de suivre la réaction principale via la disparition du NADH à 340 nm.
 
 ### Test optique + auxiliaire + réaction indicatrice
-- **CK** (créatine kinase) : dimère de sous-unités B et M. CK1 = BB (cerveau), CK2 = MB (myocarde), CK3 = MM (muscle).
+- **CK** (créatine kinase) : dimère de sous-unités B et M.
+
+| Isoforme | Composition | Tissu |
+| --- | --- | --- |
+| CK1 | BB | Cerveau |
+| CK2 | MB | Myocarde |
+| CK3 | MM | Muscle |
+
 - CK augmentée : infarctus du myocarde, lésion musculaire.
 - Réactions couplées : créatine + ATP →(CK) créatine-phosphate + ADP ; ADP + phosphoénolpyruvate → pyruvate + ATP ; pyruvate + NADH + H⁺ → lactate + NAD⁺ (réaction indicatrice, suivie à 340 nm).
 
@@ -126,8 +145,10 @@ const LAB12_COURSE = `# Lab 12 — Vitamines : détermination de la vitamine C p
 
 ## 1. Généralités sur les vitamines
 - Les vitamines sont des composés organiques essentiels, non synthétisés (ou insuffisamment) par l'organisme, nécessaires en petites quantités au métabolisme (rôle de cofacteur enzymatique).
-- **Hydrosolubles** : vitamine C (acide ascorbique) ; vitamines B — B1 (thiamine), B2 (riboflavine, précurseur FAD/FMN), B3 (niacine, précurseur NAD⁺/NADP⁺), B5 (acide pantothénique), B6 (pyridoxal), B9 (acide folique), B12 (cobalamine).
-- **Liposolubles** : vitamine D (calciférol), vitamine A (rétinol), vitamine E (tocophérol), vitamine K (ménadione).
+| Catégorie | Vitamines |
+| --- | --- |
+| Hydrosolubles | Vitamine C (acide ascorbique) ; B1 (thiamine), B2 (riboflavine, précurseur FAD/FMN), B3 (niacine, précurseur NAD⁺/NADP⁺), B5 (acide pantothénique), B6 (pyridoxal), B9 (acide folique), B12 (cobalamine) |
+| Liposolubles | Vitamine D (calciférol), vitamine A (rétinol), vitamine E (tocophérol), vitamine K (ménadione) |
 
 ## 2. Vitamine C (acide ascorbique)
 - Structure : γ-lactone de l'acide gulonique ; synthétisée à partir du glucose chez la plupart des espèces (pas chez l'humain).

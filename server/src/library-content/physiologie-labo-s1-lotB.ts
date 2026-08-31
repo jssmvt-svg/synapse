@@ -5,24 +5,31 @@ import { single } from "./qcm-helpers.js";
 const ABB_COURSE = `# TP — Équilibre acido-basique (gaz du sang)
 
 ## 1. Valeurs de référence du bulletin acido-basique
-- **pH artériel** : 7,35 – 7,45 (homéostasie standard de l'acidité/alcalinité sanguine).
-- **PCO2** (pression partielle de CO2, composante respiratoire) : 38 – 42 mmHg, exprimée en mmHg (unité de pression des gaz dissous dans le sang, différente du mEq/L des électrolytes ou du mOsm/L de l'osmolarité).
-- **HCO3⁻** (bicarbonate, composante métabolique) : 23 – 27 mEq/L — c'est le paramètre de référence pour évaluer la contribution métabolique de l'équilibre acido-basique, tandis que la PCO2 reflète la contribution respiratoire.
+
+| Paramètre | Valeur normale | Composante évaluée |
+| --- | --- | --- |
+| pH artériel | 7,35 – 7,45 | Homéostasie globale acidité/alcalinité |
+| PCO2 | 38 – 42 mmHg | Respiratoire |
+| HCO3⁻ (bicarbonate) | 23 – 27 mEq/L | Métabolique |
+
+- La PCO2 s'exprime en mmHg (pression des gaz dissous), différent du mEq/L des électrolytes ou du mOsm/L de l'osmolarité.
 
 ## 2. Interprétation des troubles simples
 - Une variation isolée de la PCO2 (respiratoire) ou du HCO3⁻ (métabolique) qui fait dévier le pH hors de la norme définit un trouble primaire simple : acidose ou alcalose, respiratoire ou métabolique.
 
-## 3. Associations compensées ou mixtes (pH normal malgré des anomalies)
-Un pH normal peut coexister avec des anomalies profondes de la PCO2 et du HCO3⁻ dans deux cas de figure :
-- **Compensation** : un trouble primaire respiratoire est contrebalancé par une réponse métabolique adaptée (ou l'inverse), ramenant le pH dans la norme. Exemple : PCO2 très abaissée (↓↓↓) associée à un HCO3⁻ très abaissé (↓↓↓) avec pH normal → acidose métabolique primaire compensée par une alcalose respiratoire.
-- **Association mixte neutralisante** : deux troubles primaires de sens opposé au sein du **même** axe (ex. acidose métabolique + alcalose métabolique) se neutralisent, ramenant pH, PCO2 et HCO3⁻ tous dans la norme.
-- Une association de deux troubles respiratoires opposés (acidose respiratoire + alcalose respiratoire) neutralise de la même façon PCO2 et HCO3⁻, avec un pH normal.
+## 3. Associations de deux troubles primaires : compensées, neutralisantes ou additives
 
-## 4. Associations mixtes non compensées (aggravation du pH)
-Quand les deux composantes (métabolique et respiratoire) vont dans le **même sens**, elles s'additionnent au lieu de se neutraliser :
-- **Acidose métabolique + acidose respiratoire** → pH très abaissé (↓↓), PCO2 augmentée (↑), HCO3⁻ abaissé (↓) : les deux mécanismes aggravent l'acidémie.
-- **Alcalose métabolique + alcalose respiratoire** → pH très élevé (↑↑), PCO2 abaissée (↓), HCO3⁻ élevé (↑) : les deux mécanismes aggravent l'alcalémie.
-- **Alcalose métabolique + acidose respiratoire** → pH normal, PCO2 très augmentée (↑↑↑), HCO3⁻ très augmenté (↑↑↑) : l'acidose respiratoire est contrebalancée par l'alcalose métabolique (et réciproquement), maintenant un pH normal malgré des valeurs absolues très anormales.
+| Association | pH | PCO2 | HCO3⁻ | Explication |
+| --- | --- | --- | --- | --- |
+| Acidose métabolique + alcalose respiratoire | N | ↓↓↓ | ↓↓↓ | Compensation : le trouble respiratoire contrebalance le trouble métabolique |
+| Alcalose métabolique + acidose respiratoire | N | ↑↑↑ | ↑↑↑ | Compensation inverse, mêmes valeurs absolues très anormales |
+| Acidose métabolique + alcalose métabolique | N | N | N | Association mixte neutralisante (même axe métabolique) |
+| Acidose respiratoire + alcalose respiratoire | N | N | N | Association mixte neutralisante (même axe respiratoire) |
+| Acidose métabolique + acidose respiratoire | ↓↓ | ↑ | ↓ | Même sens : les deux mécanismes s'additionnent, aggravant l'acidémie |
+| Alcalose métabolique + alcalose respiratoire | ↑↑ | ↓ | ↑ | Même sens : les deux mécanismes s'additionnent, aggravant l'alcalémie |
+
+- **Compensation/neutralisation** : quand les deux composantes évoluent en sens opposé, le pH peut revenir dans la norme malgré des valeurs de PCO2/HCO3⁻ très anormales.
+- **Addition** : quand les deux composantes évoluent dans le **même sens**, elles s'additionnent et le pH s'écarte fortement de la norme.
 
 ## Points à retenir pour le TP
 - Toujours vérifier l'unité : PCO2 en mmHg, HCO3⁻ en mEq/L — une confusion d'unité est un piège classique.
@@ -73,9 +80,13 @@ export const ABB_FLASHCARDS: LibraryCardSeed[] = [
 const HEMOSTASIS_PARTIAL_COURSE = `# TP — Hémostase (portion partielle)
 
 ## 1. Mécanismes de la coagulation (voies intrinsèque et extrinsèque)
-- Le **temps plaquettaire** (hémostase primaire) dépend du nombre et de la fonction des plaquettes.
-- La **voie intrinsèque** (évaluée par le TCA/APTT) est la cible du traitement par héparine.
-- La **voie extrinsèque** (évaluée par le TP/TQ) dépend des facteurs vitamino-K-dépendants (II, VII, IX, X) synthétisés par le foie.
+
+| Voie | Test | Particularité |
+| --- | --- | --- |
+| Hémostase primaire | Temps plaquettaire | Dépend du nombre et de la fonction des plaquettes |
+| Voie intrinsèque | TCA / APTT | Cible du traitement par héparine |
+| Voie extrinsèque | TP / TQ | Dépend des facteurs vitamino-K-dépendants (II, VII, IX, X), synthétisés par le foie |
+
 - Une insuffisance hépatique et une carence en vitamine K sont regroupées dans les tables d'interprétation car elles affectent toutes deux la voie extrinsèque en perturbant la synthèse de ces facteurs, allongeant le TP/TQ.
 
 ## 2. Temps de coagulation (Howell)

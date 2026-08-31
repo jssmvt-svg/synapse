@@ -27,29 +27,68 @@ const REFERENCE_VALUES_COURSE = `# TP — Valeurs de référence (physiologie)
 - Réticulocytes : 0,5 – 1,5 %. MCV (volume globulaire moyen) : 80 – 100 µm³. MCHC : 32 – 36 g/dL. MCH : 27 – 32 pg. RDW : 11,5 – 14,5 %.
 
 ## 4. Leucogramme
-- Leucocytes (WBC) : Adulte 5 000 – 9 000/mm³ ; Nouveau-né 8 000 – 30 000/mm³ ; 1-2 ans 6 000 – 17 500/mm³ ; 3-7 ans 5 500 – 15 500/mm³ ; 8-16 ans 4 500 – 13 500/mm³.
-- Formule leucocytaire (adulte / enfant) : Neutrophiles 56-68 % / 25-40 % ; Éosinophiles 1-3 % / 1-4 % ; Basophiles 0-1 % ; Lymphocytes 20-40 % / 50-70 % ; Monocytes 4-10 % / 4-8 %.
+
+| Âge | WBC total |
+| --- | --- |
+| Adulte | 5 000 – 9 000 /mm³ |
+| Nouveau-né | 8 000 – 30 000 /mm³ |
+| 1-2 ans | 6 000 – 17 500 /mm³ |
+| 3-7 ans | 5 500 – 15 500 /mm³ |
+| 8-16 ans | 4 500 – 13 500 /mm³ |
+
+| Type cellulaire | Adulte | Enfant |
+| --- | --- | --- |
+| Neutrophiles | 56 – 68 % | 25 – 40 % |
+| Éosinophiles | 1 – 3 % | 1 – 4 % |
+| Basophiles | 0 – 1 % | 0 – 1 % |
+| Lymphocytes | 20 – 40 % | 50 – 70 % |
+| Monocytes | 4 – 10 % | 4 – 8 % |
 
 ## 5. Équilibre acido-basique (gaz du sang)
-- pH : 7,35 – 7,45. PCO₂ : 38 – 42 mmHg. HCO₃⁻ : 23 – 27 mEq/L.
+
+| Paramètre | Valeur normale |
+| --- | --- |
+| pH | 7,35 – 7,45 |
+| PCO₂ | 38 – 42 mmHg |
+| HCO₃⁻ | 23 – 27 mEq/L |
 
 ## 6. Bilan d'hémostase
-- Test de fragilité capillaire (test du lacet/carnation) : négatif.
-- Numération plaquettaire : 150 000 – 350 000/mm³.
-- Temps de saignement (TS, hémostase primaire) : 1,5 – 4 min.
-- Temps de Howell (HW, hémostase secondaire globale) : 60 – 120 s.
-- TCA/APTT (voie intrinsèque) : 20 – 50 s. Temps de Quick/TP (voie extrinsèque) : 12 – 15 s. INR : 0,9 – 1,2.
+
+| Paramètre | Valeur normale |
+| --- | --- |
+| Test de fragilité capillaire (test du lacet) | Négatif |
+| Numération plaquettaire | 150 000 – 350 000/mm³ |
+| Temps de saignement (TS, hémostase primaire) | 1,5 – 4 min |
+| Temps de Howell (HW, hémostase secondaire globale) | 60 – 120 s |
+| TCA/APTT (voie intrinsèque) | 20 – 50 s |
+| Temps de Quick/TP (voie extrinsèque) | 12 – 15 s |
+| INR | 0,9 – 1,2 |
 
 ## 7. Protéinogramme (électrophorèse des protéines, ELFO)
-- Protéinémie totale : 55 – 80 g/L.
-- Répartition électrophorétique : Albumine 50-60 % ; alpha1-globuline 4,2-7,2 % ; alpha2-globuline 6,8-12 % ; Bêta-globuline 9,3-15 % ; Gamma-globuline 13-23 %.
+
+| Fraction | Valeur normale |
+| --- | --- |
+| Protéinémie totale | 55 – 80 g/L |
+| Albumine | 50 – 60 % |
+| Alpha1-globuline | 4,2 – 7,2 % |
+| Alpha2-globuline | 6,8 – 12 % |
+| Bêta-globuline | 9,3 – 15 % |
+| Gamma-globuline | 13 – 23 % |
 
 ## 8. Clairance rénale
-- Trou anionique (AG) = Na⁺ − (Cl⁻ + HCO₃⁻) = **12 ± 2 mEq/L**.
-- Débit plasmatique rénal (RPF total) : 650 ± 150 mL/min (homme) ; 600 ± 150 mL/min (femme).
-- Débit sanguin rénal (FSR) : 1200 ± 250 mL/min (homme) ; 980 ± 180 mL/min (femme).
-- Fraction de filtration (FF) : 20 ± 2 %, calculée par **FF = (DFG / RPF total) × 100**.
-- Clairance du PAH (ClPAH), équivalente au débit plasmatique rénal efficace : **ClPAH = FPR efficace = (U_PAH × V) / P_PAH** ; RPF efficace = 90 % du RPF total, donc RPF total = ClPAH / 0,9.
+
+| Paramètre | Formule | Valeur normale |
+| --- | --- | --- |
+| Trou anionique (AG) | Na⁺ − (Cl⁻ + HCO₃⁻) | 12 ± 2 mEq/L |
+| Fraction de filtration (FF) | (DFG / RPF total) × 100 | 20 ± 2 % |
+| Clairance du PAH (ClPAH) | (U_PAH × V) / P_PAH | = RPF efficace |
+
+| Débit | Homme | Femme |
+| --- | --- | --- |
+| Débit plasmatique rénal (RPF total) | 650 ± 150 mL/min | 600 ± 150 mL/min |
+| Débit sanguin rénal (FSR) | 1200 ± 250 mL/min | 980 ± 180 mL/min |
+
+- Le RPF efficace (mesuré par ClPAH) représente ≈ 90 % du RPF total, donc RPF total = ClPAH / 0,9.
 
 ## Points à retenir pour le TP
 - Connaître par cœur les plages normales de l'ionogramme, de l'hémogramme et du bilan d'hémostase : ce sont les valeurs de référence utilisées pour interpréter tout résultat pathologique.

@@ -23,8 +23,11 @@ const NUCLEOTIDE_SYNTHESIS_COURSE = `# Synthèse des nucléotides
 
 ## 5. Voies de récupération et importance clinique
 - La **HGPRT** (hypoxanthine-guanine phosphoribosyltransférase) recycle l'hypoxanthine et la guanine libres en IMP/GMP, économisant l'énergie de la synthèse de novo.
-- **Déficit complet en HGPRT** : **syndrome de Lesch-Nyhan** (transmission liée à l'X) — hyperuricémie sévère, automutilation compulsive, retard neurodéveloppemental, goutte précoce, liés à l'accumulation d'acide urique (dégradation purique excessive, faute de recyclage).
-- Le **déficit en adénosine désaminase (ADA)**, enzyme du catabolisme purique, provoque une accumulation toxique de désoxyadénosine, particulièrement délétère pour les lymphocytes, causant un **déficit immunitaire combiné sévère (SCID)**.
+
+| Déficit enzymatique | Transmission | Mécanisme | Conséquence clinique |
+| --- | --- | --- | --- |
+| **HGPRT** (complet) | Liée à l'X | Accumulation d'acide urique (bases puriques libres dégradées faute de recyclage) | Syndrome de Lesch-Nyhan : hyperuricémie sévère, automutilation compulsive, retard neurodéveloppemental, goutte précoce |
+| **Adénosine désaminase (ADA)** | — | Accumulation toxique de désoxyadénosine, délétère pour les lymphocytes | Déficit immunitaire combiné sévère (SCID) |
 
 ## Points à retenir
 - Purines : cycle construit directement sur le PRPP (ribose activé) ; premier nucléotide = IMP.

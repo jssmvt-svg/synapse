@@ -22,9 +22,12 @@ const GLYCOGENOLYSIS_COURSE = `# Glycogénolyse
 - Environ **90 %** des résidus de glycogène sont libérés sous forme de glucose-1-phosphate par la glycogène phosphorylase ; environ **10 %** sous forme de glucose libre par l'enzyme débranchante, au niveau des points de branchement.
 
 ## 4. Corrélations cliniques
-- **Maladie de McArdle** (glycogénose type V) : déficit en glycogène phosphorylase musculaire — intolérance à l'effort, crampes, myoglobinurie à l'exercice intense.
-- **Maladie de Cori** (glycogénose type III) : déficit en enzyme débranchante — accumulation de dextrines limites (glycogène anormalement court et très branché).
-- **Maladie de von Gierke** (glycogénose type I) : déficit en glucose-6-phosphatase — hypoglycémie sévère à jeun, hépatomégalie, acidose lactique.
+
+| Maladie (glycogénose) | Enzyme déficiente | Manifestations |
+| --- | --- | --- |
+| **McArdle** (type V) | Glycogène phosphorylase musculaire | Intolérance à l'effort, crampes, myoglobinurie à l'exercice intense |
+| **Cori** (type III) | Enzyme débranchante | Accumulation de dextrines limites (glycogène court et très branché) |
+| **von Gierke** (type I) | Glucose-6-phosphatase | Hypoglycémie sévère à jeun, hépatomégalie, acidose lactique |
 
 ## Points à retenir
 - La glycogène phosphorylase (PLP-dépendante) libère du glucose-1-phosphate jusqu'à ~4 résidus du branchement ; l'enzyme débranchante (transférase + glucosidase) élimine ensuite le branchement, libérant un glucose libre.
@@ -100,14 +103,15 @@ const GLYCOGEN_METABOLISM_REGULATION_COURSE = `# Régulation du métabolisme du 
 6. Simultanément, la PKA phosphoryle et **inactive** la **glycogène synthase**.
 - Cette cascade amplifie considérablement le signal initial (chaque étape multiplie l'effet de la précédente), permettant une réponse rapide et puissante à une faible concentration hormonale.
 
-## 3. Régulation allostérique dans le muscle
-- Le **Ca²⁺**, libéré lors de la contraction musculaire, active directement la **phosphorylase kinase** en se liant à sa sous-unité **calmoduline**, indépendamment de la phosphorylation par la PKA — couplage direct entre contraction et mobilisation énergétique.
-- L'**AMP**, signal de faible charge énergétique (effort intense), active allostériquement la **glycogène phosphorylase musculaire** (isoforme spécifique), indépendamment de son état de phosphorylation.
-- Le **glucose-6-phosphate**, à l'inverse, active allostériquement la **glycogène synthase** et inhibe la glycogène phosphorylase.
+## 3. Régulation allostérique — tissu par signal
 
-## 4. Régulation allostérique dans le foie
-- Le **glucose** lui-même agit comme un signal allostérique sur la glycogène phosphorylase hépatique : une glycémie élevée favorise la liaison du glucose à l'enzyme, la rendant plus sensible à la déphosphorylation et donc à l'inactivation.
-- L'**insuline** favorise l'activation de la **protéine phosphatase 1 (PP1)**, qui déphosphoryle et inactive la glycogène phosphorylase tout en déphosphorylant et activant la glycogène synthase — effet inverse global de celui du glucagon.
+| Tissu | Signal | Cible | Effet |
+| --- | --- | --- | --- |
+| Muscle | Ca²⁺ (contraction) | Phosphorylase kinase (sous-unité calmoduline) | Active, indépendamment de la PKA |
+| Muscle | AMP (effort intense) | Glycogène phosphorylase musculaire | Active allostériquement |
+| Muscle/Foie | Glucose-6-phosphate | Glycogène synthase / phosphorylase | Active la synthase, inhibe la phosphorylase |
+| Foie | Glucose (glycémie élevée) | Glycogène phosphorylase hépatique | Favorise sa déphosphorylation/inactivation |
+| Foie | Insuline | Protéine phosphatase 1 (PP1) | Inactive la phosphorylase, active la synthase |
 
 ## 5. Rôle de la phosphorylase kinase comme intégrateur de signaux
 - La phosphorylase kinase est activée par deux voies indépendantes : la phosphorylation par la PKA (signal hormonal) et la liaison du Ca²⁺ à sa sous-unité calmoduline (signal de contraction musculaire) — elle intègre ainsi un signal hormonal systémique et un signal local de demande énergétique.

@@ -27,9 +27,15 @@ const GLUCIDES_COURSE = `# Chapitre 11 — Les glucides
 L'hydrolyse du saccharose en glucose + fructose (« sucre inverti ») change le pouvoir rotatoire de la solution.
 
 ## 5. Polysaccharides
-- **Glycogène** : réserve de glucose chez l'animal (foie, muscle), fortement branché — chaînes en **α1→4**, branchements en **α1→6** environ tous les 8 à 10 résidus.
-- **Amidon** végétal : **amylose** (chaîne linéaire α1→4, comparable à un glycogène non branché) et **amylopectine** (branchée, comme le glycogène mais moins fréquemment).
-- **Cellulose** : homopolymère de glucose en liaisons **β1→4**, strictement linéaire. Cette configuration β empêche l'organisme humain (dépourvu de cellulase) de la digérer ; elle constitue la fibre alimentaire et la paroi végétale.
+
+| Polysaccharide | Liaisons | Ramification | Digestible par l'humain ? |
+| --- | --- | --- | --- |
+| Glycogène (réserve animale, foie/muscle) | α1→4, branchements α1→6 | Forte (tous les 8-10 résidus) | Oui |
+| Amylose (amidon végétal) | α1→4 | Aucune (linéaire) | Oui |
+| Amylopectine (amidon végétal) | α1→4, branchements α1→6 | Moins fréquente que le glycogène | Oui |
+| Cellulose | β1→4 | Aucune (linéaire) | Non (pas de cellulase) |
+
+La configuration β de la cellulose empêche l'organisme humain de la digérer ; elle constitue la fibre alimentaire et la paroi végétale.
 
 ## 6. Glycoconjugués
 - **Glycoprotéine** : protéine portant une chaîne glucidique représentant moins d'environ 15 % de sa masse.
@@ -38,8 +44,15 @@ L'hydrolyse du saccharose en glucose + fructose (« sucre inverti ») change le 
   - **N-liée** : la chaîne glucidique (débutant par N-acétylglucosamine) est fixée sur l'azote amide de l'**asparagine** (Asn), au sein d'un motif consensus Asn-X-Ser/Thr.
   - **O-liée** : la chaîne glucidique est fixée sur l'oxygène hydroxyle de la **sérine** ou de la **thréonine**.
 - Les **glycosyltransférases** sont les enzymes qui catalysent l'ajout séquentiel des résidus glucidiques lors de la glycosylation.
-- Exemples de GAG : **héparine** (anticoagulant naturel, utilisé en pharmacologie), **chondroïtine sulfate** (cartilage), **acide hyaluronique** (liquide synovial, matrice extracellulaire).
 - La glycosylation module la fonction des protéines : par exemple, le nombre de chaînes glucidiques portées par l'**érythropoïétine (EPO)** influence sa demi-vie plasmatique.
+
+**Exemples de glycosaminoglycanes (GAG) :**
+
+| GAG | Localisation / rôle |
+| --- | --- |
+| Héparine | Anticoagulant naturel, utilisé en pharmacologie |
+| Chondroïtine sulfate | Cartilage |
+| Acide hyaluronique | Liquide synovial, matrice extracellulaire |
 
 ## 7. Corrélations cliniques
 - **Hémoglobine glyquée (HbA1c)** : le glucose sanguin se fixe de façon non enzymatique et irréversible sur l'hémoglobine (glycation). Le taux d'HbA1c reflète la glycémie moyenne des ~3 derniers mois et sert au suivi du diabète.

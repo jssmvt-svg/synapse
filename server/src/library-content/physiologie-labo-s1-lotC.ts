@@ -75,10 +75,16 @@ export const PROTEINOGRAM_FLASHCARDS: LibraryCardSeed[] = [
 // agent — chapitre à compléter si les captures manquantes sont retrouvées).
 const URINE_FORMULA_COURSE = `# TP — Formules de physiologie rénale (clairance et filtration)
 
-## Fraction de filtration (FF)
-- Formule : **FF = (GFR / RPFtotal) × 100**
-- Valeur normale : **20 ± 2 %**
-- Représente la proportion du débit plasmatique rénal qui est effectivement filtrée à travers les capillaires glomérulaires vers la chambre de Bowman (environ un cinquième du plasma entrant dans le rein).
+## Formules et valeurs clés
+
+| Paramètre | Formule | Valeur normale |
+| --- | --- | --- |
+| Fraction de filtration (FF) | FF = (GFR / RPFtotal) × 100 | 20 ± 2 % |
+| Trou anionique urinaire (AG) | AG = (Na⁺) − (Cl⁻ + HCO₃⁻) | 12 ± 2 mEq/L |
+| Débit plasmatique rénal total (RPFtotal) | RPFtotal = ClPAH / 0,9 | voir tableau par sexe ci-dessous |
+
+- La fraction de filtration représente la proportion du débit plasmatique rénal effectivement filtrée à travers les capillaires glomérulaires vers la chambre de Bowman (environ un cinquième du plasma entrant dans le rein).
+- Le trou anionique urinaire est utilisé pour évaluer l'équilibre des ions non mesurés dans l'urine, notamment dans l'exploration des acidoses métaboliques (aide à différencier une cause rénale d'une cause digestive).
 
 ## Débit plasmatique rénal (RPF) à partir de la clairance du PAH
 - Le PAH (acide para-amino-hippurique) est presque totalement épuré du plasma en un seul passage rénal (filtration + sécrétion tubulaire).
@@ -98,11 +104,6 @@ Le débit sanguin rénal total inclut, contrairement au RPF, le volume occupé p
 | --- | --- |
 | Homme | 1200 ± 250 mL/min |
 | Femme | 980 ± 180 mL/min |
-
-## Trou anionique urinaire (Urine Anion Gap, AG)
-- Formule : **AG = (Na⁺) − (Cl⁻ + HCO₃⁻)**
-- Valeur normale : **12 ± 2 mEq/L**
-- Utilisé pour évaluer l'équilibre des ions non mesurés dans l'urine, notamment dans l'exploration des acidoses métaboliques (aide à différencier une cause rénale d'une cause digestive).
 
 ## Seuil de débit de filtration glomérulaire (GFR) pour la maladie rénale chronique
 - Un GFR **< 60 mL/min/1,73 m²**, persistant plus de 3 mois, définit la maladie rénale chronique (Boala Cronică de Rinichi, BCR).

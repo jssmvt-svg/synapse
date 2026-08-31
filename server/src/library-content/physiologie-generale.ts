@@ -38,10 +38,13 @@ const CELL_MEMBRANE_COURSE = `# Physiologie générale — Lecture 1 : la membra
 ## 3. Transport actif
 - **Caractéristiques** : se développe contre le gradient électrochimique, nécessite un transporteur spécifique et une consommation d'ATP, dépend du métabolisme cellulaire, limité par le Tmax, peut être compétitif entre substances chimiquement apparentées (ex. acides aminés).
 - **Transport actif primaire** (consommation directe d'énergie) : le transporteur est une **pompe ionique (ATPase)** (ATP → ADP + Pi + énergie).
-  - **Pompe Na⁺/K⁺-ATPase** : transporte 3 Na⁺ vers l'extérieur et 2 K⁺ vers l'intérieur pour 1 ATP ; consomme 50 % de l'énergie des neurones et néphrocytes, 10 % dans le muscle et le foie ; pompe **électrogène** (maintient le potentiel de repos, rétablit l'équilibre ionique après repolarisation, fournit le gradient de Na⁺ nécessaire au transport actif secondaire, maintient le volume cellulaire) ; activée par l'insuline, les hormones thyroïdiennes, les catécholamines ; inhibée par l'ouabaïne et les digitaliques (digoxine).
-  - **Pompe Ca²⁺** : au sarcolemme (expulse 2 Ca²⁺) et au niveau du réticulum sarcoplasmique (SERCA, recapture 2 Ca²⁺) → relaxation musculaire.
-  - **Pompe H⁺/K⁺** : cellules pariétales gastriques (formation de HCl) et néphrocytes (acidification urinaire).
-  - **Pompes H⁺** : membrane mitochondriale interne (phosphorylation oxydative) et néphrocytes (équilibre acido-basique).
+
+| Pompe | Localisation | Rôle |
+| --- | --- | --- |
+| **Na⁺/K⁺-ATPase** | Toutes cellules (50 % énergie neurones/néphrocytes, 10 % muscle/foie) | 3 Na⁺ dehors / 2 K⁺ dedans par ATP ; électrogène, maintient le potentiel de repos et le gradient de Na⁺ ; activée par insuline, hormones thyroïdiennes, catécholamines ; inhibée par ouabaïne et digitaliques |
+| **Pompe Ca²⁺** | Sarcolemme (expulse 2 Ca²⁺) et réticulum sarcoplasmique (SERCA, recapture 2 Ca²⁺) | Relaxation musculaire |
+| **Pompe H⁺/K⁺** | Cellules pariétales gastriques ; néphrocytes | Formation de HCl ; acidification urinaire |
+| **Pompes H⁺** | Membrane mitochondriale interne ; néphrocytes | Phosphorylation oxydative ; équilibre acido-basique |
 - **Transport actif secondaire** (consommation indirecte, utilise le gradient de Na⁺ créé par la pompe Na⁺/K⁺) :
   - **Cotransport** (même sens que Na⁺) : Na⁺/glucose, Na⁺/acides aminés.
   - **Contre-transport** (sens opposé à Na⁺) : échangeur Na⁺/H⁺, échangeur Na⁺/Ca²⁺ (3 Na⁺ entrent pour 1 Ca²⁺ qui sort).
@@ -157,16 +160,22 @@ const RECEPTORS_SIGNALING_COURSE = `# Physiologie générale — Lecture 2 : ré
 ## 2. Protéines G et systèmes de signalisation intracellulaire
 - **Protéines G** : protéines transductrices attachées à la face interne de la membrane, couplant le récepteur à l'effecteur (canal K⁺/Ca²⁺ ou enzyme). Structure : sous-unité α (GTPase, forme active liée au GTP, forme inactive liée au GDP) + complexe βγ.
 - **Types selon la sous-unité α** :
-  - **Gs** (récepteurs β1-adrénergiques) : active l'adénylate cyclase → cAMP.
-  - **Gi** (récepteurs β2-adrénergiques, M2-cholinergiques) : inhibe l'adénylate cyclase → ↓cAMP, efflux K⁺.
-  - **Gq** (récepteurs α1-adrénergiques, M1/M3-cholinergiques) : active la phospholipase C → IP₃, DAG → Ca²⁺-calmoduline.
+
+| Protéine G | Récepteurs couplés | Effecteur / effet |
+| --- | --- | --- |
+| **Gs** | β1-adrénergiques | Active l'adénylate cyclase → ↑cAMP |
+| **Gi** | β2-adrénergiques, M2-cholinergiques | Inhibe l'adénylate cyclase → ↓cAMP, efflux K⁺ |
+| **Gq** | α1-adrénergiques, M1/M3-cholinergiques | Active la phospholipase C → IP₃, DAG → Ca²⁺-calmoduline |
 - **Rôles des protéines G** : activation de flux ioniques transmembranaires (Ca²⁺, K⁺), modulation d'enzymes membranaires/intracellulaires (synthèse de seconds messagers), modulation de la transcription génique.
 - **Schéma général de signalisation** : messager primaire (ordre I) → récepteur membranaire → messager secondaire (ordre II) → messager tertiaire (ordre III = protéine kinase) → réponse cellulaire. Amplification de l'information : ×10 au niveau du récepteur, ×100-1000 par la « masse critique » de protéines intracellulaires activées.
 - **Les 4 systèmes de signalisation intracellulaire** :
-  1. **Adénylate cyclase - cAMP** : messagers = neurotransmetteurs, hormones polypeptidiques ; couplage Gs ou Gi ; cAMP formé à partir de l'ATP, activant la **protéine kinase A (PKA)** ; inactivation par la cAMP-phosphodiestérase. Voie Gs : NA/A stimulent le cœur via β1. Voie Gi : ACh inhibe le cœur via M2.
-  2. **Guanylate cyclase - cGMP** : ex. l'ANP se lie à son récepteur, couplé à la guanylate cyclase membranaire, générant du cGMP qui active la **protéine kinase G (PKG)** → relaxation du muscle lisse vasculaire (vasodilatation).
-  3. **Dérivés du phosphatidylinositol** : phospholipase C couplée à Gq, générant IP₃ et DAG à partir du PIP₂ ; DAG active la **protéine kinase C (PKC)** ; IP₃ active le système Ca²⁺-calmoduline. Ex. la NA contracte le muscle lisse vasculaire via α1 ; l'ACh augmente la sécrétion des glandes exocrines via M1 et contracte le muscle lisse digestif via M3 ; l'ACh stimule la libération de NO endothélial (M3), qui vasodilate via la guanylate cyclase soluble.
-  4. **Ca²⁺-calmoduline** : système le plus complexe, activé par l'augmentation du Ca²⁺ cytosolique (libération du RE via IP₃, ou influx par canaux membranaires) ; inactivé par la diminution du Ca²⁺ (recapture RE par pompe Ca²⁺, efflux membranaire) ; le complexe 4 Ca²⁺-calmoduline active la myosin light chain kinase (MLCK), phosphoryle les chaînes légères de myosine, formant les ponts actine-myosine → contraction du muscle lisse.
+
+| Système | Couplage | Second messager | Kinase activée | Exemple |
+| --- | --- | --- | --- | --- |
+| **Adénylate cyclase - cAMP** | Gs ou Gi | cAMP (à partir de l'ATP, inactivé par la cAMP-phosphodiestérase) | Protéine kinase A (PKA) | NA/A stimulent le cœur via β1 (Gs) ; ACh inhibe le cœur via M2 (Gi) |
+| **Guanylate cyclase - cGMP** | Récepteur couplé directement à la guanylate cyclase membranaire | cGMP | Protéine kinase G (PKG) | L'ANP relaxe le muscle lisse vasculaire (vasodilatation) |
+| **Dérivés du phosphatidylinositol** | Gq → phospholipase C | IP₃ et DAG (à partir du PIP₂) | DAG → PKC ; IP₃ → Ca²⁺-calmoduline | NA contracte le muscle lisse vasculaire (α1) ; ACh stimule les glandes exocrines (M1) et contracte le muscle digestif (M3) ; ACh (M3) stimule le NO endothélial |
+| **Ca²⁺-calmoduline** | Augmentation du Ca²⁺ cytosolique (IP₃ ou canaux membranaires) | Complexe 4 Ca²⁺-calmoduline | MLCK (myosin light chain kinase) | Phosphorylation des chaînes légères de myosine → contraction du muscle lisse |
 
 ## 3. Régulation et contrôle des fonctions de l'organisme
 - **Homéostasie** : capacité de l'organisme à maintenir des paramètres (biochimiques, hémodynamiques) dans les limites normales, indépendamment des variations du milieu extérieur.
@@ -291,15 +300,23 @@ const NEURON_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 3 : le ne
      - **Repolarisation** (+30 → -70 mV) : arrêt de l'influx Na⁺ (inactivation soudaine des canaux Na⁺ voltage-dépendants) ; augmentation lente de l'efflux K⁺ (délai de 0,3 ms, maximum ×300 quand les canaux Na⁺ sont inactivés).
   3. **Post-potentiel positif (hyperpolarisation)** : l'efflux K⁺ ramène le potentiel de repos ; activation de la pompe Na⁺/K⁺ → légère hyperpolarisation (-80 mV) avant rétablissement de l'équilibre initial.
 - **Périodes d'excitabilité neuronale** (dépendent de la dynamique des portes du canal Na⁺) :
-  1. **Période réfractaire absolue (PRA)** : membrane inexcitable, aucune réponse ; comprend la phase rapide de dépolarisation (canaux Na⁺ activés) et le début de la repolarisation (canaux Na⁺ inactivés).
-  2. **Période réfractaire relative (PRR)** : membrane hypoexcitable, réponse incomplète pour des stimuli supra-liminaires ; comprend la fin de la repolarisation et le post-potentiel positif.
-  3. **Période normoexcitable (PNE)** : excitabilité normale, réponse complète (« tout ou rien ») pour un stimulus liminaire ; correspond au potentiel de repos, tous les canaux Na⁺ à l'état de repos.
+
+| Période | État de la membrane | Réponse | Correspondance |
+| --- | --- | --- | --- |
+| **Réfractaire absolue (PRA)** | Inexcitable | Aucune réponse | Dépolarisation rapide (Na⁺ activés) + début repolarisation (Na⁺ inactivés) |
+| **Réfractaire relative (PRR)** | Hypoexcitable | Réponse incomplète, stimulus supra-liminaire requis | Fin de repolarisation + post-potentiel positif |
+| **Normoexcitable (PNE)** | Excitabilité normale | Réponse complète (« tout ou rien ») dès le seuil | Potentiel de repos, canaux Na⁺ tous au repos |
 
 ## 4. Conduction de l'excitation dans la fibre nerveuse
 - **Conduction dendritique** : afférente, **avec décrément** (perte d'amplitude), participe à la sommation temporelle/spatiale jusqu'au cône axonique.
 - **Conduction axonique** : efférente, **sans décrément** ; débute au cône axonique (nombre maximal de canaux Na⁺ voltage-dépendants, seuil d'excitabilité bas) ; propagation auto-régénérative ; vitesse inversement proportionnelle à la résistance électrique (donc proportionnelle au diamètre de la fibre) et dépendante de la présence de myéline.
-- **Fibres amyéliniques** (type C, 0,5-1 μm, vitesse 0,5-2 m/s) : dépolarisation localisée au cône axonique → **courants locaux de Hermann** entre zone active (repolarisée, période réfractaire, conduction unidirectionnelle) et zones adjacentes → propagation progressive jusqu'au seuil ; vitesse lente (nombreux canaux de fuite), forte consommation énergétique (nombreuses pompes Na⁺/K⁺ actives).
-- **Fibres myélinisées** (type A, 3-20 μm, 5-120 m/s ; type B, 1-3 μm, 3-15 m/s) : conduction **saltatoire** d'un nœud de Ranvier à l'autre — la dépolarisation d'un nœud entraîne une propagation électrotonique (courants de Stämpfli) jusqu'au nœud suivant, qui atteint le seuil et génère un nouveau PA. Vitesse élevée (myéline isolante, nombreux canaux Na⁺ nodaux, proportionnelle au diamètre et à la distance internodale), faible consommation énergétique. Formule : V(m/s) = 6 × diamètre de l'axone (μm) ; ex. une fibre de 20 μm conduit à 120 m/s.
+| Fibre | Diamètre | Vitesse | Conduction |
+| --- | --- | --- | --- |
+| **Amyélinique (type C)** | 0,5-1 μm | 0,5-2 m/s | Courants locaux de Hermann, propagation continue lente, forte consommation énergétique (nombreuses pompes Na⁺/K⁺) |
+| **Myélinisée type B** | 1-3 μm | 3-15 m/s | Saltatoire (nœud à nœud), courants de Stämpfli |
+| **Myélinisée type A** | 3-20 μm | 5-120 m/s | Saltatoire, vitesse la plus élevée, faible consommation énergétique |
+
+Formule de conduction saltatoire : V(m/s) = 6 × diamètre de l'axone (μm) ; ex. une fibre de 20 μm conduit à 120 m/s.
 - **Lois de la conduction axonique** :
   1. **Intégrité physiologique** : une fibre lésée, comprimée ou sectionnée ne peut conduire l'excitation (dégénérescence wallérienne, refroidissement, anesthésie locale bloquant les canaux Na⁺). Régénération axonale possible en présence de la gaine de Schwann (1-4,5 mm/jour) ; cicatrisation avec perte de l'axone en son absence.
   2. **Conduction isolée** : chaque fibre conduit son influx isolément, sans propagation aux fibres voisines.
@@ -412,7 +429,12 @@ const MUSCLE_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 4 : physi
   - **Myofilaments épais** (myosine, diamètre 10 nm, longueur 1,5 μm) et **fins** (actine, diamètre 5 nm, longueur 2 μm) ; ratio 1 myosine/6 actine et 1 actine/3 myosine dans la bande A.
   - **Sarcomère** : unité morpho-fonctionnelle des myofibrilles, formé d'1 bande A et de 2 demi-disques I, délimité par 2 bandes Z, longueur de repos 2-2,25 μm ; se raccourcit par glissement des myofilaments d'actine entre ceux de myosine.
   - **Protéines contractiles** : actine et myosine. **Protéines régulatrices** : troponine et tropomyosine.
-- **Myoglobine** : protéine à Fe²⁺, stockage temporaire d'O₂, favorise la dissociation de HbO₂ dans le muscle. **Fibres rouges** : riches en myoglobine, métabolisme aérobie, force/vitesse réduites, résistantes à la fatigue. **Fibres blanches** : pauvres en myoglobine, métabolisme anaérobie, force/vitesse accrues, moins résistantes à la fatigue.
+- **Myoglobine** : protéine à Fe²⁺, stockage temporaire d'O₂, favorise la dissociation de HbO₂ dans le muscle.
+
+| Type de fibre | Myoglobine | Métabolisme | Force / vitesse | Fatigue |
+| --- | --- | --- | --- | --- |
+| **Fibres rouges** | Riche | Aérobie | Réduites | Résistantes |
+| **Fibres blanches** | Pauvre | Anaérobie | Accrues | Peu résistantes |
 - **Myosine** : 2 chaînes lourdes + 4 chaînes légères ; **méromyosine légère (LMM)** = queue (hélice α) ; **méromyosine lourde (HMM)** = tête (site d'interaction avec l'actine + ATPase Mg²⁺-dépendante) et cou (mobilité de la tête). Orientation de la tête : 90° au repos, 45° en contraction.
 - **Actine** : forme globulaire (G-actine, monomère) et fibrillaire (F-actine, polymère de 340-380 monomères) ; capacités de polymérisation et d'interaction avec la myosine.
 - **Tropomyosine** : 1 molécule/7 monomères de G-actine ; à [Ca²⁺] cytosolique basse (10⁻⁷ M, repos), elle s'interpose entre actine et myosine, empêchant leur interaction ; à [Ca²⁺] élevée (10⁻⁵ M, stimulation), elle se déplace latéralement, permettant la formation des ponts actine-myosine.
@@ -446,8 +468,16 @@ const MUSCLE_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 4 : physi
 - **Structures spécialisées** : **cavéoles** remplacent les tubules T ; **corps denses** remplacent les bandes Z ; **connexons** = synapses électriques entre cellules.
 - Myofilaments d'actine/myosine **non organisés en sarcomères** ; activité ATPase de myosine réduite ; interaction actine-myosine dépendante de la **phosphorylation des chaînes légères de myosine**. Unité contractile : 15 myofilaments d'actine liés à 2 corps denses, autour d'un filament de myosine unique. Protéines régulatrices : tropomyosine, **calmoduline** (remplace la troponine C).
 - **Types de fibres musculaires lisses** :
-  - **Multiunitaire** : muscle intrinsèque de l'œil, gros vaisseaux ; organisation séparée, sans connexons ; innervation individuelle (jonction neuromusculaire, 1 varicosité/fibre) ; potentiel de repos constant à -60 mV ; contraction par dépolarisation (influx Ca²⁺) déclenchée par stimulation nerveuse uniquement, relaxation par hyperpolarisation (efflux K⁺, stimulation sympathique) ; contrôle exclusivement nerveux ; chaque fibre se contracte individuellement (contraction graduelle).
-  - **Unitaire** : parois des organes creux, petits vaisseaux ; groupée en couches, nombreux connexons ; innervation superficielle ; potentiel de repos oscillant lentement autour de -50 mV (fréquence 3-12/min, amplitude de quelques mV, automatisme maintenu par une cellule pacemaker) ; les PA (spikes de 50 ms, seuil -40 mV) surviennent sur le plateau de l'onde lente, uniquement par stimulation nerveuse ; contraction propagée en unité fonctionnelle (syncytium) via les connexons ; contrôle nerveux et hormonal.
+
+| | Multiunitaire | Unitaire |
+| --- | --- | --- |
+| **Localisation** | Muscle intrinsèque de l'œil, gros vaisseaux | Parois des organes creux, petits vaisseaux |
+| **Organisation** | Séparée, sans connexons | Groupée en couches, nombreux connexons |
+| **Innervation** | Individuelle (1 varicosité/fibre) | Superficielle |
+| **Potentiel de repos** | Constant, -60 mV | Oscillant lentement autour de -50 mV (3-12/min), automatisme par cellule pacemaker |
+| **Déclenchement** | Dépolarisation par stimulation nerveuse uniquement | PA (spikes 50 ms, seuil -40 mV) sur le plateau de l'onde lente |
+| **Contraction** | Individuelle, graduelle | Propagée en syncytium via les connexons |
+| **Contrôle** | Exclusivement nerveux | Nerveux et hormonal |
 - **Couplages excitation-contraction du muscle lisse** :
   - **Électro-mécanique** : l'influx nerveux active les canaux Ca²⁺ voltage-dépendants (type L) du sarcolemme.
   - **Pharmaco-mécanique** : les facteurs constricteurs activent les canaux Ca²⁺ ligand-dépendants du sarcolemme et la protéine Gq/PLC → IP₃ (messager secondaire) active les canaux Ca²⁺ du RS.

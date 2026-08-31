@@ -43,6 +43,15 @@ const CARDIAC_MEMBRANE_POTENTIAL_COURSE = `# Physiologie cardiovasculaire — Po
 
 ## 5. Le potentiel d'action (PA) des fibres à réponse rapide (contractiles atriales/ventriculaires, système His-Purkinje)
 - **Définition** : changement électrique de potentiel membranaire en réponse à un stimulus, dû à une modification séquentielle de la conductance membranaire aux ions. 5 phases.
+
+| Phase | Nom | Base ionique principale |
+| --- | --- | --- |
+| 0 | Dépolarisation rapide (upstroke) | Influx rapide de Na⁺ |
+| 1 | Repolarisation précoce (notch) | Efflux transitoire de K⁺ (Ito) |
+| 2 | Plateau | Influx lent de Ca²⁺ (type L) vs efflux lent de K⁺ |
+| 3 | Repolarisation finale | Efflux de K⁺ (IK puis IK1) |
+| 4 | Repos | Pompe Na⁺/K⁺, pompe Ca²⁺, échangeur Na⁺/Ca²⁺ |
+
 - **Phase 0 — Dépolarisation rapide (upstroke)** : au seuil de stimulation, conductance Na⁺ soudaine → influx de Na⁺ → Pmembrane passe de Pr (-85 mV) à Pseuil (-55 mV) → au seuil, ouverture soudaine des canaux Na⁺ rapides voltage-dépendants → Pmembrane atteint +20 à +30 mV (potentiel d'équilibre du Na⁺). Processus très rapide (1-2 ms). La partie positive du PA est l'« overshoot ». Les bloqueurs des canaux Na⁺ (anesthésiques locaux, tétrodotoxine, antiarythmiques) réduisent la conduction Na⁺, prolongeant la phase 0 et le PA.
 - **Phase 1 — Repolarisation rapide précoce** : générée par l'inactivation de l'influx Na⁺ et l'activation d'un courant sortant transitoire de K⁺ (canaux Ito) → repolarisation rapide et transitoire vers 0 mV (« encoche »/notch). Rôle : positionner le potentiel dans la plage optimale pour l'activation des canaux Ca²⁺ de type L.
 - **Phase 2 — Plateau** : causée par deux courants ioniques opposés maintenant le potentiel proche de 0 mV : influx lent et prolongé de Ca²⁺ via les canaux de type L, et efflux lent de K⁺. Longue durée (~220 ms). Le Ca²⁺ entrant déclenche la libération de Ca²⁺ du réticulum sarcoplasmique (« libération de calcium induite par le calcium »), initiant la contraction. Modulation par effet inotrope : influx Ca²⁺ augmenté (effet inotrope positif) par SNS, catécholamines, bêta-agonistes, théophylline ; diminué (effet inotrope négatif) par acétylcholine, bêta-bloquants (non sélectifs comme le propranolol, cardiosélectifs comme l'aténolol), inhibiteurs calciques, hypoxie, acidose.
@@ -171,6 +180,15 @@ const EXCITO_CONDUCTORY_SYSTEM_COURSE = `# Physiologie cardiovasculaire — Syst
 - **Rythmicité (fonction chronotrope)** : régularité de l'activité pacemaker déterminant la fréquence cardiaque (FC) et la régularité de la succession des battements, également influencée par les facteurs neuro-humoraux.
 
 ## 2. Composants du système excito-conducteur cardiaque
+
+| Composant | Fréquence de décharge | Rôle principal |
+| --- | --- | --- |
+| Nœud sino-atrial (NSA) | 100-110 batt/min (pacemaker actif) | Détermine la fréquence cardiaque |
+| Voies internodales | — | Conduisent le NSA vers le NAV |
+| Nœud atrio-ventriculaire (NAV) | 40-50 batt/min (pacemaker latent) | Délai physiologique, filtre électrique |
+| Faisceau de His | 25-35 batt/min (pacemaker latent) | Conduit le NAV vers les ventricules |
+| Réseau de Purkinje | 20-30 batt/min (pacemaker latent) | Stimule le myocarde ventriculaire (≈4 m/s) |
+
 1. **Nœud sino-atrial (NSA)** : pacemaker physiologique actif du cœur, déterminant la FC. Fréquence de décharge intrinsèque la plus élevée : 100-110 batt/min. Sous influence du système nerveux végétatif : au repos, tonus vagal (PSNS) prédominant → FC de repos = 60-100 batt/min ; à l'effort, SNS prédominant → FC augmentée (FC maximale ≈ 220-âge ; FC optimale ≈ 80% de la FC maximale).
 2. **Voies internodales** : conduisent les stimuli du NSA vers le NAV. Trois voies physiologiques : antérieure (**faisceau de Bachmann**, conduit préférentiellement OD→OG), médiane (**faisceau de Wenckebach**), postérieure (**faisceau de Thorel**). Pathologiquement, des voies accessoires contournant le NAV existent (ex. **faisceau de Kent** : conduit directement du NSA à la paroi ventriculaire, sans le délai physiologique du NAV → syndrome de préexcitation).
 3. **Nœud atrio-ventriculaire (NAV)** : fréquence de décharge plus lente que le NSA (40-50 batt/min, pacemaker latent). Rôles : (1) seule connexion électrique physiologique entre oreillettes et ventricules ; (2) délai physiologique de transmission de l'excitation vers les ventricules (0,12-0,20 s), permettant à la systole atriale de précéder la systole ventriculaire ; (3) prend le relais du pacemaker en cas de lésion du NSA ; (4) rôle de « filtre électrique », protégeant les ventricules de stimuli supraventriculaires trop rapides.
@@ -361,6 +379,14 @@ const ECG_PHYSIOLOGY_COURSE = `# Physiologie cardiovasculaire — Bases physiolo
 
 ## 7. Caractéristiques des paramètres de l'ECG normal
 - Le tracé de chaque cycle cardiaque comprend : **ondes** (P, Q, R, S, T, U), **segments** (portions entre ondes) et **intervalles** (segments + ondes). Conditions standards : amplitude 1 mm = 0,1 mV ; temps 1 mm = 0,04 s.
+
+| Onde | Représente | Durée | Amplitude |
+| --- | --- | --- | --- |
+| P | Dépolarisation atriale | 0,06-0,10 s | 0,10-0,25 mV |
+| QRS | Dépolarisation ventriculaire/septale | 0,08-0,10 s | 1-1,5 mV |
+| T | Repolarisation ventriculaire | 0,13-0,30 s | < 1/3 du QRS |
+| U | Repolarisation des muscles papillaires | — | < 1/3 de l'onde T |
+
 - **Onde P** : dépolarisation atriale (OD → OG), définit le rythme sinusal (« P sinusale »). Aspect : ronde, de taille uniforme. Orientation : positive dans la plupart des dérivations (maximale en II, aVF), négative en aVR, positive ou biphasique en V1-V2. Durée 0,06-0,10 s. Amplitude 0,10-0,25 mV. Axe électrique moyen dans le plan frontal : 0° à -5°. P pathologique : P mitrale = hypertrophie de l'OG ; P pulmonaire = hypertrophie de l'OD.
 - **Complexe QRS** : partie la plus significative du tracé, représente la dépolarisation des ventricules et du septum interventriculaire. Onde Q = première onde négative (durée < 0,04 s, amplitude < 1/4 de R en III/aVF/V5-V6, absente en V1-V4). Onde R = première onde positive (présente dans la plupart des dérivations). Onde S = deuxième onde négative (ou première négative après R). Onde R' = deuxième onde positive. Durée 0,08-0,10 s. Amplitude 1-1,5 mV (minimum 0,5 mV en I/II/III, 1 mV en précordiales). Axe électrique dans le plan frontal : -30° à +110° (axe intermédiaire = +30° à +60°).
   - Genèse du QRS en dérivation II (référence chez le sujet normal) : dépolarisation du septum IV (gauche→droite, vers le haut) → vecteur négatif → onde Q ; puis dépolarisation de l'apex et des parois latérales (forces gauches > forces droites) → onde R (positive) ; puis dépolarisation des bases (bas vers haut et vers la droite) → onde S (négative).
@@ -371,6 +397,14 @@ const ECG_PHYSIOLOGY_COURSE = `# Physiologie cardiovasculaire — Bases physiolo
 - **Onde U** : correspond à la repolarisation des muscles papillaires ou à la post-dépolarisation des fibres de Purkinje. Amplitude habituellement < 1/3 de l'amplitude de l'onde T dans la même dérivation (< 0,1 mV). Direction identique à celle de l'onde T. Plus visible à fréquence cardiaque basse, mieux vue en précordiales droites (V1, V2).
 
 ## 8. Segments et intervalles
+
+| Segment/intervalle | Représente | Durée normale |
+| --- | --- | --- |
+| Segment ST | Fin dépolarisation + début repolarisation ventriculaires | 0,05-0,15 s |
+| Intervalle PR (PQ) | Conduction atrio-ventriculaire | 0,12-0,21 s |
+| Intervalle QT | Systole électrique ventriculaire | 0,35-0,45 s |
+| Intervalle RR | Une révolution cardiaque complète | Variable (FC-dépendant) |
+
 - **Segment ST, point J** : le segment ST représente la dernière partie de la dépolarisation ventriculaire et le début de la repolarisation, habituellement isoélectrique (±1 mm), durée 0,05-0,15 s. Pathologiquement : lésion sous-épicardique → sus-décalage ST ; lésion sous-endocardique → sous-décalage ST. Le point J (jonction) est le repère marquant la fin de la dépolarisation ventriculaire, à l'intersection entre le QRS (très vertical) et le segment ST (habituellement horizontal).
 - **Intervalle PR (PQ)** : signifie la conduction atrio-ventriculaire (dépolarisation atriale, conduction intra-atriale, NAV, conduction His-Purkinje). Durée normale : 0,12-0,21 s. Pathologiquement : PR < 0,12 s = syndrome de préexcitation ; PR > 0,24 s = tonus vagal augmenté (réflexe de Bezold-Jarisch), induit pharmacologiquement (bêta-bloquants), ou bloc AV (1er degré : PR > 0,24 s ; 2e degré Mobitz 1/Wenckebach : PR s'allonge progressivement ; Mobitz 2 : PR constant avec battements bloqués 2:1, 3:1 ; 3e degré : dissociation AV complète).
 - **Intervalle QT** : signifie la systole électrique ventriculaire (dépolarisation + repolarisation ventriculaires). QT corrigé (QTc) selon Bazett = QT/√RR. Durée normale : 0,35-0,45 s. QTc < 0,35 s = syndrome du QT court ; QT long > 0,44 s (hommes), > 0,46 s (femmes). L'allongement du QT est potentiellement létal (risque de dépolarisation incontrôlée avant repolarisation complète de certaines cellules). Effets pharmacologiques : hypercalcémie et digitaline raccourcissent le QT ; hypocalcémie, quinidine et procaïnamide l'allongent.
@@ -519,6 +553,12 @@ const HEART_CONTRACTILITY_COURSE = `# Physiologie cardiovasculaire — Contracti
 - **Effets d'une postcharge augmentée** : postcharge (P2) augmentée → pression intraventriculaire augmentée → volume d'éjection systolique (VES) réduit → volume résiduel (VTSV) augmenté. Compensation : la quantité de VTSV additionnée au retour veineux normal augmente le VTDV suivant, ce qui active le mécanisme de Frank-Starling au battement suivant → force de contraction augmentée. Conséquence : consommation d'O2 myocardique (MVO2) augmentée. Situations pathologiques : pression aortique augmentée (HTA, sténose aortique) ou rayon ventriculaire augmenté (insuffisance cardiaque, insuffisance aortique). Compensation pour réduire la tension : augmentation de l'épaisseur pariétale (h) → hypertrophie cardiaque, réduisant la tension mais augmentant la MVO2 (pour une période limitée).
 
 ## 6. Types d'hypertrophie cardiaque compensatoire
+
+| Type | Cause | Sarcomères ajoutés | Volume ventriculaire | PTDV |
+| --- | --- | --- | --- | --- |
+| Concentrique | Surcharge de pression chronique (HTA, sténose aortique) | En parallèle | Normal | Augmentée |
+| Excentrique | Surcharge de volume chronique (insuffisance cardiaque, insuffisance aortique) | En série | Augmenté | Augmentée |
+
 - **Hypertrophie concentrique** (en réponse à une surcharge de pression chronique, ex. HTA, sténose aortique) : nouveaux sarcomères ajoutés « en parallèle » ; volume ventriculaire normal, mais PTDV augmentée.
 - **Hypertrophie excentrique** (en réponse à une surcharge de volume chronique, ex. insuffisance cardiaque, insuffisance aortique) : nouveaux sarcomères ajoutés « en série » ; volume ventriculaire augmenté, PTDV augmentée.
 - **Effets négatifs de l'hypertrophie dans le temps** : besoin accru en O2 sans formation de nouveaux capillaires → déséquilibre offre/demande d'O2 → ischémie myocardique ; compliance myocardique réduite par l'épaississement de la paroi ventriculaire → risque accru d'œdème pulmonaire ; altération fonctionnelle irréversible → insuffisance cardiaque. Remarque : chez les sportifs entraînés, l'hypertrophie physiologique s'accompagne de la formation de nouveaux capillaires, sans déséquilibre offre/demande d'O2.

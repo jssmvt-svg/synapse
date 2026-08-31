@@ -7,16 +7,17 @@ import { single } from "./qcm-helpers.js";
 // "Leukogram non N" (auto-généré à partir de ses notes, réponses toutes visibles).
 const LEUKOGRAM_COURSE = `# TP — Leucogramme normal et pathologique
 
-## 1. Valeurs normales chez l'adulte
-- **Leucocytes totaux (WBC)** : 5 000 – 9 000 /mm³.
-- **Neutrophiles (NE)** : 56 – 68 %.
-- **Lymphocytes (LY)** : 20 – 40 %.
-- **Monocytes (MO)** : 4 – 10 %.
+## 1. Valeurs normales : adulte vs enfant
 
-## 2. Particularités pédiatriques
-- Chez l'enfant de 1-2 ans, le WBC total normal est plus élevé que chez l'adulte (6 000 – 17 500 /mm³) : le système immunitaire est très actif à cet âge.
-- Chez l'enfant en général : lymphocytes plus élevés (20-70 % selon l'âge) et neutrophiles plus bas que chez l'adulte — profil inverse de l'adulte, où les neutrophiles dominent.
-- Monocytes chez l'enfant : 4 – 8 % (légèrement plus bas et plus étroit que chez l'adulte, 4-10 %).
+| Paramètre | Adulte | Enfant |
+| --- | --- | --- |
+| Leucocytes totaux (WBC) | 5 000 – 9 000 /mm³ | 6 000 – 17 500 /mm³ (1-2 ans) |
+| Neutrophiles (NE) | 56 – 68 % | plus bas que l'adulte |
+| Lymphocytes (LY) | 20 – 40 % | 20 – 70 % selon l'âge |
+| Monocytes (MO) | 4 – 10 % | 4 – 8 % |
+
+- Chez l'enfant, le système immunitaire très actif explique un WBC total plus élevé.
+- Le profil pédiatrique (lymphocytes élevés, neutrophiles relativement bas) est **inversé** par rapport à l'adulte, où les neutrophiles dominent.
 
 ## 3. Tableau d'interprétation du leucogramme par contexte clinique
 | Contexte | Nombre total (Nr.L) | NE | EO | BA | LY | MO |

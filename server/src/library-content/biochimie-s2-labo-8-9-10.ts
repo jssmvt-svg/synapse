@@ -15,9 +15,13 @@ const LAB_S2_8_COURSE = `# Labo 8 — Métabolisme des protéines : dosage des t
 - Réaction générale : *acide aminé + α-cétoglutarate ⇌ α-céto acide + glutamate* — réaction réversible, impliquée à la fois dans la dégradation et la synthèse des acides aminés.
 
 ## 3. ALAT (ALT/GPT) et ASAT (AST/GOT)
-- **ALAT** (alanine aminotransférase, SGPT) : transfère le groupe amine de la L-alanine à l'α-cétoglutarate → pyruvate + L-glutamate. Localisation quasi exclusivement **hépatique** (cytoplasme uniquement).
-- **ASAT** (aspartate aminotransférase, SGOT) : interconvertit aspartate + α-cétoglutarate ⇌ oxaloacétate + glutamate. Présente dans le foie, le **cœur**, le **muscle squelettique**, les reins, le cerveau et les globules rouges — localisation **bilocale** (cytoplasme ET mitochondrie).
-- Conséquence clinique : l'**ALAT est plus spécifique du foie** que l'ASAT, car cette dernière peut s'élever dans des pathologies extra-hépatiques (infarctus du myocarde, atteintes musculosquelettiques, pancréatite aiguë, anémie hémolytique, atteinte rénale aiguë).
+
+| | ALAT (SGPT) | ASAT (SGOT) |
+| --- | --- | --- |
+| Réaction | L-alanine + α-cétoglutarate → pyruvate + L-glutamate | Aspartate + α-cétoglutarate ⇌ oxaloacétate + glutamate |
+| Localisation subcellulaire | Cytoplasme uniquement | Bilocale (cytoplasme et mitochondrie) |
+| Distribution tissulaire | Quasi exclusivement hépatique | Foie, cœur, muscle squelettique, reins, cerveau, GR |
+| Spécificité | Plus spécifique du foie | Peut s'élever hors atteinte hépatique (IDM, muscle, pancréatite, hémolyse, rein) |
 - Lors d'une atteinte hépatique légère, l'isoenzyme cytoplasmique prédomine dans le sérum ; lors d'une atteinte sévère, l'isoenzyme mitochondriale est également libérée en quantité significative.
 
 ## 4. Principe du test optique (dosage cinétique)
@@ -29,7 +33,14 @@ const LAB_S2_8_COURSE = `# Labo 8 — Métabolisme des protéines : dosage des t
 - **Valeurs normales** : ALAT — hommes < 50 U/L, femmes < 35 U/L ; ASAT — hommes < 55 U/L, femmes < 35 U/L.
 
 ## 5. Signification clinique
-- **Pathologies hépatiques** : dans les hépatites virales et autres nécroses hépatiques, ALAT et ASAT s'élèvent avant même les signes cliniques (ictère), parfois jusqu'à 100× la limite supérieure (le plus souvent 20-50×). Élévation modérée dans la cholestase extra-hépatique. Dans la cirrhose, les valeurs varient de la limite supérieure de la normale à 4-5×, avec ASAT > ALAT. Dans le cancer hépatique primitif ou métastatique, élévation de 5 à 10×, ASAT généralement > ALAT.
+
+| Pathologie hépatique | Élévation typique | Profil |
+| --- | --- | --- |
+| Hépatite virale / nécrose hépatique aiguë | 20-50× (jusqu'à 100×), avant les signes cliniques | — |
+| Cholestase extra-hépatique | Modérée | — |
+| Cirrhose | Normale à 4-5× | ASAT > ALAT |
+| Cancer hépatique (primitif/métastatique) | 5-10× | ASAT généralement > ALAT |
+
 - **Ratio de De Ritis (ASAT/ALAT)** : > 2 évoque fortement une hépatite alcoolique ; > 5 évoque une cause extra-hépatique ; < 1 fréquent dans l'hépatite virale tardive ; ≈ 1 possible dans la cirrhose ou une hépatopathie avancée. ALAT > ASAT évoque une hépatite virale ou une stéatose hépatique non alcoolique (NAFLD).
 - **Alcool** : augmentation légère à modérée des deux enzymes.
 - **Médicaments** : opiacés, salicylés, ampicilline, paracétamol, la plupart des neuroleptiques. Le **surdosage en paracétamol** (> 10 g) est particulièrement hépatotoxique via la formation du métabolite réactif **NAPQI**.
@@ -82,10 +93,13 @@ const LAB_S2_9_COURSE = `# Labo 9 — Métabolisme des protéines : dosage de l'
 ## 3. Le cycle de l'urée
 - Le cycle de l'urée se déroule exclusivement dans le **foie**. Il débute par l'incorporation de l'ammoniac dans le **carbamoyl phosphate** (via la carbamoyl phosphate synthétase, consommant 2 ATP).
 - Étapes suivantes :
-  1. Le groupe carbamoyl est transféré à l'**ornithine** par l'**ornithine transcarbamylase** → **citrulline**.
-  2. La citrulline et l'aspartate forment l'**argininosuccinate** via l'**argininosuccinate synthétase** (consomme 1 ATP → AMP).
-  3. L'argininosuccinate est clivé en **fumarate et arginine** par l'**argininosuccinase**.
-  4. L'**arginase** libère l'**urée** à partir de l'arginine et régénère l'**ornithine**, bouclant le cycle.
+
+| # | Enzyme | Réaction |
+| --- | --- | --- |
+| 1 | Ornithine transcarbamylase | Ornithine + carbamoyl phosphate → citrulline |
+| 2 | Argininosuccinate synthétase | Citrulline + aspartate → argininosuccinate (consomme 1 ATP → AMP) |
+| 3 | Argininosuccinase | Argininosuccinate → fumarate + arginine |
+| 4 | Arginase | Arginine → urée + ornithine (régénérée, ferme le cycle) |
 - L'urée synthétisée est sécrétée dans le plasma puis éliminée par le **rein** (voie principale) ; des voies mineures existent via l'intestin et les glandes sudoripares.
 
 ## 4. Dosage enzymatique de l'urée (test optique, méthode à l'uréase)

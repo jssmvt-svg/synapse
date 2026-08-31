@@ -148,14 +148,20 @@ const TRANSITION_STAGE_REGULATION_COURSE = `# Régulation du stade de transition
 - Ces deux niveaux assurent que le complexe reste actif seulement lorsque la cellule a besoin de produire de l'acétyl-CoA pour le cycle de Krebs, et inactif lorsque l'énergie est déjà abondante.
 
 ## 2. Régulation par phosphorylation
-- **PDH kinase** : phosphoryle et **inactive** E1 (la sous-unité décarboxylante). Elle est **activée** par des concentrations élevées d'**ATP**, de **NADH** et d'**acétyl-CoA** — tous des signaux indiquant une charge énergétique élevée.
-- **PDH phosphatase** : déphosphoryle et **réactive** E1. Elle est **stimulée** par le **Ca²⁺** (important dans le muscle en contraction, où l'afflux de calcium signale un besoin accru d'énergie) et par l'**insuline** (état nourri, favorisant l'utilisation oxydative du glucose).
-- Résumé : ATP/NADH/acétyl-CoA élevés → PDH kinase active → E1 phosphorylée → complexe **inactif**. Ca²⁺/insuline élevés → PDH phosphatase active → E1 déphosphorylée → complexe **actif**.
+
+| Enzyme régulatrice | Effet sur E1 | Activée par | Conséquence sur le complexe |
+| --- | --- | --- | --- |
+| **PDH kinase** | Phosphoryle E1 | ATP, NADH, acétyl-CoA élevés (charge énergétique haute) | Complexe **inactif** |
+| **PDH phosphatase** | Déphosphoryle E1 | Ca²⁺ (contraction musculaire), insuline (état nourri) | Complexe **actif** |
 
 ## 3. Inhibition par les produits (feedback direct)
-- Le **NADH** inhibe directement E3 (compétition avec le NAD⁺ pour le même site).
-- L'**acétyl-CoA** inhibe directement E2 (compétition avec le CoA libre pour le même site).
-- Cette double inhibition produit garantit que le complexe ralentit dès que ses propres produits s'accumulent, indépendamment de la régulation par phosphorylation.
+
+| Métabolite | Sous-unité inhibée | Mécanisme |
+| --- | --- | --- |
+| **NADH** | E3 | Compétition avec le NAD⁺ pour le même site |
+| **Acétyl-CoA** | E2 | Compétition avec le CoA libre pour le même site |
+
+Cette double inhibition produit garantit que le complexe ralentit dès que ses propres produits s'accumulent, indépendamment de la régulation par phosphorylation.
 
 ## 4. Cohérence physiologique
 - Au repos, avec une charge énergétique élevée (ATP/NADH/acétyl-CoA abondants), le complexe PDH est maintenu **inactif** : la cellule n'a pas besoin de produire davantage d'acétyl-CoA.
@@ -237,17 +243,14 @@ const TRANSITION_STAGE_COURSE = `# Stade de transition (phase préparatoire)
 - Le pyruvate cytosolique doit d'abord être transporté vers la matrice mitochondriale via le **transporteur mitochondrial du pyruvate (MPC)**.
 
 ## 2. Composition du complexe PDH
-Trois sous-unités enzymatiques catalytiques :
-- **E1 (pyruvate déshydrogénase)** : décarboxyle le pyruvate ; nécessite la **thiamine pyrophosphate (TPP)**, dérivée de la vitamine B1.
-- **E2 (dihydrolipoyl transacétylase)** : transfère le groupe acétyle sur le CoA ; utilise l'**acide lipoïque** comme bras mobile.
-- **E3 (dihydrolipoyl déshydrogénase)** : réoxyde l'acide lipoïque ; utilise le FAD puis transfère les électrons au NAD⁺.
 
-Cinq cofacteurs au total, dérivés de quatre vitamines B :
-1. **Thiamine pyrophosphate (TPP)** — vitamine B1 (thiamine)
-2. **Acide lipoïque**
-3. **Coenzyme A (CoA)** — vitamine B5 (acide pantothénique)
-4. **FAD** — vitamine B2 (riboflavine)
-5. **NAD⁺** — vitamine B3 (niacine)
+| Sous-unité | Rôle | Cofacteur | Vitamine source |
+| --- | --- | --- | --- |
+| **E1** (pyruvate déshydrogénase) | Décarboxyle le pyruvate | Thiamine pyrophosphate (TPP) | B1 (thiamine) |
+| **E2** (dihydrolipoyl transacétylase) | Transfère le groupe acétyle sur le CoA | Acide lipoïque (bras mobile) | — |
+| **E3** (dihydrolipoyl déshydrogénase) | Réoxyde l'acide lipoïque | FAD puis NAD⁺ | B2 (riboflavine) et B3 (niacine) |
+
+Un cofacteur supplémentaire, non lié aux sous-unités mais indispensable, est le **coenzyme A (CoA)**, dérivé de la vitamine B5 (acide pantothénique) — cinq cofacteurs au total, dérivés de quatre vitamines B.
 
 ## 3. Mécanisme en 5 étapes
 1. E1 décarboxyle le pyruvate (perte de CO₂) ; le groupe hydroxyéthyle restant se lie au TPP.
@@ -379,8 +382,13 @@ const GLYCOLYSIS_REGULATION_COURSE = `# Régulation de la glycolyse
 - L'isoforme **musculaire (PKM1)** n'est **pas** régulée par phosphorylation : le muscle a besoin d'une glycolyse rapide et constante en cas d'effort, indépendamment du statut hormonal glucagon/insuline. L'isoforme **PKM2**, exprimée notamment dans les cellules à prolifération rapide (dont les cellules tumorales), est associée à l'effet Warburg.
 
 ## 6. Vue d'ensemble intégrée
-- **Jeûne (glucagon↑)** : F2,6BP↓ → PFK-1↓ ; pyruvate kinase hépatique phosphorylée/inactive → glycolyse hépatique freinée, néoglucogenèse favorisée.
-- **État nourri (insuline↑)** : F2,6BP↑ → PFK-1↑ ; pyruvate kinase hépatique déphosphorylée/active → glycolyse hépatique stimulée.
+
+| Enzyme | Activateurs | Inhibiteurs | Effet du glucagon (foie) | Effet de l'insuline (foie) |
+| --- | --- | --- | --- | --- |
+| Hexokinase | — | G6P (rétro-inhibition) | — | — |
+| PFK-1 | AMP, ADP, F2,6BP | ATP, citrate, pH bas | ↓ F2,6BP → PFK-1↓ | ↑ F2,6BP → PFK-1↑ |
+| Pyruvate kinase | F1,6BP (feed-forward) | ATP, acétyl-CoA, alanine | Phosphoryle/inactive (PKL) | Déphosphoryle/active (PKL) |
+
 - Un ATP/citrate élevé (énergie abondante) inhibe la PFK-1 ; un AMP élevé (énergie basse) l'active — couplage direct entre charge énergétique et flux glycolytique.
 
 ## Points à retenir
@@ -480,18 +488,10 @@ const GLYCOLYSIS_COURSE = `# Glycolyse
 - Bilan net : Glucose + 2 ADP + 2 Pi + 2 NAD⁺ → 2 Pyruvate + **2 ATP** + **2 NADH** + 2 H⁺ + 2 H₂O.
 
 ## 2. Phase d'investissement énergétique (étapes 1 à 5)
-1. **Hexokinase** (glucokinase dans le foie) : glucose → glucose-6-phosphate (G6P), consomme 1 ATP. Réaction **irréversible** ; « piège » le glucose phosphorylé dans la cellule.
-2. **Phosphoglucose isomérase** : G6P → fructose-6-phosphate (F6P), isomérisation aldose → cétose.
-3. **Phosphofructokinase-1 (PFK-1)** : F6P → fructose-1,6-bisphosphate (F1,6BP), consomme 1 ATP. Réaction **irréversible**, considérée comme l'étape limitante et la plus régulée de la voie.
-4. **Aldolase** : F1,6BP → dihydroxyacétone phosphate (DHAP) + glycéraldéhyde-3-phosphate (G3P). Clivage aldolique d'un sucre à 6 carbones en deux trioses.
-5. **Triose phosphate isomérase (TIM)** : DHAP ↔ G3P. Interconversion rapide et réversible ; seul le G3P poursuit directement la voie, si bien que chaque glucose fournit in fine **2 G3P**.
+Consomme 2 ATP pour activer et cliver le glucose en deux trioses phosphate. Contient la première enzyme irréversible (**hexokinase**) et l'étape limitante de toute la voie (**PFK-1**) — détail des 10 enzymes dans le tableau récapitulatif ci-dessous.
 
 ## 3. Phase de rendement énergétique (étapes 6 à 10, comptées deux fois par glucose)
-6. **Glycéraldéhyde-3-phosphate déshydrogénase (GAPDH)** : G3P + NAD⁺ + Pi → 1,3-bisphosphoglycérate (1,3-BPG) + NADH + H⁺. Oxydation couplée à une phosphorylation, formant une liaison acyl-phosphate riche en énergie.
-7. **Phosphoglycérate kinase** : 1,3-BPG + ADP → 3-phosphoglycérate (3-PG) + ATP. Première **phosphorylation au niveau du substrat**.
-8. **Phosphoglycérate mutase** : 3-PG → 2-phosphoglycérate (2-PG).
-9. **Énolase** : 2-PG → phosphoénolpyruvate (PEP) + H₂O. Déshydratation créant une liaison phosphate très riche en énergie.
-10. **Pyruvate kinase** : PEP + ADP → pyruvate + ATP. Réaction **irréversible**, seconde phosphorylation au niveau du substrat, troisième enzyme régulatrice clé.
+Chaque triose phosphate issu de la phase précédente est oxydé et déphosphorylé en pyruvate, avec production de NADH et d'ATP par phosphorylation au niveau du substrat (comptée ×2 par glucose, puisque deux trioses sont générés).
 
 ## 4. Bilan énergétique net
 - ATP **consommé** : 2 (étapes hexokinase et PFK-1).

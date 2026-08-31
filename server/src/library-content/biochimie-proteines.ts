@@ -27,17 +27,43 @@ const COMPOSITION_COURSE = `# Chapitre 2 — Composition et structure des proté
 ### Formules des 20 chaînes latérales (groupement R)
 Le squelette commun est H₂N–CH(R)–COOH ; seul le groupement R change d'un acide aminé à l'autre.
 
-- **Aliphatiques** : Glycine R=H · Alanine R=CH₃ · Valine R=CH(CH₃)₂ · Leucine R=CH₂CH(CH₃)₂ · Isoleucine R=CH(CH₃)CH₂CH₃.
-- **Hydroxylées** : Sérine R=CH₂OH · Thréonine R=CH(OH)CH₃.
-- **Soufrées** : Cystéine R=CH₂SH · Méthionine R=CH₂CH₂SCH₃.
-- **Acides et amides** : Acide aspartique R=CH₂COOH · Asparagine R=CH₂CONH₂ · Acide glutamique R=CH₂CH₂COOH · Glutamine R=CH₂CH₂CONH₂.
-- **Basiques** : Lysine R=(CH₂)₄NH₂ · Arginine R=(CH₂)₃NH–C(=NH)NH₂ (groupe guanidinium) · Histidine R=CH₂–(cycle imidazole).
-- **Aromatiques** : Phénylalanine R=CH₂–C₆H₅ · Tyrosine R=CH₂–C₆H₄OH · Tryptophane R=CH₂–(cycle indole).
-- **Imino-acide** : Proline — la chaîne latérale reboucle sur l'azote de la fonction amine, formant un cycle pyrrolidine qui remplace tout le groupe NH₂ habituel.
+| Nature | Acide aminé | Formule R |
+| --- | --- | --- |
+| Aliphatiques | Glycine | H |
+| Aliphatiques | Alanine | CH₃ |
+| Aliphatiques | Valine | CH(CH₃)₂ |
+| Aliphatiques | Leucine | CH₂CH(CH₃)₂ |
+| Aliphatiques | Isoleucine | CH(CH₃)CH₂CH₃ |
+| Hydroxylées | Sérine | CH₂OH |
+| Hydroxylées | Thréonine | CH(OH)CH₃ |
+| Soufrées | Cystéine | CH₂SH |
+| Soufrées | Méthionine | CH₂CH₂SCH₃ |
+| Acides et amides | Acide aspartique | CH₂COOH |
+| Acides et amides | Asparagine | CH₂CONH₂ |
+| Acides et amides | Acide glutamique | CH₂CH₂COOH |
+| Acides et amides | Glutamine | CH₂CH₂CONH₂ |
+| Basiques | Lysine | (CH₂)₄NH₂ |
+| Basiques | Arginine | (CH₂)₃NH–C(=NH)NH₂ (guanidinium) |
+| Basiques | Histidine | CH₂–(cycle imidazole) |
+| Aromatiques | Phénylalanine | CH₂–C₆H₅ |
+| Aromatiques | Tyrosine | CH₂–C₆H₄OH |
+| Aromatiques | Tryptophane | CH₂–(cycle indole) |
+| Imino-acide | Proline | la chaîne reboucle sur l'azote de l'amine, cycle pyrrolidine remplaçant le NH₂ habituel |
 
 ### Classes fonctionnelles et pKa
 - Hydrophobes : Gly, Ala, Pro, Val, Leu, Ile, Met, Trp, Phe. Polaires non chargés : Ser, Thr, Tyr, Asn, Gln, Cys. Positifs : Lys, Arg, His. Négatifs : Asp, Glu.
-- Les groupes ionisables typiques : α-carboxyle 3,1 ; Asp/Glu 4,1 ; His 6,0 ; α-amino 8,0 ; Cys 8,3 ; Tyr 10,0 ; Lys 10,4 ; Arg 12,5.
+
+| Groupe ionisable | pKa typique |
+| --- | --- |
+| α-carboxyle (terminal) | 3,1 |
+| Asp / Glu (chaîne latérale) | 4,1 |
+| His (chaîne latérale) | 6,0 |
+| α-amino (terminal) | 8,0 |
+| Cys (chaîne latérale) | 8,3 |
+| Tyr (chaîne latérale) | 10,0 |
+| Lys (chaîne latérale) | 10,4 |
+| Arg (chaîne latérale) | 12,5 |
+
 - Codes : Ala/A, Arg/R, Asn/N, Asp/D, Cys/C, Gln/Q, Glu/E, Gly/G, His/H, Ile/I, Leu/L, Lys/K, Met/M, Phe/F, Pro/P, Ser/S, Thr/T, Trp/W, Tyr/Y, Val/V. Asx/B = Asn ou Asp ; Glx/Z = Gln ou Glu.
 
 ## 3. Structure primaire et liaison peptidique
@@ -48,7 +74,20 @@ Le squelette commun est H₂N–CH(R)–COOH ; seul le groupement R change d'un 
 
 ## 4. Peptides biologiquement importants
 - Le glutathion est le tripeptide γ-Glu–Cys–Gly. La glutathion peroxydase transforme GSH en GSSG et la glutathion réductase régénère GSH grâce au NADPH issu de la voie des pentoses phosphates.
-- **Hormones à connaître :** ocytocine, vasopressine et bradykinine (9 aa) ; angiotensine II (8 aa, ↑ pression) ; glucagon (29 aa, ↑ glycémie) ; insuline (51 aa, ↓ glycémie) ; calcitonine (32 aa, ↓ calcémie) ; PTH (84 aa, ↑ calcémie) ; ANP (28 aa, ↓ pression).
+
+**Hormones peptidiques à connaître :**
+
+| Hormone | Nb résidus | Effet principal |
+| --- | --- | --- |
+| Ocytocine | 9 aa | — |
+| Vasopressine | 9 aa | — |
+| Bradykinine | 9 aa | — |
+| Angiotensine II | 8 aa | ↑ pression artérielle |
+| Glucagon | 29 aa | ↑ glycémie |
+| Insuline | 51 aa | ↓ glycémie |
+| Calcitonine | 32 aa | ↓ calcémie |
+| PTH (parathormone) | 84 aa | ↑ calcémie |
+| ANP (peptide natriurétique auriculaire) | 28 aa | ↓ pression artérielle |
 
 ## Points à retenir
 - Seuls les L-acides aminés entrent dans les protéines.

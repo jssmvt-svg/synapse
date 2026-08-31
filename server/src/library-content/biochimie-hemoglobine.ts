@@ -11,7 +11,13 @@ const HEMOGLOBIN_COURSE = `# Chapitre 7 — Hémoglobine : portrait d'une proté
 - Hb = tétramère α2β2 ; chaque sous-unité adopte le repliement globine, aussi présent dans la myoglobine.
 
 ## 7.2 Fixation coopérative de l'oxygène par l'hémoglobine
-- Myoglobine : courbe hyperbolique (P₅₀ ≈ 2 torr), pas de coopérativité. Hémoglobine : courbe sigmoïde (P₅₀ ≈ 26 torr), coopérativité positive entre sous-unités.
+
+| | Myoglobine | Hémoglobine |
+| --- | --- | --- |
+| Courbe de saturation | Hyperbolique | Sigmoïde |
+| P₅₀ | ≈ 2 torr | ≈ 26 torr |
+| Coopérativité | Aucune | Positive entre sous-unités |
+
 - La coopérativité permet à l'Hb de bien se saturer dans les poumons (pO₂ élevée) et de relarguer efficacement l'O₂ dans les tissus (pO₂ basse) : sans coopérativité, seulement ~38 % de l'O₂ serait délivré ; avec coopérativité, ~66 %.
 - États T (tendu, désoxyhémoglobine, faible affinité) et R (relâché, oxyhémoglobine, forte affinité). Le dimère α1β1 pivote d'environ 15° par rapport à α2β2 lors du passage T→R.
 - Modèle concerté (MWC) : transition tout-ou-rien de toutes les sous-unités. Modèle séquentiel (KNF) : les sous-unités changent une à une. La coopérativité réelle combine des aspects des deux modèles.

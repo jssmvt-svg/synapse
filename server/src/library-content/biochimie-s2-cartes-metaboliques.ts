@@ -19,10 +19,13 @@ const METABOLIC_MAP_CARBS_COURSE = `# Carte métabolique — Glucides
 - Depuis les précurseurs néoglucogéniques (lactate, alanine), via la **pyruvate carboxylase**, en sens inverse.
 
 ## 4. États physiologiques et bascules hormonales
-- **État nourri** (insuline↑) : glycolyse et glycogénogenèse hépatique/musculaire actives ; néoglucogenèse et glycogénolyse inhibées.
-- **Jeûne court** (glucagon↑) : glycogénolyse hépatique active ; glycolyse hépatique freinée.
-- **Jeûne prolongé** : le glycogène hépatique s'épuise (~24h), la néoglucogenèse devient la source principale de glucose (lactate, alanine, glycérol) ; le cerveau bascule progressivement vers les corps cétoniques.
-- **Effort musculaire intense** : glycogénolyse et glycolyse anaérobie musculaires activées par le Ca²⁺ et l'AMP, indépendamment des hormones circulantes.
+
+| État | Signal dominant | Effet métabolique |
+| --- | --- | --- |
+| État nourri | Insuline ↑ | Glycolyse et glycogénogenèse (hépatique/musculaire) actives ; néoglucogenèse et glycogénolyse inhibées |
+| Jeûne court | Glucagon ↑ | Glycogénolyse hépatique active ; glycolyse hépatique freinée |
+| Jeûne prolongé | Épuisement du glycogène (~24h) | Néoglucogenèse = source principale de glucose (lactate, alanine, glycérol) ; cerveau bascule vers les corps cétoniques |
+| Effort musculaire intense | Ca²⁺ et AMP (locaux) | Glycogénolyse et glycolyse anaérobie musculaires activées indépendamment des hormones circulantes |
 
 ## 5. Régulateurs croisés clés (synthèse)
 - **Fructose-2,6-bisphosphate** : active la PFK-1 (glycolyse), inhibe la FBPase-1 (néoglucogenèse) — bascule unique contrôlée par le rapport glucagon/insuline.
@@ -89,14 +92,20 @@ const METABOLIC_MAP_LIPIDS_COURSE = `# Carte métabolique — Lipides
 - Ce double rôle empêche un cycle futile : la cellule ne synthétise pas des acides gras tout en les dégradant simultanément.
 
 ## 3. États physiologiques et bascules hormonales
-- **État nourri** (insuline↑) : ACC active → malonyl-CoA élevé → lipogenèse stimulée, β-oxydation inhibée (CPT1 bloquée) ; lipolyse inhibée (HSL inactive).
-- **Jeûne** (glucagon/AMPK↑) : ACC inhibée → malonyl-CoA bas → lipogenèse freinée, β-oxydation levée (CPT1 active) ; lipolyse stimulée (HSL active), libérant des acides gras et du glycérol.
-- **Jeûne prolongé** : acétyl-CoA issu de la β-oxydation intense dépasse la capacité du cycle de Krebs → excès dirigé vers la **cétogenèse** hépatique.
+
+| État | Signal dominant | Effet métabolique |
+| --- | --- | --- |
+| État nourri | Insuline ↑ | ACC active → malonyl-CoA élevé → lipogenèse stimulée, β-oxydation inhibée (CPT1 bloquée), lipolyse inhibée (HSL inactive) |
+| Jeûne | Glucagon/AMPK ↑ | ACC inhibée → malonyl-CoA bas → lipogenèse freinée, β-oxydation levée (CPT1 active), lipolyse stimulée (HSL active) |
+| Jeûne prolongé | Acétyl-CoA en excès | La β-oxydation intense dépasse la capacité du cycle de Krebs → excès dirigé vers la cétogenèse hépatique |
 
 ## 4. Devenir tissulaire différencié
-- **Tissu adipeux** : lipogenèse et stockage en période nourrie ; lipolyse en jeûne, exportant acides gras (vers muscle/foie) et glycérol (vers foie, néoglucogenèse).
-- **Foie** : lipogenèse en excès calorique (export en VLDL) ; β-oxydation et cétogenèse en jeûne (le foie ne peut pas utiliser les corps cétoniques qu'il produit).
-- **Muscle et cœur** : grands consommateurs d'acides gras par β-oxydation, y compris au repos ; peuvent aussi utiliser les corps cétoniques.
+
+| Tissu | Rôle métabolique |
+| --- | --- |
+| Tissu adipeux | Lipogenèse et stockage en période nourrie ; lipolyse en jeûne (export d'acides gras vers muscle/foie, de glycérol vers le foie pour la néoglucogenèse) |
+| Foie | Lipogenèse en excès calorique (export en VLDL) ; β-oxydation et cétogenèse en jeûne (ne peut pas utiliser les corps cétoniques qu'il produit) |
+| Muscle et cœur | Grands consommateurs d'acides gras par β-oxydation, y compris au repos ; peuvent aussi utiliser les corps cétoniques |
 
 ## Points à retenir
 - Le malonyl-CoA est l'interrupteur central : il active la synthèse et bloque simultanément la dégradation des acides gras (inhibition de CPT1).
@@ -162,9 +171,12 @@ const METABOLIC_MAP_PROTEINS_COURSE = `# Carte métabolique — Protéines
 - Le **fumarate** produit par le cycle de l'urée (argininosuccinate lyase) rejoint directement le cycle de Krebs, reliant physiquement les deux cycles dans l'hépatocyte (« bicyclette de Krebs »).
 
 ## 4. États physiologiques
-- **Jeûne prolongé/famine** : catabolisme protéique musculaire accru pour fournir des acides aminés glucoformateurs (notamment l'alanine) à la néoglucogenèse hépatique — aux dépens de la masse musculaire.
-- **Apport protéique élevé** : stimulation à long terme des enzymes du cycle de l'urée et de la NAGS (via l'arginine), pour détoxifier l'azote excédentaire.
-- **Insuffisance hépatique** : capacité réduite à détoxifier l'ammoniac → risque d'encéphalopathie hépatique.
+
+| État | Effet sur le métabolisme protéique |
+| --- | --- |
+| Jeûne prolongé/famine | Catabolisme protéique musculaire accru pour fournir des acides aminés glucoformateurs (alanine) à la néoglucogenèse hépatique — aux dépens de la masse musculaire |
+| Apport protéique élevé | Stimulation à long terme des enzymes du cycle de l'urée et de la NAGS (via l'arginine), pour détoxifier l'azote excédentaire |
+| Insuffisance hépatique | Capacité réduite à détoxifier l'ammoniac → risque d'encéphalopathie hépatique |
 
 ## Points à retenir
 - Le glutamate est le carrefour azoté central (transamination ↔ désamination) ; l'alanine et la glutamine transportent l'azote entre organes.

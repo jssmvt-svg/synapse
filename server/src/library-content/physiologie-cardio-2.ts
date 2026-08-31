@@ -272,6 +272,17 @@ const CV_NERVOUS_REGULATION_COURSE = `# Physiologie cardiovasculaire — Lecture
 - **Autorégulation homéométrique** : à longueur de fibre constante, l'augmentation de la fréquence cardiaque augmente progressivement la force de contraction jusqu'à un plateau (« effet d'escalier »), par accumulation intracellulaire de calcium pendant la diastole raccourcie — utile dans la régulation du cœur dénervé (transplantation).
 
 ## 3. Régulation extrinsèque du cœur
+
+| Propriété | Effet SNS | Effet SNP (vague) |
+| --- | --- | --- |
+| Chronotrope (FC) | + | − (le plus marqué) |
+| Inotrope (force) | + | − (moindre) |
+| Tonotrope (tonicité) | + | − |
+| Dromotrope (conduction) | + | − |
+| Bathmotrope (excitabilité) | + | − |
+| Récepteur/médiateur | β1, noradrénaline/adrénaline | M2, acétylcholine |
+| Territoire | Toutes les structures cardiaques | Surtout NSA, NAV, oreillettes |
+
 ### 3.1 Innervation sympathique (nerfs cardiaques)
 - Origine médullaire T1-T5(6), fibres pré-ganglionnaires courtes → ganglion stellaire → fibres post-ganglionnaires longues → plexus épicardique péri-cardiaque.
 - Innerve toutes les structures cardiaques (récepteurs β1) et les coronaires (α sur grosses, β2 sur petites).
@@ -409,6 +420,14 @@ const CV_REGULATION_2_COURSE = `# Physiologie cardiovasculaire — Lecture 8 : r
 - Hors de ces limites : PA très basse → collapsus vasculaire → ischémie ; PA très élevée → dilatation vasculaire excessive → œdème.
 
 ## 2. Régulation endothéliale
+
+| Facteur | Effet | Origine/mécanisme |
+| --- | --- | --- |
+| Prostacycline (PGI₂) | Vasodilatateur + antiagrégant | Acide arachidonique (COX), via AMPc |
+| NO (EDRF) | Vasodilatateur puissant | L-arginine, via GMPc |
+| Thromboxane A₂ (TxA₂) | Vasoconstricteur + pro-agrégant | Acide arachidonique (COX-1), via IP₃/DAG |
+| Endothéline (ET-1) | Vasoconstricteur puissant, pro-inflammatoire | Récepteurs ETA/ETB2 (VC) ou ETB1 (VD via NO) |
+
 - L'endothélium n'est pas qu'une barrière mécanique : c'est un tissu dynamique qui sécrète des facteurs vasodilatateurs et vasoconstricteurs (normalement en équilibre), des facteurs pro/anti-agrégants, contrôle l'adhésion leucocytaire et la mitogenèse.
 
 ### 2.1 Facteurs vasodilatateurs endothéliaux
