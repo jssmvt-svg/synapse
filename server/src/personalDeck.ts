@@ -20,6 +20,7 @@ function normalize(value: string): string {
   return value
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[\u2018\u2019\u02bc\u00b4`]/g, "'")
     .replace(/\*\*/g, "")
     .replace(/\s+/g, " ")
     .trim()

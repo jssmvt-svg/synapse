@@ -36,6 +36,17 @@ test("accepts JSON fallback and marks in-import duplicates", () => {
   assert.equal(result.cards[1].duplicate, true);
 });
 
+test("treats differently-encoded apostrophes as the same duplicate key", () => {
+  const raw = [
+    "Hélice alpha : où se fait la liaison hydrogène de l'ATP ? :: Entre CO et NH. :: helice-alpha",
+    "Hélice alpha : où se fait la liaison hydrogène de l’ATP ? :: Entre CO et NH (bis). :: helice-alpha",
+  ].join("\n");
+  const result = parseFlashcardImport(raw, notions);
+  assert.equal(result.cards.length, 2);
+  assert.equal(result.cards[1].included, false);
+  assert.equal(result.cards[1].duplicate, true);
+});
+
 test("caps imports at one hundred cards and leaves unknown notions unassigned", () => {
   const raw = Array.from({ length: 102 }, (_, index) => `Question ${index} :: Réponse ${index} :: notion-inconnue`).join("\n");
   const result = parseFlashcardImport(raw, notions);
