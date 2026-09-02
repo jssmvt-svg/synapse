@@ -16,6 +16,12 @@ import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
 import { KrebsCycleDiagram } from "../components/KrebsCycleDiagram";
 import { MarkdownContent } from "../components/MarkdownContent";
 import { AminoAcidGallery } from "../components/AminoAcidGallery";
+import {
+  CarbohydrateGallery,
+  FatSolubleVitaminGallery,
+  LipidGallery,
+  WaterSolubleVitaminGallery,
+} from "../components/BiochemistryGalleries";
 
 type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget";
 
@@ -528,6 +534,11 @@ export function LibraryChapterView() {
   const exam = detail.exams[0];
   const isProteinCompositionChapter =
     detail.chapter.titre_fr === "Composition et structure des protéines (partie 1)";
+  const isCarbohydrateChapter = detail.chapter.titre_fr === "Glucides";
+  const isLipidChapter = detail.chapter.titre_fr === "Lipides et membranes cellulaires";
+  const isWaterSolubleVitaminChapter = detail.chapter.titre_fr === "Vitamines hydrosolubles";
+  const isFatSolubleVitaminChapter =
+    detail.chapter.titre_fr === "Vitamines liposolubles et cofacteurs apparentés";
 
   const completeResource = async (resource: LibraryResource) => {
     await api.completeLibraryResource(detail.chapter.id, resource.id, true);
@@ -636,6 +647,10 @@ export function LibraryChapterView() {
             onComplete={() => void completeResource(activeResource)}
           />
           {isProteinCompositionChapter && activeResource.resource_type === "course" && <AminoAcidGallery />}
+          {isCarbohydrateChapter && activeResource.resource_type === "course" && <CarbohydrateGallery />}
+          {isLipidChapter && activeResource.resource_type === "course" && <LipidGallery />}
+          {isWaterSolubleVitaminChapter && activeResource.resource_type === "course" && <WaterSolubleVitaminGallery />}
+          {isFatSolubleVitaminChapter && activeResource.resource_type === "course" && <FatSolubleVitaminGallery />}
         </>
       )}
       {activity === "qcm" && (
