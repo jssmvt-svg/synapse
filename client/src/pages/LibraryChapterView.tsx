@@ -15,6 +15,7 @@ import { resolveVisualKey } from "../library-widgets/visual-registry";
 import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
 import { KrebsCycleDiagram } from "../components/KrebsCycleDiagram";
 import { MarkdownContent } from "../components/MarkdownContent";
+import { AminoAcidGallery } from "../components/AminoAcidGallery";
 
 type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget";
 
@@ -525,6 +526,8 @@ export function LibraryChapterView() {
   );
   const activeResource = detail.resources.find((resource) => resource.id === resourceId) ?? detail.resources[0];
   const exam = detail.exams[0];
+  const isProteinCompositionChapter =
+    detail.chapter.titre_fr === "Composition et structure des protéines (partie 1)";
 
   const completeResource = async (resource: LibraryResource) => {
     await api.completeLibraryResource(detail.chapter.id, resource.id, true);
@@ -625,12 +628,15 @@ export function LibraryChapterView() {
       )}
 
       {activity === "resource" && activeResource && (
-        <ResourceReader
-          resource={activeResource}
-          lang={lang}
-          completed={completedResources.has(activeResource.id)}
-          onComplete={() => void completeResource(activeResource)}
-        />
+        <>
+          <ResourceReader
+            resource={activeResource}
+            lang={lang}
+            completed={completedResources.has(activeResource.id)}
+            onComplete={() => void completeResource(activeResource)}
+          />
+          {isProteinCompositionChapter && activeResource.resource_type === "course" && <AminoAcidGallery />}
+        </>
       )}
       {activity === "qcm" && (
         <QcmPractice chapter={detail} questions={detail.qcm} lang={lang} onBack={() => setActivity("hub")} />
