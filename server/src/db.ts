@@ -17,24 +17,40 @@ const pool = new Pool({
   query_timeout: 15_000,
 });
 
+type QueryExecutor = (
+  text: string,
+  params: unknown[],
+) => Promise<{ rows: any[]; rowCount: number | null }>;
+
+export type DatabaseExecutor = {
+  prepare(sql: string): {
+    get(...params: unknown[]): Promise<any>;
+    all(...params: unknown[]): Promise<any[]>;
+    run(...params: unknown[]): Promise<{ rowCount: number | null }>;
+  };
+};
+
 function toPositional(sql: string): string {
   let i = 0;
   return sql.replace(/\?/g, () => `$${++i}`);
 }
 
-function statement(sql: string) {
+function statement(
+  sql: string,
+  execute: QueryExecutor = (text, params) => pool.query(text, params),
+) {
   const text = toPositional(sql);
   return {
     async get(...params: unknown[]) {
-      const result = await pool.query(text, params);
+      const result = await execute(text, params);
       return result.rows[0] ?? null;
     },
     async all(...params: unknown[]) {
-      const result = await pool.query(text, params);
+      const result = await execute(text, params);
       return result.rows;
     },
     async run(...params: unknown[]) {
-      const result = await pool.query(text, params);
+      const result = await execute(text, params);
       return { rowCount: result.rowCount };
     },
   };
@@ -377,6 +393,29 @@ const RETRY_DELAY_MS = 2000;
 export const db = {
   prepare(sql: string) {
     return statement(sql);
+  },
+  async transaction<T>(work: (transaction: DatabaseExecutor) => Promise<T>): Promise<T> {
+    const client = await pool.connect();
+    const transaction: DatabaseExecutor = {
+      prepare(sql: string) {
+        return statement(sql, (text, params) => client.query(text, params));
+      },
+    };
+    try {
+      await client.query("BEGIN");
+      const result = await work(transaction);
+      await client.query("COMMIT");
+      return result;
+    } catch (error) {
+      try {
+        await client.query("ROLLBACK");
+      } catch (rollbackError) {
+        console.error("Database rollback failed.", rollbackError);
+      }
+      throw error;
+    } finally {
+      client.release();
+    }
   },
   async init() {
     let lastError: unknown;

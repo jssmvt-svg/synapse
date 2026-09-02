@@ -1,4 +1,4 @@
-import { db } from "./db.js";
+import { db, type DatabaseExecutor } from "./db.js";
 import { BIOCHIMIE_S1, type LibraryLearningSeed } from "./library-content/biochimie-s1.js";
 import { BIOCHIMIE_S2 } from "./library-content/biochimie-s2.js";
 import { PHYSIOLOGIE_S1 } from "./library-content/physiologie-s1.js";
@@ -30,96 +30,97 @@ async function seedMatiere(
   matiere: string,
   chapters: typeof BIOCHIMIE_S1,
 ): Promise<void> {
-  const now = Date.now();
-  await db
-    .prepare(
-      "UPDATE library_chapters SET is_active = false WHERE annee = ? AND semestre = ? AND matiere = ?",
-    )
-    .run(annee, semestre, matiere);
-
-  for (const chapter of chapters) {
-    const inserted = await db
+  await db.transaction(async (database) => {
+    const now = Date.now();
+    await database
       .prepare(
-        `INSERT INTO library_chapters
-           (annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, widget_key, section, created_at)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON CONFLICT (annee, semestre, matiere, ordre) DO UPDATE SET
-           titre_fr = EXCLUDED.titre_fr,
-           titre_en = EXCLUDED.titre_en,
-           description_fr = EXCLUDED.description_fr,
-           description_en = EXCLUDED.description_en,
-           icone = EXCLUDED.icone,
-           widget_key = EXCLUDED.widget_key,
-           section = EXCLUDED.section,
-           is_active = true
-         RETURNING id`,
+        "UPDATE library_chapters SET is_active = false WHERE annee = ? AND semestre = ? AND matiere = ?",
       )
-      .get(
-        annee,
-        semestre,
-        matiere,
-        chapter.ordre,
-        chapter.titre_fr,
-        chapter.titre_en,
-        chapter.description_fr,
-        chapter.description_en,
-        chapter.icone,
-        chapter.widget_key ?? null,
-        chapter.section ?? "cours",
-        now,
-      );
+      .run(annee, semestre, matiere);
 
-    await db.prepare("UPDATE library_flashcards SET is_active = false WHERE chapter_id = ?").run(inserted.id);
-    for (const [index, card] of chapter.cards.entries()) {
-      await db
+    for (const chapter of chapters) {
+      const inserted = await database
         .prepare(
-          `INSERT INTO library_flashcards
-             (chapter_id, ordre, question_fr, question_en, answer_fr, answer_en, visual_key, created_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-           ON CONFLICT (chapter_id, ordre) DO UPDATE SET
-             question_fr = EXCLUDED.question_fr,
-             question_en = EXCLUDED.question_en,
-             answer_fr = EXCLUDED.answer_fr,
-             answer_en = EXCLUDED.answer_en,
-             visual_key = EXCLUDED.visual_key,
-             is_active = true`,
+          `INSERT INTO library_chapters
+             (annee, semestre, matiere, ordre, titre_fr, titre_en, description_fr, description_en, icone, widget_key, section, created_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+           ON CONFLICT (annee, semestre, matiere, ordre) DO UPDATE SET
+             titre_fr = EXCLUDED.titre_fr,
+             titre_en = EXCLUDED.titre_en,
+             description_fr = EXCLUDED.description_fr,
+             description_en = EXCLUDED.description_en,
+             icone = EXCLUDED.icone,
+             widget_key = EXCLUDED.widget_key,
+             section = EXCLUDED.section,
+             is_active = true
+           RETURNING id`,
         )
-        .run(
-          inserted.id,
-          index + 1,
-          card.question_fr,
-          card.question_en,
-          card.answer_fr,
-          card.answer_en,
-          card.visual_key ?? null,
+        .get(
+          annee,
+          semestre,
+          matiere,
+          chapter.ordre,
+          chapter.titre_fr,
+          chapter.titre_en,
+          chapter.description_fr,
+          chapter.description_en,
+          chapter.icone,
+          chapter.widget_key ?? null,
+          chapter.section ?? "cours",
           now,
         );
-    }
 
-    if (chapter.learning) {
-      await seedLearningContent(inserted.id, chapter.learning, now);
+      await database.prepare("UPDATE library_flashcards SET is_active = false WHERE chapter_id = ?").run(inserted.id);
+      for (const [index, card] of chapter.cards.entries()) {
+        await database
+          .prepare(
+            `INSERT INTO library_flashcards
+               (chapter_id, ordre, question_fr, question_en, answer_fr, answer_en, visual_key, created_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+             ON CONFLICT (chapter_id, ordre) DO UPDATE SET
+               question_fr = EXCLUDED.question_fr,
+               question_en = EXCLUDED.question_en,
+               answer_fr = EXCLUDED.answer_fr,
+               answer_en = EXCLUDED.answer_en,
+               visual_key = EXCLUDED.visual_key,
+               is_active = true`,
+          )
+          .run(
+            inserted.id,
+            index + 1,
+            card.question_fr,
+            card.question_en,
+            card.answer_fr,
+            card.answer_en,
+            card.visual_key ?? null,
+            now,
+          );
+      }
+
+      if (chapter.learning) {
+        await seedLearningContent(database, inserted.id, chapter.learning, now);
+      }
     }
-  }
+  });
 }
 
 async function seedLearningContent(
+  database: DatabaseExecutor,
   chapterId: number,
   learning: LibraryLearningSeed,
   now: number,
 ): Promise<void> {
-  await Promise.all([
-    db.prepare("UPDATE library_course_resources SET is_active = false WHERE chapter_id = ?").run(chapterId),
-    db.prepare("UPDATE library_qcm_questions SET is_active = false WHERE chapter_id = ?").run(chapterId),
-    db.prepare("UPDATE library_chapter_exams SET is_active = false WHERE chapter_id = ?").run(chapterId),
-  ]);
-  await db
+  await database.prepare("UPDATE library_course_resources SET is_active = false WHERE chapter_id = ?").run(chapterId);
+  await database.prepare("UPDATE library_qcm_questions SET is_active = false WHERE chapter_id = ?").run(chapterId);
+  await database.prepare("UPDATE library_chapter_exams SET is_active = false WHERE chapter_id = ?").run(chapterId);
+  await database
     .prepare(
       `UPDATE library_qcm_options SET is_active = false
        WHERE question_id IN (SELECT id FROM library_qcm_questions WHERE chapter_id = ?)`,
     )
     .run(chapterId);
 
-  const resource = await db
+  const resource = await database
     .prepare(
       `INSERT INTO library_course_resources
          (chapter_id, ordre, resource_type, titre_fr, content_fr, source_label, created_at)
@@ -144,7 +145,7 @@ async function seedLearningContent(
 
   for (const [index, qcm] of learning.qcm.entries()) {
     const ordre = index + 1;
-    const seededQuestion = await db
+    const seededQuestion = await database
       .prepare(
         `INSERT INTO library_qcm_questions
            (chapter_id, resource_id, ordre, prompt_fr, explanation_fr, multiple_answers, source_label, visual_key, created_at)
@@ -172,7 +173,7 @@ async function seedLearningContent(
       );
 
     for (const option of qcm.options) {
-      await db
+      await database
         .prepare(
           `INSERT INTO library_qcm_options
              (question_id, option_key, label_fr, is_correct, created_at)
@@ -186,7 +187,7 @@ async function seedLearningContent(
     }
   }
 
-  await db
+  await database
     .prepare(
       `INSERT INTO library_chapter_exams
          (chapter_id, titre_fr, duration_seconds, question_count, question_orders, source_label, created_at)
