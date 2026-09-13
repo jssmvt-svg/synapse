@@ -17,6 +17,26 @@ const pool = new Pool({
   query_timeout: 15_000,
 });
 
+const DATABASE_CONNECTION_ERROR_CODES = new Set([
+  "08000",
+  "08001",
+  "08003",
+  "08004",
+  "08006",
+  "08007",
+  "08P01",
+  "57P01",
+  "57P02",
+  "57P03",
+  "53300",
+  "53400",
+  "ECONNREFUSED",
+  "ECONNRESET",
+  "EAI_AGAIN",
+  "ENETUNREACH",
+  "ETIMEDOUT",
+]);
+
 type QueryExecutor = (
   text: string,
   params: unknown[],
@@ -42,15 +62,39 @@ function statement(
   const text = toPositional(sql);
   return {
     async get(...params: unknown[]) {
-      const result = await execute(text, params);
+      let result;
+      try {
+        result = await execute(text, params);
+      } catch (error) {
+        if (isConnectionError(error)) {
+          throw new DatabaseUnavailableError(error);
+        }
+        throw error;
+      }
       return result.rows[0] ?? null;
     },
     async all(...params: unknown[]) {
-      const result = await execute(text, params);
+      let result;
+      try {
+        result = await execute(text, params);
+      } catch (error) {
+        if (isConnectionError(error)) {
+          throw new DatabaseUnavailableError(error);
+        }
+        throw error;
+      }
       return result.rows;
     },
     async run(...params: unknown[]) {
-      const result = await execute(text, params);
+      let result;
+      try {
+        result = await execute(text, params);
+      } catch (error) {
+        if (isConnectionError(error)) {
+          throw new DatabaseUnavailableError(error);
+        }
+        throw error;
+      }
       return { rowCount: result.rowCount };
     },
   };
@@ -394,6 +438,17 @@ export const db = {
   prepare(sql: string) {
     return statement(sql);
   },
+  async checkHealth() {
+    try {
+      await pool.query("SELECT 1");
+      return true;
+    } catch (error) {
+      if (isConnectionError(error)) {
+        throw new DatabaseUnavailableError(error);
+      }
+      throw error;
+    }
+  },
   async transaction<T>(work: (transaction: DatabaseExecutor) => Promise<T>): Promise<T> {
     const client = await pool.connect();
     const transaction: DatabaseExecutor = {
@@ -441,3 +496,44 @@ export const db = {
     throw lastError;
   },
 };
+
+function isConnectionError(error: unknown): boolean {
+  const code = errorCode(error);
+  if (code && DATABASE_CONNECTION_ERROR_CODES.has(code)) {
+    return true;
+  }
+
+  return /(?:connection|connect|socket|network|timeout|unreachable|terminat)/i.test(
+    errorMessage(error),
+  );
+}
+
+export class DatabaseUnavailableError extends Error {
+  constructor(cause: unknown) {
+    super("The database is currently unavailable", { cause });
+    this.name = "DatabaseUnavailableError";
+  }
+}
+
+export function isDatabaseUnavailableError(error: unknown): boolean {
+  return error instanceof DatabaseUnavailableError || isConnectionError(error);
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function errorCode(error: unknown): string | undefined {
+  if (typeof error !== "object" || error === null || !("code" in error)) {
+    return undefined;
+  }
+  const code = (error as { code?: unknown }).code;
+  return typeof code === "string" ? code : undefined;
+}
+
+pool.on("error", (error) => {
+  console.error(
+    "Unexpected PostgreSQL pool error. Database requests may be temporarily unavailable.",
+    error,
+  );
+});
