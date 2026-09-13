@@ -2,42 +2,13 @@ import { Router } from "express";
 import { db } from "../db.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 import { canOpenStudyContent } from "../studyAccessPolicy.js";
+import { catalogueSubjects, LIBRARY_SUBJECTS } from "../libraryCatalogue.js";
 
 export const libraryRouter = Router();
 
 libraryRouter.use(authMiddleware);
 
 const KNOWN_STRUCTURE = [{ annee: 1, semestres: [1, 2] }];
-const SUBJECTS = [
-  {
-    slug: "anatomie",
-    matiere: "Anatomie",
-    titre_fr: "Anatomie",
-    titre_en: "Anatomy",
-    description_fr: "Structure et organisation du corps humain.",
-    description_en: "Structure and organization of the human body.",
-    accent: "coral",
-  },
-  {
-    slug: "physiologie",
-    matiere: "Physiologie",
-    titre_fr: "Physiologie",
-    titre_en: "Physiology",
-    description_fr: "Fonctionnement des systèmes et grands équilibres du corps.",
-    description_en: "How body systems work and maintain their balance.",
-    accent: "teal",
-  },
-  {
-    slug: "biochimie",
-    matiere: "Biochimie",
-    titre_fr: "Biochimie",
-    titre_en: "Biochemistry",
-    description_fr: "Les bases moléculaires essentielles pour comprendre le vivant.",
-    description_en: "Essential molecular foundations for understanding life.",
-    accent: "violet",
-  },
-] as const;
-
 function selectedKeys(value: unknown): string[] | null {
   if (!Array.isArray(value) || value.some((key) => typeof key !== "string")) return null;
   return [...new Set(value)];
@@ -188,7 +159,7 @@ libraryRouter.get("/semesters", async (req: AuthedRequest, res) => {
       const semesterChapters = (chapters as any[]).filter(
         (chapter) => chapter.annee === semester.year_number && chapter.semestre === semester.semester_number,
       );
-      const subjectCount = new Set(semesterChapters.map((chapter) => chapter.matiere)).size || SUBJECTS.length;
+      const subjectCount = new Set(semesterChapters.map((chapter) => chapter.matiere)).size || LIBRARY_SUBJECTS.length;
       const hasAccess =
         canOpenStudyContent({
           role: user?.role,
@@ -236,10 +207,7 @@ libraryRouter.get("/semesters/:number", async (req: AuthedRequest, res) => {
     .all(semesterNumber);
   res.json({
     semester,
-    subjects: SUBJECTS.map((subject) => ({
-      ...subject,
-      chapters: (chapters as any[]).filter((chapter) => chapter.matiere === subject.matiere),
-    })),
+    subjects: catalogueSubjects(chapters as any[]),
   });
 });
 
@@ -258,15 +226,12 @@ libraryRouter.get("/subjects", async (req: AuthedRequest, res) => {
     if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
   }
   res.json(
-    SUBJECTS.map((subject) => ({
-      ...subject,
-      chapters: visibleChapters.filter((chapter) => chapter.matiere === subject.matiere),
-    })),
+    catalogueSubjects(visibleChapters),
   );
 });
 
 libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
-  const subject = SUBJECTS.find((candidate) => candidate.slug === req.params.slug);
+  const subject = LIBRARY_SUBJECTS.find((candidate) => candidate.slug === req.params.slug);
   if (!subject) return res.status(404).json({ error: "Matière introuvable" });
 
   const chapters = await db

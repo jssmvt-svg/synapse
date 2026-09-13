@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { api, type DocumentSummary, type ProgressSummary } from "../api";
 import { useAuth } from "../auth";
 import { useLang } from "../i18n";
+import { libraryRoutes } from "../libraryRoutes";
 
 export function Dashboard() {
   const { t, lang, setLang } = useLang();
@@ -42,10 +43,12 @@ export function Dashboard() {
   const text = (french: string, english: string) => (lang === "fr" ? french || english : english || french);
   const percent = (value: number) => `${Math.round(value)}%`;
   const actionLink = progress?.recommendation
-    ? `/library/chapter/${progress.recommendation.chapterId}?activity=${progress.recommendation.kind}${
-        progress.recommendation.resourceId ? `&resourceId=${progress.recommendation.resourceId}` : ""
-      }`
-    : "/library";
+    ? libraryRoutes.recommendation(
+        progress.recommendation.chapterId,
+        progress.recommendation.kind,
+        progress.recommendation.resourceId,
+      )
+    : libraryRoutes.catalogue;
   const recommendationCopy = () => {
     switch (progress?.recommendation?.reason) {
       case "resource_incomplete":
