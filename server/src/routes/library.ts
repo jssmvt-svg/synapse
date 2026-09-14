@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { db } from "../db.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
-import { canOpenStudyContent } from "../studyAccessPolicy.js";
+import { canOpenStudyContent, effectiveSubscriptionStatus } from "../studyAccessPolicy.js";
 import { catalogueSubjects, LIBRARY_SUBJECTS } from "../libraryCatalogue.js";
 
 export const libraryRouter = Router();
@@ -30,7 +30,7 @@ async function canAccessSemester(
   semesterNumber: number,
 ): Promise<boolean> {
   const [user, semester] = await Promise.all([
-    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(userId),
+    db.prepare("SELECT role, subscription_status, trial_ends_at FROM users WHERE id = ?").get(userId),
     db
       .prepare(
         `SELECT is_published FROM study_semesters
@@ -40,11 +40,18 @@ async function canAccessSemester(
   ]);
   return canOpenStudyContent({
     role: user?.role,
-    subscriptionStatus: user?.subscription_status,
+    subscriptionStatus: effectiveSubscriptionStatus(user?.subscription_status, user?.trial_ends_at),
     yearNumber,
     semesterNumber,
     semesterPublished: Boolean(semester?.is_published),
   });
+}
+
+async function hasChapterGrant(userId: number, chapterId: number): Promise<boolean> {
+  const grant = await db
+    .prepare("SELECT id FROM admin_chapter_grants WHERE user_id = ? AND chapter_id = ?")
+    .get(userId, chapterId);
+  return Boolean(grant);
 }
 
 async function requireChapterAccess(
@@ -57,7 +64,7 @@ async function requireChapterAccess(
     res.status(404).json({ error: "Chapitre introuvable" });
     return null;
   }
-  if (!(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) {
+  if (!(await hasChapterGrant(req.userId!, chapter.id)) && !(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) {
     res.status(403).json({
       error: "Un abonnement actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
       code: "SEMESTER_ACCESS_REQUIRED",
@@ -112,7 +119,7 @@ libraryRouter.get("/", async (req: AuthedRequest, res) => {
 
   const visibleChapters: any[] = [];
   for (const chapter of chapters as any[]) {
-    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+    if ((await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) || (await hasChapterGrant(req.userId!, chapter.id))) visibleChapters.push(chapter);
   }
   const tree = KNOWN_STRUCTURE.map((annee) => ({
     annee: annee.annee,
@@ -152,7 +159,7 @@ libraryRouter.get("/semesters", async (req: AuthedRequest, res) => {
          FROM library_chapters WHERE is_active = true ORDER BY semestre ASC, matiere ASC, ordre ASC`,
       )
       .all(),
-    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(req.userId),
+    db.prepare("SELECT role, subscription_status, trial_ends_at FROM users WHERE id = ?").get(req.userId),
   ]);
   res.json(
     (semesters as any[]).map((semester) => {
@@ -163,7 +170,7 @@ libraryRouter.get("/semesters", async (req: AuthedRequest, res) => {
       const hasAccess =
         canOpenStudyContent({
           role: user?.role,
-          subscriptionStatus: user?.subscription_status,
+          subscriptionStatus: effectiveSubscriptionStatus(user?.subscription_status, user?.trial_ends_at),
           yearNumber: semester.year_number,
           semesterNumber: semester.semester_number,
           semesterPublished: Boolean(semester.is_published),
@@ -223,7 +230,7 @@ libraryRouter.get("/subjects", async (req: AuthedRequest, res) => {
 
   const visibleChapters: any[] = [];
   for (const chapter of chapters as any[]) {
-    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+    if ((await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) || (await hasChapterGrant(req.userId!, chapter.id))) visibleChapters.push(chapter);
   }
   res.json(
     catalogueSubjects(visibleChapters),
@@ -246,7 +253,7 @@ libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
 
   const visibleChapters: any[] = [];
   for (const chapter of chapters as any[]) {
-    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+    if ((await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) || (await hasChapterGrant(req.userId!, chapter.id))) visibleChapters.push(chapter);
   }
   res.json({ ...subject, chapters: visibleChapters });
 });

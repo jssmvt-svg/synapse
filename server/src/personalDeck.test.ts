@@ -84,7 +84,7 @@ function createRouteDatabase() {
     return {
       async get(...params: unknown[]) {
         if (normalized.includes("SELECT id, session_token FROM users")) return users.get(Number(params[0])) ?? null;
-        if (normalized.includes("SELECT role, subscription_status FROM users")) return users.get(Number(params[0])) ?? null;
+        if (normalized.includes("SELECT role, subscription_status")) return users.get(Number(params[0])) ?? null;
         if (normalized.includes("SELECT is_published FROM study_semesters")) return { is_published: true };
         if (normalized.includes("FROM library_chapters WHERE id = ? AND is_active = true")) {
           return chapters.get(Number(params[0])) ?? null;

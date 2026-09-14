@@ -46,6 +46,87 @@ body {
   font-size: 0.9rem;
 }
 
+.form-row-2 {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.form-row-2 label {
+  flex: 1;
+}
+
+.input-eye-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-eye-wrap input {
+  flex: 1;
+  padding-right: 2.5rem;
+}
+
+.btn-eye {
+  position: absolute;
+  right: 0.4rem;
+  min-height: auto;
+  padding: 0.2rem 0.4rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.password-hints {
+  list-style: none;
+  margin: -0.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.78rem;
+  color: var(--muted, #64748b);
+}
+
+.password-hints li::before {
+  content: "○ ";
+}
+
+.password-hints li.hint-ok {
+  color: #15803d;
+}
+
+.password-hints li.hint-ok::before {
+  content: "✓ ";
+}
+
+.track-choice {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.track-choice legend {
+  font-size: 0.85rem;
+  padding: 0 0.3rem;
+}
+
+.track-choice label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.track-choice input[type="radio"] {
+  min-height: auto;
+  width: auto;
+}
+
 input,
 button {
   font-size: 1rem;
@@ -3511,4 +3592,169 @@ input:focus {
     box-sizing: border-box;
     padding: 1.35rem;
   }
+}
+
+.access-banner {
+  background: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.access-banner button {
+  align-self: flex-start;
+}
+
+.access-banner-trial {
+  background: #dcfce7;
+  border-color: #4ade80;
+}
+
+.admin-students {
+  margin-top: 1.5rem;
+}
+
+.admin-pending-alert {
+  color: #b45309;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.admin-student-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.admin-student-row {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+}
+
+.admin-student-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  min-height: auto;
+  cursor: pointer;
+  text-align: left;
+}
+
+.admin-student-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.admin-student-identity small {
+  color: var(--muted, #64748b);
+  font-size: 0.78rem;
+}
+
+.admin-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-active { background: #dcfce7; color: #166534; }
+.badge-trial { background: #dbeafe; color: #1e3a8a; }
+.badge-expired { background: #fee2e2; color: #991b1b; }
+.badge-pending { background: #fef3c7; color: #92400e; }
+.badge-none { background: #f1f5f9; color: #475569; }
+
+.admin-student-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.admin-meta-chip {
+  font-size: 0.75rem;
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.admin-student-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.admin-student-actions button {
+  min-height: 36px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.admin-student-grants {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.admin-grant-subject h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+}
+
+.admin-grant-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding: 0.15rem 0;
+}
+
+.admin-grant-row input[type="checkbox"] {
+  min-height: auto;
+  width: auto;
+}
+
+.track-choice {
+  align-items: stretch;
+}
+
+.track-choice label {
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.track-choice input[type="radio"] {
+  min-height: 18px !important;
+  height: 18px !important;
+  width: 18px !important;
+  flex: none !important;
 }

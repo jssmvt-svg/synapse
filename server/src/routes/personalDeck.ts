@@ -10,7 +10,7 @@ import {
   type DeckNotion,
   type ParsedPersonalCard,
 } from "../personalDeck.js";
-import { canOpenStudyContent } from "../studyAccessPolicy.js";
+import { canOpenStudyContent, effectiveSubscriptionStatus } from "../studyAccessPolicy.js";
 
 export const personalDeckRouter = Router();
 personalDeckRouter.use(authMiddleware);
@@ -45,7 +45,7 @@ async function requireChapterAccess(req: AuthedRequest, res: Response, chapterId
     return null;
   }
   const [user, semester] = await Promise.all([
-    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(req.userId),
+    db.prepare("SELECT role, subscription_status, trial_ends_at FROM users WHERE id = ?").get(req.userId),
     db
       .prepare("SELECT is_published FROM study_semesters WHERE year_number = ? AND semester_number = ?")
       .get(chapter.annee, chapter.semestre),
@@ -53,7 +53,7 @@ async function requireChapterAccess(req: AuthedRequest, res: Response, chapterId
   if (
     !canOpenStudyContent({
       role: user?.role,
-      subscriptionStatus: user?.subscription_status,
+      subscriptionStatus: effectiveSubscriptionStatus(user?.subscription_status, user?.trial_ends_at),
       yearNumber: chapter.annee,
       semesterNumber: chapter.semestre,
       semesterPublished: Boolean(semester?.is_published),

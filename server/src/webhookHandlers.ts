@@ -1,4 +1,5 @@
 import { db } from "./db.js";
+import { sendEmail, paymentConfirmedEmailHtml } from "./email.js";
 import { getStripeSync } from "./stripeClient.js";
 
 function activeStatus(status: string | undefined): boolean {
@@ -47,7 +48,10 @@ export class WebhookHandlers {
         ? object.current_period_end * 1000
         : null;
       const eventCreatedAt = typeof event.created === "number" ? event.created * 1000 : Date.now();
-      await db
+      const previous = await db
+        .prepare("SELECT subscription_status FROM users WHERE id = ?")
+        .get(userId);
+      const updated = await db
         .prepare(
           `UPDATE users
            SET stripe_customer_id = COALESCE(?, stripe_customer_id),
@@ -55,9 +59,10 @@ export class WebhookHandlers {
                subscription_status = ?,
                subscription_period_end = ?,
                stripe_subscription_event_created = ?
-           WHERE id = ? AND stripe_subscription_event_created <= ?`,
+           WHERE id = ? AND stripe_subscription_event_created <= ?
+           RETURNING id, email, first_name`,
         )
-        .run(
+        .get(
           typeof object.customer === "string" ? object.customer : null,
           typeof object.id === "string" ? object.id : null,
           activeStatus(status) ? status : "inactive",
@@ -66,6 +71,15 @@ export class WebhookHandlers {
           userId,
           eventCreatedAt,
         );
+
+      const wasActive = previous?.subscription_status === "active";
+      if (updated && status === "active" && !wasActive) {
+        void sendEmail(
+          updated.email,
+          "Paiement confirme - Synapse",
+          paymentConfirmedEmailHtml(updated.first_name || ""),
+        );
+      }
     }
   }
 }

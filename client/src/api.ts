@@ -36,6 +36,12 @@ export interface User {
   email: string;
   langPref: "fr" | "en";
   role: "student" | "admin";
+  firstName?: string | null;
+  lastName?: string | null;
+  track?: "dentaire" | "medecine" | null;
+  subscriptionStatus?: string | null;
+  trialEndsAt?: number | null;
+  accessRequestedAt?: number | null;
 }
 
 export interface DocumentSummary {
@@ -363,11 +369,47 @@ export interface AdminSemester {
   is_published: boolean;
 }
 
+export interface AdminStudent {
+  id: number;
+  email: string;
+  first_name: string | null;
+  last_name: string | null;
+  phone: string | null;
+  track: string | null;
+  subscription_status: string;
+  trial_ends_at: number | null;
+  access_requested_at: number | null;
+  effective_status: string;
+  created_at: number;
+}
+
+export interface AdminChapter {
+  id: number;
+  annee: number;
+  semestre: number;
+  matiere: string;
+  titre_fr: string;
+  titre_en: string;
+  ordre: number;
+}
+
 export const api = {
-  register: (email: string, password: string, langPref: "fr" | "en") =>
+  register: (payload: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    phone: string;
+    track: "dentaire" | "medecine";
+    langPref: "fr" | "en";
+  }) =>
     request<{ token: string; user: User }>("/auth/register", {
       method: "POST",
-      body: JSON.stringify({ email, password, langPref }),
+      body: JSON.stringify(payload),
+    }),
+  requestAccess: () =>
+    request<{ accessRequestedAt: number; alreadyActive: boolean }>("/auth/request-access", {
+      method: "POST",
     }),
   login: (email: string, password: string) =>
     request<{ token: string; user: User }>("/auth/login", {
@@ -435,6 +477,23 @@ export const api = {
     request<AdminSemester>(`/admin/semesters/${semester}`, {
       method: "PATCH",
       body: JSON.stringify({ isPublished }),
+    }),
+  getAdminStudents: () => request<{ total: number; students: AdminStudent[] }>("/admin/students"),
+  getAdminChapters: () => request<AdminChapter[]>("/admin/chapters"),
+  getAdminGrants: (studentId: number) =>
+    request<{ chapterIds: number[] }>(`/admin/students/${studentId}/grants`),
+  grantTrial: (studentId: number) =>
+    request<{ ok: boolean; trialEndsAt: number }>(`/admin/students/${studentId}/trial`, {
+      method: "POST",
+    }),
+  revokeAccess: (studentId: number) =>
+    request<{ ok: boolean }>(`/admin/students/${studentId}/revoke`, {
+      method: "POST",
+    }),
+  setAdminGrant: (studentId: number, chapterId: number, grant: boolean) =>
+    request<{ ok: boolean }>(`/admin/students/${studentId}/grants`, {
+      method: "POST",
+      body: JSON.stringify({ chapterId, grant }),
     }),
   getProgressSummary: () => request<ProgressSummary>("/library/progress-summary"),
   getLibraryFlashcards: (chapterId: number) =>

@@ -415,6 +415,7 @@ const SCHEMA = `
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_status TEXT NOT NULL DEFAULT 'inactive';
+ALTER TABLE users ADD COLUMN IF NOT EXISTS first_name TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS last_name TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS phone TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS track TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_requested_at BIGINT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_ends_at BIGINT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_granted_by INTEGER REFERENCES users(id);
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_period_end BIGINT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_event_created BIGINT NOT NULL DEFAULT 0;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_key TEXT;
@@ -429,6 +430,15 @@ const SCHEMA = `
         ADD CONSTRAINT library_flashcards_chapter_ordre_key UNIQUE (chapter_id, ordre);
     END IF;
   END $$;
+
+  CREATE TABLE IF NOT EXISTS admin_chapter_grants (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    granted_by INTEGER REFERENCES users(id),
+    created_at BIGINT NOT NULL,
+    UNIQUE(user_id, chapter_id)
+  );
 `;
 
 const MAX_RETRIES = 5;

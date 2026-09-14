@@ -22,3 +22,15 @@ export function canOpenStudyContent({
     (subscriptionStatus === "active" || subscriptionStatus === "trialing")
   );
 }
+export function isTrialActive(status: MembershipStatus, trialEndsAt: number | null | undefined): boolean {
+  if (status !== "trialing") return false;
+  return typeof trialEndsAt === "number" && trialEndsAt > Date.now();
+}
+
+export function effectiveSubscriptionStatus(
+  status: MembershipStatus,
+  trialEndsAt: number | null | undefined,
+): MembershipStatus {
+  if (status === "trialing" && !isTrialActive(status, trialEndsAt)) return "inactive";
+  return status;
+}

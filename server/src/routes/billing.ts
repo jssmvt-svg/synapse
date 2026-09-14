@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { randomUUID } from "node:crypto";
 import { db } from "../db.js";
+import { effectiveSubscriptionStatus } from "../studyAccessPolicy.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 import { getUncachableStripeClient } from "../stripeClient.js";
 import { getStripeAvailability } from "../stripeState.js";
@@ -20,16 +21,16 @@ function hasActiveSubscription(status: string | null | undefined): boolean {
 billingRouter.get("/status", async (req: AuthedRequest, res) => {
   const user = await db
     .prepare(
-      `SELECT role, subscription_status, subscription_period_end
+      `SELECT role, subscription_status, subscription_period_end, trial_ends_at
        FROM users WHERE id = ?`,
     )
     .get(req.userId);
   if (!user) return res.status(404).json({ error: "Utilisateur introuvable" });
   res.json({
     role: user.role,
-    subscriptionStatus: user.subscription_status,
+    subscriptionStatus: effectiveSubscriptionStatus(user.subscription_status, user.trial_ends_at),
     subscriptionPeriodEnd: user.subscription_period_end,
-    hasYearOneAccess: user.role === "admin" || hasActiveSubscription(user.subscription_status),
+    hasYearOneAccess: user.role === "admin" || hasActiveSubscription(effectiveSubscriptionStatus(user.subscription_status, user.trial_ends_at)),
     billingAvailable: getStripeAvailability().ready,
     billingMessage: getStripeAvailability().reason,
   });
@@ -40,12 +41,12 @@ billingRouter.post("/checkout", async (req: AuthedRequest, res) => {
   if (!availability.ready) return res.status(503).json({ error: availability.reason });
   const user = await db
     .prepare(
-      `SELECT id, email, stripe_customer_id, subscription_status, pending_checkout_expires_at
+      `SELECT id, email, stripe_customer_id, subscription_status, pending_checkout_expires_at, trial_ends_at
        FROM users WHERE id = ?`,
     )
     .get(req.userId);
   if (!user) return res.status(404).json({ error: "Utilisateur introuvable" });
-  if (hasActiveSubscription(user.subscription_status)) {
+  if (hasActiveSubscription(effectiveSubscriptionStatus(user.subscription_status, user.trial_ends_at))) {
     return res.status(409).json({ error: "Ton abonnement est déjà actif." });
   }
 

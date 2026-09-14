@@ -16,6 +16,8 @@ export function Dashboard() {
   const [progress, setProgress] = useState<ProgressSummary | null>(null);
   const [progressError, setProgressError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+  const [accessRequestedAt, setAccessRequestedAt] = useState<number | null>(user?.accessRequestedAt ?? null);
+  const [requestingAccess, setRequestingAccess] = useState(false);
 
   async function refreshDocuments() {
     setError(null);
@@ -32,6 +34,19 @@ export function Dashboard() {
       setProgress(await api.getProgressSummary());
     } catch (err) {
       setProgressError((err as Error).message);
+    }
+  }
+
+  async function onRequestAccess() {
+    if (requestingAccess) return;
+    setRequestingAccess(true);
+    try {
+      const result = await api.requestAccess();
+      setAccessRequestedAt(result.accessRequestedAt);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setRequestingAccess(false);
     }
   }
 
@@ -108,6 +123,32 @@ export function Dashboard() {
         <span className="status-dot" aria-hidden="true" />
         {t.onlineBadge}
       </div>
+      {user?.role !== "admin" && user?.subscriptionStatus !== "active" && user?.subscriptionStatus !== "trialing" && (
+        <div className="access-banner">
+          <p className="eyebrow">{t.accessPendingTitle}</p>
+          {accessRequestedAt ? (
+            <p>{t.accessRequestSent}</p>
+          ) : (
+            <>
+              <p>{t.accessPendingBody}</p>
+              <button type="button" onClick={() => void onRequestAccess()} disabled={requestingAccess}>
+                {t.requestAccessButton}
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      {user?.subscriptionStatus === "trialing" && user?.trialEndsAt && (
+        <div className="access-banner access-banner-trial">
+          <p>
+            {t.trialActiveUntil}{" "}
+            {new Date(user.trialEndsAt).toLocaleString(lang === "fr" ? "fr-FR" : "en-US", {
+              dateStyle: "medium",
+              timeStyle: "short",
+            })}
+          </p>
+        </div>
+      )}
       <header className="dashboard-header">
         <Link to="/dashboard" className="brand-lockup">
           <span className="brand-mark" aria-hidden="true">S</span>
@@ -180,186 +221,7 @@ export function Dashboard() {
         </Link>
       </section>
 
-      <section className="progress-dashboard" aria-labelledby="study-progress-title">
-        <div className="progress-section-heading">
-          <div>
-            <p className="eyebrow">{t.progressOverview}</p>
-            <h2 id="study-progress-title">{t.studyProgress}</h2>
-          </div>
-          <Link to="/library" className="library-link">
-            {t.continueStudying} →
-          </Link>
-        </div>
-        {progressError ? (
-          <p className="error">{progressError}</p>
-        ) : !progress ? (
-          <p className="loading-state">{t.loading}</p>
-        ) : (
-          <>
-            <div className="progress-metric-grid">
-              <article className="progress-metric">
-                <span>{t.resourcesCompleted}</span>
-                <strong>
-                  {progress.overall.resourcesCompleted}/{progress.overall.resourceTotal}
-                </strong>
-              </article>
-              <article className="progress-metric">
-                <span>{t.cardsReviewed}</span>
-                <strong>
-                  {progress.overall.flashcardsReviewed}/{progress.overall.flashcardTotal}
-                </strong>
-                <small>{progress.overall.flashcardsMastered} {t.cardsMastered.toLowerCase()}</small>
-              </article>
-              <article className="progress-metric">
-                <span>{t.qcmPerformance}</span>
-                <strong>
-                  {progress.overall.qcmAttempts ? percent(progress.overall.qcmAverageScore) : "—"}
-                </strong>
-                <small>{progress.overall.qcmAttempts} QCM</small>
-              </article>
-              <article className="progress-metric">
-                <span>{t.examCompleted}</span>
-                <strong>{progress.overall.examAttempts}</strong>
-              </article>
-            </div>
 
-            {progress.recommendation && (
-              <article className="next-action-card">
-                <div>
-                  <p className="eyebrow">{t.nextBestAction}</p>
-                  <h3>{text(progress.recommendation.title_fr, progress.recommendation.title_en)}</h3>
-                  <p>{recommendationCopy()}</p>
-                </div>
-                <Link to={actionLink} className="next-action-link">
-                  {actionLabel()} →
-                </Link>
-              </article>
-            )}
-
-            <div className="progress-detail-grid">
-              <section className="progress-detail-card">
-                <h3>{t.chapterProgress}</h3>
-                {progress.chapters.map((chapter) => (
-                  <Link key={chapter.id} to={`/library/chapter/${chapter.id}`} className="chapter-progress-row">
-                    <div>
-                      <strong>{text(chapter.titre_fr, chapter.titre_en)}</strong>
-                      <span>
-                        {chapter.resources_completed}/{chapter.resource_total} {t.resourcesCompleted.toLowerCase()}
-                      </span>
-                    </div>
-                    <div className="chapter-progress-stats">
-                      <span>{chapter.flashcards_reviewed} {t.cardsReviewed.toLowerCase()}</span>
-                      <span>
-                        {chapter.qcm_attempts ? percent(chapter.qcm_average_score) : t.noAttempts}
-                      </span>
-                    </div>
-                  </Link>
-                ))}
-              </section>
-              <section className="progress-detail-card">
-                <h3>{t.learningActivity}</h3>
-                {progress.recentActivity.length === 0 ? (
-                  <p className="hint">{t.noLearningActivity}</p>
-                ) : (
-                  <ul className="activity-list">
-                    {progress.recentActivity.map((activity, index) => (
-                      <li key={`${activity.type}-${activity.occurred_at}-${index}`}>
-                        <span className="activity-dot" aria-hidden="true" />
-                        <div>
-                          <strong>{text(activity.titre_fr, activity.titre_en)}</strong>
-                          <span>
-                            {activity.type === "resource"
-                              ? text(activity.item_fr ?? t.resourcesCompleted, activity.item_en ?? t.resourcesCompleted)
-                              : activity.type === "flashcard"
-                                ? `${t.flashcards} · ${activity.score}/5`
-                                : activity.type === "qcm"
-                                  ? `QCM · ${percent(activity.score ?? 0)}`
-                                  : `${t.chapterExam} · ${percent(activity.score ?? 0)}`}
-                          </span>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </section>
-            </div>
-          </>
-        )}
-      </section>
-
-      <div className="workspace">
-        <section className="col col-sources">
-          <h2>{t.sourcesTitle}</h2>
-          <p>{t.uploadPrompt}</p>
-          <input
-            ref={fileInput}
-            type="file"
-            accept=".pdf,.docx,.txt"
-            onChange={onFileChosen}
-            aria-label={t.uploadButton}
-          />
-          {error && <p className="error">{error}</p>}
-
-          {documents.length === 0 ? (
-            <p>{t.noDocuments}</p>
-          ) : (
-            <ul className="document-list">
-              {documents.map((doc) => (
-                <li
-                  key={doc.id}
-                  className={`document-row${doc.id === selectedDocId ? " selected" : ""}`}
-                  onClick={() => setSelectedDocId(doc.id)}
-                >
-                  <span>{doc.filename}</span>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
-
-        <section className="col col-chat">
-          <h2>{t.chatTitle}</h2>
-          <div className="mascot-card">
-            <div className="mascot-avatar" aria-hidden="true">S</div>
-            <p className="mascot-bubble">{t.sageIntro}</p>
-          </div>
-          <div className="chat-input-row">
-            <input disabled placeholder={t.chatPlaceholder} aria-label={t.chatPlaceholder} />
-            <button disabled>{t.chatSend}</button>
-          </div>
-          <span className="badge">{t.comingSoon}</span>
-        </section>
-
-        <section className="col col-studio">
-          <h2>{t.studioTitle}</h2>
-          <div className="studio-grid">
-            <button
-              className="studio-action"
-              disabled={selectedDocId === null || generating}
-              onClick={onGenerateFlashcards}
-            >
-              {t.studioFlashcards}
-              {generating ? (
-                <span className="badge">{t.generating}</span>
-              ) : selectedDocId === null ? (
-                <span className="hint">{t.selectDocumentHint}</span>
-              ) : null}
-            </button>
-            <button disabled className="studio-action">
-              {t.studioAudio}
-              <span className="badge">{t.comingSoon}</span>
-            </button>
-            <button disabled className="studio-action">
-              {t.studioVideo}
-              <span className="badge">{t.comingSoon}</span>
-            </button>
-            <button disabled className="studio-action">
-              {t.studioQuiz}
-              <span className="badge">{t.comingSoon}</span>
-            </button>
-          </div>
-        </section>
-      </div>
     </div>
   );
 }
