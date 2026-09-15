@@ -390,6 +390,19 @@ const SCHEMA = `
     END IF;
   END $$;
 
+  -- Les inscriptions/connexions comparaient l'email tel quel : "Marie@Gmail.com"
+  -- et "marie@gmail.com" créaient deux comptes distincts, l'un pouvant recevoir
+  -- un accès (essai 48h, abonnement) que l'autre ne voit jamais. On uniformise
+  -- ici les emails déjà en base — en sautant toute paire qui entrerait en
+  -- collision, pour ne jamais fusionner deux comptes sans validation humaine.
+  UPDATE users AS u
+  SET email = lower(trim(u.email))
+  WHERE lower(trim(u.email)) <> u.email
+    AND NOT EXISTS (
+      SELECT 1 FROM users AS u2
+      WHERE u2.id <> u.id AND lower(trim(u2.email)) = lower(trim(u.email))
+    );
+
   DO $$
   BEGIN
     IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'users_track_check') THEN

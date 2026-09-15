@@ -12,6 +12,7 @@ import {
   isValidPhoneCountryCode,
   isValidPhoneNumber,
   isValidTrack,
+  normalizeEmail,
   normalizeName,
 } from "../validation.js";
 
@@ -48,6 +49,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
   if (!email || !isValidEmail(email)) {
     return res.status(400).json({ error: "Adresse email invalide" });
   }
+  const cleanEmail = normalizeEmail(email);
   if (!password || !isPasswordStrongEnough(password)) {
     return res.status(400).json({
       error: "Le mot de passe doit contenir au moins 8 caractères, une majuscule et un chiffre",
@@ -66,7 +68,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
     return res.status(400).json({ error: "Merci de préciser ta filière : médecine ou dentaire" });
   }
 
-  const existing = await db.prepare("SELECT id FROM users WHERE email = ?").get(email);
+  const existing = await db.prepare("SELECT id FROM users WHERE email = ?").get(cleanEmail);
   if (existing) {
     return res.status(409).json({ error: "Un compte existe déjà avec cet email" });
   }
@@ -87,7 +89,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
     )
     .get(
-      email,
+      cleanEmail,
       passwordHash,
       sessionToken,
       lang,
@@ -101,12 +103,12 @@ authRouter.post("/register", authLimiter, async (req, res) => {
     );
 
   const token = signSession(inserted.id, sessionToken);
-  sendWelcomeEmail({ email, langPref: lang, firstName: cleanFirstName });
+  sendWelcomeEmail({ email: cleanEmail, langPref: lang, firstName: cleanFirstName });
   res.status(201).json({
     token,
     user: {
       id: inserted.id,
-      email,
+      email: cleanEmail,
       langPref: lang,
       role,
       firstName: cleanFirstName,
@@ -121,12 +123,13 @@ authRouter.post("/login", authLimiter, async (req, res) => {
   if (!email || !password) {
     return res.status(400).json({ error: "Email et mot de passe requis" });
   }
+  const cleanEmail = normalizeEmail(email);
 
   const user = await db
     .prepare(
       "SELECT id, password_hash, lang_pref, role, first_name, last_name, track FROM users WHERE email = ?",
     )
-    .get(email);
+    .get(cleanEmail);
 
   const valid = user ? await bcrypt.compare(password, user.password_hash) : false;
   if (!user || !valid) {
@@ -141,7 +144,7 @@ authRouter.post("/login", authLimiter, async (req, res) => {
     token,
     user: {
       id: user.id,
-      email,
+      email: cleanEmail,
       langPref: user.lang_pref,
       role: user.role,
       firstName: user.first_name,

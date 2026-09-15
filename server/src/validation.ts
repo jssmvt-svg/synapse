@@ -17,6 +17,15 @@ export function isValidEmail(email: string): boolean {
   return typeof email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+/**
+ * Casse et espaces superflus ne doivent jamais faire exister deux comptes
+ * pour la même adresse — "Marie@Gmail.com" et "marie@gmail.com" doivent
+ * pointer vers la même ligne, à l'inscription comme à la connexion.
+ */
+export function normalizeEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
 /** Indicatif pays : "+33", "+40", etc. */
 export function isValidPhoneCountryCode(code: string): boolean {
   return typeof code === "string" && /^\+[1-9][0-9]{0,3}$/.test(code);
