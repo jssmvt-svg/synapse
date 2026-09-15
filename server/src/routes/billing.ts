@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { randomUUID } from "node:crypto";
 import { db } from "../db.js";
+import { sendTrialRequestedEmailToAdmin } from "../email.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 import { getUncachableStripeClient } from "../stripeClient.js";
 import { getStripeAvailability } from "../stripeState.js";
@@ -20,19 +21,57 @@ function hasActiveSubscription(status: string | null | undefined): boolean {
 billingRouter.get("/status", async (req: AuthedRequest, res) => {
   const user = await db
     .prepare(
-      `SELECT role, subscription_status, subscription_period_end
+      `SELECT role, subscription_status, subscription_period_end, trial_status, trial_ends_at
        FROM users WHERE id = ?`,
     )
     .get(req.userId);
   if (!user) return res.status(404).json({ error: "Utilisateur introuvable" });
+  const trialActive =
+    user.trial_status === "granted" &&
+    user.subscription_status === "trialing" &&
+    (user.trial_ends_at == null || Date.now() < Number(user.trial_ends_at));
   res.json({
     role: user.role,
     subscriptionStatus: user.subscription_status,
     subscriptionPeriodEnd: user.subscription_period_end,
     hasYearOneAccess: user.role === "admin" || hasActiveSubscription(user.subscription_status),
+    trialStatus: user.trial_status,
+    trialEndsAt: user.trial_ends_at,
+    trialActive,
     billingAvailable: getStripeAvailability().ready,
     billingMessage: getStripeAvailability().reason,
   });
+});
+
+// Un étudiant demande ses 48h gratuites — jamais accordées automatiquement :
+// Jessica valide chaque demande depuis /admin, ce qui déclenche l'email d'accès.
+billingRouter.post("/trial/request", async (req: AuthedRequest, res) => {
+  const user = await db
+    .prepare(
+      `SELECT id, email, lang_pref, first_name, last_name, track, trial_status
+       FROM users WHERE id = ?`,
+    )
+    .get(req.userId);
+  if (!user) return res.status(404).json({ error: "Utilisateur introuvable" });
+  if (user.trial_status === "requested") {
+    return res.status(409).json({ error: "Ta demande est déjà en attente de validation." });
+  }
+  if (user.trial_status === "granted") {
+    return res.status(409).json({ error: "Ton accès gratuit est déjà actif." });
+  }
+
+  await db
+    .prepare("UPDATE users SET trial_status = 'requested', trial_requested_at = ? WHERE id = ?")
+    .run(Date.now(), user.id);
+
+  sendTrialRequestedEmailToAdmin({
+    email: user.email,
+    firstName: user.first_name,
+    lastName: user.last_name,
+    track: user.track,
+  });
+
+  res.json({ trialStatus: "requested" });
 });
 
 billingRouter.post("/checkout", async (req: AuthedRequest, res) => {

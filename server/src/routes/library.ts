@@ -59,7 +59,7 @@ async function canAccessSemester(
   semesterNumber: number,
 ): Promise<boolean> {
   const [user, semester] = await Promise.all([
-    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(userId),
+    db.prepare("SELECT role, subscription_status, subscription_period_end FROM users WHERE id = ?").get(userId),
     db
       .prepare(
         `SELECT is_published FROM study_semesters
@@ -70,6 +70,7 @@ async function canAccessSemester(
   return canOpenStudyContent({
     role: user?.role,
     subscriptionStatus: user?.subscription_status,
+    subscriptionPeriodEnd: user?.subscription_period_end,
     yearNumber,
     semesterNumber,
     semesterPublished: Boolean(semester?.is_published),
@@ -181,7 +182,7 @@ libraryRouter.get("/semesters", async (req: AuthedRequest, res) => {
          FROM library_chapters WHERE is_active = true ORDER BY semestre ASC, matiere ASC, ordre ASC`,
       )
       .all(),
-    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(req.userId),
+    db.prepare("SELECT role, subscription_status, subscription_period_end FROM users WHERE id = ?").get(req.userId),
   ]);
   res.json(
     (semesters as any[]).map((semester) => {
@@ -193,6 +194,7 @@ libraryRouter.get("/semesters", async (req: AuthedRequest, res) => {
         canOpenStudyContent({
           role: user?.role,
           subscriptionStatus: user?.subscription_status,
+          subscriptionPeriodEnd: user?.subscription_period_end,
           yearNumber: semester.year_number,
           semesterNumber: semester.semester_number,
           semesterPublished: Boolean(semester.is_published),

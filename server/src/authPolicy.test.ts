@@ -39,3 +39,31 @@ test("year-one subscription never unlocks second-year content", () => {
     false,
   );
 });
+
+test("a manually granted 48h trial stops opening content once its period end has passed", () => {
+  const now = 1_000_000;
+  assert.equal(
+    canOpenStudyContent({
+      role: "student",
+      subscriptionStatus: "trialing",
+      subscriptionPeriodEnd: now + 1,
+      yearNumber: 1,
+      semesterNumber: 1,
+      semesterPublished: true,
+      now,
+    }),
+    true,
+  );
+  assert.equal(
+    canOpenStudyContent({
+      role: "student",
+      subscriptionStatus: "trialing",
+      subscriptionPeriodEnd: now - 1,
+      yearNumber: 1,
+      semesterNumber: 1,
+      semesterPublished: true,
+      now,
+    }),
+    false,
+  );
+});

@@ -33,8 +33,26 @@ export function Membership() {
       setBusy(false);
     }
   };
+  const requestTrial = async () => {
+    setBusy(true); setError(null);
+    try {
+      const { trialStatus } = await api.requestTrial();
+      setStatus((current) => (current ? { ...current, trialStatus } : current));
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setBusy(false);
+    }
+  };
 
   const active = status?.hasYearOneAccess;
+  const trialEndsLabel = status?.trialEndsAt
+    ? new Date(status.trialEndsAt).toLocaleString(lang === "fr" ? "fr-FR" : "en-GB", {
+        dateStyle: "long",
+        timeStyle: "short",
+      })
+    : null;
+
   return (
     <main className="membership-shell">
       <Link to="/library" className="back-link">{lang === "fr" ? "← Retour à la bibliothèque" : "← Back to library"}</Link>
@@ -57,12 +75,39 @@ export function Membership() {
         {error && <p className="error">{error}</p>}
         {status?.role === "admin" ? (
           <p className="success-note">{lang === "fr" ? "Ton compte administrateur a accès à toute la première année." : "Your administrator account has access to all of year one."}</p>
+        ) : status?.trialActive ? (
+          <>
+            <p className="success-note">{lang === "fr"
+              ? `Ton essai gratuit est actif jusqu'au ${trialEndsLabel}.`
+              : `Your free trial is active until ${trialEndsLabel}.`}</p>
+            <button type="button" onClick={() => void checkout()} disabled={busy || !status.billingAvailable}>
+              {busy ? "…" : (lang === "fr" ? "S’abonner dès maintenant à 24,99 € / mois" : "Subscribe now for €24.99 / month")}
+            </button>
+          </>
         ) : active ? (
           <button type="button" onClick={() => void portal()} disabled={busy}>{busy ? "…" : (lang === "fr" ? "Gérer mon abonnement" : "Manage membership")}</button>
         ) : (
           <>
-            {status && !status.billingAvailable && <p className="hint">{status.billingMessage}</p>}
-            <button type="button" onClick={() => void checkout()} disabled={busy || !status || !status.billingAvailable}>{busy ? "…" : (lang === "fr" ? "S’abonner à 24,99 € / mois" : "Subscribe for €24.99 / month")}</button>
+            {status?.trialStatus === "requested" && (
+              <p className="hint">{lang === "fr"
+                ? "Ta demande d'accès gratuit de 48h est en attente de validation. Tu recevras un email dès que Jessica l'aura activée."
+                : "Your 48h free-access request is pending review. You'll get an email once Jessica activates it."}</p>
+            )}
+            {status?.trialStatus === "expired" && (
+              <p className="hint">{lang === "fr" ? "Ton essai gratuit de 48h est terminé." : "Your 48h free trial has ended."}</p>
+            )}
+            {status?.trialStatus === "denied" && (
+              <p className="hint">{lang === "fr" ? "Ta précédente demande d'essai n'a pas été validée." : "Your previous trial request wasn't approved."}</p>
+            )}
+            <div className="membership-actions">
+              {(status?.trialStatus === "none" || status?.trialStatus === "denied") && (
+                <button type="button" className="secondary" onClick={() => void requestTrial()} disabled={busy || !status}>
+                  {busy ? "…" : (lang === "fr" ? "Demander 48h d'accès gratuit" : "Request 48h free access")}
+                </button>
+              )}
+              {status && !status.billingAvailable && <p className="hint">{status.billingMessage}</p>}
+              <button type="button" onClick={() => void checkout()} disabled={busy || !status || !status.billingAvailable}>{busy ? "…" : (lang === "fr" ? "S’abonner à 24,99 € / mois" : "Subscribe for €24.99 / month")}</button>
+            </div>
           </>
         )}
       </section>

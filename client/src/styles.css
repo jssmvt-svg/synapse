@@ -1587,12 +1587,14 @@ button:hover:not(:disabled) {
   box-shadow: 0 12px 22px rgba(71, 66, 211, 0.25);
 }
 
-input {
+input,
+select {
   border-color: var(--border);
   background: #fbfdff;
 }
 
-input:focus {
+input:focus,
+select:focus {
   outline: 3px solid rgba(79, 100, 232, 0.18);
   outline-offset: 1px;
   border-color: var(--accent-deep);
@@ -2247,6 +2249,72 @@ input:focus {
 .admin-actions button { min-width: 9.7rem; margin-top: 0.35rem; }
 .admin-semester-row .status-dot { display: inline-block; margin: 0 0.5rem 0.12rem 0; background: #a7b3c5; box-shadow: none; }
 .admin-semester-row .status-dot.is-open { background: #28a776; box-shadow: 0 0 0 4px rgba(40, 167, 118, 0.13); }
+
+/* Inscription : champs sur une ligne, mot de passe visible, indicatif tél. */
+.auth-form-row { flex-direction: row; gap: 0.75rem; }
+.auth-form-row > label { flex: 1; min-width: 0; }
+.password-field { display: flex; gap: 0.4rem; align-items: stretch; }
+.password-field input { flex: 1; min-width: 0; }
+.password-toggle {
+  flex: 0 0 auto;
+  min-width: 2.75rem;
+  padding: 0.6rem 0.65rem;
+  background: #eef1fb;
+  box-shadow: none;
+  font-size: 1rem;
+  line-height: 1;
+}
+.password-toggle:hover:not(:disabled) { transform: none; box-shadow: none; opacity: 0.85; }
+.password-hint { margin: -0.25rem 0 0; font-size: 0.8rem; color: #7a879f; }
+.password-hint-error { color: #c0392b; }
+.phone-row select { flex: 0 0 auto; width: 11.5rem; }
+.phone-row input { flex: 1; min-width: 0; }
+
+.auth-form button.secondary,
+.membership-actions button.secondary,
+.admin-users-actions button.secondary {
+  background: #fff;
+  color: var(--accent-deep);
+  border: 1px solid #c9d3f4;
+  box-shadow: none;
+}
+.auth-form button.secondary:hover:not(:disabled),
+.membership-actions button.secondary:hover:not(:disabled),
+.admin-users-actions button.secondary:hover:not(:disabled) {
+  box-shadow: none;
+  opacity: 0.85;
+}
+
+.membership-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 0.6rem; margin-top: 1.45rem; }
+.membership-actions button { margin-top: 0; }
+
+/* Administration : comptes étudiants et validation des essais gratuits */
+.admin-users-header { margin-top: 2.5rem; }
+.admin-users-table-wrap {
+  margin-top: 1rem;
+  overflow-x: auto;
+  border: 1px solid #dce5f3;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 9px 22px rgba(34, 53, 93, 0.05);
+}
+.admin-users-table { width: 100%; border-collapse: collapse; min-width: 780px; }
+.admin-users-table th,
+.admin-users-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #eaf0fb;
+  font-size: 0.88rem;
+  color: #3a4863;
+  vertical-align: top;
+}
+.admin-users-table th { color: #7a879f; font-weight: 700; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; }
+.admin-users-table tbody tr:last-child td { border-bottom: none; }
+.admin-users-table tr.is-pending-row { background: #fff8ec; }
+.admin-users-phone { color: #7a879f; font-size: 0.8rem; margin-top: 0.15rem; }
+.admin-users-actions { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.admin-users-actions button { min-height: 36px; padding: 0.4rem 0.75rem; font-size: 0.85rem; margin-top: 0; }
+.admin-users-noop { color: #a7b3c5; }
 
 .prearrival-section {
   display: grid;

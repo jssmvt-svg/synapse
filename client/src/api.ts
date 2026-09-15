@@ -31,11 +31,27 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   return (await res.json()) as T;
 }
 
+export type Track = "medecine" | "dentaire";
+
 export interface User {
   id: number;
   email: string;
   langPref: "fr" | "en";
   role: "student" | "admin";
+  firstName?: string;
+  lastName?: string;
+  track?: Track | null;
+}
+
+export interface RegisterInput {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  phoneCountryCode: string;
+  phoneNumber: string;
+  track: Track;
+  langPref: "fr" | "en";
 }
 
 export interface DocumentSummary {
@@ -343,11 +359,16 @@ export interface StudySemesterDetail {
   subjects: LibrarySubject[];
 }
 
+export type TrialStatus = "none" | "requested" | "granted" | "expired" | "denied";
+
 export interface BillingStatus {
   role: "student" | "admin";
   subscriptionStatus: "active" | "trialing" | "inactive";
   subscriptionPeriodEnd: number | null;
   hasYearOneAccess: boolean;
+  trialStatus: TrialStatus;
+  trialEndsAt: number | null;
+  trialActive: boolean;
   billingAvailable: boolean;
   billingMessage: string;
 }
@@ -363,11 +384,29 @@ export interface AdminSemester {
   is_published: boolean;
 }
 
+export interface AdminUser {
+  id: number;
+  email: string;
+  firstName: string;
+  lastName: string;
+  phoneCountryCode: string | null;
+  phoneNumber: string | null;
+  track: Track | null;
+  role: "student" | "admin";
+  trialStatus: TrialStatus;
+  trialRequestedAt: number | null;
+  trialGrantedAt: number | null;
+  trialEndsAt: number | null;
+  subscriptionStatus: "active" | "trialing" | "inactive";
+  subscriptionPeriodEnd: number | null;
+  createdAt: number;
+}
+
 export const api = {
-  register: (email: string, password: string, langPref: "fr" | "en") =>
+  register: (input: RegisterInput) =>
     request<{ token: string; user: User }>("/auth/register", {
       method: "POST",
-      body: JSON.stringify({ email, password, langPref }),
+      body: JSON.stringify(input),
     }),
   login: (email: string, password: string) =>
     request<{ token: string; user: User }>("/auth/login", {
@@ -430,12 +469,20 @@ export const api = {
   getBillingStatus: () => request<BillingStatus>("/billing/status"),
   startCheckout: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
   openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
+  requestTrial: () => request<{ trialStatus: TrialStatus }>("/billing/trial/request", { method: "POST" }),
   getAdminSemesters: () => request<AdminSemester[]>("/admin/semesters"),
   setSemesterPublished: (semester: number, isPublished: boolean) =>
     request<AdminSemester>(`/admin/semesters/${semester}`, {
       method: "PATCH",
       body: JSON.stringify({ isPublished }),
     }),
+  getAdminUsers: () => request<AdminUser[]>("/admin/users"),
+  grantTrial: (userId: number) =>
+    request<{ trialStatus: TrialStatus; trialEndsAt: number }>(`/admin/users/${userId}/trial/grant`, {
+      method: "POST",
+    }),
+  denyTrial: (userId: number) =>
+    request<{ trialStatus: TrialStatus }>(`/admin/users/${userId}/trial/deny`, { method: "POST" }),
   getProgressSummary: () => request<ProgressSummary>("/library/progress-summary"),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),

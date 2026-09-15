@@ -48,6 +48,17 @@ const SCHEMA = `
     session_token TEXT,
     lang_pref TEXT NOT NULL DEFAULT 'fr',
     role TEXT NOT NULL DEFAULT 'student' CHECK (role IN ('student', 'admin')),
+    first_name TEXT NOT NULL DEFAULT '',
+    last_name TEXT NOT NULL DEFAULT '',
+    phone_country_code TEXT,
+    phone_number TEXT,
+    track TEXT CHECK (track IN ('medecine', 'dentaire')),
+    -- Essai gratuit de 48h : jamais auto-accordé à l'inscription — l'étudiant
+    -- doit explicitement le demander, puis Jessica valide depuis /admin.
+    trial_status TEXT NOT NULL DEFAULT 'none' CHECK (trial_status IN ('none', 'requested', 'granted', 'expired', 'denied')),
+    trial_requested_at BIGINT,
+    trial_granted_at BIGINT,
+    trial_ends_at BIGINT,
     stripe_customer_id TEXT,
     stripe_subscription_id TEXT,
     subscription_status TEXT NOT NULL DEFAULT 'inactive',
@@ -352,6 +363,15 @@ const SCHEMA = `
   ALTER TABLE library_qcm_options ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_chapter_exams ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS role TEXT NOT NULL DEFAULT 'student';
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS first_name TEXT NOT NULL DEFAULT '';
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS last_name TEXT NOT NULL DEFAULT '';
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS phone_country_code TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS phone_number TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS track TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_status TEXT NOT NULL DEFAULT 'none';
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_requested_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_granted_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_ends_at BIGINT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_status TEXT NOT NULL DEFAULT 'inactive';
@@ -367,6 +387,17 @@ const SCHEMA = `
     ) THEN
       ALTER TABLE library_flashcards
         ADD CONSTRAINT library_flashcards_chapter_ordre_key UNIQUE (chapter_id, ordre);
+    END IF;
+  END $$;
+
+  DO $$
+  BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'users_track_check') THEN
+      ALTER TABLE users ADD CONSTRAINT users_track_check CHECK (track IN ('medecine', 'dentaire'));
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'users_trial_status_check') THEN
+      ALTER TABLE users ADD CONSTRAINT users_trial_status_check
+        CHECK (trial_status IN ('none', 'requested', 'granted', 'expired', 'denied'));
     END IF;
   END $$;
 `;

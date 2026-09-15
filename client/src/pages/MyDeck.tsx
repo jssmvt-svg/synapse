@@ -361,7 +361,21 @@ export function MyDeck() {
             {progress.some((item) => item.total > 0) && <div className="notion-progress"><h3>{text.progress}</h3>{progress.filter((item) => item.total > 0).map((item) => <p key={item.notionSlug}><strong>{item.label}</strong><span>{item.reviewed}/{item.total} {text.reviewed}</span></p>)}</div>}
           </>
         )}
-        {step === "review" && <button type="button" className="text-button deck-next" onClick={() => { setNotice(null); setStep("source"); }}>{text.createMore}</button>}
+        {step === "review" && (
+          <button
+            type="button"
+            className="text-button deck-next"
+            onClick={() => {
+              setNotice(null);
+              setOwnCourse("");
+              setPrompt("");
+              setResponse("");
+              setStep("source");
+            }}
+          >
+            {text.createMore}
+          </button>
+        )}
       </section>
     </main>
   );

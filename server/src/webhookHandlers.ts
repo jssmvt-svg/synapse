@@ -1,4 +1,5 @@
 import { db } from "./db.js";
+import { sendPaymentConfirmedEmail } from "./email.js";
 import { getStripeSync } from "./stripeClient.js";
 
 function activeStatus(status: string | undefined): boolean {
@@ -20,20 +21,33 @@ export class WebhookHandlers {
     const userId = Number(metadata.user_id);
 
     if (event.type === "checkout.session.completed" && Number.isInteger(userId)) {
-      await db
+      const buyer = await db
         .prepare(
           `UPDATE users
            SET stripe_customer_id = COALESCE(?, stripe_customer_id),
                stripe_subscription_id = COALESCE(?, stripe_subscription_id),
                pending_checkout_key = NULL,
                pending_checkout_expires_at = NULL
-           WHERE id = ?`,
+           WHERE id = ?
+           RETURNING email, lang_pref, first_name`,
         )
-        .run(
+        .get(
           typeof object.customer === "string" ? object.customer : null,
           typeof object.subscription === "string" ? object.subscription : null,
           userId,
         );
+
+      // Manquait jusqu'ici : le paiement était bien traité côté abonnement,
+      // mais l'étudiant ne recevait aucune confirmation par email (même bug
+      // que sur Medbyjes avant correction).
+      if (buyer?.email) {
+        const amountTotal = typeof object.amount_total === "number" ? object.amount_total : null;
+        const amountLabel = amountTotal != null ? `${(amountTotal / 100).toFixed(2)} €` : "24,99 €";
+        sendPaymentConfirmedEmail(
+          { email: buyer.email, langPref: buyer.lang_pref, firstName: buyer.first_name },
+          amountLabel,
+        );
+      }
     }
 
     if (

@@ -45,7 +45,7 @@ async function requireChapterAccess(req: AuthedRequest, res: Response, chapterId
     return null;
   }
   const [user, semester] = await Promise.all([
-    db.prepare("SELECT role, subscription_status FROM users WHERE id = ?").get(req.userId),
+    db.prepare("SELECT role, subscription_status, subscription_period_end FROM users WHERE id = ?").get(req.userId),
     db
       .prepare("SELECT is_published FROM study_semesters WHERE year_number = ? AND semester_number = ?")
       .get(chapter.annee, chapter.semestre),
@@ -54,6 +54,7 @@ async function requireChapterAccess(req: AuthedRequest, res: Response, chapterId
     !canOpenStudyContent({
       role: user?.role,
       subscriptionStatus: user?.subscription_status,
+      subscriptionPeriodEnd: user?.subscription_period_end,
       yearNumber: chapter.annee,
       semesterNumber: chapter.semestre,
       semesterPublished: Boolean(semester?.is_published),
