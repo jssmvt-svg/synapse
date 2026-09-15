@@ -13,6 +13,7 @@ export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [countryCode, setCountryCode] = useState("+33");
   const [phone, setPhone] = useState("");
   const [track, setTrack] = useState<"dentaire" | "medecine" | "">("");
   const [error, setError] = useState<string | null>(null);
@@ -40,6 +41,7 @@ export function Register() {
         lastName,
         email,
         password,
+        countryCode,
         phone,
         track,
         langPref: lang,
@@ -105,7 +107,20 @@ export function Register() {
         </ul>
         <label>
           {t.phone}
-          <input type="tel" autoComplete="tel" placeholder="+33 6 12 34 56 78" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          <div className="phone-row">
+            <label className="sr-only" htmlFor="country-code">{t.countryCode}</label>
+            <select id="country-code" value={countryCode} onChange={(e) => setCountryCode(e.target.value)} aria-label={t.countryCode}>
+              <option value="+33">🇫🇷 +33</option>
+              <option value="+212">🇲🇦 +212</option>
+              <option value="+216">🇹🇳 +216</option>
+              <option value="+213">🇩🇿 +213</option>
+              <option value="+32">🇧🇪 +32</option>
+              <option value="+41">🇨🇭 +41</option>
+              <option value="+1">🇨🇦/🇺🇸 +1</option>
+              <option value="+44">🇬🇧 +44</option>
+            </select>
+            <input type="tel" autoComplete="tel-national" placeholder="6 12 34 56 78" value={phone} onChange={(e) => setPhone(e.target.value)} required />
+          </div>
         </label>
         <fieldset className="track-choice">
           <legend>{t.trackLabel}</legend>

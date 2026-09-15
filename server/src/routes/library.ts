@@ -259,6 +259,17 @@ libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
 });
 
 libraryRouter.get("/progress-summary", async (req: AuthedRequest, res) => {
+  const user = await db
+    .prepare("SELECT role, subscription_status, trial_ends_at FROM users WHERE id = ?")
+    .get(req.userId);
+  const membershipStatus = effectiveSubscriptionStatus(user?.subscription_status, user?.trial_ends_at);
+  if (user?.role !== "admin" && membershipStatus !== "active" && membershipStatus !== "trialing") {
+    return res.status(403).json({
+      error: "Un acces actif est necessaire pour consulter la progression.",
+      code: "STUDY_ACCESS_REQUIRED",
+    });
+  }
+
   const chapters = await db
     .prepare(
       `SELECT

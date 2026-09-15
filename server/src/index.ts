@@ -17,6 +17,7 @@ import { decksRouter } from "./routes/decks.js";
 import { libraryRouter } from "./routes/library.js";
 import { personalDeckRouter } from "./routes/personalDeck.js";
 import { seedLibrary } from "./seed-library.js";
+import { startEmailDeliveryWorker } from "./email.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -124,6 +125,7 @@ db.init()
   .then(() => {
     app.listen(port, () => {
       console.log(`Synapse server listening on port ${port}`);
+      startEmailDeliveryWorker();
       void seedLibrary().catch((error) => {
         console.error("La mise à jour de la bibliothèque a échoué.", error);
       });

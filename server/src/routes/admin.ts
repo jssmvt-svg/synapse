@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { db } from "../db.js";
-import { sendEmail, accessGrantedEmailHtml } from "../email.js";
+import { sendEmailOnce, accessGrantedEmailHtml } from "../email.js";
 import { effectiveSubscriptionStatus } from "../studyAccessPolicy.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 
@@ -47,7 +47,9 @@ adminRouter.patch("/semesters/:number", async (req, res) => {
 adminRouter.get("/students", async (_req, res) => {
   const students = await db
     .prepare(
-      `SELECT id, email, first_name, last_name, phone, track, subscription_status, trial_ends_at, access_requested_at, created_at
+      `SELECT id, email, first_name, last_name, country_code, phone, track, subscription_status,
+              trial_started_at, trial_ends_at, trial_used, access_requested_at,
+              access_processed_at, access_revoked_at, created_at
        FROM users WHERE role = 'student' ORDER BY created_at DESC`,
     )
     .all();
@@ -105,20 +107,40 @@ adminRouter.post("/students/:id/trial", async (req: AuthedRequest, res) => {
   const userId = Number(req.params.id);
   if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
   const student = await db
-    .prepare("SELECT id, email, first_name FROM users WHERE id = ?")
+    .prepare(
+      `SELECT id, email, first_name, role, subscription_status, trial_used, access_requested_at
+       FROM users WHERE id = ?`,
+    )
     .get(userId);
   if (!student) return res.status(404).json({ error: "Etudiant introuvable." });
+  if (student.role !== "student") return res.status(400).json({ error: "Le compte cible n'est pas un etudiant." });
+  if (student.subscription_status === "active") {
+    return res.status(409).json({ error: "Cet etudiant possede deja un abonnement actif." });
+  }
+  if (student.trial_used) {
+    return res.status(409).json({ error: "L'essai gratuit de cet etudiant a deja ete utilise." });
+  }
+  if (!student.access_requested_at) {
+    return res.status(409).json({ error: "Cet etudiant n'a pas demande d'essai gratuit." });
+  }
 
-  const trialEndsAt = Date.now() + 48 * 60 * 60 * 1000;
-  await db
+  const trialStartedAt = Date.now();
+  const trialEndsAt = trialStartedAt + 48 * 60 * 60 * 1000;
+  const approval = await db
     .prepare(
       `UPDATE users
-       SET subscription_status = 'trialing', trial_ends_at = ?, access_granted_by = ?
-       WHERE id = ?`,
+       SET subscription_status = 'trialing', trial_started_at = ?, trial_ends_at = ?,
+           trial_used = TRUE, access_processed_at = ?, access_revoked_at = NULL,
+           access_granted_by = ?
+       WHERE id = ? AND trial_used = FALSE AND access_requested_at IS NOT NULL`,
     )
-    .run(trialEndsAt, req.userId, userId);
+    .run(trialStartedAt, trialEndsAt, trialStartedAt, req.userId, userId);
+  if (approval.rowCount !== 1) {
+    return res.status(409).json({ error: "L'essai gratuit a deja ete traite." });
+  }
 
-  void sendEmail(
+  void sendEmailOnce(
+    `trial-granted:${userId}`,
     student.email,
     "Ton acces Synapse est ouvert",
     accessGrantedEmailHtml(student.first_name || "", trialEndsAt),
@@ -130,16 +152,21 @@ adminRouter.post("/students/:id/trial", async (req: AuthedRequest, res) => {
 adminRouter.post("/students/:id/revoke", async (req, res) => {
   const userId = Number(req.params.id);
   if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
-  const student = await db.prepare("SELECT id FROM users WHERE id = ?").get(userId);
+  const student = await db.prepare("SELECT id, subscription_status FROM users WHERE id = ? AND role = 'student'").get(userId);
   if (!student) return res.status(404).json({ error: "Etudiant introuvable." });
+  if (student.subscription_status === "active") {
+    return res.status(409).json({ error: "Un abonnement payant doit etre gere depuis Stripe." });
+  }
 
+  const revokedAt = Date.now();
   await db
     .prepare(
       `UPDATE users
-       SET subscription_status = 'inactive', trial_ends_at = NULL, access_requested_at = NULL
+       SET subscription_status = 'inactive', trial_ends_at = NULL, access_requested_at = NULL,
+           access_processed_at = ?, access_revoked_at = ?
        WHERE id = ?`,
     )
-    .run(userId);
+    .run(revokedAt, revokedAt, userId);
 
   res.json({ ok: true });
 });

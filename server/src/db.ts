@@ -118,6 +118,17 @@ const SCHEMA = `
     created_at BIGINT NOT NULL
   );
 
+  CREATE TABLE IF NOT EXISTS email_deliveries (
+    dedupe_key TEXT PRIMARY KEY,
+    recipient TEXT NOT NULL,
+    subject TEXT NOT NULL,
+    html TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'sent')),
+    attempts INTEGER NOT NULL DEFAULT 0,
+    last_attempt_at BIGINT,
+    sent_at BIGINT
+  );
+
   CREATE TABLE IF NOT EXISTS study_semesters (
     id SERIAL PRIMARY KEY,
     year_number INTEGER NOT NULL,
@@ -415,7 +426,23 @@ const SCHEMA = `
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_status TEXT NOT NULL DEFAULT 'inactive';
-ALTER TABLE users ADD COLUMN IF NOT EXISTS first_name TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS last_name TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS phone TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS track TEXT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_requested_at BIGINT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_ends_at BIGINT;  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_granted_by INTEGER REFERENCES users(id);
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS first_name TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS last_name TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS country_code TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS phone TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS track TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_requested_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_processed_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_started_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_ends_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_used BOOLEAN NOT NULL DEFAULT FALSE;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_revoked_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_granted_by INTEGER REFERENCES users(id);
+  UPDATE users
+  SET trial_used = TRUE
+  WHERE trial_used = FALSE
+    AND (trial_ends_at IS NOT NULL OR access_granted_by IS NOT NULL OR subscription_status = 'trialing');
+  ALTER TABLE email_deliveries ADD COLUMN IF NOT EXISTS html TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_period_end BIGINT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_event_created BIGINT NOT NULL DEFAULT 0;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_key TEXT;

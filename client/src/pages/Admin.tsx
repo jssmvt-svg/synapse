@@ -11,13 +11,24 @@ function studentStatusBadge(student: AdminStudent, lang: string): { label: strin
   if (student.subscription_status === "trialing" && student.trial_ends_at && student.trial_ends_at > now) {
     return { label: lang === "fr" ? "Essai actif" : "Trial active", className: "badge-trial" };
   }
-  if (student.subscription_status === "trialing" && student.trial_ends_at && student.trial_ends_at <= now) {
+  if (student.trial_used && student.trial_ends_at && student.trial_ends_at <= now) {
     return { label: lang === "fr" ? "Essai expiré" : "Trial expired", className: "badge-expired" };
   }
-  if (student.access_requested_at) {
+  if (student.access_revoked_at) {
+    return { label: lang === "fr" ? "Accès révoqué" : "Access revoked", className: "badge-expired" };
+  }
+  if (student.access_requested_at && !student.access_revoked_at && !student.trial_used) {
     return { label: lang === "fr" ? "Demande en attente" : "Access requested", className: "badge-pending" };
   }
   return { label: lang === "fr" ? "Aucun accès" : "No access", className: "badge-none" };
+}
+
+function trialCountdown(trialEndsAt: number, lang: string): string {
+  const remaining = Math.max(0, trialEndsAt - Date.now());
+  if (remaining === 0) return lang === "fr" ? "Terminé" : "Ended";
+  const hours = Math.floor(remaining / 3_600_000);
+  const minutes = Math.floor((remaining % 3_600_000) / 60_000);
+  return lang === "fr" ? `${hours} h ${minutes} min restantes` : `${hours}h ${minutes}m remaining`;
 }
 
 function formatDate(value: number | null | undefined, lang: string): string {
@@ -164,20 +175,20 @@ export function Admin() {
                   <div className="admin-student-meta">
                     {student.track && <span className="admin-meta-chip">{student.track}</span>}
                     {student.phone && <span className="admin-meta-chip">{student.phone}</span>}
-                    {student.subscription_status === "trialing" && (
+                    {student.subscription_status === "trialing" && student.trial_ends_at && (
                       <span className="admin-meta-chip">
                         {lang === "fr" ? "Fin d'essai : " : "Trial ends: "}
-                        {formatDate(student.trial_ends_at, lang)}
+                        {formatDate(student.trial_ends_at, lang)} · {trialCountdown(student.trial_ends_at, lang)}
                       </span>
                     )}
                   </div>
                   <div className="admin-student-actions">
-                    {(!student.subscription_status || student.subscription_status === "inactive") && (
+                    {student.subscription_status !== "active" && !student.trial_used && Boolean(student.access_requested_at) && (
                       <button type="button" onClick={() => void grantTrial(student.id)} disabled={accessSaving === student.id}>
                         {accessSaving === student.id ? "…" : lang === "fr" ? "Accorder 48h" : "Grant 48h"}
                       </button>
                     )}
-                    {(student.subscription_status === "trialing" || student.subscription_status === "active") && (
+                    {student.subscription_status === "trialing" && student.trial_ends_at && student.trial_ends_at > Date.now() && (
                       <button type="button" className="btn-secondary" onClick={() => void revokeAccess(student.id)} disabled={accessSaving === student.id}>
                         {accessSaving === student.id ? "…" : lang === "fr" ? "Révoquer" : "Revoke"}
                       </button>

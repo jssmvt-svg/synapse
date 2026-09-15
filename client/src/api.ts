@@ -375,9 +375,12 @@ export interface AdminStudent {
   first_name: string | null;
   last_name: string | null;
   phone: string | null;
+  country_code: string | null;
   track: string | null;
   subscription_status: string;
   trial_ends_at: number | null;
+  trial_used: boolean;
+  access_revoked_at: number | null;
   access_requested_at: number | null;
   effective_status: string;
   created_at: number;
@@ -399,6 +402,7 @@ export const api = {
     lastName: string;
     email: string;
     password: string;
+    countryCode: string;
     phone: string;
     track: "dentaire" | "medecine";
     langPref: "fr" | "en";

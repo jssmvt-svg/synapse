@@ -46,6 +46,11 @@ body {
   font-size: 0.9rem;
 }
 
+.auth-form input,
+.auth-form select {
+  width: 100%;
+}
+
 .form-row-2 {
   display: flex;
   gap: 0.75rem;
@@ -53,6 +58,7 @@ body {
 
 .form-row-2 label {
   flex: 1;
+  min-width: 0;
 }
 
 .input-eye-wrap {
@@ -128,13 +134,53 @@ body {
 }
 
 input,
-button {
+button,
+select {
   font-size: 1rem;
   padding: 0.6rem 0.75rem;
   border-radius: 8px;
   border: 1px solid var(--border);
   min-height: 44px;
   box-sizing: border-box;
+}
+
+.phone-row {
+  display: grid;
+  grid-template-columns: minmax(112px, auto) 1fr;
+  gap: 0.5rem;
+}
+
+.phone-row select,
+.phone-row input {
+  min-width: 0;
+  width: 100%;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 520px) {
+  .auth-page {
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+  }
+
+  .form-row-2 {
+    flex-direction: column;
+  }
+
+  .phone-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 button {
