@@ -5,7 +5,6 @@ import "dotenv/config";
 import express, { type NextFunction, type Request, type Response } from "express";
 import helmet from "helmet";
 import { adminRouter } from "./routes/admin.js";
-import { billingRouter } from "./routes/billing.js";
 import { db, isDatabaseUnavailableError } from "./db.js";
 import { authRouter } from "./routes/auth.js";
 import { documentsRouter } from "./routes/documents.js";
@@ -40,7 +39,6 @@ app.use("/api/documents", documentsRouter);
 app.use("/api/decks", decksRouter);
 app.use("/api/library", libraryRouter);
 app.use("/api/personal-deck", personalDeckRouter);
-app.use("/api/billing", billingRouter);
 app.use("/api/admin", adminRouter);
 
 app.get("/api/health", async (_req, res) => {

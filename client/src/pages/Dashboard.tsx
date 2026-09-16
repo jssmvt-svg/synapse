@@ -112,7 +112,9 @@ export function Dashboard() {
       {user?.role !== "admin" && user?.subscriptionStatus !== "active" && user?.subscriptionStatus !== "trialing" && (
         <div className="access-banner">
           <p className="eyebrow">{t.trialEndedBanner}</p>
-          <Link to="/membership">{lang === "fr" ? "Voir l'abonnement" : "See membership"}</Link>
+          <p>{lang === "fr"
+            ? "Contacte l'administration si tu as besoin d'un nouvel accès."
+            : "Contact the administration if you need access again."}</p>
         </div>
       )}
       {user?.subscriptionStatus === "trialing" && user?.trialEndsAt && (

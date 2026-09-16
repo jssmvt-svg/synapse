@@ -24,7 +24,7 @@ function trialCountdown(trialEndsAt: number, lang: "fr" | "en"): string {
 
 function statusLabel(lang: "fr" | "en", user: AdminUser): string {
   if (user.role === "admin") return lang === "fr" ? "Administrateur" : "Administrator";
-  if (user.subscriptionStatus === "active") return lang === "fr" ? "Abonné (payant)" : "Subscribed (paying)";
+  if (user.subscriptionStatus === "active") return lang === "fr" ? "Accès permanent" : "Permanent access";
   if (user.subscriptionStatus === "trialing" && user.trialEndsAt) {
     return lang === "fr"
       ? `Essai gratuit actif — ${trialCountdown(user.trialEndsAt, lang)}`
@@ -107,7 +107,7 @@ export function Admin() {
   return (
     <main className="admin-shell">
       <Link to="/library" className="back-link">{lang === "fr" ? "← Retour à la bibliothèque" : "← Back to library"}</Link>
-      <header><p className="eyebrow">{lang === "fr" ? "Espace Jessica" : "Jessica workspace"}</p><h1>{lang === "fr" ? "Administration de première année" : "Year-one administration"}</h1><p>{lang === "fr" ? "Ouvre ou ferme un semestre pour les étudiants ayant un abonnement actif." : "Open or close a semester for students with an active membership."}</p></header>
+      <header><p className="eyebrow">{lang === "fr" ? "Espace Jessica" : "Jessica workspace"}</p><h1>{lang === "fr" ? "Administration de première année" : "Year-one administration"}</h1><p>{lang === "fr" ? "Ouvre ou ferme un semestre pour les étudiants ayant un accès actif." : "Open or close a semester for students with active access."}</p></header>
       {error && <p className="error">{error}</p>}
       {!semesters ? <p className="loading-state">…</p> : (
         <section className="admin-semester-list">

@@ -12,10 +12,8 @@ export function canOpenStudyContent({
 }: {
   role: AccessRole;
   subscriptionStatus: MembershipStatus;
-  // Échéance de la période en cours (ms epoch). Utilisée pour couper l'accès
-  // à la fin d'un essai gratuit de 48h accordé manuellement — un abonnement
-  // Stripe "active" classique n'est jamais coupé sur cette seule base : c'est
-  // le webhook Stripe qui fait autorité sur son statut.
+  // Échéance de l'accès en cours (ms epoch), utilisée pour couper
+  // automatiquement un essai gratuit arrivé à sa fin.
   subscriptionPeriodEnd?: number | null;
   yearNumber: number;
   semesterNumber: number;

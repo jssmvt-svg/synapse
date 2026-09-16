@@ -24,7 +24,7 @@ export function LibrarySemesterView() {
           <p className="eyebrow">{lang === "fr" ? "Accès à la première année" : "Year one access"}</p>
           <h1>{lang === "fr" ? "Ce semestre est verrouillé" : "This semester is locked"}</h1>
           <p>{error}</p>
-          <Link to="/membership" className="hero-library-link">{lang === "fr" ? "Voir l’abonnement" : "View membership"}</Link>
+          <Link to="/dashboard" className="hero-library-link">{lang === "fr" ? "Retour à mon espace" : "Back to dashboard"}</Link>
         </section>
       </main>
     );
@@ -44,7 +44,6 @@ export function LibrarySemesterView() {
         <nav className="platform-nav" aria-label="Navigation">
           <Link to="/dashboard">{t.dashboard}</Link>
           <Link to="/library" className="active">{t.libraryTitle}</Link>
-          <Link to="/membership">{lang === "fr" ? "Mon abonnement" : "My membership"}</Link>
         </nav>
       </div>
       <header className="semester-header">

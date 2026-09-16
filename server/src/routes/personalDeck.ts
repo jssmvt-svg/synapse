@@ -61,7 +61,7 @@ async function requireChapterAccess(req: AuthedRequest, res: Response, chapterId
     })
   ) {
     res.status(403).json({
-      error: "Un abonnement actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
+      error: "Un accès actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
       code: "SEMESTER_ACCESS_REQUIRED",
     });
     return null;

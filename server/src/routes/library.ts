@@ -67,7 +67,7 @@ async function requireChapterAccess(
   }
   if (!(await hasChapterGrant(req.userId!, chapter.id)) && !(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) {
     res.status(403).json({
-      error: "Un abonnement actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
+      error: "Un accès actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
       code: "SEMESTER_ACCESS_REQUIRED",
     });
     return null;
@@ -201,7 +201,7 @@ libraryRouter.get("/semesters/:number", async (req: AuthedRequest, res) => {
   if (!semester) return res.status(404).json({ error: "Semestre introuvable" });
   if (!(await canAccessSemester(req.userId!, 1, semesterNumber))) {
     return res.status(403).json({
-      error: "Ce semestre sera disponible dès que ton abonnement sera actif et que Jessica l'aura ouvert.",
+      error: "Ce semestre sera disponible dès que ton accès sera actif et que Jessica l'aura ouvert.",
       code: "SEMESTER_ACCESS_REQUIRED",
     });
   }

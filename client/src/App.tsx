@@ -12,7 +12,6 @@ import { Register } from "./pages/Register";
 import { SynthesisView } from "./pages/SynthesisView";
 import { Statistics } from "./pages/Statistics";
 import { LibrarySemesterView } from "./pages/LibrarySemesterView";
-import { Membership } from "./pages/Membership";
 import { Admin } from "./pages/Admin";
 import { MyDeck } from "./pages/MyDeck";
 import { authenticatedLibraryRoutePatterns } from "./libraryRoutes";
@@ -117,10 +116,6 @@ export function App() {
       <Route
         path={authenticatedLibraryRoutePatterns.semesterSubject}
         element={<RequireAuth><LibrarySubjectView /></RequireAuth>}
-      />
-      <Route
-        path="/membership"
-        element={<RequireAuth><Membership /></RequireAuth>}
       />
       <Route
         path="/admin"

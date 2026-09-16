@@ -365,18 +365,6 @@ export interface StudySemesterDetail {
 
 export type TrialStatus = "none" | "requested" | "granted" | "expired" | "denied";
 
-export interface BillingStatus {
-  role: "student" | "admin";
-  subscriptionStatus: "active" | "trialing" | "inactive";
-  subscriptionPeriodEnd: number | null;
-  hasYearOneAccess: boolean;
-  trialStatus: TrialStatus;
-  trialEndsAt: number | null;
-  trialActive: boolean;
-  billingAvailable: boolean;
-  billingMessage: string;
-}
-
 export interface AdminSemester {
   id: number;
   year_number: number;
@@ -480,9 +468,6 @@ export const api = {
   getLibrarySubject: (slug: string) => request<LibrarySubject>(`/library/subjects/${encodeURIComponent(slug)}`),
   getStudySemesters: () => request<StudySemester[]>("/library/semesters"),
   getStudySemester: (semester: number) => request<StudySemesterDetail>(`/library/semesters/${semester}`),
-  getBillingStatus: () => request<BillingStatus>("/billing/status"),
-  startCheckout: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
-  openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
   getAdminSemesters: () => request<AdminSemester[]>("/admin/semesters"),
   setSemesterPublished: (semester: number, isPublished: boolean) =>
     request<AdminSemester>(`/admin/semesters/${semester}`, {

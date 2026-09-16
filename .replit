@@ -17,8 +17,9 @@ localPort = 5001
 externalPort = 3001
 
 [deployment]
-run = ["sh", "-c", "npm install && npm run build --workspace=client && NODE_ENV=production npm run start --workspace=server"]
-deploymentTarget = "cloudrun"
+run = ["npm", "run", "start"]
+deploymentTarget = "autoscale"
+build = ["npm", "run", "build"]
 
 [agent]
 expertMode = true

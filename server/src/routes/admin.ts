@@ -72,10 +72,7 @@ adminRouter.get("/users", async (_req, res) => {
   );
 });
 
-/**
- * Coupe manuellement l'accès d'un étudiant (essai ou octrois ponctuels) sans
- * toucher à un abonnement payant, qui reste géré par le webhook Stripe.
- */
+/** Coupe manuellement l'accès d'un étudiant. */
 adminRouter.post("/users/:id/revoke", async (req, res) => {
   const userId = Number(req.params.id);
   if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
@@ -83,10 +80,6 @@ adminRouter.post("/users/:id/revoke", async (req, res) => {
     .prepare("SELECT id, subscription_status FROM users WHERE id = ? AND role = 'student'")
     .get(userId);
   if (!student) return res.status(404).json({ error: "Étudiant introuvable." });
-  if (student.subscription_status === "active") {
-    return res.status(409).json({ error: "Un abonnement payant doit être géré depuis Stripe." });
-  }
-
   await db
     .prepare(
       `UPDATE users

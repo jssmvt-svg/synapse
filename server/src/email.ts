@@ -212,8 +212,8 @@ export function sendWelcomeEmail(user: RecipientUser, trialEndsAt: number): void
     button: lang === "fr" ? "Commencer à réviser" : "Start studying",
     note:
       lang === "fr"
-        ? "À la fin de ton essai, tu pourras t'abonner pour 24,99 € / mois si tu veux continuer."
-        : "At the end of your trial, you can subscribe for €24.99 / month if you'd like to continue.",
+        ? "À la fin de ton essai, contacte l'administration si tu souhaites continuer."
+        : "At the end of your trial, contact the administration if you would like to continue.",
   });
   void sendEmailOnce(`welcome:${user.id}`, user.email, subject, html);
 }
@@ -226,28 +226,12 @@ export function sendTrialEndedEmail(user: RecipientUser): void {
     greeting: lang === "fr" ? `Salut${hi}` : `Hi${hi}`,
     body:
       lang === "fr"
-        ? "Tes 48 heures d'accès gratuit à Synapse sont terminées. Pour continuer à profiter des cours, QCM et examens de première année, tu peux t'abonner pour 24,99 € / mois."
-        : "Your 48-hour free access to Synapse has ended. To keep enjoying year-one courses, QCMs, and exams, you can subscribe for €24.99 / month.",
-    buttonUrl: `${appUrl()}/membership`,
-    button: lang === "fr" ? "S'abonner maintenant" : "Subscribe now",
+        ? "Tes 48 heures d'accès gratuit à Synapse sont terminées. Contacte l'administration si tu souhaites continuer à profiter des cours, QCM et examens."
+        : "Your 48-hour free access to Synapse has ended. Contact the administration if you would like to keep using the courses, QCMs, and exams.",
+    buttonUrl: `${appUrl()}/dashboard`,
+    button: lang === "fr" ? "Retourner à mon espace" : "Return to my dashboard",
   });
   void sendEmailOnce(`trial-ended:${user.id}`, user.email, subject, html);
-}
-
-export function sendPaymentConfirmedEmail(user: RecipientUser, amountLabel: string, dedupeKey: string): void {
-  const lang = normEmailLang(user.langPref);
-  const hi = user.firstName ? ` ${user.firstName}` : "";
-  const subject = lang === "fr" ? "Ton paiement est confirmé ✅" : "Your payment is confirmed ✅";
-  const html = brandedEmailHtml(lang, {
-    greeting: lang === "fr" ? `Merci${hi} ! 🎉` : `Thank you${hi}! 🎉`,
-    body:
-      lang === "fr"
-        ? `Ton paiement de ${amountLabel} a bien été reçu et ton abonnement Synapse est actif. Tu as désormais accès à toute la première année : cours, QCM, flashcards et examens.`
-        : `Your payment of ${amountLabel} has been received and your Synapse membership is active. You now have access to all of year one: courses, QCMs, flashcards, and exams.`,
-    buttonUrl: `${appUrl()}/library`,
-    button: lang === "fr" ? "Accéder à la bibliothèque" : "Go to the library",
-  });
-  void sendEmailOnce(dedupeKey, user.email, subject, html);
 }
 
 /** Notification interne à Jessica — utilisée en dehors du flux étudiant (ex : alerte manuelle). */
