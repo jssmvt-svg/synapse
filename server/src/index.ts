@@ -86,21 +86,22 @@ if (process.env.NODE_ENV === "production") {
 
 const port = Number(process.env.PORT) || 5000;
 
-db.init()
+app.listen(port, () => {
+  console.log(`Synapse server listening on port ${port}`);
+});
+
+void db.init()
   .then(() => {
-    app.listen(port, () => {
-      console.log(`Synapse server listening on port ${port}`);
-      startEmailDeliveryWorker();
-      void seedLibrary().catch((error) => {
-        console.error("La mise à jour de la bibliothèque a échoué.", error);
-      });
-      startTrialExpirySweep();
+    console.log("Database initialised.");
+    startEmailDeliveryWorker();
+    void seedLibrary().catch((error) => {
+      console.error("La mise à jour de la bibliothèque a échoué.", error);
     });
+    startTrialExpirySweep();
   })
   .catch((err) => {
     console.error(
-      "Failed to initialise the database after all retry attempts. Shutting down.",
+      "Failed to initialise the database after all retry attempts. API database routes remain unavailable.",
       err,
     );
-    process.exit(1);
   });
