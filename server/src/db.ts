@@ -119,11 +119,8 @@ const SCHEMA = `
     trial_requested_at BIGINT,
     trial_granted_at BIGINT,
     trial_ends_at BIGINT,
-    stripe_customer_id TEXT,
-    stripe_subscription_id TEXT,
     subscription_status TEXT NOT NULL DEFAULT 'inactive',
     subscription_period_end BIGINT,
-    stripe_subscription_event_created BIGINT NOT NULL DEFAULT 0,
     pending_checkout_key TEXT,
     pending_checkout_expires_at BIGINT,
     created_at BIGINT NOT NULL
@@ -443,8 +440,6 @@ const SCHEMA = `
   ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_requested_at BIGINT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_granted_at BIGINT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_ends_at BIGINT;
-  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
-  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_status TEXT NOT NULL DEFAULT 'inactive';
   ALTER TABLE users ADD COLUMN IF NOT EXISTS first_name TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS last_name TEXT;
@@ -464,7 +459,6 @@ const SCHEMA = `
     AND (trial_ends_at IS NOT NULL OR access_granted_by IS NOT NULL OR subscription_status = 'trialing');
   ALTER TABLE email_deliveries ADD COLUMN IF NOT EXISTS html TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_period_end BIGINT;
-  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_event_created BIGINT NOT NULL DEFAULT 0;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_key TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_expires_at BIGINT;
 
