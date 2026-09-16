@@ -17,24 +17,84 @@ const pool = new Pool({
   query_timeout: 15_000,
 });
 
+const DATABASE_CONNECTION_ERROR_CODES = new Set([
+  "08000",
+  "08001",
+  "08003",
+  "08004",
+  "08006",
+  "08007",
+  "08P01",
+  "57P01",
+  "57P02",
+  "57P03",
+  "53300",
+  "53400",
+  "ECONNREFUSED",
+  "ECONNRESET",
+  "EAI_AGAIN",
+  "ENETUNREACH",
+  "ETIMEDOUT",
+]);
+
+type QueryExecutor = (
+  text: string,
+  params: unknown[],
+) => Promise<{ rows: any[]; rowCount: number | null }>;
+
+export type DatabaseExecutor = {
+  prepare(sql: string): {
+    get(...params: unknown[]): Promise<any>;
+    all(...params: unknown[]): Promise<any[]>;
+    run(...params: unknown[]): Promise<{ rowCount: number | null }>;
+  };
+};
+
 function toPositional(sql: string): string {
   let i = 0;
   return sql.replace(/\?/g, () => `$${++i}`);
 }
 
-function statement(sql: string) {
+function statement(
+  sql: string,
+  execute: QueryExecutor = (text, params) => pool.query(text, params),
+) {
   const text = toPositional(sql);
   return {
     async get(...params: unknown[]) {
-      const result = await pool.query(text, params);
+      let result;
+      try {
+        result = await execute(text, params);
+      } catch (error) {
+        if (isConnectionError(error)) {
+          throw new DatabaseUnavailableError(error);
+        }
+        throw error;
+      }
       return result.rows[0] ?? null;
     },
     async all(...params: unknown[]) {
-      const result = await pool.query(text, params);
+      let result;
+      try {
+        result = await execute(text, params);
+      } catch (error) {
+        if (isConnectionError(error)) {
+          throw new DatabaseUnavailableError(error);
+        }
+        throw error;
+      }
       return result.rows;
     },
     async run(...params: unknown[]) {
-      const result = await pool.query(text, params);
+      let result;
+      try {
+        result = await execute(text, params);
+      } catch (error) {
+        if (isConnectionError(error)) {
+          throw new DatabaseUnavailableError(error);
+        }
+        throw error;
+      }
       return { rowCount: result.rowCount };
     },
   };
@@ -67,6 +127,17 @@ const SCHEMA = `
     pending_checkout_key TEXT,
     pending_checkout_expires_at BIGINT,
     created_at BIGINT NOT NULL
+  );
+
+  CREATE TABLE IF NOT EXISTS email_deliveries (
+    dedupe_key TEXT PRIMARY KEY,
+    recipient TEXT NOT NULL,
+    subject TEXT NOT NULL,
+    html TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'sent')),
+    attempts INTEGER NOT NULL DEFAULT 0,
+    last_attempt_at BIGINT,
+    sent_at BIGINT
   );
 
   CREATE TABLE IF NOT EXISTS study_semesters (
@@ -375,6 +446,23 @@ const SCHEMA = `
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_status TEXT NOT NULL DEFAULT 'inactive';
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS first_name TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS last_name TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS country_code TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS phone TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS track TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_requested_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_processed_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_started_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_ends_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS trial_used BOOLEAN NOT NULL DEFAULT FALSE;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_revoked_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS access_granted_by INTEGER REFERENCES users(id);
+  UPDATE users
+  SET trial_used = TRUE
+  WHERE trial_used = FALSE
+    AND (trial_ends_at IS NOT NULL OR access_granted_by IS NOT NULL OR subscription_status = 'trialing');
+  ALTER TABLE email_deliveries ADD COLUMN IF NOT EXISTS html TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_period_end BIGINT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_event_created BIGINT NOT NULL DEFAULT 0;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_key TEXT;
@@ -413,6 +501,17 @@ const SCHEMA = `
         CHECK (trial_status IN ('none', 'requested', 'granted', 'expired', 'denied'));
     END IF;
   END $$;
+
+  -- Octroi manuel, chapitre par chapitre, en plus de l'essai/abonnement standard
+  -- (ex : donner ponctuellement accès à un contenu hors du cadre habituel).
+  CREATE TABLE IF NOT EXISTS admin_chapter_grants (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    granted_by INTEGER REFERENCES users(id),
+    created_at BIGINT NOT NULL,
+    UNIQUE(user_id, chapter_id)
+  );
 `;
 
 const MAX_RETRIES = 5;
@@ -421,6 +520,40 @@ const RETRY_DELAY_MS = 2000;
 export const db = {
   prepare(sql: string) {
     return statement(sql);
+  },
+  async checkHealth() {
+    try {
+      await pool.query("SELECT 1");
+      return true;
+    } catch (error) {
+      if (isConnectionError(error)) {
+        throw new DatabaseUnavailableError(error);
+      }
+      throw error;
+    }
+  },
+  async transaction<T>(work: (transaction: DatabaseExecutor) => Promise<T>): Promise<T> {
+    const client = await pool.connect();
+    const transaction: DatabaseExecutor = {
+      prepare(sql: string) {
+        return statement(sql, (text, params) => client.query(text, params));
+      },
+    };
+    try {
+      await client.query("BEGIN");
+      const result = await work(transaction);
+      await client.query("COMMIT");
+      return result;
+    } catch (error) {
+      try {
+        await client.query("ROLLBACK");
+      } catch (rollbackError) {
+        console.error("Database rollback failed.", rollbackError);
+      }
+      throw error;
+    } finally {
+      client.release();
+    }
   },
   async init() {
     let lastError: unknown;
@@ -446,3 +579,44 @@ export const db = {
     throw lastError;
   },
 };
+
+function isConnectionError(error: unknown): boolean {
+  const code = errorCode(error);
+  if (code && DATABASE_CONNECTION_ERROR_CODES.has(code)) {
+    return true;
+  }
+
+  return /(?:connection|connect|socket|network|timeout|unreachable|terminat)/i.test(
+    errorMessage(error),
+  );
+}
+
+export class DatabaseUnavailableError extends Error {
+  constructor(cause: unknown) {
+    super("The database is currently unavailable", { cause });
+    this.name = "DatabaseUnavailableError";
+  }
+}
+
+export function isDatabaseUnavailableError(error: unknown): boolean {
+  return error instanceof DatabaseUnavailableError || isConnectionError(error);
+}
+
+function errorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
+
+function errorCode(error: unknown): string | undefined {
+  if (typeof error !== "object" || error === null || !("code" in error)) {
+    return undefined;
+  }
+  const code = (error as { code?: unknown }).code;
+  return typeof code === "string" ? code : undefined;
+}
+
+pool.on("error", (error) => {
+  console.error(
+    "Unexpected PostgreSQL pool error. Database requests may be temporarily unavailable.",
+    error,
+  );
+});

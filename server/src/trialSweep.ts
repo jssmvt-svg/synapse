@@ -22,7 +22,7 @@ export async function runTrialExpirySweep(): Promise<void> {
     .all(now);
 
   for (const user of expired as any[]) {
-    sendTrialEndedEmail({ email: user.email, langPref: user.lang_pref, firstName: user.first_name });
+    sendTrialEndedEmail({ id: user.id, email: user.email, langPref: user.lang_pref, firstName: user.first_name });
   }
   if (expired.length > 0) {
     console.log(`[Trial] ${expired.length} essai(s) gratuit(s) expiré(s) et désactivé(s).`);

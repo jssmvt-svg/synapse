@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth";
 import { api, type StudySemester } from "../api";
 import { useLang } from "../i18n";
+import { libraryRoutes } from "../libraryRoutes";
 
 export function Library() {
   const { t, lang } = useLang();
@@ -29,7 +30,7 @@ export function Library() {
         </Link>
         <nav className="platform-nav" aria-label="Navigation">
           <Link to="/dashboard">{t.dashboard}</Link>
-          <Link to="/library" className="active">{t.libraryTitle}</Link>
+          <Link to={libraryRoutes.catalogue} className="active">{t.libraryTitle}</Link>
           <Link to="/statistics">{t.statistics}</Link>
           <Link to="/membership">{lang === "fr" ? "Mon abonnement" : "My membership"}</Link>
           {user?.role === "admin" && <Link to="/admin">{lang === "fr" ? "Administration" : "Admin"}</Link>}
@@ -47,7 +48,7 @@ export function Library() {
         {semesters.map((semester) => {
           const title = lang === "fr" ? semester.title_fr : semester.title_en;
           const description = lang === "fr" ? semester.description_fr : semester.description_en;
-          const destination = semester.has_access ? `/library/semester/${semester.semester_number}` : "/membership";
+          const destination = semester.has_access ? libraryRoutes.semester(semester.semester_number) : "/membership";
           return (
             <Link
               key={semester.id}

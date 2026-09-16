@@ -46,14 +46,141 @@ body {
   font-size: 0.9rem;
 }
 
+.auth-form input,
+.auth-form select {
+  width: 100%;
+}
+
+.form-row-2 {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.form-row-2 label {
+  flex: 1;
+  min-width: 0;
+}
+
+.input-eye-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-eye-wrap input {
+  flex: 1;
+  padding-right: 2.5rem;
+}
+
+.btn-eye {
+  position: absolute;
+  right: 0.4rem;
+  min-height: auto;
+  padding: 0.2rem 0.4rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.password-hints {
+  list-style: none;
+  margin: -0.25rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  font-size: 0.78rem;
+  color: var(--muted, #64748b);
+}
+
+.password-hints li::before {
+  content: "○ ";
+}
+
+.password-hints li.hint-ok {
+  color: #15803d;
+}
+
+.password-hints li.hint-ok::before {
+  content: "✓ ";
+}
+
+.track-choice {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.track-choice legend {
+  font-size: 0.85rem;
+  padding: 0 0.3rem;
+}
+
+.track-choice label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  font-size: 0.95rem;
+}
+
+.track-choice input[type="radio"] {
+  min-height: auto;
+  width: auto;
+}
+
 input,
-button {
+button,
+select {
   font-size: 1rem;
   padding: 0.6rem 0.75rem;
   border-radius: 8px;
   border: 1px solid var(--border);
   min-height: 44px;
   box-sizing: border-box;
+}
+
+.phone-row {
+  display: grid;
+  grid-template-columns: minmax(112px, auto) 1fr;
+  gap: 0.5rem;
+}
+
+.phone-row select,
+.phone-row input {
+  min-width: 0;
+  width: 100%;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 520px) {
+  .auth-page {
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+  }
+
+  .form-row-2 {
+    flex-direction: column;
+  }
+
+  .phone-row {
+    grid-template-columns: 1fr;
+  }
 }
 
 button {
@@ -803,6 +930,289 @@ button:disabled {
   border: none;
   border-top: 1px solid var(--border);
   margin: 1.5rem 0;
+}
+
+.amino-gallery {
+  margin-top: 1.25rem;
+  padding: clamp(1rem, 2.4vw, 1.75rem);
+  overflow: hidden;
+}
+
+.amino-gallery-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.amino-gallery-heading h2 {
+  margin: 0.25rem 0 0.5rem;
+}
+
+.amino-gallery-heading p:not(.eyebrow),
+.amino-gallery-note {
+  max-width: 720px;
+  margin: 0;
+  color: #65738a;
+  line-height: 1.55;
+}
+
+.amino-legend {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 0.45rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fbfcff;
+  color: #52617b;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.amino-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.amino-legend i,
+.amino-group-dot {
+  display: inline-block;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+}
+
+.amino-gallery-note {
+  margin-top: 1rem;
+  font-size: 0.86rem;
+}
+
+.amino-groups {
+  display: grid;
+  gap: 1.35rem;
+  margin-top: 1.2rem;
+}
+
+.amino-group {
+  min-width: 0;
+}
+
+.amino-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  color: var(--group-color);
+}
+
+.amino-group-title h3 {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.amino-group-title > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.15rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--group-color) 13%, transparent);
+  font-size: 0.72rem;
+}
+
+.amino-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.75rem;
+}
+
+.amino-card {
+  min-width: 0;
+  padding: 0.75rem 0.6rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--group-color) 24%, var(--border));
+  border-radius: 12px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--group-color) 6%, #fff), #fff);
+}
+
+.amino-card-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0 0.35rem;
+}
+
+.amino-card-label strong {
+  color: var(--group-color);
+  font-size: 1.05rem;
+}
+
+.amino-card-label span {
+  color: #33425a;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.amino-molecule {
+  display: block;
+  width: 100%;
+  height: 164px;
+  margin: 0.1rem auto 0;
+  overflow: visible;
+}
+
+.amino-card small {
+  display: block;
+  min-height: 1.1rem;
+  padding: 0 0.35rem;
+  color: #6a7890;
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-align: center;
+}
+
+.chem-gallery {
+  margin-top: 1.25rem;
+  padding: clamp(1rem, 2.4vw, 1.75rem);
+  overflow: hidden;
+}
+
+.chem-gallery-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.chem-gallery-heading h2 {
+  margin: 0.25rem 0 0.5rem;
+}
+
+.chem-gallery-heading p:not(.eyebrow),
+.chem-gallery-note {
+  max-width: 720px;
+  margin: 0;
+  color: #65738a;
+  line-height: 1.55;
+}
+
+.chem-legend {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 0.45rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fbfcff;
+  color: #52617b;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.chem-legend span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.chem-legend i,
+.chem-group-dot {
+  display: inline-block;
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 50%;
+}
+
+.chem-gallery-note {
+  margin-top: 1rem;
+  font-size: 0.86rem;
+}
+
+.chem-groups {
+  display: grid;
+  gap: 1.35rem;
+  margin-top: 1.2rem;
+}
+
+.chem-group {
+  min-width: 0;
+}
+
+.chem-group-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  color: var(--group-color);
+}
+
+.chem-group-title h3 {
+  margin: 0;
+  font-size: 0.98rem;
+}
+
+.chem-group-title > span:last-child {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.3rem;
+  height: 1.3rem;
+  margin-left: 0.15rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--group-color) 13%, transparent);
+  font-size: 0.72rem;
+}
+
+.chem-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.75rem;
+}
+
+.chem-card {
+  min-width: 0;
+  padding: 0.75rem 0.6rem 0.55rem;
+  border: 1px solid color-mix(in srgb, var(--group-color) 24%, var(--border));
+  border-radius: 12px;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--group-color) 6%, #fff), #fff);
+}
+
+.chem-card-label {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  padding: 0 0.35rem;
+}
+
+.chem-card-label strong {
+  font-size: 1.05rem;
+}
+
+.chem-card-label span {
+  color: #33425a;
+  font-size: 0.82rem;
+  font-weight: 750;
+}
+
+.chem-molecule {
+  display: block;
+  width: 100%;
+  height: 164px;
+  margin: 0.1rem auto 0;
+  overflow: visible;
+}
+
+.chem-card small {
+  display: block;
+  min-height: 1.1rem;
+  padding: 0 0.35rem;
+  color: #6a7890;
+  font-size: 0.72rem;
+  font-weight: 650;
+  text-align: center;
 }
 
 .resource-completion {
@@ -3321,4 +3731,169 @@ select:focus {
     box-sizing: border-box;
     padding: 1.35rem;
   }
+}
+
+.access-banner {
+  background: #fef3c7;
+  border: 1px solid #fbbf24;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin: 0.75rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.access-banner button {
+  align-self: flex-start;
+}
+
+.access-banner-trial {
+  background: #dcfce7;
+  border-color: #4ade80;
+}
+
+.admin-students {
+  margin-top: 1.5rem;
+}
+
+.admin-pending-alert {
+  color: #b45309;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.admin-student-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.admin-student-row {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+}
+
+.admin-student-toggle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 0;
+  min-height: auto;
+  cursor: pointer;
+  text-align: left;
+}
+
+.admin-student-identity {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.admin-student-identity small {
+  color: var(--muted, #64748b);
+  font-size: 0.78rem;
+}
+
+.admin-status-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.badge-active { background: #dcfce7; color: #166534; }
+.badge-trial { background: #dbeafe; color: #1e3a8a; }
+.badge-expired { background: #fee2e2; color: #991b1b; }
+.badge-pending { background: #fef3c7; color: #92400e; }
+.badge-none { background: #f1f5f9; color: #475569; }
+
+.admin-student-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.admin-meta-chip {
+  font-size: 0.75rem;
+  background: #f1f5f9;
+  color: #334155;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+}
+
+.admin-student-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.6rem;
+}
+
+.admin-student-actions button {
+  min-height: 36px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.admin-student-grants {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.admin-grant-subject h3 {
+  margin: 0 0 0.3rem;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: var(--muted, #64748b);
+}
+
+.admin-grant-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 400;
+  font-size: 0.9rem;
+  padding: 0.15rem 0;
+}
+
+.admin-grant-row input[type="checkbox"] {
+  min-height: auto;
+  width: auto;
+}
+
+.track-choice {
+  align-items: stretch;
+}
+
+.track-choice label {
+  flex-direction: row !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.track-choice input[type="radio"] {
+  min-height: 18px !important;
+  height: 18px !important;
+  width: 18px !important;
+  flex: none !important;
 }

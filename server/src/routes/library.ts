@@ -2,42 +2,13 @@ import { Router } from "express";
 import { db } from "../db.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 import { canOpenStudyContent } from "../studyAccessPolicy.js";
+import { catalogueSubjects, LIBRARY_SUBJECTS } from "../libraryCatalogue.js";
 
 export const libraryRouter = Router();
 
 libraryRouter.use(authMiddleware);
 
 const KNOWN_STRUCTURE = [{ annee: 1, semestres: [1, 2] }];
-const SUBJECTS = [
-  {
-    slug: "anatomie",
-    matiere: "Anatomie",
-    titre_fr: "Anatomie",
-    titre_en: "Anatomy",
-    description_fr: "Structure et organisation du corps humain.",
-    description_en: "Structure and organization of the human body.",
-    accent: "coral",
-  },
-  {
-    slug: "physiologie",
-    matiere: "Physiologie",
-    titre_fr: "Physiologie",
-    titre_en: "Physiology",
-    description_fr: "Fonctionnement des systèmes et grands équilibres du corps.",
-    description_en: "How body systems work and maintain their balance.",
-    accent: "teal",
-  },
-  {
-    slug: "biochimie",
-    matiere: "Biochimie",
-    titre_fr: "Biochimie",
-    titre_en: "Biochemistry",
-    description_fr: "Les bases moléculaires essentielles pour comprendre le vivant.",
-    description_en: "Essential molecular foundations for understanding life.",
-    accent: "violet",
-  },
-] as const;
-
 function selectedKeys(value: unknown): string[] | null {
   if (!Array.isArray(value) || value.some((key) => typeof key !== "string")) return null;
   return [...new Set(value)];
@@ -77,6 +48,13 @@ async function canAccessSemester(
   });
 }
 
+async function hasChapterGrant(userId: number, chapterId: number): Promise<boolean> {
+  const grant = await db
+    .prepare("SELECT id FROM admin_chapter_grants WHERE user_id = ? AND chapter_id = ?")
+    .get(userId, chapterId);
+  return Boolean(grant);
+}
+
 async function requireChapterAccess(
   req: AuthedRequest,
   res: { status: (code: number) => { json: (payload: unknown) => unknown } },
@@ -87,7 +65,7 @@ async function requireChapterAccess(
     res.status(404).json({ error: "Chapitre introuvable" });
     return null;
   }
-  if (!(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) {
+  if (!(await hasChapterGrant(req.userId!, chapter.id)) && !(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) {
     res.status(403).json({
       error: "Un abonnement actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
       code: "SEMESTER_ACCESS_REQUIRED",
@@ -142,7 +120,7 @@ libraryRouter.get("/", async (req: AuthedRequest, res) => {
 
   const visibleChapters: any[] = [];
   for (const chapter of chapters as any[]) {
-    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+    if ((await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) || (await hasChapterGrant(req.userId!, chapter.id))) visibleChapters.push(chapter);
   }
   const tree = KNOWN_STRUCTURE.map((annee) => ({
     annee: annee.annee,
@@ -189,7 +167,7 @@ libraryRouter.get("/semesters", async (req: AuthedRequest, res) => {
       const semesterChapters = (chapters as any[]).filter(
         (chapter) => chapter.annee === semester.year_number && chapter.semestre === semester.semester_number,
       );
-      const subjectCount = new Set(semesterChapters.map((chapter) => chapter.matiere)).size || SUBJECTS.length;
+      const subjectCount = new Set(semesterChapters.map((chapter) => chapter.matiere)).size || LIBRARY_SUBJECTS.length;
       const hasAccess =
         canOpenStudyContent({
           role: user?.role,
@@ -238,10 +216,7 @@ libraryRouter.get("/semesters/:number", async (req: AuthedRequest, res) => {
     .all(semesterNumber);
   res.json({
     semester,
-    subjects: SUBJECTS.map((subject) => ({
-      ...subject,
-      chapters: (chapters as any[]).filter((chapter) => chapter.matiere === subject.matiere),
-    })),
+    subjects: catalogueSubjects(chapters as any[]),
   });
 });
 
@@ -257,18 +232,15 @@ libraryRouter.get("/subjects", async (req: AuthedRequest, res) => {
 
   const visibleChapters: any[] = [];
   for (const chapter of chapters as any[]) {
-    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+    if ((await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) || (await hasChapterGrant(req.userId!, chapter.id))) visibleChapters.push(chapter);
   }
   res.json(
-    SUBJECTS.map((subject) => ({
-      ...subject,
-      chapters: visibleChapters.filter((chapter) => chapter.matiere === subject.matiere),
-    })),
+    catalogueSubjects(visibleChapters),
   );
 });
 
 libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
-  const subject = SUBJECTS.find((candidate) => candidate.slug === req.params.slug);
+  const subject = LIBRARY_SUBJECTS.find((candidate) => candidate.slug === req.params.slug);
   if (!subject) return res.status(404).json({ error: "Matière introuvable" });
 
   const chapters = await db
@@ -283,12 +255,23 @@ libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
 
   const visibleChapters: any[] = [];
   for (const chapter of chapters as any[]) {
-    if (await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) visibleChapters.push(chapter);
+    if ((await canAccessSemester(req.userId!, chapter.annee, chapter.semestre)) || (await hasChapterGrant(req.userId!, chapter.id))) visibleChapters.push(chapter);
   }
   res.json({ ...subject, chapters: visibleChapters });
 });
 
 libraryRouter.get("/progress-summary", async (req: AuthedRequest, res) => {
+  const user = await db
+    .prepare("SELECT role, subscription_status FROM users WHERE id = ?")
+    .get(req.userId);
+  const membershipStatus = user?.subscription_status;
+  if (user?.role !== "admin" && membershipStatus !== "active" && membershipStatus !== "trialing") {
+    return res.status(403).json({
+      error: "Un acces actif est necessaire pour consulter la progression.",
+      code: "STUDY_ACCESS_REQUIRED",
+    });
+  }
+
   const chapters = await db
     .prepare(
       `SELECT

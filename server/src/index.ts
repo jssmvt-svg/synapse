@@ -2,7 +2,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import cors from "cors";
 import "dotenv/config";
-import express from "express";
+import express, { type NextFunction, type Request, type Response } from "express";
 import helmet from "helmet";
 import { runMigrations } from "stripe-replit-sync";
 import { WebhookHandlers } from "./webhookHandlers.js";
@@ -10,7 +10,7 @@ import { getStripeSync, getUncachableStripeClient } from "./stripeClient.js";
 import { setStripeReady } from "./stripeState.js";
 import { adminRouter } from "./routes/admin.js";
 import { billingRouter } from "./routes/billing.js";
-import { db } from "./db.js";
+import { db, isDatabaseUnavailableError } from "./db.js";
 import { authRouter } from "./routes/auth.js";
 import { documentsRouter } from "./routes/documents.js";
 import { decksRouter } from "./routes/decks.js";
@@ -18,6 +18,7 @@ import { libraryRouter } from "./routes/library.js";
 import { personalDeckRouter } from "./routes/personalDeck.js";
 import { seedLibrary } from "./seed-library.js";
 import { startTrialExpirySweep } from "./trialSweep.js";
+import { startEmailDeliveryWorker } from "./email.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -58,7 +59,42 @@ app.use("/api/personal-deck", personalDeckRouter);
 app.use("/api/billing", billingRouter);
 app.use("/api/admin", adminRouter);
 
-app.get("/api/health", (_req, res) => res.json({ ok: true }));
+app.get("/api/health", async (_req, res) => {
+  try {
+    await db.checkHealth();
+    res.json({ ok: true, database: "up" });
+  } catch (error) {
+    if (isDatabaseUnavailableError(error)) {
+      res.status(503).json({ ok: false, database: "unavailable" });
+      return;
+    }
+    throw error;
+  }
+});
+
+app.use(
+  (
+    error: unknown,
+    _req: Request,
+    res: Response,
+    next: NextFunction,
+  ) => {
+    if (res.headersSent) {
+      next(error);
+      return;
+    }
+
+    if (isDatabaseUnavailableError(error)) {
+      res.status(503).json({
+        error: "Service temporairement indisponible : la base de données est inaccessible",
+      });
+      return;
+    }
+
+    console.error("Unhandled API error", error);
+    res.status(500).json({ error: "Erreur interne du serveur" });
+  },
+);
 
 if (process.env.NODE_ENV === "production") {
   const clientDist = path.join(__dirname, "../../client/dist");
@@ -90,6 +126,7 @@ db.init()
   .then(() => {
     app.listen(port, () => {
       console.log(`Synapse server listening on port ${port}`);
+      startEmailDeliveryWorker();
       void seedLibrary().catch((error) => {
         console.error("La mise à jour de la bibliothèque a échoué.", error);
       });

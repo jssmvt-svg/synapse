@@ -1,12 +1,9 @@
 import { Router } from "express";
 import { db } from "../db.js";
-import { sendTrialDeniedEmail, sendTrialGrantedEmail } from "../email.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 
 export const adminRouter = Router();
 adminRouter.use(authMiddleware);
-
-const TRIAL_DURATION_MS = 48 * 60 * 60 * 1000;
 
 async function isAdmin(userId: number | undefined): Promise<boolean> {
   if (!userId) return false;
@@ -45,7 +42,6 @@ adminRouter.patch("/semesters/:number", async (req, res) => {
   if (!updated) return res.status(404).json({ error: "Semestre introuvable." });
   res.json(updated);
 });
-
 adminRouter.get("/users", async (_req, res) => {
   const users = await db
     .prepare(
@@ -76,47 +72,72 @@ adminRouter.get("/users", async (_req, res) => {
   );
 });
 
-adminRouter.post("/users/:id/trial/grant", async (req, res) => {
+/**
+ * Coupe manuellement l'accès d'un étudiant (essai ou octrois ponctuels) sans
+ * toucher à un abonnement payant, qui reste géré par le webhook Stripe.
+ */
+adminRouter.post("/users/:id/revoke", async (req, res) => {
   const userId = Number(req.params.id);
   if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
+  const student = await db
+    .prepare("SELECT id, subscription_status FROM users WHERE id = ? AND role = 'student'")
+    .get(userId);
+  if (!student) return res.status(404).json({ error: "Étudiant introuvable." });
+  if (student.subscription_status === "active") {
+    return res.status(409).json({ error: "Un abonnement payant doit être géré depuis Stripe." });
+  }
 
-  const now = Date.now();
-  const trialEndsAt = now + TRIAL_DURATION_MS;
-  const updated = await db
+  await db
     .prepare(
       `UPDATE users
-       SET trial_status = 'granted',
-           trial_granted_at = ?,
-           trial_ends_at = ?,
-           subscription_status = 'trialing',
-           subscription_period_end = ?
-       WHERE id = ?
-       RETURNING id, email, lang_pref, first_name`,
+       SET subscription_status = 'inactive', trial_status = 'expired', trial_ends_at = NULL,
+           subscription_period_end = NULL
+       WHERE id = ?`,
     )
-    .get(now, trialEndsAt, trialEndsAt, userId);
-  if (!updated) return res.status(404).json({ error: "Utilisateur introuvable." });
+    .run(userId);
 
-  sendTrialGrantedEmail(
-    { email: updated.email, langPref: updated.lang_pref, firstName: updated.first_name },
-    trialEndsAt,
-  );
-
-  res.json({ trialStatus: "granted", trialEndsAt });
+  res.json({ ok: true });
 });
 
-adminRouter.post("/users/:id/trial/deny", async (req, res) => {
+adminRouter.get("/chapters", async (_req, res) => {
+  const chapters = await db
+    .prepare(
+      `SELECT id, annee, semestre, matiere, titre_fr, titre_en, ordre
+       FROM library_chapters WHERE is_active = true ORDER BY annee ASC, semestre ASC, matiere ASC, ordre ASC`,
+    )
+    .all();
+  res.json(chapters);
+});
+
+adminRouter.get("/students/:id/grants", async (req, res) => {
   const userId = Number(req.params.id);
   if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
+  const grants = await db
+    .prepare("SELECT chapter_id FROM admin_chapter_grants WHERE user_id = ?")
+    .all(userId);
+  res.json({ chapterIds: grants.map((g: any) => g.chapter_id) });
+});
 
-  const updated = await db
-    .prepare(
-      `UPDATE users SET trial_status = 'denied' WHERE id = ?
-       RETURNING id, email, lang_pref, first_name`,
-    )
-    .get(userId);
-  if (!updated) return res.status(404).json({ error: "Utilisateur introuvable." });
-
-  sendTrialDeniedEmail({ email: updated.email, langPref: updated.lang_pref, firstName: updated.first_name });
-
-  res.json({ trialStatus: "denied" });
+adminRouter.post("/students/:id/grants", async (req: AuthedRequest, res) => {
+  const userId = Number(req.params.id);
+  const { chapterId, grant } = req.body as { chapterId?: number; grant?: boolean };
+  if (!Number.isInteger(userId) || !Number.isInteger(chapterId) || typeof grant !== "boolean") {
+    return res.status(400).json({ error: "Requete invalide." });
+  }
+  const student = await db.prepare("SELECT id FROM users WHERE id = ?").get(userId);
+  if (!student) return res.status(404).json({ error: "Etudiant introuvable." });
+  if (grant) {
+    await db
+      .prepare(
+        `INSERT INTO admin_chapter_grants (user_id, chapter_id, granted_by, created_at)
+         VALUES (?, ?, ?, ?)
+         ON CONFLICT (user_id, chapter_id) DO NOTHING`,
+      )
+      .run(userId, chapterId, req.userId, Date.now());
+  } else {
+    await db
+      .prepare("DELETE FROM admin_chapter_grants WHERE user_id = ? AND chapter_id = ?")
+      .run(userId, chapterId);
+  }
+  res.json({ ok: true });
 });

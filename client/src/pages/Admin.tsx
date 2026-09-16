@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api, type AdminSemester, type AdminUser } from "../api";
+import { api, type AdminChapter, type AdminSemester, type AdminUser } from "../api";
 import { useLang } from "../i18n";
 
-function formatDate(lang: "fr" | "en", value: number | null): string {
+function formatDate(lang: "fr" | "en", value: number | null | undefined): string {
   if (!value) return "—";
   return new Date(value).toLocaleString(lang === "fr" ? "fr-FR" : "en-GB", { dateStyle: "medium", timeStyle: "short" });
 }
@@ -14,15 +14,23 @@ function trackLabel(lang: "fr" | "en", track: AdminUser["track"]): string {
   return "—";
 }
 
+function trialCountdown(trialEndsAt: number, lang: "fr" | "en"): string {
+  const remaining = Math.max(0, trialEndsAt - Date.now());
+  if (remaining === 0) return lang === "fr" ? "terminé" : "ended";
+  const hours = Math.floor(remaining / 3_600_000);
+  const minutes = Math.floor((remaining % 3_600_000) / 60_000);
+  return lang === "fr" ? `${hours} h ${minutes} min restantes` : `${hours}h ${minutes}m remaining`;
+}
+
 function statusLabel(lang: "fr" | "en", user: AdminUser): string {
   if (user.role === "admin") return lang === "fr" ? "Administrateur" : "Administrator";
   if (user.subscriptionStatus === "active") return lang === "fr" ? "Abonné (payant)" : "Subscribed (paying)";
-  if (user.trialStatus === "granted" && user.subscriptionStatus === "trialing") {
-    return lang === "fr" ? "Essai gratuit actif" : "Free trial active";
+  if (user.subscriptionStatus === "trialing" && user.trialEndsAt) {
+    return lang === "fr"
+      ? `Essai gratuit actif — ${trialCountdown(user.trialEndsAt, lang)}`
+      : `Free trial active — ${trialCountdown(user.trialEndsAt, lang)}`;
   }
-  if (user.trialStatus === "requested") return lang === "fr" ? "Demande d'essai en attente" : "Trial request pending";
   if (user.trialStatus === "expired") return lang === "fr" ? "Essai gratuit terminé" : "Free trial ended";
-  if (user.trialStatus === "denied") return lang === "fr" ? "Essai refusé" : "Trial denied";
   return lang === "fr" ? "Aucun accès" : "No access";
 }
 
@@ -30,14 +38,19 @@ export function Admin() {
   const { lang } = useLang();
   const [semesters, setSemesters] = useState<AdminSemester[] | null>(null);
   const [users, setUsers] = useState<AdminUser[] | null>(null);
+  const [chapters, setChapters] = useState<AdminChapter[] | null>(null);
+  const [expandedUserId, setExpandedUserId] = useState<number | null>(null);
+  const [grants, setGrants] = useState<Record<number, number[]>>({});
+  const [grantSaving, setGrantSaving] = useState<string | null>(null);
+  const [accessSaving, setAccessSaving] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState<number | null>(null);
-  const [userActionId, setUserActionId] = useState<number | null>(null);
 
   const loadUsers = () => api.getAdminUsers().then(setUsers).catch((err) => setError((err as Error).message));
 
   useEffect(() => {
     api.getAdminSemesters().then(setSemesters).catch((err) => setError((err as Error).message));
+    api.getAdminChapters().then(setChapters).catch((err) => setError((err as Error).message));
     void loadUsers();
   }, []);
 
@@ -53,31 +66,43 @@ export function Admin() {
     }
   };
 
-  const grantTrial = async (user: AdminUser) => {
-    setUserActionId(user.id); setError(null);
+  const toggleUser = async (userId: number) => {
+    if (expandedUserId === userId) { setExpandedUserId(null); return; }
+    setExpandedUserId(userId);
+    if (!grants[userId]) {
+      const data = await api.getAdminGrants(userId);
+      setGrants((current) => ({ ...current, [userId]: data.chapterIds }));
+    }
+  };
+
+  const toggleGrant = async (userId: number, chapterId: number, grantValue: boolean) => {
+    const key = `${userId}-${chapterId}`;
+    setGrantSaving(key);
     try {
-      await api.grantTrial(user.id);
+      await api.setAdminGrant(userId, chapterId, grantValue);
+      setGrants((current) => {
+        const existing = current[userId] ?? [];
+        const next = grantValue ? [...existing, chapterId] : existing.filter((id) => id !== chapterId);
+        return { ...current, [userId]: next };
+      });
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setGrantSaving(null);
+    }
+  };
+
+  const revokeAccess = async (userId: number) => {
+    setAccessSaving(userId); setError(null);
+    try {
+      await api.revokeAccess(userId);
       await loadUsers();
     } catch (err) {
       setError((err as Error).message);
     } finally {
-      setUserActionId(null);
+      setAccessSaving(null);
     }
   };
-
-  const denyTrial = async (user: AdminUser) => {
-    setUserActionId(user.id); setError(null);
-    try {
-      await api.denyTrial(user.id);
-      await loadUsers();
-    } catch (err) {
-      setError((err as Error).message);
-    } finally {
-      setUserActionId(null);
-    }
-  };
-
-  const pendingCount = users?.filter((u) => u.trialStatus === "requested").length ?? 0;
 
   return (
     <main className="admin-shell">
@@ -97,53 +122,73 @@ export function Admin() {
 
       <header className="admin-users-header">
         <h1>{lang === "fr" ? "Comptes étudiants" : "Student accounts"}</h1>
-        <p>{lang === "fr"
-          ? `Valide ou refuse les demandes d'accès gratuit de 48h. ${pendingCount > 0 ? `${pendingCount} demande(s) en attente.` : ""}`
-          : `Approve or deny 48h free-access requests. ${pendingCount > 0 ? `${pendingCount} pending request(s).` : ""}`}</p>
+        <p>
+          {lang === "fr"
+            ? "L'essai gratuit de 48h est accordé automatiquement à l'inscription. Depuis ici, tu peux couper l'accès d'un compte, ou lui ouvrir un chapitre en particulier."
+            : "The 48h free trial is granted automatically at signup. From here you can cut a student's access, or open a specific chapter for them."}
+        </p>
       </header>
-      {!users ? <p className="loading-state">…</p> : (
-        <section className="admin-users-table-wrap">
-          <table className="admin-users-table">
-            <thead>
-              <tr>
-                <th>{lang === "fr" ? "Nom" : "Name"}</th>
-                <th>{lang === "fr" ? "Contact" : "Contact"}</th>
-                <th>{lang === "fr" ? "Filière" : "Track"}</th>
-                <th>{lang === "fr" ? "Statut" : "Status"}</th>
-                <th>{lang === "fr" ? "Inscrit le" : "Registered"}</th>
-                <th>{lang === "fr" ? "Action" : "Action"}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {users.map((u) => (
-                <tr key={u.id} className={u.trialStatus === "requested" ? "is-pending-row" : ""}>
-                  <td>{[u.firstName, u.lastName].filter(Boolean).join(" ") || "—"}</td>
-                  <td>
-                    <div>{u.email}</div>
-                    <div className="admin-users-phone">{u.phoneCountryCode ?? ""} {u.phoneNumber ?? ""}</div>
-                  </td>
-                  <td>{trackLabel(lang, u.track)}</td>
-                  <td>{statusLabel(lang, u)}</td>
-                  <td>{formatDate(lang, u.createdAt)}</td>
-                  <td className="admin-users-actions">
-                    {u.trialStatus === "requested" ? (
-                      <>
-                        <button type="button" onClick={() => void grantTrial(u)} disabled={userActionId === u.id}>
-                          {userActionId === u.id ? "…" : (lang === "fr" ? "Accorder 48h" : "Grant 48h")}
-                        </button>
-                        <button type="button" className="secondary" onClick={() => void denyTrial(u)} disabled={userActionId === u.id}>
-                          {userActionId === u.id ? "…" : (lang === "fr" ? "Refuser" : "Deny")}
-                        </button>
-                      </>
+      {!users ? (
+        <p className="loading-state">…</p>
+      ) : (
+        <ul className="admin-student-list">
+          {users.map((u) => {
+            const fullName = [u.firstName, u.lastName].filter(Boolean).join(" ") || u.email;
+            return (
+              <li key={u.id} className="admin-student-row">
+                <button type="button" className="admin-student-toggle" onClick={() => void toggleUser(u.id)}>
+                  <span className="admin-student-identity">
+                    <strong>{fullName}</strong>
+                    <small>{u.email}</small>
+                  </span>
+                  <span className="admin-status-badge">{statusLabel(lang, u)}</span>
+                </button>
+                <div className="admin-student-meta">
+                  <span className="admin-meta-chip">{trackLabel(lang, u.track)}</span>
+                  {(u.phoneCountryCode || u.phoneNumber) && (
+                    <span className="admin-meta-chip">{u.phoneCountryCode ?? ""} {u.phoneNumber ?? ""}</span>
+                  )}
+                  <span className="admin-meta-chip">{lang === "fr" ? "Inscrit le " : "Registered "}{formatDate(lang, u.createdAt)}</span>
+                </div>
+                <div className="admin-student-actions">
+                  {u.role !== "admin" && u.subscriptionStatus !== "inactive" && (
+                    <button type="button" className="secondary" onClick={() => void revokeAccess(u.id)} disabled={accessSaving === u.id}>
+                      {accessSaving === u.id ? "…" : lang === "fr" ? "Couper l'accès" : "Cut access"}
+                    </button>
+                  )}
+                </div>
+                {expandedUserId === u.id && (
+                  <div className="admin-student-grants">
+                    {!chapters ? (
+                      <p className="loading-state">…</p>
                     ) : (
-                      <span className="admin-users-noop">—</span>
+                      Array.from(new Set(chapters.map((chapter) => chapter.matiere))).map((matiere) => (
+                        <div key={matiere} className="admin-grant-subject">
+                          <h3>{matiere}</h3>
+                          {chapters.filter((chapter) => chapter.matiere === matiere).map((chapter) => {
+                            const checked = (grants[u.id] ?? []).includes(chapter.id);
+                            const rowKey = `${u.id}-${chapter.id}`;
+                            return (
+                              <label key={chapter.id} className="admin-grant-row">
+                                <input
+                                  type="checkbox"
+                                  checked={checked}
+                                  disabled={grantSaving === rowKey}
+                                  onChange={(e) => void toggleGrant(u.id, chapter.id, e.target.checked)}
+                                />
+                                {lang === "fr" ? chapter.titre_fr : chapter.titre_en}
+                              </label>
+                            );
+                          })}
+                        </div>
+                      ))
                     )}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ul>
       )}
     </main>
   );

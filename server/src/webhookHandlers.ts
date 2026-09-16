@@ -12,6 +12,7 @@ export class WebhookHandlers {
     await sync.processWebhook(payload, signature);
 
     const event = JSON.parse(payload.toString()) as {
+      id?: string;
       type?: string;
       created?: number;
       data?: { object?: Record<string, unknown> };
@@ -21,6 +22,13 @@ export class WebhookHandlers {
     const userId = Number(metadata.user_id);
 
     if (event.type === "checkout.session.completed" && Number.isInteger(userId)) {
+      // Le webhook Stripe doit rester digne de confiance même s'il est rejoué
+      // ou falsifié : on vérifie que la session appartient bien au compte visé,
+      // et on ne réattribue jamais un client Stripe déjà lié à un autre compte.
+      if (String(object.client_reference_id ?? "") !== String(userId)) {
+        throw new Error("La reference client Stripe ne correspond pas au compte.");
+      }
+      const customerId = typeof object.customer === "string" ? object.customer : null;
       const buyer = await db
         .prepare(
           `UPDATE users
@@ -28,13 +36,14 @@ export class WebhookHandlers {
                stripe_subscription_id = COALESCE(?, stripe_subscription_id),
                pending_checkout_key = NULL,
                pending_checkout_expires_at = NULL
-           WHERE id = ?
-           RETURNING email, lang_pref, first_name`,
+           WHERE id = ? AND (stripe_customer_id IS NULL OR stripe_customer_id = ?)
+           RETURNING id, email, lang_pref, first_name`,
         )
         .get(
-          typeof object.customer === "string" ? object.customer : null,
+          customerId,
           typeof object.subscription === "string" ? object.subscription : null,
           userId,
+          customerId,
         );
 
       // Manquait jusqu'ici : le paiement était bien traité côté abonnement,
@@ -43,9 +52,11 @@ export class WebhookHandlers {
       if (buyer?.email) {
         const amountTotal = typeof object.amount_total === "number" ? object.amount_total : null;
         const amountLabel = amountTotal != null ? `${(amountTotal / 100).toFixed(2)} €` : "24,99 €";
+        const checkoutId = typeof object.id === "string" ? object.id : event.id ?? String(userId);
         sendPaymentConfirmedEmail(
-          { email: buyer.email, langPref: buyer.lang_pref, firstName: buyer.first_name },
+          { id: buyer.id, email: buyer.email, langPref: buyer.lang_pref, firstName: buyer.first_name },
           amountLabel,
+          `payment-confirmed:${checkoutId}`,
         );
       }
     }
@@ -61,6 +72,14 @@ export class WebhookHandlers {
         ? object.current_period_end * 1000
         : null;
       const eventCreatedAt = typeof event.created === "number" ? event.created * 1000 : Date.now();
+      const customerId = typeof object.customer === "string" ? object.customer : null;
+      const previous = await db
+        .prepare(
+          `SELECT subscription_status FROM users
+           WHERE id = ? AND (stripe_customer_id IS NULL OR stripe_customer_id = ?)`,
+        )
+        .get(userId, customerId);
+      if (!previous) throw new Error("Le client Stripe ne correspond pas au compte Synapse.");
       await db
         .prepare(
           `UPDATE users
@@ -69,16 +88,18 @@ export class WebhookHandlers {
                subscription_status = ?,
                subscription_period_end = ?,
                stripe_subscription_event_created = ?
-           WHERE id = ? AND stripe_subscription_event_created <= ?`,
+            WHERE id = ? AND stripe_subscription_event_created <= ?
+              AND (stripe_customer_id IS NULL OR stripe_customer_id = ?)`,
         )
         .run(
-          typeof object.customer === "string" ? object.customer : null,
+          customerId,
           typeof object.id === "string" ? object.id : null,
           activeStatus(status) ? status : "inactive",
           periodEnd,
           eventCreatedAt,
           userId,
           eventCreatedAt,
+          customerId,
         );
     }
   }

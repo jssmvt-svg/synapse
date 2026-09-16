@@ -1,1 +1,2 @@
 - [Stripe connection readiness](stripe-connection-readiness.md) — A Stripe connection can report healthy yet be unusable to the app until its server credential is available.
+- [Atomic library seeds](atomic-library-seeds.md) — Long content seeds must commit per subject; interrupted non-atomic seeds can hide most chapters.

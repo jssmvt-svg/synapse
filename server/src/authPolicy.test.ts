@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { publicRegistrationRole } from "./authPolicy.js";
 import { canOpenStudyContent } from "./studyAccessPolicy.js";
+import { escapeHtml } from "./email.js";
 
 test("public registration cannot provision an administrator account", () => {
   assert.equal(publicRegistrationRole(), "student");
@@ -66,4 +67,8 @@ test("a manually granted 48h trial stops opening content once its period end has
     }),
     false,
   );
+});
+
+test("user names are escaped before being inserted into transactional emails", () => {
+  assert.equal(escapeHtml(`<img src=x onerror="alert(1)">`), "&lt;img src=x onerror=&quot;alert(1)&quot;&gt;");
 });

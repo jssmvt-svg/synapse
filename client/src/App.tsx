@@ -15,6 +15,7 @@ import { LibrarySemesterView } from "./pages/LibrarySemesterView";
 import { Membership } from "./pages/Membership";
 import { Admin } from "./pages/Admin";
 import { MyDeck } from "./pages/MyDeck";
+import { authenticatedLibraryRoutePatterns } from "./libraryRoutes";
 
 function RequireAuth({ children }: { children: ReactElement }) {
   const { user, loading } = useAuth();
@@ -82,7 +83,7 @@ export function App() {
         }
       />
       <Route
-        path="/library"
+        path={authenticatedLibraryRoutePatterns.catalogue}
         element={
           <RequireAuth>
             <Library />
@@ -90,7 +91,7 @@ export function App() {
         }
       />
       <Route
-        path="/library/chapter/:id"
+        path={authenticatedLibraryRoutePatterns.chapter}
         element={
           <RequireAuth>
             <LibraryChapterView />
@@ -98,11 +99,11 @@ export function App() {
         }
       />
       <Route
-        path="/library/chapter/:id/my-deck"
+        path={authenticatedLibraryRoutePatterns.personalDeck}
         element={<RequireAuth><MyDeck /></RequireAuth>}
       />
       <Route
-        path="/library/subject/:slug"
+        path={authenticatedLibraryRoutePatterns.subject}
         element={
           <RequireAuth>
             <LibrarySubjectView />
@@ -110,11 +111,11 @@ export function App() {
         }
       />
       <Route
-        path="/library/semester/:semester"
+        path={authenticatedLibraryRoutePatterns.semester}
         element={<RequireAuth><LibrarySemesterView /></RequireAuth>}
       />
       <Route
-        path="/library/semester/:semester/subject/:slug"
+        path={authenticatedLibraryRoutePatterns.semesterSubject}
         element={<RequireAuth><LibrarySubjectView /></RequireAuth>}
       />
       <Route

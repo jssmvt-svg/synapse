@@ -25,6 +25,8 @@ const authLimiter = rateLimit({
   legacyHeaders: false,
 });
 
+const TRIAL_DURATION_MS = 48 * 60 * 60 * 1000;
+
 authRouter.post("/register", authLimiter, async (req, res) => {
   const {
     email,
@@ -81,12 +83,19 @@ authRouter.post("/register", authLimiter, async (req, res) => {
   const cleanLastName = normalizeName(lastName);
   const cleanPhoneNumber = phoneNumber.replace(/[\s.-]/g, "");
 
+  // L'essai gratuit de 48h est accordé immédiatement à l'inscription — plus
+  // besoin qu'un étudiant le demande ni que Jessica valide chaque demande.
+  const now = Date.now();
+  const trialEndsAt = now + TRIAL_DURATION_MS;
+
   const inserted = await db
     .prepare(
       `INSERT INTO users (
          email, password_hash, session_token, lang_pref, role,
-         first_name, last_name, phone_country_code, phone_number, track, created_at
-       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING id`,
+         first_name, last_name, phone_country_code, phone_number, track,
+         trial_status, trial_granted_at, trial_ends_at, subscription_status, subscription_period_end,
+         created_at
+       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'granted', ?, ?, 'trialing', ?, ?) RETURNING id`,
     )
     .get(
       cleanEmail,
@@ -99,11 +108,14 @@ authRouter.post("/register", authLimiter, async (req, res) => {
       phoneCountryCode,
       cleanPhoneNumber,
       track,
-      Date.now(),
+      now,
+      trialEndsAt,
+      trialEndsAt,
+      now,
     );
 
   const token = signSession(inserted.id, sessionToken);
-  sendWelcomeEmail({ email: cleanEmail, langPref: lang, firstName: cleanFirstName });
+  sendWelcomeEmail({ id: inserted.id, email: cleanEmail, langPref: lang, firstName: cleanFirstName }, trialEndsAt);
   res.status(201).json({
     token,
     user: {
@@ -114,6 +126,9 @@ authRouter.post("/register", authLimiter, async (req, res) => {
       firstName: cleanFirstName,
       lastName: cleanLastName,
       track,
+      trialStatus: "granted",
+      trialEndsAt,
+      subscriptionStatus: "trialing",
     },
   });
 });
@@ -127,7 +142,9 @@ authRouter.post("/login", authLimiter, async (req, res) => {
 
   const user = await db
     .prepare(
-      "SELECT id, password_hash, lang_pref, role, first_name, last_name, track FROM users WHERE email = ?",
+      `SELECT id, password_hash, lang_pref, role, first_name, last_name, track,
+              trial_status, trial_ends_at, subscription_status
+       FROM users WHERE email = ?`,
     )
     .get(cleanEmail);
 
@@ -150,6 +167,9 @@ authRouter.post("/login", authLimiter, async (req, res) => {
       firstName: user.first_name,
       lastName: user.last_name,
       track: user.track,
+      trialStatus: user.trial_status,
+      trialEndsAt: user.trial_ends_at,
+      subscriptionStatus: user.subscription_status,
     },
   });
 });
@@ -157,7 +177,9 @@ authRouter.post("/login", authLimiter, async (req, res) => {
 authRouter.get("/me", authMiddleware, async (req: AuthedRequest, res) => {
   const user = await db
     .prepare(
-      "SELECT id, email, lang_pref, role, first_name, last_name, track FROM users WHERE id = ?",
+      `SELECT id, email, lang_pref, role, first_name, last_name, track,
+              trial_status, trial_ends_at, subscription_status, subscription_period_end
+       FROM users WHERE id = ?`,
     )
     .get(req.userId);
   if (!user) {
@@ -171,6 +193,10 @@ authRouter.get("/me", authMiddleware, async (req: AuthedRequest, res) => {
     firstName: user.first_name,
     lastName: user.last_name,
     track: user.track,
+    trialStatus: user.trial_status,
+    trialEndsAt: user.trial_ends_at,
+    subscriptionStatus: user.subscription_status,
+    subscriptionPeriodEnd: user.subscription_period_end,
   });
 });
 

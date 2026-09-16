@@ -41,6 +41,10 @@ export interface User {
   firstName?: string;
   lastName?: string;
   track?: Track | null;
+  trialStatus?: TrialStatus | null;
+  trialEndsAt?: number | null;
+  subscriptionStatus?: string | null;
+  subscriptionPeriodEnd?: number | null;
 }
 
 export interface RegisterInput {
@@ -402,6 +406,16 @@ export interface AdminUser {
   createdAt: number;
 }
 
+export interface AdminChapter {
+  id: number;
+  annee: number;
+  semestre: number;
+  matiere: string;
+  titre_fr: string;
+  titre_en: string;
+  ordre: number;
+}
+
 export const api = {
   register: (input: RegisterInput) =>
     request<{ token: string; user: User }>("/auth/register", {
@@ -469,7 +483,6 @@ export const api = {
   getBillingStatus: () => request<BillingStatus>("/billing/status"),
   startCheckout: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
   openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
-  requestTrial: () => request<{ trialStatus: TrialStatus }>("/billing/trial/request", { method: "POST" }),
   getAdminSemesters: () => request<AdminSemester[]>("/admin/semesters"),
   setSemesterPublished: (semester: number, isPublished: boolean) =>
     request<AdminSemester>(`/admin/semesters/${semester}`, {
@@ -477,12 +490,18 @@ export const api = {
       body: JSON.stringify({ isPublished }),
     }),
   getAdminUsers: () => request<AdminUser[]>("/admin/users"),
-  grantTrial: (userId: number) =>
-    request<{ trialStatus: TrialStatus; trialEndsAt: number }>(`/admin/users/${userId}/trial/grant`, {
+  getAdminChapters: () => request<AdminChapter[]>("/admin/chapters"),
+  getAdminGrants: (userId: number) =>
+    request<{ chapterIds: number[] }>(`/admin/students/${userId}/grants`),
+  setAdminGrant: (userId: number, chapterId: number, grant: boolean) =>
+    request<{ ok: boolean }>(`/admin/students/${userId}/grants`, {
+      method: "POST",
+      body: JSON.stringify({ chapterId, grant }),
+    }),
+  revokeAccess: (userId: number) =>
+    request<{ ok: boolean }>(`/admin/users/${userId}/revoke`, {
       method: "POST",
     }),
-  denyTrial: (userId: number) =>
-    request<{ trialStatus: TrialStatus }>(`/admin/users/${userId}/trial/deny`, { method: "POST" }),
   getProgressSummary: () => request<ProgressSummary>("/library/progress-summary"),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),

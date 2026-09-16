@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, type LibrarySubject, type StudySemesterDetail } from "../api";
 import { useLang } from "../i18n";
+import { libraryRoutes } from "../libraryRoutes";
 
 type ChapterSection = "cours" | "laboratoire";
 
@@ -52,13 +53,13 @@ export function LibrarySubjectView() {
         </Link>
         <nav className="platform-nav" aria-label="Navigation">
           <Link to="/dashboard">{t.dashboard}</Link>
-          <Link to="/library" className="active">{t.libraryTitle}</Link>
+          <Link to={libraryRoutes.catalogue} className="active">{t.libraryTitle}</Link>
           <Link to="/statistics">{t.statistics}</Link>
         </nav>
       </div>
 
       <header className={`subject-header subject-header-${subject.accent}`}>
-        <Link to={semesterDetail ? `/library/semester/${semesterDetail.semester.semester_number}` : "/library"} className="back-link">
+        <Link to={semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue} className="back-link">
           {semesterDetail
             ? (lang === "fr" ? "← Retour aux matières" : "← Back to subjects")
             : t.backToSubjects}
@@ -73,7 +74,7 @@ export function LibrarySubjectView() {
           <span className="subject-empty-mark" aria-hidden="true">+</span>
           <h2>{t.subjectEmptyTitle}</h2>
           <p>{t.subjectEmptyCopy(title)}</p>
-          <Link to={semesterDetail ? `/library/semester/${semesterDetail.semester.semester_number}` : "/library"} className="hero-library-link">
+          <Link to={semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue} className="hero-library-link">
             {semesterDetail ? (lang === "fr" ? "Retour aux matières" : "Back to subjects") : t.backToSubjects}
           </Link>
         </section>
@@ -161,7 +162,7 @@ function SectionChapterGrid({
       ) : (
         <div className="subject-chapter-grid">
           {chapters.map((chapter) => (
-            <Link key={chapter.id} to={`/library/chapter/${chapter.id}`} className="subject-chapter-card">
+            <Link key={chapter.id} to={libraryRoutes.chapter(chapter.id)} className="subject-chapter-card">
               <span className="chapter-number">{String(chapter.ordre).padStart(2, "0")}</span>
               <span className="chapter-context">
                 {t.anneeLabel(chapter.annee)} · {t.semestreLabel(chapter.semestre)}
