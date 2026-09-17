@@ -487,6 +487,10 @@ export const api = {
     request<{ ok: boolean }>(`/admin/users/${userId}/revoke`, {
       method: "POST",
     }),
+  grantTrial: (userId: number) =>
+    request<{ trialStatus: TrialStatus; trialEndsAt: number }>(`/admin/users/${userId}/trial/grant`, {
+      method: "POST",
+    }),
   getProgressSummary: () => request<ProgressSummary>("/library/progress-summary"),
   getLibraryFlashcards: (chapterId: number) =>
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),

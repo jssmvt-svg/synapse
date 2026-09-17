@@ -234,6 +234,27 @@ export function sendTrialEndedEmail(user: RecipientUser): void {
   void sendEmailOnce(`trial-ended:${user.id}`, user.email, subject, html);
 }
 
+/** Octroi manuel par Jessica depuis /admin — en plus de l'octroi automatique à l'inscription. */
+export function sendTrialGrantedEmail(user: RecipientUser, trialEndsAt: number): void {
+  const lang = normEmailLang(user.langPref);
+  const hi = user.firstName ? ` ${user.firstName}` : "";
+  const endDate = new Date(trialEndsAt).toLocaleString(lang === "fr" ? "fr-FR" : "en-GB", {
+    dateStyle: "long",
+    timeStyle: "short",
+  });
+  const subject = lang === "fr" ? "Ton accès de 48h est réactivé 🎁" : "Your 48h access is active again 🎁";
+  const html = brandedEmailHtml(lang, {
+    greeting: lang === "fr" ? `C'est activé${hi} ! 🎁` : `It's live${hi}! 🎁`,
+    body:
+      lang === "fr"
+        ? `Jessica vient de t'accorder 48 heures d'accès à toute la première année (cours, QCM, flashcards, examens). Ton accès expirera le ${endDate}.`
+        : `Jessica just granted you 48 hours of access to all of year one (courses, QCMs, flashcards, exams). Your access expires on ${endDate}.`,
+    buttonUrl: `${appUrl()}/library`,
+    button: lang === "fr" ? "Commencer à réviser" : "Start studying",
+  });
+  void sendEmailOnce(`trial-granted:${user.id}:${trialEndsAt}`, user.email, subject, html);
+}
+
 /** Notification interne à Jessica — utilisée en dehors du flux étudiant (ex : alerte manuelle). */
 export function sendAdminNotification(subject: string, body: string): void {
   const html = brandedEmailHtml("fr", { greeting: subject, body, buttonUrl: `${appUrl()}/admin`, button: "Ouvrir l'administration" });
