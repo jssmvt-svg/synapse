@@ -1,6 +1,13 @@
 import pg from "pg";
 
-const { Pool } = pg;
+const { Pool, types } = pg;
+
+// node-postgres renvoie les colonnes BIGINT sous forme de chaînes par défaut
+// (pour ne jamais perdre de précision au-delà de Number.MAX_SAFE_INTEGER).
+// Tous nos BIGINT stockent des timestamps epoch en millisecondes — largement
+// dans la plage sûre — donc on les récupère directement en nombres : sinon
+// `new Date(valeur)` échoue silencieusement ("Invalid Date") côté client.
+types.setTypeParser(20, (value: string) => parseInt(value, 10));
 
 if (!process.env.DATABASE_URL) {
   throw new Error("DATABASE_URL is required — set it in .env or Replit Secrets");
