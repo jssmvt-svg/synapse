@@ -1,9 +1,12 @@
 import { Router } from "express";
 import { db } from "../db.js";
+import { sendTrialGrantedEmail } from "../email.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 
 export const adminRouter = Router();
 adminRouter.use(authMiddleware);
+
+const TRIAL_DURATION_MS = 48 * 60 * 60 * 1000;
 
 async function isAdmin(userId: number | undefined): Promise<boolean> {
   if (!userId) return false;
@@ -90,6 +93,39 @@ adminRouter.post("/users/:id/revoke", async (req, res) => {
     .run(userId);
 
   res.json({ ok: true });
+});
+
+/**
+ * Octroi manuel des 48h, en plus de l'octroi automatique à l'inscription --
+ * utile pour compenser un étudiant après une panne du site, ou prolonger un
+ * essai déjà expiré.
+ */
+adminRouter.post("/users/:id/trial/grant", async (req, res) => {
+  const userId = Number(req.params.id);
+  if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
+
+  const now = Date.now();
+  const trialEndsAt = now + TRIAL_DURATION_MS;
+  const updated = await db
+    .prepare(
+      `UPDATE users
+       SET trial_status = 'granted',
+           trial_granted_at = ?,
+           trial_ends_at = ?,
+           subscription_status = 'trialing',
+           subscription_period_end = ?
+       WHERE id = ? AND role = 'student'
+       RETURNING id, email, lang_pref, first_name`,
+    )
+    .get(now, trialEndsAt, trialEndsAt, userId);
+  if (!updated) return res.status(404).json({ error: "Étudiant introuvable." });
+
+  sendTrialGrantedEmail(
+    { id: updated.id, email: updated.email, langPref: updated.lang_pref, firstName: updated.first_name },
+    trialEndsAt,
+  );
+
+  res.json({ trialStatus: "granted", trialEndsAt });
 });
 
 adminRouter.get("/chapters", async (_req, res) => {

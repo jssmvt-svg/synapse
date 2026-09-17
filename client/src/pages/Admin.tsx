@@ -104,6 +104,18 @@ export function Admin() {
     }
   };
 
+  const grantTrial = async (userId: number) => {
+    setAccessSaving(userId); setError(null);
+    try {
+      await api.grantTrial(userId);
+      await loadUsers();
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setAccessSaving(null);
+    }
+  };
+
   return (
     <main className="admin-shell">
       <Link to="/library" className="back-link">{lang === "fr" ? "← Retour à la bibliothèque" : "← Back to library"}</Link>
@@ -124,8 +136,8 @@ export function Admin() {
         <h1>{lang === "fr" ? "Comptes étudiants" : "Student accounts"}</h1>
         <p>
           {lang === "fr"
-            ? "L'essai gratuit de 48h est accordé automatiquement à l'inscription. Depuis ici, tu peux couper l'accès d'un compte, ou lui ouvrir un chapitre en particulier."
-            : "The 48h free trial is granted automatically at signup. From here you can cut a student's access, or open a specific chapter for them."}
+            ? "L'essai gratuit de 48h est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 48h à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier."
+            : "The 48h free trial is granted automatically at signup. From here you can also re-grant 48h to an account (e.g. after a site outage), cut its access, or open a specific chapter for it."}
         </p>
       </header>
       {!users ? (
@@ -151,6 +163,11 @@ export function Admin() {
                   <span className="admin-meta-chip">{lang === "fr" ? "Inscrit le " : "Registered "}{formatDate(lang, u.createdAt)}</span>
                 </div>
                 <div className="admin-student-actions">
+                  {u.role !== "admin" && (
+                    <button type="button" onClick={() => void grantTrial(u.id)} disabled={accessSaving === u.id}>
+                      {accessSaving === u.id ? "…" : lang === "fr" ? "Accorder 48h" : "Grant 48h"}
+                    </button>
+                  )}
                   {u.role !== "admin" && u.subscriptionStatus !== "inactive" && (
                     <button type="button" className="secondary" onClick={() => void revokeAccess(u.id)} disabled={accessSaving === u.id}>
                       {accessSaving === u.id ? "…" : lang === "fr" ? "Couper l'accès" : "Cut access"}
