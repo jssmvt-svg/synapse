@@ -4,6 +4,8 @@ import { single, multi } from "./qcm-helpers.js";
 const UPPER_LIMB_MUSCLES_2_COURSE = `# Muscles du membre supérieur (suite)
 
 ## a. Muscles reliant le membre supérieur à la colonne vertébrale
+[[image:gray-409]]
+
 
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
@@ -13,6 +15,10 @@ const UPPER_LIMB_MUSCLES_2_COURSE = `# Muscles du membre supérieur (suite)
 | **Petit et grand rhomboïde** | Épineuses de C7-T1 (petit) et T2-T5 (grand) | Bord médial de la scapula | Nerf scapulaire dorsal (C5) | Rétractent la scapula |
 
 ## b. Muscles reliant le membre supérieur à la paroi thoracique
+[[image:gray-410]]
+
+[[image:gray-411]]
+
 
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
@@ -22,6 +28,8 @@ const UPPER_LIMB_MUSCLES_2_COURSE = `# Muscles du membre supérieur (suite)
 | **Dentelé antérieur** (grand dentelé) | 8 premières côtes (8 digitations) | Face antérieure du bord médial de la scapula | Nerf thoracique long (C5-C7) | Puissant protracteur de la scapula (muscle du boxeur) ; maintient le bord médial de la scapula plaqué contre la paroi thoracique ; avec le trapèze inférieur, fait pivoter la scapula lors de l'abduction au-dessus de l'horizontale |
 
 ## c. Muscles de l'épaule (coiffe des rotateurs + deltoïde + grand rond)
+[[image:gray-412]]
+
 
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |

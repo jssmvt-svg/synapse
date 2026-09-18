@@ -20,6 +20,8 @@ const gray = (n: number, caption: string): CourseImage => ({
 });
 
 export const COURSE_IMAGES: Record<string, CourseImage> = {
+  "gray-409": gray(409, "Muscles reliant le membre supérieur à la colonne vertébrale (trapèze, grand dorsal, rhomboïdes), vue postérieure"),
+  "gray-410": gray(410, "Grand pectoral et muscles de la face antérieure du thorax et de l'épaule"),
   "gray-411": gray(411, "Muscles du thorax et de la face antérieure du bras (biceps brachial, brachial, coracobrachial)"),
   "gray-412": gray(412, "Muscles dorsaux de la scapula et triceps brachial (face postérieure du bras)"),
   "gray-413": gray(413, "Coupe transversale du bras : compartiments antérieur et postérieur, nerfs et vaisseaux"),
