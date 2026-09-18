@@ -1,21 +1,25 @@
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { resolveVisualKey } from "../library-widgets/visual-registry";
+import { CourseImage } from "./CourseImage";
 
-// Un schéma s'insère dans un cours avec un marqueur seul sur sa ligne :
-//   [[visual:anatomy/planes]]
-// La clé est résolue par visual-registry ; clé inconnue -> rien n'est affiché.
-const VISUAL_MARKER = /^\[\[visual:([\w/-]+)\]\][ \t\r]*$/gm;
+// Un schéma ou une image s'insère dans un cours avec un marqueur seul sur sa ligne :
+//   [[visual:anatomy/planes]]   schéma SVG (visual-registry)
+//   [[image:gray-411]]          image libre de droits (course-images)
+// Clé inconnue -> rien n'est affiché.
+const FIGURE_MARKER = /^\[\[(visual|image):([\w/-]+)\]\][ \t\r]*$/gm;
 
-type Segment = { kind: "text"; value: string } | { kind: "visual"; key: string };
+type Segment =
+  | { kind: "text"; value: string }
+  | { kind: "visual" | "image"; key: string };
 
 function splitSegments(content: string): Segment[] {
   const segments: Segment[] = [];
   let last = 0;
-  for (const match of content.matchAll(VISUAL_MARKER)) {
+  for (const match of content.matchAll(FIGURE_MARKER)) {
     const index = match.index ?? 0;
     if (index > last) segments.push({ kind: "text", value: content.slice(last, index) });
-    segments.push({ kind: "visual", key: match[1] });
+    segments.push({ kind: match[1] as "visual" | "image", key: match[2] });
     last = index + match[0].length;
   }
   if (last < content.length) segments.push({ kind: "text", value: content.slice(last) });
@@ -26,11 +30,7 @@ export function MarkdownContent({ content, className }: { content: string; class
   return (
     <div className={`markdown-body${className ? ` ${className}` : ""}`}>
       {splitSegments(content).map((segment, i) =>
-        segment.kind === "visual" ? (
-          <div className="course-visual" key={i}>
-            {resolveVisualKey(segment.key)}
-          </div>
-        ) : (
+        segment.kind === "text" ? (
           <ReactMarkdown
             key={i}
             remarkPlugins={[remarkGfm]}
@@ -44,6 +44,10 @@ export function MarkdownContent({ content, className }: { content: string; class
           >
             {segment.value}
           </ReactMarkdown>
+        ) : (
+          <div className="course-visual" key={i}>
+            {segment.kind === "image" ? <CourseImage imageKey={segment.key} /> : resolveVisualKey(segment.key)}
+          </div>
         ),
       )}
     </div>
