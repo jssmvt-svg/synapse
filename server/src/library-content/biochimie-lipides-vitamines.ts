@@ -55,6 +55,7 @@ Point commun à tous les lipides membranaires : ce sont des molécules **amphipa
 - **Perméabilité** : les bicouches sont très imperméables aux ions et peu perméables aux molécules polaires ; perméabilité croissante approximative : ions (Na⁺, K⁺, Cl⁻) < glucose < tryptophane < urée/glycérol < indole < H₂O.
 
 ## 4. Les protéines membranaires
+[[visual:bio/membrane-protein-types]]
 - Elles assurent la plupart des fonctions actives de la membrane (transport, signalisation) — les lipides forment surtout la barrière. Contenu protéique variable, de moins de 20 % à plus de 75 % selon le type cellulaire (ex. cellule de Schwann = peu de protéines, membrane riche en lipides pour la myélinisation ; la sclérose en plaques est une maladie de démyélinisation). Visualisation par électrophorèse SDS-PAGE.
 
 **Modes d'association aux membranes :**
@@ -64,6 +65,7 @@ Point commun à tous les lipides membranaires : ce sont des molécules **amphipa
 4. **Insertion partielle** : une portion seulement s'insère dans la membrane, sans la traverser (ex. prostaglandine H2 synthase-1/cyclooxygénase, dont le canal hydrophobe relie le site actif à l'intérieur de la membrane ; l'**aspirine** inhibe l'activité en acétylant la Sérine 530, bloquant ce canal).
 
 ## 5. Mobilité latérale et fluidité membranaire
+[[visual:bio/membrane-fluidity]]
 - **FRAP** (Fluorescence Recovery After Photobleaching) : technique mesurant la mobilité latérale — on « blanchit » une zone marquée par fluorescence puis on observe la vitesse de récupération. Distance moyenne parcourue : s = (4Dt)^(1/2), D = coefficient de diffusion.
 - **Modèle de la mosaïque fluide** : la membrane est une solution bidimensionnelle de lipides orientés et de protéines globulaires. Diffusion latérale : rapide. Diffusion transversale (**flip-flop**) : très lente sans l'aide d'enzymes (flippases) → explique la stabilité de l'asymétrie membranaire.
 - **Facteurs de fluidité** : température de fusion (Tm), qui dépend de la longueur des chaînes d'acides gras et du degré d'insaturation cis (chaînes courtes + insaturation cis = Tm basse = plus fluide) ; le **cholestérol**, qui s'intercale entre les chaînes d'acides gras et perturbe leur empilement compact, régulant la fluidité (ni trop rigide, ni trop fluide).

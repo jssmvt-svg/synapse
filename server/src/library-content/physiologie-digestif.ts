@@ -84,6 +84,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - **Pancréas endocrine** : cellules α (glucagon), β (insuline), δ (somatostatine).
 
 ### 3.2 Mécanisme de sécrétion
+[[visual:phys/pancreatic-secretion]]
 - **Sécrétion acinaire** (isotonique) : enzymes stockées en granules de zymogène au pôle apical, éliminées par exocytose ; eau et électrolytes (Na⁺, K⁺, HCO₃⁻, Cl⁻).
 - **Sécrétion canalaire** (isotonique) : anhydrase carbonique produit HCO₃⁻ + H⁺ ; HCO₃⁻ sécrété au pôle apical en échange de Cl⁻ ; Cl⁻ sort par des canaux dépendants de l'AMPc ; H⁺ sort au pôle basal via l'échangeur Na⁺/H⁺. La sécrétine stimule l'activité de l'échangeur HCO₃⁻/Cl⁻. Un défaut des canaux Cl⁻ (dépendant de l'AMPc) provoque la précipitation des enzymes — **mucoviscidose (fibrose kystique)**.
 - Suc pancréatique clair, visqueux, volume 1500 mL/jour, pH 8, toujours isotonique quel que soit le débit.
@@ -114,6 +115,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - **Bile vésiculaire** : 20-60 mL/jour, jaune-brun, visqueuse, pH 7-7,4, concentrée en substances organiques (sels biliaires, cholestérol, acides gras, lécithine) ; [Na⁺] inchangé, [K⁺]/[Cl⁻]/[HCO₃⁻] diminuées ; l'excès de [Ca²⁺] + cholestérol favorise les **calculs biliaires**.
 
 ### 4.4 Cycle entéro-hépatique des sels biliaires
+[[visual:phys/enterohepatic-cycle]]
 - **Acides biliaires primaires** (cholique, chénodésoxycholique) : synthétisés dans l'hépatocyte à partir du cholestérol sous l'action de la 7α-hydroxylase.
 - **Acides biliaires secondaires** (désoxycholique, lithocholique) : formés dans l'intestin sous l'action de la flore bactérienne.
 - Les acides biliaires forment des **sels biliaires** par conjugaison avec un acide aminé (glycine ou taurine) + un cation (Na⁺ ou K⁺).
@@ -121,6 +123,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - **Rôles des sels biliaires** : émulsification des lipides, formation de micelles, digestion et absorption des lipides.
 
 ### 4.5 Métabolisme des pigments biliaires
+[[visual:phys/bilirubin]]
 - **Étape préhépatique** : au niveau des macrophages (rate, foie, moelle osseuse), l'hème du fer est converti en biliverdine (hème-oxygénase), puis en bilirubine indirecte (non conjuguée), qui circule liée à l'albumine.
 - **Étape hépatique** : la bilirubine indirecte est conjuguée à l'acide glucuronique (glucuronyl-transférase) → bilirubine directe (conjuguée), activement sécrétée dans les canalicules biliaires.
 - **Étape posthépatique (intestin)** : la bilirubine directe est oxydée en urobilinogène par la flore bactérienne. Une partie est réabsorbée par la veine porte (réexcrétée dans la bile ou éliminée dans les urines sous forme d'urobiline) ; une partie est oxydée en stercobilinogène, éliminée dans les fèces sous forme de stercobiline. Urinalyse normale : urobilinogène positif, bilirubine directe et sels biliaires absents.
@@ -494,6 +497,7 @@ const GI_MOTILITY_COURSE = `# Lecture 14 — Motilité gastro-intestinale
 - **Valeur fonctionnelle de la mastication** : 1) digestive (préparation mécanique/chimique des aliments) ; 2) trophique pour la cavité buccale (développement des os faciaux, stimulation de la sécrétion salivaire, auto-nettoyage buccal, perception olfactive/gustative) ; 3) trophique pour le tube digestif (intégrité mécanique, stimulation réflexe de la sécrétion et de la motilité digestive).
 
 ## 5. Déglutition
+[[visual:phys/swallowing]]
 
 - **Définition** : processus mécanique en 3 stades (buccal, pharyngé, œsophagien) déplaçant le bol alimentaire de la bouche à l'estomac via le pharynx et l'œsophage.
 

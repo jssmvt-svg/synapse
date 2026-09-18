@@ -215,6 +215,7 @@ const TUBULAR_FUNCTIONS_COURSE = `# Fonctions tubulaires
 - Permet la **concentration** (via la BDF) et la **dilution** (via la BAL) de l'urine, ainsi que le maintien du gradient osmotique médullaire.
 
 ## 5. Physiologie du tube contourné distal (TCD) et du tube collecteur (TC)
+[[visual:phys/distal-tubule-cells]]
 - Reçoivent 15 % du FG, hypotonique (150 mOsm/L).
 - **Premier tiers du TCD** : imperméable à l'eau, fonctionne comme la BLA (segment de dilution).
 - **Deux derniers tiers du TCD + TC** : « segment de finalisation de l'urine » — cellules principales et cellules intercalées.
@@ -337,6 +338,7 @@ const RENAL_EXCRETION_COURSE = `# Excrétion rénale et épargne des composants 
 - [Mg²⁺]plasmatique ≈ 3 mEq/L ; rôle dans de nombreux systèmes enzymatiques intracellulaires. Réabsorption 94-95 % : **30 % TCP** (passif) ; **65 % anse de Henlé** (branche large ascendante, principal site) ; **< 5 % TCD terminal + TC**. Régulation : PTH (↑ réabsorption, surtout branche large ascendante + TCD), [Mg²⁺]pl et [Ca²⁺]pl (rétrocontrôle inversement proportionnel).
 
 ## 6. Rôle du rein dans l'équilibre acido-basique (EAB)
+[[visual:phys/renal-acid-base]]
 - Constantes plasmatiques : pH = 7,4 ± 0,05 (pH intracellulaire 6-7,4) ; PCO₂ = 38-42 mmHg ; [HCO₃⁻] = 23-27 mEq/L ; H₂CO₃ = 1,2 mmol/L ; base excess = -2 à +2 mEq/L ; trou anionique = [Na⁺] − [Cl⁻] − [HCO₃⁻] ≈ 10 mEq/L (acidose métabolique).
 - 3 mécanismes de maintien de l'EAB, par ordre de rapidité/durée : **systèmes tampons** (immédiat, court terme), **fonction respiratoire** (contrôle du CO₂), **fonction rénale** (lente : heures-jours, mais efficace et durable).
 - **Systèmes tampons** : plasmatique (bicarbonate, le plus important — équation de Henderson-Hasselbalch, pK = 6,1, [HCO₃⁻] = 24 mEq/L) ; urinaire (phosphate, pK = 6,8) ; cellulaire (protéinate, pK ≈ 7,4).
@@ -356,6 +358,7 @@ const RENAL_EXCRETION_COURSE = `# Excrétion rénale et épargne des composants 
 - Principal tampon : phosphate (alcalin/acide). Le H⁺ transforme le phosphate alcalin en phosphate acide, éliminant environ 50 % du H⁺ produit par le catabolisme ; pour chaque H⁺ sécrété, 1 HCO₃⁻ est réabsorbé.
 
 ### Excrétion de NH₄⁺
+[[visual:phys/ammonium-trapping]]
 - NH₃ produit dans le TCP (30 % filtré, 70 % par désamination du glutamate/glutamine) diffuse passivement dans la lumière tubulaire ; en présence de H⁺ (urine acide), il forme NH₄⁺, piégé (« trapped diffusion ») et excrété sous forme de sels d'ammonium (NH₄Cl) — élimine 50 % du H⁺ normal ET tout l'excès de H⁺ en acidose chronique (odeur ammoniaquée de l'urine en acidose). Pour chaque NH₄⁺ excrété, 1 HCO₃⁻ est réabsorbé. En urine alcaline, NH₃ diffuse en retour et l'ammoniogenèse s'arrête.
 
 ### Variations de l'EAB

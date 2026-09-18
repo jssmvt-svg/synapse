@@ -454,6 +454,7 @@ export const HEMATOPOIESIS_LEUKOCYTES_FLASHCARDS: LibraryCardSeed[] = [
 const HEMOSTASIS_COURSE = `# Hémostase physiologique
 
 ## 1. Physiologie des plaquettes (thrombocytes)
+[[visual:phys/platelet-plug]]
 - **Caractéristiques générales** : les thrombocytes (Tr.) sont les plus petits éléments figurés du sang (2-4 µm), fragments cytoplasmiques anucléés contenant des granulations azurophiles, issus de la moelle osseuse.
 - **Deux propriétés fondamentales** : adhérence aux surfaces rugueuses et agrégation (formation du clou plaquettaire).
 
@@ -559,6 +560,7 @@ const HEMOSTASIS_COURSE = `# Hémostase physiologique
 - Troubles du mécanisme extrinsèque de coagulation : insuffisance hépatique, avitaminose K, traitement anti-vitamine K.
 
 ## 3. Fibrinolyse
+[[visual:phys/fibrinolysis]]
 - **Définition** : protéolyse programmée du caillot de fibrine sous l'action du système fibrinolytique.
 - **Composants** :
   1. **Plasminogène** : précurseur inactif circulant dans le plasma, synthétisé par le foie, activé à la surface du caillot de fibrine.

@@ -1,4 +1,5 @@
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ACRONYMS } from "../library-data/acronyms";
 
 // Cadre commun des schémas de cours : SVG vectoriel original (aucun droit
 // d'auteur à gérer), themable via currentColor, avec légende accessible.
@@ -13,8 +14,21 @@ export function Figure({
   caption?: string;
   children: ReactNode;
 }) {
+  const figure = useRef<HTMLElement>(null);
+  const [glossary, setGlossary] = useState<[string, string][]>([]);
+  useEffect(() => {
+    const svg = figure.current?.querySelector("svg");
+    if (!svg) return;
+    const found = new Map<string, string>();
+    svg.querySelectorAll("text").forEach((node) => {
+      (node.textContent ?? "").split(/[^A-Za-zÀ-ÿ0-9]+/).forEach((token) => {
+        if (ACRONYMS[token]) found.set(token, ACRONYMS[token]);
+      });
+    });
+    setGlossary(Array.from(found.entries()));
+  }, [viewBox, title]);
   return (
-    <figure className="course-figure">
+    <figure className="course-figure" ref={figure}>
       <svg viewBox={viewBox} role="img" aria-label={title} className="course-svg">
         <defs>
           <marker id="fig-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="9" markerHeight="9" markerUnits="userSpaceOnUse" orient="auto-start-reverse">
@@ -24,6 +38,11 @@ export function Figure({
         {children}
       </svg>
       <figcaption>{caption ?? title}</figcaption>
+      {glossary.length > 0 && (
+        <p className="figure-glossary">
+          <strong>Sigles :</strong> {glossary.map(([k, v]) => k + " = " + v).join(" · ")}
+        </p>
+      )}
     </figure>
   );
 }

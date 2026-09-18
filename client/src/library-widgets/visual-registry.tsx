@@ -1,4 +1,6 @@
 import type { ReactNode } from "react";
+import { MembraneProteinTypesDiagram, MembraneFluidityDiagram, TertiaryQuaternaryDiagram, DisaccharidesDiagram, GlycoconjugatesDiagram, RestrictionEnzymeDiagram } from "../components/BioMore";
+import { DistalTubuleCellsDiagram, RenalAcidBaseDiagram, AmmoniumTrappingDiagram, PancreaticSecretionDiagram, EnterohepaticCycleDiagram, BilirubinMetabolismDiagram, SwallowingStagesDiagram, FibrinolysisDiagram, PlateletPlugDiagram } from "../components/PhysMore";
 import { UpperLimbVeinsDiagram, ThighCompartmentsDiagram, GlutealMusclesDiagram, ThighMusclesDiagram, LowerLimbVeinsDiagram, InguinalRegionDiagram, PeritonealCompartmentsDiagram, RetroperitonealOrgansDiagram, SpleenViewsDiagram, BiliaryTreeDiagram, PortalSystemDiagram, AnatNephronDiagram, FallopianTubeDiagram, BroadLigamentDiagram, ProstateZonesDiagram, TestisEpididymisDiagram } from "../components/AnatMore";
 import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSheet, LegBonesSheet, FootBonesDiagram, RectumAnalDiagram, BladderUrethraDiagram, MaleGenitalDiagram, CoeliacTrunkDiagram } from "../components/AnatRest";
 import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/AnatBonesTP";
@@ -239,6 +241,21 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/broad-ligament": () => <BroadLigamentDiagram />,
   "anat/prostate-zones": () => <ProstateZonesDiagram />,
   "anat/testis-epididymis": () => <TestisEpididymisDiagram />,
+  "phys/distal-tubule-cells": () => <DistalTubuleCellsDiagram />,
+  "phys/renal-acid-base": () => <RenalAcidBaseDiagram />,
+  "phys/ammonium-trapping": () => <AmmoniumTrappingDiagram />,
+  "phys/pancreatic-secretion": () => <PancreaticSecretionDiagram />,
+  "phys/enterohepatic-cycle": () => <EnterohepaticCycleDiagram />,
+  "phys/bilirubin": () => <BilirubinMetabolismDiagram />,
+  "phys/swallowing": () => <SwallowingStagesDiagram />,
+  "phys/fibrinolysis": () => <FibrinolysisDiagram />,
+  "phys/platelet-plug": () => <PlateletPlugDiagram />,
+  "bio/membrane-protein-types": () => <MembraneProteinTypesDiagram />,
+  "bio/membrane-fluidity": () => <MembraneFluidityDiagram />,
+  "bio/tertiary-quaternary": () => <TertiaryQuaternaryDiagram />,
+  "bio/disaccharides": () => <DisaccharidesDiagram />,
+  "bio/glycoconjugates": () => <GlycoconjugatesDiagram />,
+  "bio/restriction-enzyme": () => <RestrictionEnzymeDiagram />,
   "anatomy/planes": () => <AnatomicalPlanes />,
   "anatomy/limb-terms": () => <LimbTerms />,
   "anatomy/joint-movements": () => <JointMovements />,

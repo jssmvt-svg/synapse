@@ -118,6 +118,7 @@ const STRUCTURE_REVISION = `# Biochimie – Lecture 3 : Structure des protéines
 - Coude inverse : liaison H CO(i) → NH(i+3), sur quatre résidus. Les boucles de surface assurent notamment la reconnaissance moléculaire.
 
 ## 2. Structure tertiaire
+[[visual:bio/tertiary-quaternary]]
 - Myoglobine : protéine globulaire compacte, principalement hélicoïdale, avec hème.
 - Protéine soluble : surface polaire/chargée, cœur hydrophobe. Protéine-canal : extérieur hydrophobe, canal interne hydrophile.
 - Un motif est une structure supersecondaire récurrente (ex. helix-turn-helix) ; un domaine se replie indépendamment dans un même polypeptide.

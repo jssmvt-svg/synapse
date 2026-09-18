@@ -22,6 +22,7 @@ const GLUCIDES_COURSE = `# Chapitre 11 — Les glucides
 - Un sucre phosphorylé (ex. glucose-6-phosphate) forme une **liaison phosphoester**.
 
 ## 4. Disaccharides
+[[visual:bio/disaccharides]]
 | Disaccharide | Composition | Liaison | Réducteur ? |
 | --- | --- | --- | --- |
 | Saccharose (sucrose) | Glucose + Fructose | α1→β2 | Non |
@@ -44,6 +45,7 @@ L'hydrolyse du saccharose en glucose + fructose (« sucre inverti ») change le 
 La configuration β de la cellulose empêche l'organisme humain de la digérer ; elle constitue la fibre alimentaire et la paroi végétale.
 
 ## 6. Glycoconjugués
+[[visual:bio/glycoconjugates]]
 - **Glycoprotéine** : protéine portant une chaîne glucidique représentant moins d'environ 15 % de sa masse.
 - **Protéoglycane** : assemblage où la composante glucidique dépasse 15 % de la masse, formée de longues chaînes de **glycosaminoglycanes (GAG)** (ex. l'agrécane du cartilage, riche en chondroïtine sulfate).
 - Deux types de glycosylation :

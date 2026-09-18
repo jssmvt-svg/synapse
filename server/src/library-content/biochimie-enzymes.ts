@@ -180,6 +180,7 @@ Les enzymes sont classées en 7 catégories selon le type de réaction catalysé
 - Mécanisme en 4 étapes : (1) le Zn²⁺ facilite la libération d'un H⁺ à partir de l'eau liée → OH⁻ ; (2) le CO₂ se fixe au site actif ; (3) OH⁻ attaque le CO₂ → HCO₃⁻ ; (4) le site actif est régénéré.
 
 ## 6. Les enzymes de restriction
+[[visual:bio/restriction-enzyme]]
 - Les bactéries possèdent des endonucléases de restriction (type II) qui dégradent l'ADN viral en clivant au sein de séquences spécifiques (« cognates »), sans dégrader l'ADN de l'hôte porteur de la même séquence.
 - Toutes hydrolysent les liaisons phosphodiester, laissant un phosphoryle en 5′, par déplacement en ligne (in-line) d'une eau activée par du **magnésium** (ex. EcoRV, Asp74/Asp90 coordonnant le Mg²⁺).
 - Spécificité par distorsion de l'ADN : les séquences de reconnaissance sont des répétitions inversées à symétrie d'ordre 2 (enzymes = dimères) ; la fixation déforme (kink) l'ADN cognate, rapprochant le phosphoanhydride du Mg²⁺ et augmentant l'énergie de liaison.
