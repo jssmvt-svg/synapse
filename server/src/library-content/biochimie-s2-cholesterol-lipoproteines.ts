@@ -8,6 +8,8 @@ const CHOLESTEROL_METABOLISM_COURSE = `# Métabolisme du cholestérol
 - Synthétisé principalement dans le **foie**, à partir d'**acétyl-CoA**, essentiellement dans le cytosol et le réticulum endoplasmique.
 
 ## 2. Les étapes clés de la synthèse
+[[visual:bio/cholesterol-synthesis]]
+
 
 | # | Étape/Enzyme | Lieu | Réaction | Note |
 | --- | --- | --- | --- | --- |
@@ -95,6 +97,8 @@ const LIPOPROTEIN_METABOLISM_COURSE = `# Métabolisme des lipoprotéines
 | IDL | VLDL après action de la LPL | ApoB-100, ApoE | Intermédiaire triglycérides/cholestérol |
 | LDL | IDL après lipase hépatique | ApoB-100 | Cholestérol estérifié |
 | HDL | Foie et intestin | ApoA-I | Transport inverse du cholestérol |
+
+[[visual:bio/lipoproteins]]
 
 ## 2. Voie exogène (chylomicrons)
 - Les triglycérides et le cholestérol alimentaires sont absorbés par les entérocytes, réassemblés, incorporés dans des **chylomicrons** (apoB-48), sécrétés dans la lymphe puis le sang.

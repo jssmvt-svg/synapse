@@ -6,6 +6,8 @@ import { single, multi } from "./qcm-helpers.js";
 const LAB2_COURSE = `# Lab 2 — Unités de mesure : masse, volume et densité
 
 ## 1. Unités de mesure
+[[visual:bio/lab-measures]]
+
 - Le système international (SI) distingue les unités **fondamentales** (masse : kg ; longueur : m ; temps : s ; température : K ; quantité de matière : mol) des unités **dérivées** (volume, pression, charge électrique en coulomb).
 - Unités hors SI courantes en laboratoire : le temps en minutes/heures, le volume en litres (1 L = 1 dm³ ; 1000 L = 1 m³ ; 1 mL = 1 cm³).
 - Multiples et sous-multiples (de 10¹⁵ à 10⁻¹⁵) : péta, ..., kilo, hecto, déca, (unité), déci, centi, milli, micro, nano, pico, femto. Convertir une unité vers une autre revient à déplacer la virgule du nombre de puissances de 10 séparant les deux préfixes.
@@ -75,6 +77,8 @@ export const LAB2_LEARNING: LibraryLearningSeed = {
 const LAB6_COURSE = `# Lab 6 — Systèmes tampons biologiques
 
 ## 1. Systèmes tampons
+[[visual:bio/lab-buffer]]
+
 - Un système tampon associe un **acide faible et sa base conjuguée** (ex. CH₃COOH/CH₃COO⁻) ou une **base faible et son acide conjugué** (ex. NH₃/NH₄⁺). Il s'oppose aux variations de pH lorsqu'une petite quantité d'acide ou de base forte est ajoutée.
 
 ### Équation de Henderson-Hasselbalch

@@ -8,6 +8,8 @@ const LAB_S2_4_COURSE = `# Labo 4 — Métabolisme des lipides : lipoprotéines 
 - Besoin quotidien ≈ 1 g, couvert par la synthèse endogène et l'apport alimentaire (exogène). En présence de sels biliaires, seule la moitié du cholestérol alimentaire est absorbée dans l'intestin. Le cholestérol absorbé est en grande partie estérifié par l'**ACAT** (acyl-CoA-cholestérol acyltransférase, enzyme microsomale de la muqueuse intestinale), puis conditionné avec les triglycérides en **chylomicrons**.
 
 ## 2. Biosynthèse du cholestérol
+[[visual:bio/cholesterol-synthesis]]
+
 - Synthèse endogène ≈ 0,5-1 g/jour, principalement hépatique (environ la moitié de la production totale), bien que toute cellule nucléée en soit capable.
 - Voie : acétyl-CoA → **HMG-CoA** (3-hydroxy-3-méthylglutaryl-CoA) → mévalonate (réaction catalysée par l'**HMG-CoA réductase**, cible majeure de la régulation de toute la voie) → intermédiaires isopréniques → squalène → **lanostérol** (premier stérol) → cholestérol après plusieurs modifications.
 - Le dernier précurseur, le **7-déhydrocholestérol**, est aussi le précurseur de la vitamine D3 (cholécalciférol).
@@ -18,6 +20,8 @@ const LAB_S2_4_COURSE = `# Labo 4 — Métabolisme des lipides : lipoprotéines 
 - Son noyau stérol ne peut pas être dégradé dans l'organisme humain : son élimination se fait exclusivement par voie biliaire, sous forme d'acides biliaires.
 
 ## 4. Les lipoprotéines plasmatiques
+[[visual:bio/lipoproteins]]
+
 - Complexes transportant les lipides (insolubles dans l'eau) dans le sang : un cœur lipidique (triglycérides, cholestérol, phospholipides) entouré d'apoprotéines et de groupes polaires en surface, assurant la solubilité aqueuse.
 - Par densité croissante : **chylomicrons < VLDL < IDL < LDL < HDL**. Plus le ratio protéines/lipides est élevé, plus la lipoprotéine est dense.
 
@@ -51,6 +55,8 @@ const LAB_S2_4_COURSE = `# Labo 4 — Métabolisme des lipides : lipoprotéines 
 - **Ratio cholestérol total / HDL** : normal 3,5-5 ; < 3,5 = risque athérogène faible ; > 5 = risque élevé.
 
 ## 9. Calcul du cholestérol LDL — équation de Friedewald
+[[visual:bio/lab-lipid-panel]]
+
 - LDL = Cholestérol total − (HDL + VLDL), où VLDL ≈ Triglycérides / 5.
 
 | LDL (mg/100 mL) | Interprétation |
@@ -107,6 +113,8 @@ const LAB_S2_5_COURSE = `# Labo 5 — Métabolisme minéral : pH, capacité tamp
 - Mesure : indicateurs colorés/papier pH (qualitatif), pH-mètre électrométrique (quantitatif).
 
 ## 2. Solutions tampons
+[[visual:bio/lab-buffer]]
+
 - Mélange (acide faible + sel de cet acide avec une base forte, ou base faible + sel avec un acide fort) qui limite la variation de pH lors de l'ajout d'acide ou de base.
 - **Capacité tampon** = nombre d'équivalents H⁺ (ou OH⁻) nécessaires pour faire varier le pH d'une unité, pour un volume de tampon donné.
 - Les systèmes tampons biologiques couvrent typiquement la zone pH 6-8 ; l'organisme maintient le pH proche de 7,4 ± 0,05 grâce à plusieurs systèmes combinés.
@@ -186,6 +194,8 @@ export const LAB_S2_5_LEARNING: LibraryLearningSeed = {
 const LAB_S2_67_COURSE = `# Labo 6 & 7 — Métabolisme des protéines et des acides aminés : identification des troubles héréditaires
 
 ## 1. Généralités sur le catabolisme des acides aminés
+[[visual:bio/aa-metabolism]]
+
 - La source principale d'acides aminés pour les protéines endogènes est constituée par les **protéines alimentaires**, hydrolysées enzymatiquement dans le tube digestif ; les acides aminés résultants passent dans le sang puis sont captés par le foie et d'autres organes, principalement pour la synthèse de protéines endogènes.
 - Le catabolisme des acides aminés a lieu surtout au niveau hépatique et rénal, par **transamination couplée à une désamination**, produisant de l'ammoniac et des **α-cétoacides**. L'ammoniac est converti en urée (éliminée par l'urine) ; les α-cétoacides sont dégradés dans le cycle de Krebs ou par des voies spécifiques.
 - La concentration plasmatique des acides aminés varie d'environ 30 % au cours de la journée, étant plus élevée après les repas.

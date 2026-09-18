@@ -7,6 +7,8 @@ import { single, multi } from "./qcm-helpers.js";
 const LAB7_COURSE = `# Labo 7 — Centrifugation et fluides biologiques
 
 ## 1. Principe de la centrifugation
+[[visual:bio/lab-centrifuge]]
+
 - La centrifugation est une méthode de séparation basée sur la **densité** des particules en suspension.
 - Vitesse de sédimentation σ = (d² · Δρ · ω² · r) / (18 · η)
 - **Directement proportionnelle** à : d (diamètre de la particule), ρ (densité), ω (vitesse angulaire, en RPM/xg selon le rotor), r (rayon du rotor).
@@ -87,6 +89,8 @@ const LAB8_COURSE = `# Labo 8 — Chromatographie et séparation des acides amin
 | 5 | Affinité | Reconnaissance spécifique ligand/partenaire (enzyme-substrat, récepteur-hormone, antigène-anticorps, ADN-protéine liante) | — | Élution par excès de ligand libre ; le partenaire le plus spécifique est le dernier élué |
 
 ## 4. Travail expérimental : séparation d'acides aminés par chromatographie sur papier
+[[visual:bio/lab-chromatography]]
+
 - Phase stationnaire : cellulose du papier (–OH, hydrophile) → forte polarité.
 - Phase mobile : mélange de solvants organiques → polarité plus faible.
 - Après migration, révélation par **ninhydrine** : réaction avec les groupes amine (–NH2) des acides aminés → coloration **violette**.
@@ -126,6 +130,8 @@ export const LAB8_LEARNING: LibraryLearningSeed = {
 const LAB9_COURSE = `# Labo 9 — Protéines : dialyse et électrophorèse
 
 ## 1. La dialyse
+[[visual:bio/lab-electrophoresis]]
+
 - Méthode de séparation basée sur deux phénomènes à travers une **membrane semi-perméable** :
   - **Osmose** : migration du solvant, du milieu le moins concentré vers le plus concentré.
   - **Diffusion** : migration des solutés (petites molécules), du milieu le plus concentré vers le moins concentré.

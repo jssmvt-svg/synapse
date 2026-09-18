@@ -6,6 +6,8 @@ const METABOLIC_MAP_CARBS_COURSE = `# Carte métabolique — Glucides
 ## 1. Vue d'ensemble intégrée
 - Cette carte relie **glycolyse**, **cycle de Krebs**, **chaîne respiratoire**, **glycogénogenèse/glycogénolyse**, **néoglucogenèse** et **voie des pentoses phosphates** en un réseau cohérent centré sur le glucose et le glucose-6-phosphate.
 
+[[visual:bio/map-carbs]]
+
 ## 2. Le glucose-6-phosphate, carrefour central
 - **Glycolyse** → pyruvate, ATP, NADH.
 - **Glycogénogenèse** → stockage, via glucose-1-phosphate.
@@ -85,6 +87,8 @@ const METABOLIC_MAP_LIPIDS_COURSE = `# Carte métabolique — Lipides
 ## 1. Vue d'ensemble intégrée
 - Cette carte relie **lipogenèse**, **synthèse des triglycérides**, **lipolyse**, **β-oxydation** et **cétogenèse** autour de deux carrefours : l'**acétyl-CoA** et les **acyl-CoA**.
 
+[[visual:bio/map-lipids]]
+
 ## 2. Le malonyl-CoA, interrupteur central
 - Produit par l'**acétyl-CoA carboxylase (ACC)** à partir de l'acétyl-CoA cytosolique (lui-même issu du citrate exporté de la mitochondrie).
 - Alimente la **synthèse des acides gras** (complexe FAS).
@@ -159,6 +163,8 @@ const METABOLIC_MAP_PROTEINS_COURSE = `# Carte métabolique — Protéines
 
 ## 1. Vue d'ensemble intégrée
 - Cette carte relie le **catabolisme des acides aminés**, le **cycle de l'urée**, et les points de connexion des squelettes carbonés avec la **glycolyse**, le **cycle de Krebs** et la **cétogenèse**.
+
+[[visual:bio/map-proteins]]
 
 ## 2. Le carrefour azoté : transamination et cycle de l'urée
 - La plupart des acides aminés cèdent leur azote à l'α-cétoglutarate (transamination), formant du **glutamate**.

@@ -4013,3 +4013,6 @@ select:focus {
 @keyframes fig-seq-3 { 0%, 28% { opacity: 1; } 36%, 100% { opacity: 0.28; } }
 .fig-seq-2 { animation-name: fig-seq-2; }
 .fig-seq-3 { animation-name: fig-seq-3; }
+
+@keyframes fig-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { g[style*="fig-spin"] { animation: none !important; } }

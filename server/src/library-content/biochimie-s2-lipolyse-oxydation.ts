@@ -8,6 +8,8 @@ const TRIGLYCERIDE_MOBILIZATION_COURSE = `# Mobilisation des triglycérides (lip
 - Stimulée par le **glucagon**, l'**adrénaline** (et plus généralement les catécholamines) ; inhibée par l'**insuline**.
 
 ## 2. Les trois lipases séquentielles
+[[visual:bio/triglyceride]]
+
 
 | # | Lipase | Substrat → Produit | Note |
 | --- | --- | --- | --- |
@@ -82,6 +84,8 @@ const FATTY_ACID_OXIDATION_1_COURSE = `# Oxydation des acides gras (partie 1) �
 - Dans le **cytosol**, l'**acyl-CoA synthétase** (thiokinase) active l'acide gras en **acyl-CoA**, en consommant 2 liaisons phosphate riches en énergie (ATP → AMP + 2 Pi, équivalent au coût de **2 ATP**).
 
 ## 2. La navette de la carnitine (transport mitochondrial)
+[[visual:bio/beta-oxidation]]
+
 Les acides gras à **longue chaîne** (>12C) ne peuvent pas traverser directement la membrane mitochondriale interne sous forme d'acyl-CoA :
 
 | # | Étape | Localisation | Réaction |

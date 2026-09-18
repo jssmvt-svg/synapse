@@ -10,6 +10,8 @@ const LAB_S2_8_COURSE = `# Labo 8 — Métabolisme des protéines : dosage des t
 - Des protéases membranaires intestinales (**aminopeptidase N, dipeptidase**) achèvent la digestion ; les acides aminés et petits peptides sont absorbés par transport actif vers la veine porte, le foie, puis la circulation générale.
 
 ## 2. Réaction de transamination
+[[visual:bio/lab-transaminases]]
+
 - La **transamination** est le principal mécanisme d'élimination de l'azote des acides aminés. La plupart des acides aminés y participent, à l'exception notable de la **lysine, la thréonine, la proline et l'hydroxyproline**.
 - Les enzymes catalysant ces réactions, les **transaminases (aminotransférases)**, utilisent le **phosphate de pyridoxal** (vitamine B6) comme cofacteur.
 - Réaction générale : *acide aminé + α-cétoglutarate ⇌ α-céto acide + glutamate* — réaction réversible, impliquée à la fois dans la dégradation et la synthèse des acides aminés.
@@ -91,6 +93,8 @@ const LAB_S2_9_COURSE = `# Labo 9 — Métabolisme des protéines : dosage de l'
   - **Glutamine** : la glutamine synthétase combine glutamate + ammoniac en glutamine dans les tissus périphériques ; au niveau du rein et de l'intestin, la glutaminase libère l'ammoniac et régénère le glutamate. Ce processus, stimulé par l'acidose, contribue au tamponnage des protons.
 
 ## 3. Le cycle de l'urée
+[[visual:bio/urea-cycle]]
+
 - Le cycle de l'urée se déroule exclusivement dans le **foie**. Il débute par l'incorporation de l'ammoniac dans le **carbamoyl phosphate** (via la carbamoyl phosphate synthétase, consommant 2 ATP).
 - Étapes suivantes :
 
@@ -103,6 +107,8 @@ const LAB_S2_9_COURSE = `# Labo 9 — Métabolisme des protéines : dosage de l'
 - L'urée synthétisée est sécrétée dans le plasma puis éliminée par le **rein** (voie principale) ; des voies mineures existent via l'intestin et les glandes sudoripares.
 
 ## 4. Dosage enzymatique de l'urée (test optique, méthode à l'uréase)
+[[visual:bio/lab-urea]]
+
 - Principe : l'urée est hydrolysée en ammoniac et CO₂ par l'**uréase**. L'ammoniac réagit ensuite avec l'α-cétoglutarate et le NADH en présence de **glutamate déshydrogénase (GLDH)**, formant du glutamate et du NAD⁺.
 - La réaction est suivie par spectrophotométrie à **340 nm** : la diminution d'absorbance (oxydation du NADH) est proportionnelle à la concentration d'urée.
 - Échantillons : sérum/plasma (héparine — pas de fluorure, qui inhibe l'uréase) ou urine des 24 heures.
@@ -147,6 +153,8 @@ export const LAB_S2_9_LEARNING: LibraryLearningSeed = {
 const LAB_S2_10_COURSE = `# Labo 10 — Métabolisme des protéines : dosage de la créatinine
 
 ## 1. Synthèse de la créatine et formation de la créatinine
+[[visual:bio/lab-creatinine]]
+
 - La **créatine** est synthétisée dans le **foie et le rein**, à partir des acides aminés **arginine, glycine et S-adénosylméthionine (SAM)**, puis transportée vers le muscle squelettique et le cerveau, où elle est convertie en **créatine phosphate** (composé à haute énergie).
 - Chaque jour, une petite fraction (**1-2 %**) de la créatine phosphate musculaire subit une **déshydratation spontanée non enzymatique** pour former la **créatinine**. La production quotidienne de créatinine est donc **proportionnelle à la masse musculaire** de l'individu.
 

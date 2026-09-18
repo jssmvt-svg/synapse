@@ -11,6 +11,8 @@ const ETC_COMPLEX_IV_ATP_SYNTHASE_COURSE = `# Chaîne de transport des électron
 - Réaction globale : 4 cytochrome c (réduit) + O₂ + 8 H⁺(matrice) → 4 cytochrome c (oxydé) + 2 H₂O + 4 H⁺(espace intermembranaire).
 
 ## 2. L'ATP synthase (complexe V)
+[[visual:bio/atp-synthase]]
+
 - Ce n'est pas un transporteur d'électrons mais un **moteur moléculaire rotatif** composé de deux parties :
   - **F₀** : portion intramembranaire, comprenant un anneau de sous-unités « c » qui tourne sous l'effet du flux de protons.
   - **F₁** : portion matricielle, comprenant les sous-unités catalytiques (3α, 3β) où l'ATP est synthétisé.
@@ -264,6 +266,8 @@ const ETC_OVERVIEW_COURSE = `# Chaîne de transport des électrons — Vue d'ens
 - Ce gradient est utilisé par l'**ATP synthase** (complexe V) pour produire de l'ATP par **chimiosmose** — c'est la **phosphorylation oxydative**.
 
 ## 2. Les composants de la chaîne
+[[visual:bio/etc]]
+
 
 | Composant | Rôle | Pompe des protons ? |
 | --- | --- | --- |
@@ -367,6 +371,8 @@ const GLYCOGENESIS_COURSE = `# Glycogénogenèse
 - Stimulée par l'**insuline** (état nourri) ; inhibée par le **glucagon** et l'**adrénaline** (jeûne, stress, effort).
 
 ## 2. Les étapes de la synthèse
+[[visual:bio/glycogenesis]]
+
 
 | # | Enzyme | Réaction | Note |
 | --- | --- | --- | --- |

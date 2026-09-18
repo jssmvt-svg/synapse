@@ -13,6 +13,8 @@ const LAB_S2_1_COURSE = `# Labo 1 — Métabolisme des glucides : dosage du gluc
 - **Disaccharidases de la bordure en brosse** (jéjunum) : maltase (maltose → glucose), isomaltase/α-1,6-glucosidase (dextrines-limites), sucrase/invertase (saccharose → glucose + fructose), lactase/β-galactosidase (lactose → glucose + galactose ; son déficit cause l'intolérance au lactose).
 
 ## 2. Transporteurs du glucose
+[[visual:bio/lab-glucose-transporters]]
+
 - **SGLT (cotransporteurs Na⁺/glucose)** : transport actif secondaire contre le gradient, énergie fournie par le gradient de Na⁺ (maintenu par la Na⁺/K⁺-ATPase). SGLT1 (absorption intestinale de glucose/galactose), SGLT2 (réabsorption rénale tubulaire proximale).
 - **GLUT (diffusion facilitée)**, indépendants de l'ATP, selon le gradient de concentration :
   | Transporteur | KM | Tissus principaux | Rôle |
@@ -47,6 +49,8 @@ const LAB_S2_1_COURSE = `# Labo 1 — Métabolisme des glucides : dosage du gluc
 - **Glycosurie pathologique** : diabète sucré (marqueur qualitatif moins précis que la glycémie/HbA1c), tubulopathies (Fanconi), grossesse, inhibiteurs du SGLT2.
 
 ## 6. Hyperglycémie provoquée par voie orale (HGPO)
+[[visual:bio/lab-ogtt]]
+
 - Objectif : évaluer l'homéostasie du glucose (diagnostic de diabète, intolérance au glucose, insulinorésistance).
 - **Indications** : glycémie à jeun 110–126 mg/dL, facteurs de risque (obésité, antécédents familiaux, syndrome métabolique, diabète gestationnel).
 - **Préparation** : régime riche en glucides (≥ 150 g/j) pendant 3 jours, pas de tabac/effort/alcool 24 h avant, arrêt des médicaments interférents, jeûne de 8–14 h.
@@ -61,6 +65,8 @@ const LAB_S2_1_COURSE = `# Labo 1 — Métabolisme des glucides : dosage du gluc
 - **Contre-indications** : diabète déjà connu, régime amaigrissant en cours, troubles digestifs de l'absorption, maladie fébrile aiguë, insuffisance hépatique.
 
 ## 7. Glycolyse (rappel) et voie des pentoses phosphates (PPP)
+[[visual:bio/ppp]]
+
 - La glycolyse (voie d'Embden-Meyerhof-Parnas) convertit 1 glucose en 2 pyruvates : bilan net +2 ATP, +2 NADH. En anaérobiose, le pyruvate est réduit en lactate (lactate déshydrogénase) pour régénérer le NAD⁺ ; le cycle de Cori recycle ensuite le lactate en glucose au niveau hépatique.
 - La **PPP** (voie des pentoses, shunt des hexoses monophosphates) est une voie cytosolique non énergétique, parallèle à la glycolyse, partageant le glucose-6-phosphate comme intermédiaire commun. Elle utilise le NADP⁺ (pas le NAD⁺) et ne produit pas d'ATP ; elle produit du CO₂, contrairement à la glycolyse.
 - **Fonctions principales** : (1) production de **NADPH** (biosynthèse réductrice — acides gras, stéroïdes ; régénération du glutathion ; production d'anion superoxyde) ; (2) production de **ribose-5-phosphate** pour la synthèse des nucléotides puriques/pyrimidiques.
@@ -159,6 +165,8 @@ const LAB_S2_2_COURSE = `# Labo 2 — Métabolisme des glucides : régulation de
 - **Acidocétose** : l'excès d'acides gras génère un excès d'acétyl-CoA hépatique ; quand celui-ci dépasse la capacité du cycle de Krebs (faible oxaloacétate), il est dérivé vers la cétogenèse.
 
 ## 6. Hémoglobine glyquée (HbA1c)
+[[visual:bio/lab-hba1c]]
+
 - Reflet **intégré de la glycémie moyenne sur 2–3 mois** (durée de vie moyenne des érythrocytes), contrairement à une mesure ponctuelle de la glycémie.
 - **Formation** (glycation non enzymatique, lente) :
   1. **Base de Schiff (aldimine)** labile et réversible entre le glucose et la valine N-terminale de la chaîne β de l'hémoglobine A — dépend directement de la glycémie ambiante.
@@ -250,6 +258,8 @@ const LAB_S2_3_COURSE = `# Labo 3 — Métabolisme lipidique : dosage des trigly
 - **Valeurs diminuées** : malnutrition, malabsorption, hyperthyroïdie, hépatopathie chronique obstructive, anémie sévère, maladies cachectisantes chroniques, régime pauvre en graisses, traitement par fibrates.
 
 ## 4. Corps cétoniques
+[[visual:bio/ketone-bodies]]
+
 - La **cétogenèse** se déroule exclusivement dans le foie (mitochondries des hépatocytes) à partir des acides gras (et de certains acides aminés cétogènes) : source d'énergie alternative en jeûne, exercice prolongé, ou déficit insulinique.
 - Trois corps cétoniques :
 

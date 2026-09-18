@@ -32,8 +32,63 @@ import { AminoAcidStructureDiagram, AminoAcidClassesDiagram, PeptideBondDiagram,
 import { EnergyProfileDiagram, EnzymeSubstrateModelsDiagram, MichaelisMentenDiagram, EnzymeInhibitionDiagram, EcClassesDiagram, CatalyticStrategiesDiagram, SerineProteaseDiagram, AtcaseDiagram, CovalentModificationDiagram, ZymogenDiagram } from "../components/BioEnzymes";
 import { MonosaccharidesDiagram, GlycosidicBondsDiagram, PolysaccharidesDiagram, FattyAcidsDiagram, MembraneLipidsDiagram, LipidAssemblyDiagram, WaterVitaminsDiagram, FatVitaminsDiagram } from "../components/BioMacro";
 
+import { LabMeasuresDiagram, LabDilutionDiagram, LabIsotonicDiagram, LabTitrationDiagram, LabPhScaleDiagram, LabIsoelectricDiagram, LabBufferDiagram, LabCentrifugeDiagram, LabChromatographyDiagram, LabElectrophoresisDiagram, LabSpectroDiagram, LabLdhDiagram, LabIodometryDiagram } from "../components/BioLab";
+
+import { GlycolysisDiagram, GlycolysisRegulationDiagram, PdhComplexDiagram, PdhRegulationDiagram, KrebsDetailedDiagram, EtcDiagram, AtpSynthaseDiagram, GlycogenesisDiagram, GlycogenolysisDiagram, GlycogenRegulationDiagram } from "../components/BioMetabolismA";
+import { GluconeogenesisDiagram, GlycolysisGluconeogenesisSwitchDiagram, FattyAcidShuttleDiagram, FasCycleDiagram, TriglycerideDiagram, BetaOxidationDiagram, AminoAcidMetabolismDiagram, UreaCycleDiagram, KetoneBodiesDiagram, PentosePhosphateDiagram, CholesterolSynthesisDiagram, LipoproteinsDiagram, NucleotideSynthesisDiagram, MetabolicMapCarbs, MetabolicMapLipids, MetabolicMapProteins } from "../components/BioMetabolismB";
+
+import { LabGlucoseTransportersDiagram, LabOgttDiagram, LabHba1cDiagram, LabLipidPanelDiagram, LabTransaminasesDiagram, LabUreaDiagram, LabCreatinineDiagram, LabBilirubinDiagram, LabUricAcidDiagram } from "../components/BioLabS2";
+
 // Schémas insérables dans un cours via [[visual:clé]] (cf. MarkdownContent).
 const COURSE_FIGURES: Record<string, () => ReactNode> = {
+  "bio/lab-glucose-transporters": () => <LabGlucoseTransportersDiagram />,
+  "bio/lab-ogtt": () => <LabOgttDiagram />,
+  "bio/lab-hba1c": () => <LabHba1cDiagram />,
+  "bio/lab-lipid-panel": () => <LabLipidPanelDiagram />,
+  "bio/lab-transaminases": () => <LabTransaminasesDiagram />,
+  "bio/lab-urea": () => <LabUreaDiagram />,
+  "bio/lab-creatinine": () => <LabCreatinineDiagram />,
+  "bio/lab-bilirubin": () => <LabBilirubinDiagram />,
+  "bio/lab-uric-acid": () => <LabUricAcidDiagram />,
+  "bio/glycolysis": () => <GlycolysisDiagram />,
+  "bio/glycolysis-regulation": () => <GlycolysisRegulationDiagram />,
+  "bio/pdh": () => <PdhComplexDiagram />,
+  "bio/pdh-regulation": () => <PdhRegulationDiagram />,
+  "bio/krebs-detailed": () => <KrebsDetailedDiagram />,
+  "bio/etc": () => <EtcDiagram />,
+  "bio/atp-synthase": () => <AtpSynthaseDiagram />,
+  "bio/glycogenesis": () => <GlycogenesisDiagram />,
+  "bio/glycogenolysis": () => <GlycogenolysisDiagram />,
+  "bio/glycogen-regulation": () => <GlycogenRegulationDiagram />,
+  "bio/gluconeogenesis": () => <GluconeogenesisDiagram />,
+  "bio/glucose-switch": () => <GlycolysisGluconeogenesisSwitchDiagram />,
+  "bio/fa-shuttle": () => <FattyAcidShuttleDiagram />,
+  "bio/fas-cycle": () => <FasCycleDiagram />,
+  "bio/triglyceride": () => <TriglycerideDiagram />,
+  "bio/beta-oxidation": () => <BetaOxidationDiagram />,
+  "bio/aa-metabolism": () => <AminoAcidMetabolismDiagram />,
+  "bio/urea-cycle": () => <UreaCycleDiagram />,
+  "bio/ketone-bodies": () => <KetoneBodiesDiagram />,
+  "bio/ppp": () => <PentosePhosphateDiagram />,
+  "bio/cholesterol-synthesis": () => <CholesterolSynthesisDiagram />,
+  "bio/lipoproteins": () => <LipoproteinsDiagram />,
+  "bio/nucleotides": () => <NucleotideSynthesisDiagram />,
+  "bio/map-carbs": () => <MetabolicMapCarbs />,
+  "bio/map-lipids": () => <MetabolicMapLipids />,
+  "bio/map-proteins": () => <MetabolicMapProteins />,
+  "bio/lab-measures": () => <LabMeasuresDiagram />,
+  "bio/lab-dilution": () => <LabDilutionDiagram />,
+  "bio/lab-isotonic": () => <LabIsotonicDiagram />,
+  "bio/lab-titration": () => <LabTitrationDiagram />,
+  "bio/lab-ph-scale": () => <LabPhScaleDiagram />,
+  "bio/lab-isoelectric": () => <LabIsoelectricDiagram />,
+  "bio/lab-buffer": () => <LabBufferDiagram />,
+  "bio/lab-centrifuge": () => <LabCentrifugeDiagram />,
+  "bio/lab-chromatography": () => <LabChromatographyDiagram />,
+  "bio/lab-electrophoresis": () => <LabElectrophoresisDiagram />,
+  "bio/lab-spectro": () => <LabSpectroDiagram />,
+  "bio/lab-ldh": () => <LabLdhDiagram />,
+  "bio/lab-iodometry": () => <LabIodometryDiagram />,
   "bio/amino-acid": () => <AminoAcidStructureDiagram />,
   "bio/amino-acid-classes": () => <AminoAcidClassesDiagram />,
   "bio/peptide-bond": () => <PeptideBondDiagram />,

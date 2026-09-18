@@ -23,6 +23,8 @@ const LAB_S2_11_COURSE = `# Labo 11 — Métabolisme des protéines : dosage de 
 - **Augmentation** : déshydratation, polyglobulies (dont polyglobulie de Vaquez), polyglobulie secondaire à une hypoxie chronique, à une encéphalite ou à certaines tumeurs sécrétant de l'érythropoïétine.
 
 ## 4. Dégradation de l'hème et production de bilirubine
+[[visual:bio/lab-bilirubin]]
+
 - La dégradation a lieu principalement dans le système réticulo-endothélial (rate, cellules de Kupffer hépatiques, phagocytes).
 - Étape limitante : l'**hème oxygénase** clive le pont α-méthène, libère le fer chélaté, produit du **CO** (exhalé par les poumons) et de la **biliverdine** (pigment vert).
 - La **biliverdine réductase** (NADPH-dépendante) réduit la biliverdine en **bilirubine** (pigment jaune-orangé), très peu soluble dans l'eau à pH neutre (conformation compacte à liaisons hydrogène).
@@ -107,6 +109,8 @@ const LAB_S2_12_COURSE = `# Labo 12 — Métabolisme des acides nucléiques : do
 4. **Catabolisme final des bases puriques et pyrimidiques** : les pyrimidines donnent des produits hydrosolubles facilement excrétés (CO₂, H₂O, NH₃) ; les purines sont dégradées en **acide urique** (2,6,8-trihydroxypurine).
 
 ## 4. Catabolisme des purines et acide urique
+[[visual:bio/lab-uric-acid]]
+
 - Le cycle purique subit une désamination puis une oxydation progressive : hypoxanthine → xanthine → **acide urique**.
 - Chez l'humain et les grands primates, l'acide urique est le produit final du catabolisme purique (contrairement à la plupart des mammifères, où l'**uricase** le dégrade encore en allantoïne).
 - Production principalement hépatique, à partir de purines endogènes et exogènes. **Valeur normale sérique : 1-7 mg/100 mL** ; pool total d'urate ≈ 1 g. Environ 2/3 est excrété par le rein (sécrétion tubulaire), 1/3 par voie intestinale.
@@ -181,6 +185,12 @@ const LAB_S2_13_COURSE = `# Labo 13 — Analyse métabolique intégrative et sys
 - La **mitochondrie** est le carrefour métabolique : les carburants issus des glucides, lipides et protéines convergent sous forme d'**acétyl-CoA** et entrent dans le cycle du TCA.
 
 ## 3. Interrelations glucides-lipides-protéines
+[[visual:bio/map-carbs]]
+
+[[visual:bio/map-lipids]]
+
+[[visual:bio/map-proteins]]
+
 - **Glucides** : source d'énergie immédiate. À l'état nourri, le glucose alimentaire est oxydé ou stocké sous forme de glycogène (foie, muscle) ; l'excès est converti en acides gras (lipogenèse de novo), stockés en triacylglycérols dans le tissu adipeux. À jeun, la glycogénolyse hépatique libère du glucose ; une fois le glycogène épuisé, la néoglucogenèse prend le relais, à partir du lactate (glycolyse anaérobie), du glycérol (lipolyse) et des acides aminés glucoformateurs (protéolyse musculaire).
 - **Lipides** : réserve énergétique la plus concentrée. À l'état nourri, les triacylglycérols alimentaires sont transportés en chylomicrons et stockés dans les adipocytes. À jeun ou lors d'un exercice prolongé, la lipolyse libère des acides gras libres, oxydés dans le foie et le muscle. Lors d'un jeûne prolongé, l'excès d'acétyl-CoA issu de la β-oxydation hépatique est converti en **corps cétoniques**, carburant alternatif préservant les protéines musculaires.
 - **Protéines et acides aminés** : rôle structural/fonctionnel principal, mais aussi substrat métabolique quand les réserves glucidiques/lipidiques sont insuffisantes. À l'état nourri, les acides aminés servent à la synthèse protéique ou sont transaminés en intermédiaires du TCA. À jeun, la protéolyse musculaire libère des acides aminés (notamment **alanine** et **glutamine**), soutenant la néoglucogenèse et l'uréogenèse hépatiques.

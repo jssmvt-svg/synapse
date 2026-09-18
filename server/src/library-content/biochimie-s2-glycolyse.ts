@@ -11,6 +11,8 @@ const KREBS_CYCLE_COURSE = `# Le cycle de Krebs
 - Comme 2 acétyl-CoA sont produits par glucose, le cycle tourne **deux fois par glucose** : bilan total = **6 NADH, 2 FADH₂, 2 ATP/GTP, 4 CO₂**.
 
 ## 2. Les 8 réactions du cycle
+[[visual:bio/krebs-detailed]]
+
 
 | # | Enzyme | Réaction | Cofacteur produit | Note |
 | --- | --- | --- | --- | --- |
@@ -148,6 +150,8 @@ const TRANSITION_STAGE_REGULATION_COURSE = `# Régulation du stade de transition
 - Ces deux niveaux assurent que le complexe reste actif seulement lorsque la cellule a besoin de produire de l'acétyl-CoA pour le cycle de Krebs, et inactif lorsque l'énergie est déjà abondante.
 
 ## 2. Régulation par phosphorylation
+[[visual:bio/pdh-regulation]]
+
 
 | Enzyme régulatrice | Effet sur E1 | Activée par | Conséquence sur le complexe |
 | --- | --- | --- | --- |
@@ -243,6 +247,8 @@ const TRANSITION_STAGE_COURSE = `# Stade de transition (phase préparatoire)
 - Le pyruvate cytosolique doit d'abord être transporté vers la matrice mitochondriale via le **transporteur mitochondrial du pyruvate (MPC)**.
 
 ## 2. Composition du complexe PDH
+[[visual:bio/pdh]]
+
 
 | Sous-unité | Rôle | Cofacteur | Vitamine source |
 | --- | --- | --- | --- |
@@ -364,6 +370,8 @@ const GLYCOLYSIS_REGULATION_COURSE = `# Régulation de la glycolyse
 - La **GKRP** (protéine régulatrice de la glucokinase) séquestre l'enzyme dans le noyau des hépatocytes lorsque la glycémie est basse, l'inactivant fonctionnellement.
 
 ## 3. Régulation de la PFK-1 — le point de contrôle majeur
+[[visual:bio/glycolysis-regulation]]
+
 - **Activateurs** : AMP et ADP (signalent une charge énergétique basse), et surtout le **fructose-2,6-bisphosphate (F2,6BP)**, l'activateur le plus puissant.
 - **Inhibiteurs** : ATP (charge énergétique élevée), **citrate** (abondance de précurseurs du cycle de Krebs, relie glycolyse et cycle de Krebs), pH bas (protection contre une acidose lactique excessive).
 - Le F2,6BP est synthétisé et dégradé par une enzyme **bifonctionnelle**, la **PFK-2/FBPase-2** :
@@ -486,6 +494,8 @@ const GLYCOLYSIS_COURSE = `# Glycolyse
 - Ne nécessite pas d'oxygène : peut fonctionner en anaérobiose.
 - Se déroule en **10 réactions enzymatiques**, réparties en deux phases : une phase d'investissement énergétique (étapes 1 à 5, consomme de l'ATP) et une phase de rendement énergétique (étapes 6 à 10, produit de l'ATP et du NADH).
 - Bilan net : Glucose + 2 ADP + 2 Pi + 2 NAD⁺ → 2 Pyruvate + **2 ATP** + **2 NADH** + 2 H⁺ + 2 H₂O.
+
+[[visual:bio/glycolysis]]
 
 ## 2. Phase d'investissement énergétique (étapes 1 à 5)
 Consomme 2 ATP pour activer et cliver le glucose en deux trioses phosphate. Contient la première enzyme irréversible (**hexokinase**) et l'étape limitante de toute la voie (**PFK-1**) — détail des 10 enzymes dans le tableau récapitulatif ci-dessous.

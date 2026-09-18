@@ -10,6 +10,8 @@ const LAB3_COURSE = `# Lab 3 — Solutions : concentrations, dilutions et soluti
 - Concentration molaire (molarité) : nombre de moles de soluté dans 1 L de solution. n = m/M (masse/masse molaire) ; molarité = n/V.
 
 ## 2. Dilutions
+[[visual:bio/lab-dilution]]
+
 - Diluer une solution consiste à ajouter du solvant (eau) pour diminuer sa concentration : V2 = V1 + V(H2O), où V1 est le volume de solution mère prélevé et V2 le volume final.
 - Relation fondamentale de dilution : **C1 × V1 = C2 × V2** (la quantité de soluté ne change pas lors d'une dilution).
 - Volume de solvant à ajouter : V(H2O) = V2 − V1.
@@ -17,6 +19,8 @@ const LAB3_COURSE = `# Lab 3 — Solutions : concentrations, dilutions et soluti
 - Les dilutions en série (facteur constant répété) permettent de préparer une gamme de concentrations à partir d'une seule solution mère.
 
 ## 3. Solutions isotoniques
+[[visual:bio/lab-isotonic]]
+
 - L'osmose est la migration de l'eau à travers une membrane semi-perméable, du compartiment le moins concentré vers le plus concentré, jusqu'à équilibre des pressions osmotiques.
 - L'osmolarité dépend du nombre de particules dissoutes, pas de leur nature : 1 molécule de glucose = 1 particule, alors qu'1 molécule de NaCl se dissocie en 2 particules (Na⁺ et Cl⁻).
 | Type | Osmolarité vs plasma | Effet sur les globules rouges | Exemple |
@@ -82,6 +86,8 @@ const LAB4_COURSE = `# Lab 4 — Acides, bases et titration acide-base
 - Échelle de 0 (très acide) à 14 (très basique), 7 étant neutre.
 
 ## 4. Titration acide-base
+[[visual:bio/lab-titration]]
+
 - La titration (dosage volumétrique) détermine la concentration inconnue d'un analyte en le faisant réagir avec un titrant de concentration connue, jusqu'au point d'équivalence (Ve).
 - Réaction générale de neutralisation : acide + base ⇌ sel + eau.
 - À l'équivalence, les moles d'acide et de base ayant réagi sont stœchiométriquement égales : **C(acide)·V(acide) = C(base)·V(base)** pour une réaction 1:1 (pour un diacide, il faut 2 équivalents de base : C(diacide)·V(diacide) = C(base)·V(base)/2).
@@ -126,6 +132,8 @@ export const LAB4_LEARNING: LibraryLearningSeed = {
 const LAB5_COURSE = `# Lab 5 — pH des fluides biologiques et point isoélectrique
 
 ## 1. Le pH des fluides biologiques
+[[visual:bio/lab-ph-scale]]
+
 Sur une échelle de 0 à 14 : [H⁺] < [OH⁻] au-dessus de 7 (basique), [H⁺] = [OH⁻] à 7 (neutre), [H⁺] > [OH⁻] en dessous de 7 (acide). Chaque unité de pH représente un facteur **10** sur la concentration en H⁺ (ex. le suc gastrique, pH ≈ 1, est environ 10⁴ fois plus acide que l'urine, pH ≈ 5).
 
 Valeurs typiques des fluides biologiques :
@@ -151,6 +159,8 @@ Valeurs typiques des fluides biologiques :
 - **Potentiomètre (pH-mètre)** : méthode quantitative précise, mesure la différence de potentiel entre une électrode de verre sensible aux H⁺ et une électrode de référence.
 
 ## 4. Point isoélectrique (pI) des acides aminés
+[[visual:bio/lab-isoelectric]]
+
 - Selon le pH du milieu, un acide aminé existe sous forme **cationique** (charge nette +, pH bas), **zwitterion/amphion** (charge nette nulle) ou **anionique** (charge nette −, pH élevé).
 - Le **point isoélectrique (pI)** est le pH auquel l'acide aminé est électriquement neutre (charge nette nulle).
 - Pour un acide aminé **monoamino-monocarboxylique** (un seul groupe COOH, un seul groupe NH₂) : **pI = (pKa₁ + pKa₂)/2**, la moyenne des deux pKa encadrant la forme neutre.

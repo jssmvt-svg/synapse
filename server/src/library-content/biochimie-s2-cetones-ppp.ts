@@ -8,6 +8,8 @@ const KETONE_METABOLISM_COURSE = `# Métabolisme des corps cétoniques
 - Ils constituent un **carburant alternatif** au glucose pour de nombreux tissus, notamment le **cerveau** après quelques jours de jeûne.
 
 ## 2. La cétogenèse (synthèse hépatique)
+[[visual:bio/ketone-bodies]]
+
 
 | # | Enzyme | Réaction | Note |
 | --- | --- | --- | --- |
@@ -92,6 +94,8 @@ const PENTOSE_PHOSPHATE_PATHWAY_COURSE = `# La voie des pentoses phosphates
 - Deux phases : une phase **oxydative** (irréversible) et une phase **non oxydative** (réversible).
 
 ## 2. Phase oxydative
+[[visual:bio/ppp]]
+
 
 | # | Enzyme | Réaction | Note |
 | --- | --- | --- | --- |

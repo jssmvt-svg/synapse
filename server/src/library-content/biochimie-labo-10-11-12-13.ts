@@ -14,6 +14,8 @@ const LAB10_COURSE = `# Lab 10 — Méthodes optiques : spectrophotométrie et q
 - **Absorbance** A = log₁₀(I₀/Iₜ) = log₁₀(1/T) — aussi appelée densité optique.
 
 ## 3. Loi de Beer-Lambert
+[[visual:bio/lab-spectro]]
+
 - **A = ε·C·L**, où ε est le coefficient d'absorptivité molaire (L·mol⁻¹·cm⁻¹), C la concentration molaire (mol/L) et L la longueur du trajet optique (cm).
 - La relation A = f(C) n'est linéaire que dans un domaine de concentration limité : au-delà d'une certaine concentration (C > Cₗᵢₘ), la loi de Beer-Lambert n'est plus valable.
 
@@ -65,6 +67,8 @@ const LAB11_COURSE = `# Lab 11 — Enzymes, cofacteurs enzymatiques et test opti
 - **Enzymes complexes (hétéroenzymes)** : protéine (apoenzyme) + cofacteur enzymatique — coenzyme (ex. dérivé de vitamine B3), groupe prosthétique, ou ion métallique (Zn²⁺, Mg²⁺...).
 
 ## 2. Le test optique
+[[visual:bio/lab-ldh]]
+
 - Méthode **spectrophotométrique** : mesure l'absorbance à 340 nm (A/340 nm), longueur d'onde d'absorption du NADH.
 - Mesure directement l'activité enzymatique : 1 unité/L correspond à la transformation d'1 µmol de substrat/produit par minute.
 - **Méthode cinétique** : la mesure se fait dans le temps (suivi de la variation d'absorbance).
@@ -158,6 +162,8 @@ const LAB12_COURSE = `# Lab 12 — Vitamines : détermination de la vitamine C p
 - Hypervitaminose : excès d'acide oxalique, risque de calculs rénaux.
 
 ## 3. Principe du dosage par titration redox (iodométrie)
+[[visual:bio/lab-iodometry]]
+
 - Une réaction redox implique un transfert d'électrons : l'**oxydation** correspond à une perte d'électrons (perte de H⁺ / gain d'O₂), la **réduction** à un gain d'électrons (gain de H⁺ / perte d'O₂).
 - L'iode (I₂) est l'agent oxydant utilisé pour titrer l'acide ascorbique, qui agit comme agent réducteur : l'acide ascorbique est oxydé en acide déhydroascorbique, tandis que I₂ est réduit en iodure (I⁻).
 - L'**amidon (empois)** est utilisé comme indicateur : en présence d'un excès d'I₂, il forme un complexe bleu caractéristique, signalant la fin de la réaction (point d'équivalence).
@@ -203,6 +209,8 @@ const LAB13_COURSE = `# Lab 13 — Cinétique enzymatique : détermination de Km
 - Au cours du temps, [S] diminue et [P] augmente ; la vitesse initiale (v₀) diminue également car le substrat s'épuise, l'enzyme peut devenir non saturée, se dénaturer, ou perdre ses cofacteurs.
 
 ## 2. Équation de Michaelis-Menten
+[[visual:bio/michaelis-menten]]
+
 - **Vmax** : vitesse maximale, atteinte lorsque l'enzyme est saturée en substrat.
 - **Km** (constante de Michaelis-Menten) : concentration de substrat pour laquelle v₀ = Vmax/2. Km reflète l'affinité de l'enzyme pour son substrat — **plus Km est petit, plus l'affinité est grande**.
 - Équation : **v₀ = (Vmax × [S]) / (Km + [S])**.

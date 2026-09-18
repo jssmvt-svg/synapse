@@ -4,6 +4,8 @@ import { single, multi } from "./qcm-helpers.js";
 const FATTY_ACID_SYNTHESIS_2_COURSE = `# Synthèse des acides gras (partie 2) — Le cycle d'élongation et au-delà du palmitate
 
 ## 1. Le cycle d'élongation du complexe FAS
+[[visual:bio/fas-cycle]]
+
 Chaque cycle comprend **4 réactions successives**, répétées **7 fois** pour synthétiser le **palmitate** (16C) à partir de 8 acétyl-CoA :
 
 | # | Étape | Enzyme | Réaction |
@@ -97,6 +99,8 @@ const TRIGLYCERIDE_SYNTHESIS_COURSE = `# Synthèse des triglycérides
 - Dans le **tissu adipeux** : dépourvu de glycérol kinase significative, le glycérol-3-phosphate provient presque exclusivement de la réduction du **DHAP** (intermédiaire de la glycolyse) par la glycérol-3-phosphate déshydrogénase.
 
 ## 3. Les étapes de la synthèse (voie du glycérol phosphate)
+[[visual:bio/triglyceride]]
+
 
 | # | Réaction | Enzyme | Note |
 | --- | --- | --- | --- |

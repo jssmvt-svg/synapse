@@ -8,6 +8,8 @@ const AMINO_ACID_METABOLISM_COURSE = `# Métabolisme des acides aminés
 - Le catabolisme des acides aminés comporte deux volets : le retrait du groupe amine (**transamination** puis **désamination**) et le devenir du squelette carboné restant.
 
 ## 2. Transamination
+[[visual:bio/aa-metabolism]]
+
 - La plupart des acides aminés cèdent leur groupe amine à l'**α-cétoglutarate**, formant du **glutamate**, réaction catalysée par des **aminotransférases (transaminases)** spécifiques, dépendantes du **pyridoxal phosphate (PLP)**, dérivé de la vitamine B6.
 - Exemples cliniquement importants : **ALT** (alanine aminotransférase : alanine + α-cétoglutarate ↔ pyruvate + glutamate) et **AST** (aspartate aminotransférase : aspartate + α-cétoglutarate ↔ oxaloacétate + glutamate) — dosées en clinique comme marqueurs de lésion hépatocellulaire.
 
@@ -87,6 +89,8 @@ const UREA_CYCLE_COURSE = `# Le cycle de l'urée
 - Se déroule dans le **foie**, à cheval sur la **mitochondrie** (2 premières réactions) et le **cytosol** (3 réactions suivantes).
 
 ## 2. Les 5 réactions du cycle
+[[visual:bio/urea-cycle]]
+
 
 | # | Enzyme | Lieu | Réaction | Note |
 | --- | --- | --- | --- | --- |

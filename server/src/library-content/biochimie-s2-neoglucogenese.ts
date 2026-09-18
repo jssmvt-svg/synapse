@@ -10,6 +10,8 @@ const GLUCONEOGENESIS_COURSE = `# Néoglucogenèse
 - Globalement l'inverse de la glycolyse, mais **n'est pas une simple réversion** : les 3 étapes irréversibles de la glycolyse sont contournées par **4 réactions distinctes**, catalysées par des enzymes différentes.
 
 ## 2. Les 4 réactions contournant les étapes irréversibles de la glycolyse
+[[visual:bio/gluconeogenesis]]
+
 
 | # | Réaction | Enzyme | Détail |
 | --- | --- | --- | --- |
@@ -115,6 +117,8 @@ const GLUCONEOGENESIS_REGULATION_COURSE = `# Régulation de la néoglucogenèse
 | **Fructose-1,6-bisphosphatase (FBPase-1)** | Citrate | Active | — |
 
 ## 3. Le rôle central du F2,6BP — régulateur croisé glycolyse/néoglucogenèse
+[[visual:bio/glucose-switch]]
+
 - Contrôlé par l'enzyme bifonctionnelle **PFK-2/FBPase-2**.
 - **Glucagon (jeûne)** → F2,6BP bas → **PFK-1 inhibée** (glycolyse freinée) **ET FBPase-1 désinhibée** (néoglucogenèse stimulée) : double effet coordonné par un seul signal.
 - **Insuline (état nourri)** → F2,6BP élevé → **PFK-1 stimulée** (glycolyse active) **ET FBPase-1 inhibée** (néoglucogenèse freinée).
@@ -183,6 +187,8 @@ const FATTY_ACID_SYNTHESIS_1_COURSE = `# Synthèse des acides gras (partie 1) �
 - Stimulée par l'**insuline** (état nourri, excès calorique) ; inhibée par le **glucagon**.
 
 ## 2. Export de l'acétyl-CoA mitochondrial vers le cytosol : la navette du citrate
+[[visual:bio/fa-shuttle]]
+
 - L'acétyl-CoA ne traverse pas librement la membrane mitochondriale interne.
 - Lorsqu'il est abondant, il se condense avec l'oxaloacétate pour former du **citrate** (citrate synthase), qui s'accumule et est exporté vers le cytosol via un transporteur dédié.
 - Dans le cytosol, l'**ATP-citrate lyase** clive le citrate en oxaloacétate + acétyl-CoA, consommant 1 ATP, régénérant l'acétyl-CoA cytosolique nécessaire à la lipogenèse.

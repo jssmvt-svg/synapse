@@ -9,6 +9,8 @@ const GLYCOGENOLYSIS_COURSE = `# Glycogénolyse
 - Stimulée par le **glucagon** (foie) et l'**adrénaline** (foie et muscle) ; inhibée par l'**insuline**.
 
 ## 2. Les étapes
+[[visual:bio/glycogenolysis]]
+
 1. **Glycogène phosphorylase** : clive séquentiellement les liaisons **α1→4** depuis l'extrémité non réductrice d'une chaîne, libérant du **glucose-1-phosphate**, jusqu'à s'arrêter à environ **4 résidus** du point de branchement le plus proche. Nécessite le **pyridoxal phosphate (PLP)**, dérivé de la vitamine B6, comme cofacteur essentiel.
 2. **Enzyme débranchante** (bifonctionnelle) :
    - Activité **transférase** : déplace un bloc de 3 résidus glucose depuis la branche vers l'extrémité de la chaîne principale voisine, reformant une liaison α1→4.
@@ -95,6 +97,8 @@ const GLYCOGEN_METABOLISM_REGULATION_COURSE = `# Régulation du métabolisme du 
 - Deux mécanismes combinés : la **phosphorylation/déphosphorylation** en cascade (hormonale) et la régulation **allostérique** directe par des métabolites.
 
 ## 2. Cascade hormonale du glucagon/adrénaline (mobilisation du glycogène)
+[[visual:bio/glycogen-regulation]]
+
 1. Le glucagon (foie) ou l'adrénaline (foie et muscle) se lie à un récepteur couplé aux protéines G.
 2. Activation de l'**adénylate cyclase** → production d'**AMPc**.
 3. L'AMPc active la **protéine kinase A (PKA)**.

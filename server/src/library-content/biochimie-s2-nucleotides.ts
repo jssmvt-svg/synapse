@@ -7,6 +7,8 @@ const NUCLEOTIDE_SYNTHESIS_COURSE = `# Synthèse des nucléotides
 - Deux voies distinctes : la **synthèse de novo** (à partir de précurseurs simples : ribose-5-phosphate, acides aminés, CO₂, dérivés du folate) et la **voie de récupération** (recyclage des bases libres issues de la dégradation des acides nucléiques).
 - Les **purines** (adénine, guanine) et les **pyrimidines** (cytosine, thymine, uracile) suivent des voies de synthèse de novo distinctes.
 
+[[visual:bio/nucleotides]]
+
 ## 2. Synthèse de novo des purines
 - Le cycle purique est construit **progressivement directement sur le ribose-5-phosphate**, activé en **PRPP** (5-phosphoribosyl-1-pyrophosphate, par la PRPP synthétase), en utilisant la glutamine, la glycine, l'aspartate, le CO₂, et des dérivés du folate (N¹⁰-formyl-THF) comme donneurs successifs.
 - Premier nucléotide purique formé : l'**inosine monophosphate (IMP)**, converti ensuite en **AMP** ou **GMP**.
