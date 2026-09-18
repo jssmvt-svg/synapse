@@ -27,11 +27,15 @@ Les plans anatomiques sont des plans géométriques théoriques qui divisent le 
 - **Plan coronal (frontal, plan Y-X)** : divise le corps en portions antérieure et postérieure (dorsale et ventrale).
 - **Plan transversal (axial, plan X-Z)** : plan horizontal parallèle au sol, divise le corps en portions supérieure et inférieure.
 
+[[visual:anatomy/planes]]
+
 ## 4. Termes descriptifs spécifiques aux membres
 - **Proximal** : proche du tronc ; **distal** : éloigné du tronc.
 - **Radial** : vers le bord externe (latéral) du membre supérieur ; **ulnaire** : vers le bord interne (médial) du membre supérieur.
 - **Tibial** : vers le bord interne du membre inférieur ; **fibulaire (péronier)** : vers le bord externe du membre inférieur.
 - **Face palmaire (volaire)** : vers la paume de la main ; **face plantaire** : vers la plante du pied.
+
+[[visual:anatomy/limb-terms]]
 
 ## 5. Mouvements articulaires
 - **Flexion** : diminue l'angle entre deux segments corporels ; **extension** : augmente cet angle.
@@ -40,7 +44,11 @@ Les plans anatomiques sont des plans géométriques théoriques qui divisent le 
 - **Pronation / supination** : mouvements de rotation de l'avant-bras/main autour de leur axe longitudinal. Avec le coude et l'épaule immobiles, tourner la paume vers le haut (position supine) = **supination** ; tourner la paume vers le bas (position prone) = **pronation**. Ces termes s'appliquent aussi au corps entier en décubitus.
 - **Circumduction** : mouvement conique d'un membre autour de l'articulation qui le contrôle, combinant flexion/extension/abduction/adduction.
 
+[[visual:anatomy/joint-movements]]
+
 ## 6. Terminologie descriptive des reliefs osseux
+[[visual:anatomy/bone-landmarks]]
+
 | Terme | Définition |
 | --- | --- |
 | Processus | Saillie osseuse |
@@ -177,12 +185,18 @@ const EMBRYOLOGY_COURSE = `# Anatomie (Embryologie humaine générale) — Lectu
   3. **Période fœtale** : de la 9ᵉ semaine à la naissance — croissance et spécialisation intenses des structures corporelles.
 - Segmentation + gastrulation + organogenèse = **embryogenèse**.
 
+[[visual:embryo/timeline]]
+
 ## 2. Appareils reproducteurs
+[[visual:embryo/reproductive]]
+
 - **Appareil reproducteur masculin** : structure primaire = **testicule** ; structures secondaires = scrotum, épididyme, canal déférent, vésicules séminales, urètre, prostate, glandes bulbo-urétrales, pénis. Les voies génitales masculines (efférents, épididyme, canal déférent, canal éjaculateur, urètre) conduisent les spermatozoïdes du testicule à l'urètre.
 - **Sperme (liquide séminal)** : contient les spermatozoïdes produits par les tubes séminifères + sécrétions des vésicules séminales, de la prostate et des glandes bulbo-urétrales. Numération moyenne : **100 millions/mL**. Contribution des glandes : vésicules séminales 60 %, prostate 30 %, testicules 5 %, glandes bulbo-urétrales 5 %.
 - **Appareil reproducteur féminin** : structure primaire = **ovaire** (produit l'ovule, sécrète les hormones du cycle menstruel) ; structures secondaires = trompes utérines, utérus, vagin, vulve, glandes vestibulaires. Les voies génitales féminines (trompe utérine, utérus, vagin) sont le site de la fécondation et du développement embryonnaire.
 
 ## 3. Cycle ovarien et cycle menstruel
+[[visual:embryo/menstrual-cycle]]
+
 - **Ovulation** : au cours de chaque cycle, un follicule ovarien mature se rompt et libère son ovule ; ce processus cyclique constitue le **cycle ovarien**, contrôlé par les hormones hypophysaires. Si la femme devient enceinte, le cycle ovarien s'interrompt temporairement.
 - **Endomètre** : couche interne de l'utérus, subissant des modifications cycliques mensuelles = **cycle menstruel (cycle endométrial)**, sous l'effet des hormones ovariennes (œstrogène, progestérone), elles-mêmes contrôlées par l'hypothalamus et l'hypophyse.
 - Les 4 phases du cycle menstruel :
@@ -194,6 +208,8 @@ const EMBRYOLOGY_COURSE = `# Anatomie (Embryologie humaine générale) — Lectu
 - Le cycle menstruel dépend donc du cycle ovarien : l'endomètre répond aux hormones sécrétées par le follicule en développement puis par le corps jaune.
 
 ## 4. Division cellulaire et gamétogenèse
+[[visual:embryo/gametogenesis]]
+
 - **Mitose** : division des cellules somatiques, en une seule séquence ; les cellules filles ont le même nombre de chromosomes (46) que la cellule mère et sont identiques entre elles.
 - **Méiose** : division spécialisée des organes reproducteurs pour produire les gamètes, en deux séquences (méiose I et II) ; les cellules filles ont un nombre haploïde de chromosomes et ne sont pas identiques entre elles.
 - **Spermatogenèse** : formation des spermatozoïdes à partir des cellules germinales primordiales (spermatogonies) dans les tubes séminifères. Les spermatogonies A sombres (cellules souches) se divisent par mitose en A sombres (réserve) et A claires ; les A claires forment des spermatogonies B, qui deviennent des spermatocytes primaires (les plus grosses cellules germinales) ; la 1ʳᵉ division méiotique donne 2 spermatocytes secondaires haploïdes ; la 2ᵉ division méiotique donne 4 spermatides haploïdes par spermatocyte primaire — 2 porteuses de 22+X et 2 de 22+Y.
@@ -203,6 +219,8 @@ const EMBRYOLOGY_COURSE = `# Anatomie (Embryologie humaine générale) — Lectu
 - Après l'ovulation, la paroi du follicule rompu s'effondre et se transforme en **corps jaune** : sous l'effet de la LH, les cellules lutéales sécrètent progestérone et un peu d'œstrogène. En l'absence de grossesse, le corps jaune dure 10 à 14 jours puis dégénère en **corps blanc (albicans)**, masse de tissu fibreux.
 
 ## 5. Fécondation
+[[visual:embryo/fertilization]]
+
 - La **fécondation** a lieu quand le spermatozoïde pénètre l'ovule et que les deux jeux de matériel génétique fusionnent, formant le **zygote** (cellule diploïde unique, 46 chromosomes). Seuls les gamètes (ovule, spermatozoïde) sont haploïdes (23 chromosomes) chez l'humain.
 - Étapes de la fécondation : le spermatozoïde traverse la **corona radiata** de l'ovule → pénétration de la **zone pellucide** grâce aux enzymes digestives libérées par l'acrosome (lyse de la zone pellucide et de la membrane plasmique de la tête du spermatozoïde) → passage dans l'espace périvitellin → une **réaction zonale** rend la zone pellucide imperméable aux autres spermatozoïdes → fusion des membranes plasmiques du spermatozoïde et de l'ovule → l'ovocyte achève sa 2ᵉ division méiotique (ovocyte mature + 2ᵉ globule polaire) → formation du **pronucléus féminin** (22+X) → formation du **pronucléus masculin** (le noyau du spermatozoïde gonfle, le flagelle se détache et dégénère) → **formation du zygote** : fusion des deux pronucléus, mélange des 23 chromosomes de chacun → diploïdie (46 chromosomes).
 - La fécondation a lieu dans les 24 h suivant l'ovulation, dans la partie la plus dilatée de la trompe utérine, l'**ampoule**.
@@ -214,12 +232,16 @@ const EMBRYOLOGY_COURSE = `# Anatomie (Embryologie humaine générale) — Lectu
 - Les spermatozoïdes sont de deux types (22+X ou 22+Y) ; les ovules sont d'un seul type (22+X). Un spermatozoïde X donne un enfant 44+XX (fille) ; un spermatozoïde Y donne un enfant 44+XY (garçon). **C'est donc le chromosome paternel qui détermine le sexe de l'enfant, pas le chromosome maternel.**
 
 ## 7. Segmentation et formation du blastocyste
+[[visual:embryo/cleavage]]
+
 - La **segmentation** est une suite de divisions mitotiques du zygote en unités plus petites (**blastomères**), sans augmentation de taille de l'ensemble.
 - Les blastomères se divisent en 4, 8, puis 16 cellules jusqu'à former la **morula** (ressemblant à une mûre). Après ~72 h (3 jours) dans la trompe, la morula entre dans la cavité utérine au 4ᵉ jour.
 - Les blastomères sont enveloppés par la zone pellucide et se réorganisent en deux groupes : la **masse cellulaire interne (embryoblaste)**, au centre, et la **masse cellulaire externe (trophoblaste)**, en périphérie. L'ensemble devient le **blastocyste**, dont la cavité remplie de liquide est le **blastocèle**. L'embryoblaste donnera l'embryon ; le trophoblaste nourrit l'embryon et formera une grande partie du placenta.
 - Le blastocyste s'agrandit, la zone pellucide disparaît, le trophoblaste s'aplatit, l'embryoblaste devient compact et s'accole au trophoblaste en un pôle — le **pôle embryonnaire**. Le blastocyste est alors prêt pour l'implantation.
 
 ## 8. Implantation et disque didermique
+[[visual:embryo/implantation]]
+
 - Au moment de l'implantation, la muqueuse utérine est en phase sécrétoire/progestative (sous l'effet de la progestérone du corps jaune) : glandes et artères utérines deviennent spiralées, le tissu devient succulent.
 - **Implantation** : le blastocyste adhère à la couche superficielle de l'endomètre, généralement sur la paroi postérieure de l'utérus près du fundus. Elle commence vers le **6ᵉ jour** et s'achève vers le **10ᵉ-11ᵉ jour** après la fécondation. C'est par cette adhésion que l'embryon reçoit oxygène et nutriments maternels.
 - Au 7ᵉ jour, le trophoblaste se différencie en deux couches : **cytotrophoblaste** (interne, mononucléé, mitotiquement actif) et **syncytiotrophoblaste** (externe, multinucléé, limites cellulaires indistinctes).
@@ -230,12 +252,16 @@ const EMBRYOLOGY_COURSE = `# Anatomie (Embryologie humaine générale) — Lectu
 - Le cœlome extra-embryonnaire divise le mésoderme extra-embryonnaire en deux feuillets : **somatique** (tapissant trophoblaste et amnios) et **splanchnique** (recouvrant le sac vitellin). Le mésoderme somatique + les deux couches du trophoblaste = **chorion** ; le mésoderme splanchnique + la partie extra-embryonnaire de l'ectoderme = **amnios**.
 
 ## 9. Gastrulation
+[[visual:embryo/gastrulation]]
+
 - La **gastrulation**, événement caractéristique de la 3ᵉ semaine de gestation, forme les **trois feuillets germinatifs** (ectoderme, mésoderme, endoderme) qui donneront tous les tissus et organes du corps. Trois structures se forment durant cette semaine : la ligne primitive, la notochorde et le tube neural.
 - La **plaque prochordale** (zone épaissie à une extrémité du disque) détermine les extrémités crâniale et caudale de l'embryon ; elle donnera le feuillet endodermique de la membrane oropharyngée (future bouche).
 - **Ligne primitive** (~jour 16) : formée par prolifération des cellules ectodermiques qui migrent vers la ligne médiane et s'y accumulent, définissant la symétrie gauche/droite du corps. Les cellules de la ligne primitive s'invaginent vers l'endoderme, formant la **gouttière primitive**. Depuis le fond de cette gouttière, les cellules migrent entre endoderme et ectoderme pour former le **mésoderme intra-embryonnaire** (3ᵉ feuillet). La ligne primitive donne naissance au mésoderme intra-embryonnaire, au septum transversum et à la notochorde.
 - À l'extrémité crâniale de la ligne primitive, les cellules prolifèrent pour former le **nœud primitif (nœud de Hensen)** ; une dépression y apparaît, le **blastopore (fossette primitive)**.
 - Les cellules mésenchymateuses migrant du nœud primitif forment le **processus notochordal**, qui croît crânialement jusqu'à la plaque prochordale — future bouche (**membrane oropharyngée**). À l'autre extrémité, l'ectoderme fusionne directement à l'endoderme en la **membrane cloacale** (futur anus primitif).
 - **Fonctions de la notochorde** : axe central de l'embryon ; induit la formation du tube neural à partir de l'ectoderme sus-jacent ; fournit la colonne centrale autour de laquelle se développeront les corps vertébraux et les disques intervertébraux.
+[[visual:embryo/neurulation]]
+
 - **Neurulation** : formation du tube neural à partir de l'ectoderme sus-jacent à la notochorde. Les cellules ectodermiques se différencient en cellules neuro-ectodermiques, qui prolifèrent pour former la **plaque neurale** (de la plaque prochordale au nœud primitif). Les bords de la plaque s'élèvent (**replis neuraux**) sous la pression du mésoderme paraxial de part et d'autre de la notochorde, formant la **gouttière neurale** ; celle-ci s'approfondit et les replis fusionnent en un **tube neural** cylindrique. La partie crâniale du tube neural s'élargit pour former l'encéphale ; la partie caudale reste tubulaire et forme la moelle spinale.
 - **Subdivisions du mésoderme intra-embryonnaire** (de part et d'autre du tube neural) :
   - **Mésoderme paraxial** : condensé le long du tube neural/notochorde ; se segmente en **somitomères** (les 1ers, 1-7, en région céphalique, donnent les muscles striés de la tête/cou sans former de somites) puis en **somites** (42-44 paires, en région caudale). Chaque somite se différencie en **sclérotome** (future colonne vertébrale), **myotome** (futurs muscles) et **dermatome** (futur derme).

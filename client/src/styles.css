@@ -3897,3 +3897,46 @@ select:focus {
   width: 18px !important;
   flex: none !important;
 }
+
+/* Schémas intégrés aux cours ([[visual:...]]) */
+.course-visual {
+  margin: 1.4rem 0;
+}
+
+.course-figure {
+  margin: 0;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 4%, var(--card-bg, transparent));
+  color: var(--ink);
+}
+
+.course-svg {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: 0 auto;
+  font-family: inherit;
+}
+
+.course-figure figcaption {
+  margin-top: 0.6rem;
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+@keyframes fig-flow {
+  to { stroke-dashoffset: -24; }
+}
+
+.fig-flow {
+  stroke-dasharray: 6 6;
+  animation: fig-flow 1.2s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fig-flow { animation: none; }
+}
