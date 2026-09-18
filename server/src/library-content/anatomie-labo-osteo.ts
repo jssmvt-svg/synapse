@@ -109,6 +109,10 @@ export const UPPER_LIMB_OSTEOLOGY_LEARNING: LibraryLearningSeed = {
 const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (squelette appendiculaire)
 
 ## 1. Os coxal (hanche)
+[[image:gray-241]]
+
+[[image:gray-242]]
+
 [[image:gray-235]]
 
 [[image:gray-236]]
@@ -143,18 +147,32 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - Base (proximale, large) et apex (distal, pointu, donnant insertion au ligament patellaire).
 
 ## 4. Tibia
+[[image:gray-257]]
+
+[[image:gray-258]]
+
+[[image:gray-259]]
+
 - Os médial de la jambe, principal os porteur.
 - Extrémité proximale : **condyle médial** et **condyle latéral**, séparés par l'**éminence intercondylaire (épines tibiales)** ; **tubérosité tibiale** en avant (insertion du ligament patellaire).
 - Diaphyse triangulaire à la palpation, **crête tibiale (bord antérieur)** directement sous-cutanée.
 - Extrémité distale : **malléole médiale**, articulaire avec le talus.
 
 ## 5. Fibula (péroné)
+[[image:gray-262]]
+
 - Os latéral, grêle, non porteur de poids (rôle de stabilisation latérale et insertion musculaire).
 - **Tête fibulaire** (proximale) s'articule avec la face postéro-latérale du condyle tibial latéral.
 - Extrémité distale : **malléole latérale**, articulaire avec le talus, descend plus bas que la malléole médiale.
 - Le nerf fibulaire commun (nerf sciatique poplité externe) contourne le col de la fibula, superficiel et vulnérable aux traumatismes à ce niveau.
 
 ## 6. Os du pied
+[[image:gray-264]]
+
+[[image:gray-268]]
+
+[[image:gray-269]]
+
 - **Tarse** (7 os) : **talus** (s'articule avec le tibia et la fibula à la mortaise tibio-fibulaire, transmet le poids du corps au pied), **calcanéus** (le plus volumineux, forme le talon, insertion du tendon calcanéen/tendon d'Achille), **naviculaire**, **cuboïde**, **cunéiformes médial, intermédiaire et latéral**.
 - **Métatarse** : 5 os longs (métatarsiens I à V), base proximale, tête distale.
 - **Phalanges** : 3 par orteil (proximale, moyenne, distale) sauf l'hallux (gros orteil) qui n'en a que 2.
