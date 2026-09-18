@@ -167,6 +167,7 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 - Chaque papille est associée à un **petit calice** ; plusieurs petits calices fusionnent en un **grand calice** ; l'urine passe ensuite dans le **bassinet** (pelvis rénal), structure aplatie en entonnoir, puis dans l'uretère.
 
 ## 4. Structure microscopique
+[[visual:anat/nephron]]
 - Le rein est constitué de **néphrons** et de tubes collecteurs. Le **néphron** est l'unité structurale et fonctionnelle du rein (1 à 3 millions par rein).
 - Chaque néphron comprend un **corpuscule rénal** (glomérule, pelote capillaire, entouré de la capsule de Bowman) et un système tubulaire (tube contourné proximal, anse de Henlé, tube contourné distal).
 - Chaque tube collecteur débute par un tube de jonction issu du tube contourné distal ; plusieurs tubes collecteurs s'unissent en un **canal collecteur (de Bellini)**, qui s'ouvre à l'apex de la papille. Les tubes collecteurs forment, en rayonnant vers le cortex, les **rayons médullaires**.
@@ -323,6 +324,7 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Lymphatiques : vers les nœuds pré-aortiques et para-aortiques. Innervation sympathique (T10-T11) et parasympathique (S2-S4).
 
 ## 4. Les trompes utérines
+[[visual:anat/fallopian-tube]]
 - Relient la cavité péritonéale à la cavité utérine ; site de fécondation et de transport de l'ovocyte. Longueur ~10 cm, logée dans le mésosalpinx du ligament large.
 - Extrémité médiale : ouverture dans l'angle utérin (ostium utérin, 1 mm). Extrémité latérale (**pavillon**) : communique avec la cavité péritonéale, bordée de franges (**fimbriae**), dont une plus longue, la **frange ovarique**, appliquée à l'ovaire.
 - **Quatre parties**, de latéral à médial : **infundibulum** (1 cm, en entonnoir, porte l'ostium abdominal et les franges) ; **ampoule** (5 cm, la plus large et longue, site de la fécondation) ; **isthme** (2,5-3 cm, étroit, à paroi musculaire épaisse) ; **partie intra-murale/interstitielle** (1 cm, traverse la paroi utérine).
@@ -351,6 +353,7 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Le **corps périnéal** (centre tendineux du périnée) est une masse fibromusculaire pyramidale médiane, à la jonction des triangles urogénital et anal — entre vagin et anus chez la femme, entre bulbe du pénis et anus chez l'homme.
 
 ## 8. Le ligament large et sa structure
+[[visual:anat/broad-ligament]]
 - Replis péritonéaux allant du bord latéral de l'utérus à la paroi pelvienne, divisant la cavité pelvienne en une partie antérieure (vessie) et une partie postérieure (rectum, anses).
 - **Parties** : **mésosalpinx** (entre trompe et ligament propre de l'ovaire) ; **mésomètre** (du plancher pelvien à l'ovaire/ligament propre/corps utérin) ; **mésovarium** ; **ligament infundibulo-pelvien (suspenseur de l'ovaire)**, contenant les vaisseaux ovariens.
 - **Contenu** : trompes et ovaires ; ligaments rond et propre de l'ovaire ; artères utérine et ovarienne ; plexus utéro-vaginal et ovarien ; vestiges embryonnaires (épo-oophore/canal de Gartner, para-oophore) ; vaisseaux/nœuds lymphatiques, tissu fibro-aréolaire.
@@ -373,6 +376,7 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Comprennent testicules et épididymes, prostate, glandes bulbo-urétrales, vésicules séminales, canaux éjaculateurs, canaux déférents.
 
 ## 12. La prostate
+[[visual:anat/prostate-zones]]
 - Plus grosse glande annexe de l'appareil reproducteur masculin, de la taille d'une châtaigne, traversée par l'urètre et les canaux éjaculateurs. Située sous le col vésical, au-dessus du sphincter urétral externe ; le releveur de l'anus est inféro-latéral, le rectum est en arrière (ampoule rectale).
 - Fonction : sécrétion d'un liquide clair laiteux (~30 % du sperme), alcalin, nourrissant les spermatozoïdes.
 - Entourée de deux capsules : vraie (condensation du stroma fibreux glandulaire) et fausse (fascia pelvien condensé).
@@ -385,6 +389,7 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - **Canaux éjaculateurs** : deux tubes étroits (~1 cm), formés par l'union du canal de la vésicule séminale et du déférent, traversent la prostate et s'ouvrent dans l'urètre prostatique. Fonction : expulsion des sécrétions testiculaires et vésiculaires dans l'urètre prostatique.
 
 ## 14. Testicule et épididyme
+[[visual:anat/testis-epididymis]]
 - **Testicule** : gonade masculine, homologue de l'ovaire, organe mobile logé dans le scrotum, suspendu par le cordon spermatique. Fonctions : production de spermatozoïdes et sécrétion de testostérone.
 - Configuration : deux pôles (supérieur donnant attache au cordon spermatique, inférieur), deux bords (antérieur, postérieur donnant attache à l'épididyme), deux surfaces (médiale, latérale).
 - Trois tuniques, de superficiel en profond : **tunique vaginale**, **tunique albuginée**, **tunique vasculaire**.

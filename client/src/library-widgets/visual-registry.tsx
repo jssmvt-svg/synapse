@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { UpperLimbVeinsDiagram, ThighCompartmentsDiagram, GlutealMusclesDiagram, ThighMusclesDiagram, LowerLimbVeinsDiagram, InguinalRegionDiagram, PeritonealCompartmentsDiagram, RetroperitonealOrgansDiagram, SpleenViewsDiagram, BiliaryTreeDiagram, PortalSystemDiagram, AnatNephronDiagram, FallopianTubeDiagram, BroadLigamentDiagram, ProstateZonesDiagram, TestisEpididymisDiagram } from "../components/AnatMore";
 import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSheet, LegBonesSheet, FootBonesDiagram, RectumAnalDiagram, BladderUrethraDiagram, MaleGenitalDiagram, CoeliacTrunkDiagram } from "../components/AnatRest";
 import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/AnatBonesTP";
 import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
@@ -222,6 +223,22 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/bladder-urethra": () => <BladderUrethraDiagram />,
   "anat/male-genital": () => <MaleGenitalDiagram />,
   "anat/coeliac-trunk": () => <CoeliacTrunkDiagram />,
+  "anat/upper-limb-veins": () => <UpperLimbVeinsDiagram />,
+  "anat/thigh-compartments": () => <ThighCompartmentsDiagram />,
+  "anat/gluteal-muscles": () => <GlutealMusclesDiagram />,
+  "anat/thigh-muscles": () => <ThighMusclesDiagram />,
+  "anat/lower-limb-veins": () => <LowerLimbVeinsDiagram />,
+  "anat/inguinal-region": () => <InguinalRegionDiagram />,
+  "anat/peritoneal-compartments": () => <PeritonealCompartmentsDiagram />,
+  "anat/retroperitoneal-organs": () => <RetroperitonealOrgansDiagram />,
+  "anat/spleen-views": () => <SpleenViewsDiagram />,
+  "anat/biliary-tree": () => <BiliaryTreeDiagram />,
+  "anat/portal-system": () => <PortalSystemDiagram />,
+  "anat/nephron": () => <AnatNephronDiagram />,
+  "anat/fallopian-tube": () => <FallopianTubeDiagram />,
+  "anat/broad-ligament": () => <BroadLigamentDiagram />,
+  "anat/prostate-zones": () => <ProstateZonesDiagram />,
+  "anat/testis-epididymis": () => <TestisEpididymisDiagram />,
   "anatomy/planes": () => <AnatomicalPlanes />,
   "anatomy/limb-terms": () => <LimbTerms />,
   "anatomy/joint-movements": () => <JointMovements />,

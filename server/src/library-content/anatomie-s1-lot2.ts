@@ -137,6 +137,7 @@ const UPPER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 Quatre systèmes anastomotiques relient les branches de l'artère brachiale (collatérales ulnaires sup./inf., collatérales de la brachiale profonde) aux branches récurrentes des artères radiale, ulnaire et interosseuse, garantissant la vascularisation du coude en cas d'occlusion locale.
 
 ## 6. Drainage veineux du membre supérieur
+[[visual:anat/upper-limb-veins]]
 - **Veines superficielles** (dans le fascia superficiel, accessibles pour prélèvements/perfusions) : réseau veineux dorsal de la main, veine céphalique (bord latéral), veine basilique (bord médial), veine cubitale médiane (anastomose céphalique→basilique au pli du coude), veine médiane de l'avant-bras.
 - **Veines profondes** : veines satellites (venae comitantes) accompagnant les artères radiale, ulnaire et brachiale, se drainant dans la veine axillaire.
 - Les veines superficielles et profondes possèdent des valvules, plus nombreuses dans le réseau profond.
@@ -254,8 +255,10 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 | **Iliaque** | Fosse iliaque, lèvre interne de la crête iliaque | Fusionne avec le grand psoas sur le petit trochanter | Nerf fémoral | Avec le psoas (iliopsoas) : flexion de la cuisse et du rachis lombaire |
 
 ## B. Muscles de la cuisse et de la fesse
+[[visual:anat/thigh-compartments]]
 
 ### B.1 Muscles antérieurs de la cuisse
+[[visual:anat/thigh-muscles]]
 - **Sartorius** : le plus long muscle du corps ; épine iliaque antéro-supérieure → face médiale du tibia. Nerf fémoral. Fléchit hanche et genou, adduit et fait une rotation latérale de la cuisse (position du tailleur).
 - **Quadriceps fémoral** (4 chefs, tous se terminent par le tendon quadricipital → patella → tendon patellaire → tubérosité tibiale ; tous innervés par le nerf fémoral ; tous extenseurs du genou) :
   - Droit fémoral (rectus femoris) : épine iliaque antéro-inférieure ; seul chef bi-articulaire, fléchit aussi la hanche.
@@ -272,6 +275,7 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 | **Grand adducteur** | Portion adductrice (branche ischio-pubienne) + portion ischio-jambière (tubérosité ischiatique) | Nerf obturateur (portion adductrice) + nerf tibial (portion ischio-jambière) | Muscle composite ; la portion ischio-jambière est un faible extenseur de hanche |
 
 ### B.3 Muscles de la région glutéale
+[[visual:anat/gluteal-muscles]]
 | Muscle | Innervation | Action principale |
 | --- | --- | --- |
 | **Grand glutéal** | Nerf glutéal inférieur (L5, S1-S2) | Extenseur et rotateur latéral de la hanche ; aide au passage assis→debout |

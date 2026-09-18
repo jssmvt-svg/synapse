@@ -31,6 +31,7 @@ const PERITONEUM_COURSE = `# Le péritoine
 - Ces deux feuillets sont séparés par un espace virtuel, la **cavité péritonéale**, contenant un mince film de liquide.
 
 ## 5. Replis péritonéaux
+[[visual:anat/retroperitoneal-organs]]
 - Formés par le feuillet viscéral, ils suspendent de nombreux organes intra-abdominaux (mobilité selon la taille/direction du repli) et livrent passage aux nerfs, vaisseaux et lymphatiques.
 - Les organes situés en dehors de la cavité péritonéale (**rétropéritonéaux**) sont fixes.
 - La **zygose** est le processus par lequel un organe initialement suspendu par un méso (et donc mobile) fusionne son méso avec le péritoine pariétal, puis les feuillets fusionnés s'atrophient : l'organe devient secondairement rétropéritonéal.
@@ -49,6 +50,7 @@ const PERITONEUM_COURSE = `# Le péritoine
   - **Petite cavité (arrière-cavité des épiploons/bourse omentale)** : plus petit compartiment, en arrière de l'estomac, du foie et du petit épiploon, communiquant avec le grand sac par le **foramen épiploïque (de Winslow)**.
 
 ## 8. Compartiments supracolique et infracolique
+[[visual:anat/peritoneal-compartments]]
 - Le mésocôlon transverse et le côlon transverse divisent la cavité péritonéale en un compartiment **supracolique** (antéro-supérieur) et un compartiment **infracolique** (postéro-inférieur).
 - **Compartiment supracolique** : entoure le foie, l'estomac, la rate et la partie supérieure du duodénum ; il est en avant du pancréas, du duodénum, des reins et des surrénales.
   - **Espaces sous-phréniques** : 4 espaces sous le diaphragme, définis par rapport au foie, importants en chirurgie car sièges fréquents d'abcès sous-phréniques :
@@ -170,6 +172,7 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 - **Tissu pancréatique accessoire** : nodules jaunâtres (1-6 mm), le plus souvent dans le duodénum, mais aussi estomac, grêle, grand épiploon, hile splénique.
 
 ### Vascularisation, innervation, lymphatiques du pancréas
+[[visual:anat/portal-system]]
 - **Artérielle** : artère splénique (branche du tronc cœliaque, source principale pour corps/queue) avec ses branches (artère pancréatique dorsale, grande artère pancréatique, artère de la queue du pancréas) ; artères pancréatico-duodénales supérieure et inférieure pour la tête (arcades antérieure/postérieure).
 - **Veineuse** : veines porte, mésentérique supérieure, splénique.
 - **Lymphatique** : corps/queue vers nœuds pancréatico-spléniques (le long de l'artère splénique) ; tête vers nœuds pyloriques ; puis vers nœuds mésentériques supérieurs ou cœliaques.
@@ -254,6 +257,7 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - **Nerveuse** : sympathique T6-T10 (nerfs grands splanchniques, plexus cœliaque et hépatique) ; parasympathique directement issu des nerfs vagues.
 
 ## 2. La rate
+[[visual:anat/spleen-views]]
 - Grande masse cunéiforme de tissu vasculaire et lymphoïde, rouge violacé, située en haut et en arrière de la cavité abdominale, dans l'hypochondre gauche entre le fundus gastrique et le diaphragme, en arrière de la ligne médio-axillaire, en regard des 9e, 10e et 11e côtes.
 - **Fonctions** : destruction des globules rouges sénescents ; production de lymphocytes.
 
@@ -328,6 +332,7 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - Nerfs : plexus cœliaque.
 
 ### Appareil biliaire extra-hépatique
+[[visual:anat/biliary-tree]]
 - 5 composants : canaux hépatiques droit et gauche → canal hépatique commun → **vésicule biliaire** → canal cystique → **canal cholédoque** (bile duct), qui reçoit la bile du foie, la stocke/concentre dans la vésicule, et la déverse dans la 2e partie du duodénum.
 
 ## Points à retenir

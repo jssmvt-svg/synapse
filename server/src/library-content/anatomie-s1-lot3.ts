@@ -198,6 +198,7 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 - Branches : 4 artères métatarsiennes plantaires, 3 artères perforantes proximales.
 
 ## 2. Veines du membre inférieur
+[[visual:anat/lower-limb-veins]]
 
 - Trois types : **superficielles**, **perforantes**, **profondes**.
 - **Veines profondes** : accompagnent les artères, drainent dans la veine fémorale puis la veine iliaque externe (veines satellites des tibiales antérieure/postérieure, veine poplitée, veine fémorale).
@@ -364,6 +365,7 @@ const ABDOMINAL_WALL_COURSE = `# Paroi abdominale antéro-latérale
 - **Innervation** : T7-T12 et L1, via les nerfs ilio-hypogastrique et ilio-inguinal.
 
 ## 4. Structures dérivées des muscles larges
+[[visual:anat/inguinal-region]]
 1. **Ligament inguinal** (de Poupart) : bord libre inférieur de l'aponévrose de l'oblique externe, tendu entre l'épine iliaque antéro-supérieure et le tubercule pubien.
 2. **Ligament lacunaire** (de Gimbernat) : portion de l'aponévrose de l'oblique externe réfléchie en arrière et en dehors, attachée à la ligne pectinéale ; base concave formant la limite médiale de l'anneau fémoral ; apex correspondant au tubercule pubien.
 3. **Tendon conjoint (falx inguinalis)** : fusion des fibres aponévrotiques inférieures de l'oblique interne et du transverse, arquées au-dessus du cordon spermatique, insérées sur la crête pubienne et la ligne pectinéale médiale.
