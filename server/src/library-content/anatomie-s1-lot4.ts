@@ -28,6 +28,7 @@ const PERITONEUM_COURSE = `# Le péritoine
 - **9 régions abdominales** : les cliniciens divisent la cavité abdominale en 9 régions à l'aide de 4 plans imaginaires (2 horizontaux, 2 verticaux) pour situer les organes et les douleurs. Le **plan transpylorique d'Addison** passe au bord inférieur de L1 (9ᵉ cartilages costaux) ; le **plan intertuberculaire** passe au bord supérieur de L5 (tubercules des crêtes iliaques, 5 cm en arrière de l'épine iliaque antéro-supérieure) ; les 2 plans verticaux relient le milieu de la clavicule au point médio-inguinal.
 
 ## 4. Le péritoine
+[[visual:anat/peritoneum-sagittal]]
 [[image:gray-1035]]
 
 - Le **péritoine** est une vaste membrane séreuse fine qui tapisse l'intérieur de la cavité abdomino-pelvienne, comparable à la plèvre ou au péricarde séreux. Il comporte un feuillet **pariétal** (simple, tapissant les parois) et un feuillet **viscéral** (complexe, formant des replis autour du tube digestif).
@@ -121,6 +122,7 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 - Le duodénum forme une boucle en « **C** » dont la concavité entoure la tête du pancréas. Il est situé au-dessus de l'ombilic, en regard de L1-L2-L3. Avec le pancréas, c'est la portion la plus profonde du tube digestif, la moins accessible à l'examen physique.
 
 ## 2. Les 4 parties du duodénum
+[[visual:anat/duodenum-pancreas]]
 [[image:gray-1056]]
 
 | Partie | Longueur | Repères |
@@ -262,6 +264,7 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - **2 faces** : antérieure (antéro-supérieure) et postérieure (postéro-inférieure).
 
 ### Les 4 parties
+[[visual:anat/stomach-parts]]
 [[image:gray-1046]]
 
 1. **Cardia** — autour de l'orifice cardial.
@@ -339,6 +342,7 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - **Bord inférieur** : sépare les 2 faces ; arrondi latéralement, fin et tranchant médialement ; présente 2 encoches (pour le ligament rond, à droite du plan médian ; encoche cystique, ~5 cm à droite, correspondant souvent au fundus vésiculaire). En médial : du 9e cartilage costal droit au 8e gauche (remonte donc vers la gauche) ; sur le plan médian, au niveau du plan transpylorique.
 
 ### Lobes du foie
+[[visual:anat/liver-views]]
 [[image:gray-1087]]
 
 - **Lobes anatomiques (face diaphragmatique)** : droit et gauche, séparés par le ligament falciforme.

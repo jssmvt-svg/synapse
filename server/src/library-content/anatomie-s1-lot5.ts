@@ -187,6 +187,7 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 - **Capsules, de dedans en dehors** : capsule fibreuse (vraie capsule, se prolonge dans le hile pour tapisser le sinus rénal) ; graisse périrénale ; fascia rénal (fausse capsule, ou fascia de Gerota, avec un feuillet antérieur mal défini — fascia de Toldt — et un feuillet postérieur bien défini — fascia de Zuckerkandl) ; graisse pararénale, en dehors du fascia rénal.
 
 ## 3. Structure macroscopique
+[[visual:anat/kidney-section]]
 [[image:gray-1127]]
 
 - Coupé longitudinalement, le rein présente le **rein proprement dit** et le **sinus rénal**.
@@ -385,6 +386,7 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Vascularisation par les artères ovarienne (tiers latéral) et utérine (deux tiers médiaux). Innervation sympathique (T11-L2), parasympathique (vague pour la partie latérale, nerfs splanchniques pelviens S2-S4 pour la partie médiale).
 
 ## 5. L'utérus — forme, dimensions et parties
+[[visual:anat/uterus-adnexa]]
 [[image:gray-1167]]
 
 - Organe musculaire creux à paroi épaisse, siège de l'implantation et du développement de l'embryon. Situé obliquement dans le petit bassin entre vessie et rectum ; communique en haut avec les trompes, en bas avec le vagin.

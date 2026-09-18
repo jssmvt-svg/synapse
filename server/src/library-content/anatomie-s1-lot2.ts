@@ -332,6 +332,7 @@ Caractéristiques communes : tous naissent de la tubérosité ischiatique, s'ins
 - **Biceps fémoral** (chef long : tubérosité ischiatique, nerf tibial ; chef court : ligne âpre, nerf fibulaire commun) → tête de la fibula.
 
 ## C. Muscles de la jambe (3 compartiments)
+[[visual:anat/leg-compartments]]
 [[image:gray-440]]
 
 

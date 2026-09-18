@@ -28,6 +28,7 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - **Bord médial (spinal), bord latéral (axillaire), angle inférieur** : repères de palpation clinique.
 
 ## 3. Humérus
+[[visual:anat/tp-humerus]]
 [[image:gray-207]]
 
 [[image:gray-208]]
@@ -126,6 +127,7 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - **Acétabulum** : cavité articulaire profonde recevant la tête fémorale (articulation coxo-fémorale), formée par la contribution des 3 os.
 
 ## 2. Fémur
+[[visual:anat/tp-femur]]
 [[image:gray-244]]
 
 [[image:gray-245]]

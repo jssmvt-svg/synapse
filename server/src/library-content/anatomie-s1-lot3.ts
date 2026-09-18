@@ -6,6 +6,7 @@ const LOWER_LIMB_JOINTS_COURSE = `# Articulations du membre inférieur — Hanch
 ## 1. L'articulation coxo-fémorale (hanche)
 
 ### 1.1 Généralités
+[[visual:anat/hip-joint]]
 - Articulation **synoviale sphéroïde (énarthrose)**, formée par la réception de la **tête du fémur** dans la cavité en forme de coupe de l'**acétabulum** (cotyle).
 - Fonctions principales : supporter le poids du corps en station debout, et transmettre à la tête fémorale les forces générées par les mouvements du tronc pendant la marche.
 
@@ -45,6 +46,7 @@ const LOWER_LIMB_JOINTS_COURSE = `# Articulations du membre inférieur — Hanch
 - Articulation multiaxiale : **flexion-extension** (axe transversal), **abduction-adduction** (axe antéropostérieur), **rotation médiale et latérale** (axe vertical), **circumduction** (combinaison des précédents).
 
 ## 2. L'articulation du genou
+[[visual:anat/knee-joint]]
 
 ### 2.1 Généralités
 [[image:gray-350]]
@@ -175,6 +177,7 @@ export const LOWER_LIMB_JOINTS_FLASHCARDS: LibraryCardSeed[] = [
 const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre inférieur
 
 ## 1. Artères du membre inférieur
+[[visual:anat/lower-limb-arteries]]
 
 ### 1.1 Artère fémorale
 [[image:gray-546]]
@@ -239,6 +242,7 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 - Le sang veineux du membre inférieur est drainé contre la gravité : toutes les veines possèdent des valvules. L'**incompétence des valvules perforantes** permet un reflux vers les veines superficielles, causant leur dilatation — les **varices**.
 
 ## 3. Nerfs du membre inférieur
+[[visual:anat/lower-limb-nerves]]
 
 ### 3.1 Plexus lombaire
 [[image:gray-822]]
@@ -383,6 +387,7 @@ const ABDOMINAL_WALL_COURSE = `# Paroi abdominale antéro-latérale
 7. **Fascia transversalis**.
 
 ## 3. Les trois muscles larges
+[[visual:anat/abdominal-wall]]
 
 ### 3.1 Muscle oblique externe
 [[image:gray-392]]

@@ -1,4 +1,7 @@
 import type { ReactNode } from "react";
+import { HumerusLandmarksDiagram, ScapulaLandmarksDiagram, FemurLandmarksDiagram, HipBoneLandmarksDiagram } from "../components/AnatBonesTP";
+import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
+import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
 import { AMINO_ACIDS } from "../library-data/amino-acids";
 import { AminoAcidStructure } from "../components/AminoAcidStructure";
@@ -194,6 +197,22 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/upper-limb-arteries": () => <UpperLimbArteriesDiagram />,
   "anat/brachial-plexus": () => <BrachialPlexusDiagram />,
   "anat/upper-limb-nerves": () => <UpperLimbNervesCourseDiagram />,
+  "anat/hip-joint": () => <HipJointDiagram />,
+  "anat/knee-joint": () => <KneeJointDiagram />,
+  "anat/leg-compartments": () => <LegCompartmentsDiagram />,
+  "anat/lower-limb-arteries": () => <LowerLimbArteriesDiagram />,
+  "anat/lower-limb-nerves": () => <LowerLimbNervesDiagram />,
+  "anat/abdominal-wall": () => <AbdominalWallDiagram />,
+  "anat/peritoneum-sagittal": () => <PeritoneumSagittalDiagram />,
+  "anat/duodenum-pancreas": () => <DuodenumPancreasDiagram />,
+  "anat/stomach-parts": () => <StomachPartsDiagram />,
+  "anat/liver-views": () => <LiverViewsDiagram />,
+  "anat/kidney-section": () => <KidneySectionDiagram />,
+  "anat/uterus-adnexa": () => <UterusAdnexaDiagram />,
+  "anat/tp-humerus": () => <HumerusLandmarksDiagram />,
+  "anat/tp-scapula": () => <ScapulaLandmarksDiagram />,
+  "anat/tp-femur": () => <FemurLandmarksDiagram />,
+  "anat/tp-hip-bone": () => <HipBoneLandmarksDiagram />,
   "anatomy/planes": () => <AnatomicalPlanes />,
   "anatomy/limb-terms": () => <LimbTerms />,
   "anatomy/joint-movements": () => <JointMovements />,
