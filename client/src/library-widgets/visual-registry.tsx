@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
 import { AMINO_ACIDS } from "../library-data/amino-acids";
 import { AminoAcidStructure } from "../components/AminoAcidStructure";
 import { HemoglobinSchematic } from "../components/HemoglobinSchematic";
@@ -181,6 +182,18 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "phys/cross-bridge": () => <CrossBridgeCycleDiagram />,
   "phys/smooth-cell": () => <SmoothMuscleCellDiagram />,
   "phys/smooth-coupling": () => <SmoothMuscleCouplingDiagram />,
+  "anat/arm-compartments": () => <ArmCompartmentsDiagram />,
+  "anat/forearm-compartments": () => <ForearmCompartmentsDiagram />,
+  "anat/forearm-innervation": () => <ForearmInnervationDiagram />,
+  "anat/joint-types": () => <JointTypesDiagram />,
+  "anat/shoulder-joint": () => <ShoulderJointDiagram />,
+  "anat/elbow-joint": () => <ElbowJointDiagram />,
+  "anat/hand-innervation": () => <HandInnervationDiagram />,
+  "anat/shoulder-muscles": () => <ShoulderMusclesDiagram />,
+  "anat/girdle-muscles": () => <GirdleMusclesDiagram />,
+  "anat/upper-limb-arteries": () => <UpperLimbArteriesDiagram />,
+  "anat/brachial-plexus": () => <BrachialPlexusDiagram />,
+  "anat/upper-limb-nerves": () => <UpperLimbNervesCourseDiagram />,
   "anatomy/planes": () => <AnatomicalPlanes />,
   "anatomy/limb-terms": () => <LimbTerms />,
   "anatomy/joint-movements": () => <JointMovements />,

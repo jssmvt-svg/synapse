@@ -4,6 +4,7 @@ import { single, multi } from "./qcm-helpers.js";
 const UPPER_LIMB_MUSCLES_2_COURSE = `# Muscles du membre supérieur (suite)
 
 ## a. Muscles reliant le membre supérieur à la colonne vertébrale
+[[visual:anat/girdle-muscles]]
 [[image:gray-409]]
 
 
@@ -28,6 +29,7 @@ const UPPER_LIMB_MUSCLES_2_COURSE = `# Muscles du membre supérieur (suite)
 | **Dentelé antérieur** (grand dentelé) | 8 premières côtes (8 digitations) | Face antérieure du bord médial de la scapula | Nerf thoracique long (C5-C7) | Puissant protracteur de la scapula (muscle du boxeur) ; maintient le bord médial de la scapula plaqué contre la paroi thoracique ; avec le trapèze inférieur, fait pivoter la scapula lors de l'abduction au-dessus de l'horizontale |
 
 ## c. Muscles de l'épaule (coiffe des rotateurs + deltoïde + grand rond)
+[[visual:anat/shoulder-muscles]]
 [[image:gray-412]]
 
 
@@ -117,6 +119,7 @@ export const UPPER_LIMB_MUSCLES_2_FLASHCARDS: LibraryCardSeed[] = [
 const UPPER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre supérieur
 
 ## 1. Artère axillaire
+[[visual:anat/upper-limb-arteries]]
 [[image:gray-523]]
 
 - Continuation de l'artère subclavière à partir du bord externe de la 1re côte ; devient l'artère brachiale au bord inférieur du grand rond.
@@ -163,6 +166,7 @@ Quatre systèmes anastomotiques relient les branches de l'artère brachiale (col
 - Les veines superficielles et profondes possèdent des valvules, plus nombreuses dans le réseau profond.
 
 ## 7. Plexus brachial
+[[visual:anat/brachial-plexus]]
 [[image:gray-807]]
 
 - Formé par les rameaux ventraux de **C5 à T1**.
@@ -171,6 +175,7 @@ Quatre systèmes anastomotiques relient les branches de l'artère brachiale (col
 - Deux exceptions échappent au plexus brachial : le trapèze (nerf accessoire) et une zone cutanée proche de l'aisselle (nerf intercostobrachial).
 
 ### Les 5 nerfs terminaux
+[[visual:anat/upper-limb-nerves]]
 [[image:gray-809]]
 
 | Nerf | Origine | Territoire moteur | Territoire sensitif |

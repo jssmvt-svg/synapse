@@ -379,6 +379,7 @@ Les structures du membre supérieur sont décrites sous les rubriques suivantes 
 Le bras est enveloppé d'un fascia profond en manchon, divisé en compartiments antérieur et postérieur par des septa intermusculaires. Les muscles du compartiment antérieur sont surtout fléchisseurs/pronateurs, ceux du compartiment postérieur extenseurs/supinateurs ; ils agissent le plus souvent en synergie.
 
 ### A. Compartiment antérieur du bras (innervés par le nerf musculo-cutané)
+[[visual:anat/arm-compartments]]
 [[image:gray-411]]
 
 | Muscle | Origine | Insertion | Innervation | Action |
@@ -393,11 +394,13 @@ Le bras est enveloppé d'un fascia profond en manchon, divisé en compartiments 
 Le **triceps brachial** est le seul muscle de ce compartiment. Trois chefs : long (tubercule infraglénoïdien), latéral (humérus, au-dessus du sillon radial) et médial (humérus, en dessous du sillon radial — le plus profond, recouvert par les deux autres). Insertion : face supérieure postérieure de l'olécrane. Innervation : nerf radial (C7-C8). Action : extension du coude.
 
 ## 3. Compartiments fasciaux de l'avant-bras
+[[visual:anat/forearm-compartments]]
 [[image:gray-417]]
 
 L'avant-bras est enveloppé du fascia antébrachial, attaché au bord postérieur sous-cutané de l'ulna. Des septa relient ce fascia aux os, délimitant, avec la membrane interosseuse, plusieurs compartiments, chacun avec ses propres muscles, nerfs et vascularisation. Près du poignet, deux épaississements du fascia — les **rétinaculums fléchisseur et extenseur** — maintiennent les tendons digitaux en place. Classiquement, l'avant-bras est divisé en compartiment antérieur et compartiment postérieur.
 
 ## 4. Muscles du compartiment antérieur de l'avant-bras
+[[visual:anat/forearm-innervation]]
 Ces muscles réalisent globalement la flexion du poignet/des doigts et la pronation. Ils sont divisés en superficiels et profonds.
 
 ### A. Groupe superficiel (5 muscles)
@@ -454,6 +457,7 @@ Aucun ne franchit l'articulation du coude ; tous naissent du radius, de l'ulna e
 Deux groupes : les muscles **extrinsèques** (situés dans l'avant-bras, assurent la prise de force) et les muscles **intrinsèques** (situés dans la main, assurent la motricité fine). Groupes de muscles intrinsèques : muscles thénariens, muscles hypothénariens, lombricaux, interosseux.
 
 ### A. Muscles thénariens
+[[visual:anat/hand-innervation]]
 [[image:gray-426]]
 
 Forment l'éminence thénar (base du pouce, côté radial de la paume), responsables de la motricité fine du pouce.
@@ -492,6 +496,7 @@ Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) e
 - **Interosseux dorsaux** : abduisent les doigts à l'articulation métacarpophalangienne (mnémotechnique : DAB, dorsaux ABduisent).
 
 ## 7. Classification des articulations
+[[visual:anat/joint-types]]
 ### A. Classification fonctionnelle (degré de mobilité)
 - **Synarthroses** : articulations immobiles (sutures crâniennes de l'adulte, articulations cartilagineuses primaires chez l'enfant en croissance).
 - **Amphiarthroses** : légèrement mobiles (articulations cartilagineuses secondaires, syndesmoses).
@@ -526,6 +531,7 @@ Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) e
 | **Sphéroïde (ball-and-socket)** | Surface sphérique s'articulant dans une cavité en cupule ; mouvement libre selon de nombreux axes | Hanche, épaule |
 
 ## 8. Articulation de l'épaule (glénohumérale)
+[[visual:anat/shoulder-joint]]
 [[image:gray-326]]
 
 [[image:gray-327]]
@@ -548,6 +554,7 @@ Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) e
 - **Mouvements** : flexion/extension (plan sagittal, axe frontal) ; abduction/adduction (plan frontal, axe sagittal) ; rotation médiale/latérale (plan transversal, axe vertical) ; circumduction (combinaison des précédents).
 
 ## 9. Articulation du coude
+[[visual:anat/elbow-joint]]
 [[image:gray-329]]
 
 [[image:gray-330]]
