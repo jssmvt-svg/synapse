@@ -117,42 +117,62 @@ export const UPPER_LIMB_MUSCLES_2_FLASHCARDS: LibraryCardSeed[] = [
 const UPPER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre supérieur
 
 ## 1. Artère axillaire
+[[image:gray-523]]
+
 - Continuation de l'artère subclavière à partir du bord externe de la 1re côte ; devient l'artère brachiale au bord inférieur du grand rond.
 - Le petit pectoral la croise et la divise en **3 parties** : 1re partie (proximale au petit pectoral, 1 branche : artère thoracique supérieure), 2e partie (postérieure au petit pectoral, 2 branches : thoraco-acromiale et thoracique latérale), 3e partie (distale au petit pectoral, 3 branches : subscapulaire, circonflexe humérale antérieure et postérieure).
 - L'**artère subscapulaire** est la plus volumineuse des branches collatérales ; elle donne l'artère circonflexe scapulaire.
 - Les artères circonflexes humérales antérieure et postérieure s'anastomosent autour du col chirurgical de l'humérus.
 
 ## 2. Artère brachiale
+[[image:gray-525]]
+
 - Continuation de l'artère axillaire, se termine au coude en donnant les artères radiale et ulnaire.
 - Rapports : nerf médian la croise d'avant en arrière dans le tiers moyen du bras ; repose en arrière sur le triceps et le brachial ; superficielle sur tout son trajet (accessible à la palpation/compression).
 - Branche principale : **artère brachiale profonde**, qui accompagne le nerf radial dans la gouttière radiale et se termine par les artères collatérales radiale et moyenne, participant à l'anastomose péri-articulaire du coude.
 
 ## 3. Artère ulnaire
+[[image:gray-527]]
+
 - Branche terminale la plus volumineuse de l'artère brachiale ; descend obliquement puis verticalement le long du bord médial de l'avant-bras.
 - Rapports : nerf médian croise l'artère 2,5 cm sous le coude ; nerf ulnaire longe son bord médial dans les 2/3 distaux.
 - Branche principale : **artère interosseuse commune**, qui se divise en interosseuse antérieure (compartiment antérieur) et postérieure (compartiment postérieur, participe à l'anastomose du coude).
 - Se termine par la **arcade palmaire superficielle**, complétée latéralement par la branche palmaire superficielle de l'artère radiale ; donne les artères digitales palmaires communes.
 
 ## 4. Artère radiale
+[[image:gray-528]]
+
 - Branche terminale la plus petite de l'artère brachiale ; superficielle sur tout son trajet dans l'avant-bras distal.
 - Quitte l'avant-bras en s'enroulant autour du bord latéral du poignet pour atteindre la tabatière anatomique.
 - Se termine par l'**arcade palmaire profonde**, complétée médialement par la branche profonde de l'artère ulnaire ; donne les artères métacarpiennes palmaires et les artères perforantes.
 
 ## 5. Anastomose péri-articulaire du coude
+[[image:gray-526]]
+
 Quatre systèmes anastomotiques relient les branches de l'artère brachiale (collatérales ulnaires sup./inf., collatérales de la brachiale profonde) aux branches récurrentes des artères radiale, ulnaire et interosseuse, garantissant la vascularisation du coude en cas d'occlusion locale.
 
 ## 6. Drainage veineux du membre supérieur
+[[image:gray-573]]
+
+[[image:gray-574]]
+
+[[image:gray-575]]
+
 - **Veines superficielles** (dans le fascia superficiel, accessibles pour prélèvements/perfusions) : réseau veineux dorsal de la main, veine céphalique (bord latéral), veine basilique (bord médial), veine cubitale médiane (anastomose céphalique→basilique au pli du coude), veine médiane de l'avant-bras.
 - **Veines profondes** : veines satellites (venae comitantes) accompagnant les artères radiale, ulnaire et brachiale, se drainant dans la veine axillaire.
 - Les veines superficielles et profondes possèdent des valvules, plus nombreuses dans le réseau profond.
 
 ## 7. Plexus brachial
+[[image:gray-807]]
+
 - Formé par les rameaux ventraux de **C5 à T1**.
 - Quatre composantes successives : **racines** (cou, profondes au scalène antérieur) → **troncs** (supérieur = C5-C6, moyen = C7, inférieur = C8-T1) → **divisions** (antérieure/postérieure, derrière la clavicule) → **cordons** (latéral = divisions antérieures des troncs supérieur/moyen ; médial = division antérieure du tronc inférieur ; postérieur = 3 divisions postérieures), situés dans l'aisselle.
 - **17 branches** au total : 5 terminales et 12 collatérales.
 - Deux exceptions échappent au plexus brachial : le trapèze (nerf accessoire) et une zone cutanée proche de l'aisselle (nerf intercostobrachial).
 
 ### Les 5 nerfs terminaux
+[[image:gray-809]]
+
 | Nerf | Origine | Territoire moteur | Territoire sensitif |
 | --- | --- | --- | --- |
 | **Axillaire** (C5-C6) | Cordon postérieur | Deltoïde, petit rond | Peau de la région deltoïdienne (moitié inférieure), capsule de l'épaule |
@@ -162,6 +182,10 @@ Quatre systèmes anastomotiques relient les branches de l'artère brachiale (col
 | **Ulnaire** (C7-T1) | Cordon médial | Fléchisseur ulnaire du carpe, moitié médiale du fléchisseur profond des doigts, muscles hypothénariens, 2 lombricaux médiaux, adducteur du pouce, interosseux | Peau de la moitié médiale de la main, face palmaire d'un doigt et demi médial |
 
 ### Trajets à retenir
+[[image:gray-815]]
+
+[[image:gray-817]]
+
 - Le **nerf axillaire** contourne le col chirurgical de l'humérus avec l'artère circonflexe humérale postérieure — vulnérable en cas de fracture/luxation de l'épaule.
 - Le **nerf radial** chemine dans la gouttière radiale de l'humérus avec l'artère brachiale profonde — vulnérable en cas de fracture de la diaphyse humérale.
 - Le **nerf médian** traverse le canal carpien pour entrer dans la main (site du syndrome du canal carpien).
@@ -249,6 +273,8 @@ const LOWER_LIMB_MUSCLES_COURSE = `# Muscles du membre inférieur
 Les muscles du membre inférieur sont classés en 4 groupes régionaux : région iliaque, cuisse/fesse, jambe, pied.
 
 ## A. Muscles de la région iliaque
+[[image:gray-430]]
+
 
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
@@ -257,6 +283,8 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 | **Iliaque** | Fosse iliaque, lèvre interne de la crête iliaque | Fusionne avec le grand psoas sur le petit trochanter | Nerf fémoral | Avec le psoas (iliopsoas) : flexion de la cuisse et du rachis lombaire |
 
 ## B. Muscles de la cuisse et de la fesse
+[[image:gray-432]]
+
 
 ### B.1 Muscles antérieurs de la cuisse
 - **Sartorius** : le plus long muscle du corps ; épine iliaque antéro-supérieure → face médiale du tibia. Nerf fémoral. Fléchit hanche et genou, adduit et fait une rotation latérale de la cuisse (position du tailleur).
@@ -266,6 +294,8 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 - **Articulaire du genou** : détaché du vaste intermédiaire ; tracte la membrane synoviale vers le haut lors de l'extension du genou.
 
 ### B.2 Muscles médiaux (adducteurs)
+[[image:gray-433]]
+
 | Muscle | Insertion | Innervation | Particularité |
 | --- | --- | --- | --- |
 | **Gracile** | Face médiale du tibia | Branche antérieure du nerf obturateur | Seul adducteur non attaché au fémur ; adducteur + fléchisseur du genou + rotateur médial de jambe |
@@ -275,6 +305,8 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 | **Grand adducteur** | Portion adductrice (branche ischio-pubienne) + portion ischio-jambière (tubérosité ischiatique) | Nerf obturateur (portion adductrice) + nerf tibial (portion ischio-jambière) | Muscle composite ; la portion ischio-jambière est un faible extenseur de hanche |
 
 ### B.3 Muscles de la région glutéale
+[[image:gray-434]]
+
 | Muscle | Innervation | Action principale |
 | --- | --- | --- |
 | **Grand glutéal** | Nerf glutéal inférieur (L5, S1-S2) | Extenseur et rotateur latéral de la hanche ; aide au passage assis→debout |
@@ -295,20 +327,34 @@ Caractéristiques communes : tous naissent de la tubérosité ischiatique, s'ins
 - **Biceps fémoral** (chef long : tubérosité ischiatique, nerf tibial ; chef court : ligne âpre, nerf fibulaire commun) → tête de la fibula.
 
 ## C. Muscles de la jambe (3 compartiments)
+[[image:gray-440]]
+
 
 ### C.a Compartiment antérieur (extenseur)
+[[image:gray-437]]
+
 Tous innervés par le nerf fibulaire profond, tous dorsi-fléchisseurs de la cheville. Tous naissent de la fibula sauf le tibial antérieur (né du tibia).
 - **Tibial antérieur** : chef dorsi-fléchisseur ; inverse aussi le pied.
 - **Long extenseur de l'hallux**, **long extenseur des orteils**, **3e fibulaire (peroneus tertius)** : dorsi-flexion ± extension des orteils ± éversion (3e fibulaire).
 
 ### C.b Compartiment latéral
+[[image:gray-439]]
+
 - **Long fibulaire** et **court fibulaire** : nerf fibulaire superficiel ; évertent le pied (le long fibulaire est le principal éverseur).
 
 ### C.c Compartiment postérieur
+[[image:gray-438]]
+
 - **Groupe superficiel** (nerf tibial) : **gastrocnémien** (2 chefs fémoraux) + **soléaire** (forment ensemble le triceps sural, tendon d'Achille → calcanéus, fléchisseurs plantaires puissants) ; **plantaire** (faible fléchisseur plantaire accessoire).
 - **Groupe profond** (nerf tibial) : **poplité** (déverrouille le genou en rotation latérale du fémur en début de flexion) ; **long fléchisseur des orteils** ; **long fléchisseur de l'hallux** ; **tibial postérieur** (inverseur principal du pied).
 
 ## D. Muscles du pied
+[[image:gray-443]]
+
+[[image:gray-444]]
+
+[[image:gray-445]]
+
 - **Extrinsèques** : tendons des muscles de jambe qui se prolongent dans le pied (éversion, inversion, flexion plantaire/dorsale).
 - **Intrinsèques** : situés dans le pied, responsables des mouvements fins des orteils ; répartis sur le **dos** du pied (court extenseur des orteils, court extenseur de l'hallux) et la **plante** du pied (muscles intrinsèques plantaires, extrinsèques et intrinsèques combinés).
 

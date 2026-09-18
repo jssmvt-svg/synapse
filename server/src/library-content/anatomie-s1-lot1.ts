@@ -454,6 +454,8 @@ Aucun ne franchit l'articulation du coude ; tous naissent du radius, de l'ulna e
 Deux groupes : les muscles **extrinsèques** (situés dans l'avant-bras, assurent la prise de force) et les muscles **intrinsèques** (situés dans la main, assurent la motricité fine). Groupes de muscles intrinsèques : muscles thénariens, muscles hypothénariens, lombricaux, interosseux.
 
 ### A. Muscles thénariens
+[[image:gray-426]]
+
 Forment l'éminence thénar (base du pouce, côté radial de la paume), responsables de la motricité fine du pouce.
 | Muscle | Origine | Insertion | Action |
 | --- | --- | --- | --- |
@@ -472,6 +474,8 @@ Forment l'éminence hypothénar (base du 5e doigt, côté ulnaire de la paume) ;
 - **Opposant du 5e doigt** : triangulaire, sous l'abducteur et le fléchisseur.
 
 ### C. Muscles lombricaux
+[[image:gray-427]]
+
 Quatre muscles numérotés 1 à 4 de latéral à médial, nommés ainsi pour leur forme allongée en ver.
 - Origine : lombricaux 1 et 2 (unipennés) — bord latéral des deux tendons latéraux du fléchisseur profond des doigts ; lombricaux 3 et 4 (bipennés) — faces adjacentes des trois tendons médiaux du fléchisseur profond.
 - Insertion : croisent le bord radial des articulations métacarpophalangiennes pour s'insérer sur le bord latéral de l'expansion digitale dorsale du doigt correspondant (2e à 5e).
@@ -479,6 +483,10 @@ Quatre muscles numérotés 1 à 4 de latéral à médial, nommés ainsi pour leu
 - Action : fléchissent l'articulation métacarpophalangienne, étendent les articulations interphalangiennes proximale et distale.
 
 ### D. Muscles interosseux
+[[image:gray-428]]
+
+[[image:gray-429]]
+
 Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) et **interosseux palmaires** (3). Innervation : nerf ulnaire pour les deux groupes.
 - **Interosseux palmaires** : adduisent les doigts à l'articulation métacarpophalangienne (mnémotechnique : PAD, palmaires ADduisent).
 - **Interosseux dorsaux** : abduisent les doigts à l'articulation métacarpophalangienne (mnémotechnique : DAB, dorsaux ABduisent).

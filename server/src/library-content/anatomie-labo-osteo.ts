@@ -6,12 +6,20 @@ import { single, multi } from "./qcm-helpers.js";
 const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (squelette appendiculaire)
 
 ## 1. Clavicule
+[[image:gray-200]]
+
+[[image:gray-201]]
+
 - Os long, seul lien osseux entre le membre supérieur et le squelette axial.
 - **Extrémité sternale** (médiale, convexe en avant) s'articule avec le manubrium sternal (articulation sterno-claviculaire).
 - **Extrémité acromiale** (latérale, concave en avant) s'articule avec l'acromion de la scapula (articulation acromio-claviculaire).
 - Face inférieure marquée par le **tubercule conoïde** et la **ligne trapézoïde** (insertions ligamentaires coraco-claviculaires).
 
 ## 2. Scapula (omoplate)
+[[image:gray-202]]
+
+[[image:gray-203]]
+
 - Os plat triangulaire appliqué sur la face postéro-latérale du thorax.
 - **Cavité glénoïde** : surface articulaire peu profonde pour la tête humérale (articulation gléno-humérale).
 - **Acromion** : prolongement latéral de l'épine de la scapula, surplombe l'articulation de l'épaule.
@@ -20,6 +28,10 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - **Bord médial (spinal), bord latéral (axillaire), angle inférieur** : repères de palpation clinique.
 
 ## 3. Humérus
+[[image:gray-207]]
+
+[[image:gray-208]]
+
 - **Tête humérale** : hémisphérique, s'articule avec la cavité glénoïde.
 - **Col anatomique** vs **col chirurgical** : ce dernier, à la jonction diaphyso-épiphysaire proximale, est un site fréquent de fracture.
 - **Tubercule majeur (grand tubercule)** et **tubercule mineur (petit tubercule)** : insertions des muscles de la coiffe des rotateurs, séparés par le **sillon intertuberculaire (gouttière bicipitale)** où chemine le tendon du long biceps.
@@ -28,6 +40,10 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - Extrémité distale : **capitulum** (articulaire avec la tête radiale), **trochlée** (articulaire avec l'ulna), **épicondyle latéral** et **épicondyle médial** (insertions des muscles épicondyliens), **fosse coronoïdienne**, **fosse olécrânienne** et **fosse radiale**.
 
 ## 4. Radius
+[[image:gray-213]]
+
+[[image:gray-214]]
+
 - Os latéral de l'avant-bras (côté du pouce).
 - **Tête radiale** (proximale, en forme de disque) s'articule avec le capitulum huméral et l'incisure radiale de l'ulna.
 - **Tubérosité radiale** : juste distale au col, insertion du biceps brachial.
@@ -42,6 +58,10 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - Extrémité distale porte la **tête ulnaire** et le **processus styloïde ulnaire**.
 
 ## 6. Os de la main
+[[image:gray-219]]
+
+[[image:gray-220]]
+
 - **Carpe** (8 os courts en 2 rangées) : rangée proximale — scaphoïde, lunatum, triquétrum, pisiforme ; rangée distale — trapèze, trapézoïde, capitatum, hamatum (avec son crochet, le **hamulus**).
 - Le **scaphoïde** est l'os carpien le plus fréquemment fracturé (chute sur la main en hyperextension) ; sa vascularisation rétrograde expose à un risque de nécrose avasculaire du pôle proximal.
 - **Métacarpe** : 5 os longs (métacarpiens I à V), base proximale, tête distale arrondie.
@@ -89,6 +109,10 @@ export const UPPER_LIMB_OSTEOLOGY_LEARNING: LibraryLearningSeed = {
 const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (squelette appendiculaire)
 
 ## 1. Os coxal (hanche)
+[[image:gray-235]]
+
+[[image:gray-236]]
+
 - Résulte de la fusion de 3 os primitivement distincts au niveau du **cotyle (acétabulum)** : **ilium**, **ischium** et **pubis**.
 - **Ilium** : partie supéro-latérale, présente la **crête iliaque** (repère de palpation), l'**épine iliaque antéro-supérieure (EIAS)** et l'**épine iliaque postéro-supérieure (EIPS)**.
 - **Ischium** : partie postéro-inférieure, présente la **tubérosité ischiatique** (support du poids du corps en position assise, insertion des muscles ischio-jambiers) et l'**épine ischiatique**.
@@ -98,6 +122,10 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - **Acétabulum** : cavité articulaire profonde recevant la tête fémorale (articulation coxo-fémorale), formée par la contribution des 3 os.
 
 ## 2. Fémur
+[[image:gray-244]]
+
+[[image:gray-245]]
+
 - Os le plus long et le plus solide du corps.
 - **Tête fémorale** : sphérique, porte la **fovéa capitis** (insertion du ligament de la tête fémorale, voie d'entrée d'une artère nourricière accessoire).
 - **Col fémoral** : oblique, site fréquent de fracture chez le sujet âgé (fracture du col du fémur), zone à vascularisation précaire.
@@ -106,6 +134,10 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - Extrémité distale : **condyle médial** et **condyle latéral**, séparés en arrière par la **fosse intercondylaire**, **épicondyle médial** et **épicondyle latéral**, **surface patellaire (trochlée fémorale)** en avant.
 
 ## 3. Patella (rotule)
+[[image:gray-255]]
+
+[[image:gray-256]]
+
 - Le plus gros os sésamoïde du corps, inclus dans le tendon du quadriceps.
 - Face postérieure articulaire, divisée par une crête verticale en deux facettes (médiale et latérale) répondant à la trochlée fémorale.
 - Base (proximale, large) et apex (distal, pointu, donnant insertion au ligament patellaire).
