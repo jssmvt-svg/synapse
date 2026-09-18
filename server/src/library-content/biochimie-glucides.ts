@@ -4,6 +4,8 @@ import { single, multi } from "./qcm-helpers.js";
 const GLUCIDES_COURSE = `# Chapitre 11 — Les glucides
 
 ## 1. Classification et cyclisation
+[[visual:bio/monosaccharides]]
+
 - Un monosaccharide est un **aldose** (fonction aldéhyde en C1, ex. glucose) ou un **cétose** (fonction cétone, ex. fructose).
 - En solution, un monosaccharide se cyclise : la forme linéaire (représentation de Fischer) et la forme cyclique (représentation de Haworth) coexistent en équilibre. Le glucose forme un cycle à 6 sommets (**pyranose**) ; le fructose peut former un cycle à 6 (pyranose) ou à 5 sommets (**furanose**).
 - La cyclisation crée un nouveau carbone asymétrique, le **carbone anomérique** : les deux formes obtenues (α et β) sont des **anomères**.
@@ -13,6 +15,8 @@ const GLUCIDES_COURSE = `# Chapitre 11 — Les glucides
 - Le glucose, le maltose et le lactose sont des sucres réducteurs ; le saccharose, dont les deux carbones anomériques sont engagés dans la liaison glycosidique, ne l'est pas.
 
 ## 3. Liaisons glycosidiques
+[[visual:bio/glycosidic-bonds]]
+
 - La **liaison O-glycosidique** unit le carbone anomérique d'un sucre à un groupe hydroxyle (d'un autre sucre, d'une protéine via Ser/Thr, d'un lipide...).
 - La **liaison N-glycosidique** unit le carbone anomérique à un groupe amine (ex. bases azotées des nucléosides ; ou l'azote de l'asparagine dans les glycoprotéines N-liées).
 - Un sucre phosphorylé (ex. glucose-6-phosphate) forme une **liaison phosphoester**.
@@ -27,6 +31,8 @@ const GLUCIDES_COURSE = `# Chapitre 11 — Les glucides
 L'hydrolyse du saccharose en glucose + fructose (« sucre inverti ») change le pouvoir rotatoire de la solution.
 
 ## 5. Polysaccharides
+[[visual:bio/polysaccharides]]
+
 
 | Polysaccharide | Liaisons | Ramification | Digestible par l'humain ? |
 | --- | --- | --- | --- |

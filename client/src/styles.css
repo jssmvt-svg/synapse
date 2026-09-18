@@ -4008,3 +4008,8 @@ select:focus {
 @media (prefers-reduced-motion: reduce) {
   .fig-slide, .fig-shrink { animation: none; }
 }
+
+@keyframes fig-seq-2 { 0%, 44% { opacity: 1; } 52%, 100% { opacity: 0.28; } }
+@keyframes fig-seq-3 { 0%, 28% { opacity: 1; } 36%, 100% { opacity: 0.28; } }
+.fig-seq-2 { animation-name: fig-seq-2; }
+.fig-seq-3 { animation-name: fig-seq-3; }

@@ -20,12 +20,16 @@ const ENZYME_BASICS_COURSE = `# Chapitre 8 — Enzymes : concepts de base et cin
 - Les enzymes ne modifient **pas** l'équilibre de la réaction (ΔG global inchangé), elles modifient uniquement la vitesse pour l'atteindre.
 
 ## 3. État de transition et énergie d'activation
+[[visual:bio/energy-profile]]
+
 - Chemin réactionnel : S → X‡ → P, où X‡ est l'**état de transition**.
 - **Énergie d'activation** ΔG‡ = énergie nécessaire pour former X‡ à partir de S.
 - La vitesse V est proportionnelle à [X‡], donc à e^(−ΔG‡/RT). Une diminution de 20 % de ΔG‡ multiplie la vitesse par environ 10.
 - Les enzymes accélèrent la réaction en **abaissant ΔG‡** (elles ne changent pas le ΔG global de la réaction).
 
 ## 4. Site actif et complexe enzyme–substrat (ES)
+[[visual:bio/enzyme-models]]
+
 - Le site actif est une crevasse tridimensionnelle formée d'acides aminés provenant de différentes parties de la structure primaire (parfois éloignés dans la séquence, ex. lysozyme).
 - Il ne représente qu'une petite partie du volume de l'enzyme et crée un microenvironnement unique.
 - Interactions multiples et faibles (liaisons H, électrostatiques, van der Waals) entre enzyme et substrat.
@@ -33,6 +37,8 @@ const ENZYME_BASICS_COURSE = `# Chapitre 8 — Enzymes : concepts de base et cin
 - **Énergie de liaison** (binding energy) : énergie libérée par l'interaction enzyme-substrat ; elle est maximale avec l'état de transition, ce qui explique en partie l'abaissement de ΔG‡.
 
 ## 5. Cinétique de Michaelis–Menten
+[[visual:bio/michaelis-menten]]
+
 - Réaction générale : E + S ⇌ ES → E + P, avec k₁, k₋₁, k₂ (=kcat).
 - Hypothèse de l'**état stationnaire** (steady state) : la vitesse de formation de ES = vitesse de dégradation de ES.
 - **Constante de Michaelis** : KM = (k₋₁ + k₂) / k₁ (unités d'une concentration).
@@ -51,6 +57,8 @@ const ENZYME_BASICS_COURSE = `# Chapitre 8 — Enzymes : concepts de base et cin
 - **Réactions à double déplacement** (ping-pong) : formation d'un intermédiaire enzyme substitué, sans complexe ternaire (ex. transamination aspartate/α-cétoglutarate).
 
 ## 7. Inhibition enzymatique
+[[visual:bio/enzyme-inhibition]]
+
 
 ### 7.1 Inhibiteurs irréversibles
 - Liaison covalente (ou non covalente très forte, dissociation négligeable).
@@ -111,6 +119,8 @@ export const ENZYME_BASICS_LEARNING: LibraryLearningSeed = {
 const CATALYTIC_STRATEGIES_COURSE = `# Chapitre 9 — Stratégies catalytiques des enzymes
 
 ## 1. La classification EC (Enzyme Commission)
+[[visual:bio/ec-classes]]
+
 Les enzymes sont classées en 7 catégories selon le type de réaction catalysée. Numéro EC attribué depuis 1961 ; la 7e classe (translocases) a été ajoutée en août 2018.
 
 | Classe | Type de réaction | Exemple |
@@ -133,12 +143,16 @@ Les enzymes sont classées en 7 catégories selon le type de réaction catalysé
 - **Translocases** (EC 7, créée en août 2018 par l'IUBMB) : déplacement d'ions/molécules à travers les membranes. ATP synthase (complexe V), Na⁺/K⁺-ATPase (3 Na⁺ sortent, 2 K⁺ entrent par ATP hydrolysé).
 
 ## 3. Quatre grandes stratégies catalytiques communes
+[[visual:bio/catalytic-strategies]]
+
 1. **Catalyse covalente** : le site actif contient un nucléophile brièvement modifié de façon covalente.
 2. **Catalyse acido-basique générale** : une molécule autre que l'eau donne ou accepte un proton.
 3. **Catalyse par approximation** : l'enzyme rapproche deux substrats dans une orientation favorable à la réaction.
 4. **Catalyse par ions métalliques** : les métaux peuvent notamment agir comme catalyseurs électrophiles.
 
 ## 4. Les protéases : une réaction fondamentalement difficile
+[[visual:bio/serine-protease]]
+
 - L'hydrolyse des protéines est exergonique mais cinétiquement très lente : la stabilisation par résonance de la liaison peptidique (caractère de double liaison partiel C–N) explique sa résistance à l'hydrolyse.
 
 ### Chymotrypsine — une sérine très réactive
@@ -221,6 +235,8 @@ const REGULATION_STRATEGIES_COURSE = `# Chapitre 10 — Stratégies de régulati
 L'activité enzymatique est régulée selon 5 grands mécanismes : (1) contrôle allostérique, (2) existence de formes multiples (isozymes), (3) modification covalente réversible, (4) activation protéolytique, (5) contrôle de la quantité d'enzyme présente (synthèse/dégradation).
 
 ## 1. L'aspartate transcarbamoylase (ATCase) — inhibition allostérique par un produit final
+[[visual:bio/atcase]]
+
 
 ### Réaction et rétro-inhibition
 - ATCase catalyse la première étape de la voie de synthèse des pyrimidines : carbamoyl-phosphate + aspartate → N-carbamoylaspartate + Pi.
@@ -250,6 +266,8 @@ L'activité enzymatique est régulée selon 5 grands mécanismes : (1) contrôle
 - L'apparition d'isozymes spécifiques dans le sang est un signe clinique de lésion tissulaire (ex. dosage des isoenzymes cardiaques après infarctus).
 
 ## 3. La modification covalente réversible
+[[visual:bio/covalent-regulation]]
+
 
 ### Généralités
 - Modifications courantes : phosphorylation (ATP), acétylation (acétyl-CoA), myristoylation, ADP-ribosylation, farnésylation, γ-carboxylation, sulfatation, ubiquitination.
@@ -275,6 +293,8 @@ L'activité enzymatique est régulée selon 5 grands mécanismes : (1) contrôle
 - La phosphoprotéomique étudie l'ensemble des protéines phosphorylées ; l'exercice physique modifie la phosphorylation de plus de 1000 sites sur près de 600 protéines (via PKA, AMPK...), favorisant le métabolisme aérobie.
 
 ## 4. L'activation par clivage protéolytique spécifique
+[[visual:bio/zymogen]]
+
 
 ### Principe et zymogènes
 - Le clivage protéolytique intervient dans : activation des enzymes digestives, coagulation sanguine, activation d'hormones, formation du collagène, développement, mort cellulaire programmée.

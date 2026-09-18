@@ -4,6 +4,8 @@ import { single, visualSingle } from "./qcm-helpers.js";
 const HEMOGLOBIN_COURSE = `# Chapitre 7 — Hémoglobine : portrait d'une protéine en action
 
 ## 7.1 Fixation de l'oxygène par le fer de l'hème
+[[visual:bio/heme]]
+
 - L'hémoglobine (Hb) transporte l'O₂ des poumons vers les tissus ; c'est une protéine allostérique à coopérativité positive. La myoglobine (Mb) fixe l'O₂ dans le muscle, sans coopérativité.
 - Le groupement hème (protoporphyrine + fer central) doit être sous forme ferreuse (Fe²⁺) pour fixer l'O₂ ; le fer ferrique (Fe³⁺) en est incapable.
 - Le fer est coordonné à 4 azotes de la protoporphyrine, à l'histidine proximale (5e site) et à l'O₂ (6e site). Lors de la fixation, le fer entre dans le plan de l'hème (il en était ~0,4 Å hors du plan à l'état désoxy).
@@ -11,6 +13,8 @@ const HEMOGLOBIN_COURSE = `# Chapitre 7 — Hémoglobine : portrait d'une proté
 - Hb = tétramère α2β2 ; chaque sous-unité adopte le repliement globine, aussi présent dans la myoglobine.
 
 ## 7.2 Fixation coopérative de l'oxygène par l'hémoglobine
+[[visual:bio/hb-cooperativity]]
+
 
 | | Myoglobine | Hémoglobine |
 | --- | --- | --- |
@@ -23,12 +27,16 @@ const HEMOGLOBIN_COURSE = `# Chapitre 7 — Hémoglobine : portrait d'une proté
 - Modèle concerté (MWC) : transition tout-ou-rien de toutes les sous-unités. Modèle séquentiel (KNF) : les sous-unités changent une à une. La coopérativité réelle combine des aspects des deux modèles.
 
 ## 7.3 Ions H⁺ et CO₂ favorisent la libération d'O₂ : l'effet Bohr
+[[visual:bio/bohr-effect]]
+
 - Le 2,3-bisphosphoglycérate (2,3-BPG), le CO₂ et les ions H⁺ sont des effecteurs allostériques hétérotropes. Le 2,3-BPG se lie dans une poche centrale qui n'existe qu'à l'état T et stabilise cet état de basse affinité.
 - L'hémoglobine fœtale (α2γ2) lie moins bien le 2,3-BPG que l'Hb adulte → affinité pour l'O₂ plus élevée → transfert materno-fœtal au niveau du placenta.
 - Effet Bohr : une baisse de pH stabilise l'état T (ponts salins comme His146β–Asp94β) et déplace la courbe vers la droite. Le CO₂ tissulaire est majoritairement transporté sous forme de bicarbonate (HCO₃⁻) via l'anhydrase carbonique ; une fraction forme un carbamate avec les groupes amino-terminaux, stabilisant aussi l'état T.
 - Le CO se lie à l'Hb environ 200 fois plus fortement que l'O₂ : sa fixation sur un site pousse le tétramère vers l'état R, empêchant la délivrance d'O₂ aux tissus — d'où la toxicité du monoxyde de carbone.
 
 ## 7.4 Mutations des gènes de l'hémoglobine et maladies
+[[visual:bio/sickle-cell]]
+
 - Drépanocytose : substitution Val pour Glu en position 6 des chaînes β (hémoglobine S). Chez l'hétérozygote (trait drépanocytaire), le sujet est généralement asymptomatique et partiellement protégé du paludisme ; chez l'homozygote, la maladie peut être fatale. La Val6 exposée en désoxy-HbS s'insère dans une poche hydrophobe d'une autre molécule de désoxy-HbS, provoquant une polymérisation en fibres qui déforme les globules rouges en faucille.
 - Thalassémies : production déséquilibrée des chaînes de globine. α-thalassémie : les tétramères de chaînes β seules fixent l'O₂ avec une forte affinité mais sans coopérativité, nuisant à la délivrance tissulaire. β-thalassémie : les chaînes α libres s'agrègent et précipitent ; l'AHSP aide à leur repliement en attendant l'assemblage du tétramère.
 - Autres globines humaines : chaînes δ, ε, ζ exprimées au cours du développement ; neuroglobine (cerveau, rétine) et cytoglobine (ubiquitaire), qui protègeraient contre l'hypoxie.

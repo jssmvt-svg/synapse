@@ -28,8 +28,40 @@ import { NephronDiagram, GlomerularFiltrationDiagram, TubularCellsDiagram, Count
 
 import { OsmolarityLabDiagram, IonogramLabDiagram, HematogramLabDiagram, AcidBaseLabDiagram, AcidBaseMixedLabDiagram, HemostasisLabDiagram, HemostasisPatternsLabDiagram, ProteinogramLabDiagram, ProteinPatternsLabDiagram, RenalFormulasLabDiagram, GfrStagesLabDiagram, LeukogramLabDiagram, LeukogramPatternsLabDiagram, AnemiaDifferentialLabDiagram, RenalPatternsLabDiagram, ReferenceValuesLabDiagram } from "../components/PhysLab";
 
+import { AminoAcidStructureDiagram, AminoAcidClassesDiagram, PeptideBondDiagram, ProteinStructureLevelsDiagram, SecondaryStructureDiagram, ProteinFoldingDiagram, HemeDiagram, HbCooperativityDiagram, BohrEffectDiagram, SickleCellDiagram } from "../components/BioProteins";
+import { EnergyProfileDiagram, EnzymeSubstrateModelsDiagram, MichaelisMentenDiagram, EnzymeInhibitionDiagram, EcClassesDiagram, CatalyticStrategiesDiagram, SerineProteaseDiagram, AtcaseDiagram, CovalentModificationDiagram, ZymogenDiagram } from "../components/BioEnzymes";
+import { MonosaccharidesDiagram, GlycosidicBondsDiagram, PolysaccharidesDiagram, FattyAcidsDiagram, MembraneLipidsDiagram, LipidAssemblyDiagram, WaterVitaminsDiagram, FatVitaminsDiagram } from "../components/BioMacro";
+
 // Schémas insérables dans un cours via [[visual:clé]] (cf. MarkdownContent).
 const COURSE_FIGURES: Record<string, () => ReactNode> = {
+  "bio/amino-acid": () => <AminoAcidStructureDiagram />,
+  "bio/amino-acid-classes": () => <AminoAcidClassesDiagram />,
+  "bio/peptide-bond": () => <PeptideBondDiagram />,
+  "bio/protein-levels": () => <ProteinStructureLevelsDiagram />,
+  "bio/secondary-structure": () => <SecondaryStructureDiagram />,
+  "bio/protein-folding": () => <ProteinFoldingDiagram />,
+  "bio/heme": () => <HemeDiagram />,
+  "bio/hb-cooperativity": () => <HbCooperativityDiagram />,
+  "bio/bohr-effect": () => <BohrEffectDiagram />,
+  "bio/sickle-cell": () => <SickleCellDiagram />,
+  "bio/energy-profile": () => <EnergyProfileDiagram />,
+  "bio/enzyme-models": () => <EnzymeSubstrateModelsDiagram />,
+  "bio/michaelis-menten": () => <MichaelisMentenDiagram />,
+  "bio/enzyme-inhibition": () => <EnzymeInhibitionDiagram />,
+  "bio/ec-classes": () => <EcClassesDiagram />,
+  "bio/catalytic-strategies": () => <CatalyticStrategiesDiagram />,
+  "bio/serine-protease": () => <SerineProteaseDiagram />,
+  "bio/atcase": () => <AtcaseDiagram />,
+  "bio/covalent-regulation": () => <CovalentModificationDiagram />,
+  "bio/zymogen": () => <ZymogenDiagram />,
+  "bio/monosaccharides": () => <MonosaccharidesDiagram />,
+  "bio/glycosidic-bonds": () => <GlycosidicBondsDiagram />,
+  "bio/polysaccharides": () => <PolysaccharidesDiagram />,
+  "bio/fatty-acids": () => <FattyAcidsDiagram />,
+  "bio/membrane-lipids": () => <MembraneLipidsDiagram />,
+  "bio/lipid-assembly": () => <LipidAssemblyDiagram />,
+  "bio/water-vitamins": () => <WaterVitaminsDiagram />,
+  "bio/fat-vitamins": () => <FatVitaminsDiagram />,
   "phys/lab-osmolarity": () => <OsmolarityLabDiagram />,
   "phys/lab-ionogram": () => <IonogramLabDiagram />,
   "phys/lab-hematogram": () => <HematogramLabDiagram />,

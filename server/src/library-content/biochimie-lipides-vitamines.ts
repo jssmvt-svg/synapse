@@ -4,6 +4,8 @@ import { single, multi } from "./qcm-helpers.js";
 const LIPIDS_MEMBRANES_COURSE = `# Chapitre 12 — Lipides et membranes cellulaires
 
 ## 1. Les acides gras
+[[visual:bio/fatty-acids]]
+
 - Un acide gras est une chaîne carbonée portant un groupe **carboxyle** (–COOH) à une extrémité et un groupe **méthyle** (–CH₃) à l'autre.
 - **Numérotation** : à partir du carboxyle, C1 = carboxyle, C2 = carbone α, C3 = carbone β. À partir de l'extrémité méthyle, le dernier carbone est le carbone **oméga (ω)** : un acide gras « oméga-3 » a sa première double liaison au 3ᵉ carbone à partir du bout méthyle.
 - **Saturés vs insaturés** : un acide gras saturé n'a aucune double liaison ; un insaturé en possède au moins une. Dans les systèmes biologiques, les acides gras ont le plus souvent un nombre pair de carbones, les chaînes en C16 et C18 étant les plus fréquentes.
@@ -20,6 +22,8 @@ const LIPIDS_MEMBRANES_COURSE = `# Chapitre 12 — Lipides et membranes cellulai
 | Arachidonate | 20 | 4 |
 
 ## 2. Les trois grands types de lipides membranaires
+[[visual:bio/membrane-lipids]]
+
 
 ### a) Phospholipides
 - Composés de 4 éléments : acide(s) gras + plateforme + phosphate + alcool.
@@ -42,6 +46,8 @@ const LIPIDS_MEMBRANES_COURSE = `# Chapitre 12 — Lipides et membranes cellulai
 Point commun à tous les lipides membranaires : ce sont des molécules **amphipathiques** — queue(s) d'acide gras hydrophobe(s) + tête polaire hydrophile (alcool + phosphate ou sucre).
 
 ## 3. Auto-assemblage en bicouches
+[[visual:bio/lipid-assembly]]
+
 - L'assemblage en membrane résulte du caractère amphipathique des lipides. Contrairement aux savons (une seule queue) qui forment des micelles, les phospholipides/glycolipides ont deux queues : l'encombrement empêche la micelle et favorise la formation spontanée d'une **bicouche lipidique**.
 - Forces en jeu : effet hydrophobe (moteur principal), interactions de van der Waals entre les queues, liaisons électrostatiques et hydrogène entre têtes polaires et eau.
 - **Liposomes** : compartiments aqueux entourés d'une bicouche, obtenus par sonication — utilisés comme systèmes de délivrance de médicaments et pour étudier des protéines membranaires reconstituées.
@@ -187,6 +193,8 @@ const WATER_SOLUBLE_VITAMINS_COURSE = `# Les vitamines hydrosolubles
 ## 11. Vitamine P — Bioflavonoïdes
 - Glycosides polyphénoliques (agrumes, baies, thé vert). Activité antioxydante ; contribue à l'intégrité des vaisseaux sanguins, en synergie avec la vitamine C.
 
+[[visual:bio/water-vitamins]]
+
 ## Tableau récapitulatif des vitamines hydrosolubles
 
 | Vitamine | Forme active | Rôle clé | Carence caractéristique |
@@ -282,6 +290,8 @@ const FAT_SOLUBLE_VITAMINS_COURSE = `# Vitamines liposolubles (A, D, E, K) et co
 - **L-Carnitine** : synthétisée à partir de la lysine et de la méthionine. Transporte les acides gras à longue chaîne à travers la membrane mitochondriale interne (indispensable à la β-oxydation) ; le muscle cardiaque/squelettique ne peut pas la synthétiser. Carence : fatigue musculaire, cardiomyopathie, accumulation de lipides neutres dans muscle/cœur/foie.
 - **Acide α-lipoïque** : cofacteur des complexes multienzymatiques de décarboxylation des α-cétoacides (pyruvate déshydrogénase, α-cétoglutarate déshydrogénase), avec TPP, CoA, FAD, NAD.
 - **Tétrahydrobioptérine (BH4)** : synthétisée à partir du GTP ; cofacteur de la phénylalanine-4-hydroxylase (Phe → Tyr — son déficit cause la phénylcétonurie), de la tyrosine-3-hydroxylase et de la NO synthase.
+
+[[visual:bio/fat-vitamins]]
 
 ## Tableau récapitulatif des vitamines liposolubles
 

@@ -9,6 +9,10 @@ const COMPOSITION_COURSE = `# Chapitre 2 — Composition et structure des proté
 - **Niveaux d'organisation :** primaire (séquence), secondaire (repliements locaux : hélice α, feuillet β, coudes), tertiaire (repliement de la chaîne entière), quaternaire (assemblage de plusieurs chaînes).
 
 ## 2. Les 20 acides aminés
+[[visual:bio/amino-acid]]
+
+[[visual:bio/amino-acid-classes]]
+
 ### Stéréochimie et ionisation
 - Le carbone α porte NH3+, COO−, H et la chaîne R. Les protéines utilisent les isomères L ; la glycine n'est pas chirale.
 - À pH neutre, les acides aminés libres sont des zwitterions. Les transitions correspondent à pK1 (carboxyle) et pK2 (amino).
@@ -67,6 +71,8 @@ Le squelette commun est H₂N–CH(R)–COOH ; seul le groupement R change d'un 
 - Codes : Ala/A, Arg/R, Asn/N, Asp/D, Cys/C, Gln/Q, Glu/E, Gly/G, His/H, Ile/I, Leu/L, Lys/K, Met/M, Phe/F, Pro/P, Ser/S, Thr/T, Trp/W, Tyr/Y, Val/V. Asx/B = Asn ou Asp ; Glx/Z = Gln ou Glu.
 
 ## 3. Structure primaire et liaison peptidique
+[[visual:bio/peptide-bond]]
+
 - La liaison peptidique est une condensation entre le carboxyle d'un résidu et l'amine du suivant. La chaîne se lit de N vers C.
 - Le squelette porte C=O et N–H ; une protéine compte souvent 50 à 2 000 résidus d'environ 110 Da chacun.
 - Deux cystéines oxydées forment un pont disulfure (cystine), réversible par réduction. L'insuline comporte deux ponts inter-chaînes et un pont intra-chaîne.
@@ -97,7 +103,11 @@ Le squelette commun est H₂N–CH(R)–COOH ; seul le groupement R change d'un 
 
 const STRUCTURE_REVISION = `# Biochimie – Lecture 3 : Structure des protéines (II)
 
+[[visual:bio/protein-levels]]
+
 ## 1. Structure secondaire
+[[visual:bio/secondary-structure]]
+
 ### 1.1 Hélice α
 - Liaisons H intra-chaîne CO(i) → NH(i+4), R vers l'extérieur, hélices presque toutes droitières (φ ≈ −60°, ψ ≈ −50°).
 - Val, Thr et Ile déstabilisent par encombrement ; Ser et Asp perturbent les liaisons H ; Pro n'a pas de NH et son cycle impose une géométrie défavorable.
@@ -122,6 +132,8 @@ const STRUCTURE_REVISION = `# Biochimie – Lecture 3 : Structure des protéines
 - Après retrait contrôlé des réactifs, la ribonucléase retrouve activité et structure : la séquence primaire contient l'information du repliement ; la forme native est la plus stable.
 
 ## 5. Repliement des protéines
+[[visual:bio/protein-folding]]
+
 - Propensions à retenir : Glu favorise l'hélice (1,59), Val le feuillet β (1,87), Gly le coude (1,77). Le contexte structural compte.
 - Le repliement est coopératif, de type tout ou rien. Il stabilise progressivement des intermédiaires plutôt que de procéder par recherche aléatoire.
 - Les IUP n'ont pas de structure fixe sans partenaire ; les protéines métamorphiques alternent entre conformations proches en énergie.
