@@ -4,6 +4,8 @@ import { single } from "./qcm-helpers.js";
 // Source : "Valeurs lab physio.pdf" (fiche de référence personnelle de l'utilisatrice).
 const REFERENCE_VALUES_COURSE = `# TP — Valeurs de référence (physiologie)
 
+[[visual:phys/lab-reference]]
+
 ## 1. Ionogramme sanguin
 | Paramètre | Valeur normale |
 | --- | --- |
@@ -27,6 +29,8 @@ const REFERENCE_VALUES_COURSE = `# TP — Valeurs de référence (physiologie)
 - Réticulocytes : 0,5 – 1,5 %. MCV (volume globulaire moyen) : 80 – 100 µm³. MCHC : 32 – 36 g/dL. MCH : 27 – 32 pg. RDW : 11,5 – 14,5 %.
 
 ## 4. Leucogramme
+[[visual:phys/lab-leukogram]]
+
 
 | Âge | WBC total |
 | --- | --- |
@@ -45,6 +49,8 @@ const REFERENCE_VALUES_COURSE = `# TP — Valeurs de référence (physiologie)
 | Monocytes | 4 – 10 % | 4 – 8 % |
 
 ## 5. Équilibre acido-basique (gaz du sang)
+[[visual:phys/lab-abb]]
+
 
 | Paramètre | Valeur normale |
 | --- | --- |
@@ -53,6 +59,8 @@ const REFERENCE_VALUES_COURSE = `# TP — Valeurs de référence (physiologie)
 | HCO₃⁻ | 23 – 27 mEq/L |
 
 ## 6. Bilan d'hémostase
+[[visual:phys/lab-hemostasis]]
+
 
 | Paramètre | Valeur normale |
 | --- | --- |
@@ -65,6 +73,8 @@ const REFERENCE_VALUES_COURSE = `# TP — Valeurs de référence (physiologie)
 | INR | 0,9 – 1,2 |
 
 ## 7. Protéinogramme (électrophorèse des protéines, ELFO)
+[[visual:phys/lab-proteinogram]]
+
 
 | Fraction | Valeur normale |
 | --- | --- |
@@ -76,6 +86,8 @@ const REFERENCE_VALUES_COURSE = `# TP — Valeurs de référence (physiologie)
 | Gamma-globuline | 13 – 23 % |
 
 ## 8. Clairance rénale
+[[visual:phys/lab-renal-formulas]]
+
 
 | Paramètre | Formule | Valeur normale |
 | --- | --- | --- |
@@ -173,6 +185,8 @@ export const REFERENCE_VALUES_FLASHCARDS: LibraryCardSeed[] = [
 const INTERPRETATION_PATTERNS_COURSE = `# TP — Interprétation des anomalies (physiologie)
 
 ## 1. Électrophorèse des protéines (ELFO) dans les dysprotéinémies
+[[visual:phys/lab-protein-patterns]]
+
 Le protéinogramme (P = protéinémie totale, Alb. = albumine, α1/α2/β/γ = fractions globuliniques) varie selon un profil caractéristique dans plusieurs situations pathologiques :
 
 | Type de dysprotéinémie | P | Alb. | α1 | α2 | β | γ |
@@ -191,6 +205,8 @@ Le protéinogramme (P = protéinémie totale, Alb. = albumine, α1/α2/β/γ = f
 - Le myélome multiple est la seule situation où la **protéinémie totale augmente** (pic monoclonal en gamma), avec albumine diminuée.
 
 ## 2. Interprétation du bilan d'hémostase
+[[visual:phys/lab-hemostasis-patterns]]
+
 | Cause fréquente | Défaut | Test du lacet | Plaquettes | TS | APTT | PT |
 | --- | --- | --- | --- | --- | --- | --- |
 | Avitaminose C | Temps vasculaire | +++ | N | ↑ | N | N |
@@ -205,6 +221,8 @@ Le protéinogramme (P = protéinémie totale, Alb. = albumine, α1/α2/β/γ = f
 - Un syndrome d'hypercoagulation associe une thrombocytose (plaquettes ↑) à un TS raccourci (↓), sans anomalie des tests de coagulation globale.
 
 ## 3. Appréciation de la fonction rénale par DFG, RPF et FF
+[[visual:phys/lab-renal-patterns]]
+
 | Paramètre | Néphropathie glomérulaire | Néphropathie tubulo-interstitielle | Néphropathie mixte |
 | --- | --- | --- | --- |
 | DFG (débit de filtration glomérulaire) | ↓ | N | ↓ |
@@ -216,6 +234,8 @@ Le protéinogramme (P = protéinémie totale, Alb. = albumine, α1/α2/β/γ = f
 - Une atteinte **mixte** associe les deux : DFG et RPF diminués tous les deux, la FF pouvant rester normale ou diminuer selon la prédominance de l'atteinte.
 
 ## 4. Troubles acido-basiques associés (doubles désordres)
+[[visual:phys/lab-abb-mixed]]
+
 | Association | pH | PCO₂ | HCO₃⁻ |
 | --- | --- | --- | --- |
 | Acidose métabolique primaire + alcalose respiratoire primaire | N | ↓↓↓ | ↓↓↓ |

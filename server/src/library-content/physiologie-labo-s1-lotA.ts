@@ -22,6 +22,8 @@ $$C_{osm} = [Na^+ \\times 2] + \\dfrac{glucose}{18} + \\dfrac{ur\\acute{e}e}{6}$
 - Multiplier la concentration de Na⁺ par 2 permet donc d'estimer la contribution osmotique totale du sodium **et** de ses anions associés, sans avoir à mesurer chaque anion séparément.
 
 ## 4. Exemple de calcul
+[[visual:phys/lab-osmolarity]]
+
 Pour un patient avec Na⁺ = 140 mEq/L, glycémie = 180 mg/dL et urée = 30 mg/dL :
 
 $$C_{osm} = (140 \\times 2) + (180/18) + (30/6) = 280 + 10 + 5 = 295 \\ mOsm/L$$
@@ -68,6 +70,8 @@ const IONOGRAMME_COURSE = `# TP — Ionogramme plasmatique
 - L'ionogramme mesure la concentration des principaux électrolytes plasmatiques : sodium, potassium, chlorure, calcium (et magnésium). Il complète l'osmolarité pour évaluer l'équilibre hydro-électrolytique.
 
 ## 2. Valeurs normales des électrolytes plasmatiques
+[[visual:phys/lab-ionogram]]
+
 
 | Électrolyte | Valeur normale |
 | --- | --- |
@@ -123,6 +127,8 @@ export const IONOGRAMME_FLASHCARDS: LibraryCardSeed[] = [
 const HEMATOGRAMME_COURSE = `# TP — Hématogramme (numération formule sanguine)
 
 ## 1. Hémoglobine, globules rouges et hématocrite
+[[visual:phys/lab-hematogram]]
+
 
 | Paramètre | Homme adulte | Femme adulte |
 | --- | --- | --- |

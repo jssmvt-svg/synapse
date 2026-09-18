@@ -26,8 +26,26 @@ import { MuscleFiberDiagram, SarcomereDiagram, NeuromuscularJunctionDiagram, Exc
 import { RedBloodCellDiagram, AnemiaDiagram, RbcLifecycleDiagram, Co2TransportDiagram, BloodVolumeDiagram, HematopoiesisDiagram, LeukocytesDiagram, HemostasisDiagram, CoagulationCascadeDiagram } from "../components/PhysBlood";
 import { NephronDiagram, GlomerularFiltrationDiagram, TubularCellsDiagram, CountercurrentDiagram, RaasDiagram, MicturitionDiagram, GastricSecretionDiagram, IntestinalAbsorptionDiagram, GiMotilityDiagram } from "../components/PhysRenalDigestive";
 
+import { OsmolarityLabDiagram, IonogramLabDiagram, HematogramLabDiagram, AcidBaseLabDiagram, AcidBaseMixedLabDiagram, HemostasisLabDiagram, HemostasisPatternsLabDiagram, ProteinogramLabDiagram, ProteinPatternsLabDiagram, RenalFormulasLabDiagram, GfrStagesLabDiagram, LeukogramLabDiagram, LeukogramPatternsLabDiagram, AnemiaDifferentialLabDiagram, RenalPatternsLabDiagram, ReferenceValuesLabDiagram } from "../components/PhysLab";
+
 // Schémas insérables dans un cours via [[visual:clé]] (cf. MarkdownContent).
 const COURSE_FIGURES: Record<string, () => ReactNode> = {
+  "phys/lab-osmolarity": () => <OsmolarityLabDiagram />,
+  "phys/lab-ionogram": () => <IonogramLabDiagram />,
+  "phys/lab-hematogram": () => <HematogramLabDiagram />,
+  "phys/lab-abb": () => <AcidBaseLabDiagram />,
+  "phys/lab-abb-mixed": () => <AcidBaseMixedLabDiagram />,
+  "phys/lab-hemostasis": () => <HemostasisLabDiagram />,
+  "phys/lab-hemostasis-patterns": () => <HemostasisPatternsLabDiagram />,
+  "phys/lab-proteinogram": () => <ProteinogramLabDiagram />,
+  "phys/lab-protein-patterns": () => <ProteinPatternsLabDiagram />,
+  "phys/lab-renal-formulas": () => <RenalFormulasLabDiagram />,
+  "phys/lab-gfr-stages": () => <GfrStagesLabDiagram />,
+  "phys/lab-leukogram": () => <LeukogramLabDiagram />,
+  "phys/lab-leukogram-patterns": () => <LeukogramPatternsLabDiagram />,
+  "phys/lab-anemia-diff": () => <AnemiaDifferentialLabDiagram />,
+  "phys/lab-renal-patterns": () => <RenalPatternsLabDiagram />,
+  "phys/lab-reference": () => <ReferenceValuesLabDiagram />,
   "phys/rbc": () => <RedBloodCellDiagram />,
   "phys/anemia": () => <AnemiaDiagram />,
   "phys/rbc-lifecycle": () => <RbcLifecycleDiagram />,

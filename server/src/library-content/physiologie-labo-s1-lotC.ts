@@ -11,6 +11,8 @@ const PROTEINOGRAM_COURSE = `# TP — Protéinogramme (électrophorèse des prot
 L'électrophorèse des protéines sériques sépare les protéines plasmatiques en 5 fractions selon leur mobilité électrophorétique : albumine, α1-globulines, α2-globulines, β-globulines et γ-globulines.
 
 ## Valeurs normales des fractions (en % du total protéique)
+[[visual:phys/lab-proteinogram]]
+
 
 | Fraction | Plage normale |
 | --- | --- |
@@ -76,6 +78,8 @@ export const PROTEINOGRAM_FLASHCARDS: LibraryCardSeed[] = [
 const URINE_FORMULA_COURSE = `# TP — Formules de physiologie rénale (clairance et filtration)
 
 ## Formules et valeurs clés
+[[visual:phys/lab-renal-formulas]]
+
 
 | Paramètre | Formule | Valeur normale |
 | --- | --- | --- |

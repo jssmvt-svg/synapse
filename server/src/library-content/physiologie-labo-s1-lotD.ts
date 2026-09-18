@@ -8,6 +8,8 @@ import { single } from "./qcm-helpers.js";
 const LEUKOGRAM_COURSE = `# TP — Leucogramme normal et pathologique
 
 ## 1. Valeurs normales : adulte vs enfant
+[[visual:phys/lab-leukogram]]
+
 
 | Paramètre | Adulte | Enfant |
 | --- | --- | --- |
@@ -20,6 +22,8 @@ const LEUKOGRAM_COURSE = `# TP — Leucogramme normal et pathologique
 - Le profil pédiatrique (lymphocytes élevés, neutrophiles relativement bas) est **inversé** par rapport à l'adulte, où les neutrophiles dominent.
 
 ## 3. Tableau d'interprétation du leucogramme par contexte clinique
+[[visual:phys/lab-leukogram-patterns]]
+
 | Contexte | Nombre total (Nr.L) | NE | EO | BA | LY | MO |
 | --- | --- | --- | --- | --- | --- | --- |
 | Enfant (physiologique) | ↑ | ↓ | — | — | ↑ | — |
@@ -145,6 +149,8 @@ const URINE_FORMULA_COURSE = `# TP — Débit de filtration glomérulaire (formu
 - À ne pas confondre avec le **débit sanguin rénal (renal blood flow, FSR)**, très supérieur (≈ 1200 ± 250 mL/min/1,73 m²), qui mesure le débit de sang traversant le rein, et non le volume filtré.
 
 ## 2. Stades d'altération de la fonction rénale (par le DFG)
+[[visual:phys/lab-gfr-stages]]
+
 | DFG | Interprétation |
 | --- | --- |
 | > 90 mL/min/1,73 m² | Fonction rénale normale |
@@ -203,6 +209,8 @@ const ANEMIA_DIFFERENTIAL_COURSE = `# TP — Diagnostic différentiel des anémi
 - **Réticulocytes** : 0,5 – 1,5 %.
 
 ## 2. Tableau de diagnostic différentiel
+[[visual:phys/lab-anemia-diff]]
+
 | Indice | Valeur normale | Anémie ferriprive | Anémie mégaloblastique | Anémie aplasique |
 | --- | --- | --- | --- | --- |
 | Ht, Hb, GR (nombre) | — | ↓ | ↓ | ↓ |

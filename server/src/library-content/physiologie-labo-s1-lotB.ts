@@ -5,6 +5,8 @@ import { single } from "./qcm-helpers.js";
 const ABB_COURSE = `# TP — Équilibre acido-basique (gaz du sang)
 
 ## 1. Valeurs de référence du bulletin acido-basique
+[[visual:phys/lab-abb]]
+
 
 | Paramètre | Valeur normale | Composante évaluée |
 | --- | --- | --- |
@@ -18,6 +20,8 @@ const ABB_COURSE = `# TP — Équilibre acido-basique (gaz du sang)
 - Une variation isolée de la PCO2 (respiratoire) ou du HCO3⁻ (métabolique) qui fait dévier le pH hors de la norme définit un trouble primaire simple : acidose ou alcalose, respiratoire ou métabolique.
 
 ## 3. Associations de deux troubles primaires : compensées, neutralisantes ou additives
+[[visual:phys/lab-abb-mixed]]
+
 
 | Association | pH | PCO2 | HCO3⁻ | Explication |
 | --- | --- | --- | --- | --- |
@@ -80,6 +84,8 @@ export const ABB_FLASHCARDS: LibraryCardSeed[] = [
 const HEMOSTASIS_PARTIAL_COURSE = `# TP — Hémostase (portion partielle)
 
 ## 1. Mécanismes de la coagulation (voies intrinsèque et extrinsèque)
+[[visual:phys/lab-hemostasis]]
+
 
 | Voie | Test | Particularité |
 | --- | --- | --- |
