@@ -203,6 +203,7 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 - **Lymphatique** : corps/queue vers nœuds pancréatico-spléniques (le long de l'artère splénique) ; tête vers nœuds pyloriques ; puis vers nœuds mésentériques supérieurs ou cœliaques.
 
 ## 7. Le plexus cœliaque
+[[visual:anat/coeliac-trunk]]
 - Plexus nerveux autonome = ganglions para-aortiques interconnectés (cœliaque, mésentérique supérieur, rénaux), autour des origines des branches majeures de l'aorte abdominale.
 - **Parasympathique** : nerf vague (X), les troncs vagaux traversent le plexus sans y faire relais.
 - **Sympathique** : nerfs splanchniques.

@@ -10,6 +10,7 @@ const RECTUM_COURSE = `# Le rectum et le canal anal
 - Longueur : **12 cm**. Le calibre n'est pas uniforme : ~4 cm dans sa partie supérieure (comme le sigmoïde), avec une dilatation dans la partie basse appelée **ampoule rectale**. Vide, les parois antérieure et postérieure de l'ampoule sont au contact l'une de l'autre.
 
 ## 2. Trajet et courbures
+[[visual:anat/rectum-anal]]
 - Le rectum commence en avant de S3, dans le prolongement du sigmoïde ; la limite (**jonction recto-sigmoïdienne**) est marquée par l'extrémité inférieure du méso-sigmoïde.
 - Il devient le canal anal 2 à 3 cm en avant et un peu au-dessous de la pointe du coccyx (**jonction ano-rectale**, qui correspond chez l'homme à l'apex de la prostate).
 - Trajet : tiers supérieur dirigé en bas et en arrière ; tiers moyen vertical ; tiers inférieur dirigé en bas et en avant.
@@ -242,6 +243,7 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 - **Innervation** : parasympathique (nervi erigentes, S2-S4, moteur pour le détrusor, inhibiteur pour le sphincter — responsable de la vidange) ; sympathique (T11-L2, inhibiteur pour le détrusor, moteur pour le sphincter — responsable du remplissage) ; somatique (nerf honteux, S2-S4, moteur pour le sphincter externe strié — contrôle volontaire de la miction).
 
 ## 9. L'urètre masculin
+[[visual:anat/bladder-urethra]]
 [[image:gray-1142]]
 
 [[image:gray-1156]]
@@ -433,6 +435,7 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Vascularisation par les artères vaginale, vaginale de l'utérine, honteuse interne, rectale moyenne, vésicale inférieure ; drainage veineux par un plexus vers les veines iliaques internes. Innervation : deux tiers supérieurs insensibles au toucher/douleur mais sensibles à l'étirement (sympathique L1-L2, parasympathique S2-S3) ; tiers inférieur très sensible au toucher (nerf honteux).
 
 ## 11. Organes génitaux internes masculins — vue d'ensemble
+[[visual:anat/male-genital]]
 [[image:gray-1135]]
 
 - Comprennent testicules et épididymes, prostate, glandes bulbo-urétrales, vésicules séminales, canaux éjaculateurs, canaux déférents.

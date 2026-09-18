@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSheet, LegBonesSheet, FootBonesDiagram, RectumAnalDiagram, BladderUrethraDiagram, MaleGenitalDiagram, CoeliacTrunkDiagram } from "../components/AnatRest";
 import { HumerusLandmarksDiagram, ScapulaLandmarksDiagram, FemurLandmarksDiagram, HipBoneLandmarksDiagram } from "../components/AnatBonesTP";
 import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
@@ -213,6 +214,14 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/tp-scapula": () => <ScapulaLandmarksDiagram />,
   "anat/tp-femur": () => <FemurLandmarksDiagram />,
   "anat/tp-hip-bone": () => <HipBoneLandmarksDiagram />,
+  "anat/tp-forearm-bones": () => <ForearmBonesSheet />,
+  "anat/tp-carpus": () => <CarpusDiagram />,
+  "anat/tp-leg-bones": () => <LegBonesSheet />,
+  "anat/tp-foot": () => <FootBonesDiagram />,
+  "anat/rectum-anal": () => <RectumAnalDiagram />,
+  "anat/bladder-urethra": () => <BladderUrethraDiagram />,
+  "anat/male-genital": () => <MaleGenitalDiagram />,
+  "anat/coeliac-trunk": () => <CoeliacTrunkDiagram />,
   "anatomy/planes": () => <AnatomicalPlanes />,
   "anatomy/limb-terms": () => <LimbTerms />,
   "anatomy/joint-movements": () => <JointMovements />,

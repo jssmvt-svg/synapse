@@ -16,6 +16,7 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - Face inférieure marquée par le **tubercule conoïde** et la **ligne trapézoïde** (insertions ligamentaires coraco-claviculaires).
 
 ## 2. Scapula (omoplate)
+[[visual:anat/tp-scapula]]
 [[image:gray-202]]
 
 [[image:gray-203]]
@@ -41,6 +42,7 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - Extrémité distale : **capitulum** (articulaire avec la tête radiale), **trochlée** (articulaire avec l'ulna), **épicondyle latéral** et **épicondyle médial** (insertions des muscles épicondyliens), **fosse coronoïdienne**, **fosse olécrânienne** et **fosse radiale**.
 
 ## 4. Radius
+[[visual:anat/tp-forearm-bones]]
 [[image:gray-213]]
 
 [[image:gray-214]]
@@ -59,6 +61,7 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - Extrémité distale porte la **tête ulnaire** et le **processus styloïde ulnaire**.
 
 ## 6. Os de la main
+[[visual:anat/tp-carpus]]
 [[image:gray-219]]
 
 [[image:gray-220]]
@@ -110,6 +113,7 @@ export const UPPER_LIMB_OSTEOLOGY_LEARNING: LibraryLearningSeed = {
 const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (squelette appendiculaire)
 
 ## 1. Os coxal (hanche)
+[[visual:anat/tp-hip-bone]]
 [[image:gray-241]]
 
 [[image:gray-242]]
@@ -149,6 +153,7 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - Base (proximale, large) et apex (distal, pointu, donnant insertion au ligament patellaire).
 
 ## 4. Tibia
+[[visual:anat/tp-leg-bones]]
 [[image:gray-257]]
 
 [[image:gray-258]]
@@ -169,6 +174,7 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - Le nerf fibulaire commun (nerf sciatique poplité externe) contourne le col de la fibula, superficiel et vulnérable aux traumatismes à ce niveau.
 
 ## 6. Os du pied
+[[visual:anat/tp-foot]]
 [[image:gray-264]]
 
 [[image:gray-268]]
