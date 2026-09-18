@@ -6,10 +6,6 @@ import { single, multi } from "./qcm-helpers.js";
 const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (squelette appendiculaire)
 
 ## 1. Clavicule
-[[image:gray-200]]
-
-[[image:gray-201]]
-
 - Os long, seul lien osseux entre le membre supérieur et le squelette axial.
 - **Extrémité sternale** (médiale, convexe en avant) s'articule avec le manubrium sternal (articulation sterno-claviculaire).
 - **Extrémité acromiale** (latérale, concave en avant) s'articule avec l'acromion de la scapula (articulation acromio-claviculaire).
@@ -17,10 +13,6 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 
 ## 2. Scapula (omoplate)
 [[visual:anat/tp-scapula]]
-[[image:gray-202]]
-
-[[image:gray-203]]
-
 - Os plat triangulaire appliqué sur la face postéro-latérale du thorax.
 - **Cavité glénoïde** : surface articulaire peu profonde pour la tête humérale (articulation gléno-humérale).
 - **Acromion** : prolongement latéral de l'épine de la scapula, surplombe l'articulation de l'épaule.
@@ -30,10 +22,6 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 
 ## 3. Humérus
 [[visual:anat/tp-humerus]]
-[[image:gray-207]]
-
-[[image:gray-208]]
-
 - **Tête humérale** : hémisphérique, s'articule avec la cavité glénoïde.
 - **Col anatomique** vs **col chirurgical** : ce dernier, à la jonction diaphyso-épiphysaire proximale, est un site fréquent de fracture.
 - **Tubercule majeur (grand tubercule)** et **tubercule mineur (petit tubercule)** : insertions des muscles de la coiffe des rotateurs, séparés par le **sillon intertuberculaire (gouttière bicipitale)** où chemine le tendon du long biceps.
@@ -43,10 +31,6 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 
 ## 4. Radius
 [[visual:anat/tp-forearm-bones]]
-[[image:gray-213]]
-
-[[image:gray-214]]
-
 - Os latéral de l'avant-bras (côté du pouce).
 - **Tête radiale** (proximale, en forme de disque) s'articule avec le capitulum huméral et l'incisure radiale de l'ulna.
 - **Tubérosité radiale** : juste distale au col, insertion du biceps brachial.
@@ -62,10 +46,6 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 
 ## 6. Os de la main
 [[visual:anat/tp-carpus]]
-[[image:gray-219]]
-
-[[image:gray-220]]
-
 - **Carpe** (8 os courts en 2 rangées) : rangée proximale — scaphoïde, lunatum, triquétrum, pisiforme ; rangée distale — trapèze, trapézoïde, capitatum, hamatum (avec son crochet, le **hamulus**).
 - Le **scaphoïde** est l'os carpien le plus fréquemment fracturé (chute sur la main en hyperextension) ; sa vascularisation rétrograde expose à un risque de nécrose avasculaire du pôle proximal.
 - **Métacarpe** : 5 os longs (métacarpiens I à V), base proximale, tête distale arrondie.
@@ -114,14 +94,6 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 
 ## 1. Os coxal (hanche)
 [[visual:anat/tp-hip-bone]]
-[[image:gray-241]]
-
-[[image:gray-242]]
-
-[[image:gray-235]]
-
-[[image:gray-236]]
-
 - Résulte de la fusion de 3 os primitivement distincts au niveau du **cotyle (acétabulum)** : **ilium**, **ischium** et **pubis**.
 - **Ilium** : partie supéro-latérale, présente la **crête iliaque** (repère de palpation), l'**épine iliaque antéro-supérieure (EIAS)** et l'**épine iliaque postéro-supérieure (EIPS)**.
 - **Ischium** : partie postéro-inférieure, présente la **tubérosité ischiatique** (support du poids du corps en position assise, insertion des muscles ischio-jambiers) et l'**épine ischiatique**.
@@ -132,10 +104,6 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 
 ## 2. Fémur
 [[visual:anat/tp-femur]]
-[[image:gray-244]]
-
-[[image:gray-245]]
-
 - Os le plus long et le plus solide du corps.
 - **Tête fémorale** : sphérique, porte la **fovéa capitis** (insertion du ligament de la tête fémorale, voie d'entrée d'une artère nourricière accessoire).
 - **Col fémoral** : oblique, site fréquent de fracture chez le sujet âgé (fracture du col du fémur), zone à vascularisation précaire.
@@ -144,30 +112,18 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - Extrémité distale : **condyle médial** et **condyle latéral**, séparés en arrière par la **fosse intercondylaire**, **épicondyle médial** et **épicondyle latéral**, **surface patellaire (trochlée fémorale)** en avant.
 
 ## 3. Patella (rotule)
-[[image:gray-255]]
-
-[[image:gray-256]]
-
 - Le plus gros os sésamoïde du corps, inclus dans le tendon du quadriceps.
 - Face postérieure articulaire, divisée par une crête verticale en deux facettes (médiale et latérale) répondant à la trochlée fémorale.
 - Base (proximale, large) et apex (distal, pointu, donnant insertion au ligament patellaire).
 
 ## 4. Tibia
 [[visual:anat/tp-leg-bones]]
-[[image:gray-257]]
-
-[[image:gray-258]]
-
-[[image:gray-259]]
-
 - Os médial de la jambe, principal os porteur.
 - Extrémité proximale : **condyle médial** et **condyle latéral**, séparés par l'**éminence intercondylaire (épines tibiales)** ; **tubérosité tibiale** en avant (insertion du ligament patellaire).
 - Diaphyse triangulaire à la palpation, **crête tibiale (bord antérieur)** directement sous-cutanée.
 - Extrémité distale : **malléole médiale**, articulaire avec le talus.
 
 ## 5. Fibula (péroné)
-[[image:gray-262]]
-
 - Os latéral, grêle, non porteur de poids (rôle de stabilisation latérale et insertion musculaire).
 - **Tête fibulaire** (proximale) s'articule avec la face postéro-latérale du condyle tibial latéral.
 - Extrémité distale : **malléole latérale**, articulaire avec le talus, descend plus bas que la malléole médiale.
@@ -175,12 +131,6 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 
 ## 6. Os du pied
 [[visual:anat/tp-foot]]
-[[image:gray-264]]
-
-[[image:gray-268]]
-
-[[image:gray-269]]
-
 - **Tarse** (7 os) : **talus** (s'articule avec le tibia et la fibula à la mortaise tibio-fibulaire, transmet le poids du corps au pied), **calcanéus** (le plus volumineux, forme le talon, insertion du tendon calcanéen/tendon d'Achille), **naviculaire**, **cuboïde**, **cunéiformes médial, intermédiaire et latéral**.
 - **Métatarse** : 5 os longs (métatarsiens I à V), base proximale, tête distale.
 - **Phalanges** : 3 par orteil (proximale, moyenne, distale) sauf l'hallux (gros orteil) qui n'en a que 2.

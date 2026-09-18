@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth";
 import { api, type StudySemester } from "../api";
 import { useLang } from "../i18n";
+import { SearchBar } from "../components/SearchBar";
 import { libraryRoutes } from "../libraryRoutes";
 
 export function Library() {
@@ -35,6 +36,7 @@ export function Library() {
           {user?.role === "admin" && <Link to="/admin">{lang === "fr" ? "Administration" : "Admin"}</Link>}
         </nav>
       </div>
+      <SearchBar />
       <header className="library-header">
         <p className="eyebrow">{t.libraryEyebrow}</p>
         <h1>{t.libraryTitle}</h1>

@@ -374,14 +374,10 @@ const UPPER_LIMB_MUSCLES_JOINTS_1_COURSE = `# Anatomie — Muscles et articulati
 Les structures du membre supérieur sont décrites sous les rubriques suivantes : muscles reliant le membre supérieur à la colonne vertébrale, muscles reliant le membre supérieur à la paroi thoracique, muscles de l'épaule, du bras, de l'avant-bras et de la main.
 
 ## 2. Muscles du bras
-[[image:gray-413]]
-
 Le bras est enveloppé d'un fascia profond en manchon, divisé en compartiments antérieur et postérieur par des septa intermusculaires. Les muscles du compartiment antérieur sont surtout fléchisseurs/pronateurs, ceux du compartiment postérieur extenseurs/supinateurs ; ils agissent le plus souvent en synergie.
 
 ### A. Compartiment antérieur du bras (innervés par le nerf musculo-cutané)
 [[visual:anat/arm-compartments]]
-[[image:gray-411]]
-
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
 | **Biceps brachial** | Chef long : tubercule supraglénoïdien (dans la capsule de l'épaule) ; chef court : apex du processus coracoïde (avec le coracobrachial) | Tubérosité radiale (tendon) et fascia de l'avant-bras médial (via l'aponévrose bicipitale, qui protège l'artère brachiale et le nerf médian) | Musculo-cutané (C5-C7) | Supinateur puissant coude fléchi ; fléchisseur puissant de l'avant-bras coude étendu ; fléchisseur faible de l'épaule |
@@ -389,14 +385,10 @@ Le bras est enveloppé d'un fascia profond en manchon, divisé en compartiments 
 | **Brachial** | Faces antéro-médiale et antéro-latérale de la diaphyse humérale | Tubérosité de l'ulna, juste distale au coude | Musculo-cutané (parfois 1/3 latéral par le radial) | Principal fléchisseur du coude ; forme le plancher de la fosse cubitale, profondément au biceps |
 
 ### B. Compartiment postérieur du bras
-[[image:gray-412]]
-
 Le **triceps brachial** est le seul muscle de ce compartiment. Trois chefs : long (tubercule infraglénoïdien), latéral (humérus, au-dessus du sillon radial) et médial (humérus, en dessous du sillon radial — le plus profond, recouvert par les deux autres). Insertion : face supérieure postérieure de l'olécrane. Innervation : nerf radial (C7-C8). Action : extension du coude.
 
 ## 3. Compartiments fasciaux de l'avant-bras
 [[visual:anat/forearm-compartments]]
-[[image:gray-417]]
-
 L'avant-bras est enveloppé du fascia antébrachial, attaché au bord postérieur sous-cutané de l'ulna. Des septa relient ce fascia aux os, délimitant, avec la membrane interosseuse, plusieurs compartiments, chacun avec ses propres muscles, nerfs et vascularisation. Près du poignet, deux épaississements du fascia — les **rétinaculums fléchisseur et extenseur** — maintiennent les tendons digitaux en place. Classiquement, l'avant-bras est divisé en compartiment antérieur et compartiment postérieur.
 
 ## 4. Muscles du compartiment antérieur de l'avant-bras
@@ -404,8 +396,6 @@ L'avant-bras est enveloppé du fascia antébrachial, attaché au bord postérieu
 Ces muscles réalisent globalement la flexion du poignet/des doigts et la pronation. Ils sont divisés en superficiels et profonds.
 
 ### A. Groupe superficiel (5 muscles)
-[[image:gray-414]]
-
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
 | **Rond pronateur** | Chef huméral (épicondyle médial) + chef ulnaire (processus coronoïde) — le nerf médian passe entre les deux chefs | Tiers moyen de la face latérale du radius | Médian | Principal pronateur ; aide à la flexion du coude |
@@ -415,8 +405,6 @@ Ces muscles réalisent globalement la flexion du poignet/des doigts et la pronat
 | **Fléchisseur superficiel des doigts** | Chef huméro-ulnaire (épicondyle médial, processus coronoïde) + chef radial (ligne oblique antérieure du radius) | 4 tendons vers les phalanges moyennes des 4 doigts médiaux | Médian | Flexion des articulations interphalangiennes proximales (IPP) ; aide à la flexion du poignet |
 
 ### B. Groupe profond (3 muscles)
-[[image:gray-415]]
-
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
 | **Long fléchisseur du pouce** (latéral) | Face antérieure du radius (2/3 supérieurs) et membrane interosseuse adjacente | Base de la phalange distale du pouce | Interosseux antérieur (branche du médian) | Flexion de la phalange distale du pouce (seul muscle à le faire) ; flexion secondaire de la phalange proximale/1er métacarpien |
@@ -425,8 +413,6 @@ Ces muscles réalisent globalement la flexion du poignet/des doigts et la pronat
 
 ## 5. Muscles du compartiment postérieur de l'avant-bras
 ### A. Groupe superficiel (7 muscles)
-[[image:gray-418]]
-
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
 | **Brachioradial** | Crête supra-épicondylaire (proximale) de l'humérus | Extrémité distale du radius, près du processus styloïde | Radial | Fléchisseur du coude (bien qu'anatomiquement classé extenseur) ; recouvre l'artère et le nerf radiaux distalement |
@@ -438,8 +424,6 @@ Ces muscles réalisent globalement la flexion du poignet/des doigts et la pronat
 | **Anconé** | Épicondyle latéral | Face latérale de l'olécrane, 1/4 supérieur de la face postérieure de l'ulna | Radial | Extenseur faible du coude |
 
 ### B. Groupe profond (5 muscles)
-[[image:gray-419]]
-
 Aucun ne franchit l'articulation du coude ; tous naissent du radius, de l'ulna et de la membrane interosseuse ; tous innervés par le **nerf interosseux postérieur** (branche profonde du radial).
 | Muscle | Origine | Insertion | Action |
 | --- | --- | --- | --- |
@@ -450,16 +434,10 @@ Aucun ne franchit l'articulation du coude ; tous naissent du radius, de l'ulna e
 | **Extenseur de l'index** | Face postérieure de l'ulna (sous l'origine du LEP), membrane interosseuse | Via l'expansion extensrice, dos des phalanges moyenne/distale de l'index | Extension de l'index ; aide à l'extension du poignet |
 
 ## 6. Muscles de la main
-[[image:gray-423]]
-
-[[image:gray-424]]
-
 Deux groupes : les muscles **extrinsèques** (situés dans l'avant-bras, assurent la prise de force) et les muscles **intrinsèques** (situés dans la main, assurent la motricité fine). Groupes de muscles intrinsèques : muscles thénariens, muscles hypothénariens, lombricaux, interosseux.
 
 ### A. Muscles thénariens
 [[visual:anat/hand-innervation]]
-[[image:gray-426]]
-
 Forment l'éminence thénar (base du pouce, côté radial de la paume), responsables de la motricité fine du pouce.
 | Muscle | Origine | Insertion | Action |
 | --- | --- | --- | --- |
@@ -478,8 +456,6 @@ Forment l'éminence hypothénar (base du 5e doigt, côté ulnaire de la paume) ;
 - **Opposant du 5e doigt** : triangulaire, sous l'abducteur et le fléchisseur.
 
 ### C. Muscles lombricaux
-[[image:gray-427]]
-
 Quatre muscles numérotés 1 à 4 de latéral à médial, nommés ainsi pour leur forme allongée en ver.
 - Origine : lombricaux 1 et 2 (unipennés) — bord latéral des deux tendons latéraux du fléchisseur profond des doigts ; lombricaux 3 et 4 (bipennés) — faces adjacentes des trois tendons médiaux du fléchisseur profond.
 - Insertion : croisent le bord radial des articulations métacarpophalangiennes pour s'insérer sur le bord latéral de l'expansion digitale dorsale du doigt correspondant (2e à 5e).
@@ -487,10 +463,6 @@ Quatre muscles numérotés 1 à 4 de latéral à médial, nommés ainsi pour leu
 - Action : fléchissent l'articulation métacarpophalangienne, étendent les articulations interphalangiennes proximale et distale.
 
 ### D. Muscles interosseux
-[[image:gray-428]]
-
-[[image:gray-429]]
-
 Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) et **interosseux palmaires** (3). Innervation : nerf ulnaire pour les deux groupes.
 - **Interosseux palmaires** : adduisent les doigts à l'articulation métacarpophalangienne (mnémotechnique : PAD, palmaires ADduisent).
 - **Interosseux dorsaux** : abduisent les doigts à l'articulation métacarpophalangienne (mnémotechnique : DAB, dorsaux ABduisent).
@@ -532,10 +504,6 @@ Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) e
 
 ## 8. Articulation de l'épaule (glénohumérale)
 [[visual:anat/shoulder-joint]]
-[[image:gray-326]]
-
-[[image:gray-327]]
-
 - Articulation entre la tête de l'humérus et la cavité glénoïde de la scapula. **Articulation la plus mobile du corps**, et donc l'une des moins stables — articulation la plus fréquemment luxée, avec un risque élevé de luxation récidivante. Type : **synoviale sphéroïde (énarthrose)**.
 - **Surfaces articulaires** : grosse tête arrondie de l'humérus contre la cavité glénoïde peu profonde de la scapula, légèrement approfondie par un anneau fibrocartilagineux, le **labrum glénoïdien**.
 - **Ligaments de l'épaule** :
@@ -555,10 +523,6 @@ Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) e
 
 ## 9. Articulation du coude
 [[visual:anat/elbow-joint]]
-[[image:gray-329]]
-
-[[image:gray-330]]
-
 - Le coude (*articulatio cubiti*) est une **articulation ginglyme (charnière)** entre l'extrémité distale de l'humérus et les extrémités proximales du radius et de l'ulna. Elle comprend deux articulations : **huméro-ulnaire** (trochlée humérale/incisure trochléaire de l'ulna) et **huméro-radiale** (capitulum huméral/tête radiale).
 - L'**articulation radio-ulnaire proximale (supérieure)** partage la même capsule que le coude mais est généralement considérée comme une articulation distincte. Le coude compte donc 3 articulations, dites **articulations cubitales** : huméro-ulnaire, huméro-radiale et radio-ulnaire proximale.
 - **Surfaces articulaires** : capitulum + trochlée de l'humérus (en haut) ; face supérieure de la tête radiale + incisure trochléaire de l'ulna (en bas).
@@ -573,8 +537,6 @@ Situés entre les métacarpiens, en deux groupes : **interosseux dorsaux** (4) e
 - **Innervation** : branche du nerf ulnaire (entre l'épicondyle médial et l'olécrane), filaments du musculo-cutané, du radial et du médian.
 
 ## 10. Articulation radio-ulnaire proximale
-[[image:gray-333]]
-
 - Type : **synoviale pivot**. Surfaces articulaires : circonférence de la tête radiale et anneau fibro-osseux formé par l'incisure radiale de l'ulna et le ligament annulaire.
 - **Ligaments** : capsule articulaire (continue avec celle du coude, attachée au ligament annulaire) ; **ligament annulaire** (bande fibreuse solide encerclant la tête radiale, la maintenant contre l'incisure radiale, attachée aux marges de l'incisure, se mêlant latéralement au ligament collatéral radial) ; **ligament carré** (fin, du col du radius à la partie supérieure de la fosse supinatrice de l'ulna, sous l'incisure radiale).
 - **Membrane synoviale** : tapisse la capsule et le ligament annulaire, continue avec celle du coude ; empêchée de herniation par le ligament carré. Relations : supinateur en avant/latéralement, anconé en arrière.

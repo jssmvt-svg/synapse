@@ -70,13 +70,13 @@ export function KneeJointDiagram() {
       <path d="M160,224 L198,262 M230,224 L196,262" stroke={C.red} strokeWidth={6} strokeLinecap="round" opacity={0.85} />
       <path d="M116,134 L106,290" stroke={C.violet} strokeWidth={7} strokeLinecap="round" />
       <path d="M262,134 L262,282" stroke={C.blue} strokeWidth={7} strokeLinecap="round" />
-      <line x1={180} y1={240} x2={370} y2={110} {...leader} /><Txt x={376} y={112} anchor="start" size={10.5} bold color={RED}>ligaments croisés (LCA / LCP)</Txt>
+      <line x1={180} y1={240} x2={370} y2={110} {...leader} /><Txt x={376} y={112} anchor="start" size={10.5} bold color={RED}>ligaments croisés antérieur et postérieur</Txt>
       <Txt x={376} y={126} anchor="start" size={9.5} color={C.grey}>croisés dans l'échancrure intercondylienne</Txt>
       <line x1={262} y1={200} x2={370} y2={160} {...leader} /><Txt x={376} y={162} anchor="start" size={10.5} bold color={DEEP.blue}>lig. collatéral tibial (médial)</Txt>
       <line x1={110} y1={200} x2={50} y2={160} {...leader} /><Txt x={4} y={150} anchor="start" size={10} bold color="#6a45b0">lig. collatéral</Txt><Txt x={4} y={162} anchor="start" size={10} bold color="#6a45b0">fibulaire (latéral)</Txt>
       <rect x={370} y={190} width={360} height={270} rx={10} fill="none" stroke="currentColor" strokeOpacity={0.25} />
       <Txt x={550} y={214} bold size={12}>Rôle de chaque structure</Txt>
-      {[["LCA", "empêche le tiroir antérieur du tibia", C.red], ["LCP", "empêche le tiroir postérieur", C.red], ["LCM (tibial)", "stabilité en valgus, adhère au ménisque médial", C.blue], ["LCL (fibulaire)", "stabilité en varus, libre du ménisque", C.violet], ["Ménisques", "répartissent les charges, amortissent", C.green]].map(([a, b, c], i) => (
+      {[["Ligament croisé antérieur", "empêche le tiroir antérieur du tibia", C.red], ["Ligament croisé postérieur", "empêche le tiroir postérieur", C.red], ["Ligament collatéral médial (tibial)", "stabilité en valgus, adhère au ménisque médial", C.blue], ["Ligament collatéral latéral (fibulaire)", "stabilité en varus, libre du ménisque", C.violet], ["Ménisques", "répartissent les charges, amortissent", C.green]].map(([a, b, c], i) => (
         <g key={String(a)}><rect x={380} y={226 + i * 46} width={340} height={40} rx={8} fill={String(c)} fillOpacity={0.1} stroke={String(c)} strokeWidth={1.6} /><Txt x={392} y={244 + i * 46} anchor="start" bold size={11} color={String(c) === C.violet ? "#6a45b0" : String(c) === C.blue ? DEEP.blue : String(c) === C.green ? DEEP.green : RED}>{String(a)}</Txt><Txt x={392} y={258 + i * 46} anchor="start" size={9.5}>{String(b)}</Txt></g>
       ))}
     </Figure>
@@ -202,7 +202,7 @@ export function AbdominalWallDiagram() {
       <rect x={410} y={34} width={140} height={110} rx={8} fill="none" stroke="currentColor" strokeOpacity={0.3} /><Txt x={480} y={54} bold size={10.5}>Au-dessus de la ligne arquée</Txt>
       <rect x={440} y={72} width={80} height={24} rx={6} fill={C.red} fillOpacity={0.55} stroke={DEEP.red} strokeWidth={2} />
       <path d="M436,66 L524,66 M436,100 L524,100" stroke={C.blue} strokeWidth={4} /><path d="M436,70 L436,98 M524,70 L524,98" stroke={C.green} strokeWidth={3} />
-      <Txt x={480} y={122} size={9}>OE en avant, OI se divise,</Txt><Txt x={480} y={135} size={9}>transverse en arrière</Txt>
+      <Txt x={480} y={122} size={9}>oblique externe en avant, oblique interne</Txt><Txt x={480} y={135} size={9}>divisé, transverse en arrière</Txt>
       <rect x={570} y={34} width={150} height={110} rx={8} fill="none" stroke="currentColor" strokeOpacity={0.3} /><Txt x={645} y={54} bold size={10.5}>Sous la ligne arquée</Txt>
       <rect x={600} y={72} width={80} height={24} rx={6} fill={C.red} fillOpacity={0.55} stroke={DEEP.red} strokeWidth={2} />
       <path d="M596,66 L684,66" stroke={C.blue} strokeWidth={4} /><path d="M596,70 L684,70" stroke={C.green} strokeWidth={4} /><path d="M596,74 L684,74" stroke={C.violet} strokeWidth={4} opacity={0} />

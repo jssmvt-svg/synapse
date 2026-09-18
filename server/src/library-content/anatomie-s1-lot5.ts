@@ -18,17 +18,11 @@ const RECTUM_COURSE = `# Le rectum et le canal anal
 - **Courbures latérales** : supérieure convexe à droite (jonction S3-S4), moyenne convexe à gauche (la plus marquée, à la jonction sacro-coccygienne), inférieure convexe à droite (pointe du coccyx).
 
 ## 3. Rapports péritonéaux
-[[image:gray-1139]]
-
 - Tiers supérieur du rectum : recouvert de péritoine en avant et sur les côtés.
 - Tiers moyen : recouvert de péritoine seulement en avant.
 - Tiers inférieur (ampoule) : entièrement sous-péritonéal ; il se situe sous le niveau du cul-de-sac recto-vésical (homme) ou recto-utérin (femme).
 
 ## 4. Rapports antérieurs
-[[image:gray-1135]]
-
-[[image:gray-1137]]
-
 - **Chez l'homme** : le tiers inférieur (sous-péritonéal) répond à la base de la vessie, aux uretères terminaux, aux vésicules séminales, aux ampoules déférentielles et à la prostate — toutes ces structures étant séparées du rectum par le **fascia recto-vésical de Denonvilliers**. Le fascia recto-prostatique (Denonvilliers) est une cloison membraneuse au fond du cul-de-sac recto-vésical qui sépare prostate et vessie du rectum. Les deux tiers supérieurs (péritonéaux) répondent au cul-de-sac recto-vésical et aux anses grêles/sigmoïdiennes qu'il contient.
 - **Chez la femme** : les deux tiers supérieurs répondent au cul-de-sac recto-utérin (de Douglas) ; le tiers inférieur répond au vagin, dont il est séparé par un fascia recto-vaginal mal défini.
 
@@ -38,10 +32,6 @@ const RECTUM_COURSE = `# Le rectum et le canal anal
 - Latéralement, la partie haute du rectum répond aux fossettes pararectales (dépressions péritonéales, extension latérale du cul-de-sac recto-vésical/recto-utérin) ; la partie basse est intimement entourée et soutenue par les releveurs de l'anus.
 
 ## 6. Configuration interne et vascularisation du rectum
-[[image:gray-1078]]
-
-[[image:gray-538]]
-
 - La muqueuse présente des plis **temporaires** (longitudinaux, disparaissant à la distension) et des plis **permanents** — les **valvules de Houston**, plis transversaux semi-lunaires (en général au nombre de trois), qui soutiennent les matières fécales et limitent la distension excessive de l'ampoule.
 - **Artères** : artère rectale supérieure (prolongement de la mésentérique inférieure, vascularise toute la muqueuse jusqu'aux valvules anales et la musculature du haut rectum) ; artères rectales moyennes (×2, branches de la division antérieure de l'iliaque interne, ne vascularisent que les tuniques superficielles) ; artères rectales inférieures (×2, branches de la honteuse interne) ; artère sacrée médiane (paroi postérieure de la jonction ano-rectale).
 - **Veines** : veine rectale supérieure → veine mésentérique inférieure → veine splénique (système porte) ; veines rectales moyennes → veine iliaque interne (système systémique) ; veines rectales inférieures → veine honteuse interne. Le rectum est ainsi un site d'**anastomose porto-cave**.
@@ -49,8 +39,6 @@ const RECTUM_COURSE = `# Le rectum et le canal anal
 - **Innervation** : fibres sympathiques (L1-L2) et parasympathiques (S2-S3-S4).
 
 ## 7. Le canal anal
-[[image:gray-1079]]
-
 - Portion terminale du gros intestin (**3,8 cm**), situé dans le périnée sous le diaphragme pelvien, également dépourvu de haustrations/tænias/appendices épiploïques.
 - Entouré d'un sphincter interne involontaire et d'un sphincter externe volontaire dont le tonus maintient le canal fermé sauf lors de la défécation.
 - Situé dans le triangle anal du périnée, entre les fosses ischio-rectales (graisseuses) qui permettent l'expansion du canal lors de la défécation.
@@ -58,8 +46,6 @@ const RECTUM_COURSE = `# Le rectum et le canal anal
 - **Rapports** : en avant, le corps périnéal, le bulbe du pénis et l'urètre spongieux (homme) ou la partie basse du vagin (femme) ; en arrière, le raphé ano-coccygien et la pointe du coccyx ; latéralement, la fosse ischio-rectale.
 
 ## 8. Configuration interne du canal anal
-[[image:gray-1080]]
-
 - Il est divisé en parties haute et basse par la **ligne pectinée (dentée)**. La partie haute (jonction ano-rectale → ligne pectinée) dérive de l'intestin postérieur endodermique ; la partie basse (ligne pectinée → marge anale) dérive du proctodéum ectodermique — d'où des différences de développement, vascularisation, drainage lymphatique et innervation.
 - Partie haute : **colonnes anales (de Morgagni)**, plis muqueux longitudinaux permanents contenant les radicelles de la veine rectale supérieure ; **valvules anales (de Morgagni)**, plis semi-lunaires reliant les extrémités basses des colonnes adjacentes, dont la ligne d'implantation dessine la ligne pectinée ; **sinus anaux**, récessus verticaux entre colonnes et au-dessus des valvules, recevant les canaux des glandes anales.
 - Partie basse : région supérieure (**pecten**), de la ligne pectinée à la **ligne blanche de Hilton** (jonction entre sphincter externe sous-cutané et extrémité basse du sphincter interne), muqueuse bleutée du fait du plexus veineux sous-jacent ; région inférieure, revêtue de peau vraie avec glandes sudoripares/sébacées et pigmentation.
@@ -70,10 +56,6 @@ const RECTUM_COURSE = `# Le rectum et le canal anal
 - Sensibilité muqueuse : moitié haute sensible à l'étirement (sympathique L1-L2, parasympathique S2-S4) ; moitié basse sensible à la douleur/température/toucher/pression (nerfs rectaux inférieurs).
 
 ## 10. Vascularisation du canal anal
-[[image:gray-1081]]
-
-[[image:gray-1083]]
-
 - Artères : partie haute par l'artère rectale supérieure, partie basse par l'artère rectale inférieure.
 - Veines : partie haute drainée par la veine rectale supérieure vers le système porte ; partie basse par les veines rectales inférieures vers le système cave.
 - Les plexus veineux **interne** (sous-muqueux, au-dessus de la ligne de Hilton) et **externe** (entre peau périanale et sphincter externe sous-cutané) communiquent entre eux, formant l'**annulus hemorrhoidalis** — les hémorroïdes sont des dilatations variqueuses de ces plexus.
@@ -164,22 +146,12 @@ export const RECTUM_FLASHCARDS: LibraryCardSeed[] = [
 const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie et l'urètre
 
 ## 1. Le rein — situation et rapports généraux
-[[image:gray-1120]]
-
-[[image:gray-1122]]
-
-[[image:gray-1123]]
-
 - Les reins sont deux organes en forme de haricot, rouge-brun, situés sur la paroi abdominale postérieure, rétropéritonéaux, en regard de T12 à L3.
 - Le rein droit est légèrement plus bas que le gauche (présence du foie) ; le rein gauche est un peu plus proche du plan médian que le droit.
 - Le grand axe de chaque rein est légèrement oblique (dirigé en bas et en dehors), rapprochant les pôles supérieurs l'un de l'autre : pôles supérieurs à 2-2,5 cm de la ligne médiane, pôles inférieurs à 6-7,5 cm.
 - Les deux reins se déplacent verticalement d'environ 2,5 cm pendant la respiration. Le **plan transpylorique** passe par la partie supérieure du hile droit et la partie inférieure du hile gauche.
 
 ## 2. Configuration externe et capsules
-[[image:gray-1125]]
-
-[[image:gray-1126]]
-
 - Chaque rein présente : deux pôles (supérieur, épais et arrondi, en rapport avec la surrénale ; inférieur, plus mince et pointu), deux surfaces (antérieure convexe, postérieure plane), deux bords (latéral convexe, médial concave au milieu où se trouve le **hile**) et un hile.
 - Le hile transmet d'avant en arrière : veine rénale, artère rénale, bassinet (pelvis rénal), branche subsidiaire de l'artère rénale, lymphatiques et nerfs.
 - **Rapports antérieurs du rein droit** : surrénale droite, lobe droit du foie, deuxième portion du duodénum, angle colique droit, jéjunum (foie et jéjunum séparés par le péritoine).
@@ -189,33 +161,23 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 
 ## 3. Structure macroscopique
 [[visual:anat/kidney-section]]
-[[image:gray-1127]]
-
 - Coupé longitudinalement, le rein présente le **rein proprement dit** et le **sinus rénal**.
 - Le rein proprement dit comprend un **cortex** externe (sous la capsule, se prolongeant entre les pyramides sous forme de colonnes de Bertin) et une **médulla** interne, formée de 5 à 11 masses coniques (**pyramides de Malpighi**) dont l'apex forme les papilles rénales, s'invaginant dans les petits calices. Une pyramide et son cortex forment un lobe rénal.
 - Le **sinus rénal** est une cavité s'ouvrant au hile, contenant la majeure partie du bassinet et des calices, les vaisseaux rénaux, les lymphatiques, les nerfs et de la graisse.
 - Chaque papille est associée à un **petit calice** ; plusieurs petits calices fusionnent en un **grand calice** ; l'urine passe ensuite dans le **bassinet** (pelvis rénal), structure aplatie en entonnoir, puis dans l'uretère.
 
 ## 4. Structure microscopique
-[[image:gray-1128]]
-
-[[image:gray-1129]]
-
 - Le rein est constitué de **néphrons** et de tubes collecteurs. Le **néphron** est l'unité structurale et fonctionnelle du rein (1 à 3 millions par rein).
 - Chaque néphron comprend un **corpuscule rénal** (glomérule, pelote capillaire, entouré de la capsule de Bowman) et un système tubulaire (tube contourné proximal, anse de Henlé, tube contourné distal).
 - Chaque tube collecteur débute par un tube de jonction issu du tube contourné distal ; plusieurs tubes collecteurs s'unissent en un **canal collecteur (de Bellini)**, qui s'ouvre à l'apex de la papille. Les tubes collecteurs forment, en rayonnant vers le cortex, les **rayons médullaires**.
 
 ## 5. Vascularisation et innervation du rein
-[[image:gray-1121]]
-
 - Chaque rein reçoit habituellement une **artère rénale** (artères rénales accessoires chez ~30 % des sujets), naissant directement de l'aorte abdominale juste sous l'origine de l'artère mésentérique supérieure (niveau du disque L1-L2). L'artère rénale droite passe en arrière de la veine cave inférieure et de la veine rénale droite ; la gauche passe en arrière de la veine rénale gauche.
 - Près du hile, chaque artère rénale se divise en division antérieure (segments apical, supérieur, moyen, inférieur) et division postérieure (segment postérieur seul). La limite entre ces territoires est la **ligne de Brödel**, plan avasculaire fonctionnel, site chirurgical privilégié.
 - Les artères segmentaires donnent des branches lobaires, puis interlobaires (dans les colonnes rénales), puis **artères arquées** (à la base des pyramides, parallèles à la surface), puis **artères interlobulaires** (radiaires), puis artérioles afférentes → capillaires glomérulaires → artérioles efférentes → plexus capillaire péritubulaire. Le retour veineux suit un trajet symétrique (veines interlobulaires → arquées → interlobaires → veine rénale).
 - Innervation : plexus rénal, issu du plexus cœliaque, fibres sympathiques (T10-L1) et parasympathiques (nerfs vagues).
 
 ## 6. L'uretère
-[[image:gray-1134]]
-
 - Tube musculaire étroit, épais et extensible, conduisant l'urine du rein à la vessie par péristaltisme. Longueur 25-30 cm, diamètre 3 mm.
 - **Trajet** : continuation du bassinet, descend obliquement en dedans sur le psoas majeur, croise en avant la bifurcation de l'artère iliaque commune au détroit supérieur (en avant de l'articulation sacro-iliaque) pour entrer dans le pelvis. Dans le pelvis, il descend d'abord en arrière et en dehors le long du bord antérieur de la grande échancrure sciatique, puis, en regard de l'épine ischiatique, se dirige en avant et en dedans vers la base de la vessie, qu'il traverse obliquement. Il chemine derrière le péritoine pariétal, auquel il est étroitement appliqué.
 - **Parties et rapports** : divisé en partie abdominale et partie pelvienne (à la bifurcation de l'iliaque commune). À droite, rapports antérieurs avec le 2e duodénum, les vaisseaux coliques/iléo-coliques droits, les vaisseaux génitaux droits, la racine du mésentère ; à gauche, avec les vaisseaux coliques gauches, sigmoïdiens, génitaux gauches, le méso-sigmoïde. Dans le pelvis, rapports avec l'artère iliaque interne, le nerf obturateur, diverses artères viscérales, et chez l'homme le déférent qui le croise médialement, chez la femme l'artère utérine qui le croise.
@@ -223,8 +185,6 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 - Vascularisation par de multiples branches (rénale, génitale, aortique directe, iliaque interne, vésicale, rectale moyenne, utérine) ; innervation sympathique T12-L1, parasympathique S2-S4.
 
 ## 7. La vessie — situation et configuration externe
-[[image:gray-1140]]
-
 - Réservoir musculaire de l'urine, situé dans la partie antérieure du petit bassin, derrière la symphyse pubienne, en avant du rectum (homme) ou de l'utérus (femme). Sa position varie avec son degré de réplétion : vide, elle est entièrement pelvienne ; pleine, elle s'étend en haut et en avant dans l'abdomen.
 - Configuration : apex, base, col, trois surfaces (supérieure, deux inféro-latérales), quatre bords (antérieur, postérieur, deux latéraux).
 - **Apex** : donne insertion au ligament ombilical médian (vestige de l'ouraque), en arrière du bord supérieur de la symphyse.
@@ -234,8 +194,6 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 - **Surfaces inféro-latérales**, non péritonisées, en rapport en avant avec l'espace rétropubien (de Retzius), la symphyse, les ligaments pubo-prostatiques ; en arrière avec l'obturateur interne (en haut) et le releveur de l'anus (en bas).
 
 ## 8. Moyens de fixité, structure et configuration interne de la vessie
-[[image:gray-1136]]
-
 - **Ligaments vrais** : ligaments latéraux (vers l'arc tendineux du fascia pelvien) ; ligaments pubo-prostatiques (fixent le col) — pubo-vésicaux chez la femme ; ligament ombilical médian (reliquat de l'ouraque) ; ligaments postérieurs.
 - **Structure pariétale**, de dedans en dehors : muqueuse plissée en rugae à vide ; sous-muqueuse ; **muscle détrusor** (trois couches de fibres lisses : longitudinale externe, circulaire moyenne — formant autour du méat urétral interne le sphincter lisse interne, continu avec la musculature prostatique —, longitudinale interne) ; adventice fibro-élastique.
 - **Trigone vésical** : zone triangulaire à paroi lisse délimitée par les deux orifices urétéraux et le méat urétral interne. La **crête inter-urétérique (barre de Mercier)** relie les deux orifices urétéraux ; les **replis urétéro-urétraux (barres de Bell)** guident vers le méat urétral en cystoscopie. L'**uvule vésicale** est une saillie muqueuse juste en arrière du méat urétral interne, produite par le lobe médian de la prostate.
@@ -244,10 +202,6 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 
 ## 9. L'urètre masculin
 [[visual:anat/bladder-urethra]]
-[[image:gray-1142]]
-
-[[image:gray-1156]]
-
 - Conduit à la fois l'urine et le sperme. Longueur ~18-20 cm, du méat urétral interne (col vésical) au méat urétral externe (gland). En érection il devient en « J » (disparition de la courbure distale) contre un trajet en « S » à l'état flaccide.
 - **Trois parties** : prostatique (traverse la prostate) ; membraneuse (traverse le diaphragme urogénital, entourée du sphincter urétral strié volontaire) ; spongieuse/pénienne (traverse le corps spongieux).
 - Partie prostatique : crête urétrale médiane, avec le **colliculus séminal (veru montanum)** portant l'orifice de l'utricule prostatique et, de part et d'autre, les orifices des canaux éjaculateurs ; sinus prostatiques de chaque côté recevant les orifices des glandes prostatiques.
@@ -255,8 +209,6 @@ const KIDNEY_URETER_BLADDER_URETHRA_COURSE = `# Le rein, l'uretère, la vessie e
 - Partie spongieuse : présente deux dilatations (fosse intrabulbaire dans le bulbe, fosse naviculaire dans le gland) ; reçoit les glandes urétrales de Littré et les lacunes de Morgagni (sauf dans la fosse naviculaire).
 
 ## 10. L'urètre féminin
-[[image:gray-1137]]
-
 - Longueur ~4 cm, du méat urétral interne (col vésical) au vestibule vaginal (en avant de l'orifice vaginal, 2-3 cm en arrière du clitoris), traversant le diaphragme urogénital, embedded dans la paroi antérieure du vagin.
 - Vascularisation par les artères honteuses internes, vaginales et les branches vésicales inférieures des artères vaginales.
 
@@ -358,8 +310,6 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Forme amygdalienne, gris rosé ; surface lisse chez la nullipare, irrégulière chez la multipare. Dimensions : ~4 cm de long, 2 cm de large, 1 cm d'épaisseur.
 
 ## 2. Situation et rapports péritonéaux de l'ovaire
-[[image:gray-1166]]
-
 - Chez la nullipare, chaque ovaire est logé dans la **fossette ovarienne**, dépression péritonéale de la paroi pelvienne latérale sous le détroit supérieur, limitée en arrière par l'uretère et les vaisseaux iliaques internes, en haut par les vaisseaux iliaques externes, en avant par l'artère ombilicale oblitérée, en bas par le nerf obturateur et ses vaisseaux.
 - L'ovaire est relié à la face postérieure du ligament large par un court repli péritonéal, le **mésovarium**, qui sert de hile (passage des vaisseaux/nerfs). L'ovaire est presque entièrement recouvert de péritoine sauf le long de son bord mésovarien.
 - Extrémités : supérieure (en rapport avec la trompe et la veine iliaque externe, donnant attache au **ligament suspenseur de l'ovaire** contenant les vaisseaux ovariens) et inférieure (plus étroite, reliée à l'angle utérin par le **ligament propre de l'ovaire**).
@@ -367,20 +317,12 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Bords : antérieur (mésovarien) et postérieur (libre, convexe, en rapport avec l'uretère).
 
 ## 3. Structure et vascularisation de l'ovaire
-[[image:gray-1163]]
-
-[[image:gray-1164]]
-
-[[image:gray-1170]]
-
 - Histologiquement : **cortex** périphérique (follicules ovariens à différents stades, épithélium germinatif, tunique albuginée sous-jacente) et **médulla** centrale (tissu conjonctif lâche, gros vaisseaux).
 - Artère : **artère ovarienne**, née de l'aorte au niveau de L1, cheminant dans le ligament suspenseur puis le mésovarium, s'anastomosant avec l'artère utérine. Apport complémentaire par le rameau ovarien de l'artère utérine.
 - Veines : plexus pampiniforme puis veine ovarienne unique ; la veine ovarienne droite se draine dans la veine cave inférieure, la gauche dans la veine rénale gauche.
 - Lymphatiques : vers les nœuds pré-aortiques et para-aortiques. Innervation sympathique (T10-T11) et parasympathique (S2-S4).
 
 ## 4. Les trompes utérines
-[[image:gray-1161]]
-
 - Relient la cavité péritonéale à la cavité utérine ; site de fécondation et de transport de l'ovocyte. Longueur ~10 cm, logée dans le mésosalpinx du ligament large.
 - Extrémité médiale : ouverture dans l'angle utérin (ostium utérin, 1 mm). Extrémité latérale (**pavillon**) : communique avec la cavité péritonéale, bordée de franges (**fimbriae**), dont une plus longue, la **frange ovarique**, appliquée à l'ovaire.
 - **Quatre parties**, de latéral à médial : **infundibulum** (1 cm, en entonnoir, porte l'ostium abdominal et les franges) ; **ampoule** (5 cm, la plus large et longue, site de la fécondation) ; **isthme** (2,5-3 cm, étroit, à paroi musculaire épaisse) ; **partie intra-murale/interstitielle** (1 cm, traverse la paroi utérine).
@@ -389,8 +331,6 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 
 ## 5. L'utérus — forme, dimensions et parties
 [[visual:anat/uterus-adnexa]]
-[[image:gray-1167]]
-
 - Organe musculaire creux à paroi épaisse, siège de l'implantation et du développement de l'embryon. Situé obliquement dans le petit bassin entre vessie et rectum ; communique en haut avec les trompes, en bas avec le vagin.
 - Piriforme, aplati d'avant en arrière. Dimensions : longueur 7,5-8 cm, largeur (au fond) 5 cm, épaisseur 2,5-3 cm, poids 30-40 g.
 - Deux parties principales : le **corps** (2/3 supérieurs) et le **col (cervix)** (1/3 inférieur), séparés par l'**isthme**. Le **fundus** est l'extrémité supérieure convexe du corps, au-dessus du plan des orifices tubaires. Le point de fusion trompe-corps est le **cornu utérin**.
@@ -398,8 +338,6 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Le col se divise en portion supravaginale (haute) et portion vaginale (basse, faisant saillie dans le vagin).
 
 ## 6. Position, cavité et rapports de l'utérus
-[[image:gray-1168]]
-
 - Position normale : **antéversion** (angle d'environ 90° entre l'axe du col et l'axe du vagin) et **antéflexion** (angle d'environ 170° entre l'axe du corps et l'axe du col, au niveau de l'isthme).
 - **Rapports antérieurs** : le corps répond au cul-de-sac vésico-utérin et à la face supérieure de la vessie ; le col supravaginal à la face postérieure de la vessie ; le col vaginal au fornix antérieur.
 - **Rapports postérieurs** : le corps répond au cul-de-sac recto-utérin (avec anses iléales/sigmoïdiennes) ; le col supravaginal au cul-de-sac recto-utérin et au rectum ; le col vaginal au fornix postérieur.
@@ -407,8 +345,6 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - **Cavité utérine** : cavité du corps (triangulaire en coupe coronale, virtuelle en coupe sagittale) continue en bas, via l'**orifice interne**, avec le canal cervical (fusiforme, plus large au milieu), qui communique en bas, via l'**orifice externe**, avec le vagin. L'**arbor vitae uteri** désigne les plis muqueux obliques (plicae palmatae) du canal cervical.
 
 ## 7. Ligaments et moyens de fixité de l'utérus
-[[image:gray-1165]]
-
 - **Ligaments faux** (replis péritonéaux, sans rôle de soutien) : ligaments larges (pairs) ; replis recto-utérins (pairs, contenant les ligaments utéro-sacrés) ; repli vésico-utérin (impair, antérieur) ; repli recto-vaginal (impair, postérieur).
 - **Ligaments vrais** (fibromusculaires, soutien réel) : **ligaments ronds** (de l'angle utérin, traversent le canal inguinal, se terminent dans le tissu du grand lèvre — tirent le fundus en avant, maintenant l'antéversion/antéflexion) ; **ligaments cervicaux transverses (de Mackenrodt)**, dits ligaments cardinaux, condensation du fascia pelvien autour des vaisseaux utérins — les plus importants ; **ligaments utéro-sacrés** (col → S2-S3, tirent le col en arrière) ; **ligaments pubo-cervicaux**.
 - **Soutiens primaires** : musculaires (diaphragme pelvien, corps périnéal, diaphragme urogénital), viscéraux (vessie, vagin), fibromusculaires (les 4 ligaments vrais ci-dessus). **Soutiens secondaires** : ligaments larges, replis vésico-utérin et recto-vaginal.
@@ -426,8 +362,6 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - Innervation : sympathique (T12-L2, contraction/vasoconstriction) et parasympathique (S2-S4, inhibition/vasodilatation). Les afférences douloureuses du corps suivent les voies sympathiques (douleur référée en T12-L2) ; celles du col suivent les nerfs splanchniques pelviens (douleur référée aux dermatomes sacrés).
 
 ## 10. Structure de l'utérus et le vagin
-[[image:gray-1169]]
-
 - Paroi du corps utérin, de superficiel en profond : **périmétrium** (séreuse péritonéale) ; **myométrium** (couche la plus épaisse, faisceaux de muscle lisse compacts) ; **endomètre** (muqueuse à modifications cycliques). Le col n'est pas tapissé d'endomètre et ne présente pas de cycle.
 - Le **vagin** est l'organe de la copulation, partie basse de la filière génitale ; il s'étend du vestibule vulvaire à l'utérus, entre vessie/urètre en avant et rectum/canal anal en arrière.
 - Dimensions : paroi antérieure 7,5 cm, paroi postérieure 9 cm ; diamètre croissant de bas (2,5 cm) en haut (5 cm). Le **fornix vaginal** (autour du col) comprend quatre parties (antérieure, postérieure, deux latérales) — le fornix postérieur est ~2 cm plus profond.
@@ -436,15 +370,9 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 
 ## 11. Organes génitaux internes masculins — vue d'ensemble
 [[visual:anat/male-genital]]
-[[image:gray-1135]]
-
 - Comprennent testicules et épididymes, prostate, glandes bulbo-urétrales, vésicules séminales, canaux éjaculateurs, canaux déférents.
 
 ## 12. La prostate
-[[image:gray-1152]]
-
-[[image:gray-1153]]
-
 - Plus grosse glande annexe de l'appareil reproducteur masculin, de la taille d'une châtaigne, traversée par l'urètre et les canaux éjaculateurs. Située sous le col vésical, au-dessus du sphincter urétral externe ; le releveur de l'anus est inféro-latéral, le rectum est en arrière (ampoule rectale).
 - Fonction : sécrétion d'un liquide clair laiteux (~30 % du sperme), alcalin, nourrissant les spermatozoïdes.
 - Entourée de deux capsules : vraie (condensation du stroma fibreux glandulaire) et fausse (fascia pelvien condensé).
@@ -452,21 +380,11 @@ const FEMALE_GENITAL_ORGANS_COURSE = `# Les organes génitaux internes féminins
 - **Zones histologiques (classification de McNeal)** : zone centrale (~25 %, entoure les canaux éjaculateurs, peu sujette au reflux urinaire) ; zone de transition (~5-10 %, entoure l'urètre, siège de l'hypertrophie bénigne — HBP) ; zone périphérique (~65 %, principal volume glandulaire, postérieure, palpable au toucher rectal, siège préférentiel du cancer prostatique).
 
 ## 13. Vésicules séminales, canaux déférents et éjaculateurs
-[[image:gray-1160]]
-
 - **Vésicules séminales** : paire de glandes tubulaires (~5 cm), situées entre le fond vésical et le rectum. Leur canal s'unit au déférent pour former le canal éjaculateur. Fonction : sécrétion d'un liquide alcalin riche en nutriments, ~60 % du volume séminal.
 - **Canal déférent** : tube musculaire épais, transporte les spermatozoïdes de l'épididyme au canal éjaculateur. Continue le canal épididymaire, monte en arrière du testicule, traverse le cordon spermatique puis le canal inguinal, entre dans l'abdomen puis le pelvis, passe en arrière de la base de la vessie (en avant de l'ampoule rectale, médialement à la vésicule séminale) et rejoint le canal de la vésicule séminale à la base de la prostate.
 - **Canaux éjaculateurs** : deux tubes étroits (~1 cm), formés par l'union du canal de la vésicule séminale et du déférent, traversent la prostate et s'ouvrent dans l'urètre prostatique. Fonction : expulsion des sécrétions testiculaires et vésiculaires dans l'urètre prostatique.
 
 ## 14. Testicule et épididyme
-[[image:gray-1143]]
-
-[[image:gray-1145]]
-
-[[image:gray-1148]]
-
-[[image:gray-1149]]
-
 - **Testicule** : gonade masculine, homologue de l'ovaire, organe mobile logé dans le scrotum, suspendu par le cordon spermatique. Fonctions : production de spermatozoïdes et sécrétion de testostérone.
 - Configuration : deux pôles (supérieur donnant attache au cordon spermatique, inférieur), deux bords (antérieur, postérieur donnant attache à l'épididyme), deux surfaces (médiale, latérale).
 - Trois tuniques, de superficiel en profond : **tunique vaginale**, **tunique albuginée**, **tunique vasculaire**.

@@ -108,6 +108,59 @@ async function getProgress(userId: number, chapterId: number) {
   return { resources, flashcards: cards, qcmAttempts: qcm, examAttempts: exams };
 }
 
+const FOLD_FROM = "àâäáãåéèêëíìîïóòôöõúùûüçœñ";
+const FOLD_TO = "aaaaaaeeeeiiiiooooouuuucon";
+function foldQuery(value: string): string {
+  return value.normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/œ/g, "o").toLowerCase();
+}
+
+libraryRouter.get("/search", async (req: AuthedRequest, res) => {
+  const raw = typeof req.query.q === "string" ? req.query.q.trim() : "";
+  if (raw.length < 2) return res.json([]);
+  const q = foldQuery(raw).slice(0, 80);
+  const pattern = "%" + q.replace(/[\\%_]/g, (c) => "\\" + c) + "%";
+  const folded = (column: string) => `translate(lower(${column}), '${FOLD_FROM}', '${FOLD_TO}')`;
+  const rows = await db
+    .prepare(
+      `SELECT c.id AS chapter_id, c.annee, c.semestre, c.matiere, c.titre_fr, c.titre_en,
+              r.id AS resource_id, r.titre_fr AS resource_titre_fr, r.titre_en AS resource_titre_en,
+              r.content_fr, r.content_en,
+              (${folded("c.titre_fr")} LIKE ? OR ${folded("c.titre_en")} LIKE ?) AS in_chapter_title,
+              (${folded("r.titre_fr")} LIKE ? OR ${folded("r.titre_en")} LIKE ?) AS in_resource_title
+       FROM library_chapters c
+       LEFT JOIN library_course_resources r ON r.chapter_id = c.id AND r.is_active = true
+       WHERE c.is_active = true AND (
+         ${folded("c.titre_fr")} LIKE ? OR ${folded("c.titre_en")} LIKE ? OR
+         ${folded("c.description_fr")} LIKE ? OR ${folded("r.titre_fr")} LIKE ? OR ${folded("r.titre_en")} LIKE ? OR
+         ${folded("r.content_fr")} LIKE ? OR ${folded("r.content_en")} LIKE ?)
+       ORDER BY c.semestre, c.matiere, c.ordre, r.ordre
+       LIMIT 200`,
+    )
+    .all(...Array(4).fill(pattern), ...Array(7).fill(pattern));
+  const allowed = new Map<string, boolean>();
+  const results: unknown[] = [];
+  for (const row of rows as Record<string, any>[]) {
+    const key = row.annee + "-" + row.semestre;
+    if (!allowed.has(key)) allowed.set(key, await canAccessSemester(req.userId!, row.annee, row.semestre));
+    if (!allowed.get(key)) continue;
+    const text: string = String(row.content_fr || row.content_en || "");
+    const idx = foldQuery(text).indexOf(q);
+    let snippet = "";
+    if (idx >= 0 && !row.in_chapter_title && !row.in_resource_title) {
+      const start = Math.max(0, idx - 50);
+      snippet = (start > 0 ? "…" : "") + text.slice(start, idx + q.length + 90).replace(/[#*|>_`\[\]]/g, " ").replace(/\s+/g, " ").trim() + "…";
+    }
+    results.push({
+      chapterId: row.chapter_id, semestre: row.semestre, matiere: row.matiere,
+      titre_fr: row.titre_fr, titre_en: row.titre_en,
+      resourceId: row.resource_id, resource_titre_fr: row.resource_titre_fr, resource_titre_en: row.resource_titre_en,
+      snippet, titleMatch: Boolean(row.in_chapter_title || row.in_resource_title),
+    });
+  }
+  results.sort((a: any, b: any) => Number(b.titleMatch) - Number(a.titleMatch));
+  res.json(results.slice(0, 40));
+});
+
 libraryRouter.get("/", async (req: AuthedRequest, res) => {
   const chapters = await db
     .prepare(

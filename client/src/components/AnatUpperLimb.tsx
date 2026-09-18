@@ -65,27 +65,29 @@ export function ForearmCompartmentsDiagram() {
       <path d="M170,226 L268,230" stroke={BONE_STROKE} strokeWidth={4} strokeDasharray="4 3" /><Txt x={220} y={246} size={9} color={C.grey}>membrane interosseuse</Txt>
       {/* antérieur superficiel */}
       <path d="M90,150 C150,90 290,90 350,160 C310,170 270,166 220,180 C170,170 120,176 90,150z" fill={C.blue} fillOpacity={0.55} stroke={DEEP.blue} strokeWidth={2.5} />
-      <Txt x={220} y={128} bold size={11.5}>Antérieur superficiel</Txt><Txt x={220} y={143} size={9.5}>rond pronateur, FRC, long palmaire, FDS, FUC</Txt>
+      <Txt x={220} y={128} bold size={11.5}>Antérieur superficiel</Txt>
       {/* antérieur profond */}
       <path d="M130,182 C170,176 270,176 316,186 C316,206 296,208 290,208 L150,204 C140,204 130,196 130,182z" fill={C.green} fillOpacity={0.55} stroke={DEEP.green} strokeWidth={2.5} />
-      <Txt x={220} y={196} bold size={10.5}>Antérieur profond</Txt><Txt x={220} y={208} size={9}>long fléchisseur du pouce, FDP</Txt>
+      <Txt x={220} y={196} bold size={10.5}>Antérieur profond</Txt>
       {/* postérieur profond */}
       <path d="M126,250 C170,262 270,262 318,252 C316,282 290,290 220,290 C160,290 128,280 126,250z" fill={C.violet} fillOpacity={0.55} stroke={DEEP.violet} strokeWidth={2.5} />
-      <Txt x={220} y={272} bold size={10.5}>Postérieur profond</Txt><Txt x={220} y={285} size={9}>supinateur, LAP, CEP, LEP, EI</Txt>
+      <Txt x={220} y={272} bold size={10.5}>Postérieur profond</Txt>
       {/* postérieur superficiel */}
       <path d="M100,270 C120,330 300,360 350,290 C320,300 260,304 220,304 C170,304 128,290 100,270z" fill={C.amber} fillOpacity={0.55} stroke={DEEP.amber} strokeWidth={2.5} />
-      <Txt x={220} y={334} bold size={11.5}>Postérieur superficiel</Txt><Txt x={220} y={349} size={9.5}>brachioradial, ERCL/ERCC, ED, EPD, EUC, anconé</Txt>
+      <Txt x={220} y={334} bold size={11.5}>Postérieur superficiel</Txt>
       {[[200, 172, NERVE, "médian"], [326, 186, NERVE, "ulnaire"]].map(([x, y, c, t]) => <g key={String(t)}><circle cx={Number(x)} cy={Number(y)} r={6} fill={String(c)} stroke="#fff" strokeWidth={1.5} /></g>)}
       <circle cx={144} cy={266} r={5} fill={NERVE} stroke="#fff" strokeWidth={1.5} />
       <circle cx={176} cy={160} r={6} fill={ART} /><circle cx={314} cy={168} r={6} fill={ART} />
       <rect x={410} y={30} width={320} height={390} rx={10} fill="none" stroke="currentColor" strokeOpacity={0.25} />
-      <Txt x={570} y={54} bold size={12}>Innervation par compartiment</Txt>
-      {[["Antérieur superficiel", "nerf médian (sauf FUC : ulnaire)", C.blue], ["Antérieur profond", "interosseux antérieur (médian) + ulnaire", C.green], ["Postérieur superficiel", "nerf radial", C.amber], ["Postérieur profond", "interosseux postérieur (branche du radial)", C.violet]].map(([t, n, c], i) => (
-        <g key={String(t)}><rect x={422} y={68 + i * 72} width={296} height={62} rx={8} fill={String(c)} fillOpacity={0.12} stroke={String(c)} strokeWidth={1.8} /><Txt x={570} y={90 + i * 72} bold size={11.5} color={String(c)}>{String(t)}</Txt><Txt x={570} y={110 + i * 72} size={10.5}>{String(n)}</Txt></g>
+      <Txt x={570} y={54} bold size={12}>Muscles et innervation par compartiment</Txt>
+      {[["Antérieur superficiel", "nerf médian (sauf fléchisseur ulnaire du carpe : ulnaire)", ["rond pronateur, fléchisseur radial du carpe,", "long palmaire, fléchisseur superficiel des doigts,", "fléchisseur ulnaire du carpe"], C.blue], ["Antérieur profond", "nerf interosseux antérieur (médian) + ulnaire", ["long fléchisseur du pouce, carré pronateur,", "fléchisseur profond des doigts"], C.green], ["Postérieur superficiel", "nerf radial", ["brachioradial, extenseurs radiaux du carpe,", "extenseur des doigts, extenseur ulnaire du carpe, anconé"], C.amber], ["Postérieur profond", "nerf interosseux postérieur (branche du radial)", ["supinateur, long abducteur du pouce,", "courts et longs extenseurs du pouce, extenseur de l'index"], C.violet]].map(([t, n, m, c], i) => (
+        <g key={String(t)}>
+          <rect x={420} y={64 + i * 84} width={300} height={78} rx={8} fill={String(c)} fillOpacity={0.12} stroke={String(c)} strokeWidth={1.8} />
+          <Txt x={570} y={82 + i * 84} bold size={11.5} color={String(c)}>{String(t)}</Txt>
+          <Txt x={570} y={97 + i * 84} size={9.5} bold>{String(n)}</Txt>
+          {(m as string[]).map((line, k) => <Txt key={k} x={570} y={110 + k * 12 + i * 84} size={9.5} color={C.grey}>{line}</Txt>)}
+        </g>
       ))}
-      <Txt x={570} y={378} size={10.5} color={C.grey}>● artères radiale et ulnaire • ● nerfs médian, ulnaire, radial</Txt>
-      <Txt x={570} y={396} size={10.5} color={C.grey}>antérieur : flexion du poignet et des doigts, pronation</Txt>
-      <Txt x={570} y={412} size={10.5} color={C.grey}>postérieur : extension, supination</Txt>
     </Figure>
   );
 }
@@ -113,7 +115,7 @@ export function ForearmInnervationDiagram() {
       <Txt x={370} y={352} size={10.5} bold>* innervés par le nerf interosseux antérieur (branche du médian)</Txt>
       <Txt x={370} y={370} size={10.5} bold>† innervés par le nerf interosseux postérieur (branche profonde du radial)</Txt>
       <rect x={20} y={384} width={700} height={44} rx={8} fill="none" stroke="currentColor" strokeOpacity={0.25} />
-      <Txt x={370} y={404} size={10.5}>mnémotechnique : « LR6 SO4 » — le médian innerve presque tout l'antérieur, l'ulnaire 1½ muscle, le radial tout le postérieur</Txt>
+      <Txt x={370} y={404} size={10.5}>le médian innerve presque tout le compartiment antérieur, l'ulnaire seulement 1½ muscle, le radial tout le postérieur</Txt>
       <Txt x={370} y={420} size={10} color={C.grey}>aucun muscle du compartiment antérieur n'est innervé par le nerf radial</Txt>
     </Figure>
   );
@@ -199,7 +201,7 @@ export function ShoulderJointDiagram() {
       <path d="M232,118 L288,104" stroke={C.blue} strokeWidth={9} strokeLinecap="round" opacity={0.45} /><Txt x={224} y={112} anchor="end" size={9} bold color={DEEP.blue}>bourse sous-acromiale</Txt>
       <rect x={400} y={176} width={330} height={250} rx={10} fill="none" stroke="currentColor" strokeOpacity={0.25} />
       <Txt x={565} y={200} bold size={12}>Stabilité et mouvements</Txt>
-      {["coiffe des rotateurs (SIPS) : stabilisateur principal", "ligaments gléno-huméraux, lig. coraco-huméral", "tendon du long chef du biceps dans la gouttière", "luxation la plus fréquente : antéro-inférieure (nerf axillaire menacé)"].map((t, i) => <Txt key={t} x={565} y={224 + i * 20} size={10.5}>{t}</Txt>)}
+      {["coiffe des rotateurs (supra-épineux, infra-épineux, petit rond, subscapulaire) : stabilisateur principal", "ligaments gléno-huméraux, lig. coraco-huméral", "tendon du long chef du biceps dans la gouttière", "luxation la plus fréquente : antéro-inférieure (nerf axillaire menacé)"].map((t, i) => <Txt key={t} x={565} y={224 + i * 20} size={10.5}>{t}</Txt>)}
       <Txt x={565} y={318} bold size={11.5}>Mouvements (3 axes)</Txt>
       {["flexion / extension", "abduction / adduction", "rotations médiale et latérale", "circumduction"].map((t, i) => <Txt key={t} x={565} y={338 + i * 20} size={10.5}>{t}</Txt>)}
     </Figure>
@@ -279,19 +281,26 @@ export function ShoulderMusclesDiagram() {
   const cols = [C.amber, C.amber, C.amber, C.violet, C.red, C.green];
   return (
     <Figure viewBox="0 0 740 470" title="Muscles de l'épaule : coiffe des rotateurs, deltoïde et grand rond" caption="Coiffe des rotateurs (supra-épineux, infra-épineux, petit rond, subscapulaire) : insertions sur les tubercules de l'humérus ; chaque muscle a sa zone d'origine sur la scapula et son nerf">
-      <path d="M80,40 C60,60 50,140 70,200 C90,260 110,300 130,330 C150,340 170,330 180,300 C190,240 170,140 130,60 C110,40 90,36 80,40z" fill={BONE} stroke={BONE_STROKE} strokeWidth={3} />
-      <path d="M66,86 C100,96 170,84 200,60 C214,50 224,58 216,70 C190,96 120,118 72,110z" fill="#e0cf9e" stroke={BONE_STROKE} strokeWidth={2.5} />
-      <Txt x={150} y={54} size={9.5} bold>acromion</Txt><Txt x={120} y={106} size={9} bold color="#6a4">épine</Txt>
-      <path d="M78,118 C110,126 150,120 160,132 C150,170 110,170 80,150z" fill={C.amber} fillOpacity={0.6} stroke={DEEP.amber} strokeWidth={2} /><Txt x={116} y={148} bold size={9}>Supra-épineux</Txt>
-      <path d="M72,158 C110,176 170,178 168,222 C150,260 100,250 78,210z" fill={C.amber} fillOpacity={0.5} stroke={DEEP.amber} strokeWidth={2} /><Txt x={120} y={214} bold size={9.5}>Infra-épineux</Txt>
-      <path d="M168,222 C180,240 176,290 154,306 C146,268 150,244 168,222z" fill={C.amber} fillOpacity={0.85} stroke={DEEP.amber} strokeWidth={2} /><Txt x={186} y={300} anchor="start" size={9} bold>petit rond</Txt>
-      <path d="M100,254 C120,262 132,294 124,326 C104,320 94,290 100,254z" fill={C.green} fillOpacity={0.7} stroke={DEEP.green} strokeWidth={2} /><Txt x={72} y={300} anchor="end" size={9} bold>grand rond</Txt>
-      <circle cx={252} cy={110} r={42} fill={BONE} stroke={BONE_STROKE} strokeWidth={3} />
-      <circle cx={244} cy={94} r={10} fill="#e0cf9e" stroke={BONE_STROKE} strokeWidth={2} /><Txt x={296} y={130} anchor="start" size={9} bold>tub. majeur</Txt>
-      <path d="M230,150 L226,330 L286,330 L270,148z" fill={BONE} stroke={BONE_STROKE} strokeWidth={3} />
-      <path d="M204,72 C230,56 290,58 306,92 L292,104 C280,84 234,80 212,96z" fill={C.red} fillOpacity={0.55} stroke={DEEP.red} strokeWidth={2} /><Txt x={258} y={70} size={9} bold color={DEEP.red}>deltoïde</Txt>
-      <Txt x={130} y={360} bold size={11}>Scapula (vue postérieure)</Txt>
-      <Txt x={130} y={378} size={9.5} color={C.grey}>humérus à droite</Txt>
+      <g transform="translate(14 8) scale(0.92)">
+        {/* scapula droite, vue postérieure : le supra-épineux est AU-DESSUS de l'épine, l'infra-épineux EN DESSOUS */}
+        <path d="M60,68 L190,52 C210,50 224,64 214,84 L206,130 C200,200 170,290 130,340 C100,330 78,220 60,68z" fill={BONE} stroke={BONE_STROKE} strokeWidth={3} />
+        <path d="M66,76 L188,58 C204,60 208,72 204,84 L198,92 L62,126z" fill={C.amber} fillOpacity={0.6} stroke={DEEP.amber} strokeWidth={2} />
+        <path d="M64,150 L206,114 C204,170 180,250 142,296 C104,272 76,214 64,150z" fill={C.amber} fillOpacity={0.4} stroke={DEEP.amber} strokeWidth={2} />
+        <path d="M206,116 C204,150 194,190 178,224 L160,208 C176,172 186,142 190,118z" fill={C.amber} fillOpacity={0.9} stroke={DEEP.amber} strokeWidth={2} />
+        <path d="M178,226 C170,262 152,292 134,310 L114,298 C132,272 150,248 160,208z" fill={C.green} fillOpacity={0.75} stroke={DEEP.green} strokeWidth={2} />
+        <path d="M60,124 L200,92 L246,66 C258,62 264,72 256,82 L206,112 L62,148z" fill="#e0cf9e" stroke={BONE_STROKE} strokeWidth={3} />
+        <circle cx={252} cy={124} r={36} fill={BONE} stroke={BONE_STROKE} strokeWidth={3} />
+        <path d="M232,158 L228,330 L290,330 L274,156z" fill={BONE} stroke={BONE_STROKE} strokeWidth={3} />
+        <circle cx={236} cy={112} r={8} fill="#e0cf9e" stroke={BONE_STROKE} strokeWidth={2} />
+        <Txt x={112} y={98} bold size={10.5}>Supra-épineux</Txt><Txt x={112} y={110} size={8.5} color={C.grey}>(au-dessus de l'épine)</Txt>
+        <Txt x={112} y={186} bold size={10.5}>Infra-épineux</Txt><Txt x={112} y={198} size={8.5} color={C.grey}>(sous l'épine)</Txt>
+        <line x1={110} y1={128} x2={40} y2={150} {...leader} /><Txt x={4} y={162} anchor="start" size={9.5} bold color="#6a4a20">épine de la scapula</Txt>
+        <line x1={248} y1={70} x2={290} y2={40} {...leader} /><Txt x={294} y={36} anchor="start" size={9.5} bold color="#6a4a20">acromion</Txt>
+        <line x1={186} y1={170} x2={20} y2={260} {...leader} /><Txt x={4} y={272} anchor="start" size={9.5} bold color={DEEP.amber}>petit rond</Txt>
+        <line x1={140} y1={290} x2={20} y2={330} {...leader} /><Txt x={4} y={342} anchor="start" size={9.5} bold color={DEEP.green}>grand rond</Txt>
+        <Txt x={258} y={200} size={9.5} bold>humérus</Txt>
+        <Txt x={140} y={372} bold size={11}>Scapula droite, vue postérieure</Txt>
+      </g>
       <rect x={330} y={16} width={400} height={440} rx={10} fill="none" stroke="currentColor" strokeOpacity={0.25} />
       {rows.map(([m, o, ins, n, a], i) => (
         <g key={m} transform={`translate(340 ${26 + i * 71})`}>

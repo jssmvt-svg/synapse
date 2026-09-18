@@ -18,8 +18,6 @@ const PERITONEUM_COURSE = `# Le péritoine
 - **Postérieurement** : la colonne vertébrale, les muscles qui s'y attachent (diaphragme, psoas majeur, carré des lombes) et le fascia thoraco-lombaire.
 
 ## 3. Forme et contenu
-[[image:gray-1034]]
-
 - En coupe transversale, la cavité abdominale est en forme de **rein** : la colonne vertébrale fait saillie en arrière sur la ligne médiane, créant une **gouttière paravertébrale** de chaque côté.
 - Trois couches de structures se trouvent en arrière de la grande cavité péritonéale, d'arrière en avant :
   1. Reins, uretères et glandes surrénales — dans la gouttière paravertébrale, enveloppés par le fascia de la cavité abdominale.
@@ -29,18 +27,10 @@ const PERITONEUM_COURSE = `# Le péritoine
 
 ## 4. Le péritoine
 [[visual:anat/peritoneum-sagittal]]
-[[image:gray-1035]]
-
 - Le **péritoine** est une vaste membrane séreuse fine qui tapisse l'intérieur de la cavité abdomino-pelvienne, comparable à la plèvre ou au péricarde séreux. Il comporte un feuillet **pariétal** (simple, tapissant les parois) et un feuillet **viscéral** (complexe, formant des replis autour du tube digestif).
 - Ces deux feuillets sont séparés par un espace virtuel, la **cavité péritonéale**, contenant un mince film de liquide.
 
 ## 5. Replis péritonéaux
-[[image:gray-1036]]
-
-[[image:gray-1041]]
-
-[[image:gray-1042]]
-
 - Formés par le feuillet viscéral, ils suspendent de nombreux organes intra-abdominaux (mobilité selon la taille/direction du repli) et livrent passage aux nerfs, vaisseaux et lymphatiques.
 - Les organes situés en dehors de la cavité péritonéale (**rétropéritonéaux**) sont fixes.
 - La **zygose** est le processus par lequel un organe initialement suspendu par un méso (et donc mobile) fusionne son méso avec le péritoine pariétal, puis les feuillets fusionnés s'atrophient : l'organe devient secondairement rétropéritonéal.
@@ -53,10 +43,6 @@ const PERITONEUM_COURSE = `# Le péritoine
 - **Ligaments** : replis reliant des organes entre eux ou à la paroi — ex. ligament spléno-rénal (rein–rate), ligaments coronaires (foie–diaphragme).
 
 ## 7. La cavité péritonéale
-[[image:gray-1038]]
-
-[[image:gray-1039]]
-
 - C'est le plus vaste et le plus complexe sac séreux du corps, espace virtuel entre feuillets pariétal et viscéral. Chez l'homme, cavité fermée ; chez la femme, elle communique avec l'extérieur via les trompes utérines, l'utérus et le vagin — ce qui explique la fréquence des infections pelviennes chez la femme.
 - Elle se divise en :
   - **Grande cavité (grand sac)** : compartiment principal, occupant toute la largeur/longueur de l'abdomen.
@@ -123,8 +109,6 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 
 ## 2. Les 4 parties du duodénum
 [[visual:anat/duodenum-pancreas]]
-[[image:gray-1056]]
-
 | Partie | Longueur | Repères |
 | --- | --- | --- |
 | **1re (supérieure)** | 5 cm | Du pylore au col de la vésicule biliaire (flexure duodénale supérieure) |
@@ -138,8 +122,6 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 - Rapports : antérieurement le lobe carré du foie et la vésicule biliaire ; postérieurement la veine porte, l'artère gastroduodénale, le cholédoque ; supérieurement le foramen épiploïque ; inférieurement la tête et le col du pancréas.
 
 ### 2e partie (descendante)
-[[image:gray-1057]]
-
 - Du col vésiculaire, descend en avant du rein droit jusqu'au bord supérieur de L4 (flexure inférieure). Croisée en son tiers moyen par le côlon transverse. Non recouverte de péritoine en arrière.
 - Rapports : antérieurement vésicule biliaire, lobe droit du foie, côlon/mésocôlon transverse, anses grêles ; latéralement côlon ascendant, angle colique droit, lobe droit du foie ; postérieurement rein droit et vaisseaux rénaux droits, VCI, psoas droit ; médialement tête du pancréas, cholédoque.
 - Le cholédoque et le canal pancréatique principal la perforent obliquement à 7-10 cm sous le pylore ; le canal pancréatique accessoire la perfore parfois 2 cm au-dessus.
@@ -156,8 +138,6 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 - Bande fibromusculaire suspendant la flexure duodéno-jéjunale au pilier droit du diaphragme. Fixe la flexure et l'empêche d'être tractée par le poids des anses grêles.
 
 ## 4. Muqueuse duodénale
-[[image:gray-1058]]
-
 - **Villosités** et **plis circulaires (valvules de Kerckring)** — augmentent la surface d'absorption jusqu'à 1500 fois ; débutent dans la 2e partie, deviennent plus grands et serrés sous le niveau de la grande papille.
 - **Sous-muqueuse** : tissu conjonctif lâche, vaisseaux, plexus de Meissner ; caractéristique — **glandes de Brunner**.
 - **Musculeuse** : circulaire interne + longitudinale externe, plexus d'Auerbach entre les deux.
@@ -171,8 +151,6 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 - **Lymphatique** : vers les nœuds pancréatico-duodénaux, puis nœuds cœliaques et mésentériques supérieurs, puis tronc lymphatique intestinal vers la citerne du chyle.
 
 ## 6. Le pancréas
-[[image:gray-1099]]
-
 - Glande **exo-endocrine** allongée, molle, finement lobulée. La partie **exocrine** sécrète le suc pancréatique ; la partie **endocrine** sécrète des hormones (insuline, etc.).
 - Situé sur la paroi abdominale postérieure, régions épigastrique et hypochondre gauche, croisant obliquement de la concavité duodénale jusqu'au hile splénique (T12-L3). Majoritairement rétropéritonéal (derrière le plancher séreux de la bourse omentale) ; sa **queue** est intrapéritonéale (ligament spléno-rénal).
 
@@ -184,16 +162,10 @@ const DUODENUM_PANCREAS_COURSE = `# Duodénum et pancréas
 - **Queue** — extrémité gauche étroite, dans le ligament spléno-rénal avec les vaisseaux spléniques ; intrapéritonéale, mobile (contrairement au reste, rétropéritonéal fixe) ; en rapport avec la face viscérale de la rate.
 
 ### Canaux pancréatiques
-[[image:gray-1100]]
-
 - **Canal pancréatique principal (de Wirsung)** : débute dans la queue, traverse toute la glande, rejoint le cholédoque pour former l'**ampoule hépato-pancréatique (de Vater)**, s'ouvrant sur la grande papille 8-10 cm sous le pylore. Canal unique dans 90 % des cas.
 - **Canal pancréatique accessoire (de Santorini)** : débute dans la partie inférieure de la tête, croise en avant le canal principal, s'ouvre sur la petite papille (2-3 cm au-dessus de la grande papille, 6-8 cm sous le pylore). Communique avec le canal principal dans 40 % des cas.
 
 ### Anomalies congénitales
-[[image:gray-1101]]
-
-[[image:gray-1102]]
-
 - **Pancréas annulaire** : anneau de tissu pancréatique encerclant la 2e partie du duodénum.
 - **Tissu pancréatique accessoire** : nodules jaunâtres (1-6 mm), le plus souvent dans le duodénum, mais aussi estomac, grêle, grand épiploon, hile splénique.
 
@@ -254,20 +226,12 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - **Fonctions** : brassage/fragmentation des aliments et mélange au suc gastrique ; stockage temporaire des aliments ; sécrétion du **facteur intrinsèque**, nécessaire à l'absorption de la vitamine B12.
 
 ### Caractères extérieurs
-[[image:gray-1047]]
-
-[[image:gray-1049]]
-
-[[image:gray-1050]]
-
 - **2 orifices** : cardia (jonction avec l'œsophage) et pylore (jonction avec le duodénum).
 - **2 courbures** : grande courbure (présente l'**incisure cardiaque**, séparant le fundus de l'œsophage) et petite courbure (présente l'**incisure angulaire**, indiquant la jonction corps/antre pylorique).
 - **2 faces** : antérieure (antéro-supérieure) et postérieure (postéro-inférieure).
 
 ### Les 4 parties
 [[visual:anat/stomach-parts]]
-[[image:gray-1046]]
-
 1. **Cardia** — autour de l'orifice cardial.
 2. **Fundus** — dôme au-dessus du plan horizontal de l'incisure cardiaque ; atteint en général le 5e espace intercostal gauche, sous le mamelon.
 3. **Corps** — partie principale, entre fundus et antre pylorique.
@@ -282,12 +246,6 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - **Face postérieure** : forme le **lit gastrique** avec diaphragme, rein gauche, surrénale gauche, pancréas, mésocôlon transverse, angle colique gauche, artère splénique, rate. Toutes ces structures sont séparées de l'estomac par la bourse omentale, sauf la **rate**, séparée par le grand sac.
 
 ### Structure microscopique
-[[image:gray-1051]]
-
-[[image:gray-1052]]
-
-[[image:gray-1053]]
-
 - 4 tuniques de dehors en dedans : **séreuse** (péritoine), **musculeuse** (3 couches de muscle lisse — longitudinale externe, circulaire moyenne, oblique interne), **sous-muqueuse** (tissu aréolaire lâche), **muqueuse** (épaisse, veloutée, plis temporaires/rugae disparaissant en distension).
 
 ### Vascularisation et innervation
@@ -312,8 +270,6 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - **Bord intermédiaire** : sépare les impressions gastrique et rénale sur la face viscérale.
 
 ### Faces
-[[image:gray-1188]]
-
 - **Face diaphragmatique** : lisse, convexe.
 - **Face viscérale** : concave, irrégulière, 4 impressions — **gastrique** (la plus grande, entre bords supérieur et intermédiaire, contient le hile splénique), **rénale** (entre bords intermédiaire et inférieur), **colique** (triangulaire, angle colique gauche) et **pancréatique** (occasionnelle, queue du pancréas).
 
@@ -321,8 +277,6 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - La rate est entièrement enveloppée de péritoine sauf au hile, d'où partent 2 replis : le **ligament gastro-splénique** (hile → tiers supérieur de la grande courbure, contient les vaisseaux gastriques courts) et le **ligament spléno-rénal** (hile → face antérieure du rein gauche, contient la queue du pancréas, les vaisseaux spléniques, les nœuds pancréatico-spléniques).
 
 ### Vascularisation et innervation
-[[image:gray-1189]]
-
 - **Artère splénique**, plus grosse branche du tronc cœliaque, chemine dans le ligament spléno-rénal, se divise en 5+ branches au hile.
 - **Veine splénique** — s'unit aux veines mésentériques inférieure et supérieure (en arrière du pancréas) pour former la veine porte.
 - **Nerfs** issus du plexus cœliaque.
@@ -335,8 +289,6 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - Métabolisme des glucides, lipides et protéines ; détoxification des médicaments/poisons ; stockage du glycogène et des vitamines liposolubles ; sécrétion de la bile.
 
 ### Caractères extérieurs
-[[image:gray-1085]]
-
 - **2 faces** : diaphragmatique et viscérale ; **1 bord** : le bord inférieur, où les deux faces se rejoignent en avant.
 - **Face diaphragmatique** : zones péritonéales lisses (supérieure, antérieure, droite) + **zone nue** (dépourvue de péritoine), postérieure ; la VCI est logée dans un sillon profond de la partie gauche de la zone nue. Ligaments péritonéaux : coronaire, triangulaires droit et gauche, falciforme.
 - **Face viscérale** : plate/concave, séparée en avant de la face diaphragmatique par le bord inférieur, en arrière du diaphragme par le feuillet postérieur du ligament coronaire. Éléments notables : fosse vésiculaire, fosse pour la VCI, fissure du ligament rond, fissure du ligament veineux, **porta hepatis** (hile hépatique). Couverte de péritoine sauf à la fosse vésiculaire et au porta hepatis.
@@ -344,8 +296,6 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 
 ### Lobes du foie
 [[visual:anat/liver-views]]
-[[image:gray-1087]]
-
 - **Lobes anatomiques (face diaphragmatique)** : droit et gauche, séparés par le ligament falciforme.
 - **Lobes anatomiques (face viscérale)** : 4 lobes délimités par des fissures/fosses en H — droit, gauche, **carré**, **caudé**.
   - Lobe droit : à droite de la fosse vésiculaire et du sillon de la VCI.
@@ -367,8 +317,6 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - **Postérieur** : zone nue directement au contact du diaphragme ; surrénale droite près du sillon de la VCI ; le plancher du sillon de la VCI est perforé par les veines hépatiques ; lobe caudé en rapport avec le récessus supérieur de la bourse omentale ; fissure du ligament veineux (profonde, à gauche du lobe caudé) ; œsophage abdominal (juste à gauche de la partie supérieure de cette fissure, empreinte œsophagienne) ; fundus gastrique juste à gauche de cette empreinte.
 
 ### Rapports — face viscérale
-[[image:gray-1086]]
-
 - Face inférieure du lobe gauche : empreinte gastrique (face antéro-supérieure de l'estomac).
 - Fissure du ligament rond : à gauche du lobe carré.
 - Face inférieure du lobe droit : lobe carré en rapport avec le pylore et le 1er duodénum ; fosse vésiculaire (vésicule biliaire) à droite du lobe carré ; angle colique droit (empreinte colique) à droite de la vésicule ; jonction 1re/2e parties du duodénum (empreinte duodénale) ; rein droit (empreinte rénale), postérieur à l'empreinte colique et à droite de l'empreinte duodénale.
@@ -380,8 +328,6 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
 - Nerfs : plexus cœliaque.
 
 ### Appareil biliaire extra-hépatique
-[[image:gray-1100]]
-
 - 5 composants : canaux hépatiques droit et gauche → canal hépatique commun → **vésicule biliaire** → canal cystique → **canal cholédoque** (bile duct), qui reçoit la bile du foie, la stocke/concentre dans la vésicule, et la déverse dans la 2e partie du duodénum.
 
 ## Points à retenir

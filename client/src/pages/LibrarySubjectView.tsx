@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, type LibrarySubject, type StudySemesterDetail } from "../api";
 import { useLang } from "../i18n";
+import { SearchBar } from "../components/SearchBar";
 import { libraryRoutes } from "../libraryRoutes";
 
 type ChapterSection = "cours" | "laboratoire";
@@ -57,6 +58,8 @@ export function LibrarySubjectView() {
           <Link to="/statistics">{t.statistics}</Link>
         </nav>
       </div>
+
+      <SearchBar />
 
       <header className={`subject-header subject-header-${subject.accent}`}>
         <Link to={semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue} className="back-link">

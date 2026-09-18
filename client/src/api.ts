@@ -152,6 +152,19 @@ export interface LibraryChapter {
   section?: "cours" | "laboratoire";
 }
 
+export interface LibrarySearchResult {
+  chapterId: number;
+  semestre: number;
+  matiere: string;
+  titre_fr: string;
+  titre_en: string;
+  resourceId: number | null;
+  resource_titre_fr: string | null;
+  resource_titre_en: string | null;
+  snippet: string;
+  titleMatch: boolean;
+}
+
 export interface LibraryResource {
   id: number;
   ordre: number;
@@ -465,6 +478,7 @@ export const api = {
     }),
   getLibrary: () => request<LibraryAnnee[]>("/library"),
   getLibrarySubjects: () => request<LibrarySubject[]>("/library/subjects"),
+  searchLibrary: (q: string) => request<LibrarySearchResult[]>(`/library/search?q=${encodeURIComponent(q)}`),
   getLibrarySubject: (slug: string) => request<LibrarySubject>(`/library/subjects/${encodeURIComponent(slug)}`),
   getStudySemesters: () => request<StudySemester[]>("/library/semesters"),
   getStudySemester: (semester: number) => request<StudySemesterDetail>(`/library/semesters/${semester}`),

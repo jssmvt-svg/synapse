@@ -5,15 +5,18 @@ import {
   type ExamAttemptResult,
   type ExamReviewItem,
   type Flashcard,
+  type LibraryChapter,
   type LibraryChapterDetail,
   type LibraryQcmQuestion,
   type LibraryResource,
   type QcmAttemptResult,
 } from "../api";
 import { useLang } from "../i18n";
+import { SearchBar } from "../components/SearchBar";
 import { resolveVisualKey } from "../library-widgets/visual-registry";
 import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
 import { KrebsCycleDiagram } from "../components/KrebsCycleDiagram";
+import { OcclusionFigure } from "../components/OcclusionFigure";
 import { MarkdownContent } from "../components/MarkdownContent";
 import { AminoAcidGallery } from "../components/AminoAcidGallery";
 import {
@@ -23,7 +26,7 @@ import {
   WaterSolubleVitaminGallery,
 } from "../components/BiochemistryGalleries";
 
-type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget";
+type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget" | "diagrams";
 
 function localized(
   lang: "fr" | "en",
@@ -41,6 +44,82 @@ function formatTime(seconds: number): string {
 
 function subjectSlug(matiere: string): string {
   return matiere.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
+function DiagramQuiz({ keys, lang }: { keys: string[]; lang: "fr" | "en" }) {
+  const fr = lang === "fr";
+  return (
+    <section className="learning-panel diagram-quiz">
+      <p className="eyebrow">{fr ? "Schémas à compléter" : "Label the diagram"}</p>
+      <h2>{fr ? "Teste-toi sur les schémas du chapitre" : "Test yourself on the chapter's diagrams"}</h2>
+      <p className="hint">
+        {fr
+          ? "Les légendes sont cachées derrière des pastilles jaunes : essaie de retrouver la réponse, puis clique sur la pastille pour vérifier."
+          : "Labels are hidden behind yellow tags: try to recall the answer, then click the tag to check."}
+      </p>
+      {keys.map((key) => (
+        <OcclusionFigure key={key} visualKey={key} startHidden />
+      ))}
+    </section>
+  );
+}
+
+type Step = { activity: Activity; resourceId?: number; label: string };
+
+function ChapterNav({
+  steps,
+  current,
+  lang,
+  prevChapter,
+  nextChapter,
+  onGo,
+  onHub,
+}: {
+  steps: Step[];
+  current: number;
+  lang: "fr" | "en";
+  prevChapter: LibraryChapter | null;
+  nextChapter: LibraryChapter | null;
+  onGo: (step: Step) => void;
+  onHub: () => void;
+}) {
+  const fr = lang === "fr";
+  const prev = current > 0 ? steps[current - 1] : null;
+  const next = current >= 0 && current < steps.length - 1 ? steps[current + 1] : null;
+  return (
+    <nav className="chapter-nav" aria-label={fr ? "Navigation dans le chapitre" : "Chapter navigation"}>
+      {prev ? (
+        <button type="button" className="chapter-nav-btn" onClick={() => onGo(prev)}>
+          <small>← {fr ? "Précédent" : "Previous"}</small>
+          <span>{prev.label}</span>
+        </button>
+      ) : prevChapter ? (
+        <Link className="chapter-nav-btn" to={`/library/chapter/${prevChapter.id}`}>
+          <small>← {fr ? "Chapitre précédent" : "Previous chapter"}</small>
+          <span>{localized(lang, prevChapter.titre_fr, prevChapter.titre_en)}</span>
+        </Link>
+      ) : (
+        <span className="chapter-nav-btn chapter-nav-disabled" />
+      )}
+      <button type="button" className="chapter-nav-btn chapter-nav-hub" onClick={onHub}>
+        <small>☰</small>
+        <span>{fr ? "Sommaire du chapitre" : "Chapter menu"}</span>
+      </button>
+      {next ? (
+        <button type="button" className="chapter-nav-btn chapter-nav-next" onClick={() => onGo(next)}>
+          <small>{fr ? "Suivant" : "Next"} →</small>
+          <span>{next.label}</span>
+        </button>
+      ) : nextChapter ? (
+        <Link className="chapter-nav-btn chapter-nav-next" to={`/library/chapter/${nextChapter.id}`}>
+          <small>{fr ? "Chapitre suivant" : "Next chapter"} →</small>
+          <span>{localized(lang, nextChapter.titre_fr, nextChapter.titre_en)}</span>
+        </Link>
+      ) : (
+        <span className="chapter-nav-btn chapter-nav-disabled" />
+      )}
+    </nav>
+  );
 }
 
 function ResourceReader({
@@ -149,7 +228,7 @@ function QcmPractice({
       </div>
       <div className="question-heading">
         <p className="eyebrow">{t.practice}</p>
-        {question.visual_key && <div className="card-visual">{resolveVisualKey(question.visual_key)}</div>}
+        {question.visual_key && <div className="card-visual"><OcclusionFigure visualKey={question.visual_key} /></div>}
         <h2>{localized(lang, question.prompt_fr, question.prompt_en)}</h2>
         <p className="hint">{question.multiple_answers ? t.chooseSeveral : t.chooseOne}</p>
       </div>
@@ -204,6 +283,19 @@ function QcmPractice({
           {submitting ? t.loading : t.submitAnswer}
         </button>
       )}
+      <div className="question-navigation">
+        <button type="button" className="nav-secondary" onClick={() => setIndex((current) => Math.max(0, current - 1))} disabled={index === 0}>
+          ← {t.previousQuestion}
+        </button>
+        <button
+          type="button"
+          className="nav-secondary"
+          onClick={() => setIndex((current) => Math.min(questions.length - 1, current + 1))}
+          disabled={index === questions.length - 1}
+        >
+          {t.nextQuestion} →
+        </button>
+      </div>
     </section>
   );
 }
@@ -252,7 +344,7 @@ function FlashcardReview({
       </div>
       <p className="eyebrow">{t.flashcards}</p>
       <p className="hint">{t.prioritizeHint}</p>
-      {card.visual_key && <div className="card-visual">{resolveVisualKey(card.visual_key)}</div>}
+      {card.visual_key && <div className="card-visual"><OcclusionFigure visualKey={card.visual_key} /></div>}
       <button
         type="button"
         className={`study-flashcard ${flipped ? "flipped" : ""}`}
@@ -274,6 +366,22 @@ function FlashcardReview({
         </button>
       </div>
       {mastery[card.id] !== undefined && <p className="saved-note">{t.masterySaved}</p>}
+      <div className="question-navigation">
+        <button
+          type="button"
+          className="nav-secondary"
+          onClick={() => { setFlipped(false); setIndex((current) => (current - 1 + cards.length) % cards.length); }}
+        >
+          ← {lang === "fr" ? "Carte précédente" : "Previous card"}
+        </button>
+        <button
+          type="button"
+          className="nav-secondary"
+          onClick={() => { setFlipped(false); setIndex((current) => (current + 1) % cards.length); }}
+        >
+          {lang === "fr" ? "Carte suivante" : "Next card"} →
+        </button>
+      </div>
     </section>
   );
 }
@@ -459,7 +567,7 @@ function TimedExam({
         </strong>
       </div>
       <p className="eyebrow">{t.chapterExam}</p>
-      {examQuestion.visual_key && <div className="card-visual">{resolveVisualKey(examQuestion.visual_key)}</div>}
+      {examQuestion.visual_key && <div className="card-visual"><OcclusionFigure visualKey={examQuestion.visual_key} /></div>}
       <h2>{localized(lang, examQuestion.prompt_fr, examQuestion.prompt_en)}</h2>
       <p className="hint">{examQuestion.multiple_answers ? t.chooseSeveral : t.chooseOne}</p>
       <div className="option-list">
@@ -504,18 +612,33 @@ export function LibraryChapterView() {
   const [activity, setActivity] = useState<Activity>("hub");
   const [resourceId, setResourceId] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [siblings, setSiblings] = useState<LibraryChapter[]>([]);
 
   useEffect(() => {
     if (!id) return;
+    setDetail(null);
+    setActivity("hub");
+    setResourceId(null);
+    setError(null);
     api
       .getLibraryChapter(Number(id))
       .then(setDetail)
       .catch((err) => setError((err as Error).message));
   }, [id]);
 
+  const matiere = detail?.chapter.matiere;
+  useEffect(() => {
+    if (!matiere) return;
+    api.getLibrarySubject(subjectSlug(matiere)).then((subject) => setSiblings(subject.chapters)).catch(() => setSiblings([]));
+  }, [matiere]);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0 });
+  }, [activity, resourceId, id]);
+
   useEffect(() => {
     const requestedActivity = searchParams.get("activity");
-    if (requestedActivity === "resource" || requestedActivity === "qcm" || requestedActivity === "flashcards" || requestedActivity === "exam") {
+    if (requestedActivity === "resource" || requestedActivity === "qcm" || requestedActivity === "flashcards" || requestedActivity === "diagrams" || requestedActivity === "exam") {
       setActivity(requestedActivity);
     }
     const requestedResource = Number(searchParams.get("resourceId"));
@@ -558,6 +681,49 @@ export function LibraryChapterView() {
     );
   };
 
+  const diagramKeys = Array.from(
+    new Set(
+      detail.resources.flatMap((resource) =>
+        (resource.content_fr || resource.content_en || "").split(String.fromCharCode(10)).map((line) => line.trim()).filter((line) => line.startsWith("[[visual:") && line.endsWith("]]")).map((line) => line.slice(9, -2)),
+      ),
+    ),
+  ).filter((key) => Boolean(resolveVisualKey(key)));
+  const steps: Step[] = [
+    ...detail.resources.map((resource) => ({
+      activity: "resource" as Activity,
+      resourceId: resource.id,
+      label: localized(lang, resource.titre_fr, resource.titre_en),
+    })),
+    ...(diagramKeys.length ? [{ activity: "diagrams" as Activity, label: lang === "fr" ? "Schémas à compléter" : "Label the diagrams" }] : []),
+    { activity: "qcm" as Activity, label: "QCM" },
+    { activity: "flashcards" as Activity, label: lang === "fr" ? "Flashcards" : "Flashcards" },
+    ...(exam ? [{ activity: "exam" as Activity, label: lang === "fr" ? "Examen du chapitre" : "Chapter exam" }] : []),
+  ];
+  const currentStep = steps.findIndex((step) =>
+    step.activity === "resource"
+      ? activity === "resource" && step.resourceId === activeResource?.id
+      : step.activity === activity,
+  );
+  const chapterIndex = siblings.findIndex((chapter) => chapter.id === detail.chapter.id);
+  const prevChapter = chapterIndex > 0 ? siblings[chapterIndex - 1] : null;
+  const nextChapter = chapterIndex >= 0 && chapterIndex < siblings.length - 1 ? siblings[chapterIndex + 1] : null;
+  const goStep = (step: Step) => {
+    if (step.resourceId) setResourceId(step.resourceId);
+    setActivity(step.activity);
+  };
+  const chapterNav = (
+    <ChapterNav
+      steps={steps}
+      current={currentStep}
+      lang={lang}
+      prevChapter={prevChapter}
+      nextChapter={nextChapter}
+      onGo={goStep}
+      onHub={() => setActivity("hub")}
+    />
+  );
+  const showNav = activity !== "hub" && activity !== "widget" && activity !== "exam" && currentStep >= 0;
+
   const openResource = (resource: LibraryResource) => {
     setResourceId(resource.id);
     setActivity("resource");
@@ -565,6 +731,7 @@ export function LibraryChapterView() {
 
   return (
     <main className="learning-shell">
+      <SearchBar />
       <header className="learning-header">
         <Link to={`/library/semester/${detail.chapter.semestre}/subject/${subjectSlug(detail.chapter.matiere)}`} className="back-link">
           {t.backToSubject(detail.chapter.matiere)}
@@ -581,8 +748,13 @@ export function LibraryChapterView() {
         </div>
       </header>
 
+      {showNav && chapterNav}
       {activity === "hub" && (
         <section className="learning-hub">
+          <div className="chapter-neighbours">
+            {prevChapter ? <Link to={`/library/chapter/${prevChapter.id}`}>← {localized(lang, prevChapter.titre_fr, prevChapter.titre_en)}</Link> : <span />}
+            {nextChapter ? <Link to={`/library/chapter/${nextChapter.id}`}>{localized(lang, nextChapter.titre_fr, nextChapter.titre_en)} →</Link> : <span />}
+          </div>
           <div className="activity-grid">
             {detail.resources.map((resource) => (
               <button key={resource.id} type="button" className="activity-card" onClick={() => openResource(resource)}>
@@ -592,6 +764,14 @@ export function LibraryChapterView() {
                 <small>{completedResources.has(resource.id) ? `✓ ${t.completed}` : t.continueAction}</small>
               </button>
             ))}
+            {diagramKeys.length > 0 && (
+              <button type="button" className="activity-card activity-card-accent" onClick={() => setActivity("diagrams")}>
+                <span className="activity-icon">🧩</span>
+                <span className="eyebrow">{lang === "fr" ? "Schémas" : "Diagrams"}</span>
+                <strong>{lang === "fr" ? `${diagramKeys.length} schémas à compléter` : `${diagramKeys.length} diagrams to label`}</strong>
+                <small>{lang === "fr" ? "Légendes cachées, clique pour vérifier" : "Hidden labels, click to check"}</small>
+              </button>
+            )}
             <button type="button" className="activity-card" onClick={() => setActivity("qcm")}>
               <span className="activity-icon">✓</span>
               <span className="eyebrow">{t.practice}</span>
@@ -620,12 +800,6 @@ export function LibraryChapterView() {
                 <small>{t.continueAction}</small>
               </button>
             )}
-            <Link to={`/library/chapter/${detail.chapter.id}/my-deck`} className="activity-card activity-card-personal">
-              <span className="activity-icon">✦</span>
-              <span className="eyebrow">Mon deck</span>
-              <strong>Créer mes flashcards</strong>
-              <small>Privé · IA non vérifiée</small>
-            </Link>
             {exam && (
               <button type="button" className="activity-card activity-card-accent" onClick={() => setActivity("exam")}>
                 <span className="activity-icon">⏱</span>
@@ -653,6 +827,7 @@ export function LibraryChapterView() {
           {isFatSolubleVitaminChapter && activeResource.resource_type === "course" && <FatSolubleVitaminGallery />}
         </>
       )}
+      {activity === "diagrams" && <DiagramQuiz keys={diagramKeys} lang={lang} />}
       {activity === "qcm" && (
         <QcmPractice chapter={detail} questions={detail.qcm} lang={lang} onBack={() => setActivity("hub")} />
       )}
@@ -662,6 +837,7 @@ export function LibraryChapterView() {
       {activity === "exam" && exam && (
         <TimedExam chapter={detail} exam={exam} questions={detail.qcm} lang={lang} onBack={() => setActivity("hub")} />
       )}
+      {showNav && chapterNav}
       {activity === "widget" && detail.chapter.widget_key === "hb-o2-curve" && (
         <section className="learning-panel">
           <div className="panel-topline">

@@ -56,23 +56,6 @@ export function HumerusLandmarksDiagram() {
   );
 }
 
-export function ScapulaLandmarksDiagram() {
-  return (
-    <Figure viewBox="0 0 740 500" title="Scapula droite, vue postérieure : reliefs à identifier" caption="Épine de la scapula (fosses supra- et infra-épineuse), acromion, processus coracoïde, cavité glénoïdale, angles supérieur et inférieur, bords médial et latéral ; l'incisure suprascapulaire livre passage au nerf suprascapulaire">
-      <path d="M70,120 L250,110 C260,140 270,180 270,220 C240,300 200,400 180,460 C130,440 90,360 74,260 C66,220 64,160 70,120z" fill={BONE} stroke={BS} strokeWidth={3} />
-      <path d="M70,196 C130,190 190,176 268,150 L292,138 C310,130 320,142 306,156 C260,186 190,214 70,230z" fill="#e6d7b0" stroke={BS} strokeWidth={3} />
-      <path d="M292,138 C320,120 350,124 356,146 L340,156 C330,144 312,146 300,156z" fill="#e6d7b0" stroke={BS} strokeWidth={3} />
-      <path d="M250,110 C270,96 286,100 286,116 L272,128 C264,120 258,116 250,110z" fill="#e6d7b0" stroke={BS} strokeWidth={2.5} />
-      <ellipse cx={272} cy={236} rx={20} ry={34} fill="#f5edd8" stroke={BS} strokeWidth={3} />
-      <path d="M156,116 C160,124 168,124 170,116" fill="none" stroke={C.grey} strokeWidth={4} />
-      <Pin n={1} x={160} y={150} /><Pin n={2} x={160} y={288} /><Pin n={3} x={72} y={196} /><Pin n={4} x={256} y={310} /><Pin n={5} x={186} y={452} />
-      <Pin n={6} x={62} y={130} /><Pin n={7} x={330} y={132} /><Pin n={8} x={272} y={104} /><Pin n={9} x={272} y={236} /><Pin n={10} x={160} y={108} />
-      <Legend x={400} y={16} title="À montrer sur la pièce osseuse" items={["Fosse supra-épineuse", "Fosse infra-épineuse", "Épine de la scapula (à peine médiale)", "Bord latéral (petit rond, long chef du triceps)", "Angle inférieur (grand rond, grand dorsal)", "Angle supérieur (élévateur)", "Acromion (articule avec la clavicule)", "Processus coracoïde (petit pectoral, coracobrachial, court biceps)", "Cavité glénoïdale (tête de l'humérus)", "Incisure suprascapulaire (nerf)"]} />
-      <Txt x={556} y={356} bold size={11} color={DEEP.blue}>Muscles qui s'y attachent</Txt>
-      {["fosses supra/infra-épineuses : supra- et infra-épineux", "fosse subscapulaire (face antérieure) : subscapulaire", "épine : trapèze (dessus), deltoïde (dessous)"].map((t, i) => <Txt key={i} x={556} y={376 + i * 18} size={9.5}>{t}</Txt>)}
-    </Figure>
-  );
-}
 
 export function FemurLandmarksDiagram() {
   return (
@@ -94,22 +77,3 @@ export function FemurLandmarksDiagram() {
   );
 }
 
-export function HipBoneLandmarksDiagram() {
-  return (
-    <Figure viewBox="0 0 740 500" title="Os coxal droit, vue latérale : reliefs à identifier" caption="Trois os soudés au niveau du cotyle : ilium (crête iliaque, épines iliaques), ischium (tubérosité ischiatique, épine ischiatique) et pubis (branche supérieure, symphyse) ; le foramen obturé est fermé par une membrane">
-      <path d="M100,40 C160,10 280,20 320,80 C336,120 300,170 270,196 L200,196 L140,150 C90,120 70,80 100,40z" fill={BONE} stroke={BS} strokeWidth={3} />
-      <path d="M200,196 L270,196 L290,260 C296,300 270,330 250,340 L220,330 C230,296 210,250 200,196z" fill={BONE} stroke={BS} strokeWidth={3} />
-      <path d="M140,150 L200,196 L140,240 C120,250 110,220 120,196z" fill={BONE} stroke={BS} strokeWidth={0} />
-      <circle cx={210} cy={214} r={38} fill="#f5edd8" stroke={BS} strokeWidth={3} /><Txt x={210} y={218} bold size={9.5}>cotyle</Txt>
-      <ellipse cx={170} cy={310} rx={34} ry={42} fill="#fff" fillOpacity={0.5} stroke={BS} strokeWidth={2.5} strokeDasharray="4 3" /><Txt x={170} y={314} bold size={9}>foramen obturé</Txt>
-      <path d="M240,340 C250,380 230,430 180,420 C150,410 130,380 140,350 L156,340z" fill={BONE} stroke={BS} strokeWidth={3} />
-      <path d="M140,260 C110,300 96,340 110,380 L140,360z" fill={BONE} stroke={BS} strokeWidth={3} />
-      <Pin n={1} x={100} y={44} /><Pin n={2} x={70} y={100} /><Pin n={3} x={318} y={100} /><Pin n={4} x={210} y={214} /><Pin n={5} x={268} y={300} />
-      <Pin n={6} x={200} y={410} /><Pin n={7} x={130} y={376} /><Pin n={8} x={170} y={296} /><Pin n={9} x={272} y={196} /><Pin n={10} x={124} y={190} />
-      <Legend x={400} y={16} title="À montrer sur la pièce osseuse" items={["Crête iliaque", "Épine iliaque antéro-supérieure (lig. inguinal)", "Épine iliaque postéro-supérieure", "Cotyle (acétabulum) : tête du fémur", "Épine ischiatique (petite/grande incisure)", "Tubérosité ischiatique (position assise)", "Branche ischio-pubienne / symphyse", "Foramen obturé (membrane, nerf obturateur)", "Bord antérieur : épine iliaque antéro-inférieure", "Ligne arquée (limite du petit bassin)"]} />
-      <Txt x={556} y={314} bold size={11} color={DEEP.blue}>Un os, trois parties</Txt>
-      {["ilium : haut, aile large (fosse iliaque)", "ischium : bas et postérieur (position assise)", "pubis : bas et antérieur (symphyse pubienne)", "ils fusionnent au centre du cotyle (cartilage en Y)"].map((t, i) => <Txt key={i} x={556} y={336 + i * 18} size={9.5}>{t}</Txt>)}
-      <line x1={0} y1={0} x2={0} y2={0} {...leader} />
-    </Figure>
-  );
-}

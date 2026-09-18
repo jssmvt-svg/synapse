@@ -4,6 +4,7 @@ import { api, type DocumentSummary, type ProgressSummary } from "../api";
 import { useAuth } from "../auth";
 import { useLang } from "../i18n";
 import { libraryRoutes } from "../libraryRoutes";
+import { SearchBar } from "../components/SearchBar";
 import { TrialCountdown } from "../components/TrialCountdown";
 
 export function Dashboard() {
@@ -162,6 +163,8 @@ export function Dashboard() {
           <button className="logout-button" onClick={logout}>{t.logout}</button>
         </div>
       </header>
+
+      <SearchBar />
 
       <section className="dashboard-hero">
         <div>

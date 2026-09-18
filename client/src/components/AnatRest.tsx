@@ -180,7 +180,7 @@ export function MaleGenitalDiagram() {
       <path d="M340,60 C380,20 440,40 440,80 C440,120 380,130 340,100z" fill={C.blue} fillOpacity={0.3} stroke={DEEP.blue} strokeWidth={2.5} /><Txt x={390} y={82} bold size={10.5} color={DEEP.blue}>Vessie</Txt>
       <rect x={520} y={270} width={210} height={190} rx={10} fill="none" stroke="currentColor" strokeOpacity={0.25} />
       <Txt x={625} y={292} bold size={12}>Sécrétions</Txt>
-      {["testicule : spermatozoïdes + testostérone", "vésicules séminales : ~60 % du sperme", "prostate : liquide prostatique (PSA)", "glandes bulbo-urétrales : liquide pré-éjaculatoire"].map((t, i) => { const [a, b] = split2(t, 32); return <g key={i}><Txt x={625} y={314 + i * 34} size={9.5}>{a}</Txt><Txt x={625} y={326 + i * 34} size={9.5}>{b}</Txt></g>; })}
+      {["testicule : spermatozoïdes + testostérone", "vésicules séminales : ~60 % du sperme", "prostate : liquide prostatique (riche en antigène prostatique spécifique)", "glandes bulbo-urétrales : liquide pré-éjaculatoire"].map((t, i) => { const [a, b] = split2(t, 32); return <g key={i}><Txt x={625} y={314 + i * 34} size={9.5}>{a}</Txt><Txt x={625} y={326 + i * 34} size={9.5}>{b}</Txt></g>; })}
     </Figure>
   );
 }

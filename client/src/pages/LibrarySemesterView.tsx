@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, type StudySemesterDetail } from "../api";
 import { useLang } from "../i18n";
+import { SearchBar } from "../components/SearchBar";
 
 export function LibrarySemesterView() {
   const { semester } = useParams<{ semester: string }>();
@@ -46,6 +47,7 @@ export function LibrarySemesterView() {
           <Link to="/library" className="active">{t.libraryTitle}</Link>
         </nav>
       </div>
+      <SearchBar />
       <header className="semester-header">
         <Link to="/library" className="back-link">{lang === "fr" ? "← Retour aux semestres" : "← Back to semesters"}</Link>
         <p className="eyebrow">{lang === "fr" ? "Première année · UMFT" : "Year one · UMFT"}</p>

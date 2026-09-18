@@ -13,7 +13,6 @@ import { SynthesisView } from "./pages/SynthesisView";
 import { Statistics } from "./pages/Statistics";
 import { LibrarySemesterView } from "./pages/LibrarySemesterView";
 import { Admin } from "./pages/Admin";
-import { MyDeck } from "./pages/MyDeck";
 import { authenticatedLibraryRoutePatterns } from "./libraryRoutes";
 
 function RequireAuth({ children }: { children: ReactElement }) {
@@ -96,10 +95,6 @@ export function App() {
             <LibraryChapterView />
           </RequireAuth>
         }
-      />
-      <Route
-        path={authenticatedLibraryRoutePatterns.personalDeck}
-        element={<RequireAuth><MyDeck /></RequireAuth>}
       />
       <Route
         path={authenticatedLibraryRoutePatterns.subject}

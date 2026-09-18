@@ -15,12 +15,6 @@ const LOWER_LIMB_JOINTS_COURSE = `# Articulations du membre inférieur — Hanch
 - **Acétabulum** (« coupe à vinaigre ») : présente trois éléments — une **surface semi-lunaire** en forme de fer à cheval (seule partie articulaire, recouverte de cartilage), l'**échancrure acétabulaire** et la **fosse acétabulaire** (non articulaires). Le **labrum acétabulaire (bourrelet cotyloïdien)** augmente la profondeur de l'acétabulum.
 
 ### 1.3 Ligaments de la hanche
-[[image:gray-339]]
-
-[[image:gray-340]]
-
-[[image:gray-341]]
-
 - **Capsule articulaire** : sac fibreux dense et résistant. Sur l'os coxal, elle s'attache 5-6 mm au-delà du bord acétabulaire ; sur le fémur, elle s'attache en avant à la ligne intertrochantérienne et en arrière à environ 1 cm en avant de la crête intertrochantérienne. Elle est plus épaisse en haut et en avant (où la résistance requise est maximale), plus fine en bas et en arrière. Elle comprend des fibres circulaires et longitudinales.
 - **Ligament ilio-fémoral** (ligament en Y de Bigelow) : le plus résistant des ligaments de la hanche, situé en avant de l'articulation ; s'attache en haut à l'épine iliaque antéro-inférieure et se divise en deux faisceaux se terminant sur la ligne intertrochantérienne.
 - **Ligament pubo-fémoral (pubo-capsulaire)** : de la crête obturatrice et de la branche supérieure du pubis, se mêlant à la capsule et au faisceau vertical du ligament ilio-fémoral.
@@ -49,8 +43,6 @@ const LOWER_LIMB_JOINTS_COURSE = `# Articulations du membre inférieur — Hanch
 [[visual:anat/knee-joint]]
 
 ### 2.1 Généralités
-[[image:gray-350]]
-
 - La plus grande et la plus complexe articulation du corps ; c'est la principale articulation portante.
 - Anciennement décrite comme une simple **trochléenne (ginglyme)**, elle est en réalité composée de **trois articulations en une** : deux articulations condylaires (entre chaque condyle fémoral et le ménisque/condyle tibial correspondant) et une articulation fémoro-patellaire (partiellement plane/arthrodiale).
 
@@ -58,12 +50,6 @@ const LOWER_LIMB_JOINTS_COURSE = `# Articulations du membre inférieur — Hanch
 - Surfaces articulaires des condyles fémoraux médial et latéral, surface trochléaire du fémur, surface articulaire de la patella, surfaces articulaires des condyles tibiaux médial et latéral.
 
 ### 2.3 Ligaments du genou
-[[image:gray-345]]
-
-[[image:gray-348]]
-
-[[image:gray-349]]
-
 - **Capsule articulaire** : sac fibreux mince, déficient en avant (remplacé par la patella, le quadriceps, les rétinaculums patellaires et le ligament patellaire). S'attache environ à 0,5-1 cm des marges articulaires ; en avant, elle est percée par la bourse suprapatellaire ; en arrière, attachée à la ligne intercondylienne ; latéralement, elle englobe l'origine du poplité. Sur le tibia, elle est déficiente en avant au niveau de la tubérosité tibiale (insertion du ligament patellaire) et présente en arrière un hiatus pour le tendon du poplité.
 - **Membrane synoviale** : tapisse la capsule fibreuse ; se prolonge en avant au-dessus de la patella comme **bourse suprapatellaire**, en arrière forme un cul-de-sac autour des ligaments croisés.
 - **Ménisques médial et latéral** : lamelles fibrocartilagineuses en croissant qui approfondissent les surfaces du plateau tibial. Bord périphérique épais, convexe, attaché à la capsule ; bord interne mince, concave, libre. Chaque ménisque couvre environ les deux tiers périphériques de la surface articulaire tibiale correspondante.
@@ -180,10 +166,6 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 [[visual:anat/lower-limb-arteries]]
 
 ### 1.1 Artère fémorale
-[[image:gray-546]]
-
-[[image:gray-550]]
-
 - Artère principale du membre inférieur, **continuation de l'artère iliaque externe**. Elle entre dans le triangle fémoral en arrière du ligament inguinal, au point médio-inguinal.
 - Trajet : descend en dedans à travers le triangle fémoral puis le canal des adducteurs ; à l'extrémité inférieure du canal (jonction tiers moyen/tiers inférieur de la cuisse), elle quitte la cuisse par le **hiatus des adducteurs** (ouverture tendineuse du grand adducteur) pour entrer dans la fosse poplitée, où elle devient l'**artère poplitée**.
 - **Branches dans le triangle fémoral** — 3 superficielles : épigastrique superficielle, honteuse externe superficielle, circonflexe iliaque superficielle ; et 3 profondes : honteuse externe profonde, rameaux musculaires, **artère fémorale profonde**.
@@ -191,28 +173,20 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 - **Artère fémorale profonde** : la plus grosse branche de la fémorale, principale source de vascularisation des muscles des trois loges de la cuisse. Ses branches : rameaux musculaires, **artère circonflexe fémorale médiale** (rameau transverse → anastomose cruciforme ; rameau ascendant → anastomose trochantérienne ; rameau acétabulaire ; rameaux rétinaculaires postérieurs vascularisant tête/col fémoral), **artère circonflexe fémorale latérale** (rameau ascendant → anastomose trochantérienne ; rameau transverse → anastomose cruciforme ; rameau descendant → anastomose du genou), et **quatre artères perforantes** (la 4e étant la continuation de la fémorale profonde).
 
 ### 1.2 Artère poplitée
-[[image:gray-552]]
-
 - Continuation de l'artère fémorale ; traverse le plancher de la fosse poplitée de dedans en dehors jusqu'au bord inférieur du poplité, où elle se termine en se divisant en **artères tibiales antérieure et postérieure**.
 - Rapports : en avant (profond) le plancher poplité (surface poplitée du fémur, genou, fascia du poplité) ; en arrière (superficiel) veine poplitée, nerf tibial, fascia superficiel, peau.
 - Branches : cutanées, musculaires (grand adducteur, ischio-jambiers, triceps sural), et **cinq géniculaires** (supérieures médiale/latérale, inférieures médiale/latérale, moyenne) formant l'anastomose géniculaire autour du genou.
 
 ### 1.3 Artère tibiale antérieure
-[[image:gray-553]]
-
 - Artère principale de la loge antérieure de la jambe ; plus petite branche terminale de la poplitée. Traverse la membrane interosseuse pour entrer dans la loge antérieure ; descend verticalement jusqu'à mi-chemin entre les malléoles, où elle devient l'**artère dorsale du pied (pédieuse)**.
 - Rapports variables avec le tibial antérieur/extenseurs des orteils selon le tiers de jambe ; le **nerf fibulaire profond** est latéral dans les tiers supérieur/inférieur, antérieur dans le tiers moyen.
 - Branches : récurrentes tibiales antérieure/postérieure (anastomose du genou), musculaires, malléolaires médiale/latérale antérieures (anastomose de la cheville), artère fibulaire (origine variable).
 
 ### 1.4 Artère dorsale du pied (pédieuse)
-[[image:gray-554]]
-
 - Continuation directe de la tibiale antérieure ; se termine en anastomosant avec l'artère plantaire latérale.
 - Branches : artères tarsiennes médiale/latérale (réseaux malléolaires), **artère arquée** (donne les artères métatarsiennes dorsales), première artère métatarsienne dorsale.
 
 ### 1.5 Artère tibiale postérieure
-[[image:gray-551]]
-
 - Plus grosse des deux branches terminales de la poplitée ; vascularise la loge postérieure, la loge latérale de la jambe et la plante du pied. Accompagnée tout du long par le **nerf tibial**. Se termine en se divisant en artères plantaires latérale (grosse) et médiale (petite).
 
 ### 1.6 Artère fibulaire (péronière)
@@ -220,18 +194,10 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 - Branches : musculaires, nourricière de la fibula, communicante (avec la tibiale postérieure au-dessus de la cheville), perforante (traverse la membrane interosseuse), calcanéenne latérale.
 
 ### 1.7 Arcade plantaire
-[[image:gray-555]]
-
 - Formée par la continuation directe de l'artère plantaire latérale ; complétée médialement par anastomose avec la terminaison de l'artère dorsale du pied. S'étend de la base du 5e métatarsien au premier espace intermétatarsien.
 - Branches : 4 artères métatarsiennes plantaires, 3 artères perforantes proximales.
 
 ## 2. Veines du membre inférieur
-[[image:gray-549]]
-
-[[image:gray-581]]
-
-[[image:gray-582]]
-
 
 - Trois types : **superficielles**, **perforantes**, **profondes**.
 - **Veines profondes** : accompagnent les artères, drainent dans la veine fémorale puis la veine iliaque externe (veines satellites des tibiales antérieure/postérieure, veine poplitée, veine fémorale).
@@ -245,8 +211,6 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 [[visual:anat/lower-limb-nerves]]
 
 ### 3.1 Plexus lombaire
-[[image:gray-822]]
-
 - Réseau situé dans l'épaisseur du **psoas major**, en avant des processus transverses lombaires.
 - Formé par l'union des rameaux ventraux de **L1-L3** et de la plus grande partie du rameau ventral de **L4** ; reçoit une contribution du nerf sous-costal (T12). La petite partie inférieure de L4 rejoint L5 pour former le **tronc lombo-sacré** (contribue au plexus sacré).
 - **Branches** :
@@ -259,8 +223,6 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 - **Nerf obturateur** : descend à travers le psoas major, émerge de son bord médial, traverse le canal obturateur. Division antérieure (rameau articulaire pour la hanche ; moteur pour long/court adducteurs et gracile, parfois pectiné ; cutané face médiale de cuisse) et division postérieure (moteur pour obturateur externe, grand adducteur, court adducteur ; rameau articulaire géniculaire pour le genou).
 
 ### 3.2 Plexus sacré
-[[image:gray-828]]
-
 - Situé sur la paroi pelvienne postérieure, en avant du piriforme. Formé par les rameaux ventraux de **L4 (partie descendante), L5, S1-S3**.
 - Chacune des 5 racines se divise en division antérieure et postérieure : les 4 divisions postérieures (L4,L5,S1,S2) forment le **nerf fibulaire commun** ; les 5 divisions antérieures forment le **nerf tibial** ; les deux, fusionnés, forment le **nerf sciatique**.
 - **Branches terminales** : nerf sciatique (divisions dorsale et ventrale), nerf honteux (divisions ventrales S2-S4).
@@ -269,22 +231,16 @@ const LOWER_LIMB_VESSELS_NERVES_COURSE = `# Artères, veines et nerfs du membre 
 - **Branche mixte** : nerf cutané postérieur de la cuisse (S1-S3).
 
 ### 3.3 Nerf sciatique
-[[image:gray-832]]
-
 - Entre dans la région glutéale par le foramen ischiatique majeur, sous le piriforme ; descend entre le grand trochanter et la tubérosité ischiatique, sous le grand fessier.
 - Se divise, au niveau de l'angle supérieur de la fosse poplitée, en ses deux branches terminales : **nerf tibial** et **nerf fibulaire commun**.
 - Branches collatérales : articulaires pour la hanche ; musculaires pour semi-tendineux, semi-membraneux, chef long du biceps et une partie du grand adducteur (fibres tibiales) ; musculaire pour le chef court du biceps fémoral (fibres fibulaires communes).
 
 ### 3.4 Nerf tibial
-[[image:gray-833]]
-
 - Plus grosse branche terminale du sciatique. Traverse la fosse poplitée, descend en arrière du tibia, passe en arrière/en dessous de la malléole médiale, se termine en nerfs plantaires médial et latéral.
 - Branches collatérales : musculaires (gastrocnémien, plantaire grêle, soléaire, poplité, tibial postérieur, fléchisseur commun/propre des orteils), **nerf sural** (avec la branche communicante du fibulaire commun), articulaires (genou, cheville), calcanéennes médiales.
 - Territoire : sensitif face postéro-latérale de jambe, face latérale et plante du pied ; moteur loge postérieure de jambe et la plupart des muscles intrinsèques du pied.
 
 ### 3.5 Nerf fibulaire (péronier) commun
-[[image:gray-835]]
-
 - Plus petite branche terminale du sciatique ; contourne le col de la fibula pour entrer dans la loge latérale de la jambe.
 - Branches terminales : **nerf fibulaire superficiel** (musculo-cutané de jambe — moteur long/court fibulaire, cutané tiers inférieur latéral de jambe et dos du pied) et **nerf fibulaire profond**.
 - Territoire : moteur loges latérale et antérieure de jambe ; sensitif face antéro-latérale de jambe et dos du pied.
@@ -390,34 +346,24 @@ const ABDOMINAL_WALL_COURSE = `# Paroi abdominale antéro-latérale
 [[visual:anat/abdominal-wall]]
 
 ### 3.1 Muscle oblique externe
-[[image:gray-392]]
-
 - **Origine** : huit digitations charnues des faces externes des huit dernières côtes ; fibres orientées en bas et en dedans.
 - **Insertion** : les fibres les plus postérieures descendent verticalement vers le tiers antérieur de la lèvre externe de la crête iliaque (bord postérieur libre du muscle) ; les fibres restantes se terminent en une large aponévrose insérée sur la **ligne blanche**, du processus xiphoïde à la symphyse pubienne. Le bord libre inférieur de l'aponévrose, épaissi et enroulé sur lui-même, forme le **ligament inguinal**.
 - **Ligne blanche** : structure fibreuse médiane, du xiphoïde à la symphyse pubienne, formée par la fusion des aponévroses des muscles de la paroi antérieure.
 - **Innervation** : rameaux ventraux des six derniers nerfs thoraciques (T7-T12).
 
 ### 3.2 Muscle oblique interne
-[[image:gray-395]]
-
 - Plus petit et plus mince que l'oblique externe ; situé profondément par rapport à lui.
 - **Origine** : deux tiers latéraux de la face supérieure du ligament inguinal ; deux tiers antérieurs de la crête iliaque (zone intermédiaire) ; fascia thoraco-lombaire. Fibres orientées en haut et en dedans (perpendiculaires à celles de l'oblique externe).
 - **Insertion** : la majorité des fibres se terminent en une aponévrose insérée sur les 7e, 8e et 9e cartilages costaux et sur la ligne blanche. Les fibres les plus postérieures s'insèrent sur le bord inférieur des trois dernières côtes. Les fibres inférieures, arquées au-dessus du canal inguinal, descendent s'insérer sur la crête pubienne et la ligne pectinéale, fusionnant avec des fibres du transverse de l'abdomen pour former le **tendon conjoint**.
 - **Innervation** : T7-T12 et L1, via les nerfs ilio-hypogastrique et ilio-inguinal (plexus lombaire).
 
 ### 3.3 Muscle transverse de l'abdomen
-[[image:gray-401]]
-
 - Le plus profond des trois muscles larges ; fibres majoritairement horizontales/transverses.
 - **Origine** : tiers latéral de la face supérieure du ligament inguinal ; deux tiers antérieurs de la crête iliaque (lèvre interne) ; fascia thoraco-lombaire ; faces internes des six dernières côtes et leurs cartilages costaux.
 - **Insertion** : les fibres inguinales s'arquent en arrière pour former le toit du canal inguinal puis descendent en dedans former une aponévrose fusionnant avec celle de l'oblique interne (tendon conjoint), insérée sur la crête pubienne et la partie médiale du pecten pubis. La majorité des fibres se terminent en une aponévrose insérée sur la ligne blanche.
 - **Innervation** : T7-T12 et L1, via les nerfs ilio-hypogastrique et ilio-inguinal.
 
 ## 4. Structures dérivées des muscles larges
-[[image:gray-393]]
-
-[[image:gray-394]]
-
 1. **Ligament inguinal** (de Poupart) : bord libre inférieur de l'aponévrose de l'oblique externe, tendu entre l'épine iliaque antéro-supérieure et le tubercule pubien.
 2. **Ligament lacunaire** (de Gimbernat) : portion de l'aponévrose de l'oblique externe réfléchie en arrière et en dehors, attachée à la ligne pectinéale ; base concave formant la limite médiale de l'anneau fémoral ; apex correspondant au tubercule pubien.
 3. **Tendon conjoint (falx inguinalis)** : fusion des fibres aponévrotiques inférieures de l'oblique interne et du transverse, arquées au-dessus du cordon spermatique, insérées sur la crête pubienne et la ligne pectinéale médiale.
@@ -426,8 +372,6 @@ const ABDOMINAL_WALL_COURSE = `# Paroi abdominale antéro-latérale
 6. **Ligament de Cooper** (pectinéal) : bande fibreuse résistante, extension latérale de la base du ligament lacunaire le long de la ligne pectinéale.
 
 ## 5. Le muscle grand droit de l'abdomen
-[[image:gray-398]]
-
 - Muscle pair, long, plat, en bandelette, s'étendant verticalement de la symphyse pubienne au rebord costal, le long de la ligne blanche qui sépare les muscles droits gauche et droit.
 - **Origine** : deux chefs tendineux — chef médial (face antérieure de la symphyse pubienne) et chef latéral (partie latérale de la crête pubienne et tubercule pubien).
 - **Insertion** : quatre digitations charnues sur la paroi thoracique antérieure, le long d'une ligne horizontale passant latéralement depuis le xiphoïde, sur les 5e, 6e et 7e cartilages costaux.
@@ -449,8 +393,6 @@ const ABDOMINAL_WALL_COURSE = `# Paroi abdominale antéro-latérale
 - **Rotation** : par contraction combinée de l'oblique externe d'un côté et de l'oblique interne du côté opposé.
 
 ## 9. La gaine des droits
-[[image:gray-399]]
-
 - Gaine aponévrotique enveloppant le grand droit (et le pyramidal s'il est présent), formée par les aponévroses des muscles larges de la paroi antérieure.
 - **Paroi antérieure** : complète sur toute la longueur du muscle. **Paroi postérieure** : déficiente en dessous — présente un bord libre concave inférieurement, la **ligne arquée (ligne de Douglas)**, entre l'ombilic et la symphyse pubienne ; en dessous de ce niveau, le muscle repose directement sur le fascia transversalis.
 - **Au-dessus de la ligne arquée** : paroi antérieure = fusion de l'aponévrose de l'oblique externe avec le feuillet antérieur de l'aponévrose de l'oblique interne ; paroi postérieure = fusion de l'aponévrose du transverse avec le feuillet postérieur de l'aponévrose de l'oblique interne.

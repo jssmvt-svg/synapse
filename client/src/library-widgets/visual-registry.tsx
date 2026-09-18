@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSheet, LegBonesSheet, FootBonesDiagram, RectumAnalDiagram, BladderUrethraDiagram, MaleGenitalDiagram, CoeliacTrunkDiagram } from "../components/AnatRest";
-import { HumerusLandmarksDiagram, ScapulaLandmarksDiagram, FemurLandmarksDiagram, HipBoneLandmarksDiagram } from "../components/AnatBonesTP";
+import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/AnatBonesTP";
 import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
@@ -211,9 +211,9 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/kidney-section": () => <KidneySectionDiagram />,
   "anat/uterus-adnexa": () => <UterusAdnexaDiagram />,
   "anat/tp-humerus": () => <HumerusLandmarksDiagram />,
-  "anat/tp-scapula": () => <ScapulaLandmarksDiagram />,
+  "anat/tp-scapula": () => <ScapulaReliefsSheet />,
   "anat/tp-femur": () => <FemurLandmarksDiagram />,
-  "anat/tp-hip-bone": () => <HipBoneLandmarksDiagram />,
+  "anat/tp-hip-bone": () => <HipBoneReliefsSheet />,
   "anat/tp-forearm-bones": () => <ForearmBonesSheet />,
   "anat/tp-carpus": () => <CarpusDiagram />,
   "anat/tp-leg-bones": () => <LegBonesSheet />,

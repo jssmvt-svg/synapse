@@ -5,7 +5,6 @@ export const libraryRoutes = {
   semesterSubject: (semester: number | string, slug: string) =>
     `/library/semester/${semester}/subject/${encodeURIComponent(slug)}`,
   chapter: (chapterId: number | string) => `/library/chapter/${chapterId}`,
-  personalDeck: (chapterId: number | string) => `/library/chapter/${chapterId}/my-deck`,
   recommendation: (
     chapterId: number,
     activity: string,
@@ -19,7 +18,6 @@ export const libraryRoutes = {
 export const authenticatedLibraryRoutePatterns = {
   catalogue: "/library",
   chapter: "/library/chapter/:id",
-  personalDeck: "/library/chapter/:id/my-deck",
   subject: "/library/subject/:slug",
   semester: "/library/semester/:semester",
   semesterSubject: "/library/semester/:semester/subject/:slug",
