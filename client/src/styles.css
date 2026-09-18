@@ -3954,3 +3954,57 @@ select:focus {
   color: inherit;
   text-decoration: underline;
 }
+
+/* Animations des schémas de physiologie */
+@keyframes fig-move {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+
+.fig-dot {
+  offset-rotate: 0deg;
+  animation: fig-move 3s linear infinite;
+}
+
+@keyframes fig-seq-4 { 0%, 22% { opacity: 1; } 28%, 100% { opacity: 0.28; } }
+@keyframes fig-seq-5 { 0%, 17% { opacity: 1; } 23%, 100% { opacity: 0.28; } }
+@keyframes fig-seq-6 { 0%, 14% { opacity: 1; } 19%, 100% { opacity: 0.28; } }
+@keyframes fig-seq-7 { 0%, 12% { opacity: 1; } 17%, 100% { opacity: 0.28; } }
+@keyframes fig-seq-8 { 0%, 10% { opacity: 1; } 15%, 100% { opacity: 0.28; } }
+
+.fig-seq { opacity: 0.28; animation-iteration-count: infinite; animation-timing-function: linear; }
+.fig-seq-4 { animation-name: fig-seq-4; }
+.fig-seq-5 { animation-name: fig-seq-5; }
+.fig-seq-6 { animation-name: fig-seq-6; }
+.fig-seq-7 { animation-name: fig-seq-7; }
+.fig-seq-8 { animation-name: fig-seq-8; }
+
+@keyframes fig-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+.fig-pulse { animation: fig-pulse 2s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fig-dot { animation: none; offset-distance: 50%; }
+  .fig-seq, .fig-pulse { animation: none; opacity: 1; }
+}
+
+@keyframes fig-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(var(--dx, 12px)); }
+}
+
+.fig-slide { animation: fig-slide 2.6s ease-in-out infinite alternate; }
+
+@keyframes fig-shrink {
+  from { transform: scaleX(1); }
+  to { transform: scaleX(0.6); }
+}
+
+.fig-shrink { animation: fig-shrink 2.6s ease-in-out infinite alternate; transform-box: fill-box; transform-origin: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  .fig-slide, .fig-shrink { animation: none; }
+}

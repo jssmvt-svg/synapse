@@ -45,6 +45,8 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - Eau 99 %, substances inorganiques 0,6 % (HCl 150-160 mEq/L, KCl 15 mEq/L, NaCl et HCO₃⁻), substances organiques 0,4 % (enzymes protéolytiques et lipolytiques, mucus, facteur intrinsèque, lysozyme, IgA sécrétoire).
 
 ### 2.3 Mécanisme de sécrétion du HCl
+[[visual:phys/gastric-secretion]]
+
 - Le CO₂ (métabolisme cellulaire ou diffusion sanguine) est hydraté par l'**anhydrase carbonique** : CO₂ + H₂O → H₂CO₃ → HCO₃⁻ + H⁺.
 - **Pôle basal** : HCO₃⁻ passe dans le sang via l'échangeur HCO₃⁻/Cl⁻ ; Cl⁻ entre dans la cellule ; K⁺ sort passivement ; la pompe Na⁺/K⁺ maintient l'électroneutralité.
 - **Pôle apical** : H⁺ est activement sécrété dans la lumière via la **pompe H⁺/K⁺-ATPase** ; Cl⁻ sort passivement par des canaux chlore. H⁺ + Cl⁻ → HCl.
@@ -314,6 +316,8 @@ const DIGESTION_ABSORPTION_COURSE = `# Lecture 13 — Digestion et absorption de
 - Agrégats multimoléculaires : concentration minimale de sels biliaires = « concentration micellaire critique » ; 20-30 molécules lipidiques par micelle (cholestérol, monoglycérides, AGL, vitamines liposolubles A, D, E, K).
 
 ### 4.3 Mécanisme de transport pour l'absorption des lipides
+[[visual:phys/intestinal-absorption]]
+
 - Localisation : jéjunum proximal.
 - 1) Diffusion des micelles vers la surface d'absorption, selon le gradient de concentration micellaire.
 - 2) Transport des composants des micelles à travers la bordure en brosse : fractions lipidiques par diffusion simple, sels biliaires par cotransport Na⁺/sels biliaires.
@@ -437,6 +441,8 @@ const GI_MOTILITY_COURSE = `# Lecture 14 — Motilité gastro-intestinale
 - Le contrôle de la contraction est à la fois nerveux et hormonal.
 
 ## 2. Types de mouvements gastro-intestinaux
+[[visual:phys/gi-motility]]
+
 
 - **Mouvements associés à la digestion et l'absorption** : toniques (contraction des sphincters digestifs, empêchant le passage prématuré du contenu intestinal), de segmentation (mélange), péristaltiques (propulsion).
 - **Mouvements associés à l'état de jeûne** : gastriques (contractions péristaltiques de « faim »), intestinaux (complexes moteurs migrants, base des contractions péristaltiques périodiques pour l'évacuation gastro-intestinale complète).

@@ -4,6 +4,8 @@ import { single, multi } from "./qcm-helpers.js";
 const RED_BLOOD_CELLS_COURSE = `# Milieu intérieur et physiologie des globules rouges
 
 ## 1. Caractéristiques morphologiques et fonctionnelles de l'érythrocyte adulte
+[[visual:phys/rbc]]
+
 - L'érythrocyte (globule rouge, GR) adulte est une cellule **anucléée**, dépourvue d'organites cellulaires et de capacité de synthèse protéique ou de prolifération.
 - **Durée de vie** : 100 à 120 jours.
 - **Forme** : disque biconcave à bords arrondis (microscopie électronique), offrant une grande surface pour un petit volume — favorable aux échanges gazeux.
@@ -21,6 +23,8 @@ const RED_BLOOD_CELLS_COURSE = `# Milieu intérieur et physiologie des globules 
 | IDR/RDW | Indirecte (calculée) | 11,5-14,5% | ↑ anisocytose |
 
 Anémie : carence en fer → ferriprive ; carence en B12/folates → mégaloblastique ; insuffisance médullaire → aplasique. Polyglobulie : primitive (maladie de Vaquez) ou secondaire (altitude).
+
+[[visual:phys/anemia]]
 
 **Orientation diagnostique par l'hémogramme** :
 | Type d'anémie | VGM | TCMH/CCMH | Réticulocytes | Cause |
@@ -71,6 +75,8 @@ Anémie : carence en fer → ferriprive ; carence en B12/folates → mégaloblas
 - **Déplacement vers la gauche** (↑ affinité, P50 < 26,6 mmHg) : ↑ pH, ↓ PCO₂, ↓ 2,3-DPG, ↓ température, HbF — favorable au niveau pulmonaire.
 
 ## 6. Rôle des globules rouges dans le transport du CO₂
+[[visual:phys/co2-transport]]
+
 - Formes de transport : 5% dissous dans le plasma (fournit la PCO₂), 95% dans le GR (dont 90% sous forme de HCO₃⁻ grâce à l'anhydrase carbonique, 5% lié de façon réversible aux groupes -NH₂ de la globine = carbhémoglobine).
 - Au niveau **tissulaire** (PCO₂ = 46 mmHg) : le CO₂ se lie à l'Hb (CarbHb) ; le CO₂ s'hydrate sous l'action de l'anhydrase carbonique (CO₂ + H₂O → H₂CO₃ → HCO₃⁻ + H⁺) ; le H⁺ est tamponné par l'Hb ; le HCO₃⁻ quitte le GR via l'échangeur Cl⁻/HCO₃⁻ (**phénomène de Hamburger**, migration des ions Cl⁻).
 - Au niveau **pulmonaire** (PCO₂ = 40 mmHg) : les systèmes tampons de l'Hb libèrent le H⁺ ; la carbhémoglobine libère le CO₂ ; le H⁺ se combine au HCO₃⁻ pour reformer H₂CO₃ puis CO₂ + H₂O ; le HCO₃⁻ entre dans le GR via l'échangeur Cl⁻/HCO₃⁻.
@@ -82,6 +88,8 @@ Anémie : carence en fer → ferriprive ; carence en B12/folates → mégaloblas
 - Ces systèmes assurent **3/4 de la capacité tampon totale du sang**.
 
 ## 8. Cinétique érythrocytaire et hémolyse physiologique
+[[visual:phys/rbc-lifecycle]]
+
 **Stade médullaire (érythropoïèse)** :
 - Se déroule dans la moelle osseuse, ~25 mL d'érythrocytes/jour (50 mL de sang/jour), sur 5-7 jours, nécessite la présence d'érythropoïétine (EPO).
 
@@ -198,6 +206,8 @@ export const RED_BLOOD_CELLS_FLASHCARDS: LibraryCardSeed[] = [
 const HEMATOPOIESIS_LEUKOCYTES_COURSE = `# Volémie, hématopoïèse et rôle des leucocytes dans la défense de l'organisme
 
 ## 1. Volémie (volume sanguin total)
+[[visual:phys/blood-volume]]
+
 - **Définition** : somme du volume plasmatique et du volume globulaire. Volume sanguin total (VST) = VP + VG = 3000 + 2000 = 5000 mL.
   - VST ≈ 5000 mL (7-8% du poids corporel, 3 L/m²)
   - Volume plasmatique (VP) ≈ 3000 mL (55% du VST)
@@ -220,6 +230,8 @@ const HEMATOPOIESIS_LEUKOCYTES_COURSE = `# Volémie, hématopoïèse et rôle de
 - **Volume sanguin central** : 600-1000 mL, mobilisé lors du passage en orthostatisme (maintien de la pression artérielle) et en début d'exercice physique.
 
 ## 2. Hématopoïèse
+[[visual:phys/hematopoiesis]]
+
 - **Définition** : formation des cellules sanguines à partir de la cellule souche pluripotente, sous l'action de facteurs de croissance (prolifération, différenciation, maturation).
 - **Localisation** : moelle osseuse (MO) — de tous les os chez le nouveau-né/nourrisson, restreinte progressivement au squelette axial chez l'adulte (os plats : sternum, côtes, os coxaux ; os courts : vertèbres ; épiphyses proximales du fémur et de l'humérus).
 
@@ -306,6 +318,8 @@ const HEMATOPOIESIS_LEUKOCYTES_COURSE = `# Volémie, hématopoïèse et rôle de
 - **Réponse secondaire** : contacts ultérieurs, latence courte (2-4 jours), activation des lymphocytes B mémoires, anticorps IgG en grande quantité, réponse rapide et ample.
 
 ### Les leucocytes granulocytaires
+[[visual:phys/leukocytes]]
+
 
 | Type | Proportion | Cinétique (moelle / sang / tissu) | Fonction principale |
 | --- | --- | --- | --- |
@@ -476,6 +490,8 @@ const HEMOSTASIS_COURSE = `# Hémostase physiologique
 - **Pathologie** : le purpura thrombopénique se manifeste par des pétéchies (hémorragies capillaires ponctuelles spontanées sous-cutanées) et un test de Rumpel-Leede positif (fragilité capillaire).
 
 ## 2. Hémostase physiologique
+[[visual:phys/hemostasis]]
+
 - **Définition** : ensemble des phénomènes assurant l'arrêt spontané de l'hémorragie au niveau des petits vaisseaux (microcirculation), impliquant des facteurs vasculaires, thrombocytaires, plasmatiques et tissulaires.
 - **Exploration** : hémostase primaire (temps de saignement TS = 1,5-4 min) — temps vasculaire (vasoconstriction) + temps plaquettaire (clou blanc plaquettaire) ; hémostase secondaire — caillot rouge de fibrine, mécanisme intrinsèque (intravasculaire) et extrinsèque (extravasculaire).
 
@@ -502,6 +518,8 @@ const HEMOSTASIS_COURSE = `# Hémostase physiologique
 - **(d) Métamorphose visqueuse** : le clou plaquettaire blanc devient un ensemble de plaquettes fusionnées d'aspect homogène ; digestion irréversible de la membrane plaquettaire par les enzymes lysosomales ; libération de tous les constituants thrombocytaires ; rôle dans l'orientation des filaments de fibrine et la rétraction du caillot (via la production de thrombosthénine).
 
 ### 2.2 Hémostase secondaire (coagulation)
+[[visual:phys/coagulation]]
+
 - Arrêt permanent du saignement, succession de réactions enzymatiques en cascade impliquant des facteurs plasmatiques (I à XIII), tissulaires (facteur III) et thrombocytaires (PL3).
 
 **Classification des facteurs plasmatiques de coagulation** :

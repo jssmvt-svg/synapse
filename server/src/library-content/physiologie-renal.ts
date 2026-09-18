@@ -10,6 +10,8 @@ const RENAL_FILTRATION_COURSE = `# Organisation du rein et filtration glomérula
 - Le **hile** est le passage des vaisseaux sanguins, lymphatiques, nerfs et de l'uretère.
 
 ## 2. Le néphron
+[[visual:phys/nephron]]
+
 - Unité morphologique et fonctionnelle du rein, siège de la formation de l'urine.
 - **1 à 1,3 million de néphrons par rein** ; après 40 ans, leur nombre diminue d'environ 10 % tous les 10 ans, et les néphrons perdus ne se régénèrent pas.
 - Deux composants principaux :
@@ -39,6 +41,8 @@ const RENAL_FILTRATION_COURSE = `# Organisation du rein et filtration glomérula
 - Selon le devenir de la substance : la clairance de la créatinine (filtrée seule, non réabsorbée ni sécrétée) évalue le DFG ; Cl(substance réabsorbée) < Cl(créatinine) ; Cl = 0 si totalement réabsorbée ; Cl(PAH) = débit plasmatique rénal (DPR), car le PAH est filtré ET sécrété à 100 %.
 
 ## 5. Filtration glomérulaire (FG)
+[[visual:phys/glomerular-filtration]]
+
 - **Définition** : premier processus de formation de l'urine — transport passif d'eau et de composants plasmatiques micromoléculaires des capillaires glomérulaires vers la capsule de Bowman, à travers la membrane de filtration glomérulaire → **urine primaire**, caractérisée par : ultrafiltrat plasmatique de composition proche du plasma mais sans protéines (plasma déprotéinisé), isotonique (300 mOsm/L), volume ≈ 120 mL/min (180 L/jour).
 - **Débit de filtration glomérulaire (DFG)** : débit de transfert d'une substance à travers la membrane de filtration (mL/min).
 
@@ -178,6 +182,8 @@ const TUBULAR_FUNCTIONS_COURSE = `# Fonctions tubulaires
 - **Transport maximal (Tmax)** : quantité maximale d'une substance transportable activement par unité de temps, limitée par la saturation des transporteurs. Exemples : glucose Tmax ≈ 320 mg/min ; protéines Tmax ≈ 30 mg/min ; acides aminés Tmax ≈ 1,5 mM/min ; Ca²⁺ Tmax ≈ 0,125 mM/min ; PAH (sécrétion) Tmax ≈ 80 mg/min.
 
 ## 2. Physiologie du tube contourné proximal (TCP)
+[[visual:phys/tubular-cells]]
+
 - Reçoit 100 % du FG (125 mL/min, isotonique) ; 3 processus : réabsorption iso-osmotique (65 % du FG), sécrétion, ammoniogenèse.
 - Structure en 3 segments : S1-S2 (convolutés) et S3 (droit).
 - L'urine sortant du TCP vers l'anse de Henlé est isotonique, représente 35 % du FG, avec [Na⁺] constante, [glucose]/[protéines]/[AA] = 0, [créatinine] augmentée.
@@ -203,6 +209,8 @@ const TUBULAR_FUNCTIONS_COURSE = `# Fonctions tubulaires
 - **Bilan de l'anse de Henlé** : reçoit 35 % du FG isotonique ; dissocie la réabsorption de l'eau et des électrolytes ; ≈ 15 % du FG en eau et 20-25 % en ions sont réabsorbés ; l'urine sortante est hypotonique (150 mOsm/L).
 
 ## 4. Mécanisme multiplicateur à contre-courant (MMCC)
+[[visual:phys/countercurrent]]
+
 - Repose sur : le flux parallèle mais opposé de l'urine et du sang entre l'anse de Henlé, les vasa recta et le tube collecteur ; les perméabilités différentielles à l'eau, aux ions et à l'urée selon les segments ; le gradient cortico-papillaire (300 → 1200 mOsm/L).
 - Permet la **concentration** (via la BDF) et la **dilution** (via la BAL) de l'urine, ainsi que le maintien du gradient osmotique médullaire.
 
@@ -294,6 +302,8 @@ export const TUBULAR_FUNCTIONS_FLASHCARDS: LibraryCardSeed[] = [
 const RENAL_EXCRETION_COURSE = `# Excrétion rénale et épargne des composants plasmatiques
 
 ## 1. Épargne et excrétion rénale de l'eau
+[[visual:phys/countercurrent]]
+
 - L'eau est filtrée au glomérule (FG = 125 mL/min, 180 L/jour, isotonique) puis réabsorbée à 99-99,5 % par les processus tubulaires → urine finale de 1,5-2 L/jour, osmolarité 800 mOsm/L (limites extrêmes 50-1200 mOsm/L), pH acide 5,5-6, débit urinaire 1-2 mL/min (limites 0,5-20 mL/min).
 - Répartition de la réabsorption : **65 % dans le TCP** (obligatoire, ADH-indépendante, via aquaporine-1 et solvent drag) ; **15-20 % dans l'anse de Henlé** (branche descendante fine, selon le gradient cortico-papillaire) ; **8-14 % dans les 2 derniers tiers du TCD + TC** (facultative, ADH-dépendante, via aquaporine-2).
 - Les **diurétiques de l'anse** (furosémide) bloquent le co-transporteur Na⁺/K⁺/2Cl⁻ de la branche large ascendante → ↓ réabsorption ions → ↓ gradient cortico-papillaire → charge osmotique dans le TC → rétention d'eau dans le TC → excrétion accrue d'eau et d'ions (20-30 % du FG) → diurèse + natriurèse (effet secondaire : perte de K⁺).
@@ -451,6 +461,8 @@ Assurée par 4 systèmes : **ADH**, **aldostérone**, **SRAA**, **ANP**.
 - Bloquée par la **spironolactone** (diurétique épargneur de K⁺).
 
 ### SRAA (système rénine-angiotensine-aldostérone)
+[[visual:phys/raas]]
+
 - La **rénine**, enzyme protéolytique sécrétée par les cellules granulaires de l'appareil juxtaglomérulaire (aa et ea), est stimulée par : ↓PA, ↓volume sanguin, ↓[Na⁺]pl, ↓[Na⁺]urinaire à la macula densa (rétrocontrôle tubulo-glomérulaire), stimulation sympathique. Inhibée par l'aldostérone (rétrocontrôle négatif via ↑[Na⁺]pl) et l'ANP.
 - Effets de l'**angiotensine II** : systémiques — vasoconstriction, ↑résistance périphérique totale, ↑PA ; rénaux — VC modérée de l'ea (GF constant) ou VC marquée de aa + ea (↓GF) ; ↑ réabsorption de Na⁺ ; ↑ sécrétion d'aldostérone (→ réabsorption Na⁺/Cl⁻/eau) ; ↑ ADH (→ réabsorption d'eau).
 - Effets de l'**angiotensine III** : vasoconstriction plus faible ; stimule aussi l'aldostérone.
@@ -480,6 +492,8 @@ Assurée par 4 systèmes : **ADH**, **aldostérone**, **SRAA**, **ANP**.
 - Physiologie du remplissage : à 100 mL d'urine, pression ≈ 15 cmH₂O (limite de résistance du sphincter interne) ; à 400 mL, pression ≈ 20 cmH₂O, avec apparition de contractions rythmiques contenues par le sphincter externe ; à 70 cmH₂O, limite de résistance du sphincter externe. Normalement, **500-600 mL** s'accumulent sans distension douloureuse — la vessie adapte son tonus au contenu.
 
 ## 5. Miction
+[[visual:phys/micturition]]
+
 - Définition : acte réflexe spinal sous contrôle volontaire inhibiteur/facilitateur.
 - Chez le nouveau-né et le nourrisson : acte purement réflexe (PSNS) ; après la myélinisation des centres nerveux, un contrôle cortical s'installe.
 - Le remplissage vésical déclenche des contractions par le **réflexe d'étirement** : récepteurs d'étirement du détrusor (surtout paroi postéro-inférieure) → voie afférente (nerfs pudendaux) → centres S2-S3 → voie efférente (nerfs pudendaux, PSNS) → effecteurs : contraction du détrusor + relâchement du sphincter interne → miction.

@@ -4,6 +4,10 @@ import { single, multi } from "./qcm-helpers.js";
 const CELL_MEMBRANE_COURSE = `# Physiologie générale — Lecture 1 : la membrane cellulaire
 
 ## 1. Organisation morphologique et fonctionnelle
+[[visual:phys/membrane]]
+
+[[visual:phys/lipid-classes]]
+
 - La **membrane cellulaire (plasmalemme)** est un complexe lipoprotéique qui sépare la cellule du milieu extracellulaire ; sa fonction principale est celle d'une barrière à perméabilité **sélective et dynamique**.
 - Modèle en **mosaïque fluide** (Singer et Nicolson, 1972) : une double couche de phospholipides dans laquelle flottent des protéines.
 - **Lipides membranaires** :
@@ -14,14 +18,22 @@ const CELL_MEMBRANE_COURSE = `# Physiologie générale — Lecture 1 : la membra
   1. **Perméabilité sélective** : perméable aux petites molécules liposolubles non chargées (O₂, CO₂, acides gras, glycérol, hormones stéroïdiennes, urée, éthanol) ; imperméable aux molécules hydrosolubles non chargées de grande taille (glucose, acides aminés) et aux ions.
   2. **Source de messagers intracellulaires** : le PIP₂ (phosphatidylinositol-4,5-biphosphate) est clivé par la phospholipase C en **IP₃** (libère le Ca²⁺ du réticulum endoplasmique) et **DAG** (active la protéine kinase C).
   3. **Source de messagers extracellulaires** : l'acide arachidonique membranaire donne naissance, via la cyclo-oxygénase et la lipoxygénase, aux **prostaglandines**, à la **prostacycline (PGI₂, vasodilatatrice, antiagrégante)**, au **thromboxane (TxA₂, vasoconstricteur, proagrégant)** et aux **leucotriènes** (réponse inflammatoire, bronchoconstriction).
+[[visual:phys/lipid-messengers]]
+
 - **Protéines membranaires** (la moitié de la masse membranaire) :
   - **Protéines périphériques** : liaison électrostatique faible, mobilité élevée ; rôle enzymatique (acétylcholinestérase externe, adénylate cyclase interne) et d'ancrage au cytosquelette/matrice extracellulaire.
   - **Protéines intégrales (transmembranaires)** : traversent toute la bicouche, fortement glycosylées côté externe, ancrage covalent, faible mobilité ; rôle de canaux ioniques/aqueux, transporteurs, récepteurs, molécules d'adhésion et de reconnaissance intercellulaire.
+[[visual:phys/membrane-proteins]]
+
 - **Structures spécialisées** :
   - **Microvillosités** (absorption, épithélium intestinal/rénal), **cils** (mouvement rythmique, épithélium respiratoire), **flagelles** (propulsion, spermatozoïdes).
   - **Jonctions intercellulaires** : **jonctions serrées** (imperméables — barrière mécanique/de protection, la perméabilité épithéliale est inversement proportionnelle à leur nombre) ; **desmosomes** (ancrage, résistance au stress mécanique — épiderme, myocarde) ; **gap junctions/connexons** (transfert bidirectionnel de petites molécules, synapses électriques — muscle cardiaque et lisse, SNC).
 
+[[visual:phys/specialized-structures]]
+
 ## 2. Transport passif
+[[visual:phys/passive-transport]]
+
 - **Caractéristiques générales** : spontané, sans consommation d'ATP, se développe dans le sens de la réduction d'un gradient (potentiel électrochimique, pression osmotique, pression hydrostatique).
 - **Diffusion simple** : à travers la matrice phospholipidique (gaz, molécules liposolubles) ou à travers les canaux ioniques ; la vitesse dépend de la perméabilité membranaire, de l'amplitude du gradient électrochimique et de la surface d'échange.
 - **Diffusion facilitée** : transport passif de substances organiques non chargées (glucose, acides aminés) nécessitant une protéine transporteuse spécifique ; vitesse de transfert augmentée mais limitée par le **Tmax** (capacité maximale du transporteur) ; l'insuline augmente 10 à 20 fois la diffusion facilitée du glucose en augmentant le nombre de transporteurs GLUT.
@@ -35,7 +47,28 @@ const CELL_MEMBRANE_COURSE = `# Physiologie générale — Lecture 1 : la membra
   - **Canaux couplés aux protéines G** : activation directe (sous-unité β, canaux K⁺) ou indirecte via adénylate/guanylate cyclase (sous-unité α).
   - **Connexons** : jonctions perméables entre 2 cellules, synapses électriques du muscle cardiaque/lisse ; leur suppression limite l'extension d'une lésion cellulaire.
 
+[[visual:phys/ion-channels]]
+
+| Classification | Type de canal | Caractéristique | Exemples |
+| --- | --- | --- | --- |
+| Dynamique | Canal de fuite | flux continu | Na⁺/K⁺ de fuite (potentiel de repos) |
+| Dynamique | Canal à porte | états ouvert/fermé transitoires | canaux régulés |
+| Stimulus | Voltage-dépendant | s'ouvre selon le potentiel membranaire | Na⁺ rapides (portes m et h), K⁺ (porte n), Ca²⁺ lents (L, T, N) |
+| Stimulus | Ligand-dépendant | s'ouvre par liaison d'un ligand | nicotinique (Na⁺), GABA/glycine (Cl⁻), glutamate (cations) |
+| Stimulus | Couplé aux protéines G | ouverture directe (βγ) ou indirecte (α) | canaux K⁺, adénylate/guanylate cyclase |
+| Jonction | Connexon | relie deux cellules | synapses électriques du cœur et du muscle lisse |
+
+| Critère | Transport passif | Transport actif |
+| --- | --- | --- |
+| Énergie | aucune (spontané) | ATP, direct (primaire) ou indirect (secondaire) |
+| Sens | selon le gradient | contre le gradient électrochimique |
+| Transporteur | aucun, canal ou protéine facilitatrice | pompe, cotransporteur ou échangeur spécifique |
+| Limite | Tmax pour la diffusion facilitée | Tmax, compétition possible entre substrats |
+| Exemples | O₂, CO₂, ions par canaux, glucose, eau (osmose) | Na⁺/K⁺-ATPase, Ca²⁺-ATPase, cotransport Na⁺/glucose |
+
 ## 3. Transport actif
+[[visual:phys/active-transport]]
+
 - **Caractéristiques** : se développe contre le gradient électrochimique, nécessite un transporteur spécifique et une consommation d'ATP, dépend du métabolisme cellulaire, limité par le Tmax, peut être compétitif entre substances chimiquement apparentées (ex. acides aminés).
 - **Transport actif primaire** (consommation directe d'énergie) : le transporteur est une **pompe ionique (ATPase)** (ATP → ADP + Pi + énergie).
 
@@ -51,6 +84,8 @@ const CELL_MEMBRANE_COURSE = `# Physiologie générale — Lecture 1 : la membra
   - **Échangeur HCO₃⁻/Cl⁻** : dépend du gradient de HCO₃⁻ généré par l'anhydrase carbonique (CO₂ + H₂O ⇌ H₂CO₃ ⇌ HCO₃⁻ + H⁺) ; présent dans les érythrocytes (équilibre acido-basique), les cellules pariétales gastriques (sécrétion de HCl) et les néphrocytes (équilibre acido-basique).
 
 ## 4. Endocytose et exocytose
+[[visual:phys/endo-exocytosis]]
+
 - **Endocytose** : internalisation de matériel par invagination de la membrane ; **phagocytose** (grosses particules solides), **pinocytose** (liquide et petites molécules dissoutes), **endocytose médiée par récepteur**.
 - **Exocytose** : fusion d'une vésicule interne avec la membrane, libération du contenu à l'extérieur.
 - L'équilibre exocytose/endocytose préserve la taille de la membrane plasmique et la taille constante de la cellule.
@@ -145,6 +180,14 @@ export const CELL_MEMBRANE_FLASHCARDS: LibraryCardSeed[] = [
 const RECEPTORS_SIGNALING_COURSE = `# Physiologie générale — Lecture 2 : récepteurs, signalisation intracellulaire et boucles de rétroaction
 
 ## 1. Transfert d'information membranaire
+[[visual:phys/receptor-types]]
+
+| Classe de récepteur | Mécanisme | Effet | Exemple |
+| --- | --- | --- | --- |
+| Récepteur-canal ionique | le ligand ouvre directement un canal | direct, très rapide | ACh sur récepteur nicotinique → influx de Na⁺ |
+| Récepteur catalytique | le ligand active une enzyme (tyrosine kinase) | plus lent, prolongé | insuline, facteurs de croissance |
+| Récepteur couplé aux protéines G (RCPG) | active une protéine G puis un effecteur | indirect, amplifié | noradrénaline sur β1 → Gs → adénylate cyclase |
+
 - **Information** = ensemble des signaux biochimiques transmis par des substances biologiquement actives qui interagissent avec des récepteurs membranaires spécifiques et déclenchent une réponse cellulaire.
 - **Messagers primaires (ligands)** :
   - **Neurotransmetteurs** (médiateurs chimiques synaptiques), **hormones endocrines** (action à distance via le sang), **hormones tissulaires** (action paracrine/autocrine locale).
@@ -157,7 +200,18 @@ const RECEPTORS_SIGNALING_COURSE = `# Physiologie générale — Lecture 2 : ré
   - **Agoniste partiel** : réponse dans 10-40 % des cas.
   - **Antagoniste** : n'induit aucune réponse (0 %) ; **compétitif** (empêche la formation du complexe ligand-récepteur) ou **allostérique** (modifie la configuration du récepteur).
 
+[[visual:phys/ligand-receptor]]
+
+| Type de ligand | Réponse cellulaire | Mécanisme |
+| --- | --- | --- |
+| Agoniste | 80-100 % | se lie au récepteur et l'active |
+| Agoniste partiel | 10-40 % | active le récepteur mais avec un effet maximal limité |
+| Antagoniste compétitif | 0 % | occupe le site et empêche la formation du complexe ligand-récepteur |
+| Antagoniste allostérique | 0 % | modifie la configuration du récepteur |
+
 ## 2. Protéines G et systèmes de signalisation intracellulaire
+[[visual:phys/g-protein-cycle]]
+
 - **Protéines G** : protéines transductrices attachées à la face interne de la membrane, couplant le récepteur à l'effecteur (canal K⁺/Ca²⁺ ou enzyme). Structure : sous-unité α (GTPase, forme active liée au GTP, forme inactive liée au GDP) + complexe βγ.
 - **Types selon la sous-unité α** :
 
@@ -166,8 +220,12 @@ const RECEPTORS_SIGNALING_COURSE = `# Physiologie générale — Lecture 2 : ré
 | **Gs** | β1-adrénergiques | Active l'adénylate cyclase → ↑cAMP |
 | **Gi** | β2-adrénergiques, M2-cholinergiques | Inhibe l'adénylate cyclase → ↓cAMP, efflux K⁺ |
 | **Gq** | α1-adrénergiques, M1/M3-cholinergiques | Active la phospholipase C → IP₃, DAG → Ca²⁺-calmoduline |
+[[visual:phys/g-protein-types]]
+
 - **Rôles des protéines G** : activation de flux ioniques transmembranaires (Ca²⁺, K⁺), modulation d'enzymes membranaires/intracellulaires (synthèse de seconds messagers), modulation de la transcription génique.
 - **Schéma général de signalisation** : messager primaire (ordre I) → récepteur membranaire → messager secondaire (ordre II) → messager tertiaire (ordre III = protéine kinase) → réponse cellulaire. Amplification de l'information : ×10 au niveau du récepteur, ×100-1000 par la « masse critique » de protéines intracellulaires activées.
+[[visual:phys/signal-cascade]]
+
 - **Les 4 systèmes de signalisation intracellulaire** :
 
 | Système | Couplage | Second messager | Kinase activée | Exemple |
@@ -178,6 +236,21 @@ const RECEPTORS_SIGNALING_COURSE = `# Physiologie générale — Lecture 2 : ré
 | **Ca²⁺-calmoduline** | Augmentation du Ca²⁺ cytosolique (IP₃ ou canaux membranaires) | Complexe 4 Ca²⁺-calmoduline | MLCK (myosin light chain kinase) | Phosphorylation des chaînes légères de myosine → contraction du muscle lisse |
 
 ## 3. Régulation et contrôle des fonctions de l'organisme
+[[visual:phys/feedback]]
+
+| | Rétroaction négative | Rétroaction positive |
+| --- | --- | --- |
+| Effet | la réponse s'oppose au changement initial | la réponse amplifie le changement initial |
+| Rôle | stabilisateur (homéostasie) | déstabilisateur, accélère un processus jusqu'à un objectif |
+| Fréquence | mécanisme typique de la régulation physiologique | rare en physiologie normale, typique des dérèglements |
+| Exemple | barorécepteurs → centres bulbaires → cœur/vaisseaux | choc hémorragique |
+
+| Mode de régulation | Messager | Caractéristiques |
+| --- | --- | --- |
+| Nerveuse | neurotransmetteur | premier système de commande, rapidité et finesse maximales, anticipation |
+| Endocrine | hormone (voie sanguine) | 2ᵉ plus rapide, amplifie et prolonge la réaction nerveuse, action systémique |
+| Humorale | constituants micromoléculaires, hormones tissulaires | hypoxie → érythropoïétine ; hypercapnie → ↑ ventilation |
+
 - **Homéostasie** : capacité de l'organisme à maintenir des paramètres (biochimiques, hémodynamiques) dans les limites normales, indépendamment des variations du milieu extérieur.
 - **Régulation** : processus par lequel un paramètre est mesuré en continu par rapport à une valeur « standard » (point de consigne) et corrigé en conséquence.
 - **Mécanismes** : régulation automatique de type rétroaction (feedback), régulation humorale, endocrine, nerveuse.
@@ -193,6 +266,14 @@ const RECEPTORS_SIGNALING_COURSE = `# Physiologie générale — Lecture 2 : ré
   3. **Centre nerveux** : réflexe somatique = cornes antérieures de la moelle, noyaux moteurs somatiques des nerfs crâniens (III, IV, VI, XI, XII) ; réflexe autonome = cornes latérales (sympathique T1-L2, parasympathique S2-S4), noyaux moteurs autonomes des nerfs crâniens (III, VII, IX, X).
   4. **Voie efférente** : réflexe somatique = axone du motoneurone unique ; réflexe autonome = 2 neurones (pré-ganglionnaire et post-ganglionnaire) — sympathique : fibres pré-ganglionnaires courtes, post-ganglionnaires longues ; parasympathique : l'inverse.
   5. **Effecteur** : réflexe somatique → fibre musculaire striée (récepteur nicotinique, ACh) ; réflexe sympathique → muscle lisse/myocarde/glandes (récepteurs α/β adrénergiques, noradrénaline) ; réflexe parasympathique → muscle lisse/myocarde/glandes (récepteur muscarinique, ACh).
+[[visual:phys/reflex-arc]]
+
+| Élément | Réflexe somatique | Réflexe autonome |
+| --- | --- | --- |
+| Centre nerveux | cornes antérieures de la moelle, noyaux moteurs des nerfs crâniens | cornes latérales (sympathique T1-L2, parasympathique S2-S4) |
+| Voie efférente | 1 neurone : le motoneurone | 2 neurones : pré-ganglionnaire et post-ganglionnaire |
+| Effecteur | fibre musculaire striée (ACh, récepteur nicotinique) | muscle lisse, myocarde, glandes (noradrénaline α/β ou ACh) |
+
 - **Classification des réflexes** : nombre de synapses (mono/polysynaptique), type de récepteur (extéro/proprio/interocepteif), type d'effecteur (somatique/viscéral), origine (inné/acquis).
 
 ## Points à retenir
@@ -274,14 +355,20 @@ export const RECEPTORS_SIGNALING_FLASHCARDS: LibraryCardSeed[] = [
 const NEURON_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 3 : le neurone, potentiels membranaires et conduction nerveuse
 
 ## 1. Organisation du tissu nerveux
+[[visual:phys/nerve-cells]]
+
 - Le tissu nerveux comprend 2 types cellulaires : les **neurones** (unité morpho-fonctionnelle du système nerveux, génération et conduction de l'excitation) et les **cellules gliales** (rôle trophique et protecteur).
 - **SNC** : moelle épinière, encéphale. **SNP** : 12 nerfs crâniens, 31 nerfs rachidiens, ganglions annexés.
+[[visual:phys/cns-pns]]
+
 - **Types de canaux ioniques neuronaux** :
   - Canaux **de fuite** (Na⁺/K⁺, sur tout le péricaryon) : maintien du potentiel de repos.
   - Canaux **ligand-dépendants** (Na⁺, K⁺, Cl⁻, Ca²⁺ ; dendrites, péricaryon) : transmission synaptique.
   - Canaux **voltage-dépendants** (Na⁺, K⁺ ; axone) : transmission du potentiel d'action le long de la fibre nerveuse.
 
 ## 2. Potentiel de repos neuronal
+[[visual:phys/resting-potential]]
+
 - **Définition** : différence de potentiel entre la surface interne (électronégative) et externe (électropositive), en conditions de repos. Mesure par microélectrodes. **Valeur : -70 mV** (plage -60 à -90 mV).
 - **Facteurs déterminants** : répartition inégale des charges électriques de part et d'autre de la membrane, différence de concentration intra/extracellulaire de Na⁺, K⁺ et Cl⁻.
 - **Facteurs de maintien** :
@@ -299,6 +386,15 @@ const NEURON_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 3 : le ne
      - **Dépolarisation** (-55 → +30 mV) : augmentation brutale de la perméabilité au Na⁺ (×600) via les canaux Na⁺ voltage-dépendants ; boucle de rétroaction positive (la dépolarisation augmente l'influx Na⁺, qui augmente la dépolarisation) ; overshoot de 0 à +30 mV.
      - **Repolarisation** (+30 → -70 mV) : arrêt de l'influx Na⁺ (inactivation soudaine des canaux Na⁺ voltage-dépendants) ; augmentation lente de l'efflux K⁺ (délai de 0,3 ms, maximum ×300 quand les canaux Na⁺ sont inactivés).
   3. **Post-potentiel positif (hyperpolarisation)** : l'efflux K⁺ ramène le potentiel de repos ; activation de la pompe Na⁺/K⁺ → légère hyperpolarisation (-80 mV) avant rétablissement de l'équilibre initial.
+[[visual:phys/action-potential]]
+
+| Phase | Événement | Canaux impliqués | Potentiel |
+| --- | --- | --- | --- |
+| Prépotentiel | dépolarisation jusqu'au seuil | sommation des potentiels locaux ; perméabilité partielle au Na⁺ | −70 → −55 mV |
+| Dépolarisation | perméabilité au Na⁺ multipliée par 600 | Na⁺ voltage-dépendants (porte m ouverte) | −55 → +30 mV |
+| Repolarisation | inactivation du Na⁺ puis efflux de K⁺ (×300) | porte h fermée, K⁺ voltage-dépendants | +30 → −70 mV |
+| Post-potentiel positif | hyperpolarisation transitoire | K⁺ lents, pompe Na⁺/K⁺ | −80 mV |
+
 - **Périodes d'excitabilité neuronale** (dépendent de la dynamique des portes du canal Na⁺) :
 
 | Période | État de la membrane | Réponse | Correspondance |
@@ -307,7 +403,11 @@ const NEURON_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 3 : le ne
 | **Réfractaire relative (PRR)** | Hypoexcitable | Réponse incomplète, stimulus supra-liminaire requis | Fin de repolarisation + post-potentiel positif |
 | **Normoexcitable (PNE)** | Excitabilité normale | Réponse complète (« tout ou rien ») dès le seuil | Potentiel de repos, canaux Na⁺ tous au repos |
 
+[[visual:phys/excitability]]
+
 ## 4. Conduction de l'excitation dans la fibre nerveuse
+[[visual:phys/conduction]]
+
 - **Conduction dendritique** : afférente, **avec décrément** (perte d'amplitude), participe à la sommation temporelle/spatiale jusqu'au cône axonique.
 - **Conduction axonique** : efférente, **sans décrément** ; débute au cône axonique (nombre maximal de canaux Na⁺ voltage-dépendants, seuil d'excitabilité bas) ; propagation auto-régénérative ; vitesse inversement proportionnelle à la résistance électrique (donc proportionnelle au diamètre de la fibre) et dépendante de la présence de myéline.
 | Fibre | Diamètre | Vitesse | Conduction |
@@ -324,6 +424,8 @@ Formule de conduction saltatoire : V(m/s) = 6 × diamètre de l'axone (μm) ; ex
   4. **Conduction non décrémentielle** : conduction sans perte d'amplitude tout au long de la fibre, selon la loi du « tout ou rien ».
 
 ## 5. La synapse et la transmission synaptique
+[[visual:phys/synapse]]
+
 - **Synapse** = jonction assurant la transmission de l'excitation entre deux cellules. **Synapse chimique** (transmission unidirectionnelle, majoritaire) vs **synapse électrique** (transmission bidirectionnelle, muscle cardiaque/lisse, SNC). Les synapses présentent une plasticité (modification, remplacement, variation en nombre).
 - **Structure de la synapse chimique** : composant présynaptique (bouton terminal, vésicules de neurotransmetteur, zone active, canaux Ca²⁺ voltage-dépendants de type N, autorécepteurs) ; fente synaptique ; composant postsynaptique (récepteurs ionotropes couplés à des canaux Ca²⁺ ligand-dépendants, ou métabotropes couplés aux protéines G ; enzymes de dégradation — acétylcholinestérase pour l'ACh, COMT pour la noradrénaline).
 - **Neurotransmetteurs** : petites molécules à libération rapide (ACh, noradrénaline, dopamine, sérotonine, GABA). **Cotransmetteurs** : peptides à libération prolongée modulant les effets du NT (neuropeptides opioïdes — endorphines, dynorphines ; non opioïdes — ADH, ocytocine, TRH).
@@ -337,6 +439,13 @@ Formule de conduction saltatoire : V(m/s) = 6 × diamètre de l'axone (μm) ; ex
      - **PPSE (potentiel postsynaptique excitateur)** : dépolarisant, influx Na⁺, amplitude 15 mV, durée 20 ms (ex. ACh sur récepteur nicotinique).
      - **PPSI (potentiel postsynaptique inhibiteur)** : hyperpolarisant, influx Cl⁻, amplitude 15 mV, durée 20 ms, diminue l'excitabilité (ex. GABA sur son récepteur).
   2. **Activation de récepteurs couplés aux protéines G (métabotropes)** : effet indirect et lent, modifiant la conductance K⁺ via messagers intracellulaires (Gi/M2/α2/β2 → cAMP → efflux K⁺ → PPSI ; Gq/α1/M1/M3 → IP₃/DAG → efflux K⁺ → PPSE).
+| | PPSE | PPSI |
+| --- | --- | --- |
+| Effet | dépolarisant, excitateur | hyperpolarisant, inhibiteur |
+| Ion | influx de Na⁺ | influx de Cl⁻ |
+| Amplitude / durée | 15 mV, 20 ms | 15 mV, 20 ms |
+| Exemple | ACh sur récepteur nicotinique | GABA sur son récepteur |
+
 - **Fatigue de la transmission synaptique** : diminution transitoire du nombre d'excitations conduites par unité de temps, due à l'épuisement des réserves de NT et à l'inactivation progressive des récepteurs postsynaptiques ; mécanisme protecteur contre la surexcitation des circuits neuronaux. Augmentée par caféine/théophylline/théobromine et alcalose ; diminuée par les anesthésiques et l'acidose.
 
 ## Points à retenir
@@ -418,6 +527,8 @@ export const NEURON_PHYSIOLOGY_FLASHCARDS: LibraryCardSeed[] = [
 const MUSCLE_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 4 : physiologie du muscle lisse et strié
 
 ## 1. Organisation de la fibre musculaire squelettique
+[[visual:phys/muscle-fiber]]
+
 - **Fibre musculaire** : cellule cylindrique, multinucléée (noyaux périphériques), longueur 1-300 mm, diamètre 10-150 μm. Membrane = **sarcolemme** ; cytoplasme = **sarcoplasme**, comprenant une partie contractile (myofibrilles) et une partie non contractile (mitochondries nombreuses, réticulum sarcoplasmique développé, myoglobine, inclusions de glycogène/lipides).
 - **Système sarcotubulaire** : structure spécialisée assurant le couplage excitation-contraction.
   - **Tubules transversaux (T)** : invaginations du sarcolemme à la jonction bande I/bande A ; contiennent des canaux Ca²⁺ lents voltage-dépendants (**DHPR**, récepteur à la dihydropyridine), activés lors de la dépolarisation du sarcolemme ; conduisent l'influx de la surface vers le réticulum sarcoplasmique (RS).
@@ -429,6 +540,8 @@ const MUSCLE_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 4 : physi
   - **Myofilaments épais** (myosine, diamètre 10 nm, longueur 1,5 μm) et **fins** (actine, diamètre 5 nm, longueur 2 μm) ; ratio 1 myosine/6 actine et 1 actine/3 myosine dans la bande A.
   - **Sarcomère** : unité morpho-fonctionnelle des myofibrilles, formé d'1 bande A et de 2 demi-disques I, délimité par 2 bandes Z, longueur de repos 2-2,25 μm ; se raccourcit par glissement des myofilaments d'actine entre ceux de myosine.
   - **Protéines contractiles** : actine et myosine. **Protéines régulatrices** : troponine et tropomyosine.
+[[visual:phys/sarcomere]]
+
 - **Myoglobine** : protéine à Fe²⁺, stockage temporaire d'O₂, favorise la dissociation de HbO₂ dans le muscle.
 
 | Type de fibre | Myoglobine | Métabolisme | Force / vitesse | Fatigue |
@@ -441,21 +554,33 @@ const MUSCLE_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 4 : physi
 - **Troponine** (complexe de 3 sous-unités) : **TnC** lie le Ca²⁺ et déclenche le déplacement de la tropomyosine ; **TnT** lie le complexe à la tropomyosine ; **TnI** lie le complexe à l'actine, maintient la tropomyosine en position bloquante et inhibe l'ATPase de la tête de myosine.
 
 ## 2. La plaque motrice
+[[visual:phys/nmj]]
+
 - **Définition** : jonction entre l'axone du motoneurone (cornes antérieures/tronc cérébral) et la fibre musculaire squelettique ; synapse chimique excitatrice.
 - **Structure** : composant présynaptique (bouton terminal, vésicules d'ACh), fente synaptique, composant postsynaptique (invagination plissée du sarcolemme, récepteurs nicotiniques).
 - **Caractéristiques fonctionnelles** : médiateur = ACh, récepteur postsynaptique = nicotinique (canal Na⁺), délai synaptique 0,4-0,7 ms, potentiel de plaque = PPSE. Potentiel de repos musculaire = -90 mV, pic du PA = +30 mV.
 - **Séquence** : invasion du bouton par le PA nerveux → influx Ca²⁺ → libération/diffusion d'ACh → action sur récepteurs nicotiniques → influx Na⁺ (canaux ligand-dépendants) → sommation temporelle/spatiale du potentiel de plaque jusqu'au seuil (-55 mV) → PA musculaire propagé lentement (30 m/s) le long du sarcolemme puis des tubules T → inactivation de l'ACh par l'AChE.
+| Bloqueur | Mécanisme | Effet |
+| --- | --- | --- |
+| Type curare | bloque le récepteur nicotinique | ↓ progressive du PPSE ; curarisation totale quand il tombe au tiers |
+| Type succinylcholine | dépolarisation puis désensibilisation du récepteur | contraction transitoire (phase I) puis blocage (phase II) |
+| Toxine botulique | bloque l'exocytose présynaptique de l'ACh | paralysie musculaire |
+
 - **Bloqueurs de la plaque motrice** (utilisés comme adjuvants anesthésiques pour la relaxation musculaire et la prévention des spasmes/convulsions) :
   - **Bloqueurs nicotiniques type curare** : diminution progressive de l'amplitude/durée du PPSE avec la dose ; curarisation totale quand le PPSE tombe au tiers de l'amplitude normale ; empêchent la liaison de l'ACh au récepteur nicotinique.
   - **Bloqueurs nicotiniques type succinylcholine** : phase I, dépolarisation postsynaptique transitoire (contraction) ; phase II, restent liés au récepteur nicotinique, le désensibilisent, maintiennent le sarcolemme repolarisé.
   - **Toxine botulique** (produite par *Clostridium botulinum*) : bloque l'exocytose présynaptique de l'ACh → paralysie musculaire.
 
 ## 3. Couplage excitation-contraction
+[[visual:phys/excitation-contraction]]
+
 - **Définition** : succession de phénomènes reliant le sarcolemme aux structures contractiles, fonction du système sarcotubulaire.
 - **Initiation de la contraction** : le PA musculaire se propage lentement le long du sarcolemme → active les canaux Ca²⁺ lents (DHPR) des tubules T → active les canaux Ca²⁺ lents (RyR) des citernes des tubules L → sortie de Ca²⁺ dans le cytoplasme ([Ca²⁺] passe de 10⁻⁷ à 10⁻⁵ M) → liaison du Ca²⁺ à la troponine C → déplacement latéral de la tropomyosine → formation des ponts actine-myosine.
 - **Initiation de la relaxation** : activation des pompes Ca²⁺ du segment longitudinal des tubules L → recapture du Ca²⁺ (stockage sur la calséquestrine) → [Ca²⁺] revient de 10⁻⁵ à 10⁻⁷ M → libération du Ca²⁺ de la troponine C → la tropomyosine reprend sa position initiale, bloquant les sites d'interaction actine-myosine → décrochage des ponts actine-myosine.
 
 ## 4. Mécanisme de la contraction musculaire
+[[visual:phys/cross-bridge]]
+
 - La contraction correspond au **glissement des myofilaments d'actine entre ceux de myosine** : les bandes Z se rapprochent, le sarcomère se raccourcit (les demi-disques clairs diminuent, le disque sombre reste inchangé).
 - **Cycle des ponts transversaux** (cyclique tant que [Ca²⁺] = 10⁻⁵ M, non simultané sur tout le sarcomère) :
   1. **Initiation** : faible affinité myosine-actine, ADP et Pi liés à la tête de myosine, angle de 90° entre tête et axe du filament, énergie stockée en « positionnement ».
@@ -464,6 +589,17 @@ const MUSCLE_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 4 : physi
   4. **Redémarrage du cycle** : hydrolyse de l'ATP par l'ATPase de myosine → liaison ADP + Pi au site nucléotidique → rétablissement de l'angle à 90° → repositionnement vers la G-actine suivante → rétablissement de liaisons faibles initiales.
 
 ## 5. Particularités physiologiques du muscle lisse
+[[visual:phys/smooth-cell]]
+
+| Critère | Muscle strié squelettique | Muscle lisse |
+| --- | --- | --- |
+| Forme | cylindrique, multinucléée (noyaux périphériques) | fusiforme, noyau unique central |
+| Invaginations | tubules T | cavéoles |
+| Ancrage des filaments | bandes Z, sarcomères | corps denses, pas de sarcomères |
+| Régulateur du Ca²⁺ | troponine C | calmoduline → MLCK |
+| Activité ATPase | rapide | réduite : cycles lents |
+| Raccourcissement | limité | jusqu'aux 2/3 de la longueur initiale |
+
 - **Forme** : fusiforme, longueur 20-500 μm, diamètre 2-10 μm, noyau unique central.
 - **Structures spécialisées** : **cavéoles** remplacent les tubules T ; **corps denses** remplacent les bandes Z ; **connexons** = synapses électriques entre cellules.
 - Myofilaments d'actine/myosine **non organisés en sarcomères** ; activité ATPase de myosine réduite ; interaction actine-myosine dépendante de la **phosphorylation des chaînes légères de myosine**. Unité contractile : 15 myofilaments d'actine liés à 2 corps denses, autour d'un filament de myosine unique. Protéines régulatrices : tropomyosine, **calmoduline** (remplace la troponine C).
@@ -482,6 +618,8 @@ const MUSCLE_PHYSIOLOGY_COURSE = `# Physiologie générale — Lecture 4 : physi
   - **Électro-mécanique** : l'influx nerveux active les canaux Ca²⁺ voltage-dépendants (type L) du sarcolemme.
   - **Pharmaco-mécanique** : les facteurs constricteurs activent les canaux Ca²⁺ ligand-dépendants du sarcolemme et la protéine Gq/PLC → IP₃ (messager secondaire) active les canaux Ca²⁺ du RS.
   - **Mécano-mécanique** : l'étirement de la fibre active les canaux Ca²⁺ mécano-dépendants du sarcolemme.
+[[visual:phys/smooth-coupling]]
+
 - **Déclenchement de la contraction** : le complexe 4 Ca²⁺-calmoduline active la **MLCK** (myosin light chain kinase) → phosphorylation des chaînes légères de myosine (avec ATP et Mg²⁺) → formation des ponts actine-myosine → contraction.
 - **Déclenchement de la relaxation** : activation des pompes Ca²⁺ du sarcolemme/RS → dissociation du complexe Ca²⁺-calmoduline → activation de la **MLCP** (myosin light chain phosphatase) → déphosphorylation des chaînes légères de myosine → découplage des ponts actine-myosine → relaxation (facteurs relaxants via cAMP/cGMP).
 - **Contractilité du muscle lisse** : activité ATPase réduite (cycles lents des ponts transversaux) ; absence de bandes Z → capacité de raccourcissement accrue (jusqu'à 2/3 de la longueur initiale, contre 1/3 en muscle strié), force de contraction accrue par unité de surface (4-6 kg/cm² contre 3-4 kg/cm²), durée de contraction prolongée (1-3 s, 30× plus qu'en muscle strié), énergie requise réduite (1/10 à 1/300), maintien prolongé de la contraction à consommation énergétique minimale (« mécanisme de blocage » ou « latch »).
