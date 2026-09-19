@@ -307,6 +307,12 @@ const STOMACH_SPLEEN_LIVER_COURSE = `# Estomac, rate et foie
   - Lobe carré : entre fosse vésiculaire et fissure du ligament rond, sous le porta hepatis.
   - Lobe caudé : entre sillon de la VCI et fissure du ligament veineux, au-dessus du porta hepatis ; présente un processus papillaire (à gauche) et un processus caudé (relie au reste du foie, au-dessus du porta hepatis).
 
+### Segments hépatiques (Couinaud)
+[[visual:anat/liver-couinaud]]
+- Le foie est divisé fonctionnellement en **8 segments** (I à VIII), chacun ayant son propre **pédicule** (branche de la veine porte, branche de l'artère hépatique, canal biliaire) et son drainage veineux : ils peuvent être réséqués séparément.
+- **Trois scissures verticales** portent les veines hépatiques : **droite** (sépare V-VIII de VI-VII), **moyenne** (plan de Cantlie, sépare foie droit et foie gauche) et **gauche/ombilicale** (ligament falciforme, sépare II-III de IV). Un **plan transversal** passant par les branches portales sépare les segments supérieurs des inférieurs.
+- **Foie droit** : V, VI, VII, VIII. **Foie gauche** : II, III, IV (IVa en haut, IVb en bas ; le lobe carré correspond au IVb). **Segment I** : lobe caudé, postérieur, vascularisé par les deux côtés et drainé directement dans la VCI.
+
 ### Rapports péritonéaux
 - Zones non couvertes de péritoine : **zone nue** (triangulaire, face postérieure du lobe droit), **fosse vésiculaire**, **sillon de la VCI**, **sillon du ligament veineux**, **porta hepatis**.
 
@@ -363,6 +369,9 @@ export const STOMACH_SPLEEN_LIVER_LEARNING: LibraryLearningSeed = {
     single("De quelle artère la veine splénique participe-t-elle à la formation, en s'unissant aux veines mésentériques ?", "C", "La veine splénique s'unit aux veines mésentériques inférieure et supérieure, en arrière du pancréas, pour former la veine porte.", ["L'artère hépatique", "L'artère gastrique gauche", "La veine porte", "La veine cave inférieure"]),
     single("Quel organe est décrit comme la plus grosse glande du corps ?", "A", "Le foie est la plus grosse glande du corps, occupant l'hypochondre droit et une partie de l'épigastre/hypochondre gauche.", ["Le foie", "Le pancréas", "La rate", "La glande surrénale"]),
     single("Quelle structure sépare les lobes anatomiques droit et gauche du foie sur sa face diaphragmatique ?", "B", "Le ligament falciforme, par son attache, sépare les lobes droit et gauche du foie sur la face diaphragmatique.", ["Le ligament rond", "Le ligament falciforme", "Le ligament coronaire", "La fissure du ligament veineux"]),
+    single("Combien de segments Couinaud distingue-t-on dans le foie ?", "D", "Le foie est divisé en 8 segments fonctionnels (I à VIII), chacun avec son propre pédicule portal, artériel et biliaire et son drainage veineux.", ["4", "6", "7", "8"]),
+    single("Quelle structure sépare le foie droit du foie gauche (plan de Cantlie) ?", "B", "Le plan de Cantlie est la scissure principale, qui porte la veine hépatique moyenne et sépare les segments V-VIII (droits) des segments II-IV (gauches).", ["La scissure ombilicale (ligament falciforme)", "La scissure principale (veine hépatique moyenne)", "La scissure droite (veine hépatique droite)", "Le plan transversal des branches portales"]),
+    single("Quel segment de Couinaud correspond au lobe caudé ?", "A", "Le segment I correspond au lobe caudé : postérieur, vascularisé par les deux côtés et drainé directement dans la veine cave inférieure.", ["Le segment I", "Le segment IV", "Le segment V", "Le segment VIII"]),
     single("Combien de lobes anatomiques distingue-t-on sur la face viscérale du foie ?", "C", "Sur la face viscérale, on distingue 4 lobes anatomiques (droit, gauche, carré, caudé), délimités par des fissures/fosses formant une figure en H.", ["2", "3", "4", "5"]),
     single("Où se situe le lobe carré du foie ?", "A", "Le lobe carré se situe entre la fosse vésiculaire et la fissure du ligament rond, sous le porta hepatis.", ["Entre la fosse vésiculaire et la fissure du ligament rond", "Entre le sillon de la VCI et la fissure du ligament veineux", "À droite de la fosse vésiculaire", "À gauche de la fissure du ligament rond"]),
     single("Où se situe le lobe caudé du foie par rapport au porta hepatis ?", "B", "Le lobe caudé se situe entre le sillon de la VCI et la fissure du ligament veineux, au-dessus du porta hepatis.", ["En dessous du porta hepatis", "Au-dessus du porta hepatis, entre le sillon de la VCI et la fissure du ligament veineux", "À droite de la fosse vésiculaire", "Dans la zone nue du foie"]),

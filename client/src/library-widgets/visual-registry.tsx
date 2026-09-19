@@ -5,7 +5,7 @@ import { UpperLimbVeinsDiagram, ThighCompartmentsDiagram, GlutealMusclesDiagram,
 import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSheet, LegBonesSheet, FootBonesDiagram, RectumAnalDiagram, BladderUrethraDiagram, MaleGenitalDiagram, CoeliacTrunkDiagram } from "../components/AnatRest";
 import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/AnatBonesTP";
 import { ForearmBonesDiagram, WristJointDiagram, HipBoneDiagram, LegBonesDiagram, AnkleJointDiagram, FootMedialBonesDiagram } from "../components/AnatBonesTP2";
-import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
+import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, LiverCouinaudDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
 import { AMINO_ACIDS } from "../library-data/amino-acids";
@@ -212,6 +212,7 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/duodenum-pancreas": () => <DuodenumPancreasDiagram />,
   "anat/stomach-parts": () => <StomachPartsDiagram />,
   "anat/liver-views": () => <LiverViewsDiagram />,
+  "anat/liver-couinaud": () => <LiverCouinaudDiagram />,
   "anat/kidney-section": () => <KidneySectionDiagram />,
   "anat/uterus-adnexa": () => <UterusAdnexaDiagram />,
   "anat/tp-humerus": () => <HumerusLandmarksDiagram />,

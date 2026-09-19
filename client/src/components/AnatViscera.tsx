@@ -160,4 +160,39 @@ export function UterusAdnexaDiagram() {
   );
 }
 
+// ─── Foie : segments de Couinaud ─────────────────────────────────────────
+const LIVER_OUTLINE = "M40,170 C40,90 160,60 260,66 C340,70 410,110 400,190 C392,260 300,320 200,326 C110,326 40,260 40,170z";
+export function LiverCouinaudDiagram() {
+  const segs: [string, string, number, number, number, number, string, number, number][] = [
+    ["vii", "VII", 0, 0, 150, 190, C.violet, 95, 140], ["vi", "VI", 0, 190, 150, 700, C.blue, 95, 250],
+    ["viii", "VIII", 150, 0, 240, 190, C.green, 195, 140], ["v", "V", 150, 190, 240, 700, C.amber, 195, 260],
+    ["iva", "IVa", 240, 0, 300, 190, C.pink, 270, 150], ["ivb", "IVb", 240, 190, 300, 700, C.red, 270, 260],
+    ["ii", "II", 300, 0, 740, 190, C.blue, 350, 150], ["iii", "III", 300, 190, 740, 700, C.green, 345, 240],
+  ];
+  return (
+    <Figure viewBox="0 0 740 440" title="Foie : segments de Couinaud (face antérieure)" caption="Trois scissures verticales portant les veines hépatiques (droite, moyenne, gauche) et un plan transversal passant par les branches portales définissent huit segments ; chaque segment a son propre pédicule portal, artériel et biliaire et son drainage veineux : ils sont indépendants pour la chirurgie hépatique ; le segment I (lobe caudé) est postérieur">
+      <defs>
+        {segs.map(([id, , x0, y0, x1, y1]) => <clipPath key={id} id={`couinaud-${id}`}><rect x={x0} y={y0} width={x1 - x0} height={y1 - y0} /></clipPath>)}
+      </defs>
+      {segs.map(([id, , , , , , c]) => <path key={id} d={LIVER_OUTLINE} fill={c} fillOpacity={0.4} clipPath={`url(#couinaud-${id})`} />)}
+      <path d={LIVER_OUTLINE} fill="none" stroke={DEEP.pink} strokeWidth={3} />
+      {[150, 240, 300].map((x, i) => <line key={x} x1={x} y1={64} x2={x} y2={324} stroke={C.blue} strokeWidth={3} strokeDasharray="8 5" opacity={0.85 - i * 0.05} />)}
+      <line x1={40} y1={190} x2={240} y2={190} stroke={DEEP.green} strokeWidth={3} strokeDasharray="8 5" />
+      <line x1={300} y1={190} x2={400} y2={190} stroke={DEEP.green} strokeWidth={3} strokeDasharray="8 5" />
+      {segs.map(([id, t, , , , , , tx, ty]) => <Txt key={id} x={tx} y={ty} bold size={20}>{t}</Txt>)}
+      <circle cx={222} cy={204} r={16} fill="none" stroke={C.grey} strokeWidth={2} strokeDasharray="4 3" /><Txt x={222} y={209} bold size={11} color={C.grey}>I</Txt>
+      <Txt x={150} y={50} bold size={9} color={DEEP.blue}>V. hép. droite</Txt><Txt x={240} y={38} bold size={9} color={DEEP.blue}>V. hép. moyenne</Txt><Txt x={310} y={50} bold size={9} color={DEEP.blue}>V. hép. gauche</Txt>
+      <Txt x={40} y={346} anchor="start" size={9.5} bold color={DEEP.green}>plan transversal : branches portales droite et gauche</Txt>
+      <Txt x={40} y={362} anchor="start" size={9.5} color={C.grey}>segment I (lobe caudé) : face postérieure, drainé directement dans la VCI</Txt>
+      <rect x={430} y={20} width={300} height={410} rx={10} fill="none" stroke="currentColor" strokeOpacity={0.25} />
+      <Txt x={580} y={42} bold size={12}>Scissures et plans</Txt>
+      {[["Scissure droite (v. hép. droite)", "sépare VI, VII (latéral) de V, VIII"], ["Scissure principale (v. hép. moyenne)", "plan de Cantlie : foie droit / foie gauche"], ["Scissure ombilicale (lig. falciforme)", "sépare II, III du segment IV"], ["Plan transversal (branches portales)", "haut : II, IVa, VII, VIII ; bas : III, IVb, V, VI"]].map(([a, b], i) => (
+        <g key={a}><rect x={442} y={54 + i * 52} width={276} height={46} rx={8} fill={C.blue} fillOpacity={0.08} stroke={C.blue} strokeWidth={1.4} /><Txt x={580} y={73 + i * 52} bold size={10.5}>{a}</Txt><Txt x={580} y={89 + i * 52} size={9.5}>{b}</Txt></g>
+      ))}
+      <Txt x={580} y={282} bold size={12}>À retenir</Txt>
+      {["foie droit : V, VI, VII, VIII ; foie gauche : II, III, IV", "I : caudé, autonome (vascularisation des deux côtés)", "IV : divisé en IVa (haut) et IVb (bas), carré = IVb", "hépatectomie droite : V à VIII ; gauche : II à IV", "chaque segment : 1 pédicule (veine porte, artère, canal biliaire)", "les veines hépatiques cheminent entre les segments"].map((t, i) => <Txt key={i} x={580} y={306 + i * 20} size={9.5}>{t}</Txt>)}
+    </Figure>
+  );
+}
+
 export function _touch() { return [BONE, BS]; }
