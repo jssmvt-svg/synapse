@@ -136,6 +136,9 @@ export function Dashboard() {
           <Link to="/library" className="header-nav-link">
             {t.libraryTitle}
           </Link>
+          <Link to="/duel" className="header-nav-link">
+            🎮 {lang === "fr" ? "Jeux" : "Games"}
+          </Link>
           <Link to="/statistics" className="header-nav-link">
             {t.statistics}
           </Link>
@@ -189,6 +192,14 @@ export function Dashboard() {
           <h2>{t.dashboardFeatureExam}</h2>
           <p>{t.dashboardFeatureExamCopy}</p>
           <small>{t.chapterExam} →</small>
+        </Link>
+        <Link to="/duel" className="dashboard-feature-card">
+          <span className="feature-index feature-index-violet">🎮</span>
+          <h2>{lang === "fr" ? "Mini-jeux de révision" : "Study mini-games"}</h2>
+          <p>{lang === "fr"
+            ? "Combat, course de voitures, bloc opératoire, tir à la corde : affronte un autre étudiant en direct avec ton avatar. Gagne de l'XP et de l'or."
+            : "Fight, car race, operating room, tug of war: face another student live with your avatar. Earn XP and gold."}</p>
+          <small>{lang === "fr" ? "Jouer" : "Play"} →</small>
         </Link>
         <Link to="/statistics" className="dashboard-feature-card">
           <span className="feature-index feature-index-warm">03</span>

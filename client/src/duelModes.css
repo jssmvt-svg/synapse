@@ -1,0 +1,890 @@
+/* ===== Modes de jeu : sélection, éditeur d'avatar, décors ===== */
+
+/* HUD : positions explicites (le compte à rebours occupe la colonne centrale) */
+.duel-hp-me { grid-column: 1; grid-row: 1; }
+.duel-hp-foe { grid-column: 3; grid-row: 1; }
+
+.duel-hp-track span[data-kind="progress"] {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 6px, rgba(0, 0, 0, 0.2) 6px 8px),
+    #ffd23f;
+}
+
+.duel-hp-me .duel-hp-track span[data-kind="force"] {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 6px, rgba(0, 0, 0, 0.2) 6px 8px),
+    #5b9bff;
+}
+
+.duel-hp-foe .duel-hp-track span[data-kind="force"] {
+  background:
+    repeating-linear-gradient(90deg, transparent 0 6px, rgba(0, 0, 0, 0.2) 6px 8px),
+    #ff7a6b;
+}
+
+.duel-hp-track-thin {
+  height: 8px;
+  padding: 1px;
+  margin-top: 3px;
+  border-width: 2px;
+}
+
+.duel-arena-shake-soft {
+  animation: duel-arena-shake 0.45s steps(6) 0.95s;
+}
+
+.duel-banner-ko strong {
+  font-size: clamp(16px, 5.4cqw, 42px);
+  text-align: center;
+  line-height: 1.3;
+}
+
+/* --- Choix du jeu --- */
+.duel-modes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 0.7rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.duel-mode-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.9rem;
+  border: 2px solid var(--border);
+  border-radius: 14px;
+  background: var(--card-bg);
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
+}
+
+.duel-mode-card:hover {
+  transform: translateY(-2px);
+}
+
+.duel-mode-card[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--card-bg));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+.duel-mode-icon {
+  font-size: 1.9rem;
+  line-height: 1;
+}
+
+/* --- Personnage et éditeur --- */
+.duel-avatar-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.6rem;
+}
+
+.duel-avatar-head h2 {
+  margin: 0;
+}
+
+.duel-editor {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.2rem;
+  padding: 1rem;
+  margin: 0.5rem 0 1rem;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+}
+
+.duel-editor-preview {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-width: 180px;
+  padding: 1rem;
+  border-radius: 10px;
+  background: linear-gradient(#4a5bd0 0 40%, #7e95f2 40% 70%, #ffd9a6 70% 100%);
+}
+
+.duel-field {
+  margin-bottom: 0.7rem;
+}
+
+.duel-field-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.duel-swatches,
+.duel-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.duel-swatch {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.duel-swatch[aria-pressed="true"] {
+  border-color: var(--ink);
+  box-shadow: 0 0 0 2px var(--card-bg) inset;
+}
+
+.duel-chip {
+  padding: 0.35rem 0.7rem;
+  border: 2px solid var(--border);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--ink);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.duel-chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--card-bg));
+  font-weight: 700;
+}
+
+.duel-chip-dot {
+  display: inline-block;
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-right: 0.35rem;
+  border-radius: 50%;
+  background: var(--chip-color);
+}
+
+/* --- Course de voitures --- */
+.race-arena .duel-bg-far { bottom: 40%; }
+.race-arena .duel-bg-near { bottom: 38%; }
+
+.race-track {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  height: 54%;
+  background: linear-gradient(#63d46c 0 8px, #3b9c52 8px 100%);
+}
+
+.race-lane {
+  position: absolute;
+  right: 0;
+  left: 0;
+  height: 86px;
+}
+
+.race-lane-foe { top: 10px; }
+.race-lane-me { top: 106px; }
+
+.race-road {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 44px;
+  border-top: 4px solid #eeeef6;
+  border-bottom: 4px solid #c63a3a;
+  background:
+    repeating-linear-gradient(90deg, #f5d34f 0 22px, transparent 22px 44px) 0 20px / 100% 4px repeat-x,
+    #3b3b4d;
+  animation: race-scroll 0.5s steps(4) infinite;
+}
+
+@keyframes race-scroll {
+  to { background-position: -44px 20px, 0 0; }
+}
+
+.race-car {
+  position: absolute;
+  bottom: 2px;
+  width: 108px;
+  transition: left 1.3s cubic-bezier(0.25, 0.8, 0.3, 1);
+}
+
+.race-car svg {
+  display: block;
+  overflow: visible;
+}
+
+.race-name {
+  position: absolute;
+  top: -4px;
+  left: 4px;
+  font-size: 7px;
+  color: #fff;
+  text-shadow: 1px 1px 0 #14112b;
+  white-space: nowrap;
+}
+
+.race-wheel-a { animation: race-wheel-a 0.16s steps(1) infinite; }
+.race-wheel-b { animation: race-wheel-b 0.16s steps(1) infinite; }
+
+@keyframes race-wheel-a {
+  0% { visibility: visible; }
+  50% { visibility: hidden; }
+}
+
+@keyframes race-wheel-b {
+  0% { visibility: hidden; }
+  50% { visibility: visible; }
+}
+
+.race-flame {
+  position: absolute;
+  bottom: 14px;
+  left: -34px;
+  width: 38px;
+  height: 18px;
+  background: linear-gradient(90deg, transparent, #ff6a2c 35%, #ffd23f);
+  clip-path: polygon(0 50%, 25% 20%, 45% 32%, 70% 0, 100% 25%, 100% 75%, 70% 100%, 45% 68%, 25% 80%);
+  animation: race-flicker 0.14s steps(2) infinite;
+}
+
+.race-flame-3 {
+  left: -62px;
+  width: 66px;
+  height: 22px;
+  background: linear-gradient(90deg, transparent, #5cc8ff 35%, #ffffff);
+}
+
+@keyframes race-flicker {
+  50% { transform: scaleX(0.8) translateY(1px); }
+}
+
+.race-finish {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 14px;
+  background: repeating-conic-gradient(#ffffff 0 25%, #14112b 0 50%) 0 0 / 14px 14px;
+}
+
+/* --- Bloc opératoire --- */
+.op-wall {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 63px, rgba(20, 17, 43, 0.06) 63px 64px),
+    linear-gradient(#e6f4f4 0 66%, #b7d7da 66% 68%, #9dbfc7 68% 100%);
+}
+
+.op-rooms {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 84px;
+}
+
+.op-side {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.op-side-foe {
+  border-left: 3px solid #14112b;
+}
+
+.op-steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  justify-content: center;
+  margin: 0;
+  padding: 0 4px;
+  list-style: none;
+}
+
+.op-steps li {
+  padding: 3px 4px;
+  border: 2px solid #14112b;
+  background: #ffffff;
+  color: #14112b;
+  font-size: 6px;
+  opacity: 0.55;
+}
+
+.op-steps li[data-state="done"] {
+  background: #4be07f;
+  opacity: 1;
+}
+
+.op-steps li[data-state="current"] {
+  background: #ffe36e;
+  opacity: 1;
+  animation: duel-blink 0.8s steps(2) infinite;
+}
+
+.op-scene {
+  position: relative;
+  flex: 1;
+  width: 100%;
+}
+
+.op-monitor {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 112px;
+  padding: 6px;
+  translate: -50% 0;
+  border: 3px solid #5a657a;
+  background: #14112b;
+  color: #4be07f;
+  font-size: 8px;
+  text-align: center;
+}
+
+.op-monitor svg {
+  display: block;
+  margin: 0 auto 4px;
+  overflow: hidden;
+}
+
+.op-monitor path {
+  fill: none;
+  stroke: #4be07f;
+  stroke-width: 2;
+}
+
+.op-ecg-line {
+  animation: op-ecg var(--beat, 1s) steps(8) infinite;
+}
+
+@keyframes op-ecg {
+  to { transform: translateX(-40px); }
+}
+
+.op-monitor[data-alert="true"] {
+  border-color: #ff5a4a;
+  color: #ff5a4a;
+}
+
+.op-monitor[data-alert="true"] path {
+  stroke: #ff5a4a;
+}
+
+.op-monitor[data-flat="true"] {
+  animation: duel-blink 0.6s steps(2) infinite;
+}
+
+.op-doctor {
+  position: absolute;
+  bottom: 6%;
+  z-index: 2;
+}
+
+.op-side-me .op-doctor { left: 4%; }
+.op-side-foe .op-doctor { right: 4%; }
+
+.op-bed {
+  position: absolute;
+  bottom: 4%;
+}
+
+.op-side-me .op-bed { right: 3%; }
+.op-side-foe .op-bed { left: 3%; }
+
+.op-bed svg {
+  display: block;
+}
+
+.op-bed-shake {
+  animation: pixel-hit 0.55s steps(6) both;
+}
+
+.op-plus {
+  position: absolute;
+  bottom: 40px;
+  color: #4be07f;
+  font-size: 18px;
+  text-shadow: 2px 2px 0 #14112b;
+  animation: op-plus 1.4s steps(10) both;
+}
+
+.op-plus-1 { left: 25%; }
+.op-plus-2 { left: 50%; animation-delay: 0.2s; }
+.op-plus-3 { left: 72%; animation-delay: 0.4s; }
+
+@keyframes op-plus {
+  0% { opacity: 0; transform: translateY(10px); }
+  25% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-46px); }
+}
+
+.op-alarm {
+  position: absolute;
+  top: -16px;
+  right: 0;
+  left: 0;
+  color: #ff5a4a;
+  font-size: 8px;
+  text-align: center;
+  text-shadow: 1px 1px 0 #14112b;
+  animation: duel-blink 0.4s steps(2) infinite;
+}
+
+/* --- Tir à la corde --- */
+.tug-arena .duel-bg-far { bottom: 36%; }
+.tug-arena .duel-bg-near { bottom: 33%; }
+
+.tug-cliff {
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  width: 39%;
+  height: 28%;
+  background:
+    linear-gradient(#63d46c 0 8px, #3b9c52 8px 16px, transparent 16px),
+    repeating-linear-gradient(90deg, #5a3f7a 0 36px, #4f356e 36px 72px);
+}
+
+.tug-cliff-left {
+  left: 0;
+  clip-path: polygon(0 0, 90% 0, 90% 22%, 95% 22%, 95% 48%, 100% 48%, 100% 100%, 0 100%);
+}
+
+.tug-cliff-right {
+  right: 0;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 48%, 5% 48%, 5% 22%, 10% 22%);
+}
+
+.tug-pit {
+  position: absolute;
+  right: 35%;
+  bottom: 0;
+  left: 35%;
+  z-index: 1;
+  height: 15%;
+  overflow: hidden;
+  background: repeating-linear-gradient(0deg, #7a5230 0 10px, #6b4626 10px 20px);
+  border-top: 4px solid #4a2f18;
+}
+
+.tug-pit i {
+  position: absolute;
+  bottom: 4px;
+  width: 8px;
+  height: 8px;
+  background: #a4713f;
+  animation: tug-bubble 1.6s steps(6) infinite;
+}
+
+.tug-pit i:nth-child(1) { left: 22%; }
+.tug-pit i:nth-child(2) { left: 50%; animation-delay: 0.5s; }
+.tug-pit i:nth-child(3) { left: 76%; animation-delay: 1s; }
+
+@keyframes tug-bubble {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-16px) scale(1.5); }
+}
+
+.tug-slot {
+  position: absolute;
+  bottom: 27%;
+  z-index: 2;
+  transition: transform 1s steps(8);
+}
+
+.tug-slot-me {
+  left: 8%;
+  transform: translateX(calc(var(--r, 0) * -26px));
+}
+
+.tug-slot-foe {
+  right: 8%;
+  transform: translateX(calc(var(--r, 0) * -26px));
+}
+
+.tug-rope {
+  position: absolute;
+  right: calc(8% + 104px);
+  bottom: calc(27% + 62px);
+  left: calc(8% + 104px);
+  z-index: 3;
+  height: 8px;
+  border: 2px solid #4a3620;
+  background: repeating-linear-gradient(45deg, #c9a36b 0 4px, #8a6a3c 4px 8px);
+}
+
+.tug-flag {
+  position: absolute;
+  top: -30px;
+  left: calc(50% + var(--r, 0) * -40%);
+  width: 5px;
+  height: 36px;
+  background: #3a2a20;
+  transition: left 1s steps(8);
+}
+
+.tug-flag::after {
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width: 22px;
+  height: 14px;
+  background: #ff4d3a;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  content: "";
+}
+
+.tug-pull-me { animation: tug-pull-me 0.7s steps(7); }
+.tug-pull-foe { animation: tug-pull-foe 0.7s steps(7); }
+
+@keyframes tug-pull-me {
+  35% { transform: translateX(-14px); }
+}
+
+@keyframes tug-pull-foe {
+  35% { transform: translateX(14px); }
+}
+
+.tug-fall.tug-slot-me { animation: tug-fall-me 1s steps(8) 0.9s both; }
+.tug-fall.tug-slot-foe { animation: tug-fall-foe 1s steps(8) 0.9s both; }
+
+@keyframes tug-fall-me {
+  to { transform: translate(190px, 110px) rotate(80deg); opacity: 0; }
+}
+
+@keyframes tug-fall-foe {
+  to { transform: translate(-190px, 110px) rotate(-80deg); opacity: 0; }
+}
+
+/* --- Petits écrans --- */
+@media (max-width: 640px) {
+  .duel-editor {
+    grid-template-columns: 1fr;
+  }
+
+  .race-car {
+    width: 90px;
+  }
+
+  .race-car svg {
+    width: 90px;
+    height: auto;
+  }
+
+  .op-monitor {
+    width: 92px;
+  }
+
+  .op-bed svg {
+    width: 120px;
+    height: auto;
+  }
+
+  .op-doctor .pixel-fighter svg {
+    width: 62px;
+    height: auto;
+  }
+
+  .tug-slot .pixel-fighter svg {
+    width: 72px;
+    height: auto;
+  }
+
+  .tug-rope {
+    right: calc(8% + 62px);
+    left: calc(8% + 62px);
+    bottom: calc(27% + 40px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .race-road,
+  .race-flame,
+  .race-wheel-a,
+  .race-wheel-b,
+  .op-ecg-line,
+  .op-plus,
+  .op-alarm,
+  .tug-pit i {
+    animation: none !important;
+  }
+}
+
+/* L'indice passe en bas de l'arène : le haut est occupé par les étapes */
+.op-arena .duel-hint {
+  top: auto;
+  bottom: 6px;
+  z-index: 4;
+}
+
+.duel-editor-preview {
+  align-self: start;
+  padding-top: 2.2rem;
+}
+
+/* ===== Téléphone ===== */
+@media (max-width: 640px) {
+  .duel-page {
+    padding-right: 12px;
+    padding-left: 12px;
+    padding-bottom: max(3rem, env(safe-area-inset-bottom));
+  }
+
+  /* L'arène laisse la question et ses 4 réponses visibles sans défiler */
+  .duel-arena {
+    height: 280px;
+  }
+
+  .duel-hud {
+    top: 8px;
+    right: 8px;
+    left: 8px;
+    gap: 6px;
+  }
+
+  .duel-hint {
+    top: 70px;
+    font-size: 8px;
+  }
+
+  /* Salon : 2 jeux par ligne */
+  .duel-modes {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .duel-mode-card {
+    padding: 0.7rem;
+  }
+
+  .duel-mode-card .duel-muted {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .duel-avatars {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.45rem;
+  }
+
+  .duel-actions .duel-button {
+    flex: 1 1 100%;
+    padding: 0.85rem 1rem;
+    text-align: center;
+  }
+
+  .duel-join {
+    flex: 1 1 100%;
+  }
+
+  .duel-join input {
+    flex: 1;
+    width: auto;
+    min-width: 0;
+    padding: 0.85rem 0.75rem;
+  }
+
+  .duel-option {
+    padding: 0.9rem 0.8rem;
+  }
+
+  .duel-editor-preview {
+    min-width: 0;
+    padding-top: 1.4rem;
+  }
+
+  /* Course : deux voies compactes */
+  .race-track {
+    height: 64%;
+  }
+
+  .race-lane {
+    --car-w: 96px;
+    height: 78px;
+  }
+
+  .race-lane-foe { top: 4px; }
+  .race-lane-me { top: 90px; }
+
+  .race-road {
+    height: 38px;
+  }
+
+  .race-car {
+    width: 80px;
+  }
+
+  .race-car svg {
+    width: 80px;
+  }
+
+  .race-name {
+    font-size: 6px;
+  }
+
+  .race-flame {
+    left: -28px;
+    width: 30px;
+  }
+
+  .race-flame-3 {
+    left: -48px;
+    width: 52px;
+  }
+
+  /* Bloc opératoire : une seule étape affichée, éléments réduits */
+  .op-arena {
+    height: 330px;
+  }
+
+  .op-rooms {
+    padding-top: 78px;
+  }
+
+  .op-steps li {
+    padding: 3px 6px;
+    font-size: 7px;
+  }
+
+  .op-steps li:not([data-state="current"]) {
+    display: none;
+  }
+
+  .op-steps li[data-state="done"]:last-child {
+    display: block;
+  }
+
+  .op-monitor {
+    top: 4px;
+    width: 84px;
+    padding: 4px;
+    font-size: 7px;
+  }
+
+  .op-monitor svg {
+    width: 72px;
+    height: 27px;
+  }
+
+  .op-doctor {
+    bottom: 26px;
+  }
+
+  .op-side-me .op-doctor { left: 2%; }
+  .op-side-foe .op-doctor { right: 2%; }
+
+  .op-doctor .pixel-fighter svg {
+    width: 56px;
+  }
+
+  .op-bed {
+    bottom: 26px;
+  }
+
+  .op-side-me .op-bed { right: 0; }
+  .op-side-foe .op-bed { left: 0; }
+
+  .op-bed svg {
+    width: 92px;
+  }
+
+  .op-arena .duel-hint {
+    bottom: 0;
+    padding: 5px 0;
+    background: rgba(20, 17, 43, 0.78);
+    font-size: 7px;
+  }
+
+  .op-alarm {
+    font-size: 6px;
+  }
+
+  .duel-callout {
+    font-size: 8px;
+  }
+
+  .duel-callout-tier-3 {
+    font-size: 10px;
+  }
+}
+
+/* Au toucher : pas de survol « collant », pas de zoom au double-tap */
+@media (hover: none) {
+  .duel-option:hover:not(:disabled),
+  .duel-mode-card:hover,
+  .duel-avatar-card:hover,
+  .duel-button:hover:not(:disabled) {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .duel-option:hover:not(:disabled) {
+    border-color: var(--border);
+  }
+}
+
+.duel-option,
+.duel-button,
+.duel-mode-card,
+.duel-avatar-card,
+.duel-chip,
+.duel-swatch {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Très petits écrans */
+@media (max-width: 360px) {
+  .duel-hp-label {
+    font-size: 7px;
+  }
+
+  .duel-avatars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .duel-avatar-head .duel-button {
+    padding: 0.5rem 0.8rem;
+    white-space: nowrap;
+  }
+
+  .duel-avatar-head h2 {
+    font-size: 1rem;
+  }
+
+  .duel-avatar-card {
+    padding: 0.4rem 0.2rem;
+  }
+
+  .duel-avatar-card .duel-muted {
+    display: none;
+  }
+}
+
+/* Tableau de bord sur mobile : les jeux passent en tête (les liens d'en-tête sont masqués) */
+@media (max-width: 800px) {
+  .dashboard-feature-card[href="/duel"] {
+    order: -1;
+  }
+}

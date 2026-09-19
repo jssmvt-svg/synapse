@@ -513,6 +513,17 @@ const SCHEMA = `
     created_at BIGINT NOT NULL,
     UNIQUE(user_id, chapter_id)
   );
+
+  -- Progression du duel en arène : XP, or et bilan des matchs.
+  CREATE TABLE IF NOT EXISTS duel_profiles (
+    user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    xp INTEGER NOT NULL DEFAULT 0,
+    gold INTEGER NOT NULL DEFAULT 0,
+    wins INTEGER NOT NULL DEFAULT 0,
+    losses INTEGER NOT NULL DEFAULT 0,
+    draws INTEGER NOT NULL DEFAULT 0,
+    updated_at BIGINT NOT NULL
+  );
 `;
 
 const MAX_RETRIES = 5;

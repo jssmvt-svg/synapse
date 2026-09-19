@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./auth";
 import { Dashboard } from "./pages/Dashboard";
 import { DeckView } from "./pages/DeckView";
+import { Duel } from "./pages/Duel";
 import { Library } from "./pages/Library";
 import { LibraryChapterView } from "./pages/LibraryChapterView";
 import { LibrarySubjectView } from "./pages/LibrarySubjectView";
@@ -115,6 +116,14 @@ export function App() {
       <Route
         path="/admin"
         element={<RequireAuth><Admin /></RequireAuth>}
+      />
+      <Route
+        path="/duel"
+        element={<RequireAuth><Duel /></RequireAuth>}
+      />
+      <Route
+        path="/duel/:code"
+        element={<RequireAuth><Duel /></RequireAuth>}
       />
       <Route
         path="/statistics"

@@ -417,6 +417,68 @@ export interface AdminChapter {
   ordre: number;
 }
 
+export type DuelMode = "combat" | "race" | "surgery" | "tug";
+
+export type DuelPhase = "waiting" | "countdown" | "question" | "reveal" | "finished";
+
+export interface DuelState {
+  code: string;
+  phase: DuelPhase;
+  serverNow: number;
+  mode: DuelMode;
+  goal: number;
+  maxHp: number;
+  phaseEndsAt: number | null;
+  round: number;
+  totalRounds: number;
+  isPublic: boolean;
+  me: { name: string; avatar: string; hp: number; progress: number; correct: number; streak: number };
+  opponent: {
+    name: string;
+    avatar: string;
+    hp: number;
+    progress: number;
+    correct: number;
+    streak: number;
+    answered: boolean;
+  } | null;
+  question: {
+    id: number;
+    promptFr: string;
+    promptEn: string;
+    options: Array<{ key: string; labelFr: string; labelEn: string }>;
+  } | null;
+  myAnswer: string | null;
+  reveal: {
+    correctKey: string;
+    explanationFr: string;
+    explanationEn: string;
+    myAnswer: string | null;
+    opponentAnswer: string | null;
+    myCorrect: boolean;
+    opponentCorrect: boolean;
+    damageTaken: number;
+    damageDealt: number;
+    myAttackTier: number;
+    opponentAttackTier: number;
+    myGain: number;
+    opponentGain: number;
+    myComplication: boolean;
+    opponentComplication: boolean;
+  } | null;
+  result: {
+    outcome: "win" | "loss" | "draw";
+    reason: "ko" | "goal" | "rounds" | "forfeit" | "abandoned";
+    rewards: { xp: number; gold: number } | null;
+  } | null;
+}
+
+export interface DuelOverview {
+  profile: { xp: number; level: number; gold: number; wins: number; losses: number; draws: number };
+  leaderboard: Array<{ name: string; xp: number; level: number; wins: number; isMe: boolean }>;
+  activeRoomCode: string | null;
+}
+
 export const api = {
   register: (input: RegisterInput) =>
     request<{ token: string; user: User }>("/auth/register", {
@@ -532,4 +594,22 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ sessionId, answers }),
     }),
+  duelOverview: () => request<DuelOverview>("/duel/me"),
+  duelCreateRoom: (avatar: string, mode: DuelMode) =>
+    request<DuelState>("/duel/rooms", { method: "POST", body: JSON.stringify({ avatar, mode }) }),
+  duelQuickMatch: (avatar: string, mode: DuelMode) =>
+    request<DuelState>("/duel/quick", { method: "POST", body: JSON.stringify({ avatar, mode }) }),
+  duelJoinRoom: (code: string, avatar: string) =>
+    request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}/join`, {
+      method: "POST",
+      body: JSON.stringify({ avatar }),
+    }),
+  duelGetRoom: (code: string) => request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}`),
+  duelAnswer: (code: string, optionKey: string) =>
+    request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}/answer`, {
+      method: "POST",
+      body: JSON.stringify({ optionKey }),
+    }),
+  duelLeave: (code: string) =>
+    request<void>(`/duel/rooms/${encodeURIComponent(code)}/leave`, { method: "POST", body: "{}" }),
 };

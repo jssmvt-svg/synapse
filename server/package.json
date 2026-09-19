@@ -9,6 +9,7 @@
     "start": "tsx src/index.ts",
     "typecheck": "tsc --noEmit",
     "test:auth-policy": "tsx --test src/authPolicy.test.ts src/personalDeck.test.ts",
+    "test:duel": "tsx --test src/duelEngine.test.ts",
     "test:library-navigation": "tsx --test ../tests/libraryNavigation.test.ts",
     "provision:admin": "tsx ../scripts/provision-admin.ts",
     "find:duplicate-emails": "tsx ../scripts/find-duplicate-accounts.ts"
