@@ -63,17 +63,17 @@ export function DuodenumPancreasDiagram() {
 export function StomachPartsDiagram() {
   return (
     <Figure viewBox="0 0 740 440" title="Estomac : les quatre parties et les courbures" caption="Cardia, fundus, corps et pylore (antre + canal pylorique + sphincter) ; petite courbure (petit omentum) et grande courbure (grand omentum, ligament gastro-splénique) ; vascularisation par les branches du tronc cœliaque">
-      <path d="M118,30 L150,30 L154,80 C150,130 190,150 240,146 C330,142 350,230 300,290 C250,340 150,330 120,270 C100,220 110,150 118,80z" fill={C.amber} fillOpacity={0.45} stroke={DEEP.amber} strokeWidth={3} />
+      <path d="M118,30 L150,30 L154,80 C160,50 250,18 330,56 C400,100 390,220 300,290 C250,340 150,330 120,270 C100,220 110,150 118,80z" fill={C.amber} fillOpacity={0.45} stroke={DEEP.amber} strokeWidth={3} />
       <path d="M118,30 L154,30" stroke={C.grey} strokeWidth={8} />
       <path d="M300,290 C330,300 380,290 396,270 L396,240 C370,250 340,262 322,262" fill={C.green} fillOpacity={0.5} stroke={DEEP.green} strokeWidth={2.5} />
       <path d="M396,240 L420,240 L420,270 L396,270z" fill={C.red} fillOpacity={0.6} stroke={DEEP.red} strokeWidth={2.5} />
       <circle cx={158} cy={92} r={10} fill="#fff" stroke={C.grey} strokeWidth={2.5} /><Txt x={172} y={64} anchor="start" bold size={10.5}>Cardia</Txt>
-      <path d="M172,110 C200,60 260,40 300,60 C320,80 300,120 240,140" fill={C.blue} fillOpacity={0.25} stroke={C.blue} strokeWidth={2} strokeDasharray="5 4" /><Txt x={262} y={86} bold size={11} color={DEEP.blue}>Fundus</Txt>
+      <path d="M156,100 C158,50 250,18 330,56 C352,68 364,96 368,124 C320,108 240,102 156,100z" fill={C.blue} fillOpacity={0.3} stroke={DEEP.blue} strokeWidth={2} /><path d="M156,100 L372,118" stroke={DEEP.blue} strokeWidth={1.5} strokeDasharray="5 4" /><Txt x={262} y={70} bold size={12} color={DEEP.blue}>Fundus</Txt><Txt x={262} y={86} size={9} color={C.grey}>au-dessus du plan du cardia</Txt>
       <Txt x={200} y={230} bold size={12}>Corps</Txt>
       <Txt x={352} y={286} bold size={10.5} color={DEEP.green}>Antre</Txt>
       <Txt x={408} y={296} bold size={10.5} color={RED}>Pylore</Txt>
       <path d="M126,110 C104,200 116,280 150,304" fill="none" stroke={C.violet} strokeWidth={5} strokeLinecap="round" opacity={0.7} /><Txt x={96} y={200} anchor="end" bold size={10.5} color="#6a45b0">petite courbure</Txt><Txt x={96} y={214} anchor="end" size={9} color={C.grey}>→ petit omentum</Txt>
-      <path d="M186,138 C290,110 370,200 316,300" fill="none" stroke={C.pink} strokeWidth={5} strokeLinecap="round" opacity={0.7} /><Txt x={336} y={160} anchor="start" bold size={10.5} color={DEEP.pink}>grande courbure</Txt><Txt x={336} y={174} anchor="start" size={9} color={C.grey}>→ grand omentum</Txt>
+      <path d="M200,36 C240,26 290,30 330,56 C400,100 390,220 300,290" fill="none" stroke={C.pink} strokeWidth={5} strokeLinecap="round" opacity={0.7} /><Txt x={352} y={176} anchor="end" bold size={10.5} color={DEEP.pink}>grande courbure</Txt><Txt x={352} y={190} anchor="end" size={9} color={C.grey}>→ grand omentum</Txt>
       <path d="M120,270 L100,290" stroke={C.grey} strokeWidth={0} /><Txt x={126} y={324} anchor="start" size={9.5} bold color={C.grey}>incisure angulaire</Txt>
       <rect x={440} y={20} width={290} height={410} rx={10} fill="none" stroke="currentColor" strokeOpacity={0.25} />
       <Txt x={585} y={44} bold size={12}>Vascularisation (tronc cœliaque)</Txt>

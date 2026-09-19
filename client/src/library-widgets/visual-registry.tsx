@@ -4,6 +4,7 @@ import { DistalTubuleCellsDiagram, RenalAcidBaseDiagram, AmmoniumTrappingDiagram
 import { UpperLimbVeinsDiagram, ThighCompartmentsDiagram, GlutealMusclesDiagram, ThighMusclesDiagram, LowerLimbVeinsDiagram, InguinalRegionDiagram, PeritonealCompartmentsDiagram, RetroperitonealOrgansDiagram, SpleenViewsDiagram, BiliaryTreeDiagram, PortalSystemDiagram, AnatNephronDiagram, FallopianTubeDiagram, BroadLigamentDiagram, ProstateZonesDiagram, TestisEpididymisDiagram } from "../components/AnatMore";
 import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSheet, LegBonesSheet, FootBonesDiagram, RectumAnalDiagram, BladderUrethraDiagram, MaleGenitalDiagram, CoeliacTrunkDiagram } from "../components/AnatRest";
 import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/AnatBonesTP";
+import { ForearmBonesDiagram, WristJointDiagram, HipBoneDiagram, LegBonesDiagram, AnkleJointDiagram, FootMedialBonesDiagram } from "../components/AnatBonesTP2";
 import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
@@ -221,6 +222,12 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/tp-carpus": () => <CarpusDiagram />,
   "anat/tp-leg-bones": () => <LegBonesSheet />,
   "anat/tp-foot": () => <FootBonesDiagram />,
+  "anat/tp-forearm-drawing": () => <ForearmBonesDiagram />,
+  "anat/tp-wrist": () => <WristJointDiagram />,
+  "anat/tp-hip-drawing": () => <HipBoneDiagram />,
+  "anat/tp-leg-drawing": () => <LegBonesDiagram />,
+  "anat/tp-ankle": () => <AnkleJointDiagram />,
+  "anat/tp-foot-medial": () => <FootMedialBonesDiagram />,
   "anat/rectum-anal": () => <RectumAnalDiagram />,
   "anat/bladder-urethra": () => <BladderUrethraDiagram />,
   "anat/male-genital": () => <MaleGenitalDiagram />,

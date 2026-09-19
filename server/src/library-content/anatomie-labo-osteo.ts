@@ -27,27 +27,40 @@ const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (
 - **Tubercule majeur (grand tubercule)** et **tubercule mineur (petit tubercule)** : insertions des muscles de la coiffe des rotateurs, séparés par le **sillon intertuberculaire (gouttière bicipitale)** où chemine le tendon du long biceps.
 - **Tubérosité deltoïdienne** : sur la face latérale de la diaphyse, insertion du deltoïde.
 - **Sillon du nerf radial** : trajet oblique sur la face postérieure de la diaphyse — un traumatisme diaphysaire à ce niveau expose le nerf radial.
+- **Diaphyse** : prismatique triangulaire, à **3 faces** (antéro-latérale, antéro-médiale, postérieure) et **3 bords** (antérieur, latéral, médial) ; les bords latéral et médial se prolongent en bas par les crêtes supra-épicondylaires.
 - Extrémité distale : **capitulum** (articulaire avec la tête radiale), **trochlée** (articulaire avec l'ulna), **épicondyle latéral** et **épicondyle médial** (insertions des muscles épicondyliens), **fosse coronoïdienne**, **fosse olécrânienne** et **fosse radiale**.
 
-## 4. Radius
+## 4. Radius et ulna (os de l'avant-bras)
+[[visual:anat/tp-forearm-drawing]]
 [[visual:anat/tp-forearm-bones]]
+- Chaque diaphyse est **triangulaire** : **3 faces** (antérieure, postérieure, et latérale pour le radius / médiale pour l'ulna) et **3 bords** (antérieur, postérieur, **interosseux**). Le **bord interosseux** est tranchant, regarde vers l'autre os et reçoit la **membrane interosseuse**.
+
+### Radius
 - Os latéral de l'avant-bras (côté du pouce).
 - **Tête radiale** (proximale, en forme de disque) s'articule avec le capitulum huméral et l'incisure radiale de l'ulna.
 - **Tubérosité radiale** : juste distale au col, insertion du biceps brachial.
 - Extrémité distale élargie, porte le **processus styloïde radial** et l'**incisure ulnaire** (articulation radio-ulnaire distale).
 
-## 5. Ulna (cubitus)
+### Ulna (cubitus)
 - Os médial de l'avant-bras (côté du petit doigt), stabilisateur principal de l'articulation du coude.
 - **Olécrâne** : proéminence postéro-proximale, insertion du triceps brachial, forme la pointe du coude.
 - **Processus coronoïde** : proéminence antéro-proximale.
 - **Incisure trochléaire (grande cavité sigmoïde)** : entre olécrâne et processus coronoïde, s'articule avec la trochlée humérale.
 - **Incisure radiale** : surface latérale s'articulant avec la tête radiale (articulation radio-ulnaire proximale).
 - Extrémité distale porte la **tête ulnaire** et le **processus styloïde ulnaire**.
+- Diaphyse : faces antérieure, postérieure et médiale (sous-cutanée) ; bords antérieur, postérieur et interosseux (latéral). Elle s'affine de haut en bas alors que le radius s'élargit.
 
-## 6. Os de la main
+## 5. Poignet (articulation radio-carpienne)
+[[visual:anat/tp-wrist]]
+- Le **poignet** est l'articulation **radio-carpienne** : surface articulaire carpienne du **radius** + **disque articulaire** (qui sépare l'ulna du carpe) en haut ; **scaphoïde, lunatum et triquétrum** en bas. L'**ulna** n'y participe pas directement.
+- L'articulation **médio-carpienne** sépare la rangée proximale de la rangée distale ; les articulations **carpo-métacarpiennes** relient la rangée distale aux bases des métacarpiens.
+- Le **tunnel carpien** est limité par la gouttière du carpe (face palmaire concave, bordée par le pisiforme et l'hamulus de l'hamatum en médial, le scaphoïde et le trapèze en latéral) ; le **nerf médian** et les tendons fléchisseurs le traversent.
+
+## 6. Carpe et os de la main
 [[visual:anat/tp-carpus]]
 - **Carpe** (8 os courts en 2 rangées) : rangée proximale — scaphoïde, lunatum, triquétrum, pisiforme ; rangée distale — trapèze, trapézoïde, capitatum, hamatum (avec son crochet, le **hamulus**).
 - Le **scaphoïde** est l'os carpien le plus fréquemment fracturé (chute sur la main en hyperextension) ; sa vascularisation rétrograde expose à un risque de nécrose avasculaire du pôle proximal.
+- Chaque os du carpe est un os court cuboïde à **6 faces** : palmaire, dorsale, proximale, distale, médiale et latérale (les faces proximale et distale sont articulaires).
 - **Métacarpe** : 5 os longs (métacarpiens I à V), base proximale, tête distale arrondie.
 - **Phalanges** : 3 par doigt (proximale, moyenne, distale) sauf le pouce qui n'en a que 2 (proximale, distale).
 
@@ -93,8 +106,11 @@ export const UPPER_LIMB_OSTEOLOGY_LEARNING: LibraryLearningSeed = {
 const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (squelette appendiculaire)
 
 ## 1. Os coxal (hanche)
+[[visual:anat/tp-hip-drawing]]
 [[visual:anat/tp-hip-bone]]
+- L'os coxal est un os plat à **2 faces** (latérale ou glutéale, avec l'acétabulum ; médiale, avec la fosse iliaque, la surface auriculaire et la face symphysaire) et **4 bords** : **supérieur** (crête iliaque), **antérieur** (EIAS, EIAI, éminence ilio-pubienne, pubis), **postérieur** (EIPS, EIPI, grande incisure ischiatique, épine ischiatique, petite incisure, tubérosité) et **inférieur** (branche ischio-pubienne).
 - Résulte de la fusion de 3 os primitivement distincts au niveau du **cotyle (acétabulum)** : **ilium**, **ischium** et **pubis**.
+- **Comment distinguer les trois os** : l'**ilium** est l'aile large **au-dessus** de l'acétabulum ; l'**ischium** est la partie **postéro-inférieure** (tubérosité sur laquelle on s'assoit) ; le **pubis** est la partie **antéro-inférieure** qui rejoint son homologue à la symphyse. L'ischium et le pubis délimitent par leurs branches le **foramen obturé**. Les trois os sont séparés dans l'acétabulum par le **cartilage en Y**, ossifié vers 16 ans.
 - **Ilium** : partie supéro-latérale, présente la **crête iliaque** (repère de palpation), l'**épine iliaque antéro-supérieure (EIAS)** et l'**épine iliaque postéro-supérieure (EIPS)**.
 - **Ischium** : partie postéro-inférieure, présente la **tubérosité ischiatique** (support du poids du corps en position assise, insertion des muscles ischio-jambiers) et l'**épine ischiatique**.
 - **Pubis** : partie antéro-médiale, les deux pubis s'unissent à la **symphyse pubienne**.
@@ -109,6 +125,7 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - **Col fémoral** : oblique, site fréquent de fracture chez le sujet âgé (fracture du col du fémur), zone à vascularisation précaire.
 - **Grand trochanter** et **petit trochanter** : reliefs latéral et médial, insertions des muscles pelvi-trochantériens et du psoas-iliaque respectivement, reliés par la **ligne intertrochantérique** (antérieure) et la **crête intertrochantérique** (postérieure).
 - **Ligne âpre** : crête rugueuse longitudinale sur la face postérieure de la diaphyse, insertion de nombreux muscles (adducteurs, vaste latéral/médial).
+- **Diaphyse** : 3 faces (antérieure, médiale, latérale) et 3 bords (médial, latéral, et postérieur formé par la ligne âpre à deux lèvres) ; elle est convexe en avant.
 - Extrémité distale : **condyle médial** et **condyle latéral**, séparés en arrière par la **fosse intercondylaire**, **épicondyle médial** et **épicondyle latéral**, **surface patellaire (trochlée fémorale)** en avant.
 
 ## 3. Patella (rotule)
@@ -116,21 +133,34 @@ const LOWER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre inférieur (
 - Face postérieure articulaire, divisée par une crête verticale en deux facettes (médiale et latérale) répondant à la trochlée fémorale.
 - Base (proximale, large) et apex (distal, pointu, donnant insertion au ligament patellaire).
 
-## 4. Tibia
+## 4. Tibia et fibula (os de la jambe)
+[[visual:anat/tp-leg-drawing]]
 [[visual:anat/tp-leg-bones]]
+
+### Tibia
 - Os médial de la jambe, principal os porteur.
 - Extrémité proximale : **condyle médial** et **condyle latéral**, séparés par l'**éminence intercondylaire (épines tibiales)** ; **tubérosité tibiale** en avant (insertion du ligament patellaire).
-- Diaphyse triangulaire à la palpation, **crête tibiale (bord antérieur)** directement sous-cutanée.
+- Diaphyse **triangulaire** : **3 faces** (**médiale**, sous-cutanée ; **latérale**, en rapport avec la loge antérieure ; **postérieure**, avec la ligne du soléaire) et **3 bords** (**antérieur** ou **crête tibiale**, sous-cutanée ; **médial** ; **interosseux**, latéral, pour la membrane interosseuse).
 - Extrémité distale : **malléole médiale**, articulaire avec le talus.
 
-## 5. Fibula (péroné)
+### Fibula (péroné)
 - Os latéral, grêle, non porteur de poids (rôle de stabilisation latérale et insertion musculaire).
 - **Tête fibulaire** (proximale) s'articule avec la face postéro-latérale du condyle tibial latéral.
 - Extrémité distale : **malléole latérale**, articulaire avec le talus, descend plus bas que la malléole médiale.
+- Diaphyse grêle à 3 faces (médiale, latérale, postérieure) et 3 bords (antérieur, postérieur, interosseux) ; la **membrane interosseuse** l'unit au tibia.
 - Le nerf fibulaire commun (nerf sciatique poplité externe) contourne le col de la fibula, superficiel et vulnérable aux traumatismes à ce niveau.
 
-## 6. Os du pied
+## 5. Cheville (articulation talo-crurale)
+[[visual:anat/tp-ankle]]
+- La **mortaise tibio-fibulaire** est formée par le **plafond tibial** (surface articulaire inférieure du tibia), la **malléole médiale** (tibia) et la **malléole latérale** (fibula), solidarisées par la **syndesmose tibio-fibulaire** ; elle enserre la **trochlée du talus**.
+- La trochlée du talus est plus large en avant : la cheville est **plus stable en flexion dorsale**.
+- **Ligament collatéral médial (deltoïde)** : puissant, en éventail depuis la malléole médiale. **Ligament collatéral latéral** : trois faisceaux (talo-fibulaire antérieur, calcanéo-fibulaire, talo-fibulaire postérieur) ; le **talo-fibulaire antérieur** est le plus souvent lésé dans l'entorse en inversion.
+- Sous la cheville, l'articulation **subtalaire** (talus-calcanéus) assure l'inversion et l'éversion du pied.
+
+## 6. Tarse et os du pied
+[[visual:anat/tp-foot-medial]]
 [[visual:anat/tp-foot]]
+- Chaque os du tarse a une **face dorsale** (supérieure), une **face plantaire** (inférieure) et des faces articulaires ; le **bord médial** du pied comprend le calcanéus, le talus, le naviculaire, le cunéiforme médial et le métatarsien I, le **bord latéral** le calcanéus, le cuboïde et le métatarsien V.
 - **Tarse** (7 os) : **talus** (s'articule avec le tibia et la fibula à la mortaise tibio-fibulaire, transmet le poids du corps au pied), **calcanéus** (le plus volumineux, forme le talon, insertion du tendon calcanéen/tendon d'Achille), **naviculaire**, **cuboïde**, **cunéiformes médial, intermédiaire et latéral**.
 - **Métatarse** : 5 os longs (métatarsiens I à V), base proximale, tête distale.
 - **Phalanges** : 3 par orteil (proximale, moyenne, distale) sauf l'hallux (gros orteil) qui n'en a que 2.
