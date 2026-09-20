@@ -6,6 +6,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 ## 1. Sécrétion salivaire
 
 ### 1.1 Glandes et mécanisme
+[[visual:phys/salivary-glands]]
 - Trois paires de glandes salivaires principales : **parotides** (sécrétion séreuse, 25 % du volume), **sous-maxillaires** (mixtes, 70 % du volume — la principale source) et **sublinguales** (mixtes, 5 %), plus des glandes accessoires muqueuses.
 - Sécrétion en deux étapes :
   - **Stade acinaire** : liquide extracellulaire isotonique (285-295 mOsm/L) contenant eau, amylase, électrolytes (Na⁺, Cl⁻, HCO₃⁻, K⁺) et mucus — c'est la **salive primaire**.
@@ -28,6 +29,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 7. **Trophique** : intégrité de l'émail dentaire, réparation des tissus mous.
 
 ### 1.4 Régulation de la sécrétion salivaire
+[[visual:phys/salivary-regulation]]
 - Sécrétion continue avec variations quantitatives/qualitatives : basale minimale (mécanisme cholinergique) vs activée exclusivement réflexe.
 - **Mécanisme cholinergique (parasympathique)** : noyau salivaire inférieur (bulbe) et supérieur (pont). Afférences des nerfs V, VII, IX, X depuis récepteurs gustatifs, tactiles et nociceptifs de la langue/bouche/pharynx. Efférences : VII → glandes sous-linguale + sous-maxillaire ; IX → parotide ; X → glandes mineures. Activation rapide, prolongée, volume élevé, sécrétion aqueuse riche en amylase.
 - **Mécanisme adrénergique (sympathique)** : stress, émotions fortes → cortex + hypothalamus → corne latérale T1-T3 → ganglion cervical supérieur → glandes salivaires (vasoconstriction, contraction myoépithéliale, libération de mucus préformé). Activation tardive, volume réduit, sécrétion visqueuse riche en mucine.
@@ -37,6 +39,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 ## 2. Sécrétion gastrique
 
 ### 2.1 Glandes gastriques
+[[visual:phys/gastric-glands]]
 - **Glandes oxyntiques** (fundus + corps, 80 % de la surface gastrique) : cellules à mucus du collet (mucus + HCO₃⁻ + eau), **cellules pariétales/oxyntiques** (HCl + facteur intrinsèque de Castle), **cellules principales/peptiques** (pepsinogène + lipase gastrique), **cellules ECL** (histamine), cellules souches.
 - **Glandes pyloriques** (antre, 20 % de la surface) : cellules à mucus, **cellules G** (gastrine), **cellules D** (somatostatine).
 
@@ -63,10 +66,13 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - **Gélatinase** : présente seulement chez l'enfant, casse la gélatine en peptides/acides aminés, activité 400× plus intense que la pepsine.
 
 ### 2.6 Facteur intrinsèque de Castle et mucus gastrique
+[[visual:phys/intrinsic-factor]]
 - Le **facteur intrinsèque (FI)** est une glycoprotéine synthétisée par les cellules pariétales ; il forme un complexe FI/B12 qui protège la digestion de la vitamine B12, se lie à des récepteurs spécifiques de l'iléon (endocytose médiée par récepteur), puis se dissocie pour former le complexe B12/transcobalamine II.
 - Le **mucus gastrique** (eau, HCO₃⁻, glycoprotéines, gel adhérent visqueux de 0,2-1 mm) forme une barrière physique et chimique (HCO₃⁻ neutralise le HCl localement, pH 7 à l'épithélium). L'infection à *Helicobacter pylori* détruit cette couche de mucus, favorisant les ulcères gastro-duodénaux.
 
 ### 2.7 Régulation de la sécrétion gastrique
+[[visual:phys/gastric-phases]]
+[[visual:phys/parietal-control]]
 - **Sécrétion basale** : 5-10 % du maximum, riche en mucine, mécanisme cholinergique, activée par le stress.
 - **Sécrétion stimulée**, en trois mécanismes (nerveux, endocrine, paracrine) et trois phases :
   - **Phase céphalique (40 %)** : réflexe inconditionné (goût, tact, hypoglycémie) et conditionné (vue, odeur, états psychiques) → cortex/hypothalamus antérieur → vague (ACh → pepsinogène/HCl ; ACh → cellules G → gastrine → HCl).
@@ -95,6 +101,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - **Glycolytique** : amylase pancréatique (la plus puissante, casse les liaisons α-1,4 et α-1,6, amidon/glycogène → dextrines, maltose, maltotriose).
 
 ### 3.4 Régulation de la sécrétion pancréatique
+[[visual:phys/pancreatic-regulation]]
 - **Mécanisme endocrine (principal)** : CCK + gastrine + GRP activent la sécrétion acinaire (riche en enzymes) ; somatostatine inhibe. Sécrétine + VIP (libérés par la muqueuse duodénale à pH 4,5-5) activent la sécrétion canalaire (riche en eau/HCO₃⁻).
 - **Mécanisme nerveux (secondaire)** : vague parasympathique active la sécrétion acinaire (ACh, récepteurs M3) et augmente le flux par vasodilatation ; sympathique inhibe par vasoconstriction.
 - **Phases** : céphalique (20 %, mécanisme nerveux exclusif, ACh) ; gastrique (10 %, réflexe vago-pancréatique, ACh + gastrine) ; **intestinale (70 %, principale)** : CCK (sécrétion acinaire riche en enzymes) et sécrétine à pH < 4,5 (sécrétion canalaire riche en HCO₃⁻).
@@ -102,6 +109,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 ## 4. Sécrétion biliaire
 
 ### 4.1 Formation et trajet
+[[visual:phys/bile-formation]]
 - Sécrétée par l'hépatocyte → canalicules biliaires → canaux biliaires → canal hépatique = **bile hépatique** (sécrétion continue, solution aqueuse de NaHCO₃, faible en composés organiques).
 - Stockée et concentrée (5-20×) dans la **vésicule biliaire** = **bile vésiculaire**, libérée par le canal cystique → cholédoque.
 
@@ -133,6 +141,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - **Fonction excrétrice** : produits endogènes (pigments biliaires, excès de cholestérol), xénobiotiques (toxiques, médicaments, sels de métaux lourds, colorants).
 
 ### 4.7 Régulation
+[[visual:phys/bile-regulation]]
 - **Sels biliaires** : effet cholérétique principal.
 - **Sécrétine** : stimule la fraction cholalo-dépendante (effet cholérétique) et la sécrétion canalaire d'eau/HCO₃⁻ (effet hydrocholérétique).
 - **Mécanisme nerveux (secondaire)** : vague stimule le flux sanguin hépatique et la libération de sécrétine ; sympathique inhibe le flux sanguin hépatique.
@@ -141,6 +150,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 ## 5. Sécrétion intestinale
 
 ### 5.1 Glandes de Brünner et de Lieberkühn
+[[visual:phys/intestinal-glands]]
 - **Glandes de Brünner** : exclusivement dans la sous-muqueuse duodénale (entre pylore et ampoule de Vater) ; sécrétion riche en mucus et HCO₃⁻ ; stimulée par le contact alimentaire, l'irritation duodénale, le vague et la sécrétine ; inhibée par le sympathique ; protection mécanique et chimique de la muqueuse duodénale contre le suc gastrique.
 - **Glandes de Lieberkühn** (crypts, base des replis de la muqueuse intestinale) : entérocytes (eau/électrolytes, réabsorbés avec les nutriments), cellules caliciformes (mucus alcalin, barrière locale), cellules de Paneth (défensines, lysozyme, barrière antibactérienne), cellules souches (renouvellement des entérocytes en 3-4 jours).
 
@@ -150,6 +160,7 @@ const DIGESTIVE_SECRETION_COURSE = `# Lecture 12 — La fonction sécrétoire du
 - Régulation : mécanisme nerveux (réflexes entériques locaux via le plexus de Meissner ; vague stimule Brünner sans effet sur Lieberkühn ; sympathique inhibe Brünner) et mécanisme endocrine (sécrétine).
 
 ### 5.3 Fonctions du côlon
+[[visual:phys/colon-flora]]
 - **Côlon proximal** : fonctions digestive et absorptive.
 - **Côlon distal, sigmoïde, rectum** : fonction de stockage temporaire des matières fécales.
 - Sécrétion de Lieberkühn (200 mL/jour, isotonique, alcaline, eau/HCO₃⁻/mucus, sans enzymes digestives), stimulée par réflexes entériques locaux et sécrétine.
@@ -261,12 +272,14 @@ const DIGESTION_ABSORPTION_COURSE = `# Lecture 13 — Digestion et absorption de
 - Sites d'absorption : cavité buccale (aucune valeur nutritive, médicaments comme la nitroglycérine) ; estomac (eau, alcool 20 %, aspirine) ; **duodénum-jéjunum : site principal** ; iléon (sels biliaires, vitamine B12) ; côlon proximal (eau, NaCl).
 
 ### 1.2 Particularités morphofonctionnelles de l'intestin
+[[visual:phys/absorption-surface]]
 - Surface d'absorption ≈ 200 m² grâce à trois niveaux d'amplification : **valvules conniventes** (plis de la muqueuse, ×3), **villosités intestinales** (élongations muqueuses, ×30), **microvillosités** (élongations de la membrane de l'entérocyte = « bordure en brosse », ×600).
 - Villosités : fines élongations de 0,5-1 mm, densité 20-40/mm², épithélium simple issu des cryptes de Lieberkühn (cellules matures à bordure en brosse), axe conjonctivo-vasculaire (chylifère central lymphatique, artériole → capillaires → veinule, fibres musculaires lisses).
 - Bordure en brosse : 3000-6000 microvillosités/cellule, unité digestivo-absorbante (enzymes protéiques finalisant la digestion + protéines transporteuses assurant l'absorption). Les jonctions intercellulaires « gap » forment des espaces paracellulaires (absorption iso-osmotique d'eau et de NaCl ; passage des substances absorbées par voie transcellulaire).
 - Circulation intestinale : au repos, 1000 mL/min (20 % du débit cardiaque, 75 % pour la muqueuse digestive) ; augmente en digestion par redistribution du volume sanguin. Système capillaire double : sang (veine porte → foie) et lymphe (canal thoracique → circulation veineuse → cœur → circulation artérielle → tissu adipeux → foie).
 
 ### 1.3 Voies et mécanismes d'absorption
+[[visual:phys/enterocyte-transport]]
 - **Voie transcellulaire (principale)** : lumière → bordure en brosse apicale → pôle basal → espace paracellulaire → capillaire sanguin ou lymphatique.
 - **Voie paracellulaire (secondaire)** : lumière → jonctions intercellulaires → membrane basale → capillaire ; minimale au duodénum/côlon (jonctions serrées), maximale au jéjunum (jonctions lâches).
 - **Transport passif** : diffusion simple (lipides et vitamines liposolubles à travers la membrane ; eau et NaCl par voie paracellulaire, diffusion iso-osmotique) ; diffusion facilitée (fructose et vitamines au pôle apical ; monosaccharides, acides aminés et minéraux au pôle basal) ; diffusion par canaux ioniques (Na⁺, K⁺, Ca²⁺ au pôle apical ; Cl⁻, K⁺ au pôle basal).
@@ -275,6 +288,7 @@ const DIGESTION_ABSORPTION_COURSE = `# Lecture 13 — Digestion et absorption de
 - **Transport vésiculaire** : endocytose médiée par récepteur au pôle apical (complexe vitamine B12 + facteur intrinsèque) ; exocytose au pôle basal (chylomicrons, complexe Ca²⁺/B12/transcobalamine II).
 
 ## 2. Digestion et absorption des glucides
+[[visual:phys/carb-digestion]]
 
 - Apport alimentaire : 6 g/kg/jour. Formes : polysaccharides (amidon, glycogène, dextrines, cellulose), disaccharides (saccharose, lactose, maltose), monosaccharides (glucose, fructose, galactose).
 
@@ -292,6 +306,7 @@ const DIGESTION_ABSORPTION_COURSE = `# Lecture 13 — Digestion et absorption de
 - Facteurs influençant l'absorption : état de la muqueuse intestinale (l'inflammation la diminue), motilité intestinale (un péristaltisme exacerbé diminue le temps de contact et donc l'absorption), fonction thyroïdienne (les hormones thyroïdiennes stimulent l'absorption du glucose, effet hyperglycémiant).
 
 ## 3. Digestion et absorption des protéines
+[[visual:phys/protein-digestion]]
 
 - Apport alimentaire : 0,8 g/kg/jour.
 
@@ -309,6 +324,7 @@ const DIGESTION_ABSORPTION_COURSE = `# Lecture 13 — Digestion et absorption de
 - Apport alimentaire : 1 g/kg/jour. Formes : triglycérides (forme majeure), cholestérol estérifié, phospholipides (lécithine).
 
 ### 4.1 Enzymes lipolytiques
+[[visual:phys/lipid-digestion]]
 - **Lipase linguale + lipase gastrique** : actives dans l'estomac (pH acide), plus importantes chez l'enfant.
 - **Lipase pancréatique** : l'enzyme lipolytique digestive la plus importante, active en pH alcalin, nécessite l'émulsification préalable des triglycérides par les sels biliaires.
 - Cholestérol-estérase (cholestérol estérifié → cholestérol libre + AGL) ; phospholipase A2 (lécithine → lysolécithine + AGL).
@@ -332,6 +348,7 @@ const DIGESTION_ABSORPTION_COURSE = `# Lecture 13 — Digestion et absorption de
 ## 5. Absorption de l'eau, des minéraux et des vitamines
 
 ### 5.1 Bilan hydrique digestif
+[[visual:phys/gut-water-balance]]
 - Apport total : 9000 mL/jour (liquides ingérés 2600 mL + sécrétions digestives 7000 mL : salivaire 1500, gastrique 1500, pancréatique 1500, biliaire 1000, intestinale 1500).
 - Absorption totale : 8900 mL/jour (intestin grêle 8500 mL, gros intestin 400 mL). Élimination fécale : seulement 100 mL/jour.
 
@@ -346,6 +363,7 @@ const DIGESTION_ABSORPTION_COURSE = `# Lecture 13 — Digestion et absorption de
 - HCO₃⁻ : neutralisé par le HCl gastrique (HCl + HCO₃⁻ → H₂CO₃ → CO₂ + H₂O), NaCl/CO₂/H₂O réabsorbés dans le sang.
 
 ### 5.4 Absorption des minéraux : Ca²⁺ et Fe²⁺
+[[visual:phys/mineral-vitamin-absorption]]
 - **Calcium** : représente 30-80 % du calcium alimentaire absorbé, maximal dans l'intestin proximal, nécessite une libération préalable des complexes alimentaires insolubles par le HCl. Voie paracellulaire passive (1/3, non régulée) et voie transcellulaire active (2/3, régulée par la vitamine D3) : pôle apical (canaux Ca²⁺), intracellulaire (liaison à la calbindine, empêchant la formation de complexes insolubles), pôle basal (pompes Ca²⁺ et échangeur Na⁺/Ca²⁺).
 - **Fer** : seulement 5-10 % de l'apport alimentaire est absorbé. Le Fe³⁺ des complexes organiques insolubles est réduit en Fe²⁺ sous l'action du HCl, de la vitamine C et de la fer-réductase de la bordure en brosse (l'hème est libéré sous l'action des enzymes protéolytiques digestives). Pôle apical : cotransport H⁺/Fe²⁺ ou diffusion facilitée pour l'hème. Intracellulaire : oxydation du Fe²⁺ en Fe³⁺ (féroxidase) — soit stockage sous forme de ferritine (Fe³⁺ + apoferritine), soit liaison à l'IRP régulant l'absorption. Pôle basal : formation du complexe Fe²⁺/transferrine, sécrété dans la lumière duodénale puis endocytose du complexe, dissociation, Fe³⁺ lié à la transferrine plasmatique (vers foie/moelle osseuse) via le canal ferroportine.
 - **Régulation de l'absorption du fer (rétrocontrôle négatif)** : le niveau de réserve hépatique en ferritine et le niveau de sidérémie régulent l'absorption. L'**hepcidine** (hormone hépatique) est libérée lorsque les réserves sont suffisantes et réduit l'activité de la ferroportine, diminuant l'absorption digestive du fer.
@@ -462,6 +480,7 @@ const GI_MOTILITY_COURSE = `# Lecture 14 — Motilité gastro-intestinale
 - La fréquence est caractéristique de chaque segment intestinal (pacemaker local) et progresse pour permettre une propulsion locale.
 
 ## 3. Mécanismes de contrôle de l'activité du tube digestif
+[[visual:phys/gi-control]]
 
 ### 3.1 Mécanisme nerveux intrinsèque (système nerveux entérique, SNE)
 - Réseau neuronal situé dans la paroi intestinale de l'œsophage à l'anus : **plexus myentérique d'Auerbach** et **plexus sous-muqueux de Meissner**.
@@ -487,6 +506,7 @@ const GI_MOTILITY_COURSE = `# Lecture 14 — Motilité gastro-intestinale
   - **Sérotonine** (intestin) : motilité et sécrétion intestinale↑.
 
 ## 4. Mastication
+[[visual:phys/mastication-reflex]]
 
 - **Définition** : traitement mécanique et mélange avec la salive des aliments introduits dans la bouche → formation du **bol alimentaire**.
 - Composante active : dents, mandibule, articulation temporo-mandibulaire, muscles masticateurs (nerf V), muscles de la langue (nerf XII), muscles oro-faciaux (nerf VII). Rôles fonctionnels : dents (broyage, surface occlusale), muscles masticateurs (mouvements mandibulaires, occlusion), langue (propulsion des aliments sur la surface de broyage), muscles oro-faciaux (maintien de la salive et des aliments dans la bouche).
@@ -522,6 +542,7 @@ const GI_MOTILITY_COURSE = `# Lecture 14 — Motilité gastro-intestinale
 - **Mécanisme nerveux extrinsèque** : centre de déglutition bulbaire — coordonne le péristaltisme œsophagien moyen et inférieur ainsi que le SOI. Zones réflexogènes : isthme bucco-pharyngé stimulé par les particules salivaires/matière humide de déglutition ; distension mécanique œsophagienne. Nerfs V, IX, X (V → muscles masséters, VII → muscles mimiques, XII → muscles linguaux, IX → muscles pharyngés, X → muscles œsophagiens).
 
 ## 6. Fonctions motrices de l'estomac
+[[visual:phys/gastric-motility]]
 
 ### 6.1 Contractions de la faim
 - Caractérisent l'état de jeûne, surviennent 12-24 h après la vidange gastrique complète.
@@ -547,6 +568,7 @@ const GI_MOTILITY_COURSE = `# Lecture 14 — Motilité gastro-intestinale
 - **Mécanisme endocrine (rétrocontrôle négatif)** : produits de digestion protéique au niveau gastrique → stimulateur (sécrétion de gastrine) ; pH duodénal (3,5) → inhibiteur (sécrétion de sécrétine) ; produits de digestion lipidique au niveau duodénal → inhibiteur (sécrétion de CCK).
 
 ## 7. Fonction motrice de l'intestin grêle
+[[visual:phys/small-intestine-motility]]
 
 ### 7.1 Mouvements de mélange et d'absorption
 - Mouvements des fibres musculaires des villosités : le relâchement favorise l'absorption intestinale, la contraction propulse le contenu villositaire vers la circulation sous-muqueuse.
@@ -569,6 +591,7 @@ const GI_MOTILITY_COURSE = `# Lecture 14 — Motilité gastro-intestinale
 - **Mouvements de « transport de masse »** : contractions péristaltiques groupées très fortes, 1-3 fois/jour, assurent l'évacuation complète du côlon, fortement influencées par les émotions et les stimuli excitateurs conditionnés.
 
 ## 9. Défécation
+[[visual:phys/colon-defecation]]
 
 - **Définition** : évacuation du contenu rectal, par réflexe recto-sphinctérien et contrôle volontaire.
 - **Réflexe myentérique intrinsèque** : efficacité réduite.
