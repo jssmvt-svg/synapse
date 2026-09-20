@@ -14,10 +14,12 @@ const AMINO_ACID_METABOLISM_COURSE = `# Métabolisme des acides aminés
 - Exemples cliniquement importants : **ALT** (alanine aminotransférase : alanine + α-cétoglutarate ↔ pyruvate + glutamate) et **AST** (aspartate aminotransférase : aspartate + α-cétoglutarate ↔ oxaloacétate + glutamate) — dosées en clinique comme marqueurs de lésion hépatocellulaire.
 
 ## 3. Désamination oxydative
+[[visual:bio/nitrogen-convergence]]
 - Le glutamate, formé par transamination, est ensuite désaminé par la **glutamate déshydrogénase** (mitochondrie), libérant de l'**ammoniac (NH₃)** libre et régénérant l'α-cétoglutarate, avec production de NADH (ou NADPH selon le sens de la réaction).
 - C'est la principale voie par laquelle l'azote aminé converge vers l'ammoniac, destiné à être détoxifié par le **cycle de l'urée**.
 
 ## 4. Classification glucoformateur / cétogène
+[[visual:bio/aa-fate]]
 
 | Catégorie | Devenir du squelette carboné | Exemples |
 | --- | --- | --- |

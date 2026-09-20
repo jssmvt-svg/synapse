@@ -4,7 +4,7 @@ import { Ax, Card, dash, dot, grid } from "./PhysCardio";
 
 // Physiologie S1 — respiration et endocrinologie : un schéma par sous-partie du cours.
 
-const arrow = (d: string, c = "currentColor") => <path d={d} fill="none" stroke={c} strokeWidth={2.2} markerEnd="url(#fig-arrow)" />;
+export const arrow = (d: string, c = "currentColor") => <path d={d} fill="none" stroke={c} strokeWidth={2.2} markerEnd="url(#fig-arrow)" />;
 const inhib = (x1: number, y1: number, x2: number, y2: number, c = DEEP.red) => (
   <g>
     <path d={`M${x1},${y1} L${x2},${y2}`} stroke={c} strokeWidth={2.2} strokeDasharray="6 4" fill="none" />
@@ -12,7 +12,7 @@ const inhib = (x1: number, y1: number, x2: number, y2: number, c = DEEP.red) => 
   </g>
 );
 
-function Box({ x, y, w, h, t, s, c, size = 11.5 }: { x: number; y: number; w: number; h: number; t: string; s?: string; c: string; size?: number }) {
+export function Box({ x, y, w, h, t, s, c, size = 11.5 }: { x: number; y: number; w: number; h: number; t: string; s?: string; c: string; size?: number }) {
   return (
     <g>
       <rect x={x} y={y} width={w} height={h} rx={10} fill={c} fillOpacity={0.15} stroke={c} strokeWidth={2} />

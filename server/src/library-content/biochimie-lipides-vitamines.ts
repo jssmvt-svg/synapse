@@ -170,6 +170,7 @@ const WATER_SOLUBLE_VITAMINS_COURSE = `# Les vitamines hydrosolubles
 - **Carence** : besoin ≈ 1,4–2,0 mg/jour. Conséquences : **anémie sidéroblastique** (synthèse de l'hème), dysfonction neuronale/convulsions (déficit en GABA). Excès (fortes doses, plusieurs g/jour) : neuropathie sensitive.
 
 ## 7. Vitamine B9 — Acide folique (folacine)
+[[visual:bio/folate-b12]]
 - **Structure** : noyau ptéridine + acide para-aminobenzoïque (PABA) → acide ptéroïque, conjugué à l'acide glutamique. L'organisme ne peut synthétiser ni le PABA ni fixer les résidus glutamate → apport alimentaire obligatoire ; 70–95 % détruit à la cuisson.
 - **Métabolisme** : réduction hépatique en **tétrahydrofolate (FolH4)**, forme active, par la **dihydrofolate réductase (DHFR)**, NADPH-dépendante.
 - **Rôle** : le FolH4 transporte des groupements à un carbone (méthyl, méthylène, formyl...), nécessaire à la synthèse de la sérine, méthionine, glycine, des purines et du **dTMP** (synthèse de l'ADN). Coopère avec la B12 dans la conversion homocystéine → méthionine. La thymidylate synthase et la DHFR sont très actives dans les tissus à forte division cellulaire. Le **méthotrexate** (analogue du 10-méthyl-THF) inhibe la DHFR → utilisé comme anticancéreux.
@@ -255,6 +256,7 @@ const FAT_SOLUBLE_VITAMINS_COURSE = `# Vitamines liposolubles (A, D, E, K) et co
 - **Stockage** : foie (A, D, K), tissu adipeux (E). Élimination biliaire → cycle entéro-hépatique → fèces ; certains métabolites passent dans l'urine.
 
 ## 2. Vitamine A (rétinol, rétinoïdes)
+[[visual:bio/vitamin-a]]
 - **Sources** : provitamines A/carotènes (végétaux) ; rétinoïdes (uniquement produits animaux : foie, huiles de poisson, jaune d'œuf).
 - **Structure** : 3 molécules biologiquement actives — rétinol, rétinal (rétinaldéhyde) et acide rétinoïque, dérivées du β-carotène.
 - **Métabolisme** : le β-carotène est clivé en rétinal dans la muqueuse intestinale, réduit en rétinol ; estérifié puis transporté par les chylomicrons vers le foie, stocké sous forme d'esters de rétinyle. Transport foie → tissus périphériques via la **RBP** (retinol binding protein), complexée à la transthyrétine.
@@ -266,6 +268,7 @@ const FAT_SOLUBLE_VITAMINS_COURSE = `# Vitamines liposolubles (A, D, E, K) et co
 - **Toxicité** (hypervitaminose A) : céphalées, hypertension intracrânienne, hépatomégalie, épaississement osseux, alopécie.
 
 ## 3. Vitamine D (calciférols)
+[[visual:bio/vitamin-d]]
 - N'est pas une vraie vitamine : synthétisée dans la peau sous UV (7-déhydrocholestérol → cholécalciférol/D3), sa principale source ; considérée comme une **pro-hormone**. Vitamine D2 (ergocalciférol) issue des végétaux.
 - **Forme active** : **calcitriol** (1,25-dihydroxyvitamine D3), obtenue par 25-hydroxylation hépatique puis 1-hydroxylation rénale.
 - **Rôle** : agit avec la PTH et la calcitonine pour réguler l'homéostasie calcium/phosphate ; se lie à des récepteurs nucléaires → induit l'expression de la **calbindine**, protéine facilitant l'absorption intestinale du calcium ; diminue l'excrétion rénale de calcium/phosphate ; favorise la minéralisation osseuse.
@@ -273,6 +276,7 @@ const FAT_SOLUBLE_VITAMINS_COURSE = `# Vitamines liposolubles (A, D, E, K) et co
 - **Toxicité** : hypercalcémie, calcinose. L'exposition solaire excessive n'entraîne PAS d'intoxication (capacité limitée de synthèse cutanée du précurseur).
 
 ## 4. Vitamine E (tocophérols)
+[[visual:bio/vitamin-e-c]]
 - **Sources** : huiles végétales (maïs, soja).
 - **Structure** : dérivés méthylés du tocol ; 4 formes (α, β, γ, δ) — l'**α-tocophérol** a l'activité biologique relative la plus élevée (100).
 - **Métabolisme** : absorption dépendante de la bile (chylomicrons) ; s'accumule surtout dans le **tissu adipeux** (principal site de stockage) et les membranes cellulaires.
@@ -280,6 +284,7 @@ const FAT_SOLUBLE_VITAMINS_COURSE = `# Vitamines liposolubles (A, D, E, K) et co
 - **Carence** : fragilité érythrocytaire → **anémie hémolytique** par dommage oxydatif ; myopathie, ataxie avec dégénérescence rétinienne.
 
 ## 5. Vitamine K
+[[visual:bio/vitamin-k]]
 - **Sources** : K1/phylloquinone (légumes verts), K2/ménaquinone (synthèse bactérienne intestinale), K3/ménadione (forme synthétique, hydrosoluble).
 - **Rôle majeur** : maintien des facteurs de coagulation **II, VII, IX, X** ainsi que des protéines C et S, par **γ-carboxylation** post-traductionnelle de résidus glutamate (cofacteur de la glutamyl-carboxylase). La prothrombine γ-carboxylée chélate le calcium.
 - Le **dicoumarol** et la **warfarine** bloquent la régénération de la forme hydroquinone de la vitamine K → utilisés comme anticoagulants.

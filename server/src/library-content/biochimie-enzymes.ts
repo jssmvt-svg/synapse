@@ -12,6 +12,7 @@ const ENZYME_BASICS_COURSE = `# Chapitre 8 — Enzymes : concepts de base et cin
 - **Holoenzyme** = enzyme + cofacteur (active) ; **apoenzyme** = enzyme sans son cofacteur (inactive).
 
 ## 2. Thermodynamique (énergie libre de Gibbs)
+[[visual:bio/gibbs]]
 - Le ΔG renseigne sur la **spontanéité** (thermodynamique), jamais sur la **vitesse** (cinétique) d'une réaction.
 - ΔG < 0 : réaction exergonique, spontanée. ΔG > 0 : endergonique, non spontanée. ΔG = 0 : équilibre.
 - ΔG = ΔG°′ + RT·ln([C][D]/[A][B]) ; à l'équilibre : ΔG°′ = −RT·lnK'eq.
@@ -53,6 +54,7 @@ const ENZYME_BASICS_COURSE = `# Chapitre 8 — Enzymes : concepts de base et cin
 - Les enzymes allostériques ne suivent **pas** la cinétique de Michaelis–Menten : elles montrent une liaison coopérative au substrat, donnant une courbe sigmoïde (V₀ vs [S]).
 
 ## 6. Réactions à plusieurs substrats
+[[visual:bio/multi-substrate]]
 - **Réactions séquentielles** (aléatoires ou ordonnées) : formation d'un complexe ternaire enzyme + 2 substrats (ex. lactate déshydrogénase = ordonnée ; créatine kinase = aléatoire).
 - **Réactions à double déplacement** (ping-pong) : formation d'un intermédiaire enzyme substitué, sans complexe ternaire (ex. transamination aspartate/α-cétoglutarate).
 
@@ -165,6 +167,7 @@ Les enzymes sont classées en 7 catégories selon le type de réaction catalysé
 - Comparaison chymotrypsine/trypsine/élastase : la même triade catalytique, mais Asp189 (trypsine) attire les résidus basiques, Val190/Val216 (élastase) referment la poche pour les petits résidus. D'autres protéases non homologues utilisent quand même une triade catalytique → évolution convergente (apparue indépendamment au moins 3 fois).
 
 ### Trois classes de protéases selon le nucléophile activé
+[[visual:bio/protease-classes]]
 | Classe | Mécanisme d'activation | Exemple |
 | --- | --- | --- |
 | Cystéine protéase | Cystéine activée par une histidine | Papaïne |
@@ -174,6 +177,7 @@ Les enzymes sont classées en 7 catégories selon le type de réaction catalysé
 - **Inhibiteurs de protéases, médicaments importants** : Captopril (inhibiteur de l'ECA, régule la pression artérielle) ; Indinavir (inhibiteur de la protéase aspartique du VIH, analogue du substrat, traitement du SIDA).
 
 ## 5. L'anhydrase carbonique : rendre une réaction rapide encore plus rapide
+[[visual:bio/carbonic-anhydrase]]
 - Le CO₂, produit final du métabolisme aérobie, est converti en bicarbonate + proton par l'anhydrase carbonique (réaction inversée dans les poumons pour exhaler le CO₂) : CO₂ + H₂O ↔ H₂CO₃ ↔ HCO₃⁻ + H⁺.
 - Rôles physiologiques : formation de l'humeur aqueuse de l'œil ; un déficit est associé à l'ostéopétrose et à un déficit intellectuel. Au moins 7 gènes homologues chez l'humain ; ce fut la première enzyme à zinc découverte.
 - Le Zn²⁺ est lié à 4 ligands : 3 histidines (His94, His96, His119) + une molécule d'eau/ion hydroxyde selon le pH. Le pH optimal est 8 ; le Zn²⁺ abaisse le pKa de l'eau de ~15,7 à ~7, générant l'ion OH⁻, nucléophile puissant.
@@ -187,6 +191,7 @@ Les enzymes sont classées en 7 catégories selon le type de réaction catalysé
 - **Protection de l'hôte** : les sites de reconnaissance de l'ADN de l'hôte sont méthylés par des méthylases, ce qui empêche la distorsion nécessaire à la catalyse (système de restriction-modification).
 
 ## 7. Les myosines : convertir l'hydrolyse de l'ATP en travail mécanique
+[[visual:bio/myosin-cycle]]
 - Les myosines utilisent l'énergie de l'hydrolyse de l'ATP pour propulser le mouvement dans la cellule : ATP + H₂O ↔ ADP + Pi.
 - L'ATP doit être lié au **Mg²⁺** (ou Mn²⁺) pour être un substrat fonctionnel — vrai pour la plupart des NTPases.
 - Des myosines fluorescentes sur actine restent immobiles sans ATP mais se déplacent par pas d'environ 74 nm avec ATP.
@@ -287,6 +292,7 @@ L'activité enzymatique est régulée selon 5 grands mécanismes : (1) contrôle
 | PKC | Diacylglycérol |
 
 ### La protéine kinase A (PKA)
+[[visual:bio/pka]]
 - L'épinéphrine (adrénaline) déclenche la réponse « combat ou fuite » et induit la synthèse d'AMPc dans les cellules musculaires.
 - PKA inactive = complexe **R2C2** (2 sous-unités régulatrices + 2 catalytiques) ; une séquence pseudo-substrat de R bloque le site actif de C.
 - La liaison de 4 molécules d'AMPc sur les sous-unités R provoque leur dissociation des sous-unités C, libérant les sous-unités catalytiques actives.
@@ -308,6 +314,7 @@ L'activité enzymatique est régulée selon 5 grands mécanismes : (1) contrôle
 - Le clivage permet à l'amino-terminal d'Ile16 de former une interaction électrostatique avec le carboxylate de l'Asp194 : indispensable à la formation du site de liaison du substrat et de la poche oxyanionique.
 
 ### Cascade d'activation pancréatique
+[[visual:bio/pancreatic-cascade]]
 - L'**entéropeptidase** (intestin) active le trypsinogène en trypsine. La trypsine active ensuite en cascade : chymotrypsinogène, proélastase, procarboxypeptidase, prolipase — et peut aussi s'auto-activer.
 
 ### Inhibiteurs spécifiques des protéases

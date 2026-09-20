@@ -9,6 +9,8 @@ import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram
 import { ClavicleScapulaDiagram, ForearmAnteriorDiagram, ForearmPosteriorDiagram, LegLateralDiagram, LegPosteriorDiagram } from "../components/AnatUpperLimbSheets";
 import { MyocyteDiagram, VentricularAPDiagram, PacemakerAPDiagram, ConductionSystemDiagram, ECGDiagram, LeadsDiagram, CardiacCycleDiagram, PVLoopDiagram, FrankStarlingDiagram, VascularBedDiagram, StarlingForcesDiagram, BaroreflexDiagram } from "../components/PhysCardio";
 import { SpirogramDiagram, GasCascadeDiagram, VQZonesDiagram, AlveolarMembraneDiagram, RespiratoryCentersDiagram, HypothalamicAxesDiagram, ThyroidDiagram, AdrenalDiagram, GlucoseDiagram, CalciumDiagram } from "../components/PhysRespEndo";
+import { GibbsDiagram, MultiSubstrateDiagram, CarbonicAnhydraseDiagram, MyosinCycleDiagram, PKADiagram, ProteaseClassesDiagram, PancreaticCascadeDiagram, ReducingSugarsDiagram, RenalGlucoseDiagram, GlutathioneDiagram, AnfinsenDiagram, MisfoldingDiagram } from "../components/BioEnzProt";
+import { VitaminADiagram, VitaminDDiagram, VitaminECDiagram, VitaminKDiagram, FolateB12Diagram, PurineDeNovoDiagram, PyrimidineDeNovoDiagram, DeoxynucleotideDiagram, SalvageDiagram, AminoAcidFateDiagram, NitrogenConvergenceDiagram } from "../components/BioVitNuc";
 import { HipOverviewDiagram, IliacMusclesDiagram, ThighAnteriorDiagram, ThighAdductorsDiagram, HamstringsDiagram, LegAnteriorDiagram, FootMusclesDiagram } from "../components/AnatLowerLimbSheets";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
@@ -186,6 +188,29 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "phys/action-potential": () => <ActionPotentialDiagram />,
   "phys/excitability": () => <ExcitabilityPeriodsDiagram />,
   "phys/conduction": () => <ConductionDiagram />,
+  "bio/gibbs": () => <GibbsDiagram />,
+  "bio/multi-substrate": () => <MultiSubstrateDiagram />,
+  "bio/carbonic-anhydrase": () => <CarbonicAnhydraseDiagram />,
+  "bio/myosin-cycle": () => <MyosinCycleDiagram />,
+  "bio/pka": () => <PKADiagram />,
+  "bio/protease-classes": () => <ProteaseClassesDiagram />,
+  "bio/pancreatic-cascade": () => <PancreaticCascadeDiagram />,
+  "bio/reducing-sugars": () => <ReducingSugarsDiagram />,
+  "bio/renal-glucose": () => <RenalGlucoseDiagram />,
+  "bio/glutathione": () => <GlutathioneDiagram />,
+  "bio/anfinsen": () => <AnfinsenDiagram />,
+  "bio/misfolding": () => <MisfoldingDiagram />,
+  "bio/vitamin-a": () => <VitaminADiagram />,
+  "bio/vitamin-d": () => <VitaminDDiagram />,
+  "bio/vitamin-e-c": () => <VitaminECDiagram />,
+  "bio/vitamin-k": () => <VitaminKDiagram />,
+  "bio/folate-b12": () => <FolateB12Diagram />,
+  "bio/purine-denovo": () => <PurineDeNovoDiagram />,
+  "bio/pyrimidine-denovo": () => <PyrimidineDeNovoDiagram />,
+  "bio/deoxynucleotides": () => <DeoxynucleotideDiagram />,
+  "bio/salvage": () => <SalvageDiagram />,
+  "bio/aa-fate": () => <AminoAcidFateDiagram />,
+  "bio/nitrogen-convergence": () => <NitrogenConvergenceDiagram />,
   "phys/spirogram": () => <SpirogramDiagram />,
   "phys/gas-cascade": () => <GasCascadeDiagram />,
   "phys/vq-zones": () => <VQZonesDiagram />,
