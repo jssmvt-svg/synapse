@@ -6,6 +6,7 @@ import { single, multi } from "./qcm-helpers.js";
 const UPPER_LIMB_OSTEOLOGY_COURSE = `# TP — Ostéologie du membre supérieur (squelette appendiculaire)
 
 ## 1. Clavicule
+[[visual:anat/clavicle-scapula]]
 - Os long, seul lien osseux entre le membre supérieur et le squelette axial.
 - **Extrémité sternale** (médiale, convexe en avant) s'articule avec le manubrium sternal (articulation sterno-claviculaire).
 - **Extrémité acromiale** (latérale, concave en avant) s'articule avec l'acromion de la scapula (articulation acromio-claviculaire).

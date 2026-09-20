@@ -392,6 +392,7 @@ Le **triceps brachial** est le seul muscle de ce compartiment. Trois chefs : lon
 L'avant-bras est enveloppé du fascia antébrachial, attaché au bord postérieur sous-cutané de l'ulna. Des septa relient ce fascia aux os, délimitant, avec la membrane interosseuse, plusieurs compartiments, chacun avec ses propres muscles, nerfs et vascularisation. Près du poignet, deux épaississements du fascia — les **rétinaculums fléchisseur et extenseur** — maintiennent les tendons digitaux en place. Classiquement, l'avant-bras est divisé en compartiment antérieur et compartiment postérieur.
 
 ## 4. Muscles du compartiment antérieur de l'avant-bras
+[[visual:anat/forearm-anterior]]
 [[visual:anat/forearm-innervation]]
 Ces muscles réalisent globalement la flexion du poignet/des doigts et la pronation. Ils sont divisés en superficiels et profonds.
 
@@ -412,6 +413,7 @@ Ces muscles réalisent globalement la flexion du poignet/des doigts et la pronat
 | **Carré pronateur** (distal) | Crête oblique du 1/4 inférieur de la face antérieure de l'ulna | Fibres superficielles : 1/4 distal du radius ; fibres profondes : zone triangulaire au-dessus de l'échancrure ulnaire | Interosseux antérieur (médian) | Principal pronateur ; assisté par le rond pronateur en pronation rapide/forcée |
 
 ## 5. Muscles du compartiment postérieur de l'avant-bras
+[[visual:anat/forearm-posterior]]
 ### A. Groupe superficiel (7 muscles)
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |

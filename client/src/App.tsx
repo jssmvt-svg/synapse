@@ -1,20 +1,21 @@
-import type { ReactElement } from "react";
+import { lazy, Suspense, type ReactElement } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./auth";
-import { Dashboard } from "./pages/Dashboard";
-import { DeckView } from "./pages/DeckView";
-import { Duel } from "./pages/Duel";
-import { Library } from "./pages/Library";
-import { LibraryChapterView } from "./pages/LibraryChapterView";
-import { LibrarySubjectView } from "./pages/LibrarySubjectView";
 import { Landing } from "./pages/Landing";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-import { SynthesisView } from "./pages/SynthesisView";
-import { Statistics } from "./pages/Statistics";
-import { LibrarySemesterView } from "./pages/LibrarySemesterView";
-import { Admin } from "./pages/Admin";
 import { authenticatedLibraryRoutePatterns } from "./libraryRoutes";
+
+const Dashboard = lazy(() => import("./pages/Dashboard").then((m) => ({ default: m.Dashboard })));
+const DeckView = lazy(() => import("./pages/DeckView").then((m) => ({ default: m.DeckView })));
+const Duel = lazy(() => import("./pages/Duel").then((m) => ({ default: m.Duel })));
+const Library = lazy(() => import("./pages/Library").then((m) => ({ default: m.Library })));
+const LibraryChapterView = lazy(() => import("./pages/LibraryChapterView").then((m) => ({ default: m.LibraryChapterView })));
+const LibrarySubjectView = lazy(() => import("./pages/LibrarySubjectView").then((m) => ({ default: m.LibrarySubjectView })));
+const SynthesisView = lazy(() => import("./pages/SynthesisView").then((m) => ({ default: m.SynthesisView })));
+const Statistics = lazy(() => import("./pages/Statistics").then((m) => ({ default: m.Statistics })));
+const LibrarySemesterView = lazy(() => import("./pages/LibrarySemesterView").then((m) => ({ default: m.LibrarySemesterView })));
+const Admin = lazy(() => import("./pages/Admin").then((m) => ({ default: m.Admin })));
 
 function RequireAuth({ children }: { children: ReactElement }) {
   const { user, loading } = useAuth();
@@ -32,6 +33,7 @@ function PublicOnly({ children }: { children: ReactElement }) {
 
 export function App() {
   return (
+    <Suspense fallback={<p>...</p>}>
     <Routes>
       <Route
         path="/"
@@ -135,5 +137,6 @@ export function App() {
       />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
+    </Suspense>
   );
 }

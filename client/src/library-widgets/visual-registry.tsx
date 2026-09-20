@@ -6,6 +6,8 @@ import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSh
 import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/AnatBonesTP";
 import { ForearmBonesDiagram, WristJointDiagram, HipBoneDiagram, LegBonesDiagram, AnkleJointDiagram, FootMedialBonesDiagram } from "../components/AnatBonesTP2";
 import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, LiverCouinaudDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
+import { ClavicleScapulaDiagram, ForearmAnteriorDiagram, ForearmPosteriorDiagram, LegLateralDiagram, LegPosteriorDiagram } from "../components/AnatUpperLimbSheets";
+import { HipOverviewDiagram, IliacMusclesDiagram, ThighAnteriorDiagram, ThighAdductorsDiagram, HamstringsDiagram, LegAnteriorDiagram, FootMusclesDiagram } from "../components/AnatLowerLimbSheets";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
 import { AMINO_ACIDS } from "../library-data/amino-acids";
@@ -203,6 +205,18 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/brachial-plexus": () => <BrachialPlexusDiagram />,
   "anat/upper-limb-nerves": () => <UpperLimbNervesCourseDiagram />,
   "anat/hip-joint": () => <HipJointDiagram />,
+  "anat/clavicle-scapula": () => <ClavicleScapulaDiagram />,
+  "anat/forearm-anterior": () => <ForearmAnteriorDiagram />,
+  "anat/forearm-posterior": () => <ForearmPosteriorDiagram />,
+  "anat/leg-lateral": () => <LegLateralDiagram />,
+  "anat/leg-posterior": () => <LegPosteriorDiagram />,
+  "anat/hip-overview": () => <HipOverviewDiagram />,
+  "anat/iliac-muscles": () => <IliacMusclesDiagram />,
+  "anat/thigh-anterior": () => <ThighAnteriorDiagram />,
+  "anat/thigh-adductors": () => <ThighAdductorsDiagram />,
+  "anat/hamstrings": () => <HamstringsDiagram />,
+  "anat/leg-anterior": () => <LegAnteriorDiagram />,
+  "anat/foot-muscles": () => <FootMusclesDiagram />,
   "anat/knee-joint": () => <KneeJointDiagram />,
   "anat/leg-compartments": () => <LegCompartmentsDiagram />,
   "anat/lower-limb-arteries": () => <LowerLimbArteriesDiagram />,

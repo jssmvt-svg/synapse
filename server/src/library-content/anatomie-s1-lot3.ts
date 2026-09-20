@@ -6,7 +6,7 @@ const LOWER_LIMB_JOINTS_COURSE = `# Articulations du membre inférieur — Hanch
 ## 1. L'articulation coxo-fémorale (hanche)
 
 ### 1.1 Généralités
-[[visual:anat/hip-joint]]
+[[visual:anat/hip-overview]]
 - Articulation **synoviale sphéroïde (énarthrose)**, formée par la réception de la **tête du fémur** dans la cavité en forme de coupe de l'**acétabulum** (cotyle).
 - Fonctions principales : supporter le poids du corps en station debout, et transmettre à la tête fémorale les forces générées par les mouvements du tronc pendant la marche.
 
@@ -15,6 +15,7 @@ const LOWER_LIMB_JOINTS_COURSE = `# Articulations du membre inférieur — Hanch
 - **Acétabulum** (« coupe à vinaigre ») : présente trois éléments — une **surface semi-lunaire** en forme de fer à cheval (seule partie articulaire, recouverte de cartilage), l'**échancrure acétabulaire** et la **fosse acétabulaire** (non articulaires). Le **labrum acétabulaire (bourrelet cotyloïdien)** augmente la profondeur de l'acétabulum.
 
 ### 1.3 Ligaments de la hanche
+[[visual:anat/hip-joint]]
 - **Capsule articulaire** : sac fibreux dense et résistant. Sur l'os coxal, elle s'attache 5-6 mm au-delà du bord acétabulaire ; sur le fémur, elle s'attache en avant à la ligne intertrochantérienne et en arrière à environ 1 cm en avant de la crête intertrochantérienne. Elle est plus épaisse en haut et en avant (où la résistance requise est maximale), plus fine en bas et en arrière. Elle comprend des fibres circulaires et longitudinales.
 - **Ligament ilio-fémoral** (ligament en Y de Bigelow) : le plus résistant des ligaments de la hanche, situé en avant de l'articulation ; s'attache en haut à l'épine iliaque antéro-inférieure et se divise en deux faisceaux se terminant sur la ligne intertrochantérienne.
 - **Ligament pubo-fémoral (pubo-capsulaire)** : de la crête obturatrice et de la branche supérieure du pubis, se mêlant à la capsule et au faisceau vertical du ligament ilio-fémoral.

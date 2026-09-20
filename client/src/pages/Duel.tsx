@@ -28,6 +28,7 @@ import { useLang } from "../i18n";
 import "../duel.css";
 import "../duelModes.css";
 
+const BOT_AFTER_MS = 10_000;
 const POLL_MS = 1000;
 
 export function Duel() {
@@ -471,6 +472,27 @@ function Arena({ code }: { code: string }) {
     navigate("/duel");
   }
 
+  async function playBot() {
+    if (busyRef.current) return;
+    busyRef.current = true;
+    try {
+      apply(await api.duelPlayBot(code));
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      busyRef.current = false;
+    }
+  }
+
+  // Recherche rapide sans adversaire : après 10 s, on lance un duel contre le bot.
+  const waitingPublic = state?.phase === "waiting" && state.isPublic;
+  useEffect(() => {
+    if (!waitingPublic) return;
+    const id = setTimeout(() => void playBot(), BOT_AFTER_MS);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [waitingPublic, code]);
+
   async function playAgain() {
     try {
       const next = await api.duelQuickMatch(loadAvatarCode(), state?.mode ?? "combat");
@@ -539,6 +561,14 @@ function Arena({ code }: { code: string }) {
             </>
           )}
           <p className="duel-pulse">{l("En attente d'un adversaire…", "Waiting for an opponent…")}</p>
+          <button className="duel-button" onClick={() => void playBot()}>
+            {l("Jouer contre le bot maintenant", "Play against the bot now")}
+          </button>
+          {state.isPublic && (
+            <p className="duel-muted">
+              {l("Sans adversaire au bout de 10 s, le bot te défie automatiquement.", "With no opponent after 10 s, the bot will challenge you automatically.")}
+            </p>
+          )}
         </section>
       )}
 
