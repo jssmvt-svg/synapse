@@ -34,6 +34,7 @@ const LEUKOGRAM_COURSE = `# TP — Leucogramme normal et pathologique
 | Maladie contagieuse | N | — | — | ↑ | — | — |
 
 ## 4. Principes d'interprétation
+[[visual:phys/lab-leuko-tree]]
 - Une **infection bactérienne aiguë** stimule la production de neutrophiles : le WBC total et le pourcentage de neutrophiles augmentent, tandis que le pourcentage de lymphocytes diminue par effet relatif.
 - Les **infections virales aiguës** suivent le schéma inverse : neutropénie relative avec lymphocytose et monocytose. La mononucléose infectieuse et la tuberculose représentent une forme accentuée de ce profil (neutropénie marquée ↓↓, lymphocytose et monocytose marquées ↑↑).
 - Une **éosinophilie** (↑ EO) oriente vers une parasitose, une allergie ou une maladie dermatologique — pas vers une infection bactérienne.

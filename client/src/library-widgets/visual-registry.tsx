@@ -11,6 +11,7 @@ import { MyocyteDiagram, VentricularAPDiagram, PacemakerAPDiagram, ConductionSys
 import { SpirogramDiagram, GasCascadeDiagram, VQZonesDiagram, AlveolarMembraneDiagram, RespiratoryCentersDiagram, HypothalamicAxesDiagram, ThyroidDiagram, AdrenalDiagram, GlucoseDiagram, CalciumDiagram } from "../components/PhysRespEndo";
 import { GibbsDiagram, MultiSubstrateDiagram, CarbonicAnhydraseDiagram, MyosinCycleDiagram, PKADiagram, ProteaseClassesDiagram, PancreaticCascadeDiagram, ReducingSugarsDiagram, RenalGlucoseDiagram, GlutathioneDiagram, AnfinsenDiagram, MisfoldingDiagram } from "../components/BioEnzProt";
 import { VitaminADiagram, VitaminDDiagram, VitaminECDiagram, VitaminKDiagram, FolateB12Diagram, PurineDeNovoDiagram, PyrimidineDeNovoDiagram, DeoxynucleotideDiagram, SalvageDiagram, AminoAcidFateDiagram, NitrogenConvergenceDiagram } from "../components/BioVitNuc";
+import { OsmWhyDiagram, UrineAnionGapDiagram, IndicesMapDiagram, SimpleAcidBaseDiagram, HemostasisTestsDiagram, RenalCascadeDiagram, LeukoTreeDiagram, ElfoPrincipleDiagram } from "../components/PhysLabSheets";
 import { HipOverviewDiagram, IliacMusclesDiagram, ThighAnteriorDiagram, ThighAdductorsDiagram, HamstringsDiagram, LegAnteriorDiagram, FootMusclesDiagram } from "../components/AnatLowerLimbSheets";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
@@ -188,6 +189,14 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "phys/action-potential": () => <ActionPotentialDiagram />,
   "phys/excitability": () => <ExcitabilityPeriodsDiagram />,
   "phys/conduction": () => <ConductionDiagram />,
+  "phys/lab-osm-why": () => <OsmWhyDiagram />,
+  "phys/lab-uag": () => <UrineAnionGapDiagram />,
+  "phys/lab-indices-map": () => <IndicesMapDiagram />,
+  "phys/lab-abb-simple": () => <SimpleAcidBaseDiagram />,
+  "phys/lab-hemostasis-tests": () => <HemostasisTestsDiagram />,
+  "phys/lab-renal-cascade": () => <RenalCascadeDiagram />,
+  "phys/lab-leuko-tree": () => <LeukoTreeDiagram />,
+  "phys/lab-elfo-principle": () => <ElfoPrincipleDiagram />,
   "bio/gibbs": () => <GibbsDiagram />,
   "bio/multi-substrate": () => <MultiSubstrateDiagram />,
   "bio/carbonic-anhydrase": () => <CarbonicAnhydraseDiagram />,

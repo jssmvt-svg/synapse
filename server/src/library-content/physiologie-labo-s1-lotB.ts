@@ -17,6 +17,7 @@ const ABB_COURSE = `# TP — Équilibre acido-basique (gaz du sang)
 - La PCO2 s'exprime en mmHg (pression des gaz dissous), différent du mEq/L des électrolytes ou du mOsm/L de l'osmolarité.
 
 ## 2. Interprétation des troubles simples
+[[visual:phys/lab-abb-simple]]
 - Une variation isolée de la PCO2 (respiratoire) ou du HCO3⁻ (métabolique) qui fait dévier le pH hors de la norme définit un trouble primaire simple : acidose ou alcalose, respiratoire ou métabolique.
 
 ## 3. Associations de deux troubles primaires : compensées, neutralisantes ou additives
@@ -96,6 +97,7 @@ const HEMOSTASIS_PARTIAL_COURSE = `# TP — Hémostase (portion partielle)
 - Une insuffisance hépatique et une carence en vitamine K sont regroupées dans les tables d'interprétation car elles affectent toutes deux la voie extrinsèque en perturbant la synthèse de ces facteurs, allongeant le TP/TQ.
 
 ## 2. Temps de coagulation (Howell)
+[[visual:phys/lab-hemostasis-tests]]
 - Le temps de Howell mesure le temps de coagulation total d'un plasma recalcifié.
 - Valeur normale : **60 – 120 secondes** (environ 1 à 2 minutes).
 

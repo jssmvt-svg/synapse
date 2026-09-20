@@ -8,6 +8,7 @@ import { single } from "./qcm-helpers.js";
 const PROTEINOGRAM_COURSE = `# TP — Protéinogramme (électrophorèse des protéines sériques)
 
 ## Principe
+[[visual:phys/lab-elfo-principle]]
 L'électrophorèse des protéines sériques sépare les protéines plasmatiques en 5 fractions selon leur mobilité électrophorétique : albumine, α1-globulines, α2-globulines, β-globulines et γ-globulines.
 
 ## Valeurs normales des fractions (en % du total protéique)
@@ -91,6 +92,7 @@ const URINE_FORMULA_COURSE = `# TP — Formules de physiologie rénale (clairanc
 - Le trou anionique urinaire est utilisé pour évaluer l'équilibre des ions non mesurés dans l'urine, notamment dans l'exploration des acidoses métaboliques (aide à différencier une cause rénale d'une cause digestive).
 
 ## Débit plasmatique rénal (RPF) à partir de la clairance du PAH
+[[visual:phys/lab-renal-cascade]]
 - Le PAH (acide para-amino-hippurique) est presque totalement épuré du plasma en un seul passage rénal (filtration + sécrétion tubulaire).
 - Le **RPF effectif** correspond à environ 90 % du **RPF total** (car une petite fraction du sang rénal, notamment corticale profonde, n'est pas totalement épurée).
 - Formule : **RPFtotal = ClPAH / 0,9**
