@@ -12,6 +12,7 @@ const CARDIAC_MEMBRANE_POTENTIAL_COURSE = `# Physiologie cardiovasculaire — Po
 - Système valvulaire : valves **atrio-ventriculaires** (mitrale entre OG-VG, tricuspide entre OD-VD) et valves **sigmoïdes/semilunaires** (aortique entre VG-aorte, pulmonaire entre VD-artère pulmonaire). Rôle : assurer un flux sanguin unidirectionnel et empêcher la régurgitation. Deux types de dysfonction : **régurgitation** (fermeture incomplète, reflux) et **sténose** (ouverture rétrécie, nécessitant plus de force pour éjecter le sang) — les deux peuvent coexister.
 
 ## 2. Structure et fonction de la fibre myocardique
+[[visual:phys/myocyte]]
 - Le myocyte cardiaque est une cellule musculaire striée spécialisée, d'environ 25 μm de diamètre et 100 μm de longueur, contenant des myofibrilles faites de myofilaments. Sa fonction principale est le cycle contraction-relaxation.
 - **Sarcolemme** : membrane complexe (bicouche lipidique + protéines : pompes, canaux, transporteurs, protéines G, récepteurs, enzymes). Canaux principaux : Na⁺, K⁺, Ca²⁺. Pompes principales : transport actif primaire (Ca²⁺-ATPase, Na⁺/K⁺-ATPase) et transport actif secondaire (échangeur Na⁺/Ca²⁺).
 - **Canaux Na⁺** : dans les fibres à réponse rapide (contractiles), canaux Na⁺ rapides voltage-dépendants, ouverts en phase 0 (dépolarisation), assurant un influx rapide de Na⁺. Dans les fibres à réponse lente (pacemaker), canaux Na⁺ non-voltage-dépendants ou canaux « funny », activés pendant la dépolarisation diastolique lente (DDL, phase 4), assurant un influx lent de Na⁺ à l'origine de l'automatisme.
@@ -42,6 +43,7 @@ const CARDIAC_MEMBRANE_POTENTIAL_COURSE = `# Physiologie cardiovasculaire — Po
   2. **Pompe Na⁺/K⁺** (transport actif primaire) : mécanisme le plus important pour le maintien du gradient électrochimique et du Pr.
 
 ## 5. Le potentiel d'action (PA) des fibres à réponse rapide (contractiles atriales/ventriculaires, système His-Purkinje)
+[[visual:phys/ventricular-ap]]
 - **Définition** : changement électrique de potentiel membranaire en réponse à un stimulus, dû à une modification séquentielle de la conductance membranaire aux ions. 5 phases.
 
 | Phase | Nom | Base ionique principale |
@@ -65,6 +67,7 @@ const CARDIAC_MEMBRANE_POTENTIAL_COURSE = `# Physiologie cardiovasculaire — Po
   - Durée totale du PA dans les fibres à réponse rapide : environ 250 ms.
 
 ## 6. Potentiel de repos et potentiel d'action des fibres à réponse lente (cellules pacemaker du nœud SA et du nœud AV)
+[[visual:phys/pacemaker-ap]]
 - Les cellules pacemaker n'ont pas de potentiel de repos constant, uniquement un **potentiel diastolique maximal (PDM) = -60 mV**.
 - **Phase 4 — Dépolarisation diastolique lente (DDL)** : le potentiel membranaire change lentement et automatiquement du PDM (-60 mV) vers le potentiel seuil (-40 mV), moment où la dépolarisation (phase 0) est déclenchée. C'est la phase la plus importante, à la base de l'automatisme.
   - Base ionique de la DDL : influx lent de Na⁺ via les canaux non-voltage-dépendants (canaux « funny », If) ; influx lent de Ca²⁺ via les canaux de type T (transitoires) ; fermeture plus rapide des canaux K⁺ en phase 3, empêchant l'efflux d'ions positifs.
@@ -180,6 +183,7 @@ const EXCITO_CONDUCTORY_SYSTEM_COURSE = `# Physiologie cardiovasculaire — Syst
 - **Rythmicité (fonction chronotrope)** : régularité de l'activité pacemaker déterminant la fréquence cardiaque (FC) et la régularité de la succession des battements, également influencée par les facteurs neuro-humoraux.
 
 ## 2. Composants du système excito-conducteur cardiaque
+[[visual:phys/conduction-system]]
 
 | Composant | Fréquence de décharge | Rôle principal |
 | --- | --- | --- |
@@ -350,6 +354,7 @@ const ECG_PHYSIOLOGY_COURSE = `# Physiologie cardiovasculaire — Bases physiolo
 - **Historique** : Willem Einthoven (prix Nobel 1924) a établi les fondements théoriques et pratiques de l'ECG (premier enregistrement en 1886). Prémisses : le cœur = un dipôle au centre du thorax, lui-même au centre du corps ; les articulations carpiennes et tarsiennes sont équidistantes du cœur ; la résistance électrique des tissus est constante. Le **triangle d'Einthoven** est un triangle équilatéral pointé vers le bas, centré sur le thorax, avec des sommets entre les bras et la jambe gauche.
 
 ## 4. Les dérivations ECG standards
+[[visual:phys/ecg-leads]]
 - **Définition** : une dérivation ECG est une relation spatiale entre 2 points du champ électrique cardiaque où sont placées les électrodes. Avantage : enregistrement non invasif, sans effraction sanguine.
 - Types de dérivations : **directes** (électrodes placées directement sur le cœur), **semi-directes** (électrodes proches du cœur, via des voies naturelles : œsophage, voies aériennes), **indirectes** (électrodes plus éloignées, sur les membres et le thorax). En pratique, 12 dérivations sont utilisées, enregistrant simultanément un même processus.
 - **Dérivations bipolaires des membres (I, II, III)** : introduites par Einthoven (1903), forment le triangle équilatéral d'Einthoven centré sur le cœur.
@@ -378,6 +383,7 @@ const ECG_PHYSIOLOGY_COURSE = `# Physiologie cardiovasculaire — Bases physiolo
 - Si l'onde de dépolarisation est parallèle à l'axe de la dérivation → déflexion positive maximale ; oblique → déflexion positive plus faible ; parallèle mais orientation opposée → déflexion négative maximale ; oblique et opposée → déflexion négative plus faible ; perpendiculaire à l'axe → pas de déflexion (somme des ondes = 0).
 
 ## 7. Caractéristiques des paramètres de l'ECG normal
+[[visual:phys/ecg-normal]]
 - Le tracé de chaque cycle cardiaque comprend : **ondes** (P, Q, R, S, T, U), **segments** (portions entre ondes) et **intervalles** (segments + ondes). Conditions standards : amplitude 1 mm = 0,1 mV ; temps 1 mm = 0,04 s.
 
 | Onde | Représente | Durée | Amplitude |
@@ -518,6 +524,7 @@ const HEART_CONTRACTILITY_COURSE = `# Physiologie cardiovasculaire — Contracti
   - Agents **inotropes positifs** (ex. épinéphrine) → augmentation de la performance cardiaque → augmentation de la force de contraction ET de Vmax. **Vmax ne dépend que de l'effet inotrope** → Vmax est un indicateur de la fonction inotrope.
 
 ## 2. Le mécanisme de Frank-Starling (relation longueur-tension)
+[[visual:phys/frank-starling]]
 - Représente l'**autorégulation hétérométrique** du cœur. En 1895, Frank découvrit sur du muscle cardiaque de grenouille que plus la précharge est grande, plus la force générée est grande ; en 1914, Starling démontra le même phénomène sur un modèle cœur-poumon canin.
 - **Conditions de l'expérience de Frank-Starling** : charge (L) constante, longueur initiale (li) progressivement augmentée. Paramètres mesurés : **tension active (TA)** en systole (dépend du niveau de couplage actine-myosine — meilleur couplage = TA plus élevée) et **tension passive (TP)** au repos (dépend de l'étirement des éléments élastiques — plus li augmente, plus l'élément élastique s'étire, diminuant l'élasticité et augmentant la rigidité de la fibre).
 - **Résultats de l'expérience** :

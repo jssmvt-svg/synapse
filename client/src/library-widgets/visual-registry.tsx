@@ -7,6 +7,8 @@ import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/An
 import { ForearmBonesDiagram, WristJointDiagram, HipBoneDiagram, LegBonesDiagram, AnkleJointDiagram, FootMedialBonesDiagram } from "../components/AnatBonesTP2";
 import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, LiverCouinaudDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
 import { ClavicleScapulaDiagram, ForearmAnteriorDiagram, ForearmPosteriorDiagram, LegLateralDiagram, LegPosteriorDiagram } from "../components/AnatUpperLimbSheets";
+import { MyocyteDiagram, VentricularAPDiagram, PacemakerAPDiagram, ConductionSystemDiagram, ECGDiagram, LeadsDiagram, CardiacCycleDiagram, PVLoopDiagram, FrankStarlingDiagram, VascularBedDiagram, StarlingForcesDiagram, BaroreflexDiagram } from "../components/PhysCardio";
+import { SpirogramDiagram, GasCascadeDiagram, VQZonesDiagram, AlveolarMembraneDiagram, RespiratoryCentersDiagram, HypothalamicAxesDiagram, ThyroidDiagram, AdrenalDiagram, GlucoseDiagram, CalciumDiagram } from "../components/PhysRespEndo";
 import { HipOverviewDiagram, IliacMusclesDiagram, ThighAnteriorDiagram, ThighAdductorsDiagram, HamstringsDiagram, LegAnteriorDiagram, FootMusclesDiagram } from "../components/AnatLowerLimbSheets";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
@@ -184,6 +186,28 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "phys/action-potential": () => <ActionPotentialDiagram />,
   "phys/excitability": () => <ExcitabilityPeriodsDiagram />,
   "phys/conduction": () => <ConductionDiagram />,
+  "phys/spirogram": () => <SpirogramDiagram />,
+  "phys/gas-cascade": () => <GasCascadeDiagram />,
+  "phys/vq-zones": () => <VQZonesDiagram />,
+  "phys/alveolar-membrane": () => <AlveolarMembraneDiagram />,
+  "phys/respiratory-centers": () => <RespiratoryCentersDiagram />,
+  "phys/hypothalamic-axes": () => <HypothalamicAxesDiagram />,
+  "phys/thyroid": () => <ThyroidDiagram />,
+  "phys/adrenal": () => <AdrenalDiagram />,
+  "phys/glucose-regulation": () => <GlucoseDiagram />,
+  "phys/calcium-homeostasis": () => <CalciumDiagram />,
+  "phys/myocyte": () => <MyocyteDiagram />,
+  "phys/ventricular-ap": () => <VentricularAPDiagram />,
+  "phys/pacemaker-ap": () => <PacemakerAPDiagram />,
+  "phys/conduction-system": () => <ConductionSystemDiagram />,
+  "phys/ecg-normal": () => <ECGDiagram />,
+  "phys/ecg-leads": () => <LeadsDiagram />,
+  "phys/cardiac-cycle": () => <CardiacCycleDiagram />,
+  "phys/pv-loop": () => <PVLoopDiagram />,
+  "phys/frank-starling": () => <FrankStarlingDiagram />,
+  "phys/vascular-bed": () => <VascularBedDiagram />,
+  "phys/starling-forces": () => <StarlingForcesDiagram />,
+  "phys/baroreflex": () => <BaroreflexDiagram />,
   "phys/synapse": () => <SynapseDiagram />,
   "phys/muscle-fiber": () => <MuscleFiberDiagram />,
   "phys/sarcomere": () => <SarcomereDiagram />,

@@ -44,6 +44,7 @@ const RESPIRATORY_MECHANICS_COURSE = `# Physiologie respiratoire — Lecture 1 :
 - **Corrélations cliniques** : chez le prématuré, la production réduite de surfactant entraîne une tendance au collapsus alvéolaire à l'expiration → syndrome de détresse respiratoire du nouveau-né. Chez l'adulte, un déficit peut survenir en cas d'œdème pulmonaire, chez les fumeurs, après oxygénothérapie prolongée ou inactivation par aspiration de liquides. L'absence de surfactant est incompatible avec la vie.
 
 ## 6. Volumes et capacités pulmonaires statiques
+[[visual:phys/spirogram]]
 - La ventilation est l'échange d'air entre l'atmosphère et les alvéoles ; le cycle ventilatoire = inhalation suivie d'exhalation. L'évaluation se fait par mesure des volumes et débits d'air (spiromètres informatisés).
 - Les volumes/capacités pulmonaires sont des paramètres statiques mesurés à des moments précis du cycle respiratoire ; ils varient avec l'âge (diminution), le sexe (F < H d'environ 20-25 %) et le développement physique.
 - **Volumes pulmonaires** (mesurés directement par spirométrie, sauf VR) :
@@ -188,6 +189,7 @@ const PULMONARY_VENTILATION_COURSE = `# Physiologie respiratoire — Lecture 2 :
 - **Rôle de la VA** : correction rapide des variations de composition de l'air alvéolaire dues aux échanges avec le sang capillaire pulmonaire. VA normale = 4 L/min (2 L/min/poumon). Efficacité évaluée par le temps de dilution homogène de l'hélium dans les espaces alvéolaires (normal < 3 minutes).
 
 ## 3. Rapport ventilation/perfusion (V/Q)
+[[visual:phys/vq-zones]]
 - Au repos, chez l'adulte normal : ventilation pulmonaire = 6 L/min (VA = 4, VD = 2), débit sanguin pulmonaire (Q = débit cardiaque) = 5 L/min. **Rapport V/Q idéal = 4/5 = 0,8**, condition optimale pour les échanges gazeux alvéolaires.
 - Le V/Q n'est pas identique dans toutes les zones pulmonaires : la distribution régionale de l'air dépend du degré d'expansion alvéolaire (propriétés mécaniques broncho-pulmonaires, gradient de pression pleurale — facteur principal, dépendant de la gravité).
 - **Distribution régionale de l'air inhalé** : au repos, en fin d'expiration, la CRF est répartie de façon inégale — davantage à l'apex, moins à la base (pression intrapleurale plus négative à l'apex, alvéoles plus expansées). À l'inspiration, l'air inhalé se dirige préférentiellement vers les alvéoles les moins expansées, donc vers la base : **les bases pulmonaires sont mieux ventilées que les apex (environ 3× plus)**.
@@ -196,6 +198,7 @@ const PULMONARY_VENTILATION_COURSE = `# Physiologie respiratoire — Lecture 2 :
 - **Mécanismes locaux de régulation du V/Q** : (1) à l'apex (excès de ventilation) → hypocapnie alvéolaire locale → le CO₂ est un facteur de régulation qui provoque une **bronchoconstriction** locale → diminution de la ventilation, redirection de l'air vers les zones bien perfusées ; (2) à la base (excès de perfusion) → hypoxie alvéolaire locale → le déficit en O₂ provoque une **vasoconstriction** locale → redirection du sang vers les zones bien ventilées. Ces mécanismes ramènent le V/Q à 0,8 dans la majorité du poumon, limitant l'espace mort alvéolaire à 2-3 % et permettant une saturation en OxiHb de 97,5-98 % (PO₂ artérielle ≈ 100 mmHg, PCO₂ ≈ 40 mmHg).
 
 ## 4. Membrane alvéolo-capillaire (MAC) et diffusion des gaz
+[[visual:phys/alveolar-membrane]]
 - La MAC est l'ensemble des structures que les gaz respiratoires traversent entre les alvéoles et les globules rouges : surfactant, épithélium alvéolaire, membrane basale alvéolaire, tissu pulmonaire élastique (interstitium très fin), membrane basale capillaire (fusionnée par endroits avec la précédente), endothélium capillaire, membrane du globule rouge.
 - **Facteurs déterminant la diffusion gazeuse à travers la MAC** :
   1. **Caractéristiques de la MAC** : surface (40-100 m², diffusion proportionnelle à la surface), épaisseur (< 1 µm, diffusion inversement proportionnelle à l'épaisseur), diamètre capillaire (5 µm) < diamètre du globule rouge (7 µm) — le GR doit se déformer, sa membrane touche la paroi capillaire, réduisant la distance de diffusion.
@@ -209,6 +212,7 @@ const PULMONARY_VENTILATION_COURSE = `# Physiologie respiratoire — Lecture 2 :
 - **Transfert du CO₂** : diffusion sang veineux → alvéole, environ 20× plus rapide que l'O₂ malgré un gradient de pression plus faible, grâce à sa haute solubilité.
 
 ## 5. Diffusion des gaz dans les tissus
+[[visual:phys/gas-cascade]]
 - Les échanges gazeux tissulaires fournissent l'O₂ nécessaire au métabolisme cellulaire et éliminent le CO₂. Ils comprennent deux processus : la diffusion physique (déterminée par le gradient de pression entre capillaires, interstitium et cellules) et la respiration cellulaire (réactions redox couplées à la phosphorylation oxydative).
 - **Diffusion de l'O₂** : gradient décroissant — sang capillaire artériel 95 mmHg → liquide interstitiel 40 mmHg → intracellulaire 23 mmHg → crêtes mitochondriales 1 mmHg. Vitesse de diffusion dépendante de la vitesse de transport sanguin, du temps de transit, de la surface de diffusion (nombre de capillaires ouverts) et de l'intensité du métabolisme cellulaire.
 - **Équation de diffusion tissulaire** : VO₂ = D × A × (PO₂[capillaire] − PO₂[tissu]) / L, où L = distance capillaire-mitochondrie. Cette distance varie selon les tissus (ex. ventricule gauche 13 µm, cortex cérébral 36 µm, muscle squelettique 80 µm) ; le recrutement capillaire (jusqu'à ×3 à l'effort) est le moyen le plus efficace d'augmenter l'apport d'O₂ en réduisant cette distance.
@@ -297,6 +301,7 @@ export const PULMONARY_VENTILATION_FLASHCARDS: LibraryCardSeed[] = [
 const VENTILATION_REGULATION_COURSE = `# Physiologie respiratoire — Lecture 3 : Régulation de la ventilation et du tonus broncho-moteur
 
 ## 1. Centres nerveux de régulation de la ventilation
+[[visual:phys/respiratory-centers]]
 - Les mécanismes de contrôle ventilatoire doivent : (1) établir le rythme ventilatoire automatique ; (2) l'ajuster aux besoins métaboliques (via les chimiorécepteurs, régulation neuro-humorale), aux conditions mécaniques (via les mécanorécepteurs, ex. changement de posture), et aux comportements non ventilatoires épisodiques (parole, alimentation, éternuement, hoquet).
 - Structures nerveuses : structures sous-corticales (adaptation de la ventilation) et cortex (contrôle volontaire).
 - **Eupnée** = ventilation normale (alternance inspiration/expiration au repos, en sommeil NREM et à l'effort léger). Inspiration : activation du diaphragme ± intercostaux. Expiration : passive, par cessation de l'inspiration et recul élastique. **Ventilation forcée** (effort intense) : recrutement des muscles accessoires inspiratoires et expiratoires, augmentation d'amplitude et de fréquence de l'activité du nerf phrénique.
