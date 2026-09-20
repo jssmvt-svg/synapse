@@ -66,6 +66,8 @@ export function OcclusionFigure({ visualKey, startHidden = false }: { visualKey:
 
   const node = resolveVisualKey(visualKey);
   if (!node) return null;
+  // Une structure moléculaire n'a pas de légendes à masquer.
+  if (/^(mol|amino|vitamin)\//.test(visualKey)) return <div className="molecule-figure">{node}</div>;
   return (
     <div className={hidden ? "occlusion is-hidden" : "occlusion"}>
       <div className="occlusion-bar">

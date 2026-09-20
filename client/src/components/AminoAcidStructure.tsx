@@ -1,4 +1,6 @@
 import { CATEGORY_COLOR, type AminoAcidDef } from "../library-data/amino-acids";
+import { AMINO_SMILES } from "../library-data/molecules";
+import { MoleculeStructure } from "./MoleculeStructure";
 
 interface AminoAcidStructureProps {
   aa: AminoAcidDef;
@@ -10,6 +12,9 @@ interface AminoAcidStructureProps {
 // choix de scope assumé pour un rendu propre et lisible sur les 20 acides aminés.
 export function AminoAcidStructure({ aa }: AminoAcidStructureProps) {
   const color = CATEGORY_COLOR[aa.category];
+  const structure = AMINO_SMILES[aa.code3];
+  // Vraie formule topologique (sans le nom, pour pouvoir s'auto-tester).
+  if (structure) return <MoleculeStructure smiles={structure.smiles} label={aa.name_fr} />;
 
   return (
     <svg viewBox="0 0 260 140" width="220" height="118" role="img" aria-label={aa.name_fr}>

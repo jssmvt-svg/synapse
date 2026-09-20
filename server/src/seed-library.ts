@@ -1,6 +1,7 @@
 import { db, type DatabaseExecutor } from "./db.js";
 import { BIOCHIMIE_S1, type LibraryLearningSeed } from "./library-content/biochimie-s1.js";
 import { BIOCHIMIE_S2 } from "./library-content/biochimie-s2.js";
+import { addMoleculeCards } from "./library-content/biochimie-molecules.js";
 import { PHYSIOLOGIE_S1 } from "./library-content/physiologie-s1.js";
 import { PHYSIOLOGIE_S2 } from "./library-content/physiologie-s2.js";
 import { ANATOMIE_S1 } from "./library-content/anatomie-s1.js";
@@ -11,9 +12,9 @@ import { ANATOMIE_S1 } from "./library-content/anatomie-s1.js";
 export async function seedLibrary(): Promise<void> {
   const startedAt = Date.now();
   console.log("[seed-library] Demarrage du seed de la bibliotheque...");
-  await seedMatiere(1, 1, "Biochimie", BIOCHIMIE_S1);
+  await seedMatiere(1, 1, "Biochimie", addMoleculeCards(BIOCHIMIE_S1, 1));
   console.log(`[seed-library] Biochimie S1 seedee (${BIOCHIMIE_S1.length} chapitres).`);
-  await seedMatiere(1, 2, "Biochimie", BIOCHIMIE_S2);
+  await seedMatiere(1, 2, "Biochimie", addMoleculeCards(BIOCHIMIE_S2, 2));
   console.log(`[seed-library] Biochimie S2 seedee (${BIOCHIMIE_S2.length} chapitres).`);
   await seedMatiere(1, 1, "Physiologie", PHYSIOLOGIE_S1);
   console.log(`[seed-library] Physiologie S1 seedee (${PHYSIOLOGIE_S1.length} chapitres).`);
