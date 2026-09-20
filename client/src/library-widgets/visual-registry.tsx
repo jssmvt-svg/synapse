@@ -12,6 +12,8 @@ import { SpirogramDiagram, GasCascadeDiagram, VQZonesDiagram, AlveolarMembraneDi
 import { GibbsDiagram, MultiSubstrateDiagram, CarbonicAnhydraseDiagram, MyosinCycleDiagram, PKADiagram, ProteaseClassesDiagram, PancreaticCascadeDiagram, ReducingSugarsDiagram, RenalGlucoseDiagram, GlutathioneDiagram, AnfinsenDiagram, MisfoldingDiagram } from "../components/BioEnzProt";
 import { VitaminADiagram, VitaminDDiagram, VitaminECDiagram, VitaminKDiagram, FolateB12Diagram, PurineDeNovoDiagram, PyrimidineDeNovoDiagram, DeoxynucleotideDiagram, SalvageDiagram, AminoAcidFateDiagram, NitrogenConvergenceDiagram } from "../components/BioVitNuc";
 import { OsmWhyDiagram, UrineAnionGapDiagram, IndicesMapDiagram, SimpleAcidBaseDiagram, HemostasisTestsDiagram, RenalCascadeDiagram, LeukoTreeDiagram, ElfoPrincipleDiagram } from "../components/PhysLabSheets";
+import { UrineDensityDiagram, BloodBuffersDiagram, ChromatographyDiagram, ConcentrationMethodsDiagram, OpticalTestsDiagram, EnzymeFactorsDiagram } from "../components/BioLabA";
+import { MetabolicStatesDiagram, G6PDBrewerDiagram, TriglycerideAssayDiagram, KetosisRotheraDiagram, LipoproteinSeparationDiagram, PheTyrDiagram, BCAADiagram, TryptophanDiagram, AmmoniaTransportDiagram, CreatinineClearanceDiagram, HemeSynthesisDiagram, JaundiceDiagram } from "../components/BioLabB";
 import { HipOverviewDiagram, IliacMusclesDiagram, ThighAnteriorDiagram, ThighAdductorsDiagram, HamstringsDiagram, LegAnteriorDiagram, FootMusclesDiagram } from "../components/AnatLowerLimbSheets";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
@@ -189,6 +191,24 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "phys/action-potential": () => <ActionPotentialDiagram />,
   "phys/excitability": () => <ExcitabilityPeriodsDiagram />,
   "phys/conduction": () => <ConductionDiagram />,
+  "bio/lab-urine-density": () => <UrineDensityDiagram />,
+  "bio/lab-blood-buffers": () => <BloodBuffersDiagram />,
+  "bio/lab-chrom-mechanisms": () => <ChromatographyDiagram />,
+  "bio/lab-conc-methods": () => <ConcentrationMethodsDiagram />,
+  "bio/lab-optical-tests": () => <OpticalTestsDiagram />,
+  "bio/lab-enzyme-factors": () => <EnzymeFactorsDiagram />,
+  "bio/lab-metabolic-states": () => <MetabolicStatesDiagram />,
+  "bio/lab-g6pd-brewer": () => <G6PDBrewerDiagram />,
+  "bio/lab-tg-assay": () => <TriglycerideAssayDiagram />,
+  "bio/lab-ketosis-rothera": () => <KetosisRotheraDiagram />,
+  "bio/lab-lipoprotein-sep": () => <LipoproteinSeparationDiagram />,
+  "bio/lab-phe-tyr": () => <PheTyrDiagram />,
+  "bio/lab-bcaa": () => <BCAADiagram />,
+  "bio/lab-tryptophan": () => <TryptophanDiagram />,
+  "bio/lab-ammonia-transport": () => <AmmoniaTransportDiagram />,
+  "bio/lab-creatinine-clearance": () => <CreatinineClearanceDiagram />,
+  "bio/lab-heme-synthesis": () => <HemeSynthesisDiagram />,
+  "bio/lab-jaundice": () => <JaundiceDiagram />,
   "phys/lab-osm-why": () => <OsmWhyDiagram />,
   "phys/lab-uag": () => <UrineAnionGapDiagram />,
   "phys/lab-indices-map": () => <IndicesMapDiagram />,

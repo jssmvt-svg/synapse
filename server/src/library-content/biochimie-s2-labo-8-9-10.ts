@@ -87,6 +87,7 @@ const LAB_S2_9_COURSE = `# Labo 9 — Métabolisme des protéines : dosage de l'
 - NH₃/NH₄⁺ sont **toxiques**, notamment neurotoxiques (perturbation possible du métabolisme du glutamate/glutamine cérébral) — leur concentration sanguine doit rester très basse.
 
 ## 2. Transport et détoxification de l'ammoniac
+[[visual:bio/lab-ammonia-transport]]
 - Les acides aminés transfèrent leur groupe amine à l'α-cétoglutarate (transamination) pour former du **glutamate**, qui subit ensuite une **désamination oxydative** libérant de l'ammoniac libre pour la synthèse d'urée.
 - Formes de transport non toxiques :
   - **Cycle glucose-alanine** : le pyruvate musculaire (glycolyse) est transaminé en alanine, libérée dans le sang, captée par le foie, reconvertie en pyruvate — son groupe amine sert à la synthèse d'urée.
@@ -163,6 +164,7 @@ const LAB_S2_10_COURSE = `# Labo 10 — Métabolisme des protéines : dosage de 
 - Une clairance rénale diminuée entraîne une **augmentation de la créatinine sanguine**.
 
 ## 3. Limites de la créatinine comme marqueur de filtration glomérulaire (DFG)
+[[visual:bio/lab-creatinine-clearance]]
 - La créatinine sérique dépend fortement de la **masse musculaire**, qui varie selon l'individu (culturiste vs patient cachectique), l'**âge** (diminution de la masse musculaire), le **sexe** (masse musculaire généralement plus faible chez la femme).
 - Un **apport carné important** peut augmenter transitoirement la créatinine sérique jusqu'à **30 %** (créatinine ingérée avec la viande). Un **exercice physique intense** peut aussi provoquer une élévation transitoire modérée.
 - Deux approches pour estimer le DFG :

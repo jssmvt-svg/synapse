@@ -37,6 +37,7 @@ const LAB2_COURSE = `# Lab 2 — Unités de mesure : masse, volume et densité
 - La densité est une constante physique caractéristique d'une substance. Mesure : balance + volume pour les solides, pycnomètre pour les liquides, hydromètre pour les gaz/solutions.
 
 ## 5. Densité urinaire
+[[visual:bio/lab-urine-density]]
 - L'urine est composée d'eau et de solutés (composés azotés comme l'urée et la créatinine, ions Na⁺/K⁺/Cl⁻/HPO₄²⁻, urobilinogène, acide urique).
 - La densité urinaire (SG, specific gravity) est la densité relative à celle de l'eau pure (SG = 1,000, sans dimension).
 - Valeurs de référence et interprétation clinique :
@@ -87,6 +88,7 @@ const LAB6_COURSE = `# Lab 6 — Systèmes tampons biologiques
 - **Capacité tampon (β)** : dépend de la concentration totale du couple acide/base — plus les concentrations sont élevées, plus la capacité à absorber un ajout d'acide ou de base est grande.
 
 ## 2. Systèmes tampons biologiques du sang
+[[visual:bio/lab-blood-buffers]]
 Le pH sanguin normal est étroitement régulé à **7,35–7,45** ([H⁺] ≈ 40 nM). Quatre systèmes tampons principaux coexistent :
 
 | Système | pKa | Mécanisme / rôle |

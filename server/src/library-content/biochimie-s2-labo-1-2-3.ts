@@ -76,6 +76,7 @@ const LAB_S2_1_COURSE = `# Labo 1 — Métabolisme des glucides : dosage du gluc
 - **Tissus à forte activité PPP** : foie, tissu adipeux, corticosurrénale, gonades, glande mammaire lactante (biosynthèse réductrice) ; globules rouges et polynucléaires (défense antioxydante/immunitaire).
 
 ## 8. PPP dans les globules rouges et déficit en G6PD
+[[visual:bio/lab-g6pd-brewer]]
 - Dans les GR (dépourvus de mitochondries), la PPP est la **seule source de NADPH**, indispensable à la régénération du glutathion réduit (détoxification du H₂O₂ par la glutathion peroxydase).
 - Un déficit en **glucose-6-phosphate déshydrogénase (G6PD)** — enzymopathie la plus fréquente au monde — compromet cette protection : peroxydation lipidique membranaire, oxydation de l'hémoglobine (corps de Heinz), hémolyse. Déclencheurs : infections, médicaments oxydants (primaquine, sulfamides), fèves (favisme).
 - Le déficit en G6PD confère une résistance partielle au paludisme (Plasmodium falciparum).
@@ -241,6 +242,7 @@ const LAB_S2_3_COURSE = `# Labo 3 — Métabolisme lipidique : dosage des trigly
 - Dans l'entérocyte, les acides gras et monoacylglycérols sont reconvertis en triglycérides (activation en acyl-CoA, coût ATP), assemblés avec des apolipoprotéines en **chylomicrons** — les plus volumineuses des lipoprotéines.
 
 ## 3. Dosage des triglycérides sériques
+[[visual:bio/lab-tg-assay]]
 - Les TAG (« graisses neutres ») n'ont pas de méthode de reconnaissance directe spécifique : le dosage passe par la mesure du **glycérol** libéré après hydrolyse enzymatique.
 - **Méthode à la pyruvate kinase (lecture UV)** :
   - Triglycérides --lipase--> glycérol + acides gras
@@ -272,6 +274,7 @@ const LAB_S2_3_COURSE = `# Labo 3 — Métabolisme lipidique : dosage des trigly
 - **Rôle physiologique** : en cas de faible disponibilité en glucose, la cétogenèse épargne le glucose pour les tissus strictement glucodépendants (GR, certaines zones cérébrales).
 
 ## 5. Cétogenèse pathologique et acidocétose
+[[visual:bio/lab-ketosis-rothera]]
 - Survient quand la production hépatique de corps cétoniques dépasse la capacité d'utilisation périphérique → **cétonémie**, puis **cétonurie** au-delà du seuil rénal.
 - **Mécanisme** (déficit insulinique, ex. diabète de type 1 non contrôlé, ou jeûne prolongé) :
   1. Levée de l'inhibition insulinique de la lipolyse → libération d'acides gras libres et de glycérol.

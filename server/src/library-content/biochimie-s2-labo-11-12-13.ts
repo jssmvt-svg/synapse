@@ -10,6 +10,7 @@ const LAB_S2_11_COURSE = `# Labo 11 — Métabolisme des protéines : dosage de 
 - Dans l'hémoglobine et la myoglobine, le fer de l'hème reste sous forme **ferreuse (Fe²⁺)** tout au long du cycle de fixation/libération de l'O₂. Dans les enzymes redox et la chaîne respiratoire, il alterne entre Fe²⁺ et Fe³⁺ (ferrique).
 
 ## 2. Biosynthèse de l'hème
+[[visual:bio/lab-heme-synthesis]]
 - Le fer alimentaire est absorbé, mais le cycle porphyrine est presque entièrement synthétisé de novo. La voie est répartie entre mitochondrie (étapes initiale et finale) et cytosol (étapes intermédiaires).
 - Première réaction (mitochondriale) : la glycine forme une base de Schiff avec le pyridoxal phosphate (PLP) via l'**ALA synthase** — étape limitante, soumise à rétro-inhibition par l'hème (produit final de la voie).
 - Dernière étape : insertion du fer, catalysée par la **ferrochélatase**.
@@ -40,6 +41,7 @@ const LAB_S2_11_COURSE = `# Labo 11 — Métabolisme des protéines : dosage de 
 - **Valeurs normales** : bilirubine directe < 0,2 mg/dL ; bilirubine totale < 1,0 mg/dL ; bilirubine indirecte < 0,8 mg/dL.
 
 ## 6. L'ictère : classification clinique
+[[visual:bio/lab-jaundice]]
 Toute perturbation de la production, la conjugaison ou l'excrétion de la bilirubine entraîne une hyperbilirubinémie, cliniquement visible sous forme d'**ictère** (du français « jaune »).
 
 | Type d'ictère | Cause | Bilirubine plasmatique | Bilirubine urinaire | Urobilinogène urinaire | Selles |
@@ -202,6 +204,7 @@ const LAB_S2_13_COURSE = `# Labo 13 — Analyse métabolique intégrative et sys
 - **Cortisol et hormone de croissance** : modulent la disponibilité des substrats sur des durées plus longues.
 
 ## 5. États métaboliques et adaptations
+[[visual:bio/lab-metabolic-states]]
 - **État nourri (postprandial précoce)** : abondance de nutriments, favorise le stockage.
 - **Jeûne** : la glycogénolyse est la première source de glucose sanguin, puis la néoglucogenèse prend progressivement le relais.
 - **Jeûne prolongé/famine** : la production de corps cétoniques augmente fortement, fournissant jusqu'à **60-70 % des besoins énergétiques du cerveau**.

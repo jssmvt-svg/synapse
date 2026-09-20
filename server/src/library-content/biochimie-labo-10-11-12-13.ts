@@ -20,6 +20,7 @@ const LAB10_COURSE = `# Lab 10 — Méthodes optiques : spectrophotométrie et q
 - La relation A = f(C) n'est linéaire que dans un domaine de concentration limité : au-delà d'une certaine concentration (C > Cₗᵢₘ), la loi de Beer-Lambert n'est plus valable.
 
 ## 4. Méthodes de détermination de la concentration
+[[visual:bio/lab-conc-methods]]
 1. **Calcul direct** à partir du coefficient d'absorptivité molaire connu : C = A/(ε·L).
 2. **Référence à un standard** de concentration connue : le rapport des absorbances est égal au rapport des concentrations, donc C_échantillon = (A_échantillon / A_std) × C_std.
 3. **Courbe d'étalonnage** : plusieurs solutions standards de concentration croissante et connue sont mesurées pour tracer une droite A = f(C) ; la concentration inconnue est lue par interpolation sur cette droite.
@@ -90,6 +91,7 @@ const LAB11_COURSE = `# Lab 11 — Enzymes, cofacteurs enzymatiques et test opti
 - LDH augmentée : infarctus du myocarde, hémolyse, pancréatite, hépatite, dystrophie musculaire.
 
 ### Test optique + réaction indicatrice (transaminases)
+[[visual:bio/lab-optical-tests]]
 | Enzyme | Réaction catalysée | Tissu(s) principal(aux) |
 | --- | --- | --- |
 | GPT/ALAT (glutamate pyruvate transaminase / alanine aminotransférase) | Alanine + α-cétoglutarate ⇌ pyruvate + glutamate | Foie (surtout) |
@@ -224,6 +226,7 @@ const LAB13_COURSE = `# Lab 13 — Cinétique enzymatique : détermination de Km
 - Cette représentation linéaire facilite la détermination expérimentale précise de Km et Vmax, plus difficile à lire directement sur la courbe hyperbolique de Michaelis-Menten.
 
 ## 4. Facteurs influençant la vitesse de réaction (v₀)
+[[visual:bio/lab-enzyme-factors]]
 - **[S]** : la concentration en substrat.
 - **pH** : modifie la structure (ionisation) de l'enzyme et donc son activité.
 - **Température** : l'activité augmente avec la température jusqu'à un optimum, au-delà duquel l'enzyme se dénature.
