@@ -33,6 +33,7 @@ const LAB_S2_4_COURSE = `# Labo 4 — Métabolisme des lipides : lipoprotéines 
 | HDL | — | Foie et intestin | Transport inverse du cholestérol vers le foie (« bon cholestérol ») |
 
 ## 5. Méthodes de séparation des lipoprotéines
+[[visual:bio/lab-lipoprotein-sep]]
 - **Ultracentrifugation** : séparation selon la densité (champ ~100 000 g) ; dans un tampon de densité 1,063 g/cm³, 4 fractions : chylomicrons (d ≤ 0,96), VLDL (0,96-1,006), LDL (1,006-1,063), HDL (1,063-1,21 g/cm³).
 - **Électrophorèse** (pH 8,6) : les chylomicrons ne migrent quasiment pas (pauvres en protéines/phospholipides) ; les β-lipoprotéines correspondent aux LDL, les pré-β-lipoprotéines aux VLDL, les α-lipoprotéines aux HDL. Sur un sérum normal à jeun (8-10h), les chylomicrons sont absents et les VLDL (pré-β) ne sont présentes qu'à l'état de traces.
 - **Méthodes chimiques** : précipitation par cations divalents, polyanions ou tensioactifs. Les HDL sont isolées par précipitation au réactif phosphotungstique ; les HDL+LDL par précipitation au dodécylsulfate de sodium (SDS).
@@ -220,6 +221,7 @@ const LAB_S2_67_COURSE = `# Labo 6 & 7 — Métabolisme des protéines et des ac
 - Méthodes qualitatives/semi-quantitatives (mise en évidence d'acides aminés ou métabolites spécifiques) vs quantitatives (spectrométrie de masse, spectrophotométrie IR, HPLC) en centres spécialisés.
 
 ## 4. Métabolisme de la phénylalanine et de la tyrosine
+[[visual:bio/lab-phe-tyr]]
 - La **phénylalanine** est un acide aminé essentiel mixte (glucoformateur et cétogène). La **tyrosine** est non essentielle mais dépend entièrement de la phénylalanine pour sa formation ; en cas de déficit en Phe, la Tyr devient elle-même essentielle.
 - Formation de la Tyr : hydroxylation de la Phe par la **phénylalanine hydroxylase**, nécessitant tétrahydrobioptérine (BH₄), O₂ et NADPH. Un défaut de cette étape est la cause la plus fréquente de trouble héréditaire du métabolisme des acides aminés : la **phénylcétonurie (PCU)**.
 - Catabolisme de la Tyr : transamination → p-hydroxyphénylpyruvate → homogentisate → maleylacétoacétate → fumarylacétoacétate → **fumarate** (glucoformateur) + **acétoacétate** (cétogène).
@@ -230,6 +232,7 @@ const LAB_S2_67_COURSE = `# Labo 6 & 7 — Métabolisme des protéines et des ac
 - **Tyrosinémies** : déficits enzymatiques variés de la voie catabolique de la Tyr, manifestations neurologiques ou accumulation de métabolites toxiques (hépato-, néphro- et cancérogènes).
 
 ## 5. Métabolisme des acides aminés ramifiés (BCAA) : valine, leucine, isoleucine
+[[visual:bio/lab-bcaa]]
 - Trois acides aminés essentiels, obtenus exclusivement par l'alimentation. Devenir métabolique : **valine glucoformatrice**, **leucine cétogène**, **isoleucine mixte**.
 - Contrairement à la plupart des acides aminés, leur catabolisme n'est pas principalement hépatique mais **extrahépatique** (muscle squelettique, rein, cerveau), l'aminotransférase des BCAA ayant une faible activité hépatique — d'où leur importance énergétique musculaire lors du jeûne/de l'exercice.
 - **Voie initiale commune** : (1) transamination par la BCAT (branched-chain aminotransferase, cofacteur vitamine B₆/pyridoxal phosphate) → cétoacides ramifiés (BCKA) ; (2) décarboxylation oxydative par le complexe **BCKD** (branched-chain α-keto acid dehydrogenase) → dérivés acyl-CoA. Un déficit génétique du BCKD cause la **leucinose**.
@@ -238,6 +241,7 @@ const LAB_S2_67_COURSE = `# Labo 6 & 7 — Métabolisme des protéines et des ac
 - **Acidémie méthylmalonique** : lien clinique via l'étape propionyl-CoA → succinyl-CoA, dépendante de la vitamine B₁₂ ; un déficit en B₁₂ altère aussi la dégradation de la valine et de l'isoleucine, entraînant accumulation d'acide méthylmalonique, acidose métabolique et atteinte neurologique.
 
 ## 6. Métabolisme du tryptophane
+[[visual:bio/lab-tryptophan]]
 - Acide aminé essentiel mixte (produit glucoformateur via alanine → pyruvate, et cétogène via acétyl-CoA/acétoacétate). Précurseur de la sérotonine, de la mélatonine, de la tryptamine et du **NAD⁺** — d'où son rôle de provitamine PP (niacine) ; chez l'adulte, la conversion Trp → NAD⁺ suffit généralement aux besoins.
 - **Voie de la kynurénine** (catabolisme principal) : Trp → N-formylkynurénine (tryptophane dioxygénase) → kynurénine → alanine + acétoacétyl-CoA.
 - **Voie sérotonine/mélatonine** : Trp → 5-hydroxytryptophane (tryptophane hydroxylase, BH₄-dépendante) → **sérotonine** (décarboxylation PLP-dépendante), neurotransmetteur régulant humeur, appétit, motilité intestinale ; dans la glande pinéale, la sérotonine devient **mélatonine** (acétylation + méthylation), régulant le rythme circadien. Les repas riches en glucides favorisent la captation cérébrale du Trp (clairance des AA compétiteurs via l'insuline) et donc la synthèse de sérotonine ; les repas riches en protéines l'inhibent par compétition de transport.

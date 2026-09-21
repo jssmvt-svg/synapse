@@ -1,3 +1,8 @@
+// OBSOLETE : les cartes de structure des acides aminés (et de 100 autres
+// molécules) sont désormais définies dans server/src/library-content/
+// biochimie-molecules.ts et semées par seedLibrary. Ce script insérait des
+// cartes numérotées 100+ que seedLibrary désactive à chaque démarrage : ne plus
+// l'utiliser (il créerait des doublons inactifs).
 import "dotenv/config";
 import pg from "pg";
 import { AMINO_ACIDS, CATEGORY_LABEL_FR } from "../client/src/library-data/amino-acids";

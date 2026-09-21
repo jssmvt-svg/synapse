@@ -6,6 +6,19 @@ import { ScapulaReliefsSheet, ForearmBonesSheet, CarpusDiagram, HipBoneReliefsSh
 import { HumerusLandmarksDiagram, FemurLandmarksDiagram } from "../components/AnatBonesTP";
 import { ForearmBonesDiagram, WristJointDiagram, HipBoneDiagram, LegBonesDiagram, AnkleJointDiagram, FootMedialBonesDiagram } from "../components/AnatBonesTP2";
 import { PeritoneumSagittalDiagram, DuodenumPancreasDiagram, StomachPartsDiagram, LiverViewsDiagram, LiverCouinaudDiagram, KidneySectionDiagram, UterusAdnexaDiagram } from "../components/AnatViscera";
+import { MOLECULES } from "../library-data/molecules";
+import { MoleculeStructure } from "../components/MoleculeStructure";
+import { ClavicleScapulaDiagram, ForearmAnteriorDiagram, ForearmPosteriorDiagram, LegLateralDiagram, LegPosteriorDiagram } from "../components/AnatUpperLimbSheets";
+import { MyocyteDiagram, VentricularAPDiagram, PacemakerAPDiagram, ConductionSystemDiagram, ECGDiagram, LeadsDiagram, CardiacCycleDiagram, PVLoopDiagram, FrankStarlingDiagram, VascularBedDiagram, StarlingForcesDiagram, BaroreflexDiagram } from "../components/PhysCardio";
+import { SpirogramDiagram, GasCascadeDiagram, VQZonesDiagram, AlveolarMembraneDiagram, RespiratoryCentersDiagram, HypothalamicAxesDiagram, ThyroidDiagram, AdrenalDiagram, GlucoseDiagram, CalciumDiagram } from "../components/PhysRespEndo";
+import { GibbsDiagram, MultiSubstrateDiagram, CarbonicAnhydraseDiagram, MyosinCycleDiagram, PKADiagram, ProteaseClassesDiagram, PancreaticCascadeDiagram, ReducingSugarsDiagram, RenalGlucoseDiagram, GlutathioneDiagram, AnfinsenDiagram, MisfoldingDiagram } from "../components/BioEnzProt";
+import { VitaminADiagram, VitaminDDiagram, VitaminECDiagram, VitaminKDiagram, FolateB12Diagram, PurineDeNovoDiagram, PyrimidineDeNovoDiagram, DeoxynucleotideDiagram, SalvageDiagram, AminoAcidFateDiagram, NitrogenConvergenceDiagram } from "../components/BioVitNuc";
+import { OsmWhyDiagram, UrineAnionGapDiagram, IndicesMapDiagram, SimpleAcidBaseDiagram, HemostasisTestsDiagram, RenalCascadeDiagram, LeukoTreeDiagram, ElfoPrincipleDiagram } from "../components/PhysLabSheets";
+import { UrineDensityDiagram, BloodBuffersDiagram, ChromatographyDiagram, ConcentrationMethodsDiagram, OpticalTestsDiagram, EnzymeFactorsDiagram } from "../components/BioLabA";
+import { MetabolicStatesDiagram, G6PDBrewerDiagram, TriglycerideAssayDiagram, KetosisRotheraDiagram, LipoproteinSeparationDiagram, PheTyrDiagram, BCAADiagram, TryptophanDiagram, AmmoniaTransportDiagram, CreatinineClearanceDiagram, HemeSynthesisDiagram, JaundiceDiagram } from "../components/BioLabB";
+import { SalivaryGlandsDiagram, SalivaryRegulationDiagram, GastricGlandsDiagram, GastricPhasesDiagram, ParietalControlDiagram, IntrinsicFactorDiagram, PancreaticRegulationDiagram, BileFormationDiagram, BileRegulationDiagram, IntestinalGlandsDiagram, ColonFloraDiagram } from "../components/PhysDigestA";
+import { AbsorptionSurfaceDiagram, EnterocyteTransportDiagram, CarbDigestionDiagram, ProteinDigestionDiagram, LipidDigestionDiagram, GutWaterBalanceDiagram, MineralVitaminAbsorptionDiagram, GIControlDiagram, MasticationReflexDiagram, GastricMotilityDiagram, SmallIntestineMotilityDiagram, ColonDefecationDiagram } from "../components/PhysDigestB";
+import { HipOverviewDiagram, IliacMusclesDiagram, ThighAnteriorDiagram, ThighAdductorsDiagram, HamstringsDiagram, LegAnteriorDiagram, FootMusclesDiagram } from "../components/AnatLowerLimbSheets";
 import { HipJointDiagram, KneeJointDiagram, LegCompartmentsDiagram, LowerLimbArteriesDiagram, LowerLimbNervesDiagram, AbdominalWallDiagram } from "../components/AnatLowerTrunk";
 import { ArmCompartmentsDiagram, ForearmCompartmentsDiagram, ForearmInnervationDiagram, JointTypesDiagram, ShoulderJointDiagram, ElbowJointDiagram, HandInnervationDiagram, ShoulderMusclesDiagram, GirdleMusclesDiagram, UpperLimbArteriesDiagram, BrachialPlexusDiagram, UpperLimbNervesCourseDiagram } from "../components/AnatUpperLimb";
 import { AMINO_ACIDS } from "../library-data/amino-acids";
@@ -182,6 +195,100 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "phys/action-potential": () => <ActionPotentialDiagram />,
   "phys/excitability": () => <ExcitabilityPeriodsDiagram />,
   "phys/conduction": () => <ConductionDiagram />,
+  "phys/salivary-glands": () => <SalivaryGlandsDiagram />,
+  "phys/salivary-regulation": () => <SalivaryRegulationDiagram />,
+  "phys/gastric-glands": () => <GastricGlandsDiagram />,
+  "phys/gastric-phases": () => <GastricPhasesDiagram />,
+  "phys/parietal-control": () => <ParietalControlDiagram />,
+  "phys/intrinsic-factor": () => <IntrinsicFactorDiagram />,
+  "phys/pancreatic-regulation": () => <PancreaticRegulationDiagram />,
+  "phys/bile-formation": () => <BileFormationDiagram />,
+  "phys/bile-regulation": () => <BileRegulationDiagram />,
+  "phys/intestinal-glands": () => <IntestinalGlandsDiagram />,
+  "phys/colon-flora": () => <ColonFloraDiagram />,
+  "phys/absorption-surface": () => <AbsorptionSurfaceDiagram />,
+  "phys/enterocyte-transport": () => <EnterocyteTransportDiagram />,
+  "phys/carb-digestion": () => <CarbDigestionDiagram />,
+  "phys/protein-digestion": () => <ProteinDigestionDiagram />,
+  "phys/lipid-digestion": () => <LipidDigestionDiagram />,
+  "phys/gut-water-balance": () => <GutWaterBalanceDiagram />,
+  "phys/mineral-vitamin-absorption": () => <MineralVitaminAbsorptionDiagram />,
+  "phys/gi-control": () => <GIControlDiagram />,
+  "phys/mastication-reflex": () => <MasticationReflexDiagram />,
+  "phys/gastric-motility": () => <GastricMotilityDiagram />,
+  "phys/small-intestine-motility": () => <SmallIntestineMotilityDiagram />,
+  "phys/colon-defecation": () => <ColonDefecationDiagram />,
+  "bio/lab-urine-density": () => <UrineDensityDiagram />,
+  "bio/lab-blood-buffers": () => <BloodBuffersDiagram />,
+  "bio/lab-chrom-mechanisms": () => <ChromatographyDiagram />,
+  "bio/lab-conc-methods": () => <ConcentrationMethodsDiagram />,
+  "bio/lab-optical-tests": () => <OpticalTestsDiagram />,
+  "bio/lab-enzyme-factors": () => <EnzymeFactorsDiagram />,
+  "bio/lab-metabolic-states": () => <MetabolicStatesDiagram />,
+  "bio/lab-g6pd-brewer": () => <G6PDBrewerDiagram />,
+  "bio/lab-tg-assay": () => <TriglycerideAssayDiagram />,
+  "bio/lab-ketosis-rothera": () => <KetosisRotheraDiagram />,
+  "bio/lab-lipoprotein-sep": () => <LipoproteinSeparationDiagram />,
+  "bio/lab-phe-tyr": () => <PheTyrDiagram />,
+  "bio/lab-bcaa": () => <BCAADiagram />,
+  "bio/lab-tryptophan": () => <TryptophanDiagram />,
+  "bio/lab-ammonia-transport": () => <AmmoniaTransportDiagram />,
+  "bio/lab-creatinine-clearance": () => <CreatinineClearanceDiagram />,
+  "bio/lab-heme-synthesis": () => <HemeSynthesisDiagram />,
+  "bio/lab-jaundice": () => <JaundiceDiagram />,
+  "phys/lab-osm-why": () => <OsmWhyDiagram />,
+  "phys/lab-uag": () => <UrineAnionGapDiagram />,
+  "phys/lab-indices-map": () => <IndicesMapDiagram />,
+  "phys/lab-abb-simple": () => <SimpleAcidBaseDiagram />,
+  "phys/lab-hemostasis-tests": () => <HemostasisTestsDiagram />,
+  "phys/lab-renal-cascade": () => <RenalCascadeDiagram />,
+  "phys/lab-leuko-tree": () => <LeukoTreeDiagram />,
+  "phys/lab-elfo-principle": () => <ElfoPrincipleDiagram />,
+  "bio/gibbs": () => <GibbsDiagram />,
+  "bio/multi-substrate": () => <MultiSubstrateDiagram />,
+  "bio/carbonic-anhydrase": () => <CarbonicAnhydraseDiagram />,
+  "bio/myosin-cycle": () => <MyosinCycleDiagram />,
+  "bio/pka": () => <PKADiagram />,
+  "bio/protease-classes": () => <ProteaseClassesDiagram />,
+  "bio/pancreatic-cascade": () => <PancreaticCascadeDiagram />,
+  "bio/reducing-sugars": () => <ReducingSugarsDiagram />,
+  "bio/renal-glucose": () => <RenalGlucoseDiagram />,
+  "bio/glutathione": () => <GlutathioneDiagram />,
+  "bio/anfinsen": () => <AnfinsenDiagram />,
+  "bio/misfolding": () => <MisfoldingDiagram />,
+  "bio/vitamin-a": () => <VitaminADiagram />,
+  "bio/vitamin-d": () => <VitaminDDiagram />,
+  "bio/vitamin-e-c": () => <VitaminECDiagram />,
+  "bio/vitamin-k": () => <VitaminKDiagram />,
+  "bio/folate-b12": () => <FolateB12Diagram />,
+  "bio/purine-denovo": () => <PurineDeNovoDiagram />,
+  "bio/pyrimidine-denovo": () => <PyrimidineDeNovoDiagram />,
+  "bio/deoxynucleotides": () => <DeoxynucleotideDiagram />,
+  "bio/salvage": () => <SalvageDiagram />,
+  "bio/aa-fate": () => <AminoAcidFateDiagram />,
+  "bio/nitrogen-convergence": () => <NitrogenConvergenceDiagram />,
+  "phys/spirogram": () => <SpirogramDiagram />,
+  "phys/gas-cascade": () => <GasCascadeDiagram />,
+  "phys/vq-zones": () => <VQZonesDiagram />,
+  "phys/alveolar-membrane": () => <AlveolarMembraneDiagram />,
+  "phys/respiratory-centers": () => <RespiratoryCentersDiagram />,
+  "phys/hypothalamic-axes": () => <HypothalamicAxesDiagram />,
+  "phys/thyroid": () => <ThyroidDiagram />,
+  "phys/adrenal": () => <AdrenalDiagram />,
+  "phys/glucose-regulation": () => <GlucoseDiagram />,
+  "phys/calcium-homeostasis": () => <CalciumDiagram />,
+  "phys/myocyte": () => <MyocyteDiagram />,
+  "phys/ventricular-ap": () => <VentricularAPDiagram />,
+  "phys/pacemaker-ap": () => <PacemakerAPDiagram />,
+  "phys/conduction-system": () => <ConductionSystemDiagram />,
+  "phys/ecg-normal": () => <ECGDiagram />,
+  "phys/ecg-leads": () => <LeadsDiagram />,
+  "phys/cardiac-cycle": () => <CardiacCycleDiagram />,
+  "phys/pv-loop": () => <PVLoopDiagram />,
+  "phys/frank-starling": () => <FrankStarlingDiagram />,
+  "phys/vascular-bed": () => <VascularBedDiagram />,
+  "phys/starling-forces": () => <StarlingForcesDiagram />,
+  "phys/baroreflex": () => <BaroreflexDiagram />,
   "phys/synapse": () => <SynapseDiagram />,
   "phys/muscle-fiber": () => <MuscleFiberDiagram />,
   "phys/sarcomere": () => <SarcomereDiagram />,
@@ -203,6 +310,18 @@ const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "anat/brachial-plexus": () => <BrachialPlexusDiagram />,
   "anat/upper-limb-nerves": () => <UpperLimbNervesCourseDiagram />,
   "anat/hip-joint": () => <HipJointDiagram />,
+  "anat/clavicle-scapula": () => <ClavicleScapulaDiagram />,
+  "anat/forearm-anterior": () => <ForearmAnteriorDiagram />,
+  "anat/forearm-posterior": () => <ForearmPosteriorDiagram />,
+  "anat/leg-lateral": () => <LegLateralDiagram />,
+  "anat/leg-posterior": () => <LegPosteriorDiagram />,
+  "anat/hip-overview": () => <HipOverviewDiagram />,
+  "anat/iliac-muscles": () => <IliacMusclesDiagram />,
+  "anat/thigh-anterior": () => <ThighAnteriorDiagram />,
+  "anat/thigh-adductors": () => <ThighAdductorsDiagram />,
+  "anat/hamstrings": () => <HamstringsDiagram />,
+  "anat/leg-anterior": () => <LegAnteriorDiagram />,
+  "anat/foot-muscles": () => <FootMusclesDiagram />,
   "anat/knee-joint": () => <KneeJointDiagram />,
   "anat/leg-compartments": () => <LegCompartmentsDiagram />,
   "anat/lower-limb-arteries": () => <LowerLimbArteriesDiagram />,
@@ -297,6 +416,11 @@ export function resolveVisualKey(key: string): ReactNode | null {
     const code = key.slice("vitamin/".length);
     const vitamin = VITAMINS.find((v) => v.code === code);
     return vitamin ? <VitaminStructure vitamin={vitamin} /> : null;
+  }
+
+  if (key.startsWith("mol/")) {
+    const molecule = MOLECULES[key.slice("mol/".length)];
+    return molecule ? <MoleculeStructure smiles={molecule.smiles} /> : null;
   }
 
   if (key === "hb-quaternary") {

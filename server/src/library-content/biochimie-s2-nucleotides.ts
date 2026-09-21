@@ -10,20 +10,24 @@ const NUCLEOTIDE_SYNTHESIS_COURSE = `# Synthèse des nucléotides
 [[visual:bio/nucleotides]]
 
 ## 2. Synthèse de novo des purines
+[[visual:bio/purine-denovo]]
 - Le cycle purique est construit **progressivement directement sur le ribose-5-phosphate**, activé en **PRPP** (5-phosphoribosyl-1-pyrophosphate, par la PRPP synthétase), en utilisant la glutamine, la glycine, l'aspartate, le CO₂, et des dérivés du folate (N¹⁰-formyl-THF) comme donneurs successifs.
 - Premier nucléotide purique formé : l'**inosine monophosphate (IMP)**, converti ensuite en **AMP** ou **GMP**.
 - Étape engagée spécifiquement dans la voie purique : la **glutamine PRPP amidotransférase**, juste après la formation du PRPP.
 
 ## 3. Synthèse de novo des pyrimidines
+[[visual:bio/pyrimidine-denovo]]
 - Contrairement aux purines, l'anneau pyrimidique est construit **séparément** (à partir de **carbamoyl phosphate cytosolique**, produit par la **carbamoyl phosphate synthétase II (CPS2)**, distincte de la CPS1 mitochondriale du cycle de l'urée, et d'**aspartate**), **puis** attaché au ribose-5-phosphate (PRPP).
 - Premier nucléotide pyrimidique formé : l'**acide orotique**, converti en orotidine monophosphate (OMP) puis en **UMP** (uridine monophosphate), précurseur de tous les autres nucléotides pyrimidiques.
 - Étape limitante : la **CPS2**, régulée différemment de la CPS1 — activée par le PRPP et l'ATP, inhibée par le produit final UTP.
 
 ## 4. Formation des désoxyribonucléotides
+[[visual:bio/deoxynucleotides]]
 - La **ribonucléotide réductase** convertit les ribonucléotides diphosphate (NDP) en **désoxyribonucléotides** (dNDP), réduisant le groupe hydroxyle en position 2' du ribose ; nécessite la **thiorédoxine** comme donneur d'électrons.
 - La **thymidylate synthase** convertit le dUMP en **dTMP**, utilisant le **N⁵,N¹⁰-méthylène-THF** comme donneur de méthyle — réaction ciblée par certains chimiothérapiques comme le **5-fluorouracile**.
 
 ## 5. Voies de récupération et importance clinique
+[[visual:bio/salvage]]
 - La **HGPRT** (hypoxanthine-guanine phosphoribosyltransférase) recycle l'hypoxanthine et la guanine libres en IMP/GMP, économisant l'énergie de la synthèse de novo.
 
 | Déficit enzymatique | Transmission | Mécanisme | Conséquence clinique |

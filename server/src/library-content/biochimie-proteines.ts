@@ -79,6 +79,7 @@ Le squelette commun est H₂N–CH(R)–COOH ; seul le groupement R change d'un 
 - La liaison peptidique est non chargée, plane, à caractère de double liaison partielle : sa rotation est interdite. Les rotations φ (N–Cα) et ψ (Cα–carbonyle) déterminent la conformation ; le diagramme de Ramachandran indique les couples permis.
 
 ## 4. Peptides biologiquement importants
+[[visual:bio/glutathione]]
 - Le glutathion est le tripeptide γ-Glu–Cys–Gly. La glutathion peroxydase transforme GSH en GSSG et la glutathion réductase régénère GSH grâce au NADPH issu de la voie des pentoses phosphates.
 
 **Hormones peptidiques à connaître :**
@@ -129,6 +130,7 @@ const STRUCTURE_REVISION = `# Biochimie – Lecture 3 : Structure des protéines
 - Association de sous-unités : homodimère Cro, hémoglobine α2β2, capside du rhinovirus.
 
 ## 4. Séquence, repliement et expérience d'Anfinsen
+[[visual:bio/anfinsen]]
 - L'urée détruit les interactions non covalentes ; le β-mercaptoéthanol réduit les ponts disulfure.
 - Après retrait contrôlé des réactifs, la ribonucléase retrouve activité et structure : la séquence primaire contient l'information du repliement ; la forme native est la plus stable.
 
@@ -140,6 +142,7 @@ const STRUCTURE_REVISION = `# Biochimie – Lecture 3 : Structure des protéines
 - Les IUP n'ont pas de structure fixe sans partenaire ; les protéines métamorphiques alternent entre conformations proches en énergie.
 
 ## 6. Mauvais repliement et maladies
+[[visual:bio/misfolding]]
 - Les amyloïdoses viennent d'agrégats riches en feuillets β. Un noyau de PrPSc peut recruter et convertir la PrP normale.
 
 ## 7. Modifications post-traductionnelles et pièges

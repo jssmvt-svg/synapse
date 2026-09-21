@@ -610,6 +610,8 @@ export const api = {
       method: "POST",
       body: JSON.stringify({ optionKey }),
     }),
+  duelPlayBot: (code: string) =>
+    request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}/bot`, { method: "POST", body: "{}" }),
   duelLeave: (code: string) =>
     request<void>(`/duel/rooms/${encodeURIComponent(code)}/leave`, { method: "POST", body: "{}" }),
 };

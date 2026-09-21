@@ -32,6 +32,8 @@ const DATABASE_CONNECTION_ERROR_CODES = new Set([
   "08006",
   "08007",
   "08P01",
+  "28000",
+  "28P01",
   "57P01",
   "57P02",
   "57P03",

@@ -98,6 +98,7 @@ export interface DuelPlayer {
   lastSeen: number;
   hp: number;
   correct: number;
+  bot?: boolean;
 }
 
 interface GivenAnswer {
@@ -141,7 +142,14 @@ export interface DuelRoom {
   createdAt: number;
   rewardsSettled: boolean;
   rewards: Record<number, DuelRewards>;
+  vsBot?: boolean;
 }
+
+// Adversaire de secours quand personne d'autre n'est en ligne. Son identifiant
+// n'existe pas en base : il ne reçoit jamais de récompense.
+export const BOT_ID = -1;
+export const BOT_ACCURACY = 0.65;
+const BOT_AVATAR = "3-short-2-1-p-2";
 
 export function createRoom(
   code: string,
@@ -212,6 +220,39 @@ export function joinRoom(
   room.answers = {};
   for (const player of room.players) player.lastSeen = now;
   return null;
+}
+
+export function addBot(room: DuelRoom, questions: EngineQuestion[], now: number): string | null {
+  const error = joinRoom(room, { userId: BOT_ID, name: "Synapse Bot", avatar: BOT_AVATAR }, questions, now);
+  if (error) return error;
+  room.players[1].bot = true;
+  room.vsBot = true;
+  return null;
+}
+
+function hashOf(text: string): number {
+  let hash = 2166136261;
+  for (let i = 0; i < text.length; i += 1) {
+    hash ^= text.charCodeAt(i);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
+}
+
+// Le bot répond à un instant simulé (3 à 12 s après la question), donc le
+// résultat ne dépend pas de la fréquence des sondages.
+function botAnswerIfDue(room: DuelRoom, now: number): void {
+  const bot = room.players.find((player) => player.bot);
+  if (!bot || room.answers[bot.userId]) return;
+  const seed = hashOf(`${room.code}:${room.round}`);
+  const at = room.phaseStartedAt + 3_000 + (seed % 9_000);
+  if (now < at) return;
+  const question = room.questions[room.round];
+  if (!question) return;
+  const wrong = question.options.filter((option) => option.key !== question.correctKey);
+  const right = (seed >>> 8) % 100 < BOT_ACCURACY * 100 || wrong.length === 0;
+  const key = right ? question.correctKey : wrong[(seed >>> 16) % wrong.length].key;
+  room.answers[bot.userId] = { key, at };
 }
 
 export function touch(room: DuelRoom, userId: number, now: number): void {
@@ -359,6 +400,7 @@ export function advance(room: DuelRoom, now: number): void {
   for (let guard = 0; guard < 100; guard += 1) {
     if (room.phase === "waiting" || room.phase === "finished") return;
 
+    for (const player of room.players) if (player.bot) player.lastSeen = now;
     const absence = absenteeIfAny(room, now);
     if (absence.absent) {
       forfeit(room, absence.loserId, now);
@@ -376,6 +418,7 @@ export function advance(room: DuelRoom, now: number): void {
 
     if (room.phase === "question") {
       const end = room.phaseStartedAt + QUESTION_MS;
+      botAnswerIfDue(room, now);
       const everyoneAnswered = room.players.every((player) => room.answers[player.userId]);
       if (!everyoneAnswered && now < end) return;
       const lastAnswerAt = Math.max(...Object.values(room.answers).map((answer) => answer.at));
@@ -442,7 +485,9 @@ export function computeRewards(room: DuelRoom, userId: number): DuelRewards {
   const correct = player?.correct ?? 0;
   const bonusXp = outcome === "win" ? 20 : outcome === "draw" ? 8 : 0;
   const gold = outcome === "win" ? 20 : outcome === "draw" ? 10 : 5;
-  return { xp: 10 + correct * 2 + bonusXp, gold };
+  const xp = 10 + correct * 2 + bonusXp;
+  // Contre le bot : moitié moins, pour ne pas décourager les vrais duels.
+  return room.vsBot ? { xp: Math.floor(xp / 2), gold: Math.floor(gold / 2) } : { xp, gold };
 }
 
 export interface DuelView {

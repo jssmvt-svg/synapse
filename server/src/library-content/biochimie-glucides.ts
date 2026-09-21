@@ -11,6 +11,7 @@ const GLUCIDES_COURSE = `# Chapitre 11 — Les glucides
 - La cyclisation crée un nouveau carbone asymétrique, le **carbone anomérique** : les deux formes obtenues (α et β) sont des **anomères**.
 
 ## 2. Sucres réducteurs
+[[visual:bio/reducing-sugars]]
 - Un sucre dont le carbone anomérique est libre (non engagé dans une liaison) peut s'ouvrir et réduire un oxydant : c'est un **sucre réducteur**. Le test de Fehling/Benedict (Cu²⁺, bleu → Cu₂O, précipité rouge brique) détecte cette propriété.
 - Le glucose, le maltose et le lactose sont des sucres réducteurs ; le saccharose, dont les deux carbones anomériques sont engagés dans la liaison glycosidique, ne l'est pas.
 
@@ -63,6 +64,7 @@ La configuration β de la cellulose empêche l'organisme humain de la digérer ;
 | Acide hyaluronique | Liquide synovial, matrice extracellulaire |
 
 ## 7. Corrélations cliniques
+[[visual:bio/renal-glucose]]
 - **Hémoglobine glyquée (HbA1c)** : le glucose sanguin se fixe de façon non enzymatique et irréversible sur l'hémoglobine (glycation). Le taux d'HbA1c reflète la glycémie moyenne des ~3 derniers mois et sert au suivi du diabète.
 - **Réabsorption rénale du glucose** : le glucose filtré par le glomérule est normalement entièrement réabsorbé dans le tubule proximal. Au-delà du seuil rénal (~1,80 g/L, soit ~10 mmol/L), la capacité de réabsorption est dépassée et du glucose apparaît dans les urines (**glycosurie**), comme dans le diabète non contrôlé.
 

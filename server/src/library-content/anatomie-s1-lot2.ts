@@ -247,6 +247,7 @@ const LOWER_LIMB_MUSCLES_COURSE = `# Muscles du membre inférieur
 Les muscles du membre inférieur sont classés en 4 groupes régionaux : région iliaque, cuisse/fesse, jambe, pied.
 
 ## A. Muscles de la région iliaque
+[[visual:anat/iliac-muscles]]
 
 | Muscle | Origine | Insertion | Innervation | Action |
 | --- | --- | --- | --- | --- |
@@ -258,7 +259,7 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 [[visual:anat/thigh-compartments]]
 
 ### B.1 Muscles antérieurs de la cuisse
-[[visual:anat/thigh-muscles]]
+[[visual:anat/thigh-anterior]]
 - **Sartorius** : le plus long muscle du corps ; épine iliaque antéro-supérieure → face médiale du tibia. Nerf fémoral. Fléchit hanche et genou, adduit et fait une rotation latérale de la cuisse (position du tailleur).
 - **Quadriceps fémoral** (4 chefs, tous se terminent par le tendon quadricipital → patella → tendon patellaire → tubérosité tibiale ; tous innervés par le nerf fémoral ; tous extenseurs du genou) :
   - Droit fémoral (rectus femoris) : épine iliaque antéro-inférieure ; seul chef bi-articulaire, fléchit aussi la hanche.
@@ -266,6 +267,7 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 - **Articulaire du genou** : détaché du vaste intermédiaire ; tracte la membrane synoviale vers le haut lors de l'extension du genou.
 
 ### B.2 Muscles médiaux (adducteurs)
+[[visual:anat/thigh-adductors]]
 | Muscle | Insertion | Innervation | Particularité |
 | --- | --- | --- | --- |
 | **Gracile** | Face médiale du tibia | Branche antérieure du nerf obturateur | Seul adducteur non attaché au fémur ; adducteur + fléchisseur du genou + rotateur médial de jambe |
@@ -290,6 +292,8 @@ Les muscles du membre inférieur sont classés en 4 groupes régionaux : région
 | **Obturateur externe** | Branche postérieure du nerf obturateur | Rotateur latéral |
 
 ### B.4 Muscles ischio-jambiers (postérieurs de la cuisse)
+[[visual:anat/hamstrings]]
+[[visual:anat/thigh-muscles]]
 Caractéristiques communes : tous naissent de la tubérosité ischiatique, s'insèrent sur un os de la jambe, sont innervés par la partie tibiale du nerf sciatique, fléchissent le genou et étendent la hanche, et croisent 2 articulations (hanche et genou).
 - **Semi-tendineux** → face médiale du tibia (derrière sartorius et gracile).
 - **Semi-membraneux** → condyle médial du tibia (face postérieure).
@@ -299,18 +303,22 @@ Caractéristiques communes : tous naissent de la tubérosité ischiatique, s'ins
 [[visual:anat/leg-compartments]]
 
 ### C.a Compartiment antérieur (extenseur)
+[[visual:anat/leg-anterior]]
 Tous innervés par le nerf fibulaire profond, tous dorsi-fléchisseurs de la cheville. Tous naissent de la fibula sauf le tibial antérieur (né du tibia).
 - **Tibial antérieur** : chef dorsi-fléchisseur ; inverse aussi le pied.
 - **Long extenseur de l'hallux**, **long extenseur des orteils**, **3e fibulaire (peroneus tertius)** : dorsi-flexion ± extension des orteils ± éversion (3e fibulaire).
 
 ### C.b Compartiment latéral
+[[visual:anat/leg-lateral]]
 - **Long fibulaire** et **court fibulaire** : nerf fibulaire superficiel ; évertent le pied (le long fibulaire est le principal éverseur).
 
 ### C.c Compartiment postérieur
+[[visual:anat/leg-posterior]]
 - **Groupe superficiel** (nerf tibial) : **gastrocnémien** (2 chefs fémoraux) + **soléaire** (forment ensemble le triceps sural, tendon d'Achille → calcanéus, fléchisseurs plantaires puissants) ; **plantaire** (faible fléchisseur plantaire accessoire).
 - **Groupe profond** (nerf tibial) : **poplité** (déverrouille le genou en rotation latérale du fémur en début de flexion) ; **long fléchisseur des orteils** ; **long fléchisseur de l'hallux** ; **tibial postérieur** (inverseur principal du pied).
 
 ## D. Muscles du pied
+[[visual:anat/foot-muscles]]
 - **Extrinsèques** : tendons des muscles de jambe qui se prolongent dans le pied (éversion, inversion, flexion plantaire/dorsale).
 - **Intrinsèques** : situés dans le pied, responsables des mouvements fins des orteils ; répartis sur le **dos** du pied (court extenseur des orteils, court extenseur de l'hallux) et la **plante** du pied (muscles intrinsèques plantaires, extrinsèques et intrinsèques combinés).
 

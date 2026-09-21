@@ -79,6 +79,7 @@ const LAB8_COURSE = `# Labo 8 — Chromatographie et séparation des acides amin
 - **Selon le mécanisme d'interaction analyte/phases** : adsorption, partition, échange d'ions, exclusion stérique (gel filtration/tamis moléculaire), affinité.
 
 ## 3. Les cinq mécanismes de séparation
+[[visual:bio/lab-chrom-mechanisms]]
 
 | # | Mécanisme | Base de séparation | Phases (SP / MP) | Rémanence |
 | --- | --- | --- | --- | --- |

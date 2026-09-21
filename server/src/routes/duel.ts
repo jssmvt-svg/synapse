@@ -2,8 +2,10 @@ import { randomInt } from "node:crypto";
 import { Router } from "express";
 import { db } from "../db.js";
 import {
+  BOT_ID,
   MIN_QUESTIONS,
   QUESTION_COUNT,
+  addBot,
   advance,
   computeRewards,
   createRoom,
@@ -63,7 +65,21 @@ async function displayName(userId: number): Promise<string> {
 }
 
 // Chapitres que l'étudiant peut ouvrir (même règle d'accès que la bibliothèque).
-async function accessibleChapterIds(userId: number): Promise<Set<number>> {
+// Mis en cache 60 s : chaque calcul coûte 4 requêtes vers la base distante et
+// il est refait à chaque création ou jonction de salle.
+const ACCESS_CACHE_MS = 60_000;
+const accessCache = new Map<number, { at: number; ids: Promise<Set<number>> }>();
+
+function accessibleChapterIds(userId: number): Promise<Set<number>> {
+  const cached = accessCache.get(userId);
+  if (cached && Date.now() - cached.at < ACCESS_CACHE_MS) return cached.ids;
+  const ids = computeAccessibleChapterIds(userId);
+  accessCache.set(userId, { at: Date.now(), ids });
+  ids.catch(() => accessCache.delete(userId));
+  return ids;
+}
+
+async function computeAccessibleChapterIds(userId: number): Promise<Set<number>> {
   const [user, semesters, chapters, grants] = await Promise.all([
     db
       .prepare("SELECT role, subscription_status, subscription_period_end FROM users WHERE id = ?")
@@ -179,7 +195,7 @@ function settleRewards(room: DuelRoom): Promise<void> {
       const now = Date.now();
       for (const player of room.players) {
         const outcome = outcomeFor(room, player.userId);
-        if (!outcome || room.rewards[player.userId]) continue;
+        if (player.userId === BOT_ID || !outcome || room.rewards[player.userId]) continue;
         const rewards = computeRewards(room, player.userId);
         await db
           .prepare(
@@ -364,6 +380,18 @@ duelRouter.post("/rooms/:code/join", async (req: AuthedRequest, res) => {
   const error = await joinAndStart(room, userId, req.body?.avatar);
   if (error) return res.status(409).json({ error });
   res.json(await snapshot(room, userId));
+});
+
+// Personne en ligne : le joueur peut lancer le duel contre un bot.
+duelRouter.post("/rooms/:code/bot", async (req: AuthedRequest, res) => {
+  const room = roomFor(req);
+  if (!room) return res.status(404).json({ error: "Duel introuvable" });
+  if (room.phase === "waiting") {
+    const questions = await pickQuestions([req.userId!], room.chapterId);
+    if (questions.length < MIN_QUESTIONS) return res.status(409).json({ error: NOT_ENOUGH });
+    if (room.phase === "waiting") addBot(room, questions, Date.now());
+  }
+  res.json(await snapshot(room, req.userId!));
 });
 
 duelRouter.get("/rooms/:code", async (req: AuthedRequest, res) => {

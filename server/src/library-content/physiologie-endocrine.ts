@@ -4,6 +4,7 @@ import { single, multi } from "./qcm-helpers.js";
 const HYPOTHALAMUS_PITUITARY_THYROID_COURSE = `# Physiologie endocrinienne — Lecture 1 : hypothalamus endocrinien, hypophyse et thyroïde
 
 ## 1. L'hypothalamus endocrinien
+[[visual:phys/hypothalamic-axes]]
 - L'hypothalamus est une **aire intégrative** majeure pour les fonctions endocrines, métaboliques, végétatives et comportementales : il traite des stimuli nerveux (stress, émotions, odorat, goût, stimuli visuels, variation de température) et des composants plasmatiques, puis optimise la réponse vers les tissus cibles par voie nerveuse et humorale.
 - **Axe hypothalamo-hypophysaire** : connexion avec le lobe antérieur (adénohypophyse, via le système porte hypophysaire) et le lobe postérieur (neurohypophyse, via transport axonal direct).
 - **Quatre types de neurosécrétions hypothalamiques** :
@@ -48,6 +49,7 @@ const HYPOTHALAMUS_PITUITARY_THYROID_COURSE = `# Physiologie endocrinienne — L
 - Pendant le travail, la boucle est auto-entretenue : la dilatation du col par la tête du fœtus stimule un réflexe neurogène → OXT → contraction utérine → dilatation accrue du col (rétrocontrôle positif).
 
 ## 5. Hormones thyroïdiennes (T3 et T4)
+[[visual:phys/thyroid]]
 - La glande thyroïde, sous le larynx, a pour unité morpho-fonctionnelle le **follicule thyroïdien** ; sécrète T3/T4 (par les follicules) et la calcitonine (par les cellules C).
 - **Biosynthèse** : nécessite l'iode (150 µg/jour) ; l'iode ingéré est capté à 1/5 par la thyroïde (le reste est excrété dans les urines) ; toutes les étapes de synthèse dépendent de la TSH ; iodation de la tyrosine sur la thyroglobuline.
 - **T3 (triiodothyronine)** : 7 % du pool plasmatique, mais 4 fois plus active. **T4 (thyroxine)** : 93 % du pool ; convertie en T3 au niveau intracellulaire.
@@ -146,6 +148,7 @@ export const HYPOTHALAMUS_PITUITARY_THYROID_FLASHCARDS: LibraryCardSeed[] = [
 const ADRENAL_SEXUAL_HORMONES_COURSE = `# Physiologie endocrinienne — Lecture 2 : hormones surrénaliennes et sexuelles
 
 ## 1. Hormones glucocorticoïdes (GC)
+[[visual:phys/adrenal]]
 - Synthèse dans la zone fasciculée du cortex surrénalien ; hormones stéroïdiennes principales : **cortisol** (hydrocortisone, 95 %) et **corticostérone**, sous contrôle de l'ACTH.
 - **Mécanisme d'action** : le GC pénètre la cellule et se lie à un récepteur intracellulaire spécifique → complexe GC-récepteur agit sur le noyau (élément de réponse aux glucocorticoïdes, GRE) → stimulation ou inhibition de la transcription de l'ARNm → effet après 45-60 min (plus lent que les catécholamines, utilisées en urgence).
 - **Effets métaboliques** :
@@ -287,6 +290,7 @@ export const ADRENAL_SEXUAL_HORMONES_FLASHCARDS: LibraryCardSeed[] = [
 const PANCREAS_BONE_CALCIUM_COURSE = `# Physiologie endocrinienne — Lecture 3 : pancréas endocrine, physiologie osseuse et homéostasie phosphocalcique
 
 ## 1. Pancréas endocrine
+[[visual:phys/glucose-regulation]]
 - Les îlots de Langerhans sécrètent : cellules α → **glucagon** ; cellules β → **insuline** ; cellules δ → **somatostatine** (polypeptide pancréatique).
 
 ### 1.1 Insuline
@@ -334,6 +338,7 @@ const PANCREAS_BONE_CALCIUM_COURSE = `# Physiologie endocrinienne — Lecture 3 
 - **Phosphate total** : 4 mg % ; 85 % dans l'os, 1 % extracellulaire, 14 % intracellulaire ; système tampon phosphate alcalin/acide (1,3 mM/L) dans le plasma.
 
 ## 3. Hormones de l'homéostasie phosphocalcique
+[[visual:phys/calcium-homeostasis]]
 ### 3.1 Parathormone (PTH)
 - Synthèse : 4 glandes parathyroïdes, rétro-thyroïdiennes ; structure polypeptidique.
 - **Effet principal : ↑ calcémie**, via 3 sites : os (mobilisation Ca²⁺/phosphate → déminéralisation osseuse) ; rein (réabsorption de Ca²⁺/Mg²⁺/H⁺, excrétion de phosphate, inhibition de l'anhydrase carbonique → pH acide maintenant le Ca²⁺, stimulation de la synthèse de CTL) ; intestin (absorption de Ca²⁺, avec la CTL).

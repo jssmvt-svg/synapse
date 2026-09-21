@@ -18,6 +18,7 @@ $$C_{osm} = [Na^+ \\times 2] + \\dfrac{glucose}{18} + \\dfrac{ur\\acute{e}e}{6}$
   - **Urée** : 15 – 45 mg/dL
 
 ## 3. Pourquoi multiplier le sodium par 2 ?
+[[visual:phys/lab-osm-why]]
 - Le sodium (Na⁺) est le principal cation extracellulaire. Chaque ion Na⁺ est électriquement associé à un anion (principalement le chlorure Cl⁻) pour maintenir l'électroneutralité du plasma.
 - Multiplier la concentration de Na⁺ par 2 permet donc d'estimer la contribution osmotique totale du sodium **et** de ses anions associés, sans avoir à mesurer chaque anion séparément.
 
@@ -85,6 +86,7 @@ const IONOGRAMME_COURSE = `# TP — Ionogramme plasmatique
 - Comme pour l'osmolarité, la concentration de Na⁺ (en mEq/L) est multipliée par 2 pour représenter sa contribution osmotique totale, incluant les anions associés.
 
 ## 4. Le trou anionique urinaire (Urine Anion Gap)
+[[visual:phys/lab-uag]]
 - Utilisé dans l'évaluation de la clairance rénale et le diagnostic différentiel des acidoses métaboliques hyperchlorémiques.
 - Formule : **AG urinaire = Na⁺ − (Cl⁻ + HCO₃⁻)** (concentrations urinaires).
 - Valeur normale : **12 ± 2 mEq/L**.
@@ -140,6 +142,7 @@ const HEMATOGRAMME_COURSE = `# TP — Hématogramme (numération formule sanguin
 - L'hématocrite représente la proportion du volume sanguin occupée par les globules rouges.
 
 ## 2. Indices érythrocytaires
+[[visual:phys/lab-indices-map]]
 
 | Indice | Valeur normale | Signification |
 | --- | --- | --- |

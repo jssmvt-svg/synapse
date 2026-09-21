@@ -4,6 +4,7 @@ import { single, multi } from "./qcm-helpers.js";
 const CARDIAC_CYCLE_OUTPUT_COURSE = `# Physiologie cardiovasculaire — Lecture 5 : cycle cardiaque, bruits du cœur, débit cardiaque et circulation coronaire
 
 ## 1. Le cycle cardiaque
+[[visual:phys/cardiac-cycle]]
 - Le **cycle cardiaque** regroupe tous les événements mécaniques et électriques liés au flux sanguin à travers le cœur pendant une systole et une diastole.
 - Conditions requises pour un cycle normal : conduction normale de l'influx par le système excito-conducteur, mouvement correct des valves (AV ouvertes/sigmoïdes fermées en diastole, inverse en systole), et pressions adéquates pour déterminer le sens du flux.
 - Pressions normales : ventricule gauche 0-2 (diastole) à 120-140 mmHg (systole) ; aorte 60-80 à 120-140 mmHg ; ventricule droit 0-2 à 15-20 mmHg ; artère pulmonaire 7-12 à 15-20 mmHg.
@@ -28,6 +29,7 @@ const CARDIAC_CYCLE_OUTPUT_COURSE = `# Physiologie cardiovasculaire — Lecture 
 | Systole auriculaire | B4 | après P, avant Q |
 
 ## 2. Courbe pression-volume
+[[visual:phys/pv-loop]]
 - **Remplissage (A→B)** : de l'ouverture mitrale à sa fermeture ; augmentation du volume jusqu'au VTD, faible hausse de pression (compliance).
 - **Contraction isovolumétrique (B→C)** : volume constant (VTD), pression augmente rapidement.
 - **Éjection (C→D)** : volume diminue du VTD au VTS (VES).
@@ -136,6 +138,7 @@ export const CARDIAC_CYCLE_OUTPUT_FLASHCARDS: LibraryCardSeed[] = [
 const HEMODYNAMICS_CIRCULATION_COURSE = `# Physiologie cardiovasculaire — Lecture 6 : hémodynamique, circulation artérielle, microcirculation, circulation veineuse et lymphatique
 
 ## 1. Paramètres hémodynamiques généraux
+[[visual:phys/vascular-bed]]
 - **Pression** : diminue progressivement de l'aorte (≈100 mmHg) vers les veines caves (≈0-3 mmHg). Dans les artères : pulsatile (PAo systolique 120-135, diastolique 60-80, différentielle 40-50 mmHg, pression moyenne ≈100 mmHg). Dans les capillaires : perd son caractère pulsatile, adaptée aux échanges transcapillaires (filtration côté artériel, réabsorption côté veineux). Dans les veines : ≈12 mmHg dans les membres inférieurs, 0-3 mmHg dans les veines caves.
 - **Vélocité** : maximale dans l'aorte (33 cm/s), minimale dans les capillaires (0,3 mm/s, ×1000 plus lente, adaptée aux échanges), ré-augmente progressivement dans les veines (1/2 à 1/4 de la vélocité aortique dans la veine cave).
 - **Surface de section** : minimale dans l'aorte (2,5 cm²), maximale dans les capillaires (2500 cm², adaptée aux échanges), intermédiaire mais plus grande que l'artère correspondante dans les veines (×3-4).
@@ -174,6 +177,7 @@ const HEMODYNAMICS_CIRCULATION_COURSE = `# Physiologie cardiovasculaire — Lect
 - **Sphygmogramme artériel** : onde positive interrompue par l'incisure dicrote (fermeture aortique) ; vélocité de l'onde de pouls (15× plus rapide que le flux sanguin) : aorte 3-5 m/s, petites artères 15-35 m/s (augmente avec la rigidité pariétale, diminue avec la compliance).
 
 ## 7. Microcirculation
+[[visual:phys/starling-forces]]
 - **Composants** : artérioles (muscle lisse), méta-artérioles avec sphincters précapillaires, anastomoses artério-veineuses (rôle thermorégulateur cutané), capillaires, veinules.
 - **Types de capillaires** : continus (jonctions serrées, seuls petits solutés — cerveau) ; fenêtrés (petites ouvertures — glomérule rénal) ; discontinus (larges espaces, passage de protéines — rate, foie, intestin grêle).
 - Au repos, seuls 10-20 % des capillaires sont ouverts ; ce taux atteint 80-100 % dans le muscle squelettique actif.
@@ -310,6 +314,7 @@ const CV_NERVOUS_REGULATION_COURSE = `# Physiologie cardiovasculaire — Lecture
 - Chémorécepteurs cardiaques : fibres vagales (sensibles à la bradykinine, sérotonine, prostaglandines — réflexes coronaro-dilatateurs) et sympathiques (réflexes coronaro-constricteurs) ; impliqués dans les réflexes pathologiques de l'infarctus : **réflexe de Bezold-Jarisch** (protecteur, ↓FC/↓PA) et **réflexe de Mallians** (aggravant, ↑FC/↑PA) ; responsables de la douleur de l'angine de poitrine.
 
 ### 4.3 Barorécepteurs et chémorécepteurs du sinus carotidien et de la crosse aortique
+[[visual:phys/baroreflex]]
 - **Barorécepteurs** : stimulés par la distension pariétale (↑PA) → **réflexe dépresseur** : voie afférente IX (glosso-pharyngien, sinus carotidien) et X (vague, crosse aortique) → NTS → stimulation vagale (↓FC) + inhibition du tonus sympathique (vasodilatation, ↓RPT) → ↓PA. Les barorécepteurs carotidiens sont plus sensibles que les aortiques. L'hypertension chronique diminue leur sensibilité (recalibrage/« resetting »).
 - **Chémorécepteurs** : stimulés par ↓PO₂, ↑PCO₂, ↑H⁺ → **réflexe presseur** : voie afférente IX/X → NTS → inhibition de la zone dépressive/activation de la zone pressive → ↑FC, ↑force, vasoconstriction → ↑PA.
 

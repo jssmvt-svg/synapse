@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   ABSENCE_MS,
+  BOT_ID,
+  addBot,
   COMPLICATION_DAMAGE,
   DEFAULT_AVATAR,
   GOAL,
@@ -307,4 +309,22 @@ test("tir à la corde : deux tireurs égaux ne bougent pas la corde", () => {
   play(room, 1, () => ["A", "A"]);
   assert.equal(room.players[0].hp, 100);
   assert.equal(room.players[1].hp, 100);
+});
+
+test("le bot répond seul, reste présent et un duel contre lui va à son terme", () => {
+  const room = createRoom("BOT01", { userId: 1, name: "Moi" }, { isPublic: true, chapterId: null }, 0);
+  assert.equal(addBot(room, questions, 0), null);
+  assert.equal(room.players[1].userId, BOT_ID);
+  let now = COUNTDOWN_MS;
+  for (let step = 0; step < 400 && room.phase !== "finished"; step += 1) {
+    now += 1000;
+    touch(room, 1, now);
+    advance(room, now);
+    if (room.phase === "question" && !room.answers[1]) submitAnswer(room, 1, "A", now);
+  }
+  assert.equal(room.phase, "finished");
+  assert.notEqual(room.reason, "forfeit");
+  const full = computeRewards(room, 1);
+  room.vsBot = false;
+  assert.ok(computeRewards(room, 1).xp >= full.xp);
 });
