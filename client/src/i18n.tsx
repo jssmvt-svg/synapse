@@ -404,6 +404,8 @@ interface LangContextValue {
   tx: Tx;
   dir: "ltr" | "rtl";
   locale: string;
+  /** Légendes des schémas traduites (null pendant le chargement ; {} en français). */
+  figureLabels: Record<string, string> | null;
 }
 
 const LangContext = createContext<LangContextValue | null>(null);
@@ -420,6 +422,25 @@ export function LangProvider({ children }: { children: ReactNode }) {
     }
   };
 
+  const [figureLabels, setFigureLabels] = useState<Record<string, string> | null>(lang === "fr" ? {} : null);
+  useEffect(() => {
+    if (lang === "fr") {
+      setFigureLabels({});
+      return;
+    }
+    let cancelled = false;
+    setFigureLabels(null);
+    fetch(`/translations/figures.${lang}.json`)
+      .then((response) => (response.ok ? response.json() : {}))
+      .catch(() => ({}))
+      .then((labels) => {
+        if (!cancelled) setFigureLabels(labels as Record<string, string>);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [lang]);
+
   const dir = isRtl(lang) ? "rtl" : "ltr";
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -427,7 +448,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
   }, [lang, dir]);
 
   return (
-    <LangContext.Provider value={{ lang, setLang: updateLang, t: ALL[lang], tx: makeTx(lang), dir, locale: LOCALES[lang] }}>
+    <LangContext.Provider value={{ lang, setLang: updateLang, t: ALL[lang], tx: makeTx(lang), dir, locale: LOCALES[lang], figureLabels }}>
       {children}
     </LangContext.Provider>
   );
@@ -452,7 +473,7 @@ export function Fwd() {
 const LANG_NAMES: Record<Lang, string> = { fr: "Français", en: "English", ar: "العربية", it: "Italiano" };
 
 // Sélecteur de langue ; onChange permet de mémoriser aussi le choix côté serveur.
-export function LanguageSwitcher({ onChange }: { onChange?: (lang: Lang) => void }) {
+export function LanguageSwitcher({ onChange }: { onChange?: (lang: Lang) => void | Promise<unknown> }) {
   const { lang, setLang } = useLang();
   return (
     <div className="language-switcher" role="group" aria-label="Language">
@@ -465,8 +486,12 @@ export function LanguageSwitcher({ onChange }: { onChange?: (lang: Lang) => void
           className={lang === code ? "selected" : ""}
           aria-pressed={lang === code}
           onClick={() => {
+            if (code === lang) return;
             setLang(code);
-            onChange?.(code);
+            void Promise.resolve(onChange?.(code)).finally(() => {
+              // Le contenu des cours est traduit par le serveur : on recharge les pages qui en affichent.
+              if (!["/", "/login", "/register"].includes(window.location.pathname)) window.location.reload();
+            });
           }}
         >
           {LANG_LABELS[code]}

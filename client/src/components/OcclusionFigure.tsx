@@ -7,7 +7,7 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 // Schéma « à compléter » : les légendes courtes sont masquées par des pastilles ;
 // un clic sur une pastille révèle la légende, un bouton révèle tout ou remasque tout.
 export function OcclusionFigure({ visualKey, startHidden = false }: { visualKey: string; startHidden?: boolean }) {
-  const { lang, tx } = useLang();
+  const { lang, tx, figureLabels } = useLang();
   const ref = useRef<HTMLDivElement>(null);
   const [hidden, setHidden] = useState(startHidden);
   const [total, setTotal] = useState(0);
@@ -61,7 +61,7 @@ export function OcclusionFigure({ visualKey, startHidden = false }: { visualKey:
       covers.push(cover);
     });
     return restore;
-  }, [hidden, visualKey]);
+  }, [hidden, visualKey, figureLabels]);
 
   const node = resolveVisualKey(visualKey);
   if (!node) return null;

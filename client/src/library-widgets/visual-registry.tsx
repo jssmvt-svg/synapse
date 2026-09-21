@@ -62,7 +62,7 @@ import { GluconeogenesisDiagram, GlycolysisGluconeogenesisSwitchDiagram, FattyAc
 import { LabGlucoseTransportersDiagram, LabOgttDiagram, LabHba1cDiagram, LabLipidPanelDiagram, LabTransaminasesDiagram, LabUreaDiagram, LabCreatinineDiagram, LabBilirubinDiagram, LabUricAcidDiagram } from "../components/BioLabS2";
 
 // Schémas insérables dans un cours via [[visual:clé]] (cf. MarkdownContent).
-const COURSE_FIGURES: Record<string, () => ReactNode> = {
+export const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "bio/lab-glucose-transporters": () => <LabGlucoseTransportersDiagram />,
   "bio/lab-ogtt": () => <LabOgttDiagram />,
   "bio/lab-hba1c": () => <LabHba1cDiagram />,

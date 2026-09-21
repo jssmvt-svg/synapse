@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "react";
+import { useLang } from "../i18n";
 import { ACRONYMS } from "../library-data/acronyms";
 
 // Cadre commun des schémas de cours : SVG vectoriel original (aucun droit
@@ -15,6 +16,7 @@ export function Figure({
   children: ReactNode;
 }) {
   const figure = useRef<HTMLElement>(null);
+  const { figureLabels: labels, tx } = useLang();
   const [glossary, setGlossary] = useState<[string, string][]>([]);
   useEffect(() => {
     const svg = figure.current?.querySelector("svg");
@@ -37,10 +39,10 @@ export function Figure({
         </defs>
         {children}
       </svg>
-      <figcaption>{caption ?? title}</figcaption>
+      <figcaption>{labels?.[caption ?? title] ?? caption ?? title}</figcaption>
       {glossary.length > 0 && (
         <p className="figure-glossary">
-          <strong>Sigles :</strong> {glossary.map(([k, v]) => k + " = " + v).join(" · ")}
+          <strong>{tx("Sigles :", "Acronyms:")}</strong> {glossary.map(([k, v]) => k + " = " + (labels?.[v] ?? v)).join(" · ")}
         </p>
       )}
     </figure>

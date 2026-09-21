@@ -11,6 +11,7 @@ import { documentsRouter } from "./routes/documents.js";
 import { decksRouter } from "./routes/decks.js";
 import { duelRouter } from "./routes/duel.js";
 import { libraryRouter } from "./routes/library.js";
+import { localizeResponses } from "./translations.js";
 import { personalDeckRouter } from "./routes/personalDeck.js";
 import { seedLibrary } from "./seed-library.js";
 import { startTrialExpirySweep } from "./trialSweep.js";
@@ -35,6 +36,7 @@ app.use(
 
 app.use(express.json({ limit: "2mb" }));
 
+app.use("/api", localizeResponses);
 app.use("/api/auth", authRouter);
 app.use("/api/documents", documentsRouter);
 app.use("/api/decks", decksRouter);
