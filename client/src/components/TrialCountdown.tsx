@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLang } from "../i18n";
 
 function remainingParts(endsAt: number, now: number): { hours: number; minutes: number; seconds: number } {
   const remainingMs = Math.max(0, endsAt - now);
@@ -13,7 +14,8 @@ function pad(value: number): string {
 }
 
 /** Compte à rebours en direct jusqu'à la fin de l'essai gratuit de 48h. */
-export function TrialCountdown({ endsAt, lang }: { endsAt: number; lang: "fr" | "en" }) {
+export function TrialCountdown({ endsAt }: { endsAt: number; lang?: string }) {
+  const { tx } = useLang();
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -27,7 +29,7 @@ export function TrialCountdown({ endsAt, lang }: { endsAt: number; lang: "fr" | 
   return (
     <span className="trial-countdown">
       {ended
-        ? (lang === "fr" ? "Essai terminé" : "Trial ended")
+        ? (tx("Essai terminé", "Trial ended"))
         : `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`}
     </span>
   );

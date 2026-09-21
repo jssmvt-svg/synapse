@@ -8,7 +8,7 @@ import { useLang } from "../i18n";
 const PASSWORD_RULE = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
 
 export function Register() {
-  const { t, lang } = useLang();
+  const { t, lang, tx } = useLang();
   const { setUser } = useAuth();
   const navigate = useNavigate();
   const [firstName, setFirstName] = useState("");
@@ -32,7 +32,7 @@ export function Register() {
       return;
     }
     if (!track) {
-      setError(lang === "fr" ? "Merci de préciser ta filière." : "Please choose your track.");
+      setError(tx("Merci de préciser ta filière.", "Please choose your track."));
       return;
     }
     setBusy(true);
@@ -129,7 +129,7 @@ export function Register() {
               autoComplete="tel-national"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder={lang === "fr" ? "6 12 34 56 78" : "6 12 34 56 78"}
+              placeholder={tx("6 12 34 56 78", "6 12 34 56 78")}
               required
             />
           </div>

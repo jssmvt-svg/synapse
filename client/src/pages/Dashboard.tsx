@@ -2,13 +2,13 @@ import { useEffect, useRef, useState, type ChangeEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api, type DocumentSummary, type ProgressSummary } from "../api";
 import { useAuth } from "../auth";
-import { useLang } from "../i18n";
+import { useLang, Fwd, LanguageSwitcher } from "../i18n";
 import { libraryRoutes } from "../libraryRoutes";
 import { SearchBar } from "../components/SearchBar";
 import { TrialCountdown } from "../components/TrialCountdown";
 
 export function Dashboard() {
-  const { t, lang, setLang } = useLang();
+  const { t, lang, setLang, tx } = useLang();
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [documents, setDocuments] = useState<DocumentSummary[]>([]);
@@ -113,9 +113,7 @@ export function Dashboard() {
       {user?.role !== "admin" && user?.subscriptionStatus !== "active" && user?.subscriptionStatus !== "trialing" && (
         <div className="access-banner">
           <p className="eyebrow">{t.trialEndedBanner}</p>
-          <p>{lang === "fr"
-            ? "Contacte l'administration si tu as besoin d'un nouvel accès."
-            : "Contact the administration if you need access again."}</p>
+          <p>{tx("Contacte l'administration si tu as besoin d'un nouvel accès.", "Contact the administration if you need access again.")}</p>
         </div>
       )}
       {user?.subscriptionStatus === "trialing" && user?.trialEndsAt && (
@@ -137,31 +135,12 @@ export function Dashboard() {
             {t.libraryTitle}
           </Link>
           <Link to="/duel" className="header-nav-link">
-            🎮 {lang === "fr" ? "Jeux" : "Games"}
+            🎮 {tx("Jeux", "Games")}
           </Link>
           <Link to="/statistics" className="header-nav-link">
             {t.statistics}
           </Link>
-          <div className="language-switcher" aria-label="Language">
-            <button
-              className={lang === "fr" ? "selected" : ""}
-              onClick={() => {
-                setLang("fr");
-                api.setLang("fr").catch(() => {});
-              }}
-            >
-              FR
-            </button>
-            <button
-              className={lang === "en" ? "selected" : ""}
-              onClick={() => {
-                setLang("en");
-                api.setLang("en").catch(() => {});
-              }}
-            >
-              EN
-            </button>
-          </div>
+          <LanguageSwitcher onChange={(code) => { api.setLang(code).catch(() => {}); }} />
           <span className="user-chip">{user?.email}</span>
           <button className="logout-button" onClick={logout}>{t.logout}</button>
         </div>
@@ -176,7 +155,7 @@ export function Dashboard() {
           <p>{t.dashboardIntro}</p>
         </div>
         <Link to="/library" className="hero-library-link">
-          {t.libraryTitle} <span aria-hidden="true">→</span>
+          {t.libraryTitle} <span aria-hidden="true"><Fwd /></span>
         </Link>
       </section>
 
@@ -185,27 +164,25 @@ export function Dashboard() {
           <span className="feature-index">01</span>
           <h2>{t.dashboardFeatureCourse}</h2>
           <p>{t.dashboardFeatureCourseCopy}</p>
-          <small>{t.libraryTitle} →</small>
+          <small>{t.libraryTitle} <Fwd /></small>
         </Link>
         <Link to="/library" className="dashboard-feature-card">
           <span className="feature-index feature-index-violet">02</span>
           <h2>{t.dashboardFeatureExam}</h2>
           <p>{t.dashboardFeatureExamCopy}</p>
-          <small>{t.chapterExam} →</small>
+          <small>{t.chapterExam} <Fwd /></small>
         </Link>
         <Link to="/duel" className="dashboard-feature-card">
           <span className="feature-index feature-index-violet">🎮</span>
-          <h2>{lang === "fr" ? "Mini-jeux de révision" : "Study mini-games"}</h2>
-          <p>{lang === "fr"
-            ? "Combat, course de voitures, bloc opératoire, tir à la corde : affronte un autre étudiant en direct avec ton avatar. Gagne de l'XP et de l'or."
-            : "Fight, car race, operating room, tug of war: face another student live with your avatar. Earn XP and gold."}</p>
-          <small>{lang === "fr" ? "Jouer" : "Play"} →</small>
+          <h2>{tx("Mini-jeux de révision", "Study mini-games")}</h2>
+          <p>{tx("Combat, course de voitures, bloc opératoire, tir à la corde : affronte un autre étudiant en direct avec ton avatar. Gagne de l'XP et de l'or.", "Fight, car race, operating room, tug of war: face another student live with your avatar. Earn XP and gold.")}</p>
+          <small>{tx("Jouer", "Play")} <Fwd /></small>
         </Link>
         <Link to="/statistics" className="dashboard-feature-card">
           <span className="feature-index feature-index-warm">03</span>
           <h2>{t.dashboardFeatureStats}</h2>
           <p>{t.dashboardFeatureStatsCopy}</p>
-          <small>{t.statistics} →</small>
+          <small>{t.statistics} <Fwd /></small>
         </Link>
       </section>
 

@@ -6,7 +6,7 @@ import { SearchBar } from "../components/SearchBar";
 
 export function LibrarySemesterView() {
   const { semester } = useParams<{ semester: string }>();
-  const { lang, t } = useLang();
+  const { lang, t, tx } = useLang();
   const [detail, setDetail] = useState<StudySemesterDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -22,10 +22,10 @@ export function LibrarySemesterView() {
     return (
       <main className="library">
         <section className="access-message">
-          <p className="eyebrow">{lang === "fr" ? "Accès à la première année" : "Year one access"}</p>
-          <h1>{lang === "fr" ? "Ce semestre est verrouillé" : "This semester is locked"}</h1>
+          <p className="eyebrow">{tx("Accès à la première année", "Year one access")}</p>
+          <h1>{tx("Ce semestre est verrouillé", "This semester is locked")}</h1>
           <p>{error}</p>
-          <Link to="/dashboard" className="hero-library-link">{lang === "fr" ? "Retour à mon espace" : "Back to dashboard"}</Link>
+          <Link to="/dashboard" className="hero-library-link">{tx("Retour à mon espace", "Back to dashboard")}</Link>
         </section>
       </main>
     );
@@ -49,12 +49,12 @@ export function LibrarySemesterView() {
       </div>
       <SearchBar />
       <header className="semester-header">
-        <Link to="/library" className="back-link">{lang === "fr" ? "← Retour aux semestres" : "← Back to semesters"}</Link>
-        <p className="eyebrow">{lang === "fr" ? "Première année · UMFT" : "Year one · UMFT"}</p>
+        <Link to="/library" className="back-link">{tx("← Retour aux semestres", "← Back to semesters")}</Link>
+        <p className="eyebrow">{tx("Première année · UMFT", "Year one · UMFT")}</p>
         <h1>{title}</h1>
         <p>{description}</p>
       </header>
-      <section className="subject-grid" aria-label={lang === "fr" ? "Matières" : "Subjects"}>
+      <section className="subject-grid" aria-label={tx("Matières", "Subjects")}>
         {detail.subjects.map((subject, index) => {
           const subjectTitle = lang === "fr" ? subject.titre_fr : subject.titre_en;
           const subjectDescription = lang === "fr" ? subject.description_fr : subject.description_en;
@@ -70,9 +70,9 @@ export function LibrarySemesterView() {
               <p>{subjectDescription}</p>
               <div className="subject-card-footer">
                 <span>{subject.chapters.length
-                  ? `${subject.chapters.length} ${lang === "fr" ? "chapitres" : "chapters"}`
-                  : (lang === "fr" ? "Contenu à venir" : "Content coming soon")}</span>
-                <strong>{lang === "fr" ? "Explorer →" : "Explore →"}</strong>
+                  ? `${subject.chapters.length} ${tx("chapitres", "chapters")}`
+                  : (tx("Contenu à venir", "Content coming soon"))}</span>
+                <strong>{tx("Explorer →", "Explore →")}</strong>
               </div>
             </Link>
           );

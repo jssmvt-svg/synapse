@@ -7,8 +7,7 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 // Schéma « à compléter » : les légendes courtes sont masquées par des pastilles ;
 // un clic sur une pastille révèle la légende, un bouton révèle tout ou remasque tout.
 export function OcclusionFigure({ visualKey, startHidden = false }: { visualKey: string; startHidden?: boolean }) {
-  const { lang } = useLang();
-  const fr = lang === "fr";
+  const { lang, tx } = useLang();
   const ref = useRef<HTMLDivElement>(null);
   const [hidden, setHidden] = useState(startHidden);
   const [total, setTotal] = useState(0);
@@ -72,10 +71,10 @@ export function OcclusionFigure({ visualKey, startHidden = false }: { visualKey:
     <div className={hidden ? "occlusion is-hidden" : "occlusion"}>
       <div className="occlusion-bar">
         <button type="button" className="nav-secondary" onClick={() => setHidden((h) => !h)}>
-          {hidden ? (fr ? "👁 Tout révéler" : "👁 Reveal all") : (fr ? "🧩 Masquer les légendes (me tester)" : "🧩 Hide labels (test me)")}
+          {hidden ? (tx("👁 Tout révéler", "👁 Reveal all")) : (tx("🧩 Masquer les légendes (me tester)", "🧩 Hide labels (test me)"))}
         </button>
         {hidden && total > 0 && (
-          <span className="hint">{fr ? `Clique sur une pastille pour voir la réponse · ${found}/${total}` : `Click a tag to reveal · ${found}/${total}`}</span>
+          <span className="hint">{tx("Clique sur une pastille pour voir la réponse", "Click a tag to reveal")} · {found}/{total}</span>
         )}
       </div>
       <div ref={ref}>{node}</div>

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, type Flashcard } from "../api";
-import { useLang } from "../i18n";
+import { useLang, Back } from "../i18n";
 
 export function DeckView() {
   const { id } = useParams<{ id: string }>();
@@ -37,7 +37,7 @@ export function DeckView() {
 
   return (
     <div className="deck-view">
-      <Link to="/dashboard">← {t.dashboard}</Link>
+      <Link to="/dashboard"><Back /> {t.dashboard}</Link>
       <p className="card-progress">{t.cardProgress(index + 1, cards.length)}</p>
       <div className="flashcard" onClick={() => setFlipped((f) => !f)}>
         <p>{flipped ? answer : question}</p>

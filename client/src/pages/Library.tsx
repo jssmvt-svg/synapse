@@ -7,7 +7,7 @@ import { SearchBar } from "../components/SearchBar";
 import { libraryRoutes } from "../libraryRoutes";
 
 export function Library() {
-  const { t, lang } = useLang();
+  const { t, lang, tx } = useLang();
   const { user } = useAuth();
   const [semesters, setSemesters] = useState<StudySemester[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -33,16 +33,14 @@ export function Library() {
           <Link to="/dashboard">{t.dashboard}</Link>
           <Link to={libraryRoutes.catalogue} className="active">{t.libraryTitle}</Link>
           <Link to="/statistics">{t.statistics}</Link>
-          {user?.role === "admin" && <Link to="/admin">{lang === "fr" ? "Administration" : "Admin"}</Link>}
+          {user?.role === "admin" && <Link to="/admin">{tx("Administration", "Admin")}</Link>}
         </nav>
       </div>
       <SearchBar />
       <header className="library-header">
         <p className="eyebrow">{t.libraryEyebrow}</p>
         <h1>{t.libraryTitle}</h1>
-        <p>{lang === "fr"
-          ? "Première année UMFT : choisis ton semestre, puis avance à ton rythme dans chaque matière."
-          : "UMFT year one: choose your semester, then progress through every subject at your own pace."}</p>
+        <p>{tx("Première année UMFT : choisis ton semestre, puis avance à ton rythme dans chaque matière.", "UMFT year one: choose your semester, then progress through every subject at your own pace.")}</p>
       </header>
 
       <section className="semester-grid" aria-label={t.libraryTitle}>
@@ -57,16 +55,16 @@ export function Library() {
               className={`semester-card ${semester.has_access ? "semester-card-open" : "semester-card-locked"}`}
             >
               <span className="semester-card-number">0{semester.semester_number}</span>
-              <span className="semester-card-kicker">{lang === "fr" ? "Première année" : "Year one"}</span>
+              <span className="semester-card-kicker">{tx("Première année", "Year one")}</span>
               <h2>{title}</h2>
               <p>{description}</p>
               <div className="semester-card-footer">
-                <span>{semester.subject_count} {lang === "fr" ? "matières" : "subjects"} · {semester.chapter_count} {lang === "fr" ? "chapitres" : "chapters"}</span>
+                <span>{semester.subject_count} {tx("matières", "subjects")} · {semester.chapter_count} {tx("chapitres", "chapters")}</span>
                 <strong>{semester.has_access
-                  ? (lang === "fr" ? "Ouvrir le semestre →" : "Open semester →")
+                  ? (tx("Ouvrir le semestre →", "Open semester →"))
                   : (semester.is_published
-                    ? (lang === "fr" ? "Accès requis →" : "Access required →")
-                    : (lang === "fr" ? "Bientôt disponible" : "Coming soon"))}</strong>
+                    ? (tx("Accès requis →", "Access required →"))
+                    : (tx("Bientôt disponible", "Coming soon")))}</strong>
               </div>
             </Link>
           );

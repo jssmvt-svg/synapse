@@ -6,14 +6,13 @@ import { libraryRoutes } from "../libraryRoutes";
 
 // Barre de recherche : tape un mot, obtiens les cours correspondants.
 export function SearchBar() {
-  const { lang } = useLang();
+  const { lang, tx } = useLang();
   const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<LibrarySearchResult[]>([]);
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const box = useRef<HTMLDivElement>(null);
-  const fr = lang === "fr";
 
   useEffect(() => {
     if (query.trim().length < 2) {
@@ -45,20 +44,20 @@ export function SearchBar() {
       <input
         type="search"
         value={query}
-        placeholder={fr ? "🔍 Rechercher un mot dans les cours…" : "🔍 Search a word in the courses…"}
+        placeholder={tx("🔍 Rechercher un mot dans les cours…", "🔍 Search a word in the courses…")}
         onChange={(e) => { setQuery(e.target.value); setOpen(true); }}
         onFocus={() => setOpen(true)}
-        aria-label={fr ? "Rechercher" : "Search"}
+        aria-label={tx("Rechercher", "Search")}
       />
       {open && query.trim().length >= 2 && (
         <div className="search-results">
           {loading && <p className="search-empty">…</p>}
-          {!loading && results.length === 0 && <p className="search-empty">{fr ? "Aucun résultat" : "No result"}</p>}
+          {!loading && results.length === 0 && <p className="search-empty">{tx("Aucun résultat", "No result")}</p>}
           {results.map((r, i) => (
             <button type="button" key={`${r.chapterId}-${r.resourceId}-${i}`} onClick={() => go(r)}>
               <small>S{r.semestre} · {r.matiere}</small>
-              <strong>{fr ? r.titre_fr : r.titre_en || r.titre_fr}</strong>
-              {r.resource_titre_fr && <em>{fr ? r.resource_titre_fr : r.resource_titre_en || r.resource_titre_fr}</em>}
+              <strong>{lang === "fr" ? r.titre_fr : r.titre_en || r.titre_fr}</strong>
+              {r.resource_titre_fr && <em>{lang === "fr" ? r.resource_titre_fr : r.resource_titre_en || r.resource_titre_fr}</em>}
               {r.snippet && <span>{r.snippet}</span>}
             </button>
           ))}

@@ -796,7 +796,7 @@ function ChemistryGallery({
   renderCard: (card: Card, color: string, english: boolean) => ReactNode;
 }) {
   const { lang } = useLang();
-  const english = lang === "en";
+  const english = lang !== "fr";
   return (
     <section className="chem-gallery learning-panel" aria-labelledby={`${id}-title`}>
       <div className="chem-gallery-heading">

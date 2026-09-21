@@ -1,9 +1,9 @@
 import { db } from "./db.js";
 
-type EmailLang = "fr" | "en";
+type EmailLang = "fr" | "en"; // arabe et italien : e-mails en anglais
 
 function normEmailLang(lang: string | null | undefined): EmailLang {
-  return lang === "en" ? "en" : "fr";
+  return lang === "ar" || lang === "it" || lang === "en" ? "en" : "fr";
 }
 
 function appUrl(): string {

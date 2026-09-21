@@ -1,3 +1,4 @@
+import type { Lang } from "./i18n";
 const TOKEN_KEY = "synapse_token";
 
 export function getToken(): string | null {
@@ -36,7 +37,7 @@ export type Track = "medecine" | "dentaire";
 export interface User {
   id: number;
   email: string;
-  langPref: "fr" | "en";
+  langPref: Lang;
   role: "student" | "admin";
   firstName?: string;
   lastName?: string;
@@ -55,7 +56,7 @@ export interface RegisterInput {
   phoneCountryCode: string;
   phoneNumber: string;
   track: Track;
-  langPref: "fr" | "en";
+  langPref: Lang;
 }
 
 export interface DocumentSummary {
@@ -491,7 +492,7 @@ export const api = {
       body: JSON.stringify({ email, password }),
     }),
   me: () => request<User>("/auth/me"),
-  setLang: (langPref: "fr" | "en") =>
+  setLang: (langPref: Lang) =>
     request<{ langPref: string }>("/auth/lang", {
       method: "PATCH",
       body: JSON.stringify({ langPref }),

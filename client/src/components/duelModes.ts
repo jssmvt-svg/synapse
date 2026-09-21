@@ -101,8 +101,8 @@ export function saveMode(mode: GameMode): void {
 }
 
 export function useCopy() {
-  const { lang } = useLang();
-  return (fr: string, en: string) => (lang === "fr" ? fr : en);
+  const { tx } = useLang();
+  return tx;
 }
 
 // Délai avant que l'adversaire encaisse le coup : le temps que l'attaque

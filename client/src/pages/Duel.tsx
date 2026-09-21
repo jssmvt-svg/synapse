@@ -24,7 +24,7 @@ import {
   type GameMode,
 } from "../components/duelModes";
 import { PixelFighter } from "../components/PixelFighter";
-import { useLang } from "../i18n";
+import { useLang, bi, Back } from "../i18n";
 import "../duel.css";
 import "../duelModes.css";
 
@@ -98,7 +98,7 @@ function AvatarEditor({ code, onChange }: { code: string; onChange: (code: strin
           <div className="duel-chips" role="group" aria-label={l("Coiffure", "Hair")}>
             {HAIR_STYLES.map((hair) => (
               <button key={hair} type="button" className="duel-chip" aria-pressed={hair === config.hair} onClick={() => update({ hair })}>
-                {HAIR_LABELS[hair][lang]}
+                {bi(HAIR_LABELS[hair], lang)}
               </button>
             ))}
           </div>
@@ -188,11 +188,11 @@ function Lobby() {
   const levelProgress = profile ? profile.xp % 100 : 0;
   const selectedMode = modeInfo(mode);
   const info = avatarInfo(avatarCode);
-  const moveNames = selectedMode.moves ? selectedMode.moves.map((move) => move[lang]) : [...info.attacks];
+  const moveNames = selectedMode.moves ? selectedMode.moves.map((move) => bi(move, lang)) : [...info.attacks];
 
   return (
     <main className="duel-page">
-      <Link to="/dashboard" className="duel-back">← {l("Tableau de bord", "Dashboard")}</Link>
+      <Link to="/dashboard" className="duel-back"><Back /> {l("Tableau de bord", "Dashboard")}</Link>
 
       <header className="duel-hero">
         <p className="eyebrow">{l("Mini-jeux de révision", "Study mini-games")}</p>
@@ -210,8 +210,8 @@ function Lobby() {
           <li key={entry.id}>
             <button className="duel-mode-card" aria-pressed={entry.id === mode} onClick={() => chooseMode(entry.id)}>
               <span className="duel-mode-icon" aria-hidden="true">{entry.icon}</span>
-              <strong>{entry.name[lang]}</strong>
-              <span className="duel-muted">{entry.tagline[lang]}</span>
+              <strong>{bi(entry.name, lang)}</strong>
+              <span className="duel-muted">{bi(entry.tagline, lang)}</span>
             </button>
           </li>
         ))}
@@ -535,10 +535,10 @@ function Arena({ code }: { code: string }) {
     <main className="duel-page">
       <div className="duel-topbar">
         <button className="duel-link-button" onClick={leave}>
-          ← {state.phase === "finished" ? l("Quitter", "Leave") : state.phase === "waiting" ? l("Annuler", "Cancel") : l("Abandonner", "Forfeit")}
+          <Back /> {state.phase === "finished" ? l("Quitter", "Leave") : state.phase === "waiting" ? l("Annuler", "Cancel") : l("Abandonner", "Forfeit")}
         </button>
         <span className="duel-round">
-          {meta.icon} {meta.name[lang]}
+          {meta.icon} {bi(meta.name, lang)}
           {state.phase === "question" || state.phase === "reveal" ? ` · ${state.round + 1}/${state.totalRounds}` : ""}
         </span>
       </div>

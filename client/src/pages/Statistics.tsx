@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api, type ProgressSummary } from "../api";
-import { useLang } from "../i18n";
+import { useLang, Fwd } from "../i18n";
 
 function percentage(value: number): string {
   return `${Math.round(value)}%`;
@@ -83,7 +83,7 @@ export function Statistics() {
             <p className="eyebrow">{t.progressOverview}</p>
             <h2>{t.statsByChapter}</h2>
           </div>
-          <Link to="/library" className="hero-library-link">{t.continueStudying} →</Link>
+          <Link to="/library" className="hero-library-link">{t.continueStudying} <Fwd /></Link>
         </div>
 
         <div className="statistics-chapters">
@@ -101,7 +101,7 @@ export function Statistics() {
                     <h3>{text(chapter.titre_fr, chapter.titre_en)}</h3>
                   </div>
                   <Link to={`/library/chapter/${chapter.id}`} className="text-button">
-                    {t.viewChapter} →
+                    {t.viewChapter} <Fwd />
                   </Link>
                 </div>
                 <div className="chapter-stat-line">

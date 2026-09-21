@@ -1,7 +1,8 @@
+import type { Lang } from "../i18n";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, type LibrarySubject, type StudySemesterDetail } from "../api";
-import { useLang } from "../i18n";
+import { useLang, Fwd } from "../i18n";
 import { SearchBar } from "../components/SearchBar";
 import { libraryRoutes } from "../libraryRoutes";
 
@@ -9,7 +10,7 @@ type ChapterSection = "cours" | "laboratoire";
 
 export function LibrarySubjectView() {
   const { slug, semester } = useParams<{ slug: string; semester?: string }>();
-  const { t, lang } = useLang();
+  const { t, lang, tx } = useLang();
   const [subject, setSubject] = useState<LibrarySubject | null>(null);
   const [semesterDetail, setSemesterDetail] = useState<StudySemesterDetail | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -64,7 +65,7 @@ export function LibrarySubjectView() {
       <header className={`subject-header subject-header-${subject.accent}`}>
         <Link to={semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue} className="back-link">
           {semesterDetail
-            ? (lang === "fr" ? "← Retour aux matières" : "← Back to subjects")
+            ? (tx("← Retour aux matières", "← Back to subjects"))
             : t.backToSubjects}
         </Link>
         <p className="eyebrow">{t.libraryTitle}</p>
@@ -78,7 +79,7 @@ export function LibrarySubjectView() {
           <h2>{t.subjectEmptyTitle}</h2>
           <p>{t.subjectEmptyCopy(title)}</p>
           <Link to={semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue} className="hero-library-link">
-            {semesterDetail ? (lang === "fr" ? "Retour aux matières" : "Back to subjects") : t.backToSubjects}
+            {semesterDetail ? (tx("Retour aux matières", "Back to subjects")) : t.backToSubjects}
           </Link>
         </section>
       ) : activeSection === null ? (
@@ -105,7 +106,7 @@ function SubjectSectionPicker({
   chapters: LibrarySubject["chapters"];
   onSelect: (section: ChapterSection) => void;
 }) {
-  const { t } = useLang();
+  const { t, tx } = useLang();
   const coursCount = chapters.filter((chapter) => (chapter.section ?? "cours") === "cours").length;
   const laboCount = chapters.filter((chapter) => chapter.section === "laboratoire").length;
 
@@ -121,13 +122,13 @@ function SubjectSectionPicker({
           <span className="chapter-number">{String(coursCount).padStart(2, "0")}</span>
           <h3>{t.sectionCours}</h3>
           <p>{t.sectionCoursCopy}</p>
-          <small>{t.subjectExplore} →</small>
+          <small>{t.subjectExplore} <Fwd /></small>
         </button>
         <button type="button" className="subject-section-card" onClick={() => onSelect("laboratoire")}>
           <span className="chapter-number">{String(laboCount).padStart(2, "0")}</span>
           <h3>{t.sectionLaboratoires}</h3>
           <p>{t.sectionLaboratoiresCopy}</p>
-          <small>{t.subjectExplore} →</small>
+          <small>{t.subjectExplore} <Fwd /></small>
         </button>
       </div>
     </section>
@@ -142,10 +143,10 @@ function SectionChapterGrid({
 }: {
   chapters: LibrarySubject["chapters"];
   section: ChapterSection;
-  lang: "fr" | "en";
+  lang: Lang;
   onBack: () => void;
 }) {
-  const { t } = useLang();
+  const { t, tx } = useLang();
 
   return (
     <section aria-labelledby="subject-chapters-heading">
@@ -172,7 +173,7 @@ function SectionChapterGrid({
               </span>
               <h3>{lang === "fr" ? chapter.titre_fr : chapter.titre_en}</h3>
               <p>{lang === "fr" ? chapter.description_fr : chapter.description_en}</p>
-              <small>{t.subjectOpenChapter} →</small>
+              <small>{t.subjectOpenChapter} <Fwd /></small>
             </Link>
           ))}
         </div>

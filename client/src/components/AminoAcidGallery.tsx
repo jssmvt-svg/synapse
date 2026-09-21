@@ -169,7 +169,7 @@ function Molecule({ code, color, name }: { code: string; color: string; name: st
 
 export function AminoAcidGallery() {
   const { lang } = useLang();
-  const isEnglish = lang === "en";
+  const isEnglish = lang !== "fr";
   return (
     <section className="amino-gallery learning-panel" aria-labelledby="amino-gallery-title">
       <div className="amino-gallery-heading">

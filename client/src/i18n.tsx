@@ -1,6 +1,17 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { ar } from "./i18n-ar";
+import { it } from "./i18n-it";
+import { PHRASES } from "./i18n-phrases";
 
-export type Lang = "fr" | "en";
+export type Lang = "fr" | "en" | "ar" | "it";
+export const LANGS: Lang[] = ["fr", "en", "ar", "it"];
+export const LANG_LABELS: Record<Lang, string> = { fr: "FR", en: "EN", ar: "عربي", it: "IT" };
+export const LOCALES: Record<Lang, string> = { fr: "fr-FR", en: "en-GB", ar: "ar-SA", it: "it-IT" };
+
+// Un dictionnaire = les clés du français ; les fonctions gardent leurs paramètres.
+export type Dict = {
+  [K in keyof (typeof DICT)["fr"]]: (typeof DICT)["fr"][K] extends (...args: infer A) => string ? (...args: A) => string : string;
+};
 
 const DICT = {
   fr: {
@@ -355,28 +366,68 @@ const DICT = {
     dashboardFeatureStats: "Statistics",
     dashboardFeatureStatsCopy: "Track your progress and find the activities that deserve another review.",
   },
-} as const;
+};
+
+const ALL: Record<Lang, Dict> = { fr: DICT.fr as Dict, en: DICT.en as Dict, ar, it };
+
+function readStoredLang(): Lang {
+  try {
+    const stored = localStorage.getItem("synapse_lang");
+    if (stored && (LANGS as string[]).includes(stored)) return stored as Lang;
+  } catch {
+    /* stockage indisponible */
+  }
+  return "fr";
+}
+
+// Contenu des cours : disponible en français et en anglais seulement (arabe et italien retombent sur l'anglais).
+export type ContentLang = "fr" | "en";
+export const contentLang = (lang: Lang): ContentLang => (lang === "fr" ? "fr" : "en");
+
+// Objet { fr, en } : arabe / italien via PHRASES (clé = texte français), sinon anglais.
+export function bi(text: { fr: string; en: string }, lang: Lang): string {
+  return lang === "fr" ? text.fr : lang === "en" ? text.en : PHRASES[text.fr]?.[lang] ?? text.en;
+}
+
+export const isRtl = (lang: Lang) => lang === "ar";
+
+// Texte isolé : tx(français, anglais). Arabe et italien viennent de i18n-phrases ; à défaut, l'anglais.
+export type Tx = (fr: string, en: string) => string;
+export function makeTx(lang: Lang): Tx {
+  return (fr, en) => (lang === "fr" ? fr : lang === "en" ? en : PHRASES[fr]?.[lang] ?? en);
+}
 
 interface LangContextValue {
   lang: Lang;
   setLang: (lang: Lang) => void;
-  t: (typeof DICT)["fr"] | (typeof DICT)["en"];
+  t: Dict;
+  tx: Tx;
+  dir: "ltr" | "rtl";
+  locale: string;
 }
 
 const LangContext = createContext<LangContextValue | null>(null);
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>(
-    (localStorage.getItem("synapse_lang") as Lang | null) ?? "fr",
-  );
+  const [lang, setLang] = useState<Lang>(readStoredLang);
 
   const updateLang = (next: Lang) => {
     setLang(next);
-    localStorage.setItem("synapse_lang", next);
+    try {
+      localStorage.setItem("synapse_lang", next);
+    } catch {
+      /* ignoré */
+    }
   };
 
+  const dir = isRtl(lang) ? "rtl" : "ltr";
+  useEffect(() => {
+    document.documentElement.lang = lang;
+    document.documentElement.dir = dir;
+  }, [lang, dir]);
+
   return (
-    <LangContext.Provider value={{ lang, setLang: updateLang, t: DICT[lang] }}>
+    <LangContext.Provider value={{ lang, setLang: updateLang, t: ALL[lang], tx: makeTx(lang), dir, locale: LOCALES[lang] }}>
       {children}
     </LangContext.Provider>
   );
@@ -386,4 +437,41 @@ export function useLang(): LangContextValue {
   const ctx = useContext(LangContext);
   if (!ctx) throw new Error("useLang must be used within LangProvider");
   return ctx;
+}
+
+// Flèches de navigation : inversées en lecture de droite à gauche.
+export function Back() {
+  const { dir } = useLang();
+  return <>{dir === "rtl" ? "→" : "←"}</>;
+}
+export function Fwd() {
+  const { dir } = useLang();
+  return <>{dir === "rtl" ? "←" : "→"}</>;
+}
+
+const LANG_NAMES: Record<Lang, string> = { fr: "Français", en: "English", ar: "العربية", it: "Italiano" };
+
+// Sélecteur de langue ; onChange permet de mémoriser aussi le choix côté serveur.
+export function LanguageSwitcher({ onChange }: { onChange?: (lang: Lang) => void }) {
+  const { lang, setLang } = useLang();
+  return (
+    <div className="language-switcher" role="group" aria-label="Language">
+      {LANGS.map((code) => (
+        <button
+          key={code}
+          type="button"
+          lang={code}
+          title={LANG_NAMES[code]}
+          className={lang === code ? "selected" : ""}
+          aria-pressed={lang === code}
+          onClick={() => {
+            setLang(code);
+            onChange?.(code);
+          }}
+        >
+          {LANG_LABELS[code]}
+        </button>
+      ))}
+    </div>
+  );
 }

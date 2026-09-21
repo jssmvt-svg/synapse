@@ -1,6 +1,7 @@
+import type { Lang } from "../i18n";
 import { type CSSProperties, type ReactNode } from "react";
 import type { DuelState } from "../api";
-import { useLang } from "../i18n";
+import { useLang, bi } from "../i18n";
 import { attackTierForStreak, avatarInfo, type AvatarInfo } from "./avatars";
 import { buildSprite, SKIN_TONES } from "./avatarSprite";
 import { modeInfo, useCopy, type GameMode } from "./duelModes";
@@ -95,10 +96,10 @@ function Hint({ mode, info, streak }: { mode: GameMode; info: AvatarInfo; streak
   const { lang } = useLang();
   const meta = modeInfo(mode);
   const tier = attackTierForStreak(streak + 1);
-  const name = meta.moves ? meta.moves[tier - 1][lang] : info.attacks[tier - 1];
+  const name = meta.moves ? bi(meta.moves[tier - 1], lang) : info.attacks[tier - 1];
   return (
     <p className="duel-hint">
-      {meta.nextLabel[lang]} : <strong style={{ color: info.glow }}>{name}</strong>
+      {bi(meta.nextLabel, lang)} : <strong style={{ color: info.glow }}>{name}</strong>
       {tier > 1 && <span className="duel-hint-tier"> {tier === 3 ? "★★" : "★"}</span>}
     </p>
   );
@@ -144,9 +145,9 @@ function Banners({ state, remainingSeconds }: { state: DuelState; remainingSecon
   );
 }
 
-function moveText(mode: GameMode, info: AvatarInfo, tier: number, lang: "fr" | "en"): string {
+function moveText(mode: GameMode, info: AvatarInfo, tier: number, lang: Lang): string {
   const meta = modeInfo(mode);
-  return meta.moves ? meta.moves[tier - 1][lang] : info.attacks[tier - 1];
+  return meta.moves ? bi(meta.moves[tier - 1], lang) : info.attacks[tier - 1];
 }
 
 /* ---------- Combat ---------- */
@@ -390,7 +391,7 @@ function OpSide({
       <ol className="op-steps" aria-label={l("Étapes de l'opération", "Operation steps")}>
         {STEPS.map((step, index) => (
           <li key={step.fr} data-state={progress >= (index + 1) * 20 ? "done" : progress >= index * 20 ? "current" : "todo"}>
-            {step[lang]}
+            {bi(step, lang)}
           </li>
         ))}
       </ol>

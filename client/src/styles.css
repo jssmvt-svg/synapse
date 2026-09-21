@@ -2745,7 +2745,7 @@ select:focus {
 .prearrival-steps li { display: flex; align-items: center; gap: 0.7rem; padding: 0.72rem 0; border-bottom: 1px solid rgba(255,255,255,0.15); }
 .prearrival-steps strong { color: #ffbf7b; font-size: 0.78rem; }
 .prearrival-steps span { font-weight: 750; }
-.prearrival-section .landing-outline { grid-column: 2; justify-self: start; border-color: rgba(255,255,255,0.45); color: #fff; }
+.prearrival-section .landing-outline { grid-column: 2; justify-self: start; border-color: rgba(255,255,255,0.45); color: #fff; background: rgba(255,255,255,0.12); }
 
 @media (max-width: 760px) {
   .semester-grid { grid-template-columns: 1fr; }
@@ -4133,3 +4133,33 @@ select:focus {
 .molecule-figure {
   width: 100%;
 }
+
+/* Témoignage de la créatrice (page d'accueil) */
+.landing-story {
+  width: min(100% - 2rem, 1040px);
+  margin: 2.5rem auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  border: 1px solid #d8e3fa;
+  border-radius: 20px;
+  background: linear-gradient(115deg, #fbf9ff, #edf4ff);
+}
+.landing-story h2 { margin: 0 0 0.8rem; color: #273d83; font-size: 1.5rem; letter-spacing: -0.04em; }
+.landing-story blockquote { margin: 0; padding-inline-start: 1rem; border-inline-start: 3px solid #5b6ee1; color: #4a5a78; line-height: 1.7; }
+.story-scores { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.story-scores li { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; padding: 0.9rem 0.4rem; border-radius: 14px; background: #fff; border: 1px solid #d8e3fa; text-align: center; }
+.story-scores strong { color: #2f62e8; font-size: 1.5rem; letter-spacing: -0.03em; }
+.story-scores span { color: #60708a; font-size: 0.78rem; }
+@media (max-width: 760px) {
+  .landing-story { grid-template-columns: 1fr; padding: 1.4rem; }
+}
+
+/* Langues : arabe (lecture de droite à gauche) */
+html[lang="ar"] body { font-family: "Segoe UI", Tahoma, "Noto Sans Arabic", system-ui, sans-serif; }
+html[dir="rtl"] input[type="email"],
+html[dir="rtl"] input[type="tel"],
+html[dir="rtl"] input[type="password"] { direction: ltr; text-align: right; }
+.language-switcher button { white-space: nowrap; }

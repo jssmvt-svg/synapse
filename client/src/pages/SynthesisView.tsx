@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { api, type Synthesis } from "../api";
-import { useLang } from "../i18n";
+import { useLang, Back } from "../i18n";
 import { MarkdownContent } from "../components/MarkdownContent";
 
 export function SynthesisView() {
@@ -25,7 +25,7 @@ export function SynthesisView() {
 
   return (
     <div className="synthesis-view">
-      <Link to="/dashboard">← {t.dashboard}</Link>
+      <Link to="/dashboard"><Back /> {t.dashboard}</Link>
       <div className="synthesis-content">
         <MarkdownContent content={content} />
       </div>

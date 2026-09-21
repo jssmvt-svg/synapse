@@ -16,6 +16,10 @@ import {
   normalizeName,
 } from "../validation.js";
 
+const SUPPORTED_LANGS = ["fr", "en", "ar", "it"] as const;
+const isSupportedLang = (value: unknown): value is (typeof SUPPORTED_LANGS)[number] => SUPPORTED_LANGS.some((lang) => lang === value);
+const normalizeLang = (value: unknown) => (isSupportedLang(value) ? value : "fr");
+
 export const authRouter = Router();
 
 const authLimiter = rateLimit({
@@ -77,7 +81,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
 
   const passwordHash = await bcrypt.hash(password, 12);
   const sessionToken = randomUUID();
-  const lang = langPref === "en" ? "en" : "fr";
+  const lang = normalizeLang(langPref);
   const role = publicRegistrationRole();
   const cleanFirstName = normalizeName(firstName);
   const cleanLastName = normalizeName(lastName);
@@ -202,8 +206,8 @@ authRouter.get("/me", authMiddleware, async (req: AuthedRequest, res) => {
 
 authRouter.patch("/lang", authMiddleware, async (req: AuthedRequest, res) => {
   const { langPref } = req.body as { langPref?: string };
-  if (langPref !== "fr" && langPref !== "en") {
-    return res.status(400).json({ error: "langPref doit être 'fr' ou 'en'" });
+  if (!isSupportedLang(langPref)) {
+    return res.status(400).json({ error: "langPref doit être 'fr', 'en', 'ar' ou 'it'" });
   }
   await db.prepare("UPDATE users SET lang_pref = ? WHERE id = ?").run(langPref, req.userId);
   res.json({ langPref });

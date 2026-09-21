@@ -1,3 +1,4 @@
+import type { Lang } from "../i18n";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import {
@@ -11,7 +12,7 @@ import {
   type LibraryResource,
   type QcmAttemptResult,
 } from "../api";
-import { useLang } from "../i18n";
+import { useLang, Back, Fwd } from "../i18n";
 import { SearchBar } from "../components/SearchBar";
 import { resolveVisualKey } from "../library-widgets/visual-registry";
 import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
@@ -29,7 +30,7 @@ import {
 type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget" | "diagrams";
 
 function localized(
-  lang: "fr" | "en",
+  lang: Lang,
   french: string | undefined,
   english: string | undefined,
 ): string {
@@ -46,16 +47,14 @@ function subjectSlug(matiere: string): string {
   return matiere.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-function DiagramQuiz({ keys, lang }: { keys: string[]; lang: "fr" | "en" }) {
-  const fr = lang === "fr";
+function DiagramQuiz({ keys, lang }: { keys: string[]; lang: Lang }) {
+  const { tx } = useLang();
   return (
     <section className="learning-panel diagram-quiz">
-      <p className="eyebrow">{fr ? "Schémas à compléter" : "Label the diagram"}</p>
-      <h2>{fr ? "Teste-toi sur les schémas du chapitre" : "Test yourself on the chapter's diagrams"}</h2>
+      <p className="eyebrow">{tx("Schémas à compléter", "Label the diagram")}</p>
+      <h2>{tx("Teste-toi sur les schémas du chapitre", "Test yourself on the chapter's diagrams")}</h2>
       <p className="hint">
-        {fr
-          ? "Les légendes sont cachées derrière des pastilles jaunes : essaie de retrouver la réponse, puis clique sur la pastille pour vérifier."
-          : "Labels are hidden behind yellow tags: try to recall the answer, then click the tag to check."}
+        {tx("Les légendes sont cachées derrière des pastilles jaunes : essaie de retrouver la réponse, puis clique sur la pastille pour vérifier.", "Labels are hidden behind yellow tags: try to recall the answer, then click the tag to check.")}
       </p>
       {keys.map((key) => (
         <OcclusionFigure key={key} visualKey={key} startHidden />
@@ -77,25 +76,25 @@ function ChapterNav({
 }: {
   steps: Step[];
   current: number;
-  lang: "fr" | "en";
+  lang: Lang;
   prevChapter: LibraryChapter | null;
   nextChapter: LibraryChapter | null;
   onGo: (step: Step) => void;
   onHub: () => void;
 }) {
-  const fr = lang === "fr";
+  const { tx } = useLang();
   const prev = current > 0 ? steps[current - 1] : null;
   const next = current >= 0 && current < steps.length - 1 ? steps[current + 1] : null;
   return (
-    <nav className="chapter-nav" aria-label={fr ? "Navigation dans le chapitre" : "Chapter navigation"}>
+    <nav className="chapter-nav" aria-label={tx("Navigation dans le chapitre", "Chapter navigation")}>
       {prev ? (
         <button type="button" className="chapter-nav-btn" onClick={() => onGo(prev)}>
-          <small>← {fr ? "Précédent" : "Previous"}</small>
+          <small><Back /> {tx("Précédent", "Previous")}</small>
           <span>{prev.label}</span>
         </button>
       ) : prevChapter ? (
         <Link className="chapter-nav-btn" to={`/library/chapter/${prevChapter.id}`}>
-          <small>← {fr ? "Chapitre précédent" : "Previous chapter"}</small>
+          <small><Back /> {tx("Chapitre précédent", "Previous chapter")}</small>
           <span>{localized(lang, prevChapter.titre_fr, prevChapter.titre_en)}</span>
         </Link>
       ) : (
@@ -103,16 +102,16 @@ function ChapterNav({
       )}
       <button type="button" className="chapter-nav-btn chapter-nav-hub" onClick={onHub}>
         <small>☰</small>
-        <span>{fr ? "Sommaire du chapitre" : "Chapter menu"}</span>
+        <span>{tx("Sommaire du chapitre", "Chapter menu")}</span>
       </button>
       {next ? (
         <button type="button" className="chapter-nav-btn chapter-nav-next" onClick={() => onGo(next)}>
-          <small>{fr ? "Suivant" : "Next"} →</small>
+          <small>{tx("Suivant", "Next")} <Fwd /></small>
           <span>{next.label}</span>
         </button>
       ) : nextChapter ? (
         <Link className="chapter-nav-btn chapter-nav-next" to={`/library/chapter/${nextChapter.id}`}>
-          <small>{fr ? "Chapitre suivant" : "Next chapter"} →</small>
+          <small>{tx("Chapitre suivant", "Next chapter")} <Fwd /></small>
           <span>{localized(lang, nextChapter.titre_fr, nextChapter.titre_en)}</span>
         </Link>
       ) : (
@@ -129,11 +128,11 @@ function ResourceReader({
   onComplete,
 }: {
   resource: LibraryResource;
-  lang: "fr" | "en";
+  lang: Lang;
   completed: boolean;
   onComplete: () => void;
 }) {
-  const { t } = useLang();
+  const { t, tx } = useLang();
   const content = localized(lang, resource.content_fr, resource.content_en);
   const title = localized(lang, resource.titre_fr, resource.titre_en);
 
@@ -176,10 +175,10 @@ function QcmPractice({
 }: {
   chapter: LibraryChapterDetail;
   questions: LibraryQcmQuestion[];
-  lang: "fr" | "en";
+  lang: Lang;
   onBack: () => void;
 }) {
-  const { t } = useLang();
+  const { t, tx } = useLang();
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState<string[]>([]);
   const [result, setResult] = useState<QcmAttemptResult | null>(null);
@@ -285,7 +284,7 @@ function QcmPractice({
       )}
       <div className="question-navigation">
         <button type="button" className="nav-secondary" onClick={() => setIndex((current) => Math.max(0, current - 1))} disabled={index === 0}>
-          ← {t.previousQuestion}
+          <Back /> {t.previousQuestion}
         </button>
         <button
           type="button"
@@ -293,7 +292,7 @@ function QcmPractice({
           onClick={() => setIndex((current) => Math.min(questions.length - 1, current + 1))}
           disabled={index === questions.length - 1}
         >
-          {t.nextQuestion} →
+          {t.nextQuestion} <Fwd />
         </button>
       </div>
     </section>
@@ -308,10 +307,10 @@ function FlashcardReview({
 }: {
   chapter: LibraryChapterDetail;
   cards: Flashcard[];
-  lang: "fr" | "en";
+  lang: Lang;
   onBack: () => void;
 }) {
-  const { t } = useLang();
+  const { t, tx } = useLang();
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [mastery, setMastery] = useState<Record<number, number>>(
@@ -372,14 +371,14 @@ function FlashcardReview({
           className="nav-secondary"
           onClick={() => { setFlipped(false); setIndex((current) => (current - 1 + cards.length) % cards.length); }}
         >
-          ← {lang === "fr" ? "Carte précédente" : "Previous card"}
+          <Back /> {tx("Carte précédente", "Previous card")}
         </button>
         <button
           type="button"
           className="nav-secondary"
           onClick={() => { setFlipped(false); setIndex((current) => (current + 1) % cards.length); }}
         >
-          {lang === "fr" ? "Carte suivante" : "Next card"} →
+          {tx("Carte suivante", "Next card")} <Fwd />
         </button>
       </div>
     </section>
@@ -394,10 +393,10 @@ function ExamReview({
 }: {
   result: ExamAttemptResult;
   questions: LibraryQcmQuestion[];
-  lang: "fr" | "en";
+  lang: Lang;
   onRestart: () => void;
 }) {
-  const { t } = useLang();
+  const { t, tx } = useLang();
   return (
     <section className="learning-panel exam-result">
       <p className="eyebrow">{result.timedOut ? t.timeExpired : t.examFinished}</p>
@@ -459,10 +458,10 @@ function TimedExam({
   chapter: LibraryChapterDetail;
   exam: LibraryChapterDetail["exams"][number];
   questions: LibraryQcmQuestion[];
-  lang: "fr" | "en";
+  lang: Lang;
   onBack: () => void;
 }) {
-  const { t } = useLang();
+  const { t, tx } = useLang();
   const [session, setSession] = useState<{ sessionId: number; expiresAt: number; questionOrders: number[] } | null>(null);
   const [remaining, setRemaining] = useState(0);
   const [index, setIndex] = useState(0);
@@ -607,7 +606,7 @@ function TimedExam({
 export function LibraryChapterView() {
   const { id } = useParams<{ id: string }>();
   const [searchParams] = useSearchParams();
-  const { t, lang } = useLang();
+  const { t, lang, tx } = useLang();
   const [detail, setDetail] = useState<LibraryChapterDetail | null>(null);
   const [activity, setActivity] = useState<Activity>("hub");
   const [resourceId, setResourceId] = useState<number | null>(null);
@@ -694,10 +693,10 @@ export function LibraryChapterView() {
       resourceId: resource.id,
       label: localized(lang, resource.titre_fr, resource.titre_en),
     })),
-    ...(diagramKeys.length ? [{ activity: "diagrams" as Activity, label: lang === "fr" ? "Schémas à compléter" : "Label the diagrams" }] : []),
+    ...(diagramKeys.length ? [{ activity: "diagrams" as Activity, label: tx("Schémas à compléter", "Label the diagrams") }] : []),
     { activity: "qcm" as Activity, label: "QCM" },
-    { activity: "flashcards" as Activity, label: lang === "fr" ? "Flashcards" : "Flashcards" },
-    ...(exam ? [{ activity: "exam" as Activity, label: lang === "fr" ? "Examen du chapitre" : "Chapter exam" }] : []),
+    { activity: "flashcards" as Activity, label: tx("Flashcards", "Flashcards") },
+    ...(exam ? [{ activity: "exam" as Activity, label: tx("Examen du chapitre", "Chapter exam") }] : []),
   ];
   const currentStep = steps.findIndex((step) =>
     step.activity === "resource"
@@ -752,8 +751,8 @@ export function LibraryChapterView() {
       {activity === "hub" && (
         <section className="learning-hub">
           <div className="chapter-neighbours">
-            {prevChapter ? <Link to={`/library/chapter/${prevChapter.id}`}>← {localized(lang, prevChapter.titre_fr, prevChapter.titre_en)}</Link> : <span />}
-            {nextChapter ? <Link to={`/library/chapter/${nextChapter.id}`}>{localized(lang, nextChapter.titre_fr, nextChapter.titre_en)} →</Link> : <span />}
+            {prevChapter ? <Link to={`/library/chapter/${prevChapter.id}`}><Back /> {localized(lang, prevChapter.titre_fr, prevChapter.titre_en)}</Link> : <span />}
+            {nextChapter ? <Link to={`/library/chapter/${nextChapter.id}`}>{localized(lang, nextChapter.titre_fr, nextChapter.titre_en)} <Fwd /></Link> : <span />}
           </div>
           <div className="activity-grid">
             {detail.resources.map((resource) => (
@@ -767,9 +766,9 @@ export function LibraryChapterView() {
             {diagramKeys.length > 0 && (
               <button type="button" className="activity-card activity-card-accent" onClick={() => setActivity("diagrams")}>
                 <span className="activity-icon">🧩</span>
-                <span className="eyebrow">{lang === "fr" ? "Schémas" : "Diagrams"}</span>
-                <strong>{lang === "fr" ? `${diagramKeys.length} schémas à compléter` : `${diagramKeys.length} diagrams to label`}</strong>
-                <small>{lang === "fr" ? "Légendes cachées, clique pour vérifier" : "Hidden labels, click to check"}</small>
+                <span className="eyebrow">{tx("Schémas", "Diagrams")}</span>
+                <strong>{diagramKeys.length} {tx("schémas à compléter", "diagrams to label")}</strong>
+                <small>{tx("Légendes cachées, clique pour vérifier", "Hidden labels, click to check")}</small>
               </button>
             )}
             <button type="button" className="activity-card" onClick={() => setActivity("qcm")}>
