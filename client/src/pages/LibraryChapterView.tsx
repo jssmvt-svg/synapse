@@ -17,6 +17,7 @@ import { SearchBar } from "../components/SearchBar";
 import { resolveVisualKey } from "../library-widgets/visual-registry";
 import { OxygenSaturationChart } from "../components/OxygenSaturationChart";
 import { KrebsCycleDiagram } from "../components/KrebsCycleDiagram";
+import { AminoAcidQuiz } from "../components/AminoAcidQuiz";
 import { OcclusionFigure } from "../components/OcclusionFigure";
 import { MarkdownContent } from "../components/MarkdownContent";
 import { AminoAcidGallery } from "../components/AminoAcidGallery";
@@ -799,6 +800,14 @@ export function LibraryChapterView() {
                 <small>{t.continueAction}</small>
               </button>
             )}
+            {detail.chapter.widget_key === "amino-acid-quiz" && (
+              <button type="button" className="activity-card" onClick={() => setActivity("widget")}>
+                <span className="activity-icon">🧬</span>
+                <span className="eyebrow">{t.aminoAcidQuizTitle}</span>
+                <strong>{t.aminoAcidQuizTitle}</strong>
+                <small>{t.continueAction}</small>
+              </button>
+            )}
             {exam && (
               <button type="button" className="activity-card activity-card-accent" onClick={() => setActivity("exam")}>
                 <span className="activity-icon">⏱</span>
@@ -859,6 +868,16 @@ export function LibraryChapterView() {
           <p className="eyebrow">Schéma animé</p>
           <h2>Le cycle de Krebs</h2>
           <KrebsCycleDiagram />
+        </section>
+      )}
+      {activity === "widget" && detail.chapter.widget_key === "amino-acid-quiz" && (
+        <section className="learning-panel widget-panel-centered">
+          <div className="panel-topline">
+            <button type="button" className="text-button" onClick={() => setActivity("hub")}>
+              {t.backToLibrary}
+            </button>
+          </div>
+          <AminoAcidQuiz />
         </section>
       )}
     </main>
