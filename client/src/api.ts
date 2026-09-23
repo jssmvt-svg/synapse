@@ -11,6 +11,15 @@ export function clearToken(): void {
   localStorage.removeItem(TOKEN_KEY);
 }
 
+// Langue choisie : le serveur traduit le contenu des cours en conséquence.
+function storedLang(): string {
+  try {
+    return localStorage.getItem("synapse_lang") ?? "fr";
+  } catch {
+    return "fr";
+  }
+}
+
 async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   const token = getToken();
   const isFormData = options.body instanceof FormData;
@@ -20,6 +29,7 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
     headers: {
       ...(isFormData ? {} : { "Content-Type": "application/json" }),
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      "X-Lang": storedLang(),
       ...options.headers,
     },
   });

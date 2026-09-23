@@ -140,7 +140,7 @@ export function Dashboard() {
           <Link to="/statistics" className="header-nav-link">
             {t.statistics}
           </Link>
-          <LanguageSwitcher onChange={(code) => { api.setLang(code).catch(() => {}); }} />
+          <LanguageSwitcher onChange={(code) => api.setLang(code).catch(() => {})} />
           <span className="user-chip">{user?.email}</span>
           <button className="logout-button" onClick={logout}>{t.logout}</button>
         </div>
