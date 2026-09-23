@@ -4,7 +4,9 @@ import { it } from "./i18n-it";
 import { PHRASES } from "./i18n-phrases";
 
 export type Lang = "fr" | "en" | "ar" | "it";
-export const LANGS: Lang[] = ["fr", "en", "ar", "it"];
+// Arabe et italien restent supportés côté code (traductions, contenu) mais sont
+// masqués du sélecteur en attendant que leur traduction soit jugée complète.
+export const LANGS: Lang[] = ["fr", "en"];
 export const LANG_LABELS: Record<Lang, string> = { fr: "FR", en: "EN", ar: "عربي", it: "IT" };
 export const LOCALES: Record<Lang, string> = { fr: "fr-FR", en: "en-GB", ar: "ar-SA", it: "it-IT" };
 

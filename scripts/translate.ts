@@ -189,8 +189,11 @@ async function callModel(job: Job, batch: Source[]): Promise<Map<number, string>
   const request = {
     model: MODEL,
     max_tokens: Math.min(64000, Math.max(4000, Math.ceil(chars / 1.2) + 2000)),
-    thinking: { type: "adaptive" },
-    output_config: { effort: "low", format: { type: "json_schema", schema: SCHEMA } },
+    // Haiku ne supporte ni le thinking adaptatif ni le paramètre "effort" (400 invalid_request_error).
+    ...(MODEL.includes("haiku") ? {} : { thinking: { type: "adaptive" } }),
+    output_config: MODEL.includes("haiku")
+      ? { format: { type: "json_schema", schema: SCHEMA } }
+      : { effort: "low", format: { type: "json_schema", schema: SCHEMA } },
     system: systemPrompt(job.lang, job.kind),
     messages: [{ role: "user", content: JSON.stringify(batch.map((item, id) => ({ id, text: item.fr }))) }],
     ...(useFallbacks ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" } : {}),
