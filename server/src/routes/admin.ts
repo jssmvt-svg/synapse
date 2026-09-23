@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { db } from "../db.js";
-import { sendTrialGrantedEmail } from "../email.js";
+import { buildReengagementEmail, sendReengagementEmail, sendTrialGrantedEmail } from "../email.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 
 export const adminRouter = Router();
@@ -168,5 +168,54 @@ adminRouter.post("/students/:id/grants", async (req: AuthedRequest, res) => {
       .prepare("DELETE FROM admin_chapter_grants WHERE user_id = ? AND chapter_id = ?")
       .run(userId, chapterId);
   }
+  res.json({ ok: true });
+});
+
+/** Étudiants dont l'essai 48h est terminé sans abonnement actif : cibles de la relance. */
+adminRouter.get("/reengagement/candidates", async (_req, res) => {
+  const rows = await db
+    .prepare(
+      `SELECT id, email, first_name, lang_pref, trial_ends_at
+       FROM users
+       WHERE role = 'student' AND trial_status = 'expired' AND subscription_status != 'active'
+       ORDER BY trial_ends_at DESC NULLS LAST
+       LIMIT 200`,
+    )
+    .all();
+  res.json(
+    rows.map((u: any) => ({
+      id: u.id,
+      email: u.email,
+      firstName: u.first_name,
+      langPref: u.lang_pref,
+      trialEndedAt: u.trial_ends_at,
+    })),
+  );
+});
+
+adminRouter.get("/reengagement/preview/:id", async (req, res) => {
+  const userId = Number(req.params.id);
+  if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
+  const user = await db
+    .prepare("SELECT id, email, lang_pref, first_name FROM users WHERE id = ?")
+    .get(userId);
+  if (!user) return res.status(404).json({ error: "Étudiant introuvable." });
+  const { subject, html } = buildReengagementEmail({
+    id: user.id,
+    email: user.email,
+    langPref: user.lang_pref,
+    firstName: user.first_name,
+  });
+  res.json({ subject, html });
+});
+
+adminRouter.post("/reengagement/send/:id", async (req, res) => {
+  const userId = Number(req.params.id);
+  if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
+  const user = await db
+    .prepare("SELECT id, email, lang_pref, first_name FROM users WHERE id = ? AND role = 'student'")
+    .get(userId);
+  if (!user) return res.status(404).json({ error: "Étudiant introuvable." });
+  sendReengagementEmail({ id: user.id, email: user.email, langPref: user.lang_pref, firstName: user.first_name });
   res.json({ ok: true });
 });

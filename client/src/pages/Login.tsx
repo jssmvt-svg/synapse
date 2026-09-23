@@ -32,10 +32,10 @@ export function Login() {
 
   return (
     <div className="auth-page">
-      <div className="auth-brand">
+      <Link to="/" className="auth-brand">
         <span className="brand-mark" aria-hidden="true">S</span>
         <span>{t.appName}</span>
-      </div>
+      </Link>
       <p className="auth-intro">{t.authIntro}</p>
       <form onSubmit={onSubmit} className="auth-form">
         <h2>{t.login}</h2>

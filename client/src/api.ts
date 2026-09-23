@@ -574,6 +574,14 @@ export const api = {
     request<{ ok: boolean }>(`/admin/users/${userId}/revoke`, {
       method: "POST",
     }),
+  getReengagementCandidates: () =>
+    request<Array<{ id: number; email: string; firstName: string; langPref: string; trialEndedAt: number | null }>>(
+      "/admin/reengagement/candidates",
+    ),
+  previewReengagementEmail: (userId: number) =>
+    request<{ subject: string; html: string }>(`/admin/reengagement/preview/${userId}`),
+  sendReengagementEmail: (userId: number) =>
+    request<{ ok: boolean }>(`/admin/reengagement/send/${userId}`, { method: "POST" }),
   grantTrial: (userId: number) =>
     request<{ trialStatus: TrialStatus; trialEndsAt: number }>(`/admin/users/${userId}/trial/grant`, {
       method: "POST",
@@ -606,8 +614,8 @@ export const api = {
       body: JSON.stringify({ sessionId, answers }),
     }),
   duelOverview: () => request<DuelOverview>("/duel/me"),
-  duelCreateRoom: (avatar: string, mode: DuelMode) =>
-    request<DuelState>("/duel/rooms", { method: "POST", body: JSON.stringify({ avatar, mode }) }),
+  duelCreateRoom: (avatar: string, mode: DuelMode, chapterId?: number | null) =>
+    request<DuelState>("/duel/rooms", { method: "POST", body: JSON.stringify({ avatar, mode, chapterId }) }),
   duelQuickMatch: (avatar: string, mode: DuelMode) =>
     request<DuelState>("/duel/quick", { method: "POST", body: JSON.stringify({ avatar, mode }) }),
   duelJoinRoom: (code: string, avatar: string) =>

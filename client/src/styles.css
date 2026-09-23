@@ -8331,3 +8331,55 @@ html[dir="rtl"] input[type="password"] { direction: ltr; text-align: right; }
 
 /* Les schémas restent en lecture gauche-droite (text-anchor) ; le texte arabe s'affiche quand même de droite à gauche. */
 .course-svg { direction: ltr; }
+
+.landing-pricing {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
+  align-items: center;
+  padding: 3rem 2rem;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.pricing-card {
+  background: #fff;
+  border: 1px solid rgba(37, 99, 235, 0.15);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.08);
+}
+.pricing-amount { display: flex; align-items: baseline; gap: 0.3rem; margin: 0 0 1.2rem; }
+.pricing-amount strong { font-size: 2.6rem; color: #1a202c; }
+.pricing-amount span { color: #7a879f; font-size: 1rem; }
+.pricing-includes { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; gap: 0.6rem; color: #4a5568; }
+.pricing-includes li::before { content: "✓ "; color: #2563eb; font-weight: 700; }
+@media (max-width: 760px) {
+  .landing-pricing { grid-template-columns: 1fr; padding: 2rem 1.2rem; }
+}
+
+.landing-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 1.5rem 2rem 2.5rem;
+  color: #7a879f;
+  font-size: 0.85rem;
+}
+.landing-footer a { color: inherit; }
+@media (max-width: 760px) {
+  .landing-footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem 1.2rem 2rem; }
+}
+
+.legal-page { max-width: 720px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; line-height: 1.6; color: #2d3748; }
+.legal-page h1 { margin: 1.5rem 0 2rem; }
+.legal-page section { margin-bottom: 1.8rem; }
+.legal-page h2 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+.legal-page .legal-note { color: #7a879f; font-size: 0.85rem; border-top: 1px solid #e2e8f0; padding-top: 1.2rem; }
+
+.duel-topic-selects { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; }
+.duel-topic-selects select { flex: 1 1 180px; }
+
+.admin-email-preview { margin-top: 0.8rem; width: 100%; }
+.admin-email-preview iframe { width: 100%; height: 420px; border: 1px solid #e2e8f0; border-radius: 10px; background: #fff; }

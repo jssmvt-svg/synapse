@@ -274,12 +274,8 @@ export function sendPaymentConfirmedEmail(user: RecipientUser, periodEndsAt: num
   void sendEmailOnce(`payment-confirmed:${user.id}:${periodEndsAt ?? "na"}`, user.email, subject, html);
 }
 
-/**
- * Relance ciblée : étudiant dont l'essai 48h est terminé sans abonnement.
- * Brouillon uniquement pour l'instant — pas encore relié à une route ou une
- * tâche planifiée ; Jessica doit valider le contenu avant tout envoi réel.
- */
-export function sendReengagementEmail(user: RecipientUser): void {
+/** Construit le contenu de l'email de relance sans l'envoyer — utilisé pour l'aperçu admin. */
+export function buildReengagementEmail(user: RecipientUser): { subject: string; html: string } {
   const lang = normEmailLang(user.langPref);
   const hi = user.firstName ? ` ${user.firstName}` : "";
   const subject =
@@ -299,6 +295,12 @@ export function sendReengagementEmail(user: RecipientUser): void {
         ? "Tu as déjà testé Synapse il y a quelque temps — cette offre ne dure pas indéfiniment."
         : "You already tried Synapse a while back — this offer won't last forever.",
   });
+  return { subject, html };
+}
+
+/** Relance ciblée : étudiant dont l'essai 48h est terminé sans abonnement. */
+export function sendReengagementEmail(user: RecipientUser): void {
+  const { subject, html } = buildReengagementEmail(user);
   void sendEmailOnce(`reengagement:${user.id}`, user.email, subject, html);
 }
 

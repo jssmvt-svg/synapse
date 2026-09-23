@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { api, type DuelOverview, type DuelState } from "../api";
+import { api, type DuelOverview, type DuelState, type StudySemester, type LibrarySubject } from "../api";
 import { avatarInfo, loadAvatarCode, PRESETS, saveAvatarCode } from "../components/avatars";
 import {
   ELEMENTS,
@@ -156,10 +156,29 @@ function Lobby() {
   const [avatarCode, setAvatarCode] = useState<string>(loadAvatarCode);
   const [mode, setMode] = useState<GameMode>(loadMode);
   const [editing, setEditing] = useState(false);
+  const [semesters, setSemesters] = useState<StudySemester[] | null>(null);
+  const [semesterNumber, setSemesterNumber] = useState<number | "">("");
+  const [subjects, setSubjects] = useState<LibrarySubject[] | null>(null);
+  const [subjectSlug, setSubjectSlug] = useState<string>("");
+  const [chapterId, setChapterId] = useState<number | "">("");
 
   useEffect(() => {
     api.duelOverview().then(setOverview).catch((err: Error) => setError(err.message));
+    api.getStudySemesters().then((list) => {
+      setSemesters(list);
+      const accessible = list.filter((s) => s.has_access);
+      if (accessible.length === 1) setSemesterNumber(accessible[0].semester_number);
+    }).catch(() => {});
   }, []);
+
+  useEffect(() => {
+    if (semesterNumber === "") { setSubjects(null); return; }
+    api.getStudySemester(semesterNumber).then((detail) => setSubjects(detail.subjects)).catch(() => setSubjects(null));
+    setSubjectSlug("");
+    setChapterId("");
+  }, [semesterNumber]);
+
+  const selectedSubject = subjects?.find((s) => s.slug === subjectSlug) ?? null;
 
   function chooseAvatar(code: string) {
     setAvatarCode(code);
@@ -259,6 +278,42 @@ function Lobby() {
         </div>
       )}
 
+      <section className="duel-card duel-topic-picker">
+        <h2>{l("Choisir une matière et un chapitre (optionnel)", "Pick a subject and chapter (optional)")}</h2>
+        <p className="duel-muted">
+          {l(
+            "Pour une salle privée seulement : laisse vide pour réviser tout le semestre.",
+            "Private rooms only: leave empty to practise the whole semester.",
+          )}
+        </p>
+        <div className="duel-topic-selects">
+          <select value={semesterNumber} onChange={(e) => setSemesterNumber(e.target.value ? Number(e.target.value) : "")}>
+            <option value="">{l("Semestre en cours", "Current semester")}</option>
+            {semesters?.filter((s) => s.has_access).map((s) => (
+              <option key={s.semester_number} value={s.semester_number}>
+                {lang === "fr" ? s.title_fr : s.title_en}
+              </option>
+            ))}
+          </select>
+          <select value={subjectSlug} onChange={(e) => setSubjectSlug(e.target.value)} disabled={!subjects}>
+            <option value="">{l("Toutes les matières", "All subjects")}</option>
+            {subjects?.map((s) => (
+              <option key={s.slug} value={s.slug}>{lang === "fr" ? s.titre_fr : s.titre_en}</option>
+            ))}
+          </select>
+          <select
+            value={chapterId}
+            onChange={(e) => setChapterId(e.target.value ? Number(e.target.value) : "")}
+            disabled={!selectedSubject}
+          >
+            <option value="">{l("Tous les chapitres", "All chapters")}</option>
+            {selectedSubject?.chapters.map((c) => (
+              <option key={c.id} value={c.id}>{lang === "fr" ? c.titre_fr : c.titre_en}</option>
+            ))}
+          </select>
+        </div>
+      </section>
+
       <section className="duel-actions">
         <button
           className="duel-button duel-button-primary"
@@ -267,7 +322,11 @@ function Lobby() {
         >
           {selectedMode.icon} {l("Adversaire aléatoire", "Random opponent")}
         </button>
-        <button className="duel-button" disabled={busy} onClick={() => enter(() => api.duelCreateRoom(avatarCode, mode))}>
+        <button
+          className="duel-button"
+          disabled={busy}
+          onClick={() => enter(() => api.duelCreateRoom(avatarCode, mode, chapterId === "" ? null : chapterId))}
+        >
           🔗 {l("Créer une salle privée", "Create a private room")}
         </button>
         <form

@@ -2,6 +2,7 @@ import { lazy, Suspense, type ReactElement } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAuth } from "./auth";
 import { Landing } from "./pages/Landing";
+import { Legal } from "./pages/Legal";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import { authenticatedLibraryRoutePatterns } from "./libraryRoutes";
@@ -59,6 +60,7 @@ export function App() {
           </PublicOnly>
         }
       />
+      <Route path="/legal" element={<Legal />} />
       <Route
         path="/dashboard"
         element={

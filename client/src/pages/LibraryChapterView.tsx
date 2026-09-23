@@ -775,13 +775,13 @@ export function LibraryChapterView() {
             <button type="button" className="activity-card" onClick={() => setActivity("qcm")}>
               <span className="activity-icon">✓</span>
               <span className="eyebrow">{t.practice}</span>
-              <strong>{detail.qcm.length} questions corrigées</strong>
+              <strong>{tx(`${detail.qcm.length} questions corrigées`, `${detail.qcm.length} corrected questions`)}</strong>
               <small>{t.continueAction}</small>
             </button>
             <button type="button" className="activity-card" onClick={() => setActivity("flashcards")}>
               <span className="activity-icon">◇</span>
               <span className="eyebrow">{t.flashcards}</span>
-              <strong>{detail.flashcards.length} cartes</strong>
+              <strong>{tx(`${detail.flashcards.length} cartes`, `${detail.flashcards.length} cards`)}</strong>
               <small>{t.continueAction}</small>
             </button>
             {detail.chapter.widget_key === "hb-o2-curve" && (

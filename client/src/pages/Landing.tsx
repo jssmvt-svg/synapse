@@ -20,6 +20,7 @@ export function Landing() {
           <a href="#program">{t.landingProgram}</a>
           <a href="#method">{t.landingMethod}</a>
           <a href="#prearrival">{tx("Pré-rentrée", "Pre-term")}</a>
+          <a href="#pricing">{tx("Tarifs", "Pricing")}</a>
         </nav>
         <div className="landing-actions">
           <LanguageSwitcher />
@@ -94,6 +95,29 @@ export function Landing() {
         <Link to="/register" className="landing-outline">{tx("Créer mon accès", "Create my access")} <Fwd /></Link>
       </section>
 
+      <section className="landing-pricing" id="pricing">
+        <div>
+          <p className="eyebrow">{tx("Tarifs", "Pricing")}</p>
+          <h2>{tx("Un seul plan, tout inclus.", "One plan, everything included.")}</h2>
+          <p>
+            {tx(
+              "48 heures d'essai gratuit dès l'inscription, sans carte bancaire. Ensuite, accès complet à toute la première année.",
+              "48 hours of free trial right after signup, no card needed. After that, full access to all of year one.",
+            )}
+          </p>
+        </div>
+        <div className="pricing-card">
+          <p className="pricing-amount"><strong>15 €</strong><span>/{tx("mois", "month")}</span></p>
+          <ul className="pricing-includes">
+            <li>{tx("Cours, QCM, flashcards et examens chronométrés", "Courses, QCMs, flashcards, timed exams")}</li>
+            <li>{tx("Mini-jeux de révision en duel", "Study duel mini-games")}</li>
+            <li>{tx("Suivi de progression et statistiques", "Progress tracking and statistics")}</li>
+            <li>{tx("Sans engagement", "No commitment")}</li>
+          </ul>
+          <Link to="/register" className="landing-primary">{tx("Commencer l'essai gratuit", "Start the free trial")} <Fwd /></Link>
+        </div>
+      </section>
+
       <section className="landing-method" id="method">
         <div>
           <p className="eyebrow">{t.landingMethod}</p>
@@ -102,6 +126,11 @@ export function Landing() {
         <p>{t.landingMethodCopy}</p>
         <Link to="/register" className="landing-outline">{t.register} <Fwd /></Link>
       </section>
+
+      <footer className="landing-footer">
+        <span>© {new Date().getFullYear()} {t.appName}</span>
+        <Link to="/legal">{tx("Mentions légales", "Legal notice")}</Link>
+      </footer>
     </main>
   );
 }

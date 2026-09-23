@@ -3,6 +3,110 @@ import { Link } from "react-router-dom";
 import { api, type AdminChapter, type AdminSemester, type AdminUser } from "../api";
 import { useLang, type Tx } from "../i18n";
 
+interface ReengagementCandidate {
+  id: number;
+  email: string;
+  firstName: string;
+  langPref: string;
+  trialEndedAt: number | null;
+}
+
+function ReengagementSection({ tx, locale }: { tx: Tx; locale: string }) {
+  const [candidates, setCandidates] = useState<ReengagementCandidate[] | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [previewId, setPreviewId] = useState<number | null>(null);
+  const [preview, setPreview] = useState<{ subject: string; html: string } | null>(null);
+  const [confirmingId, setConfirmingId] = useState<number | null>(null);
+  const [sentIds, setSentIds] = useState<Set<number>>(new Set());
+  const [busyId, setBusyId] = useState<number | null>(null);
+
+  useEffect(() => {
+    api.getReengagementCandidates().then(setCandidates).catch((err) => setError((err as Error).message));
+  }, []);
+
+  async function togglePreview(id: number) {
+    if (previewId === id) { setPreviewId(null); setPreview(null); return; }
+    setBusyId(id);
+    try {
+      const data = await api.previewReengagementEmail(id);
+      setPreview(data);
+      setPreviewId(id);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  async function confirmSend(id: number) {
+    if (confirmingId !== id) { setConfirmingId(id); return; }
+    setBusyId(id);
+    try {
+      await api.sendReengagementEmail(id);
+      setSentIds((current) => new Set(current).add(id));
+      setConfirmingId(null);
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setBusyId(null);
+    }
+  }
+
+  return (
+    <section className="admin-reengagement">
+      <header className="admin-users-header">
+        <h1>{tx("Relance des essais expirés", "Expired trial re-engagement")}</h1>
+        <p>
+          {tx(
+            "Étudiants dont l'essai de 48h est terminé sans abonnement. Aperçu obligatoire avant tout envoi.",
+            "Students whose 48h trial ended without a subscription. Preview required before any send.",
+          )}
+        </p>
+      </header>
+      {error && <p className="error">{error}</p>}
+      {!candidates ? (
+        <p className="loading-state">…</p>
+      ) : candidates.length === 0 ? (
+        <p>{tx("Aucun candidat pour l'instant.", "No candidates yet.")}</p>
+      ) : (
+        <ul className="admin-student-list">
+          {candidates.map((c) => (
+            <li key={c.id} className="admin-student-row">
+              <span className="admin-student-identity">
+                <strong>{c.firstName || c.email}</strong>
+                <small>{c.email} · {tx("essai terminé le ", "trial ended ")}{c.trialEndedAt ? formatDate(locale, c.trialEndedAt) : "—"}</small>
+              </span>
+              <div className="admin-student-actions">
+                <button type="button" onClick={() => void togglePreview(c.id)} disabled={busyId === c.id}>
+                  {previewId === c.id ? tx("Masquer l'aperçu", "Hide preview") : tx("Aperçu", "Preview")}
+                </button>
+                {sentIds.has(c.id) ? (
+                  <span className="admin-meta-chip">{tx("Envoyé ✓", "Sent ✓")}</span>
+                ) : (
+                  <button
+                    type="button"
+                    className={confirmingId === c.id ? "" : "secondary"}
+                    onClick={() => void confirmSend(c.id)}
+                    disabled={busyId === c.id}
+                  >
+                    {confirmingId === c.id ? tx("Confirmer l'envoi ?", "Confirm send?") : tx("Envoyer", "Send")}
+                  </button>
+                )}
+              </div>
+              {previewId === c.id && preview && (
+                <div className="admin-email-preview">
+                  <p className="admin-meta-chip">{tx("Objet : ", "Subject: ")}{preview.subject}</p>
+                  <iframe title="preview" srcDoc={preview.html} />
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  );
+}
+
 function formatDate(locale: string, value: number | null | undefined): string {
   if (!value) return "—";
   return new Date(value).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" });
@@ -203,6 +307,8 @@ export function Admin() {
           })}
         </ul>
       )}
+
+      <ReengagementSection tx={tx} locale={locale} />
     </main>
   );
 }
