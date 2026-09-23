@@ -2,6 +2,34 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 import { useLang } from "../i18n";
 import { ACRONYMS } from "../library-data/acronyms";
 
+/**
+ * Filet de sécurité pour les schémas qui écrivent <text>/<tspan> directement
+ * dans le SVG (sans passer par le composant Txt ci-dessous, qui traduit déjà
+ * via React). Le français original est mis en cache dans un attribut pour
+ * pouvoir re-basculer de langue sans le perdre après une première traduction.
+ * Retourne les sigles trouvés (pour le glossaire affiché sous le schéma).
+ */
+export function applyFigureTranslations(
+  svg: SVGElement | SVGSVGElement,
+  labels: Record<string, string> | null,
+): Map<string, string> {
+  const found = new Map<string, string>();
+  svg.querySelectorAll("text, tspan").forEach((node) => {
+    // Un <text> qui contient des <tspan> n'est pas une feuille de texte : on ne
+    // touche qu'aux nœuds sans enfant élément (le <text> lui-même, ou chaque
+    // <tspan>), sinon écrire .textContent détruirait la structure imbriquée.
+    if (node.children.length > 0) return;
+    const element = node as SVGElement;
+    const original = element.dataset.fr ?? element.textContent ?? "";
+    if (!element.dataset.fr) element.dataset.fr = original;
+    element.textContent = labels?.[original] ?? original;
+    original.split(/[^A-Za-zÀ-ÿ0-9]+/).forEach((token) => {
+      if (ACRONYMS[token]) found.set(token, ACRONYMS[token]);
+    });
+  });
+  return found;
+}
+
 // Cadre commun des schémas de cours : SVG vectoriel original (aucun droit
 // d'auteur à gérer), themable via currentColor, avec légende accessible.
 export function Figure({
@@ -21,14 +49,8 @@ export function Figure({
   useEffect(() => {
     const svg = figure.current?.querySelector("svg");
     if (!svg) return;
-    const found = new Map<string, string>();
-    svg.querySelectorAll("text").forEach((node) => {
-      (node.textContent ?? "").split(/[^A-Za-zÀ-ÿ0-9]+/).forEach((token) => {
-        if (ACRONYMS[token]) found.set(token, ACRONYMS[token]);
-      });
-    });
-    setGlossary(Array.from(found.entries()));
-  }, [viewBox, title]);
+    setGlossary(Array.from(applyFigureTranslations(svg, labels).entries()));
+  }, [viewBox, title, labels]);
   return (
     <figure className="course-figure" ref={figure}>
       <svg viewBox={viewBox} role="img" aria-label={title} className="course-svg">
@@ -68,9 +90,11 @@ export function Txt({
   x: number; y: number; children: ReactNode; anchor?: "start" | "middle" | "end";
   bold?: boolean; color?: string; size?: number; opacity?: number;
 }) {
+  const { figureLabels } = useLang();
+  const text = typeof children === "string" ? (figureLabels?.[children] ?? children) : children;
   return (
     <text x={x} y={y} textAnchor={anchor} fontSize={size} fontWeight={bold ? 700 : 400} fill={color ?? "currentColor"} opacity={opacity}>
-      {children}
+      {text}
     </text>
   );
 }

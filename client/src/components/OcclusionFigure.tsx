@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { resolveVisualKey } from "../library-widgets/visual-registry";
+import { applyFigureTranslations } from "./Figure";
 import { useLang } from "../i18n";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
@@ -12,6 +13,14 @@ export function OcclusionFigure({ visualKey, startHidden = false }: { visualKey:
   const [hidden, setHidden] = useState(startHidden);
   const [total, setTotal] = useState(0);
   const [found, setFound] = useState(0);
+
+  // Traduit le texte du SVG en premier : les caches de pastilles (ci-dessous)
+  // se dimensionnent sur le texte déjà traduit, dans les deux branches (avec
+  // ou sans pastilles à masquer).
+  useEffect(() => {
+    const svg = ref.current?.querySelector("svg");
+    if (svg) applyFigureTranslations(svg, figureLabels);
+  }, [visualKey, figureLabels]);
 
   useEffect(() => {
     const root = ref.current;
@@ -66,7 +75,7 @@ export function OcclusionFigure({ visualKey, startHidden = false }: { visualKey:
   const node = resolveVisualKey(visualKey);
   if (!node) return null;
   // Une structure moléculaire n'a pas de légendes à masquer.
-  if (/^(mol|amino|vitamin)\//.test(visualKey)) return <div className="molecule-figure">{node}</div>;
+  if (/^(mol|amino|vitamin)\//.test(visualKey)) return <div ref={ref} className="molecule-figure">{node}</div>;
   return (
     <div className={hidden ? "occlusion is-hidden" : "occlusion"}>
       <div className="occlusion-bar">

@@ -8,6 +8,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { ACRONYMS } from "../src/library-data/acronyms";
 import { AMINO_ACIDS } from "../src/library-data/amino-acids";
 import { VITAMINS } from "../src/library-data/vitamins";
+import { MOLECULES } from "../src/library-data/molecules";
 import { COURSE_FIGURES, resolveVisualKey } from "../src/library-widgets/visual-registry";
 
 const decode = (text: string) =>
@@ -20,7 +21,13 @@ const decode = (text: string) =>
     .replace(/&amp;/g, "&")
     .trim();
 
-const keys = [...Object.keys(COURSE_FIGURES), ...AMINO_ACIDS.map((a) => `amino/${a.code3}`), ...VITAMINS.map((v) => `vitamin/${v.code}`)];
+const keys = [
+  ...Object.keys(COURSE_FIGURES),
+  ...AMINO_ACIDS.map((a) => `amino/${a.code3}`),
+  ...VITAMINS.map((v) => `vitamin/${v.code}`),
+  ...Object.keys(MOLECULES).map((id) => `mol/${id}`),
+  "hb-quaternary",
+];
 const labels = new Set<string>();
 const originalError = console.error;
 console.error = () => {}; // avertissements React sur les clés : sans intérêt ici
