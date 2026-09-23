@@ -255,6 +255,25 @@ export function sendTrialGrantedEmail(user: RecipientUser, trialEndsAt: number):
   void sendEmailOnce(`trial-granted:${user.id}:${trialEndsAt}`, user.email, subject, html);
 }
 
+export function sendPaymentConfirmedEmail(user: RecipientUser, periodEndsAt: number | null): void {
+  const lang = normEmailLang(user.langPref);
+  const hi = user.firstName ? ` ${user.firstName}` : "";
+  const endDate = periodEndsAt
+    ? new Date(periodEndsAt).toLocaleDateString(lang === "fr" ? "fr-FR" : "en-GB", { dateStyle: "long" })
+    : null;
+  const subject = lang === "fr" ? "Paiement confirmé — accès activé 🎉" : "Payment confirmed — access activated 🎉";
+  const html = brandedEmailHtml(lang, {
+    greeting: lang === "fr" ? `Merci${hi} ! 🎉` : `Thank you${hi}! 🎉`,
+    body:
+      lang === "fr"
+        ? `Ton paiement a bien été reçu. Ton accès complet à Synapse (cours, QCM, flashcards, examens, duels) est activé${endDate ? ` jusqu'au ${endDate}` : ""}.`
+        : `Your payment has been received. Your full access to Synapse (courses, QCMs, flashcards, exams, duels) is now active${endDate ? ` until ${endDate}` : ""}.`,
+    buttonUrl: `${appUrl()}/library`,
+    button: lang === "fr" ? "Commencer à réviser" : "Start studying",
+  });
+  void sendEmailOnce(`payment-confirmed:${user.id}:${periodEndsAt ?? "na"}`, user.email, subject, html);
+}
+
 /** Notification interne à Jessica — utilisée en dehors du flux étudiant (ex : alerte manuelle). */
 export function sendAdminNotification(subject: string, body: string): void {
   const html = brandedEmailHtml("fr", { greeting: subject, body, buttonUrl: `${appUrl()}/admin`, button: "Ouvrir l'administration" });

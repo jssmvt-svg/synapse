@@ -625,4 +625,6 @@ export const api = {
     request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}/bot`, { method: "POST", body: "{}" }),
   duelLeave: (code: string) =>
     request<void>(`/duel/rooms/${encodeURIComponent(code)}/leave`, { method: "POST", body: "{}" }),
+  createCheckoutSession: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
+  openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
 };

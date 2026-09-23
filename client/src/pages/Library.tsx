@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth";
 import { api, type StudySemester } from "../api";
 import { useLang } from "../i18n";
@@ -8,13 +8,22 @@ import { libraryRoutes } from "../libraryRoutes";
 
 export function Library() {
   const { t, lang, tx } = useLang();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  const [searchParams] = useSearchParams();
   const [semesters, setSemesters] = useState<StudySemester[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     api.getStudySemesters().then(setSemesters).catch((err) => setError((err as Error).message));
   }, []);
+
+  // Le webhook Stripe active l'accès en tâche de fond ; on rafraîchit l'utilisateur
+  // au retour du paiement pour ne pas laisser afficher le bandeau "essai terminé".
+  useEffect(() => {
+    if (searchParams.get("checkout") === "success") {
+      api.me().then(setUser).catch(() => {});
+    }
+  }, [searchParams, setUser]);
 
   if (error) return <main className="library"><p className="error">{error}</p></main>;
   if (!semesters) return <main className="library"><p className="loading-state">{t.loading}</p></main>;

@@ -470,6 +470,9 @@ const SCHEMA = `
   ALTER TABLE users ADD COLUMN IF NOT EXISTS subscription_period_end BIGINT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_key TEXT;
   ALTER TABLE users ADD COLUMN IF NOT EXISTS pending_checkout_expires_at BIGINT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_customer_id TEXT;
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS stripe_subscription_id TEXT;
+  CREATE UNIQUE INDEX IF NOT EXISTS users_stripe_customer_id_key ON users (stripe_customer_id) WHERE stripe_customer_id IS NOT NULL;
 
   DO $$
   BEGIN

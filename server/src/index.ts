@@ -5,6 +5,7 @@ import "dotenv/config";
 import express, { type NextFunction, type Request, type Response } from "express";
 import helmet from "helmet";
 import { adminRouter } from "./routes/admin.js";
+import { billingRouter } from "./routes/billing.js";
 import { db, isDatabaseUnavailableError } from "./db.js";
 import { authRouter } from "./routes/auth.js";
 import { documentsRouter } from "./routes/documents.js";
@@ -33,6 +34,11 @@ app.use(
     origin: allowedOrigins.length > 0 ? allowedOrigins : true,
   }),
 );
+
+// Monté avant express.json() : le webhook Stripe a besoin du corps brut pour
+// vérifier la signature (billing.ts applique lui-même express.raw() sur cette
+// route et express.json() sur les autres routes de facturation).
+app.use("/api/billing", billingRouter);
 
 app.use(express.json({ limit: "2mb" }));
 

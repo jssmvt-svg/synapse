@@ -17,7 +17,21 @@ export function Dashboard() {
   const [error, setError] = useState<string | null>(null);
   const [progress, setProgress] = useState<ProgressSummary | null>(null);
   const [progressError, setProgressError] = useState<string | null>(null);
+  const [checkoutLoading, setCheckoutLoading] = useState(false);
+  const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+
+  async function startCheckout() {
+    setCheckoutError(null);
+    setCheckoutLoading(true);
+    try {
+      const { url } = await api.createCheckoutSession();
+      window.location.href = url;
+    } catch (err) {
+      setCheckoutError((err as Error).message);
+      setCheckoutLoading(false);
+    }
+  }
 
   async function refreshDocuments() {
     setError(null);
@@ -111,9 +125,18 @@ export function Dashboard() {
         {t.onlineBadge}
       </div>
       {user?.role !== "admin" && user?.subscriptionStatus !== "active" && user?.subscriptionStatus !== "trialing" && (
-        <div className="access-banner">
+        <div className="access-banner access-banner-pricing">
           <p className="eyebrow">{t.trialEndedBanner}</p>
-          <p>{tx("Contacte l'administration si tu as besoin d'un nouvel accès.", "Contact the administration if you need access again.")}</p>
+          <p>
+            {tx(
+              "Continue à réviser avec un accès complet : 15 € par mois, sans engagement.",
+              "Keep studying with full access: €15 per month, no commitment.",
+            )}
+          </p>
+          <button type="button" onClick={() => void startCheckout()} disabled={checkoutLoading}>
+            {checkoutLoading ? tx("Redirection…", "Redirecting…") : tx("Activer mon accès", "Activate my access")}
+          </button>
+          {checkoutError && <p className="error">{checkoutError}</p>}
         </div>
       )}
       {user?.subscriptionStatus === "trialing" && user?.trialEndsAt && (
