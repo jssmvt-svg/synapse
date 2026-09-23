@@ -12,6 +12,8 @@ export const it: Dict = {
   phoneCountry: "Prefisso",
   track: "Corso di studi",
   trackPlaceholder: "Scegli il tuo corso di studi",
+  studyLanguage: "Lingua di studio",
+  studyLanguageHint: "I corsi e le email ti saranno inviati in questa lingua.",
   trackMedicine: "Medicina",
   trackDentistry: "Odontoiatria",
   showPassword: "Mostra la password",

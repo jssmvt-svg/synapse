@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { api, setToken, type Track } from "../api";
 import { COUNTRY_CODES } from "../countryCodes";
 import { useAuth } from "../auth";
-import { useLang } from "../i18n";
+import { useLang, LANGS, LANG_NAMES, type Lang } from "../i18n";
 
 const PASSWORD_RULE = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
 
@@ -19,6 +19,7 @@ export function Register() {
   const [phoneCountryCode, setPhoneCountryCode] = useState("+33");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [track, setTrack] = useState<Track | "">("");
+  const [studyLang, setStudyLang] = useState<Lang>(lang);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -45,7 +46,7 @@ export function Register() {
         phoneCountryCode,
         phoneNumber,
         track,
-        langPref: lang,
+        langPref: studyLang,
       });
       setToken(token);
       setUser(user);
@@ -141,6 +142,15 @@ export function Register() {
             <option value="medecine">{t.trackMedicine}</option>
             <option value="dentaire">{t.trackDentistry}</option>
           </select>
+        </label>
+        <label>
+          {t.studyLanguage}
+          <select value={studyLang} onChange={(e) => setStudyLang(e.target.value as Lang)} required>
+            {LANGS.map((code) => (
+              <option key={code} value={code}>{LANG_NAMES[code]}</option>
+            ))}
+          </select>
+          <small className="password-hint">{t.studyLanguageHint}</small>
         </label>
         {error && <p className="error">{error}</p>}
         <button type="submit" disabled={busy}>

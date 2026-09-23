@@ -274,6 +274,34 @@ export function sendPaymentConfirmedEmail(user: RecipientUser, periodEndsAt: num
   void sendEmailOnce(`payment-confirmed:${user.id}:${periodEndsAt ?? "na"}`, user.email, subject, html);
 }
 
+/**
+ * Relance ciblée : étudiant dont l'essai 48h est terminé sans abonnement.
+ * Brouillon uniquement pour l'instant — pas encore relié à une route ou une
+ * tâche planifiée ; Jessica doit valider le contenu avant tout envoi réel.
+ */
+export function sendReengagementEmail(user: RecipientUser): void {
+  const lang = normEmailLang(user.langPref);
+  const hi = user.firstName ? ` ${user.firstName}` : "";
+  const subject =
+    lang === "fr"
+      ? "Synapse passe à 15 €/mois (au lieu de 25 €) — et il y a du nouveau"
+      : "Synapse is now €15/month (down from €25) — and there's new stuff";
+  const html = brandedEmailHtml(lang, {
+    greeting: lang === "fr" ? `On a pensé à toi${hi} 👋` : `We thought of you${hi} 👋`,
+    body:
+      lang === "fr"
+        ? `Depuis ton essai gratuit, Synapse a bien changé : le prix est passé de 25 € à 15 €/mois, et deux nouveautés sont arrivées. Tu peux maintenant réviser en jouant — des duels en direct contre d'autres étudiants pendant que tu apprends — et de nouveaux schémas ont été ajoutés dans les cours. De quoi prendre de l'avance sur les autres étudiants de ta promo.`
+        : `Since your free trial, Synapse has changed a lot: the price dropped from €25 to €15/month, and two new things arrived. You can now study while playing — live duels against other students as you learn — and new diagrams were added to the courses. A real edge over the rest of your class.`,
+    buttonUrl: `${appUrl()}/dashboard`,
+    button: lang === "fr" ? "Revoir Synapse" : "Take another look",
+    note:
+      lang === "fr"
+        ? "Tu as déjà testé Synapse il y a quelque temps — cette offre ne dure pas indéfiniment."
+        : "You already tried Synapse a while back — this offer won't last forever.",
+  });
+  void sendEmailOnce(`reengagement:${user.id}`, user.email, subject, html);
+}
+
 /** Notification interne à Jessica — utilisée en dehors du flux étudiant (ex : alerte manuelle). */
 export function sendAdminNotification(subject: string, body: string): void {
   const html = brandedEmailHtml("fr", { greeting: subject, body, buttonUrl: `${appUrl()}/admin`, button: "Ouvrir l'administration" });

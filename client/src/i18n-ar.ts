@@ -13,6 +13,8 @@ export const ar: Dict = {
   phoneCountry: "رمز الدولة",
   track: "التخصص",
   trackPlaceholder: "اختر تخصصك",
+  studyLanguage: "لغة الدراسة",
+  studyLanguageHint: "سيتم إرسال الدورات والرسائل الإلكترونية إليك بهذه اللغة.",
   trackMedicine: "الطب",
   trackDentistry: "طب الأسنان",
   showPassword: "إظهار كلمة المرور",

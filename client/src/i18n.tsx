@@ -28,6 +28,8 @@ const DICT = {
     phoneCountry: "Indicatif",
     track: "Filière",
     trackPlaceholder: "Choisis ta filière",
+    studyLanguage: "Langue d'étude",
+    studyLanguageHint: "Les cours et les emails te seront envoyés dans cette langue.",
     trackMedicine: "Médecine",
     trackDentistry: "Dentaire",
     showPassword: "Afficher le mot de passe",
@@ -211,6 +213,8 @@ const DICT = {
     phoneCountry: "Country code",
     track: "Track",
     trackPlaceholder: "Choose your track",
+    studyLanguage: "Study language",
+    studyLanguageHint: "Courses and emails will be sent to you in this language.",
     trackMedicine: "Medicine",
     trackDentistry: "Dentistry",
     showPassword: "Show password",
@@ -486,7 +490,7 @@ export function Fwd() {
   return <>{dir === "rtl" ? "←" : "→"}</>;
 }
 
-const LANG_NAMES: Record<Lang, string> = { fr: "Français", en: "English", ar: "العربية", it: "Italiano" };
+export const LANG_NAMES: Record<Lang, string> = { fr: "Français", en: "English", ar: "العربية", it: "Italiano" };
 
 // Sélecteur de langue ; onChange permet de mémoriser aussi le choix côté serveur.
 export function LanguageSwitcher({ onChange }: { onChange?: (lang: Lang) => void | Promise<unknown> }) {
