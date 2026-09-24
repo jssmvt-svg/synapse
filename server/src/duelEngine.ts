@@ -128,7 +128,8 @@ export interface DuelRoom {
   code: string;
   mode: GameMode;
   isPublic: boolean;
-  chapterId: number | null;
+  chapterIds: number[] | null;
+  difficulty: "easy" | "intermediate" | "hard" | null;
   players: DuelPlayer[];
   questions: EngineQuestion[];
   phase: Phase;
@@ -154,7 +155,12 @@ const BOT_AVATAR = "3-short-2-1-p-2";
 export function createRoom(
   code: string,
   host: { userId: number; name: string; avatar?: unknown },
-  options: { isPublic: boolean; chapterId: number | null; mode?: unknown },
+  options: {
+    isPublic: boolean;
+    chapterIds: number[] | null;
+    difficulty?: "easy" | "intermediate" | "hard" | null;
+    mode?: unknown;
+  },
   now: number,
 ): DuelRoom {
   const mode = normalizeMode(options.mode);
@@ -162,7 +168,8 @@ export function createRoom(
     code,
     mode,
     isPublic: options.isPublic,
-    chapterId: options.chapterId,
+    chapterIds: options.chapterIds,
+    difficulty: options.difficulty ?? null,
     players: [newPlayer(host, now, mode)],
     questions: [],
     phase: "waiting",

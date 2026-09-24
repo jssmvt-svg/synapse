@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { api, type DuelOverview, type DuelState, type StudySemester, type LibrarySubject } from "../api";
+import { api, type DuelOverview, type DuelState, type StudySemester, type LibrarySubject, type DuelDifficulty } from "../api";
 import { avatarInfo, loadAvatarCode, PRESETS, saveAvatarCode } from "../components/avatars";
 import {
   ELEMENTS,
@@ -161,6 +161,7 @@ function Lobby() {
   const [subjects, setSubjects] = useState<LibrarySubject[] | null>(null);
   const [subjectSlug, setSubjectSlug] = useState<string>("");
   const [chapterId, setChapterId] = useState<number | "">("");
+  const [difficulty, setDifficulty] = useState<DuelDifficulty | "">("");
 
   useEffect(() => {
     api.duelOverview().then(setOverview).catch((err: Error) => setError(err.message));
@@ -179,6 +180,10 @@ function Lobby() {
   }, [semesterNumber]);
 
   const selectedSubject = subjects?.find((s) => s.slug === subjectSlug) ?? null;
+  // Chapitre précis choisi -> juste lui ; sinon toute la matière choisie ;
+  // sinon aucun filtre (tout le semestre accessible).
+  const selectedChapterIds =
+    chapterId !== "" ? [chapterId] : selectedSubject ? selectedSubject.chapters.map((c) => c.id) : null;
 
   function chooseAvatar(code: string) {
     setAvatarCode(code);
@@ -311,6 +316,12 @@ function Lobby() {
               <option key={c.id} value={c.id}>{lang === "fr" ? c.titre_fr : c.titre_en}</option>
             ))}
           </select>
+          <select value={difficulty} onChange={(e) => setDifficulty(e.target.value as DuelDifficulty | "")}>
+            <option value="">{l("Toutes difficultés", "Any difficulty")}</option>
+            <option value="easy">{l("Facile", "Easy")}</option>
+            <option value="intermediate">{l("Intermédiaire", "Intermediate")}</option>
+            <option value="hard">{l("Difficile", "Hard")}</option>
+          </select>
         </div>
       </section>
 
@@ -325,7 +336,7 @@ function Lobby() {
         <button
           className="duel-button"
           disabled={busy}
-          onClick={() => enter(() => api.duelCreateRoom(avatarCode, mode, chapterId === "" ? null : chapterId))}
+          onClick={() => enter(() => api.duelCreateRoom(avatarCode, mode, selectedChapterIds, difficulty || null))}
         >
           🔗 {l("Créer une salle privée", "Create a private room")}
         </button>

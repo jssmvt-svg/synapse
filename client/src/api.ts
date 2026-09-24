@@ -430,6 +430,8 @@ export interface AdminChapter {
 
 export type DuelMode = "combat" | "race" | "surgery" | "tug";
 
+export type DuelDifficulty = "easy" | "intermediate" | "hard";
+
 export type DuelPhase = "waiting" | "countdown" | "question" | "reveal" | "finished";
 
 export interface DuelState {
@@ -614,8 +616,12 @@ export const api = {
       body: JSON.stringify({ sessionId, answers }),
     }),
   duelOverview: () => request<DuelOverview>("/duel/me"),
-  duelCreateRoom: (avatar: string, mode: DuelMode, chapterId?: number | null) =>
-    request<DuelState>("/duel/rooms", { method: "POST", body: JSON.stringify({ avatar, mode, chapterId }) }),
+  duelCreateRoom: (
+    avatar: string,
+    mode: DuelMode,
+    chapterIds?: number[] | null,
+    difficulty?: DuelDifficulty | null,
+  ) => request<DuelState>("/duel/rooms", { method: "POST", body: JSON.stringify({ avatar, mode, chapterIds, difficulty }) }),
   duelQuickMatch: (avatar: string, mode: DuelMode) =>
     request<DuelState>("/duel/quick", { method: "POST", body: JSON.stringify({ avatar, mode }) }),
   duelJoinRoom: (code: string, avatar: string) =>

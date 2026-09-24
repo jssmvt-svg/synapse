@@ -435,6 +435,14 @@ const SCHEMA = `
   ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_flashcards ADD COLUMN IF NOT EXISTS visual_key TEXT;
   ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS visual_key TEXT;
+  ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS difficulty TEXT NOT NULL DEFAULT 'intermediate';
+  DO $$
+  BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'library_qcm_questions_difficulty_check') THEN
+      ALTER TABLE library_qcm_questions ADD CONSTRAINT library_qcm_questions_difficulty_check
+        CHECK (difficulty IN ('easy', 'intermediate', 'hard'));
+    END IF;
+  END $$;
   ALTER TABLE library_course_resources ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_qcm_questions ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;
   ALTER TABLE library_qcm_options ADD COLUMN IF NOT EXISTS is_active BOOLEAN NOT NULL DEFAULT TRUE;

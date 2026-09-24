@@ -115,13 +115,23 @@ async function hasStudyAccess(userId: number): Promise<boolean> {
 
 // Questions à réponse unique, communes aux deux joueurs (pas de contenu verrouillé
 // pour l'un des deux).
+const DIFFICULTIES = ["easy", "intermediate", "hard"] as const;
+type Difficulty = (typeof DIFFICULTIES)[number];
+function normalizeDifficulty(value: unknown): Difficulty | null {
+  return DIFFICULTIES.includes(value as Difficulty) ? (value as Difficulty) : null;
+}
+
 async function pickQuestions(
   userIds: number[],
-  chapterId: number | null,
+  chapterIds: number[] | null,
+  difficulty: Difficulty | null,
 ): Promise<EngineQuestion[]> {
   const sets = await Promise.all(userIds.map((id) => accessibleChapterIds(id)));
   let shared = [...sets[0]].filter((id) => sets.every((set) => set.has(id)));
-  if (chapterId !== null) shared = shared.filter((id) => id === chapterId);
+  if (chapterIds && chapterIds.length > 0) {
+    const wanted = new Set(chapterIds);
+    shared = shared.filter((id) => wanted.has(id));
+  }
   if (shared.length === 0) return [];
 
   const questionRows = await db
@@ -129,9 +139,10 @@ async function pickQuestions(
       `SELECT id, chapter_id, prompt_fr, prompt_en, explanation_fr, explanation_en
        FROM library_qcm_questions
        WHERE is_active = true AND multiple_answers = false AND chapter_id = ANY(?)
+         AND difficulty = ANY(?)
        ORDER BY random() LIMIT 40`,
     )
-    .all(shared);
+    .all(shared, difficulty ? [difficulty] : DIFFICULTIES);
   if (questionRows.length === 0) return [];
 
   const optionRows = await db
@@ -267,7 +278,8 @@ async function joinAndStart(room: DuelRoom, userId: number, avatar: unknown): Pr
   const guestName = await displayName(userId);
   const questions = await pickQuestions(
     [room.players[0].userId, userId],
-    room.chapterId,
+    room.chapterIds,
+    room.difficulty,
   );
   if (questions.length < MIN_QUESTIONS) return NOT_ENOUGH;
   const error = joinRoom(room, { userId, name: guestName, avatar }, questions, Date.now());
@@ -318,11 +330,13 @@ duelRouter.post("/rooms", async (req: AuthedRequest, res) => {
   if (existing) return res.json(await snapshot(existing, userId));
   if (!(await hasStudyAccess(userId))) return res.status(403).json({ error: NO_ACCESS });
 
-  const chapterId = Number.isInteger(req.body?.chapterId) ? Number(req.body.chapterId) : null;
+  const rawChapterIds = Array.isArray(req.body?.chapterIds) ? req.body.chapterIds : [];
+  const chapterIds = rawChapterIds.filter((id: unknown) => Number.isInteger(id)).map(Number);
+  const difficulty = normalizeDifficulty(req.body?.difficulty);
   const room = createRoom(
     newCode(),
     { userId, name: await displayName(userId), avatar: req.body?.avatar },
-    { isPublic: false, chapterId, mode: req.body?.mode },
+    { isPublic: false, chapterIds: chapterIds.length > 0 ? chapterIds : null, difficulty, mode: req.body?.mode },
     Date.now(),
   );
   rooms.set(room.code, room);
@@ -357,7 +371,7 @@ duelRouter.post("/quick", async (req: AuthedRequest, res) => {
   const room = createRoom(
     newCode(),
     { userId, name: await displayName(userId), avatar: req.body?.avatar },
-    { isPublic: true, chapterId: null, mode: req.body?.mode },
+    { isPublic: true, chapterIds: null, mode: req.body?.mode },
     now,
   );
   rooms.set(room.code, room);
@@ -387,7 +401,7 @@ duelRouter.post("/rooms/:code/bot", async (req: AuthedRequest, res) => {
   const room = roomFor(req);
   if (!room) return res.status(404).json({ error: "Duel introuvable" });
   if (room.phase === "waiting") {
-    const questions = await pickQuestions([req.userId!], room.chapterId);
+    const questions = await pickQuestions([req.userId!], room.chapterIds, room.difficulty);
     if (questions.length < MIN_QUESTIONS) return res.status(409).json({ error: NOT_ENOUGH });
     if (room.phase === "waiting") addBot(room, questions, Date.now());
   }

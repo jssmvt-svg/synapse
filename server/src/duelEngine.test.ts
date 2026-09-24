@@ -38,7 +38,7 @@ const questions: EngineQuestion[] = Array.from({ length: 10 }, (_, index) => ({
 }));
 
 function startedRoom() {
-  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: false, chapterId: null }, 0);
+  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: false, chapterIds: null }, 0);
   assert.equal(joinRoom(room, { userId: 2, name: "Ben" }, questions, 0), null);
   advance(room, COUNTDOWN_MS);
   assert.equal(room.phase, "question");
@@ -46,7 +46,7 @@ function startedRoom() {
 }
 
 test("refuse qu'un joueur rejoigne sa propre salle ou une salle pleine", () => {
-  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: false, chapterId: null }, 0);
+  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: false, chapterIds: null }, 0);
   assert.equal(joinRoom(room, { userId: 1, name: "Ana" }, questions, 0), "ALREADY_IN_ROOM");
   assert.equal(joinRoom(room, { userId: 2, name: "Ben" }, questions, 0), null);
   assert.equal(joinRoom(room, { userId: 3, name: "Cy" }, questions, 0), "ROOM_NOT_JOINABLE");
@@ -169,7 +169,7 @@ test("un joueur silencieux trop longtemps est déclaré forfait", () => {
 });
 
 test("quitter une salle en attente l'annule sans vainqueur", () => {
-  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: true, chapterId: null }, 0);
+  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: true, chapterIds: null }, 0);
   leaveRoom(room, 1, 10);
   assert.equal(room.phase, "finished");
   assert.equal(outcomeFor(room, 1), null);
@@ -181,7 +181,7 @@ test("l'avatar est un code validé, sinon avatar par défaut", () => {
   for (const bad of ["<script>", "kaito", "9-spiky-0-0-p-0", "1-mohawk-0-0-p-0", "1-spiky-9-0-p-0", "1-spiky-0-8-p-0", "1-spiky-0-0-p-6", undefined, 42]) {
     assert.equal(normalizeAvatar(bad), DEFAULT_AVATAR);
   }
-  const room = createRoom("ABCDE", { userId: 1, name: "Ana", avatar: "4-braids-1-7-s-4" }, { isPublic: false, chapterId: null }, 0);
+  const room = createRoom("ABCDE", { userId: 1, name: "Ana", avatar: "4-braids-1-7-s-4" }, { isPublic: false, chapterIds: null }, 0);
   joinRoom(room, { userId: 2, name: "Ben", avatar: "inconnu" }, questions, 0);
   const view = viewFor(room, 1, 0);
   assert.equal(view.me.avatar, "4-braids-1-7-s-4");
@@ -226,7 +226,7 @@ test("une mauvaise réponse casse la série", () => {
 });
 
 function startedModeRoom(mode: string) {
-  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: false, chapterId: null, mode }, 0);
+  const room = createRoom("ABCDE", { userId: 1, name: "Ana" }, { isPublic: false, chapterIds: null, mode }, 0);
   joinRoom(room, { userId: 2, name: "Ben" }, questions, 0);
   advance(room, COUNTDOWN_MS);
   return room;
@@ -312,7 +312,7 @@ test("tir à la corde : deux tireurs égaux ne bougent pas la corde", () => {
 });
 
 test("le bot répond seul, reste présent et un duel contre lui va à son terme", () => {
-  const room = createRoom("BOT01", { userId: 1, name: "Moi" }, { isPublic: true, chapterId: null }, 0);
+  const room = createRoom("BOT01", { userId: 1, name: "Moi" }, { isPublic: true, chapterIds: null }, 0);
   assert.equal(addBot(room, questions, 0), null);
   assert.equal(room.players[1].userId, BOT_ID);
   let now = COUNTDOWN_MS;
