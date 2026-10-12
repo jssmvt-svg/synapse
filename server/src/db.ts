@@ -244,6 +244,22 @@ const SCHEMA = `
     CONSTRAINT library_flashcards_chapter_ordre_key UNIQUE (chapter_id, ordre)
   );
 
+  -- Questions ouvertes (« open questions ») officielles : énoncé rédactionnel +
+  -- réponse modèle, stockés en bilingue (comme les flashcards) pour que
+  -- l'étudiant s'entraîne à rédiger puis compare à un corrigé fidèle au cours.
+  CREATE TABLE IF NOT EXISTS library_open_questions (
+    id SERIAL PRIMARY KEY,
+    chapter_id INTEGER NOT NULL REFERENCES library_chapters(id) ON DELETE CASCADE,
+    ordre INTEGER NOT NULL DEFAULT 0,
+    question_fr TEXT NOT NULL,
+    question_en TEXT NOT NULL,
+    answer_fr TEXT NOT NULL,
+    answer_en TEXT NOT NULL,
+    is_active BOOLEAN NOT NULL DEFAULT TRUE,
+    created_at BIGINT NOT NULL,
+    CONSTRAINT library_open_questions_chapter_ordre_key UNIQUE (chapter_id, ordre)
+  );
+
   -- Ressources de cours officielles. Le contenu français est toujours stocké
   -- séparément : l'interface peut être en anglais sans jamais masquer la
   -- source pédagogique fournie en français.

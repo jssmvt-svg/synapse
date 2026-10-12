@@ -98,6 +98,31 @@ async function seedMatiere(
           );
       }
 
+      await database.prepare("UPDATE library_open_questions SET is_active = false WHERE chapter_id = ?").run(inserted.id);
+      for (const [index, openQuestion] of (chapter.openQuestions ?? []).entries()) {
+        await database
+          .prepare(
+            `INSERT INTO library_open_questions
+               (chapter_id, ordre, question_fr, question_en, answer_fr, answer_en, created_at)
+             VALUES (?, ?, ?, ?, ?, ?, ?)
+             ON CONFLICT (chapter_id, ordre) DO UPDATE SET
+               question_fr = EXCLUDED.question_fr,
+               question_en = EXCLUDED.question_en,
+               answer_fr = EXCLUDED.answer_fr,
+               answer_en = EXCLUDED.answer_en,
+               is_active = true`,
+          )
+          .run(
+            inserted.id,
+            index + 1,
+            openQuestion.question_fr,
+            openQuestion.question_en,
+            openQuestion.answer_fr,
+            openQuestion.answer_en,
+            now,
+          );
+      }
+
       if (chapter.learning) {
         await seedLearningContent(database, inserted.id, chapter.learning, now);
       }

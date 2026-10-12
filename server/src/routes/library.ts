@@ -503,7 +503,7 @@ libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
   const chapter = await requireChapterAccess(req, res, chapterId);
   if (!chapter) return;
 
-  const [resources, flashcards, qcm, exams, progress] = await Promise.all([
+  const [resources, flashcards, qcm, exams, openQuestions, progress] = await Promise.all([
     db
       .prepare(
         `SELECT id, ordre, resource_type, titre_fr, titre_en, content_fr, content_en, source_label
@@ -548,10 +548,16 @@ libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
          FROM library_chapter_exams WHERE chapter_id = ? AND is_active = true ORDER BY id ASC`,
       )
       .all(chapterId),
+    db
+      .prepare(
+        `SELECT id, ordre, question_fr, question_en, answer_fr, answer_en
+         FROM library_open_questions WHERE chapter_id = ? AND is_active = true ORDER BY ordre ASC`,
+      )
+      .all(chapterId),
     getProgress(req.userId!, chapterId),
   ]);
 
-  res.json({ chapter, resources, flashcards, qcm, exams, progress });
+  res.json({ chapter, resources, flashcards, qcm, exams, openQuestions, progress });
 });
 
 libraryRouter.get("/chapters/:id/flashcards", async (req: AuthedRequest, res) => {

@@ -8301,3 +8301,17 @@ html[dir="rtl"] input[type="password"] { direction: ltr; text-align: right; }
 
 .admin-email-preview { margin-top: 0.8rem; width: 100%; }
 .admin-email-preview iframe { width: 100%; height: 420px; border: 1px solid #e2e8f0; border-radius: 10px; background: #fff; }
+
+/* Questions ouvertes / Open questions */
+.open-questions-panel .hint { margin-top: 0.35rem; }
+.open-question-card {
+  margin: 1rem 0 1.25rem;
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent, #0ea5a4);
+  border-radius: 14px;
+  background: var(--surface-muted, rgba(14, 165, 164, 0.08));
+}
+.open-question-card h2 { margin: 0; font-size: 1.15rem; line-height: 1.45; }
+.open-question-answer { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border); }
+.open-question-answer .course-copy { margin-top: 0.6rem; }

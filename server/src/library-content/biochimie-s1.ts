@@ -38,6 +38,16 @@ export interface LibraryCardSeed {
   visual_key?: string;
 }
 
+// Question ouverte (« open question ») : énoncé rédactionnel du cours et sa
+// réponse modèle. Stockée en bilingue inline (comme les flashcards) car la
+// source officielle est fournie directement dans les deux langues.
+export interface LibraryOpenQuestionSeed {
+  question_fr: string;
+  question_en: string;
+  answer_fr: string;
+  answer_en: string;
+}
+
 export interface LibraryChapterSeed {
   ordre: number;
   titre_fr: string;
@@ -53,6 +63,9 @@ export interface LibraryChapterSeed {
   widget_key?: string;
   cards: LibraryCardSeed[];
   learning?: LibraryLearningSeed;
+  // Questions ouvertes du chapitre (sujets d'examen oral/rédactionnel), avec
+  // réponse modèle fidèle au cours. Absent = pas de questions ouvertes.
+  openQuestions?: LibraryOpenQuestionSeed[];
 }
 
 export interface LibraryQcmOptionSeed {
