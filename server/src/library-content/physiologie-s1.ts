@@ -69,6 +69,21 @@ import {
   INTERPRETATION_PATTERNS_LEARNING,
   INTERPRETATION_PATTERNS_FLASHCARDS,
 } from "./physiologie-labo-s1-lotE.js";
+import {
+  OPEN_L1_CELL_MEMBRANE,
+  OPEN_L2_RECEPTORS,
+  OPEN_L3_NEURON,
+  OPEN_L4_MUSCLE,
+  OPEN_L5_HEMATOPOIESIS,
+  OPEN_L6_ERYTHROCYTES,
+  OPEN_L7_HEMOSTASIS,
+  OPEN_L8_GLOMERULAR,
+  OPEN_L9_TUBULAR,
+  OPEN_L10_CLEARANCE,
+  OPEN_L11_REGULATION,
+  OPEN_L12_SECRETION,
+  OPEN_L13_ABSORPTION,
+} from "./physiologie-s1-open-questions.js";
 
 // Le quiz "Formule Urine" (10 questions) a ete capture en deux morceaux
 // (Q1-8 dans le lot C, Q9-10 dans le lot D) : on les fusionne en un seul
@@ -97,6 +112,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🧫",
     learning: CELL_MEMBRANE_LEARNING,
     cards: CELL_MEMBRANE_FLASHCARDS,
+    openQuestions: OPEN_L1_CELL_MEMBRANE,
   },
   {
     ordre: 2,
@@ -107,6 +123,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🔗",
     learning: RECEPTORS_SIGNALING_LEARNING,
     cards: RECEPTORS_SIGNALING_FLASHCARDS,
+    openQuestions: OPEN_L2_RECEPTORS,
   },
   {
     ordre: 3,
@@ -117,6 +134,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "⚡",
     learning: NEURON_PHYSIOLOGY_LEARNING,
     cards: NEURON_PHYSIOLOGY_FLASHCARDS,
+    openQuestions: OPEN_L3_NEURON,
   },
   {
     ordre: 4,
@@ -127,6 +145,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "💪",
     learning: MUSCLE_PHYSIOLOGY_LEARNING,
     cards: MUSCLE_PHYSIOLOGY_FLASHCARDS,
+    openQuestions: OPEN_L4_MUSCLE,
   },
   {
     ordre: 5,
@@ -137,6 +156,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🩸",
     learning: RED_BLOOD_CELLS_LEARNING,
     cards: RED_BLOOD_CELLS_FLASHCARDS,
+    openQuestions: OPEN_L6_ERYTHROCYTES,
   },
   {
     ordre: 6,
@@ -147,6 +167,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🛡️",
     learning: HEMATOPOIESIS_LEUKOCYTES_LEARNING,
     cards: HEMATOPOIESIS_LEUKOCYTES_FLASHCARDS,
+    openQuestions: OPEN_L5_HEMATOPOIESIS,
   },
   {
     ordre: 7,
@@ -157,6 +178,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🩹",
     learning: HEMOSTASIS_LEARNING,
     cards: HEMOSTASIS_FLASHCARDS,
+    openQuestions: OPEN_L7_HEMOSTASIS,
   },
   {
     ordre: 8,
@@ -167,6 +189,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🫘",
     learning: RENAL_FILTRATION_LEARNING,
     cards: RENAL_FILTRATION_FLASHCARDS,
+    openQuestions: OPEN_L8_GLOMERULAR,
   },
   {
     ordre: 9,
@@ -177,6 +200,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🧪",
     learning: TUBULAR_FUNCTIONS_LEARNING,
     cards: TUBULAR_FUNCTIONS_FLASHCARDS,
+    openQuestions: OPEN_L9_TUBULAR,
   },
   {
     ordre: 10,
@@ -187,6 +211,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "💧",
     learning: RENAL_EXCRETION_LEARNING,
     cards: RENAL_EXCRETION_FLASHCARDS,
+    openQuestions: OPEN_L10_CLEARANCE,
   },
   {
     ordre: 11,
@@ -197,6 +222,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🚽",
     learning: RENAL_REGULATION_LEARNING,
     cards: RENAL_REGULATION_FLASHCARDS,
+    openQuestions: OPEN_L11_REGULATION,
   },
   {
     ordre: 12,
@@ -207,6 +233,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🦷",
     learning: DIGESTIVE_SECRETION_LEARNING,
     cards: DIGESTIVE_SECRETION_FLASHCARDS,
+    openQuestions: OPEN_L12_SECRETION,
   },
   {
     ordre: 13,
@@ -217,6 +244,7 @@ export const PHYSIOLOGIE_S1: LibraryChapterSeed[] = [
     icone: "🍽️",
     learning: DIGESTION_ABSORPTION_LEARNING,
     cards: DIGESTION_ABSORPTION_FLASHCARDS,
+    openQuestions: OPEN_L13_ABSORPTION,
   },
   {
     ordre: 14,

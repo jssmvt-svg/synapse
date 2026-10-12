@@ -242,12 +242,22 @@ export interface LibraryProgress {
   }>;
 }
 
+export interface LibraryOpenQuestion {
+  id: number;
+  ordre: number;
+  question_fr: string;
+  question_en: string;
+  answer_fr: string;
+  answer_en: string;
+}
+
 export interface LibraryChapterDetail {
   chapter: LibraryChapter;
   resources: LibraryResource[];
   flashcards: Flashcard[];
   qcm: LibraryQcmQuestion[];
   exams: LibraryExam[];
+  openQuestions: LibraryOpenQuestion[];
   progress: LibraryProgress;
 }
 

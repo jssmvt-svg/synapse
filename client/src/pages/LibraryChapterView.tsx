@@ -8,6 +8,7 @@ import {
   type Flashcard,
   type LibraryChapter,
   type LibraryChapterDetail,
+  type LibraryOpenQuestion,
   type LibraryQcmQuestion,
   type LibraryResource,
   type QcmAttemptResult,
@@ -28,7 +29,7 @@ import {
   WaterSolubleVitaminGallery,
 } from "../components/BiochemistryGalleries";
 
-type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget" | "diagrams";
+type Activity = "hub" | "resource" | "qcm" | "flashcards" | "exam" | "widget" | "diagrams" | "open-questions";
 
 function localized(
   lang: Lang,
@@ -386,6 +387,81 @@ function FlashcardReview({
   );
 }
 
+function OpenQuestionsPractice({
+  questions,
+  lang,
+  onBack,
+}: {
+  questions: LibraryOpenQuestion[];
+  lang: Lang;
+  onBack: () => void;
+}) {
+  const { t, tx } = useLang();
+  const [index, setIndex] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const question = questions[index];
+
+  useEffect(() => {
+    setRevealed(false);
+  }, [index]);
+
+  if (!question) return <p className="hint">{t.noContent}</p>;
+
+  const go = (next: number) => {
+    setIndex((next + questions.length) % questions.length);
+  };
+
+  return (
+    <section className="learning-panel open-questions-panel">
+      <div className="panel-topline">
+        <button type="button" className="text-button" onClick={onBack}>
+          {t.backToLibrary}
+        </button>
+        <span className="progress-label">
+          {tx(
+            `Question ${index + 1} / ${questions.length}`,
+            `Question ${index + 1} / ${questions.length}`,
+          )}
+        </span>
+      </div>
+      <p className="eyebrow">{tx("Questions ouvertes", "Open questions")}</p>
+      <p className="hint">
+        {tx(
+          "Rédige ta réponse de mémoire, puis révèle le corrigé pour la comparer.",
+          "Draft your answer from memory, then reveal the model answer to compare.",
+        )}
+      </p>
+      <article className="open-question-card">
+        <h2>{localized(lang, question.question_fr, question.question_en)}</h2>
+      </article>
+      {revealed ? (
+        <div className="open-question-answer">
+          <p className="eyebrow">{tx("Réponse modèle", "Model answer")}</p>
+          <MarkdownContent
+            content={localized(lang, question.answer_fr, question.answer_en)}
+            className="course-copy"
+          />
+          <button type="button" className="text-button" onClick={() => setRevealed(false)}>
+            {tx("Masquer la réponse", "Hide the answer")}
+          </button>
+        </div>
+      ) : (
+        <button type="button" onClick={() => setRevealed(true)}>
+          {tx("Révéler la réponse modèle", "Reveal the model answer")}
+        </button>
+      )}
+      <div className="question-navigation">
+        <button type="button" className="nav-secondary" onClick={() => go(index - 1)}>
+          <Back /> {tx("Question précédente", "Previous question")}
+        </button>
+        <button type="button" className="nav-secondary" onClick={() => go(index + 1)}>
+          {tx("Question suivante", "Next question")} <Fwd />
+        </button>
+      </div>
+    </section>
+  );
+}
+
 function ExamReview({
   result,
   questions,
@@ -638,7 +714,7 @@ export function LibraryChapterView() {
 
   useEffect(() => {
     const requestedActivity = searchParams.get("activity");
-    if (requestedActivity === "resource" || requestedActivity === "qcm" || requestedActivity === "flashcards" || requestedActivity === "diagrams" || requestedActivity === "exam") {
+    if (requestedActivity === "resource" || requestedActivity === "qcm" || requestedActivity === "flashcards" || requestedActivity === "diagrams" || requestedActivity === "exam" || requestedActivity === "open-questions") {
       setActivity(requestedActivity);
     }
     const requestedResource = Number(searchParams.get("resourceId"));
@@ -655,6 +731,8 @@ export function LibraryChapterView() {
   );
   const activeResource = detail.resources.find((resource) => resource.id === resourceId) ?? detail.resources[0];
   const exam = detail.exams[0];
+  const openQuestions = detail.openQuestions ?? [];
+  const hasOpenQuestions = openQuestions.length > 0;
   const isProteinCompositionChapter =
     detail.chapter.titre_fr === "Composition et structure des protéines (partie 1)";
   const isCarbohydrateChapter = detail.chapter.titre_fr === "Glucides";
@@ -697,6 +775,7 @@ export function LibraryChapterView() {
     ...(diagramKeys.length ? [{ activity: "diagrams" as Activity, label: tx("Schémas à compléter", "Label the diagrams") }] : []),
     { activity: "qcm" as Activity, label: "QCM" },
     { activity: "flashcards" as Activity, label: tx("Flashcards", "Flashcards") },
+    ...(hasOpenQuestions ? [{ activity: "open-questions" as Activity, label: tx("Questions ouvertes", "Open questions") }] : []),
     ...(exam ? [{ activity: "exam" as Activity, label: tx("Examen du chapitre", "Chapter exam") }] : []),
   ];
   const currentStep = steps.findIndex((step) =>
@@ -784,6 +863,14 @@ export function LibraryChapterView() {
               <strong>{tx(`${detail.flashcards.length} cartes`, `${detail.flashcards.length} cards`)}</strong>
               <small>{t.continueAction}</small>
             </button>
+            {hasOpenQuestions && (
+              <button type="button" className="activity-card" onClick={() => setActivity("open-questions")}>
+                <span className="activity-icon">✍️</span>
+                <span className="eyebrow">{tx("Questions ouvertes", "Open questions")}</span>
+                <strong>{tx(`${openQuestions.length} sujets à rédiger`, `${openQuestions.length} topics to write`)}</strong>
+                <small>{t.continueAction}</small>
+              </button>
+            )}
             {detail.chapter.widget_key === "hb-o2-curve" && (
               <button type="button" className="activity-card" onClick={() => setActivity("widget")}>
                 <span className="activity-icon">📈</span>
@@ -841,6 +928,9 @@ export function LibraryChapterView() {
       )}
       {activity === "flashcards" && (
         <FlashcardReview chapter={detail} cards={detail.flashcards} lang={lang} onBack={() => setActivity("hub")} />
+      )}
+      {activity === "open-questions" && (
+        <OpenQuestionsPractice questions={openQuestions} lang={lang} onBack={() => setActivity("hub")} />
       )}
       {activity === "exam" && exam && (
         <TimedExam chapter={detail} exam={exam} questions={detail.qcm} lang={lang} onBack={() => setActivity("hub")} />
