@@ -90,7 +90,7 @@ export function Landing() {
         </div>
         <ol className="prearrival-steps">
           <li><strong>01</strong><span>{tx("Comprendre la plateforme", "Understand the platform")}</span></li>
-          <li><strong>02</strong><span>{tx("Explorer les deux semestres", "Explore both semesters")}</span></li>
+          <li><strong>02</strong><span>{tx("Explorer le semestre 1 gratuitement", "Explore semester 1 for free")}</span></li>
           <li><strong>03</strong><span>{tx("Construire ton rythme", "Build your routine")}</span></li>
         </ol>
         <Link to="/register" className="landing-outline">{tx("Créer mon accès", "Create my access")} <Fwd /></Link>

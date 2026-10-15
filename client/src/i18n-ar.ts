@@ -20,7 +20,7 @@ export const ar: Dict = {
   showPassword: "إظهار كلمة المرور",
   hidePassword: "إخفاء كلمة المرور",
   passwordRequirements: "٨ أحرف على الأقل، وحرف كبير، ورقم.",
-  trialActiveUntil: "التجربة المجانية فعّالة حتى",
+  trialActiveUntil: "الوقت المتبقي من تجربتك المجانية",
   trialEndedBanner: "انتهت تجربتك المجانية (٨ أيام). اشترك للمتابعة.",
   submit: "تأكيد",
   logout: "تسجيل الخروج",

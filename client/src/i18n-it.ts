@@ -19,7 +19,7 @@ export const it: Dict = {
   showPassword: "Mostra la password",
   hidePassword: "Nascondi la password",
   passwordRequirements: "Almeno 8 caratteri, una maiuscola e un numero.",
-  trialActiveUntil: "Prova gratuita attiva fino al",
+  trialActiveUntil: "Tempo rimasto della prova gratuita",
   trialEndedBanner: "La tua prova gratuita di 8 giorni è terminata. Abbonati per continuare.",
   submit: "Conferma",
   logout: "Esci",
