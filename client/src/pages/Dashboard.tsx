@@ -6,6 +6,7 @@ import { useLang, Fwd, LanguageSwitcher } from "../i18n";
 import { libraryRoutes } from "../libraryRoutes";
 import { SearchBar } from "../components/SearchBar";
 import { TrialCountdown } from "../components/TrialCountdown";
+import { LaunchOfferNote, useLaunchOffer } from "../components/LaunchOffer";
 
 export function Dashboard() {
   const { t, lang, setLang, tx } = useLang();
@@ -20,6 +21,7 @@ export function Dashboard() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState<string | null>(null);
   const fileInput = useRef<HTMLInputElement>(null);
+  const launchOffer = useLaunchOffer();
 
   async function startCheckout() {
     setCheckoutError(null);
@@ -133,6 +135,7 @@ export function Dashboard() {
               "Keep studying with full access to both semesters: €10 per month, no commitment.",
             )}
           </p>
+          <LaunchOfferNote offer={launchOffer} />
           <button type="button" onClick={() => void startCheckout()} disabled={checkoutLoading}>
             {checkoutLoading ? tx("Redirection…", "Redirecting…") : tx("Activer mon accès", "Activate my access")}
           </button>
@@ -149,6 +152,7 @@ export function Dashboard() {
               "Your trial covers semester 1. Subscribe (€10/month, no commitment) to unlock semester 2 as well.",
             )}
           </p>
+          <LaunchOfferNote offer={launchOffer} />
           <button type="button" onClick={() => void startCheckout()} disabled={checkoutLoading}>
             {checkoutLoading ? tx("Redirection…", "Redirecting…") : tx("M'abonner maintenant", "Subscribe now")}
           </button>
