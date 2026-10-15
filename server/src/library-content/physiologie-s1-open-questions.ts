@@ -1142,3 +1142,82 @@ export const OPEN_L13_ABSORPTION: LibraryOpenQuestionSeed[] = [
       "**Iron**: only **5-10%** of dietary intake is absorbed, in the **duodenum**. The Fe³⁺ of insoluble complexes is reduced to absorbable **Fe²⁺** by HCl, **vitamin C** and the brush-border ferric reductase (heme is released by the proteolytic enzymes). Apical pole: **H⁺/Fe²⁺ co-transport** (or facilitated diffusion for heme). Within the cell: Fe²⁺ is oxidized to Fe³⁺ (ferroxidase) then stored as **ferritin** or exported. Basal pole: export via **ferroportin**, then binding to plasma **transferrin** (→ liver, marrow). Absorption is finely set by **negative feedback**: hepatic **hepcidin**, released when stores are sufficient, reduces ferroportin activity and hence absorption. **Vitamins**: the **fat-soluble (A, D, E, K)** are absorbed in the duodenum/jejunum by **simple diffusion** (included in the micelles); the **water-soluble (B complex, C, folic acid)** by **Na⁺/vitamin co-transport** and facilitated diffusion; **vitamin B12** is absorbed specifically in the **ileum**, by **endocytosis of the B12/intrinsic factor complex**, then carried as a B12/transcobalamin II complex.",
   },
 ];
+
+// ===========================================================================
+// Schémas des cours associés aux réponses modèles
+// ===========================================================================
+// Pour chaque sujet (position 1-10 dans sa LECTURE), les schémas du cours
+// condensé correspondant qui illustrent la réponse. Ils sont ajoutés à la fin
+// de answer_fr / answer_en sous forme de marqueurs [[visual:clé]] (rendus par
+// MarkdownContent, comme dans les cours). Pas de schéma quand aucun schéma du
+// cours ne correspond au sujet.
+const OPEN_QUESTION_VISUALS: [LibraryOpenQuestionSeed[], (string[] | null)[]][] = [
+  [OPEN_L1_CELL_MEMBRANE, [
+    ["phys/membrane", "phys/lipid-messengers"], ["phys/membrane-proteins"], ["phys/passive-transport"],
+    ["phys/ion-channels"], ["phys/ion-channels"], ["phys/ion-channels"],
+    ["phys/active-transport"], ["phys/active-transport"], ["phys/active-transport"], ["phys/active-transport"],
+  ]],
+  [OPEN_L2_RECEPTORS, [
+    ["phys/g-protein-cycle", "phys/g-protein-types"], ["phys/receptor-types"], ["phys/ligand-receptor"],
+    ["phys/signal-cascade"], ["phys/feedback"], null, null, ["phys/reflex-arc"], ["phys/reflex-arc"], null,
+  ]],
+  [OPEN_L3_NEURON, [
+    ["phys/resting-potential"], ["phys/action-potential"], ["phys/action-potential"], ["phys/excitability"],
+    ["phys/conduction"], ["phys/conduction"], null, ["phys/synapse"], ["phys/synapse"], null,
+  ]],
+  [OPEN_L4_MUSCLE, [
+    ["phys/muscle-fiber", "phys/excitation-contraction"], ["phys/sarcomere"], ["phys/cross-bridge"],
+    ["phys/nmj"], ["phys/nmj"], ["phys/excitation-contraction"], ["phys/cross-bridge"],
+    ["phys/smooth-cell"], ["phys/smooth-cell"], ["phys/smooth-coupling"],
+  ]],
+  [OPEN_L5_HEMATOPOIESIS, [
+    ["phys/blood-volume"], ["phys/blood-volume"], ["phys/hematopoiesis"], null, ["phys/hematopoiesis"],
+    ["phys/leukocytes"], ["phys/leukocytes"], ["phys/leukocytes"], null, null,
+  ]],
+  [OPEN_L6_ERYTHROCYTES, [
+    ["phys/rbc"], null, null, null, null, null, ["phys/co2-transport"], ["phys/co2-transport"], null,
+    ["phys/rbc-lifecycle"],
+  ]],
+  [OPEN_L7_HEMOSTASIS, [
+    null, ["phys/hemostasis"], ["phys/platelet-plug"], ["phys/platelet-plug"], ["phys/coagulation"],
+    ["phys/coagulation"], ["phys/coagulation"], ["phys/coagulation"], ["phys/fibrinolysis"], ["phys/fibrinolysis"],
+  ]],
+  [OPEN_L8_GLOMERULAR, [
+    ["phys/nephron"], ["phys/nephron"], ["phys/glomerular-filtration"], null, ["phys/glomerular-filtration"],
+    null, null, null, null, null,
+  ]],
+  [OPEN_L9_TUBULAR, [
+    ["phys/tubular-cells"], ["phys/tubular-cells"], ["phys/tubular-cells"], ["phys/ammonium-trapping"],
+    ["phys/countercurrent"], ["phys/countercurrent"], ["phys/countercurrent"],
+    ["phys/distal-tubule-cells"], ["phys/distal-tubule-cells"], ["phys/distal-tubule-cells"],
+  ]],
+  [OPEN_L10_CLEARANCE, [
+    ["phys/countercurrent"], null, null, null, ["phys/tubular-cells"], ["phys/tubular-cells"],
+    ["phys/renal-acid-base"], ["phys/renal-acid-base"], ["phys/renal-acid-base"], ["phys/ammonium-trapping"],
+  ]],
+  [OPEN_L11_REGULATION, [
+    null, ["phys/raas"], ["phys/countercurrent"], ["phys/raas"], null, null,
+    ["phys/micturition"], ["phys/micturition"], null, null,
+  ]],
+  [OPEN_L12_SECRETION, [
+    ["phys/salivary-glands"], ["phys/salivary-regulation"], ["phys/gastric-secretion"], ["phys/intrinsic-factor"],
+    ["phys/gastric-phases", "phys/parietal-control"], ["phys/pancreatic-secretion"],
+    ["phys/pancreatic-secretion", "phys/pancreatic-regulation"], ["phys/bile-formation"],
+    ["phys/enterohepatic-cycle", "phys/bile-regulation"], ["phys/intestinal-glands"],
+  ]],
+  [OPEN_L13_ABSORPTION, [
+    ["phys/absorption-surface"], ["phys/enterocyte-transport"], ["phys/carb-digestion"], ["phys/intestinal-absorption"],
+    ["phys/protein-digestion"], ["phys/lipid-digestion"], ["phys/intestinal-absorption"], ["phys/gut-water-balance"],
+    ["phys/mineral-vitamin-absorption"], ["phys/mineral-vitamin-absorption"],
+  ]],
+];
+
+for (const [questions, visuals] of OPEN_QUESTION_VISUALS) {
+  questions.forEach((question, index) => {
+    const keys = visuals[index];
+    if (!keys) return;
+    const markers = keys.map((key) => `[[visual:${key}]]`).join("\n\n");
+    question.answer_fr = `${question.answer_fr}\n\n${markers}`;
+    question.answer_en = `${question.answer_en}\n\n${markers}`;
+  });
+}

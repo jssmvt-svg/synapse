@@ -25,6 +25,9 @@ export function Library() {
     }
   }, [searchParams, setUser]);
 
+  // Pendant l'essai gratuit, seul le semestre 1 est ouvert.
+  const onTrial = user?.role !== "admin" && user?.subscriptionStatus === "trialing";
+
   if (error) return <main className="library"><p className="error">{error}</p></main>;
   if (!semesters) return <main className="library"><p className="loading-state">{t.loading}</p></main>;
 
@@ -72,7 +75,9 @@ export function Library() {
                 <strong>{semester.has_access
                   ? (tx("Ouvrir le semestre →", "Open semester →"))
                   : (semester.is_published
-                    ? (tx("Accès requis →", "Access required →"))
+                    ? (onTrial
+                      ? tx("Réservé aux abonnés →", "Subscribers only →")
+                      : tx("Accès requis →", "Access required →"))
                     : (tx("Bientôt disponible", "Coming soon")))}</strong>
               </div>
             </Link>

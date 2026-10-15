@@ -15,6 +15,7 @@ import {
   normalizeEmail,
   normalizeName,
 } from "../validation.js";
+import { TRIAL_DURATION_MS } from "../studyAccessPolicy.js";
 
 const SUPPORTED_LANGS = ["fr", "en", "ar", "it"] as const;
 const isSupportedLang = (value: unknown): value is (typeof SUPPORTED_LANGS)[number] => SUPPORTED_LANGS.some((lang) => lang === value);
@@ -28,8 +29,6 @@ const authLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
-
-const TRIAL_DURATION_MS = 48 * 60 * 60 * 1000;
 
 authRouter.post("/register", authLimiter, async (req, res) => {
   const {
@@ -87,7 +86,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
   const cleanLastName = normalizeName(lastName);
   const cleanPhoneNumber = phoneNumber.replace(/[\s.-]/g, "");
 
-  // L'essai gratuit de 48h est accordé immédiatement à l'inscription — plus
+  // L'essai gratuit de 8 jours (semestre 1) est accordé immédiatement à l'inscription — plus
   // besoin qu'un étudiant le demande ni que Jessica valide chaque demande.
   const now = Date.now();
   const trialEndsAt = now + TRIAL_DURATION_MS;

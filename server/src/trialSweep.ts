@@ -2,7 +2,7 @@ import { db } from "./db.js";
 import { sendTrialEndedEmail } from "./email.js";
 
 /**
- * Désactive automatiquement les essais gratuits de 48h arrivés à échéance et
+ * Désactive automatiquement les essais gratuits (8 jours) arrivés à échéance et
  * prévient l'étudiant par email. Appelé au démarrage puis à intervalle
  * régulier — pas de dépendance à une requête utilisateur pour se déclencher,
  * contrairement à la vérification "paresseuse" faite dans studyAccessPolicy.

@@ -80,12 +80,12 @@ export const PHRASES: Record<string, Entry> = {
   "Fermer le semestre": e("إغلاق الفصل الدراسي", "Chiudi il semestre"),
   "Ouvrir le semestre": e("فتح الفصل الدراسي", "Apri il semestre"),
   "Comptes étudiants": e("حسابات الطلاب", "Account degli studenti"),
-  "L'essai gratuit de 48h est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 48h à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier.": e(
-    "تُمنح التجربة المجانية (٤٨ ساعة) تلقائيًا عند التسجيل. من هنا يمكنك أيضًا منح حساب ٤٨ ساعة أخرى (مثلًا بعد عطل في الموقع)، أو قطع وصوله، أو فتح فصل معيّن له.",
-    "La prova gratuita di 48 ore viene concessa automaticamente all'iscrizione. Da qui puoi anche concedere altre 48 ore a un account (ad es. dopo un problema del sito), togliergli l'accesso o aprirgli un capitolo specifico.",
+  "L'essai gratuit de 8 jours (semestre 1 uniquement) est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 8 jours d'essai à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier.": e(
+    "تُمنح التجربة المجانية (٨ أيام، الفصل الأول فقط) تلقائيًا عند التسجيل. من هنا يمكنك أيضًا منح حساب ٨ أيام تجربة أخرى (مثلًا بعد عطل في الموقع)، أو قطع وصوله، أو فتح فصل معيّن له.",
+    "La prova gratuita di 8 giorni (solo semestre 1) viene concessa automaticamente all'iscrizione. Da qui puoi anche concedere altri 8 giorni di prova a un account (ad es. dopo un problema del sito), togliergli l'accesso o aprirgli un capitolo specifico.",
   ),
   "Inscrit le ": e("تاريخ التسجيل: ", "Iscritto il "),
-  "Accorder 48h": e("منح ٤٨ ساعة", "Concedi 48 ore"),
+  "Accorder 8 jours": e("منح ٨ أيام", "Concedi 8 giorni"),
   "Couper l'accès": e("قطع الوصول", "Togli l'accesso"),
   "Contacte l'administration si tu as besoin d'un nouvel accès.": e("تواصل مع الإدارة إذا احتجت إلى وصول جديد.", "Contatta l'amministrazione se hai bisogno di un nuovo accesso."),
 

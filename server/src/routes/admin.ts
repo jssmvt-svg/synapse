@@ -2,11 +2,10 @@ import { Router } from "express";
 import { db } from "../db.js";
 import { buildReengagementEmail, sendReengagementEmail, sendTrialGrantedEmail } from "../email.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
+import { TRIAL_DURATION_MS } from "../studyAccessPolicy.js";
 
 export const adminRouter = Router();
 adminRouter.use(authMiddleware);
-
-const TRIAL_DURATION_MS = 48 * 60 * 60 * 1000;
 
 async function isAdmin(userId: number | undefined): Promise<boolean> {
   if (!userId) return false;
@@ -96,7 +95,7 @@ adminRouter.post("/users/:id/revoke", async (req, res) => {
 });
 
 /**
- * Octroi manuel des 48h, en plus de l'octroi automatique à l'inscription --
+ * Octroi manuel d'un essai de 8 jours (semestre 1), en plus de l'octroi automatique à l'inscription --
  * utile pour compenser un étudiant après une panne du site, ou prolonger un
  * essai déjà expiré.
  */
@@ -171,7 +170,7 @@ adminRouter.post("/students/:id/grants", async (req: AuthedRequest, res) => {
   res.json({ ok: true });
 });
 
-/** Étudiants dont l'essai 48h est terminé sans abonnement actif : cibles de la relance. */
+/** Étudiants dont l'essai gratuit est terminé sans abonnement actif : cibles de la relance. */
 adminRouter.get("/reengagement/candidates", async (_req, res) => {
   const rows = await db
     .prepare(

@@ -21,7 +21,7 @@ export const ar: Dict = {
   hidePassword: "إخفاء كلمة المرور",
   passwordRequirements: "٨ أحرف على الأقل، وحرف كبير، ورقم.",
   trialActiveUntil: "التجربة المجانية فعّالة حتى",
-  trialEndedBanner: "انتهت تجربتك المجانية (٤٨ ساعة). اشترك للمتابعة.",
+  trialEndedBanner: "انتهت تجربتك المجانية (٨ أيام). اشترك للمتابعة.",
   submit: "تأكيد",
   logout: "تسجيل الخروج",
   dashboard: "مستنداتي",

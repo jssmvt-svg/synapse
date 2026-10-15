@@ -191,7 +191,7 @@ interface RecipientUser {
 
 /**
  * Envoyée à l'inscription : le compte vient d'être créé et l'essai gratuit de
- * 48h est accordé immédiatement (pas de validation manuelle), donc ce mail
+ * 8 jours (semestre 1) est accordé immédiatement (pas de validation manuelle), donc ce mail
  * fait à la fois office de bienvenue et de confirmation d'accès.
  */
 export function sendWelcomeEmail(user: RecipientUser, trialEndsAt: number): void {
@@ -201,19 +201,19 @@ export function sendWelcomeEmail(user: RecipientUser, trialEndsAt: number): void
     dateStyle: "long",
     timeStyle: "short",
   });
-  const subject = lang === "fr" ? "Bienvenue sur Synapse — ton accès de 48h est ouvert 🎉" : "Welcome to Synapse — your 48h access is open 🎉";
+  const subject = lang === "fr" ? "Bienvenue sur Synapse — tes 8 jours d'essai gratuit commencent 🎉" : "Welcome to Synapse — your 8-day free trial starts now 🎉";
   const html = brandedEmailHtml(lang, {
     greeting: lang === "fr" ? `Bienvenue${hi} ! 👋` : `Welcome${hi}! 👋`,
     body:
       lang === "fr"
-        ? `Ton compte Synapse est créé, et tu as dès maintenant 48 heures d'accès gratuit à toute la première année (cours, QCM, flashcards, examens). Ton accès expirera le ${endDate}.`
-        : `Your Synapse account has been created, and you now have 48 hours of free access to all of year one (courses, QCMs, flashcards, exams). Your access expires on ${endDate}.`,
+        ? `Ton compte Synapse est créé, et tu as dès maintenant 8 jours d'accès gratuit au semestre 1 (cours, QCM, examens blancs, questions ouvertes). Ton accès expirera le ${endDate}.`
+        : `Your Synapse account has been created, and you now have 8 days of free access to semester 1 (courses, QCMs, mock exams, open questions). Your access expires on ${endDate}.`,
     buttonUrl: `${appUrl()}/library`,
     button: lang === "fr" ? "Commencer à réviser" : "Start studying",
     note:
       lang === "fr"
-        ? "À la fin de ton essai, contacte l'administration si tu souhaites continuer."
-        : "At the end of your trial, contact the administration if you would like to continue.",
+        ? "Ensuite, l'abonnement est à 15 €/mois, sans engagement, et donne accès aux deux semestres."
+        : "After that, the subscription is €15/month, no commitment, and covers both semesters.",
   });
   void sendEmailOnce(`welcome:${user.id}`, user.email, subject, html);
 }
@@ -226,8 +226,8 @@ export function sendTrialEndedEmail(user: RecipientUser): void {
     greeting: lang === "fr" ? `Salut${hi}` : `Hi${hi}`,
     body:
       lang === "fr"
-        ? "Tes 48 heures d'accès gratuit à Synapse sont terminées. Contacte l'administration si tu souhaites continuer à profiter des cours, QCM et examens."
-        : "Your 48-hour free access to Synapse has ended. Contact the administration if you would like to keep using the courses, QCMs, and exams.",
+        ? "Tes 8 jours d'essai gratuit sur Synapse sont terminés. Pour continuer (et débloquer le semestre 2), l'abonnement est à 15 €/mois, sans engagement."
+        : "Your 8-day free trial on Synapse has ended. To keep going (and unlock semester 2), the subscription is €15/month, no commitment.",
     buttonUrl: `${appUrl()}/dashboard`,
     button: lang === "fr" ? "Retourner à mon espace" : "Return to my dashboard",
   });
@@ -242,13 +242,13 @@ export function sendTrialGrantedEmail(user: RecipientUser, trialEndsAt: number):
     dateStyle: "long",
     timeStyle: "short",
   });
-  const subject = lang === "fr" ? "Ton accès de 48h est réactivé 🎁" : "Your 48h access is active again 🎁";
+  const subject = lang === "fr" ? "Ton essai gratuit de 8 jours est réactivé 🎁" : "Your 8-day free trial is active again 🎁";
   const html = brandedEmailHtml(lang, {
     greeting: lang === "fr" ? `C'est activé${hi} ! 🎁` : `It's live${hi}! 🎁`,
     body:
       lang === "fr"
-        ? `Jessica vient de t'accorder 48 heures d'accès à toute la première année (cours, QCM, flashcards, examens). Ton accès expirera le ${endDate}.`
-        : `Jessica just granted you 48 hours of access to all of year one (courses, QCMs, flashcards, exams). Your access expires on ${endDate}.`,
+        ? `Jessica vient de t'accorder 8 jours d'accès au semestre 1 (cours, QCM, examens blancs, questions ouvertes). Ton accès expirera le ${endDate}.`
+        : `Jessica just granted you 8 days of access to semester 1 (courses, QCMs, mock exams, open questions). Your access expires on ${endDate}.`,
     buttonUrl: `${appUrl()}/library`,
     button: lang === "fr" ? "Commencer à réviser" : "Start studying",
   });
@@ -298,7 +298,7 @@ export function buildReengagementEmail(user: RecipientUser): { subject: string; 
   return { subject, html };
 }
 
-/** Relance ciblée : étudiant dont l'essai 48h est terminé sans abonnement. */
+/** Relance ciblée : étudiant dont l'essai gratuit est terminé sans abonnement. */
 export function sendReengagementEmail(user: RecipientUser): void {
   const { subject, html } = buildReengagementEmail(user);
   void sendEmailOnce(`reengagement:${user.id}`, user.email, subject, html);

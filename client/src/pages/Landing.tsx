@@ -34,6 +34,7 @@ export function Landing() {
           <h1>{tx("Prépare ta première année de médecine avec confiance.", "Start your first year of medicine with confidence.")}</h1>
           <p>{tx("Synapse réunit un parcours de pré-rentrée, des cours guidés et des entraînements pour progresser du premier au second semestre.", "Synapse brings together a pre-term pathway, guided courses, and practice to help you progress from semester one to semester two.")}</p>
           <a href="#prearrival" className="landing-primary">{tx("Découvrir la pré-rentrée", "Explore the pre-term")} <span aria-hidden="true"><Fwd /></span></a>
+          <p className="landing-offer">{tx("8 jours gratuits · puis 15 €/mois · sans engagement", "8 days free · then €15/month · no commitment")}<br />{tx("Cours, QCM, examens blancs, questions ouvertes", "Courses, QCMs, mock exams, open questions")}</p>
         </div>
         <div className="landing-figures" aria-label={t.landingProgram}>
           <article><strong>01</strong><span>{t.landingFigureChapter}</span></article>
@@ -66,18 +67,18 @@ export function Landing() {
       <section className="landing-story" id="story">
         <div className="story-copy">
           <p className="eyebrow">{tx("Créé par une étudiante", "Made by a student")}</p>
-          <h2>{tx("Une étudiante a fait Synapse pour les étudiants.", "A student built Synapse for students.")}</h2>
+          <h2>{tx("J'ai galéré. Synapse, c'est ce que j'aurais aimé avoir.", "I struggled. Synapse is what I wish I'd had.")}</h2>
           <blockquote>
             {tx(
-              "Je suis étudiante, et j'ai créé Synapse pour aider les autres étudiants à réviser beaucoup plus vite et plus efficacement. Je l'utilise moi-même : j'ai eu 8 sur 10 dans les trois matières.",
-              "I'm a student, and I built Synapse to help other students revise much faster and more effectively. I use it myself: I scored 8 out of 10 in all three subjects.",
+              "Pendant longtemps, j'ai galéré pour avoir de bonnes notes. À force de chercher comment réviser mieux, j'ai construit ma méthode — et aujourd'hui j'ai 16/20 de moyenne dans les trois matières principales. Synapse, c'est cette méthode mise à ta disposition. Je ne force personne à la prendre : ce n'est qu'un complément à ce que tu apprends en cours.",
+              "For a long time, I struggled to get good grades. While looking for better ways to revise, I built my own method — and today I have a 16/20 average in the three main subjects. Synapse is that method, made available to you. I'm not pushing anyone to sign up: it's only a complement to what you learn in class.",
             )}
           </blockquote>
         </div>
-        <ul className="story-scores" aria-label={tx("Mes notes", "My grades")}>
-          <li><strong>8/10</strong><span>{tx("Anatomie", "Anatomy")}</span></li>
-          <li><strong>8/10</strong><span>{tx("Physiologie", "Physiology")}</span></li>
-          <li><strong>8/10</strong><span>{tx("Biochimie", "Biochemistry")}</span></li>
+        <ul className="story-scores" aria-label={tx("Mes moyennes", "My averages")}>
+          <li><strong>16/20</strong><span>{tx("Anatomie", "Anatomy")}</span></li>
+          <li><strong>16/20</strong><span>{tx("Physiologie", "Physiology")}</span></li>
+          <li><strong>16/20</strong><span>{tx("Biochimie", "Biochemistry")}</span></li>
         </ul>
       </section>
 
@@ -98,23 +99,26 @@ export function Landing() {
       <section className="landing-pricing" id="pricing">
         <div>
           <p className="eyebrow">{tx("Tarifs", "Pricing")}</p>
-          <h2>{tx("Un seul plan, tout inclus.", "One plan, everything included.")}</h2>
+          <h2>{tx("8 jours gratuits, puis 15 €/mois.", "8 days free, then €15/month.")}</h2>
           <p>
             {tx(
-              "48 heures d'essai gratuit dès l'inscription, sans carte bancaire. Ensuite, accès complet à toute la première année.",
-              "48 hours of free trial right after signup, no card needed. After that, full access to all of year one.",
+              "8 jours d'essai gratuit dès l'inscription, sans carte bancaire, pour découvrir tout le semestre 1. Ensuite, 15 € par mois, sans engagement, pour les deux semestres.",
+              "8 days of free trial right after signup, no card needed, to explore all of semester 1. After that, €15 per month, no commitment, for both semesters.",
             )}
           </p>
         </div>
         <div className="pricing-card">
+          <p className="pricing-trial">{tx("8 jours gratuits", "8 days free")}</p>
           <p className="pricing-amount"><strong>15 €</strong><span>/{tx("mois", "month")}</span></p>
           <ul className="pricing-includes">
-            <li>{tx("Cours, QCM, flashcards et examens chronométrés", "Courses, QCMs, flashcards, timed exams")}</li>
-            <li>{tx("Mini-jeux de révision en duel", "Study duel mini-games")}</li>
-            <li>{tx("Suivi de progression et statistiques", "Progress tracking and statistics")}</li>
+            <li>{tx("Cours complets des deux semestres", "Full courses for both semesters")}</li>
+            <li>{tx("QCM corrigés", "QCMs with corrections")}</li>
+            <li>{tx("Examens blancs chronométrés", "Timed mock exams")}</li>
+            <li>{tx("Questions ouvertes avec réponses modèles et schémas", "Open questions with model answers and diagrams")}</li>
+            <li>{tx("Mini-jeux de révision et statistiques", "Study mini-games and statistics")}</li>
             <li>{tx("Sans engagement", "No commitment")}</li>
           </ul>
-          <Link to="/register" className="landing-primary">{tx("Commencer l'essai gratuit", "Start the free trial")} <Fwd /></Link>
+          <Link to="/register" className="landing-primary">{tx("Commencer mes 8 jours gratuits", "Start my 8 free days")} <Fwd /></Link>
         </div>
       </section>
 

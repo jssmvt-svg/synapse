@@ -1,3 +1,7 @@
+// Essai gratuit : 8 jours, semestre 1 uniquement (inscription et octroi admin).
+export const TRIAL_DAYS = 8;
+export const TRIAL_DURATION_MS = TRIAL_DAYS * 24 * 60 * 60 * 1000;
+
 export type MembershipStatus = "active" | "trialing" | "inactive" | string | null | undefined;
 export type AccessRole = "student" | "admin" | string | null | undefined;
 
@@ -25,8 +29,9 @@ export function canOpenStudyContent({
     return false;
   }
   if (subscriptionStatus === "active") return true;
+  // L'essai gratuit n'ouvre que le semestre 1 ; le semestre 2 est réservé aux abonnés.
   if (subscriptionStatus === "trialing") {
-    return subscriptionPeriodEnd == null || now < subscriptionPeriodEnd;
+    return semesterNumber === 1 && (subscriptionPeriodEnd == null || now < subscriptionPeriodEnd);
   }
   return false;
 }

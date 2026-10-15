@@ -69,6 +69,20 @@ test("a manually granted 48h trial stops opening content once its period end has
   );
 });
 
+test("a free trial only opens semester 1; semester 2 requires a subscription", () => {
+  const now = 1_000_000;
+  const base = { role: "student", yearNumber: 1, semesterPublished: true, now } as const;
+  assert.equal(
+    canOpenStudyContent({ ...base, subscriptionStatus: "trialing", subscriptionPeriodEnd: now + 1, semesterNumber: 1 }),
+    true,
+  );
+  assert.equal(
+    canOpenStudyContent({ ...base, subscriptionStatus: "trialing", subscriptionPeriodEnd: now + 1, semesterNumber: 2 }),
+    false,
+  );
+  assert.equal(canOpenStudyContent({ ...base, subscriptionStatus: "active", semesterNumber: 2 }), true);
+});
+
 test("user names are escaped before being inserted into transactional emails", () => {
   assert.equal(escapeHtml(`<img src=x onerror="alert(1)">`), "&lt;img src=x onerror=&quot;alert(1)&quot;&gt;");
 });

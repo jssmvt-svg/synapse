@@ -58,8 +58,8 @@ function ReengagementSection({ tx, locale }: { tx: Tx; locale: string }) {
         <h1>{tx("Relance des essais expirés", "Expired trial re-engagement")}</h1>
         <p>
           {tx(
-            "Étudiants dont l'essai de 48h est terminé sans abonnement. Aperçu obligatoire avant tout envoi.",
-            "Students whose 48h trial ended without a subscription. Preview required before any send.",
+            "Étudiants dont l'essai gratuit est terminé sans abonnement. Aperçu obligatoire avant tout envoi.",
+            "Students whose free trial ended without a subscription. Preview required before any send.",
           )}
         </p>
       </header>
@@ -237,7 +237,7 @@ export function Admin() {
       <header className="admin-users-header">
         <h1>{tx("Comptes étudiants", "Student accounts")}</h1>
         <p>
-          {tx("L'essai gratuit de 48h est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 48h à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier.", "The 48h free trial is granted automatically at signup. From here you can also re-grant 48h to an account (e.g. after a site outage), cut its access, or open a specific chapter for it.")}
+          {tx("L'essai gratuit de 8 jours (semestre 1 uniquement) est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 8 jours d'essai à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier.", "The 8-day free trial (semester 1 only) is granted automatically at signup. From here you can also re-grant an 8-day trial to an account (e.g. after a site outage), cut its access, or open a specific chapter for it.")}
         </p>
       </header>
       {!users ? (
@@ -265,7 +265,7 @@ export function Admin() {
                 <div className="admin-student-actions">
                   {u.role !== "admin" && (
                     <button type="button" onClick={() => void grantTrial(u.id)} disabled={accessSaving === u.id}>
-                      {accessSaving === u.id ? "…" : tx("Accorder 48h", "Grant 48h")}
+                      {accessSaving === u.id ? "…" : tx("Accorder 8 jours", "Grant 8 days")}
                     </button>
                   )}
                   {u.role !== "admin" && u.subscriptionStatus !== "inactive" && (
