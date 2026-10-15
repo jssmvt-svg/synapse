@@ -212,8 +212,8 @@ export function sendWelcomeEmail(user: RecipientUser, trialEndsAt: number): void
     button: lang === "fr" ? "Commencer à réviser" : "Start studying",
     note:
       lang === "fr"
-        ? "Ensuite, l'abonnement est à 15 €/mois, sans engagement, et donne accès aux deux semestres."
-        : "After that, the subscription is €15/month, no commitment, and covers both semesters.",
+        ? "Ensuite, l'abonnement est à 10 €/mois, sans engagement, et donne accès aux deux semestres."
+        : "After that, the subscription is €10/month, no commitment, and covers both semesters.",
   });
   void sendEmailOnce(`welcome:${user.id}`, user.email, subject, html);
 }
@@ -226,8 +226,8 @@ export function sendTrialEndedEmail(user: RecipientUser): void {
     greeting: lang === "fr" ? `Salut${hi}` : `Hi${hi}`,
     body:
       lang === "fr"
-        ? "Tes 8 jours d'essai gratuit sur Synapse sont terminés. Pour continuer (et débloquer le semestre 2), l'abonnement est à 15 €/mois, sans engagement."
-        : "Your 8-day free trial on Synapse has ended. To keep going (and unlock semester 2), the subscription is €15/month, no commitment.",
+        ? "Tes 8 jours d'essai gratuit sur Synapse sont terminés. Pour continuer (et débloquer le semestre 2), l'abonnement est à 10 €/mois, sans engagement."
+        : "Your 8-day free trial on Synapse has ended. To keep going (and unlock semester 2), the subscription is €10/month, no commitment.",
     buttonUrl: `${appUrl()}/dashboard`,
     button: lang === "fr" ? "Retourner à mon espace" : "Return to my dashboard",
   });
@@ -280,14 +280,14 @@ export function buildReengagementEmail(user: RecipientUser): { subject: string; 
   const hi = user.firstName ? ` ${user.firstName}` : "";
   const subject =
     lang === "fr"
-      ? "Synapse passe à 15 €/mois (au lieu de 25 €) — et il y a du nouveau"
-      : "Synapse is now €15/month (down from €25) — and there's new stuff";
+      ? "Synapse passe à 10 €/mois (au lieu de 15 €) — et il y a du nouveau"
+      : "Synapse is now €10/month (down from €15) — and there's new stuff";
   const html = brandedEmailHtml(lang, {
     greeting: lang === "fr" ? `On a pensé à toi${hi} 👋` : `We thought of you${hi} 👋`,
     body:
       lang === "fr"
-        ? `Depuis ton essai gratuit, Synapse a bien changé : le prix est passé de 25 € à 15 €/mois, et deux nouveautés sont arrivées. Tu peux maintenant réviser en jouant — des duels en direct contre d'autres étudiants pendant que tu apprends — et de nouveaux schémas ont été ajoutés dans les cours. De quoi prendre de l'avance sur les autres étudiants de ta promo.`
-        : `Since your free trial, Synapse has changed a lot: the price dropped from €25 to €15/month, and two new things arrived. You can now study while playing — live duels against other students as you learn — and new diagrams were added to the courses. A real edge over the rest of your class.`,
+        ? `Depuis ton essai gratuit, Synapse a bien changé : le prix est passé de 15 € à 10 €/mois, et deux nouveautés sont arrivées. Tu peux maintenant réviser en jouant — des duels en direct contre d'autres étudiants pendant que tu apprends — et de nouveaux schémas ont été ajoutés dans les cours. De quoi prendre de l'avance sur les autres étudiants de ta promo.`
+        : `Since your free trial, Synapse has changed a lot: the price dropped from €15 to €10/month, and two new things arrived. You can now study while playing — live duels against other students as you learn — and new diagrams were added to the courses. A real edge over the rest of your class.`,
     buttonUrl: `${appUrl()}/dashboard`,
     button: lang === "fr" ? "Revoir Synapse" : "Take another look",
     note:

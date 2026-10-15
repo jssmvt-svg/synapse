@@ -129,8 +129,8 @@ export function Dashboard() {
           <p className="eyebrow">{t.trialEndedBanner}</p>
           <p>
             {tx(
-              "Continue à réviser avec un accès complet aux deux semestres : 15 € par mois, sans engagement.",
-              "Keep studying with full access to both semesters: €15 per month, no commitment.",
+              "Continue à réviser avec un accès complet aux deux semestres : 10 € par mois, sans engagement.",
+              "Keep studying with full access to both semesters: €10 per month, no commitment.",
             )}
           </p>
           <button type="button" onClick={() => void startCheckout()} disabled={checkoutLoading}>
@@ -145,8 +145,8 @@ export function Dashboard() {
           <TrialCountdown endsAt={user.trialEndsAt} lang={lang} />
           <p>
             {tx(
-              "Ton essai donne accès au semestre 1. Abonne-toi (15 €/mois, sans engagement) pour débloquer aussi le semestre 2.",
-              "Your trial covers semester 1. Subscribe (€15/month, no commitment) to unlock semester 2 as well.",
+              "Ton essai donne accès au semestre 1. Abonne-toi (10 €/mois, sans engagement) pour débloquer aussi le semestre 2.",
+              "Your trial covers semester 1. Subscribe (€10/month, no commitment) to unlock semester 2 as well.",
             )}
           </p>
           <button type="button" onClick={() => void startCheckout()} disabled={checkoutLoading}>
