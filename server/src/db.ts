@@ -122,8 +122,8 @@ const SCHEMA = `
     phone_country_code TEXT,
     phone_number TEXT,
     track TEXT CHECK (track IN ('medecine', 'dentaire')),
-    -- Essai gratuit de 48h : jamais auto-accordé à l'inscription — l'étudiant
-    -- doit explicitement le demander, puis Jessica valide depuis /admin.
+    -- Essai gratuit (8 jours, semestre 1) : accordé automatiquement à
+    -- l'inscription (routes/auth.ts) ; Jessica peut le réaccorder depuis /admin.
     trial_status TEXT NOT NULL DEFAULT 'none' CHECK (trial_status IN ('none', 'requested', 'granted', 'expired', 'denied')),
     trial_requested_at BIGINT,
     trial_granted_at BIGINT,

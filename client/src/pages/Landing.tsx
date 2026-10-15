@@ -34,6 +34,7 @@ export function Landing() {
           <h1>{tx("Prépare ta première année de médecine avec confiance.", "Start your first year of medicine with confidence.")}</h1>
           <p>{tx("Synapse réunit un parcours de pré-rentrée, des cours guidés et des entraînements pour progresser du premier au second semestre.", "Synapse brings together a pre-term pathway, guided courses, and practice to help you progress from semester one to semester two.")}</p>
           <a href="#prearrival" className="landing-primary">{tx("Découvrir la pré-rentrée", "Explore the pre-term")} <span aria-hidden="true"><Fwd /></span></a>
+          <p className="landing-offer">{tx("8 jours gratuits · puis 10 €/mois · sans engagement", "8 days free · then €10/month · no commitment")}<br />{tx("Cours, QCM, examens blancs, questions ouvertes", "Courses, QCMs, mock exams, open questions")}</p>
         </div>
         <div className="landing-figures" aria-label={t.landingProgram}>
           <article><strong>01</strong><span>{t.landingFigureChapter}</span></article>
@@ -89,7 +90,7 @@ export function Landing() {
         </div>
         <ol className="prearrival-steps">
           <li><strong>01</strong><span>{tx("Comprendre la plateforme", "Understand the platform")}</span></li>
-          <li><strong>02</strong><span>{tx("Explorer les deux semestres", "Explore both semesters")}</span></li>
+          <li><strong>02</strong><span>{tx("Explorer le semestre 1 gratuitement", "Explore semester 1 for free")}</span></li>
           <li><strong>03</strong><span>{tx("Construire ton rythme", "Build your routine")}</span></li>
         </ol>
         <Link to="/register" className="landing-outline">{tx("Créer mon accès", "Create my access")} <Fwd /></Link>
@@ -98,23 +99,26 @@ export function Landing() {
       <section className="landing-pricing" id="pricing">
         <div>
           <p className="eyebrow">{tx("Tarifs", "Pricing")}</p>
-          <h2>{tx("Un seul plan, tout inclus.", "One plan, everything included.")}</h2>
+          <h2>{tx("8 jours gratuits, puis 10 €/mois.", "8 days free, then €10/month.")}</h2>
           <p>
             {tx(
-              "48 heures d'essai gratuit dès l'inscription, sans carte bancaire. Ensuite, accès complet à toute la première année.",
-              "48 hours of free trial right after signup, no card needed. After that, full access to all of year one.",
+              "8 jours d'essai gratuit dès l'inscription, sans carte bancaire, pour découvrir tout le semestre 1. Ensuite, 10 € par mois, sans engagement, pour les deux semestres.",
+              "8 days of free trial right after signup, no card needed, to explore all of semester 1. After that, €10 per month, no commitment, for both semesters.",
             )}
           </p>
         </div>
         <div className="pricing-card">
-          <p className="pricing-amount"><strong>15 €</strong><span>/{tx("mois", "month")}</span></p>
+          <p className="pricing-trial">{tx("8 jours gratuits", "8 days free")}</p>
+          <p className="pricing-amount"><strong>10 €</strong><span>/{tx("mois", "month")}</span></p>
           <ul className="pricing-includes">
-            <li>{tx("Cours, QCM, flashcards et examens chronométrés", "Courses, QCMs, flashcards, timed exams")}</li>
-            <li>{tx("Mini-jeux de révision en duel", "Study duel mini-games")}</li>
-            <li>{tx("Suivi de progression et statistiques", "Progress tracking and statistics")}</li>
+            <li>{tx("Cours complets des deux semestres", "Full courses for both semesters")}</li>
+            <li>{tx("QCM corrigés", "QCMs with corrections")}</li>
+            <li>{tx("Examens blancs chronométrés", "Timed mock exams")}</li>
+            <li>{tx("Questions ouvertes avec réponses modèles et schémas", "Open questions with model answers and diagrams")}</li>
+            <li>{tx("Mini-jeux de révision et statistiques", "Study mini-games and statistics")}</li>
             <li>{tx("Sans engagement", "No commitment")}</li>
           </ul>
-          <Link to="/register" className="landing-primary">{tx("Commencer l'essai gratuit", "Start the free trial")} <Fwd /></Link>
+          <Link to="/register" className="landing-primary">{tx("Commencer mes 8 jours gratuits", "Start my 8 free days")} <Fwd /></Link>
         </div>
       </section>
 

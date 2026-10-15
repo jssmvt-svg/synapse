@@ -8315,3 +8315,34 @@ html[dir="rtl"] input[type="password"] { direction: ltr; text-align: right; }
 .open-question-card h2 { margin: 0; font-size: 1.15rem; line-height: 1.45; }
 .open-question-answer { margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed var(--border); }
 .open-question-answer .course-copy { margin-top: 0.6rem; }
+
+/* Offre (landing) */
+.landing-offer { margin: 1rem 0 0; color: #4a5568; font-size: 0.95rem; line-height: 1.6; }
+.pricing-trial {
+  display: inline-block;
+  margin: 0 0 0.6rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #166534;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+/* ── Thème clair forcé ─────────────────────────────────────────────────────
+   Synapse est toujours en clair : on l'annonce au navigateur pour empêcher le
+   mode sombre automatique des téléphones (Chrome Android, etc.) d'inverser les
+   couleurs. Placé en fin de fichier pour l'emporter sur les blocs précédents. */
+:root { color-scheme: only light; --bg: #ffffff; }
+html { background: #ffffff; }
+body { background: #ffffff; }
+input, select, textarea { background-color: #ffffff; color: var(--ink); }
+
+/* ── Adaptation mobile : le contenu tient dans la largeur de l'écran ─────── */
+img, svg, video, canvas { max-width: 100%; }
+img, video { height: auto; }
+.course-copy, .markdown-body, .open-question-card, .open-question-answer { overflow-wrap: break-word; min-width: 0; }
+.markdown-body pre { overflow-x: auto; }
+.course-visual { max-width: 100%; overflow-x: auto; }
+.landing-story { box-sizing: border-box; }
+.story-scores li { min-width: 0; }

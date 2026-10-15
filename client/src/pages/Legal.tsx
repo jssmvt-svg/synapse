@@ -64,7 +64,7 @@ export function Legal() {
         <h2>{tx("Prix et paiement", "Pricing and payment")}</h2>
         <p>
           <strong>{tx("Abonnement : ", "Subscription: ")}</strong>
-          {tx("15 €/mois, facturé par cycle de 4 mois (~60 €), sans engagement.", "€15/month, billed in 4-month cycles (~€60), no commitment.")}
+          {tx("10 €/mois, facturé chaque mois, sans engagement. Essai gratuit de 8 jours (semestre 1) à l'inscription, sans carte bancaire.", "€10/month, billed monthly, no commitment. 8-day free trial (semester 1) at signup, no card needed.")}
           <br />
           <strong>{tx("Paiement : ", "Payment: ")}</strong>Stripe, Inc.<br />
           <strong>TVA : </strong>{tx("Non applicable — statut en cours", "Not applicable — registration in progress")}
@@ -81,8 +81,8 @@ export function Legal() {
         <h2>{tx("Nature et durée de l'accès", "Nature and Duration of Access")}</h2>
         <p>
           {tx(
-            "Synapse est un accès par abonnement, renouvelé automatiquement à chaque cycle de 4 mois tant qu'il n'est pas annulé. Le contenu est susceptible d'évoluer (corrections, ajouts, mises à jour) et n'est pas figé.",
-            "Synapse is a subscription access, automatically renewed every 4-month cycle unless cancelled. The content may evolve (corrections, additions, updates) and is not final.",
+            "Synapse est un accès par abonnement, renouvelé automatiquement chaque mois tant qu'il n'est pas annulé. Le contenu est susceptible d'évoluer (corrections, ajouts, mises à jour) et n'est pas figé.",
+            "Synapse is a subscription access, automatically renewed every month unless cancelled. The content may evolve (corrections, additions, updates) and is not final.",
           )}
         </p>
       </section>

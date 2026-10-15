@@ -253,8 +253,11 @@ libraryRouter.get("/semesters/:number", async (req: AuthedRequest, res) => {
     .get(semesterNumber);
   if (!semester) return res.status(404).json({ error: "Semestre introuvable" });
   if (!(await canAccessSemester(req.userId!, 1, semesterNumber))) {
+    const viewer = await db.prepare("SELECT subscription_status FROM users WHERE id = ?").get(req.userId);
     return res.status(403).json({
-      error: "Ce semestre sera disponible dès que ton accès sera actif et que Jessica l'aura ouvert.",
+      error: semesterNumber === 2 && semester.is_published && viewer?.subscription_status === "trialing"
+        ? "Le semestre 2 est réservé aux abonnés (l'essai gratuit donne accès au semestre 1)."
+        : "Ce semestre sera disponible dès que ton accès sera actif et que Jessica l'aura ouvert.",
       code: "SEMESTER_ACCESS_REQUIRED",
     });
   }
