@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { useLang, Fwd, LanguageSwitcher } from "../i18n";
+import { LaunchOfferNote, useLaunchOffer } from "../components/LaunchOffer";
 
 export function Landing() {
   const { t, lang, setLang, tx } = useLang();
+  const launchOffer = useLaunchOffer();
 
   return (
     <main className="landing-page">
@@ -35,6 +37,7 @@ export function Landing() {
           <p>{tx("Synapse réunit un parcours de pré-rentrée, des cours guidés et des entraînements pour progresser du premier au second semestre.", "Synapse brings together a pre-term pathway, guided courses, and practice to help you progress from semester one to semester two.")}</p>
           <a href="#prearrival" className="landing-primary">{tx("Découvrir la pré-rentrée", "Explore the pre-term")} <span aria-hidden="true"><Fwd /></span></a>
           <p className="landing-offer">{tx("8 jours gratuits · puis 10 €/mois · sans engagement", "8 days free · then €10/month · no commitment")}<br />{tx("Cours, QCM, examens blancs, questions ouvertes", "Courses, QCMs, mock exams, open questions")}</p>
+          <LaunchOfferNote offer={launchOffer} />
         </div>
         <div className="landing-figures" aria-label={t.landingProgram}>
           <article><strong>01</strong><span>{t.landingFigureChapter}</span></article>
@@ -110,6 +113,7 @@ export function Landing() {
         <div className="pricing-card">
           <p className="pricing-trial">{tx("8 jours gratuits", "8 days free")}</p>
           <p className="pricing-amount"><strong>10 €</strong><span>/{tx("mois", "month")}</span></p>
+          <LaunchOfferNote offer={launchOffer} />
           <ul className="pricing-includes">
             <li>{tx("Cours complets des deux semestres", "Full courses for both semesters")}</li>
             <li>{tx("QCM corrigés", "QCMs with corrections")}</li>

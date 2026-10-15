@@ -502,6 +502,8 @@ export interface DuelOverview {
   activeRoomCode: string | null;
 }
 
+export type LaunchOffer = { active: boolean; remaining: number; total: number };
+
 export const api = {
   register: (input: RegisterInput) =>
     request<{ token: string; user: User }>("/auth/register", {
@@ -649,6 +651,7 @@ export const api = {
     request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}/bot`, { method: "POST", body: "{}" }),
   duelLeave: (code: string) =>
     request<void>(`/duel/rooms/${encodeURIComponent(code)}/leave`, { method: "POST", body: "{}" }),
+  getLaunchOffer: () => request<LaunchOffer>("/billing/launch-offer"),
   createCheckoutSession: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
   openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
 };
