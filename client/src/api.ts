@@ -646,8 +646,8 @@ export const api = {
     chapterIds?: number[] | null,
     difficulty?: DuelDifficulty | null,
   ) => request<DuelState>("/duel/rooms", { method: "POST", body: JSON.stringify({ avatar, mode, chapterIds, difficulty }) }),
-  duelQuickMatch: (avatar: string, mode: DuelMode) =>
-    request<DuelState>("/duel/quick", { method: "POST", body: JSON.stringify({ avatar, mode }) }),
+  duelQuickMatch: (avatar: string, mode: DuelMode, chapterIds?: number[] | null, difficulty?: DuelDifficulty | null) =>
+    request<DuelState>("/duel/quick", { method: "POST", body: JSON.stringify({ avatar, mode, chapterIds, difficulty }) }),
   duelJoinRoom: (code: string, avatar: string) =>
     request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}/join`, {
       method: "POST",
