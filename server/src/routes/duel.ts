@@ -23,10 +23,33 @@ import {
 } from "../duelEngine.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 import { canOpenStudyContent } from "../studyAccessPolicy.js";
+import { loadDictionary } from "../translations.js";
 
 export const duelRouter = Router();
 
 duelRouter.use(authMiddleware);
+
+// Messages d'erreur en anglais pour l'interface anglaise (en-tête x-lang).
+const EN_ERRORS: Record<string, string> = {
+  "Cette salle n'est plus disponible.": "This room is no longer available.",
+  "Tu ne peux pas affronter toi-même.": "You can't play against yourself.",
+  "Trop tard : la manche est terminée.": "Too late: the round is over.",
+  "Tu as déjà répondu à cette question.": "You already answered this question.",
+  "Réponse inconnue.": "Unknown answer.",
+  "Un accès actif à un semestre est nécessaire pour jouer.": "You need active access to a semester to play.",
+  "Pas assez de questions pour ce choix de matière : choisis une autre matière ou tout le semestre.":
+    "Not enough questions for this subject: pick another subject or the whole semester.",
+  "Tu as déjà un duel en cours.": "You already have a duel in progress.",
+  "Salle introuvable ou déjà complète.": "Room not found or already full.",
+  "Duel introuvable": "Duel not found",
+};
+duelRouter.use((req, res, next) => {
+  if (req.headers["x-lang"] !== "en") return next();
+  const json = res.json.bind(res);
+  res.json = ((body: any) =>
+    json(body && typeof body.error === "string" ? { ...body, error: EN_ERRORS[body.error] ?? body.error } : body)) as typeof res.json;
+  next();
+});
 
 // Les salles vivent en mémoire : un duel dure quelques minutes et n'a de valeur
 // qu'en direct. Seules les récompenses sont persistées (table duel_profiles).
@@ -121,6 +144,92 @@ function normalizeDifficulty(value: unknown): Difficulty | null {
   return DIFFICULTIES.includes(value as Difficulty) ? (value as Difficulty) : null;
 }
 
+// Anglais manquant : on prend la traduction du dictionnaire (npm run translate),
+// sinon le français. Fait ici car le client affiche directement promptEn.
+function english(fr: string, en: string | null | undefined): string {
+  return en || loadDictionary("en")[fr] || fr;
+}
+
+function shuffled<T>(items: T[]): T[] {
+  const copy = [...items];
+  for (let i = copy.length - 1; i > 0; i -= 1) {
+    const j = randomInt(i + 1);
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+}
+
+const MAX_FLASHCARD_ANSWER = 110;
+
+// Questions simples tirées des flashcards du cours : la bonne réponse est celle
+// de la carte, les 3 leurres sont des réponses d'autres cartes du même chapitre
+// (à défaut, de la même sélection), de longueur proche pour ne pas trahir la
+// bonne réponse. Les cartes à image (molécules…) sont exclues : le jeu n'affiche
+// pas de schéma.
+async function flashcardQuestions(chapterIds: number[], count: number): Promise<EngineQuestion[]> {
+  if (count <= 0) return [];
+  const rows = (await db
+    .prepare(
+      `SELECT id, chapter_id, question_fr, question_en, answer_fr, answer_en
+       FROM library_flashcards
+       WHERE is_active = true AND chapter_id = ANY(?) AND visual_key IS NULL
+         AND char_length(answer_fr) <= ?`,
+    )
+    .all(chapterIds, MAX_FLASHCARD_ANSWER)) as any[];
+  return buildFlashcardQuestions(rows, count);
+}
+
+export function buildFlashcardQuestions(allRows: any[], count: number): EngineQuestion[] {
+  // Réponses « Oui… / Non… » : mauvais leurres et mauvaises questions à choix.
+  const rows = allRows.filter((row) => !/^(oui|non)\b/i.test(String(row.answer_fr).trim()));
+  const byChapter = new Map<number, any[]>();
+  for (const row of rows) {
+    const list = byChapter.get(row.chapter_id) ?? [];
+    list.push(row);
+    byChapter.set(row.chapter_id, list);
+  }
+
+  const questions: EngineQuestion[] = [];
+  const usedAnswers = new Set<string>();
+  for (const card of shuffled(rows)) {
+    if (questions.length >= count) break;
+    const answer = String(card.answer_fr).trim();
+    if (usedAnswers.has(answer)) continue;
+    const sameChapter = byChapter.get(card.chapter_id) ?? [];
+    const candidates = (sameChapter.length >= 6 ? sameChapter : rows).filter(
+      (other) => String(other.answer_fr).trim() !== answer,
+    );
+    const distinct = new Map<string, any>();
+    for (const other of candidates) distinct.set(String(other.answer_fr).trim(), other);
+    if (distinct.size < 3) continue;
+    const decoys = shuffled([...distinct.values()])
+      .sort((a, b) => Math.abs(a.answer_fr.length - answer.length) - Math.abs(b.answer_fr.length - answer.length))
+      .slice(0, 6);
+    const picked = shuffled(decoys).slice(0, 3);
+    const keys = ["A", "B", "C", "D"];
+    const options = shuffled([card, ...picked]).map((option, index) => ({
+      key: keys[index],
+      labelFr: option.answer_fr,
+      labelEn: english(option.answer_fr, option.answer_en),
+      correct: option === card,
+    }));
+    usedAnswers.add(answer);
+    questions.push({
+      id: -Number(card.id),
+      chapterId: card.chapter_id,
+      promptFr: card.question_fr,
+      promptEn: english(card.question_fr, card.question_en),
+      explanationFr: card.answer_fr,
+      explanationEn: english(card.answer_fr, card.answer_en),
+      options: options.map(({ key, labelFr, labelEn }) => ({ key, labelFr, labelEn })),
+      correctKey: options.find((option) => option.correct)!.key,
+    });
+  }
+  return questions;
+}
+
+// Facile (par défaut) : flashcards du cours ; intermédiaire : moitié flashcards,
+// moitié QCM ; difficile : QCM du cours. Si une source manque, l'autre complète.
 async function pickQuestions(
   userIds: number[],
   chapterIds: number[] | null,
@@ -134,15 +243,27 @@ async function pickQuestions(
   }
   if (shared.length === 0) return [];
 
+  const level = difficulty ?? "easy";
+  const flashTarget = level === "easy" ? QUESTION_COUNT : level === "intermediate" ? Math.ceil(QUESTION_COUNT / 2) : 0;
+  const fromCards = await flashcardQuestions(shared, flashTarget);
+  const fromQcm = await qcmQuestions(shared, QUESTION_COUNT - fromCards.length);
+  let questions = [...fromCards, ...fromQcm];
+  if (questions.length < QUESTION_COUNT && level === "hard") {
+    questions = [...questions, ...(await flashcardQuestions(shared, QUESTION_COUNT - questions.length))];
+  }
+  return shuffled(questions).slice(0, QUESTION_COUNT);
+}
+
+async function qcmQuestions(shared: number[], count: number): Promise<EngineQuestion[]> {
+  if (count <= 0) return [];
   const questionRows = await db
     .prepare(
       `SELECT id, chapter_id, prompt_fr, prompt_en, explanation_fr, explanation_en
        FROM library_qcm_questions
        WHERE is_active = true AND multiple_answers = false AND chapter_id = ANY(?)
-         AND difficulty = ANY(?)
        ORDER BY random() LIMIT 40`,
     )
-    .all(shared, difficulty ? [difficulty] : DIFFICULTIES);
+    .all(shared);
   if (questionRows.length === 0) return [];
 
   const optionRows = await db
@@ -170,19 +291,30 @@ async function pickQuestions(
       id: row.id,
       chapterId: row.chapter_id,
       promptFr: row.prompt_fr,
-      promptEn: row.prompt_en || row.prompt_fr,
+      promptEn: english(row.prompt_fr, row.prompt_en),
       explanationFr: row.explanation_fr,
-      explanationEn: row.explanation_en || row.explanation_fr,
+      explanationEn: english(row.explanation_fr, row.explanation_en),
       options: options.map((option) => ({
         key: option.option_key,
         labelFr: option.label_fr,
-        labelEn: option.label_en || option.label_fr,
+        labelEn: english(option.label_fr, option.label_en),
       })),
       correctKey: correct[0].option_key,
     });
-    if (questions.length === QUESTION_COUNT) break;
+    if (questions.length === count) break;
   }
   return questions;
+}
+
+function parseChapterIds(value: unknown): number[] | null {
+  const ids = (Array.isArray(value) ? value : []).filter((id: unknown) => Number.isInteger(id)).map(Number);
+  return ids.length > 0 ? ids : null;
+}
+
+// Deux joueurs ne sont appariés en partie rapide que s'ils ont choisi la même
+// matière / le même chapitre et la même difficulté.
+function topicKey(chapterIds: number[] | null, difficulty: Difficulty | null): string {
+  return `${chapterIds ? [...chapterIds].sort((a, b) => a - b).join(",") : "all"}|${difficulty ?? "easy"}`;
 }
 
 function levelOf(xp: number): number {
@@ -272,7 +404,7 @@ const ERRORS: Record<string, string> = {
 };
 
 const NO_ACCESS = "Un accès actif à un semestre est nécessaire pour jouer.";
-const NOT_ENOUGH = "Pas assez de questions communes aux deux joueurs pour lancer un duel.";
+const NOT_ENOUGH = "Pas assez de questions pour ce choix de matière : choisis une autre matière ou tout le semestre.";
 
 async function joinAndStart(room: DuelRoom, userId: number, avatar: unknown): Promise<string | null> {
   const guestName = await displayName(userId);
@@ -330,13 +462,12 @@ duelRouter.post("/rooms", async (req: AuthedRequest, res) => {
   if (existing) return res.json(await snapshot(existing, userId));
   if (!(await hasStudyAccess(userId))) return res.status(403).json({ error: NO_ACCESS });
 
-  const rawChapterIds = Array.isArray(req.body?.chapterIds) ? req.body.chapterIds : [];
-  const chapterIds = rawChapterIds.filter((id: unknown) => Number.isInteger(id)).map(Number);
+  const chapterIds = parseChapterIds(req.body?.chapterIds);
   const difficulty = normalizeDifficulty(req.body?.difficulty);
   const room = createRoom(
     newCode(),
     { userId, name: await displayName(userId), avatar: req.body?.avatar },
-    { isPublic: false, chapterIds: chapterIds.length > 0 ? chapterIds : null, difficulty, mode: req.body?.mode },
+    { isPublic: false, chapterIds, difficulty, mode: req.body?.mode },
     Date.now(),
   );
   rooms.set(room.code, room);
@@ -349,12 +480,16 @@ duelRouter.post("/quick", async (req: AuthedRequest, res) => {
   if (existing) return res.json(await snapshot(existing, userId));
   if (!(await hasStudyAccess(userId))) return res.status(403).json({ error: NO_ACCESS });
 
+  const chapterIds = parseChapterIds(req.body?.chapterIds);
+  const difficulty = normalizeDifficulty(req.body?.difficulty);
+  const topic = topicKey(chapterIds, difficulty);
   const now = Date.now();
   const waiting = [...rooms.values()]
     .filter(
       (room) =>
         room.isPublic &&
         room.mode === normalizeMode(req.body?.mode) &&
+        topicKey(room.chapterIds, room.difficulty) === topic &&
         room.phase === "waiting" &&
         !hasPlayer(room, userId) &&
         now - room.players[0].lastSeen < 10_000,
@@ -371,7 +506,7 @@ duelRouter.post("/quick", async (req: AuthedRequest, res) => {
   const room = createRoom(
     newCode(),
     { userId, name: await displayName(userId), avatar: req.body?.avatar },
-    { isPublic: true, chapterIds: null, mode: req.body?.mode },
+    { isPublic: true, chapterIds, difficulty, mode: req.body?.mode },
     now,
   );
   rooms.set(room.code, room);

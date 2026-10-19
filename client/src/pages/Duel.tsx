@@ -161,14 +161,16 @@ function Lobby() {
   const [subjects, setSubjects] = useState<LibrarySubject[] | null>(null);
   const [subjectSlug, setSubjectSlug] = useState<string>("");
   const [chapterId, setChapterId] = useState<number | "">("");
-  const [difficulty, setDifficulty] = useState<DuelDifficulty | "">("");
+  const [difficulty, setDifficulty] = useState<DuelDifficulty>("easy");
 
   useEffect(() => {
     api.duelOverview().then(setOverview).catch((err: Error) => setError(err.message));
     api.getStudySemesters().then((list) => {
       setSemesters(list);
+      // Premier semestre accessible présélectionné : la liste des matières est
+      // alors tout de suite disponible.
       const accessible = list.filter((s) => s.has_access);
-      if (accessible.length === 1) setSemesterNumber(accessible[0].semester_number);
+      if (accessible.length > 0) setSemesterNumber(accessible[0].semester_number);
     }).catch(() => {});
   }, []);
 
@@ -183,7 +185,7 @@ function Lobby() {
   // Chapitre précis choisi -> juste lui ; sinon toute la matière choisie ;
   // sinon aucun filtre (tout le semestre accessible).
   const selectedChapterIds =
-    chapterId !== "" ? [chapterId] : selectedSubject ? selectedSubject.chapters.map((c) => c.id) : null;
+    chapterId !== "" ? [chapterId] : selectedSubject ? selectedSubject.chapters.map((c) => c.id) : subjects ? subjects.flatMap((s) => s.chapters.map((c) => c.id)) : null;
 
   function chooseAvatar(code: string) {
     setAvatarCode(code);
@@ -284,11 +286,11 @@ function Lobby() {
       )}
 
       <section className="duel-card duel-topic-picker">
-        <h2>{l("Choisir une matière et un chapitre (optionnel)", "Pick a subject and chapter (optional)")}</h2>
+        <h2>{l("Choisir une matière et un chapitre", "Pick a subject and chapter")}</h2>
         <p className="duel-muted">
           {l(
-            "Pour une salle privée seulement : laisse vide pour réviser tout le semestre.",
-            "Private rooms only: leave empty to practise the whole semester.",
+            "Les questions ne portent que sur ce que tu choisis ici. « Facile » = questions des flashcards du cours.",
+            "Questions only cover what you pick here. \"Easy\" = questions from the course flashcards.",
           )}
         </p>
         <div className="duel-topic-selects">
@@ -316,11 +318,10 @@ function Lobby() {
               <option key={c.id} value={c.id}>{lang === "fr" ? c.titre_fr : c.titre_en}</option>
             ))}
           </select>
-          <select value={difficulty} onChange={(e) => setDifficulty(e.target.value as DuelDifficulty | "")}>
-            <option value="">{l("Toutes difficultés", "Any difficulty")}</option>
-            <option value="easy">{l("Facile", "Easy")}</option>
-            <option value="intermediate">{l("Intermédiaire", "Intermediate")}</option>
-            <option value="hard">{l("Difficile", "Hard")}</option>
+          <select value={difficulty} onChange={(e) => setDifficulty(e.target.value as DuelDifficulty)}>
+            <option value="easy">{l("Facile (flashcards)", "Easy (flashcards)")}</option>
+            <option value="intermediate">{l("Intermédiaire (flashcards + QCM)", "Intermediate (flashcards + MCQ)")}</option>
+            <option value="hard">{l("Difficile (QCM du cours)", "Hard (course MCQ)")}</option>
           </select>
         </div>
       </section>
@@ -329,14 +330,14 @@ function Lobby() {
         <button
           className="duel-button duel-button-primary"
           disabled={busy}
-          onClick={() => enter(() => api.duelQuickMatch(avatarCode, mode))}
+          onClick={() => enter(() => api.duelQuickMatch(avatarCode, mode, selectedChapterIds, difficulty))}
         >
           {selectedMode.icon} {l("Adversaire aléatoire", "Random opponent")}
         </button>
         <button
           className="duel-button"
           disabled={busy}
-          onClick={() => enter(() => api.duelCreateRoom(avatarCode, mode, selectedChapterIds, difficulty || null))}
+          onClick={() => enter(() => api.duelCreateRoom(avatarCode, mode, selectedChapterIds, difficulty))}
         >
           🔗 {l("Créer une salle privée", "Create a private room")}
         </button>

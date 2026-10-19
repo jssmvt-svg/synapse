@@ -8,7 +8,7 @@ export const QUESTION_COUNT = 10;
 export const MIN_QUESTIONS = 5;
 export const COUNTDOWN_MS = 3_000;
 export const QUESTION_MS = 20_000;
-export const REVEAL_MS = 4_000;
+export const REVEAL_MS = 2_500;
 export const ABSENCE_MS = 25_000;
 export const BASE_DAMAGE = 15;
 export const SPEED_BONUS_DAMAGE = 15;
@@ -252,7 +252,12 @@ function botAnswerIfDue(room: DuelRoom, now: number): void {
   const bot = room.players.find((player) => player.bot);
   if (!bot || room.answers[bot.userId]) return;
   const seed = hashOf(`${room.code}:${room.round}`);
-  const at = room.phaseStartedAt + 3_000 + (seed % 9_000);
+  // Le bot répond entre 3 et 8 s ; si le joueur a déjà répondu, il ne le fait
+  // pas attendre : il répond dans les ~1,5 s qui suivent.
+  let at = room.phaseStartedAt + 3_000 + (seed % 5_000);
+  const human = room.players.find((player) => !player.bot);
+  const humanAnswer = human ? room.answers[human.userId] : undefined;
+  if (humanAnswer) at = Math.min(at, Math.max(room.phaseStartedAt + 1_500, humanAnswer.at + 600 + (seed % 900)));
   if (now < at) return;
   const question = room.questions[room.round];
   if (!question) return;
