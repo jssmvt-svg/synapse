@@ -113,6 +113,126 @@ billingRouter.post("/portal", express.json(), authMiddleware, async (req: Authed
 });
 
 /**
+ * Page « Mon compte » de l'étudiant : profil, abonnement en cours (prochain
+ * prélèvement, résiliation programmée) et historique des paiements Stripe.
+ */
+billingRouter.get("/account", authMiddleware, async (req: AuthedRequest, res) => {
+  const user = await db
+    .prepare(
+      `SELECT id, email, first_name, last_name, track, study_lang, role, created_at,
+              trial_status, trial_ends_at, subscription_status, subscription_period_end,
+              stripe_customer_id, stripe_subscription_id
+       FROM users WHERE id = ?`,
+    )
+    .get(req.userId);
+  if (!user) return res.status(404).json({ error: "Utilisateur introuvable" });
+
+  let subscription: {
+    status: string;
+    cancelAtPeriodEnd: boolean;
+    currentPeriodEnd: number | null;
+    amount: number;
+    currency: string;
+  } | null = null;
+  let payments: Array<{
+    id: string;
+    date: number;
+    amount: number;
+    currency: string;
+    status: string | null;
+    periodStart: number | null;
+    periodEnd: number | null;
+    pdfUrl: string | null;
+    url: string | null;
+  }> = [];
+
+  if (stripe) {
+    const customerId = await usableCustomerId(user.id, user.stripe_customer_id);
+    if (customerId && user.stripe_subscription_id) {
+      try {
+        const sub = await stripe.subscriptions.retrieve(user.stripe_subscription_id);
+        const item = sub.items.data[0];
+        subscription = {
+          status: sub.status,
+          cancelAtPeriodEnd: sub.cancel_at_period_end,
+          currentPeriodEnd: currentPeriodEndMs(sub),
+          amount: item?.price?.unit_amount ?? MONTHLY_PRICE_CENTS,
+          currency: item?.price?.currency ?? "eur",
+        };
+      } catch (error) {
+        console.error("[stripe] Abonnement illisible pour la page compte.", error);
+      }
+    }
+    if (customerId) {
+      try {
+        const invoices = await stripe.invoices.list({ customer: customerId, limit: 24 });
+        payments = invoices.data
+          .filter((invoice) => invoice.status === "paid" || invoice.status === "open" || invoice.status === "uncollectible")
+          .map((invoice) => {
+            const line = invoice.lines.data[0];
+            return {
+              id: invoice.id ?? "",
+              date: invoice.created * 1000,
+              amount: invoice.status === "paid" ? invoice.amount_paid : invoice.amount_due,
+              currency: invoice.currency,
+              status: invoice.status,
+              periodStart: line?.period?.start ? line.period.start * 1000 : null,
+              periodEnd: line?.period?.end ? line.period.end * 1000 : null,
+              pdfUrl: invoice.invoice_pdf ?? null,
+              url: invoice.hosted_invoice_url ?? null,
+            };
+          });
+      } catch (error) {
+        console.error("[stripe] Factures illisibles pour la page compte.", error);
+      }
+    }
+  }
+
+  res.json({
+    profile: {
+      email: user.email,
+      firstName: user.first_name,
+      lastName: user.last_name,
+      track: user.track,
+      studyLang: user.study_lang,
+      year: 1,
+      createdAt: user.created_at,
+    },
+    access: {
+      role: user.role,
+      subscriptionStatus: user.subscription_status,
+      subscriptionPeriodEnd: user.subscription_period_end,
+      trialStatus: user.trial_status,
+      trialEndsAt: user.trial_ends_at,
+      premium: user.subscription_status === "active" && Boolean(user.stripe_subscription_id),
+      formerSubscriber: Boolean(user.stripe_customer_id) && user.subscription_status !== "active",
+    },
+    subscription,
+    payments,
+  });
+});
+
+/**
+ * Résiliation : l'abonnement s'arrête à la fin du mois déjà payé (plus aucun
+ * prélèvement ensuite). Quand la période se termine, Stripe envoie
+ * customer.subscription.deleted et le webhook coupe l'accès.
+ */
+async function setCancelAtPeriodEnd(req: AuthedRequest, res: express.Response, cancel: boolean) {
+  if (!stripe) return res.status(503).json({ error: "Le paiement n'est pas encore configuré." });
+  const user = await db
+    .prepare("SELECT stripe_subscription_id FROM users WHERE id = ?")
+    .get(req.userId);
+  if (!user?.stripe_subscription_id) {
+    return res.status(404).json({ error: "Aucun abonnement en cours sur ce compte." });
+  }
+  const sub = await stripe.subscriptions.update(user.stripe_subscription_id, { cancel_at_period_end: cancel });
+  res.json({ cancelAtPeriodEnd: sub.cancel_at_period_end, currentPeriodEnd: currentPeriodEndMs(sub) });
+}
+
+billingRouter.post("/cancel", express.json(), authMiddleware, (req: AuthedRequest, res) => setCancelAtPeriodEnd(req, res, true));
+billingRouter.post("/resume", express.json(), authMiddleware, (req: AuthedRequest, res) => setCancelAtPeriodEnd(req, res, false));
+
+/**
  * Webhook Stripe : source de vérité pour l'activation/désactivation de l'accès.
  * Monté avec un parseur de corps brut (express.raw) AVANT express.json() dans
  * index.ts — la vérification de signature a besoin du corps non modifié.

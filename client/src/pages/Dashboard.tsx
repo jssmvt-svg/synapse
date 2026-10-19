@@ -126,15 +126,28 @@ export function Dashboard() {
       </div>
       {user?.role !== "admin" && user?.subscriptionStatus !== "active" && user?.subscriptionStatus !== "trialing" && (
         <div className="access-banner access-banner-pricing">
-          <p className="eyebrow">{t.trialEndedBanner}</p>
+          <p className="eyebrow">
+            {user?.formerSubscriber
+              ? tx("Ton abonnement est terminé.", "Your subscription has ended.")
+              : t.trialEndedBanner}
+          </p>
           <p>
-            {tx(
-              "Continue à réviser avec un accès complet aux deux semestres : 10 € par mois, sans engagement.",
-              "Keep studying with full access to both semesters: €10 per month, no commitment.",
-            )}
+            {user?.formerSubscriber
+              ? tx(
+                  "L'accès aux cours est coupé et l'essai gratuit a déjà été utilisé sur ce compte. Réabonne-toi pour tout retrouver : 10 € par mois, sans engagement.",
+                  "Course access is closed and the free trial has already been used on this account. Subscribe again to get everything back: €10 per month, no commitment.",
+                )
+              : tx(
+                  "Continue à réviser avec un accès complet aux deux semestres : 10 € par mois, sans engagement.",
+                  "Keep studying with full access to both semesters: €10 per month, no commitment.",
+                )}
           </p>
           <button type="button" onClick={() => void startCheckout()} disabled={checkoutLoading}>
-            {checkoutLoading ? tx("Redirection…", "Redirecting…") : tx("Activer mon accès", "Activate my access")}
+            {checkoutLoading
+              ? tx("Redirection…", "Redirecting…")
+              : user?.formerSubscriber
+                ? tx("Me réabonner", "Subscribe again")
+                : tx("Activer mon accès", "Activate my access")}
           </button>
           {checkoutError && <p className="error">{checkoutError}</p>}
         </div>
@@ -174,6 +187,9 @@ export function Dashboard() {
             {t.statistics}
           </Link>
           <LanguageSwitcher onChange={(code) => api.setLang(code).catch(() => {})} />
+          <Link to="/account" className="header-nav-link">
+            👤 {tx("Mon compte", "My account")}
+          </Link>
           <span className="user-chip">{user?.email}</span>
           <button className="logout-button" onClick={logout}>{t.logout}</button>
         </div>

@@ -17,6 +17,7 @@ const SynthesisView = lazy(() => import("./pages/SynthesisView").then((m) => ({ 
 const Statistics = lazy(() => import("./pages/Statistics").then((m) => ({ default: m.Statistics })));
 const LibrarySemesterView = lazy(() => import("./pages/LibrarySemesterView").then((m) => ({ default: m.LibrarySemesterView })));
 const Admin = lazy(() => import("./pages/Admin").then((m) => ({ default: m.Admin })));
+const Account = lazy(() => import("./pages/Account").then((m) => ({ default: m.Account })));
 
 function RequireAuth({ children }: { children: ReactElement }) {
   const { user, loading } = useAuth();
@@ -134,6 +135,14 @@ export function App() {
         element={
           <RequireAuth>
             <Statistics />
+          </RequireAuth>
+        }
+      />
+      <Route
+        path="/account"
+        element={
+          <RequireAuth>
+            <Account />
           </RequireAuth>
         }
       />

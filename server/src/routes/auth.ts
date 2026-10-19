@@ -186,7 +186,7 @@ authRouter.get("/me", authMiddleware, async (req: AuthedRequest, res) => {
   const user = await db
     .prepare(
       `SELECT id, email, lang_pref, role, first_name, last_name, track,
-              trial_status, trial_ends_at, subscription_status, subscription_period_end
+              trial_status, trial_ends_at, subscription_status, subscription_period_end, stripe_customer_id
        FROM users WHERE id = ?`,
     )
     .get(req.userId);
@@ -205,6 +205,7 @@ authRouter.get("/me", authMiddleware, async (req: AuthedRequest, res) => {
     trialEndsAt: user.trial_ends_at,
     subscriptionStatus: user.subscription_status,
     subscriptionPeriodEnd: user.subscription_period_end,
+    formerSubscriber: Boolean(user.stripe_customer_id) && user.subscription_status !== "active",
   });
 });
 
