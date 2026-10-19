@@ -55,6 +55,7 @@ import { EnergyProfileDiagram, EnzymeSubstrateModelsDiagram, MichaelisMentenDiag
 import { MonosaccharidesDiagram, GlycosidicBondsDiagram, PolysaccharidesDiagram, FattyAcidsDiagram, MembraneLipidsDiagram, LipidAssemblyDiagram, WaterVitaminsDiagram, FatVitaminsDiagram } from "../components/BioMacro";
 
 import { LabMeasuresDiagram, LabDilutionDiagram, LabIsotonicDiagram, LabTitrationDiagram, LabPhScaleDiagram, LabIsoelectricDiagram, LabBufferDiagram, LabCentrifugeDiagram, LabChromatographyDiagram, LabElectrophoresisDiagram, LabSpectroDiagram, LabLdhDiagram, LabIodometryDiagram } from "../components/BioLab";
+import { LabRotorsDiagram, LabHemodialysisDiagram, LabReactionTimeDiagram } from "../components/BioLabQuestions";
 
 import { GlycolysisDiagram, GlycolysisRegulationDiagram, PdhComplexDiagram, PdhRegulationDiagram, KrebsDetailedDiagram, EtcDiagram, AtpSynthaseDiagram, GlycogenesisDiagram, GlycogenolysisDiagram, GlycogenRegulationDiagram } from "../components/BioMetabolismA";
 import { GluconeogenesisDiagram, GlycolysisGluconeogenesisSwitchDiagram, FattyAcidShuttleDiagram, FasCycleDiagram, TriglycerideDiagram, BetaOxidationDiagram, AminoAcidMetabolismDiagram, UreaCycleDiagram, KetoneBodiesDiagram, PentosePhosphateDiagram, CholesterolSynthesisDiagram, LipoproteinsDiagram, NucleotideSynthesisDiagram, MetabolicMapCarbs, MetabolicMapLipids, MetabolicMapProteins } from "../components/BioMetabolismB";
@@ -111,6 +112,9 @@ export const COURSE_FIGURES: Record<string, () => ReactNode> = {
   "bio/lab-spectro": () => <LabSpectroDiagram />,
   "bio/lab-ldh": () => <LabLdhDiagram />,
   "bio/lab-iodometry": () => <LabIodometryDiagram />,
+  "bio/lab-rotors": () => <LabRotorsDiagram />,
+  "bio/lab-hemodialysis": () => <LabHemodialysisDiagram />,
+  "bio/lab-reaction-time": () => <LabReactionTimeDiagram />,
   "bio/amino-acid": () => <AminoAcidStructureDiagram />,
   "bio/amino-acid-classes": () => <AminoAcidClassesDiagram />,
   "bio/peptide-bond": () => <PeptideBondDiagram />,

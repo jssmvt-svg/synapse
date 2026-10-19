@@ -1610,3 +1610,33 @@ Handout example: the line 1/v = 34.753·(1/[S]) + 773.73 gives 1/Vmax ≈ 0.775 
 - result: colour **more intense in the tube without EDTA**.`,
   },
 ];
+
+// ===========================================================================
+// Schémas ajoutés à la fin des réponses (clés du visual-registry client),
+// une entrée par question, dans l'ordre ; null = pas de schéma.
+// ===========================================================================
+const OPEN_LAB_VISUALS: [LibraryOpenQuestionSeed[], (string[] | null)[]][] = [
+  [OPEN_LAB2_MEASURES, [["bio/lab-measures"], ["bio/lab-measures"], ["bio/lab-measures"], null, ["bio/lab-urine-density"]]],
+  [OPEN_LAB3_SOLUTIONS, [["bio/lab-dilution"], ["bio/lab-isotonic"], ["bio/lab-isotonic"], ["bio/lab-dilution"], ["bio/lab-isotonic"]]],
+  [OPEN_LAB4_TITRATION, [["bio/lab-ph-scale"], null, ["bio/lab-titration"], ["bio/lab-titration"], ["bio/lab-titration"]]],
+  [OPEN_LAB5_PH, [["bio/lab-ph-scale"], ["bio/lab-ph-scale"], null, ["bio/lab-isoelectric"], ["bio/lab-isoelectric"]]],
+  [OPEN_LAB6_BUFFERS, [["bio/lab-buffer"], ["bio/lab-buffer"], ["bio/lab-buffer"], ["bio/lab-blood-buffers"], ["bio/bohr-effect"]]],
+  [OPEN_LAB7_SAMPLES, [null, null, ["bio/lab-centrifuge"], ["bio/lab-centrifuge"], null, ["bio/lab-rotors"], ["bio/lab-rotors"]]],
+  [OPEN_LAB8_CHROMATOGRAPHY, [["bio/lab-chrom-mechanisms"], ["bio/lab-chrom-mechanisms"], ["bio/lab-chromatography"], ["bio/lab-chrom-mechanisms"], ["bio/lab-chromatography"], ["bio/lab-chrom-mechanisms"]]],
+  [OPEN_LAB9_DIALYSIS, [["bio/lab-electrophoresis"], ["bio/lab-hemodialysis"], ["bio/lab-electrophoresis"], ["bio/lab-electrophoresis"], ["bio/lab-electrophoresis"], ["bio/lab-electrophoresis"]]],
+  [OPEN_LAB10_SPECTRO, [["bio/lab-spectro"], ["bio/lab-spectro"], ["bio/lab-conc-methods"], ["bio/lab-conc-methods"], ["bio/lab-spectro"], null]],
+  [OPEN_LAB11_OPTICAL_TEST, [null, ["bio/lab-ldh"], ["bio/lab-optical-tests"], ["bio/lab-ldh"], ["bio/lab-transaminases"]]],
+  [OPEN_LAB12_VITAMIN_C, [["bio/water-vitamins", "bio/fat-vitamins"], null, ["bio/vitamin-e-c"], ["bio/lab-iodometry"], ["bio/lab-iodometry"]]],
+  // Q3 contient déjà [[visual:bio/michaelis-menten]] dans sa réponse.
+  [OPEN_LAB13_KINETICS, [["bio/lab-reaction-time"], ["bio/michaelis-menten"], null, ["bio/michaelis-menten"], ["bio/michaelis-menten"], ["bio/lab-enzyme-factors"]]],
+];
+
+for (const [questions, visuals] of OPEN_LAB_VISUALS) {
+  questions.forEach((question, index) => {
+    const keys = visuals[index];
+    if (!keys) return;
+    const markers = keys.map((key) => `[[visual:${key}]]`).join("\n\n");
+    question.answer_fr = `${question.answer_fr}\n\n${markers}`;
+    question.answer_en = `${question.answer_en}\n\n${markers}`;
+  });
+}
