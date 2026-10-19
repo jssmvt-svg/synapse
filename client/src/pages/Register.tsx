@@ -1,7 +1,8 @@
-import { useMemo, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api, setToken, type StudyLang, type Track } from "../api";
-import { COUNTRY_CODES, DEFAULT_COUNTRY, countryOptions } from "../countryCodes";
+import { COUNTRY_CODES, DEFAULT_COUNTRY } from "../countryCodes";
+import { CountryPicker } from "../components/CountryPicker";
 import { useAuth } from "../auth";
 import { useLang } from "../i18n";
 
@@ -28,7 +29,6 @@ export function Register() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [track, setTrack] = useState<Track | "">("");
   const [studyLang, setStudyLang] = useState<StudyLang>(lang === "en" ? "en" : "fr");
-  const countries = useMemo(() => countryOptions(lang), [lang]);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -130,11 +130,14 @@ export function Register() {
         <label>
           {t.phone}
           <div className="auth-form-row phone-row">
-            <select value={phoneCountry} onChange={(e) => setPhoneCountry(e.target.value)} aria-label={t.phoneCountry}>
-              {countries.map((c) => (
-                <option key={c.iso} value={c.iso}>{c.label}</option>
-              ))}
-            </select>
+            <CountryPicker
+              value={phoneCountry}
+              onChange={setPhoneCountry}
+              locale={lang}
+              label={t.phoneCountry}
+              placeholder={tx("Tape ton pays ou +indicatif", "Type your country or +code")}
+              emptyText={tx("Aucun pays trouvé", "No country found")}
+            />
             <input
               type="tel"
               autoComplete="tel-national"
