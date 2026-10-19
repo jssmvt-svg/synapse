@@ -23,6 +23,20 @@ import {
   LAB12_LEARNING,
   LAB13_LEARNING,
 } from "./biochimie-labo-10-11-12-13.js";
+import {
+  OPEN_LAB2_MEASURES,
+  OPEN_LAB3_SOLUTIONS,
+  OPEN_LAB4_TITRATION,
+  OPEN_LAB5_PH,
+  OPEN_LAB6_BUFFERS,
+  OPEN_LAB7_SAMPLES,
+  OPEN_LAB8_CHROMATOGRAPHY,
+  OPEN_LAB9_DIALYSIS,
+  OPEN_LAB10_SPECTRO,
+  OPEN_LAB11_OPTICAL_TEST,
+  OPEN_LAB12_VITAMIN_C,
+  OPEN_LAB13_KINETICS,
+} from "./biochimie-labo-open-questions.js";
 
 // Contenu officiel pré-rédigé : Biochimie, Année 1, Semestre 1.
 // Extrait du notebook NotebookLM "Lecture Biochem S1" (11 lectures / sources)
@@ -790,6 +804,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "SI units, weighing and volume measurement instruments, urine density",
     icone: "⚖️",
     learning: LAB2_LEARNING,
+    openQuestions: OPEN_LAB2_MEASURES,
     cards: [],
   },
   {
@@ -801,6 +816,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Concentrations, dilution calculations and osmolarity of infusion solutions",
     icone: "💧",
     learning: LAB3_LEARNING,
+    openQuestions: OPEN_LAB3_SOLUTIONS,
     cards: [],
   },
   {
@@ -812,6 +828,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Water autoionization, acid/base strength, pH and volumetric titration methods",
     icone: "⚗️",
     learning: LAB4_LEARNING,
+    openQuestions: OPEN_LAB4_TITRATION,
     cards: [],
   },
   {
@@ -823,6 +840,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "pH calculations (strong/weak acids and bases), determination methods, isoelectric point of amino acids",
     icone: "🧪",
     learning: LAB5_LEARNING,
+    openQuestions: OPEN_LAB5_PH,
     cards: [],
   },
   {
@@ -834,6 +852,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Henderson-Hasselbalch equation, blood buffers, acid-base balance",
     icone: "🧫",
     learning: LAB6_LEARNING,
+    openQuestions: OPEN_LAB6_BUFFERS,
     cards: [],
   },
   {
@@ -845,6 +864,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Centrifugation principle, blood sampling types and collection tubes",
     icone: "🩸",
     learning: LAB7_LEARNING,
+    openQuestions: OPEN_LAB7_SAMPLES,
     cards: [],
   },
   {
@@ -856,6 +876,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Chromatography principles, separation mechanisms and paper chromatography",
     icone: "🧬",
     learning: LAB8_LEARNING,
+    openQuestions: OPEN_LAB8_CHROMATOGRAPHY,
     cards: [],
   },
   {
@@ -867,6 +888,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Dialysis principles, medical applications and serum protein electrophoresis",
     icone: "🩹",
     learning: LAB9_LEARNING,
+    openQuestions: OPEN_LAB9_DIALYSIS,
     cards: [],
   },
   {
@@ -878,6 +900,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Beer-Lambert law, calibration curves and optical assay of serum proteins",
     icone: "📈",
     learning: LAB10_LEARNING,
+    openQuestions: OPEN_LAB10_SPECTRO,
     cards: [],
   },
   {
@@ -889,6 +912,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Enzyme cofactors, LDH isoenzymes, transaminases and creatine kinase",
     icone: "🔬",
     learning: LAB11_LEARNING,
+    openQuestions: OPEN_LAB11_OPTICAL_TEST,
     cards: [],
   },
   {
@@ -900,6 +924,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Redox titration, structure and biological roles of ascorbic acid",
     icone: "🍊",
     learning: LAB12_LEARNING,
+    openQuestions: OPEN_LAB12_VITAMIN_C,
     cards: [],
   },
   {
@@ -911,6 +936,7 @@ export const BIOCHIMIE_S1: LibraryChapterSeed[] = [
     description_en: "Michaelis-Menten and Lineweaver-Burk equations, factors affecting enzyme rate",
     icone: "📉",
     learning: LAB13_LEARNING,
+    openQuestions: OPEN_LAB13_KINETICS,
     cards: [],
   },
   {

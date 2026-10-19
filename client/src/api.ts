@@ -255,6 +255,13 @@ export interface LibraryOpenQuestion {
   answer_en: string;
 }
 
+export interface SectionOpenQuestion extends LibraryOpenQuestion {
+  chapter_id: number;
+  chapter_ordre: number;
+  chapter_titre_fr: string;
+  chapter_titre_en: string;
+}
+
 export interface LibraryChapterDetail {
   chapter: LibraryChapter;
   resources: LibraryResource[];
@@ -608,6 +615,8 @@ export const api = {
     request<Flashcard[]>(`/library/chapters/${chapterId}/flashcards`),
   getLibraryChapter: (chapterId: number) =>
     request<LibraryChapterDetail>(`/library/chapters/${chapterId}`),
+  getSectionOpenQuestions: (chapterIds: number[]) =>
+    request<SectionOpenQuestion[]>(`/library/open-questions?chapters=${chapterIds.join(",")}`),
   completeLibraryResource: (chapterId: number, resourceId: number, completed: boolean) =>
     request<{ resourceId: number; completed: boolean }>(`/library/chapters/${chapterId}/course-progress`, {
       method: "POST",

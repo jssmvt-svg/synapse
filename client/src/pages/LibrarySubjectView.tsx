@@ -5,6 +5,7 @@ import { api, type LibrarySubject, type StudySemesterDetail } from "../api";
 import { useLang, Fwd } from "../i18n";
 import { SearchBar } from "../components/SearchBar";
 import { libraryRoutes } from "../libraryRoutes";
+import { OpenQuestionsTrainer, type TrainerQuestion } from "../components/OpenQuestionsTrainer";
 
 type ChapterSection = "cours" | "laboratoire";
 
@@ -147,6 +148,43 @@ function SectionChapterGrid({
   onBack: () => void;
 }) {
   const { t, tx } = useLang();
+  const [sectionQuestions, setSectionQuestions] = useState<TrainerQuestion[]>([]);
+  const [training, setTraining] = useState(false);
+  const chapterKey = chapters.map((chapter) => chapter.id).join(",");
+
+  useEffect(() => {
+    setSectionQuestions([]);
+    setTraining(false);
+    if (!chapterKey) return;
+    api
+      .getSectionOpenQuestions(chapterKey.split(",").map(Number))
+      .then((questions) =>
+        setSectionQuestions(
+          questions.map((question) => ({
+            ...question,
+            source_key: String(question.chapter_id),
+            source_fr: question.chapter_titre_fr,
+            source_en: question.chapter_titre_en,
+          })),
+        ),
+      )
+      .catch(() => setSectionQuestions([]));
+  }, [chapterKey]);
+
+  const trainerTitle = section === "laboratoire"
+    ? tx("Questions de labo", "Lab questions")
+    : tx("Questions ouvertes", "Open questions");
+
+  if (training && sectionQuestions.length) {
+    return (
+      <OpenQuestionsTrainer
+        questions={sectionQuestions}
+        lang={lang}
+        title={trainerTitle}
+        onBack={() => setTraining(false)}
+      />
+    );
+  }
 
   return (
     <section aria-labelledby="subject-chapters-heading">
@@ -161,6 +199,22 @@ function SectionChapterGrid({
           </h2>
         </div>
       </div>
+      {sectionQuestions.length > 0 && (
+        <button type="button" className="oq-section-card" onClick={() => setTraining(true)}>
+          <span className="oq-section-icon" aria-hidden="true">🎲</span>
+          <span className="oq-section-copy">
+            <span className="eyebrow">{tx("Entraînement", "Practice")}</span>
+            <strong>{tx(`${trainerTitle} : révision et test aléatoire`, `${trainerTitle}: review and random test`)}</strong>
+            <span>
+              {tx(
+                `${sectionQuestions.length} questions avec réponse modèle, issues de ${new Set(sectionQuestions.map((q) => q.source_key)).size} chapitres. Révise-les ou lance un test tiré au hasard, avec un score à la fin.`,
+                `${sectionQuestions.length} questions with model answers from ${new Set(sectionQuestions.map((q) => q.source_key)).size} chapters. Review them or start a randomly drawn test, scored at the end.`,
+              )}
+            </span>
+          </span>
+          <small>{tx("Commencer", "Start")} <Fwd /></small>
+        </button>
+      )}
       {chapters.length === 0 ? (
         <p className="hint">{t.sectionEmptyLabo}</p>
       ) : (

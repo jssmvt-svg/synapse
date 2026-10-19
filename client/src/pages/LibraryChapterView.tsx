@@ -8,7 +8,6 @@ import {
   type Flashcard,
   type LibraryChapter,
   type LibraryChapterDetail,
-  type LibraryOpenQuestion,
   type LibraryQcmQuestion,
   type LibraryResource,
   type QcmAttemptResult,
@@ -21,6 +20,7 @@ import { KrebsCycleDiagram } from "../components/KrebsCycleDiagram";
 import { AminoAcidQuiz } from "../components/AminoAcidQuiz";
 import { OcclusionFigure } from "../components/OcclusionFigure";
 import { MarkdownContent } from "../components/MarkdownContent";
+import { OpenQuestionsTrainer } from "../components/OpenQuestionsTrainer";
 import { AminoAcidGallery } from "../components/AminoAcidGallery";
 import {
   CarbohydrateGallery,
@@ -381,81 +381,6 @@ function FlashcardReview({
           onClick={() => { setFlipped(false); setIndex((current) => (current + 1) % cards.length); }}
         >
           {tx("Carte suivante", "Next card")} <Fwd />
-        </button>
-      </div>
-    </section>
-  );
-}
-
-function OpenQuestionsPractice({
-  questions,
-  lang,
-  onBack,
-}: {
-  questions: LibraryOpenQuestion[];
-  lang: Lang;
-  onBack: () => void;
-}) {
-  const { t, tx } = useLang();
-  const [index, setIndex] = useState(0);
-  const [revealed, setRevealed] = useState(false);
-  const question = questions[index];
-
-  useEffect(() => {
-    setRevealed(false);
-  }, [index]);
-
-  if (!question) return <p className="hint">{t.noContent}</p>;
-
-  const go = (next: number) => {
-    setIndex((next + questions.length) % questions.length);
-  };
-
-  return (
-    <section className="learning-panel open-questions-panel">
-      <div className="panel-topline">
-        <button type="button" className="text-button" onClick={onBack}>
-          {t.backToLibrary}
-        </button>
-        <span className="progress-label">
-          {tx(
-            `Question ${index + 1} / ${questions.length}`,
-            `Question ${index + 1} / ${questions.length}`,
-          )}
-        </span>
-      </div>
-      <p className="eyebrow">{tx("Questions ouvertes", "Open questions")}</p>
-      <p className="hint">
-        {tx(
-          "Rédige ta réponse de mémoire, puis révèle le corrigé pour la comparer.",
-          "Draft your answer from memory, then reveal the model answer to compare.",
-        )}
-      </p>
-      <article className="open-question-card">
-        <h2>{localized(lang, question.question_fr, question.question_en)}</h2>
-      </article>
-      {revealed ? (
-        <div className="open-question-answer">
-          <p className="eyebrow">{tx("Réponse modèle", "Model answer")}</p>
-          <MarkdownContent
-            content={localized(lang, question.answer_fr, question.answer_en)}
-            className="course-copy"
-          />
-          <button type="button" className="text-button" onClick={() => setRevealed(false)}>
-            {tx("Masquer la réponse", "Hide the answer")}
-          </button>
-        </div>
-      ) : (
-        <button type="button" onClick={() => setRevealed(true)}>
-          {tx("Révéler la réponse modèle", "Reveal the model answer")}
-        </button>
-      )}
-      <div className="question-navigation">
-        <button type="button" className="nav-secondary" onClick={() => go(index - 1)}>
-          <Back /> {tx("Question précédente", "Previous question")}
-        </button>
-        <button type="button" className="nav-secondary" onClick={() => go(index + 1)}>
-          {tx("Question suivante", "Next question")} <Fwd />
         </button>
       </div>
     </section>
@@ -930,7 +855,7 @@ export function LibraryChapterView() {
         <FlashcardReview chapter={detail} cards={detail.flashcards} lang={lang} onBack={() => setActivity("hub")} />
       )}
       {activity === "open-questions" && (
-        <OpenQuestionsPractice questions={openQuestions} lang={lang} onBack={() => setActivity("hub")} />
+        <OpenQuestionsTrainer questions={openQuestions} lang={lang} onBack={() => setActivity("hub")} />
       )}
       {activity === "exam" && exam && (
         <TimedExam chapter={detail} exam={exam} questions={detail.qcm} lang={lang} onBack={() => setActivity("hub")} />

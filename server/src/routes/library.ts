@@ -563,6 +563,37 @@ libraryRouter.get("/chapters/:id", async (req: AuthedRequest, res) => {
   res.json({ chapter, resources, flashcards, qcm, exams, openQuestions, progress });
 });
 
+// Questions ouvertes de plusieurs chapitres (test aléatoire d'une section, ex.
+// tous les labos d'une matière). Les chapitres inaccessibles sont ignorés.
+libraryRouter.get("/open-questions", async (req: AuthedRequest, res) => {
+  const chapterIds = [...new Set(String(req.query.chapters ?? "").split(",").map(Number))]
+    .filter((id) => Number.isInteger(id) && id > 0)
+    .slice(0, 60);
+
+  const questions: any[] = [];
+  for (const chapterId of chapterIds) {
+    const chapter = await getChapter(chapterId);
+    if (!chapter) continue;
+    if (!(await hasChapterGrant(req.userId!, chapter.id)) && !(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) continue;
+    const rows = await db
+      .prepare(
+        `SELECT id, ordre, question_fr, question_en, answer_fr, answer_en
+         FROM library_open_questions WHERE chapter_id = ? AND is_active = true ORDER BY ordre ASC`,
+      )
+      .all(chapterId);
+    for (const row of rows as any[]) {
+      questions.push({
+        ...row,
+        chapter_id: chapter.id,
+        chapter_ordre: chapter.ordre,
+        chapter_titre_fr: chapter.titre_fr,
+        chapter_titre_en: chapter.titre_en,
+      });
+    }
+  }
+  res.json(questions);
+});
+
 libraryRouter.get("/chapters/:id/flashcards", async (req: AuthedRequest, res) => {
   const chapterId = Number(req.params.id);
   const chapter = await requireChapterAccess(req, res, chapterId);
