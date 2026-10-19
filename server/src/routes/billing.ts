@@ -10,8 +10,6 @@ const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID;
 /** Abonnement mensuel, fixé dans le code pour ne plus dépendre du tarif saisi dans Stripe. */
 const MONTHLY_PRICE_CENTS = 1000;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
-/** Coupon Stripe de l'offre de lancement (ex. -50 % à vie, limité à 5 utilisations). Facultatif. */
-const STRIPE_LAUNCH_COUPON_ID = process.env.STRIPE_LAUNCH_COUPON_ID;
 
 const stripe = STRIPE_SECRET_KEY ? new Stripe(STRIPE_SECRET_KEY) : null;
 
@@ -27,33 +25,7 @@ function currentPeriodEndMs(subscription: Stripe.Subscription): number | null {
   return seconds ? seconds * 1000 : null;
 }
 
-type LaunchOffer = { active: boolean; remaining: number; total: number };
-const NO_LAUNCH_OFFER: LaunchOffer = { active: false, remaining: 0, total: 0 };
-let launchOfferCache: { value: LaunchOffer; at: number } | null = null;
-
-/** État de l'offre de lancement, lu sur le coupon Stripe (places = max_redemptions - times_redeemed). */
-async function getLaunchOffer(): Promise<LaunchOffer> {
-  if (!stripe || !STRIPE_LAUNCH_COUPON_ID) return NO_LAUNCH_OFFER;
-  if (launchOfferCache && Date.now() - launchOfferCache.at < 60_000) return launchOfferCache.value;
-  let value = NO_LAUNCH_OFFER;
-  try {
-    const coupon = await stripe.coupons.retrieve(STRIPE_LAUNCH_COUPON_ID);
-    const total = coupon.max_redemptions ?? 0;
-    const remaining = Math.max(0, total - coupon.times_redeemed);
-    value = { active: coupon.valid && remaining > 0, remaining, total };
-  } catch (error) {
-    console.error("[stripe] Coupon de lancement illisible.", error);
-  }
-  launchOfferCache = { value, at: Date.now() };
-  return value;
-}
-
 export const billingRouter = Router();
-
-/** Offre de lancement (public) : affichée sur l'accueil et le tableau de bord tant qu'il reste des places. */
-billingRouter.get("/launch-offer", async (_req, res) => {
-  res.json(await getLaunchOffer());
-});
 
 let productIdCache: string | null = null;
 
@@ -81,7 +53,7 @@ billingRouter.post("/checkout", express.json(), authMiddleware, async (req: Auth
   if (!user) return res.status(404).json({ error: "Étudiant introuvable." });
 
   const productId = await synapseProductId();
-  const params: Stripe.Checkout.SessionCreateParams = {
+  const session = await stripe.checkout.sessions.create({
     mode: "subscription",
     ...(user.stripe_customer_id
       ? { customer: user.stripe_customer_id }
@@ -100,22 +72,7 @@ billingRouter.post("/checkout", express.json(), authMiddleware, async (req: Auth
     ],
     success_url: `${appUrl()}/library?checkout=success`,
     cancel_url: `${appUrl()}/pricing?checkout=cancelled`,
-  };
-
-  let session: Stripe.Checkout.Session;
-  const offer = await getLaunchOffer();
-  if (offer.active && STRIPE_LAUNCH_COUPON_ID) {
-    try {
-      session = await stripe.checkout.sessions.create({ ...params, discounts: [{ coupon: STRIPE_LAUNCH_COUPON_ID }] });
-    } catch (error) {
-      // Dernière place prise entre-temps : on retombe sur le plein tarif.
-      console.warn("[stripe] Coupon de lancement refusé, plein tarif.", error);
-      launchOfferCache = null;
-      session = await stripe.checkout.sessions.create(params);
-    }
-  } else {
-    session = await stripe.checkout.sessions.create(params);
-  }
+  });
 
   res.json({ url: session.url });
 });
@@ -163,7 +120,6 @@ billingRouter.post("/webhook", express.raw({ type: "application/json" }), async 
       const subscriptionId =
         typeof session.subscription === "string" ? session.subscription : session.subscription?.id;
       if (!Number.isInteger(userId) || !customerId) break;
-      launchOfferCache = null;
 
       const subscription = subscriptionId ? await stripe.subscriptions.retrieve(subscriptionId) : null;
       const periodEnd = subscription ? currentPeriodEndMs(subscription) : null;

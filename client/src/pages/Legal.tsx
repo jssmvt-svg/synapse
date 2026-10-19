@@ -66,9 +66,6 @@ export function Legal() {
           <strong>{tx("Abonnement : ", "Subscription: ")}</strong>
           {tx("10 €/mois, facturé chaque mois, sans engagement. Essai gratuit de 8 jours (semestre 1) à l'inscription, sans carte bancaire.", "€10/month, billed monthly, no commitment. 8-day free trial (semester 1) at signup, no card needed.")}
           <br />
-          <strong>{tx("Offre de lancement : ", "Launch offer: ")}</strong>
-          {tx("5 €/mois pour les 5 premiers abonnés, tant que leur abonnement reste actif ; appliquée automatiquement au paiement, dans la limite des places.", "€5/month for the first 5 subscribers, for as long as their subscription stays active; applied automatically at checkout, while spots last.")}
-          <br />
           <strong>{tx("Paiement : ", "Payment: ")}</strong>Stripe, Inc.<br />
           <strong>TVA : </strong>{tx("Non applicable — statut en cours", "Not applicable — registration in progress")}
         </p>
