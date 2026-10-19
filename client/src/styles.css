@@ -8454,6 +8454,29 @@ img, video { height: auto; }
 .oq-badge { display: inline-block; margin-right: 0.5rem; padding: 0.1rem 0.5rem; font-size: 0.75rem; border-radius: 999px; vertical-align: middle; }
 .oq-badge-partial { color: #92400e; background: #fef3c7; }
 .oq-badge-missed { color: #991b1b; background: #fee2e2; }
+/* Quiz acides aminés : 20 questions, navigation libre */
+.aa-quiz-top { display: flex; justify-content: space-between; gap: 1rem; }
+.aa-quiz-dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin: 0.4rem 0 1rem; }
+.aa-quiz-dot {
+  min-width: 2rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: none;
+}
+.aa-quiz-dot.is-right { color: #166534; background: #dcfce7; border-color: #86efac; }
+.aa-quiz-dot.is-wrong { color: #991b1b; background: #fee2e2; border-color: #fca5a5; }
+.aa-quiz-dot.is-current { outline: 2px solid var(--accent); outline-offset: 1px; }
+.aa-quiz-missed { margin: 0.5rem 0 1rem; }
+.quiz-option:disabled { opacity: 0.55; cursor: default; }
+.quiz-option.correct, .quiz-option.correct:disabled { opacity: 1; color: #fff; background: #16a34a; }
+.quiz-option.incorrect, .quiz-option.incorrect:disabled { opacity: 1; color: #fff; background: #dc2626; }
+.aa-quiz-missed .aa-quiz-dots { justify-content: flex-start; }
+
 @media (max-width: 520px) {
   .oq-section-card { grid-template-columns: auto 1fr; }
   .oq-section-card small { grid-column: 2; }
