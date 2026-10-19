@@ -56,6 +56,49 @@ export interface User {
   trialEndsAt?: number | null;
   subscriptionStatus?: string | null;
   subscriptionPeriodEnd?: number | null;
+  /** A déjà payé un abonnement qui n'est plus actif (résilié ou impayé). */
+  formerSubscriber?: boolean;
+}
+
+export interface AccountPayment {
+  id: string;
+  date: number;
+  amount: number;
+  currency: string;
+  status: string | null;
+  periodStart: number | null;
+  periodEnd: number | null;
+  pdfUrl: string | null;
+  url: string | null;
+}
+
+export interface AccountOverview {
+  profile: {
+    email: string;
+    firstName: string | null;
+    lastName: string | null;
+    track: Track | null;
+    studyLang: StudyLang | null;
+    year: number;
+    createdAt: number;
+  };
+  access: {
+    role: "student" | "admin";
+    subscriptionStatus: string;
+    subscriptionPeriodEnd: number | null;
+    trialStatus: string | null;
+    trialEndsAt: number | null;
+    premium: boolean;
+    formerSubscriber: boolean;
+  };
+  subscription: {
+    status: string;
+    cancelAtPeriodEnd: boolean;
+    currentPeriodEnd: number | null;
+    amount: number;
+    currency: string;
+  } | null;
+  payments: AccountPayment[];
 }
 
 /** Langue d'études déclarée à l'inscription (le roumain n'a pas encore de contenu dédié). */
@@ -666,4 +709,9 @@ export const api = {
     request<void>(`/duel/rooms/${encodeURIComponent(code)}/leave`, { method: "POST", body: "{}" }),
   createCheckoutSession: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
   openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
+  getAccount: () => request<AccountOverview>("/billing/account"),
+  cancelSubscription: () =>
+    request<{ cancelAtPeriodEnd: boolean; currentPeriodEnd: number | null }>("/billing/cancel", { method: "POST" }),
+  resumeSubscription: () =>
+    request<{ cancelAtPeriodEnd: boolean; currentPeriodEnd: number | null }>("/billing/resume", { method: "POST" }),
 };

@@ -8,7 +8,15 @@ export const libraryRouter = Router();
 
 libraryRouter.use(authMiddleware);
 
-const KNOWN_STRUCTURE = [{ annee: 1, semestres: [1, 2] }];
+// Accès terminé (essai déjà utilisé ou abonnement résilié) : l'essai gratuit
+// n'est accordé qu'une fois par compte, il faut se réabonner.
+function accessEndedMessage(req: AuthedRequest): string {
+  return req.headers["x-lang"] === "en"
+    ? "Your access has ended: the free trial has already been used on this account and no subscription is active. To get all the courses back, subscribe again from “My account” (€10/month, no commitment)."
+    : "Ton accès est terminé : l'essai gratuit a déjà été utilisé sur ce compte et aucun abonnement n'est actif. Pour retrouver tous les cours, réabonne-toi depuis « Mon compte » (10 €/mois, sans engagement).";
+}
+
+const KNOWN_STRUCTURE =[{ annee: 1, semestres: [1, 2] }];
 function selectedKeys(value: unknown): string[] | null {
   if (!Array.isArray(value) || value.some((key) => typeof key !== "string")) return null;
   return [...new Set(value)];
@@ -66,8 +74,11 @@ async function requireChapterAccess(
     return null;
   }
   if (!(await hasChapterGrant(req.userId!, chapter.id)) && !(await canAccessSemester(req.userId!, chapter.annee, chapter.semestre))) {
+    const viewer = await db.prepare("SELECT subscription_status FROM users WHERE id = ?").get(req.userId);
     res.status(403).json({
-      error: "Un accès actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
+      error: viewer?.subscription_status === "inactive"
+        ? accessEndedMessage(req)
+        : "Un accès actif et l'ouverture du semestre sont nécessaires pour accéder à ce contenu.",
       code: "SEMESTER_ACCESS_REQUIRED",
     });
     return null;
@@ -257,7 +268,9 @@ libraryRouter.get("/semesters/:number", async (req: AuthedRequest, res) => {
     return res.status(403).json({
       error: semesterNumber === 2 && semester.is_published && viewer?.subscription_status === "trialing"
         ? "Le semestre 2 est réservé aux abonnés (l'essai gratuit donne accès au semestre 1)."
-        : "Ce semestre sera disponible dès que ton accès sera actif et que Jessica l'aura ouvert.",
+        : semester.is_published && viewer?.subscription_status === "inactive"
+          ? accessEndedMessage(req)
+          : "Ce semestre sera disponible dès que ton accès sera actif et que Jessica l'aura ouvert.",
       code: "SEMESTER_ACCESS_REQUIRED",
     });
   }
