@@ -42,6 +42,25 @@ async function synapseProductId(): Promise<string | null> {
   return productIdCache;
 }
 
+/**
+ * Client Stripe enregistré, s'il existe bien avec la clé actuelle. Un client
+ * créé en mode test n'existe pas en mode live (« No such customer ») : on
+ * l'oublie, et Checkout en créera un nouveau à partir de l'e-mail.
+ */
+async function usableCustomerId(userId: number, customerId: string | null): Promise<string | null> {
+  if (!stripe || !customerId) return null;
+  try {
+    const customer = await stripe.customers.retrieve(customerId);
+    if (!("deleted" in customer && customer.deleted)) return customerId;
+  } catch (error) {
+    if (!(error instanceof Stripe.errors.StripeInvalidRequestError && error.code === "resource_missing")) throw error;
+  }
+  await db
+    .prepare("UPDATE users SET stripe_customer_id = NULL, stripe_subscription_id = NULL WHERE id = ?")
+    .run(userId);
+  return null;
+}
+
 /** Crée une session Stripe Checkout pour l'abonnement mensuel de l'étudiant connecté. */
 billingRouter.post("/checkout", express.json(), authMiddleware, async (req: AuthedRequest, res) => {
   if (!stripe) {
@@ -53,11 +72,10 @@ billingRouter.post("/checkout", express.json(), authMiddleware, async (req: Auth
   if (!user) return res.status(404).json({ error: "Étudiant introuvable." });
 
   const productId = await synapseProductId();
+  const customerId = await usableCustomerId(user.id, user.stripe_customer_id);
   const session = await stripe.checkout.sessions.create({
     mode: "subscription",
-    ...(user.stripe_customer_id
-      ? { customer: user.stripe_customer_id }
-      : { customer_email: user.email }),
+    ...(customerId ? { customer: customerId } : { customer_email: user.email }),
     client_reference_id: String(user.id),
     line_items: [
       {
@@ -81,13 +99,14 @@ billingRouter.post("/checkout", express.json(), authMiddleware, async (req: Auth
 billingRouter.post("/portal", express.json(), authMiddleware, async (req: AuthedRequest, res) => {
   if (!stripe) return res.status(503).json({ error: "Le paiement n'est pas encore configuré." });
   const user = await db
-    .prepare("SELECT stripe_customer_id FROM users WHERE id = ?")
+    .prepare("SELECT id, stripe_customer_id FROM users WHERE id = ?")
     .get(req.userId);
-  if (!user?.stripe_customer_id) {
+  const customerId = user ? await usableCustomerId(user.id, user.stripe_customer_id) : null;
+  if (!customerId) {
     return res.status(404).json({ error: "Aucun abonnement Stripe associé à ce compte." });
   }
   const session = await stripe.billingPortal.sessions.create({
-    customer: user.stripe_customer_id,
+    customer: customerId,
     return_url: `${appUrl()}/dashboard`,
   });
   res.json({ url: session.url });
