@@ -49,12 +49,22 @@ adminRouter.get("/users", async (_req, res) => {
     .prepare(
       `SELECT id, email, first_name, last_name, phone_country_code, phone_number, study_lang, track, role,
               trial_status, trial_requested_at, trial_granted_at, trial_ends_at,
-              subscription_status, subscription_period_end, created_at
+              subscription_status, subscription_period_end, stripe_customer_id, stripe_subscription_id, created_at
        FROM users ORDER BY created_at DESC`,
     )
     .all();
+  // Paiement Stripe : « paid » = abonnement Stripe en cours, « past_due » = échec
+  // de prélèvement en cours de relance, « cancelled » = a déjà payé mais n'est
+  // plus abonné, « none » = n'a jamais payé (essai ou accès offert).
+  const paymentOf = (u: any) => {
+    if (u.stripe_subscription_id && u.subscription_status === "active") return "paid";
+    if (u.stripe_subscription_id && u.subscription_status === "past_due") return "past_due";
+    if (u.stripe_customer_id && u.subscription_status !== "active") return "cancelled";
+    return "none";
+  };
   res.json(
     users.map((u: any) => ({
+      payment: paymentOf(u),
       id: u.id,
       email: u.email,
       firstName: u.first_name,

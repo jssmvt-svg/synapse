@@ -8454,6 +8454,26 @@ img, video { height: auto; }
 .oq-badge { display: inline-block; margin-right: 0.5rem; padding: 0.1rem 0.5rem; font-size: 0.75rem; border-radius: 999px; vertical-align: middle; }
 .oq-badge-partial { color: #92400e; background: #fef3c7; }
 .oq-badge-missed { color: #991b1b; background: #fee2e2; }
+/* Admin : élèves ayant payé */
+.admin-badges { display: inline-flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 0.35rem; }
+.admin-premium-badge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  color: #7c4a03;
+  background: linear-gradient(135deg, #fde68a, #fbbf24);
+  border: 1px solid #f59e0b;
+}
+.admin-payment-filters { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 0 1rem; }
+/* La ligne cliquable héritait du texte blanc des boutons : nom et statut invisibles. */
+.admin-student-toggle { color: var(--ink); background: transparent; box-shadow: none; gap: 0.6rem; text-align: left; }
+.admin-student-toggle:hover { background: transparent; }
+.admin-student-identity strong { color: var(--ink); }
+.admin-student-identity small { color: var(--muted, #64748b); font-weight: 400; }
+.admin-status-badge { color: #334155; background: #f1f5f9; border: 1px solid var(--border); }
+
 /* Quiz acides aminés : 20 questions, navigation libre */
 .aa-quiz-top { display: flex; justify-content: space-between; gap: 1rem; }
 .aa-quiz-dots { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.35rem; margin: 0.4rem 0 1rem; }
