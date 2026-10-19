@@ -1,9 +1,17 @@
-import { useState, type FormEvent } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { api, setToken, type Track } from "../api";
-import { COUNTRY_CODES } from "../countryCodes";
+import { api, setToken, type StudyLang, type Track } from "../api";
+import { COUNTRY_CODES, DEFAULT_COUNTRY, countryOptions } from "../countryCodes";
 import { useAuth } from "../auth";
-import { useLang, LANGS, LANG_NAMES, type Lang } from "../i18n";
+import { useLang } from "../i18n";
+
+// Le roumain est enregistré comme langue d'études, mais le contenu n'existe qu'en
+// français et en anglais : l'interface s'affiche alors en anglais.
+const STUDY_LANGS: Array<{ code: StudyLang; label: string }> = [
+  { code: "fr", label: "Français" },
+  { code: "en", label: "English" },
+  { code: "ro", label: "Română" },
+];
 
 const PASSWORD_RULE = /^(?=.*[A-Z])(?=.*[0-9]).{8,}$/;
 
@@ -16,10 +24,11 @@ export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [phoneCountryCode, setPhoneCountryCode] = useState("+33");
+  const [phoneCountry, setPhoneCountry] = useState(DEFAULT_COUNTRY);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [track, setTrack] = useState<Track | "">("");
-  const [studyLang, setStudyLang] = useState<Lang>(lang);
+  const [studyLang, setStudyLang] = useState<StudyLang>(lang === "en" ? "en" : "fr");
+  const countries = useMemo(() => countryOptions(lang), [lang]);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
 
@@ -43,10 +52,11 @@ export function Register() {
         lastName,
         email,
         password,
-        phoneCountryCode,
+        phoneCountryCode: COUNTRY_CODES.find((c) => c.iso === phoneCountry)?.code ?? "+33",
         phoneNumber,
         track,
-        langPref: studyLang,
+        langPref: studyLang === "fr" ? "fr" : "en",
+        studyLang,
       });
       setToken(token);
       setUser(user);
@@ -120,9 +130,9 @@ export function Register() {
         <label>
           {t.phone}
           <div className="auth-form-row phone-row">
-            <select value={phoneCountryCode} onChange={(e) => setPhoneCountryCode(e.target.value)} aria-label={t.phoneCountry}>
-              {COUNTRY_CODES.map((c) => (
-                <option key={c.code} value={c.code}>{c.label}</option>
+            <select value={phoneCountry} onChange={(e) => setPhoneCountry(e.target.value)} aria-label={t.phoneCountry}>
+              {countries.map((c) => (
+                <option key={c.iso} value={c.iso}>{c.label}</option>
               ))}
             </select>
             <input
@@ -145,12 +155,19 @@ export function Register() {
         </label>
         <label>
           {t.studyLanguage}
-          <select value={studyLang} onChange={(e) => setStudyLang(e.target.value as Lang)} required>
-            {LANGS.map((code) => (
-              <option key={code} value={code}>{LANG_NAMES[code]}</option>
+          <select value={studyLang} onChange={(e) => setStudyLang(e.target.value as StudyLang)} required>
+            {STUDY_LANGS.map(({ code, label }) => (
+              <option key={code} value={code}>{label}</option>
             ))}
           </select>
-          <small className="password-hint">{t.studyLanguageHint}</small>
+          <small className="password-hint">
+            {studyLang === "ro"
+              ? tx(
+                  "Le contenu en roumain arrive bientôt : en attendant, les cours s'affichent en anglais.",
+                  "Romanian content is coming soon: meanwhile, courses are shown in English.",
+                )
+              : t.studyLanguageHint}
+          </small>
         </label>
         {error && <p className="error">{error}</p>}
         <button type="submit" disabled={busy}>

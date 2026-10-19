@@ -5,7 +5,10 @@ import { sendPaymentConfirmedEmail } from "../email.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
+/** Ancien tarif configuré dans Stripe : ne sert plus qu'à retrouver le produit Synapse. */
 const STRIPE_PRICE_ID = process.env.STRIPE_PRICE_ID;
+/** Abonnement mensuel, fixé dans le code pour ne plus dépendre du tarif saisi dans Stripe. */
+const MONTHLY_PRICE_CENTS = 1000;
 const STRIPE_WEBHOOK_SECRET = process.env.STRIPE_WEBHOOK_SECRET;
 /** Coupon Stripe de l'offre de lancement (ex. -50 % à vie, limité à 5 utilisations). Facultatif. */
 const STRIPE_LAUNCH_COUPON_ID = process.env.STRIPE_LAUNCH_COUPON_ID;
@@ -52,9 +55,24 @@ billingRouter.get("/launch-offer", async (_req, res) => {
   res.json(await getLaunchOffer());
 });
 
-/** Crée une session Stripe Checkout pour l'abonnement semestriel de l'étudiant connecté. */
+let productIdCache: string | null = null;
+
+/** Produit Stripe « Synapse » existant (via l'ancien tarif), pour ne pas en créer un par paiement. */
+async function synapseProductId(): Promise<string | null> {
+  if (!stripe || !STRIPE_PRICE_ID) return null;
+  if (productIdCache) return productIdCache;
+  try {
+    const price = await stripe.prices.retrieve(STRIPE_PRICE_ID);
+    productIdCache = typeof price.product === "string" ? price.product : price.product.id;
+  } catch (error) {
+    console.error("[stripe] Tarif STRIPE_PRICE_ID illisible, produit créé à la volée.", error);
+  }
+  return productIdCache;
+}
+
+/** Crée une session Stripe Checkout pour l'abonnement mensuel de l'étudiant connecté. */
 billingRouter.post("/checkout", express.json(), authMiddleware, async (req: AuthedRequest, res) => {
-  if (!stripe || !STRIPE_PRICE_ID) {
+  if (!stripe) {
     return res.status(503).json({ error: "Le paiement n'est pas encore configuré." });
   }
   const user = await db
@@ -62,13 +80,24 @@ billingRouter.post("/checkout", express.json(), authMiddleware, async (req: Auth
     .get(req.userId);
   if (!user) return res.status(404).json({ error: "Étudiant introuvable." });
 
+  const productId = await synapseProductId();
   const params: Stripe.Checkout.SessionCreateParams = {
     mode: "subscription",
     ...(user.stripe_customer_id
       ? { customer: user.stripe_customer_id }
       : { customer_email: user.email }),
     client_reference_id: String(user.id),
-    line_items: [{ price: STRIPE_PRICE_ID, quantity: 1 }],
+    line_items: [
+      {
+        price_data: {
+          currency: "eur",
+          unit_amount: MONTHLY_PRICE_CENTS,
+          recurring: { interval: "month", interval_count: 1 },
+          ...(productId ? { product: productId } : { product_data: { name: "Synapse — abonnement mensuel" } }),
+        },
+        quantity: 1,
+      },
+    ],
     success_url: `${appUrl()}/library?checkout=success`,
     cancel_url: `${appUrl()}/pricing?checkout=cancelled`,
   };

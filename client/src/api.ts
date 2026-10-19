@@ -58,6 +58,9 @@ export interface User {
   subscriptionPeriodEnd?: number | null;
 }
 
+/** Langue d'études déclarée à l'inscription (le roumain n'a pas encore de contenu dédié). */
+export type StudyLang = "fr" | "en" | "ro";
+
 export interface RegisterInput {
   firstName: string;
   lastName: string;
@@ -67,6 +70,7 @@ export interface RegisterInput {
   phoneNumber: string;
   track: Track;
   langPref: Lang;
+  studyLang: StudyLang;
 }
 
 export interface DocumentSummary {
@@ -417,6 +421,7 @@ export interface AdminUser {
   lastName: string;
   phoneCountryCode: string | null;
   phoneNumber: string | null;
+  studyLang: StudyLang | null;
   track: Track | null;
   role: "student" | "admin";
   trialStatus: TrialStatus;

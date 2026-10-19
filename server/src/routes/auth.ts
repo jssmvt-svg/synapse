@@ -40,6 +40,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
     phoneCountryCode,
     phoneNumber,
     track,
+    studyLang,
   } = req.body as {
     email?: string;
     password?: string;
@@ -49,6 +50,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
     phoneCountryCode?: string;
     phoneNumber?: string;
     track?: string;
+    studyLang?: string;
   };
 
   if (!email || !isValidEmail(email)) {
@@ -81,6 +83,8 @@ authRouter.post("/register", authLimiter, async (req, res) => {
   const passwordHash = await bcrypt.hash(password, 12);
   const sessionToken = randomUUID();
   const lang = normalizeLang(langPref);
+  // Langue d'études déclarée (fr/en/ro) — le roumain n'a pas de contenu dédié, l'interface reste en `lang`.
+  const cleanStudyLang = studyLang === "fr" || studyLang === "en" || studyLang === "ro" ? studyLang : lang;
   const role = publicRegistrationRole();
   const cleanFirstName = normalizeName(firstName);
   const cleanLastName = normalizeName(lastName);
@@ -95,10 +99,10 @@ authRouter.post("/register", authLimiter, async (req, res) => {
     .prepare(
       `INSERT INTO users (
          email, password_hash, session_token, lang_pref, role,
-         first_name, last_name, phone_country_code, phone_number, track,
+         first_name, last_name, phone_country_code, phone_number, study_lang, track,
          trial_status, trial_granted_at, trial_ends_at, subscription_status, subscription_period_end,
          created_at
-       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'granted', ?, ?, 'trialing', ?, ?) RETURNING id`,
+       ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'granted', ?, ?, 'trialing', ?, ?) RETURNING id`,
     )
     .get(
       cleanEmail,
@@ -110,6 +114,7 @@ authRouter.post("/register", authLimiter, async (req, res) => {
       cleanLastName,
       phoneCountryCode,
       cleanPhoneNumber,
+      cleanStudyLang,
       track,
       now,
       trialEndsAt,
