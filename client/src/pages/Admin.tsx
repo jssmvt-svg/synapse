@@ -260,6 +260,12 @@ export function Admin() {
                   {(u.phoneCountryCode || u.phoneNumber) && (
                     <span className="admin-meta-chip">{u.phoneCountryCode ?? ""} {u.phoneNumber ?? ""}</span>
                   )}
+                  {u.studyLang && (
+                    <span className="admin-meta-chip">
+                      {tx("Langue d'études : ", "Study language: ")}
+                      {{ fr: "Français", en: "English", ro: "Română" }[u.studyLang]}
+                    </span>
+                  )}
                   <span className="admin-meta-chip">{tx("Inscrit le ", "Registered ")}{formatDate(locale, u.createdAt)}</span>
                 </div>
                 <div className="admin-student-actions">

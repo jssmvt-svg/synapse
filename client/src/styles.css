@@ -8346,16 +8346,3 @@ img, video { height: auto; }
 .course-visual { max-width: 100%; overflow-x: auto; }
 .landing-story { box-sizing: border-box; }
 .story-scores li { min-width: 0; }
-
-/* Offre de lancement (5 €/mois pour les premiers abonnés) */
-.launch-offer {
-  margin: 0.6rem 0 1rem;
-  padding: 0.55rem 0.8rem;
-  border-radius: 10px;
-  background: #fff4e5;
-  border: 1px solid #f5c48a;
-  color: #7a4a10;
-  font-size: 0.92rem;
-  line-height: 1.45;
-}
-.launch-offer strong { color: #b35c00; }

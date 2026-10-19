@@ -47,7 +47,7 @@ adminRouter.patch("/semesters/:number", async (req, res) => {
 adminRouter.get("/users", async (_req, res) => {
   const users = await db
     .prepare(
-      `SELECT id, email, first_name, last_name, phone_country_code, phone_number, track, role,
+      `SELECT id, email, first_name, last_name, phone_country_code, phone_number, study_lang, track, role,
               trial_status, trial_requested_at, trial_granted_at, trial_ends_at,
               subscription_status, subscription_period_end, created_at
        FROM users ORDER BY created_at DESC`,
@@ -61,6 +61,7 @@ adminRouter.get("/users", async (_req, res) => {
       lastName: u.last_name,
       phoneCountryCode: u.phone_country_code,
       phoneNumber: u.phone_number,
+      studyLang: u.study_lang,
       track: u.track,
       role: u.role,
       trialStatus: u.trial_status,

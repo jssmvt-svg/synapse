@@ -58,6 +58,9 @@ export interface User {
   subscriptionPeriodEnd?: number | null;
 }
 
+/** Langue d'études déclarée à l'inscription (le roumain n'a pas encore de contenu dédié). */
+export type StudyLang = "fr" | "en" | "ro";
+
 export interface RegisterInput {
   firstName: string;
   lastName: string;
@@ -67,6 +70,7 @@ export interface RegisterInput {
   phoneNumber: string;
   track: Track;
   langPref: Lang;
+  studyLang: StudyLang;
 }
 
 export interface DocumentSummary {
@@ -417,6 +421,7 @@ export interface AdminUser {
   lastName: string;
   phoneCountryCode: string | null;
   phoneNumber: string | null;
+  studyLang: StudyLang | null;
   track: Track | null;
   role: "student" | "admin";
   trialStatus: TrialStatus;
@@ -501,8 +506,6 @@ export interface DuelOverview {
   leaderboard: Array<{ name: string; xp: number; level: number; wins: number; isMe: boolean }>;
   activeRoomCode: string | null;
 }
-
-export type LaunchOffer = { active: boolean; remaining: number; total: number };
 
 export const api = {
   register: (input: RegisterInput) =>
@@ -651,7 +654,6 @@ export const api = {
     request<DuelState>(`/duel/rooms/${encodeURIComponent(code)}/bot`, { method: "POST", body: "{}" }),
   duelLeave: (code: string) =>
     request<void>(`/duel/rooms/${encodeURIComponent(code)}/leave`, { method: "POST", body: "{}" }),
-  getLaunchOffer: () => request<LaunchOffer>("/billing/launch-offer"),
   createCheckoutSession: () => request<{ url: string }>("/billing/checkout", { method: "POST" }),
   openBillingPortal: () => request<{ url: string }>("/billing/portal", { method: "POST" }),
 };
