@@ -8346,3 +8346,32 @@ img, video { height: auto; }
 .course-visual { max-width: 100%; overflow-x: auto; }
 .landing-story { box-sizing: border-box; }
 .story-scores li { min-width: 0; }
+
+/* Sélecteur d'indicatif avec recherche (inscription) */
+.phone-row { grid-template-columns: minmax(0, 13rem) 1fr; display: grid; }
+.country-picker { position: relative; min-width: 0; }
+.country-picker input { width: 100%; }
+.country-picker-list {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 4px);
+  left: 0;
+  width: max(100%, 16rem);
+  max-height: 15rem;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0.25rem 0;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+}
+.country-picker-option { padding: 0.5rem 0.75rem; cursor: pointer; font-weight: 400; }
+.country-picker-option.is-active { background: color-mix(in srgb, var(--accent) 12%, #fff); }
+.country-picker-option[aria-selected="true"] { font-weight: 600; }
+.country-picker-empty { padding: 0.5rem 0.75rem; color: var(--muted, #64748b); }
+@media (max-width: 520px) {
+  .phone-row { grid-template-columns: 1fr; }
+  .country-picker-list { width: 100%; }
+}
