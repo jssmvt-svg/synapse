@@ -435,8 +435,9 @@ export interface AdminUser {
   trialRequestedAt: number | null;
   trialGrantedAt: number | null;
   trialEndsAt: number | null;
-  subscriptionStatus: "active" | "trialing" | "inactive";
+  subscriptionStatus: "active" | "trialing" | "inactive" | "past_due";
   subscriptionPeriodEnd: number | null;
+  payment: "paid" | "past_due" | "cancelled" | "none";
   createdAt: number;
 }
 

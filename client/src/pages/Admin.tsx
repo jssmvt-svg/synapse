@@ -128,7 +128,9 @@ function trialCountdown(trialEndsAt: number, tx: Tx): string {
 
 function statusLabel(tx: Tx, user: AdminUser): string {
   if (user.role === "admin") return tx("Administrateur", "Administrator");
-  if (user.subscriptionStatus === "active") return tx("Accès permanent", "Permanent access");
+  if (user.payment === "past_due") return tx("Paiement en échec (relance Stripe)", "Payment failed (Stripe retrying)");
+  if (user.subscriptionStatus === "active" && user.payment !== "paid") return tx("Accès offert (sans paiement)", "Free access (no payment)");
+  if (user.subscriptionStatus === "active") return tx("Abonnement payé", "Paid subscription");
   if (user.subscriptionStatus === "trialing" && user.trialEndsAt) {
     return `${tx("Essai gratuit actif", "Free trial active")} — ${trialCountdown(user.trialEndsAt, tx)}`;
   }
@@ -142,6 +144,7 @@ export function Admin() {
   const [users, setUsers] = useState<AdminUser[] | null>(null);
   const [chapters, setChapters] = useState<AdminChapter[] | null>(null);
   const [expandedUserId, setExpandedUserId] = useState<number | null>(null);
+  const [paymentFilter, setPaymentFilter] = useState<"all" | "paid" | "trial" | "free" | "none">("all");
   const [grants, setGrants] = useState<Record<number, number[]>>({});
   const [grantSaving, setGrantSaving] = useState<string | null>(null);
   const [accessSaving, setAccessSaving] = useState<number | null>(null);
@@ -240,11 +243,32 @@ export function Admin() {
           {tx("L'essai gratuit de 8 jours (semestre 1 uniquement) est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 8 jours d'essai à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier.", "The 8-day free trial (semester 1 only) is granted automatically at signup. From here you can also re-grant an 8-day trial to an account (e.g. after a site outage), cut its access, or open a specific chapter for it.")}
         </p>
       </header>
+      {users && (
+        <div className="admin-payment-filters" role="group" aria-label={tx("Filtrer les comptes", "Filter accounts")}>
+          {([
+            ["all", tx("Tous", "All"), users.length],
+            ["paid", tx("⭐ Premium (payé)", "⭐ Premium (paid)"), users.filter((u) => u.payment === "paid").length],
+            ["trial", tx("En essai", "On trial"), users.filter((u) => u.subscriptionStatus === "trialing").length],
+            ["free", tx("Accès offert", "Free access"), users.filter((u) => u.role !== "admin" && u.subscriptionStatus === "active" && u.payment !== "paid").length],
+            ["none", tx("Sans accès", "No access"), users.filter((u) => u.role !== "admin" && u.subscriptionStatus === "inactive").length],
+          ] as const).map(([key, label, count]) => (
+            <button key={key} type="button" className={`oq-chip${paymentFilter === key ? " is-on" : ""}`} aria-pressed={paymentFilter === key} onClick={() => setPaymentFilter(key)}>
+              {label} <small>({count})</small>
+            </button>
+          ))}
+        </div>
+      )}
       {!users ? (
         <p className="loading-state">…</p>
       ) : (
         <ul className="admin-student-list">
-          {users.map((u) => {
+          {users.filter((u) =>
+            paymentFilter === "all" ? true
+            : paymentFilter === "paid" ? u.payment === "paid"
+            : paymentFilter === "trial" ? u.subscriptionStatus === "trialing"
+            : paymentFilter === "free" ? u.role !== "admin" && u.subscriptionStatus === "active" && u.payment !== "paid"
+            : u.role !== "admin" && u.subscriptionStatus === "inactive",
+          ).map((u) => {
             const fullName = [u.firstName, u.lastName].filter(Boolean).join(" ") || u.email;
             return (
               <li key={u.id} className="admin-student-row">
@@ -253,7 +277,11 @@ export function Admin() {
                     <strong>{fullName}</strong>
                     <small>{u.email}</small>
                   </span>
-                  <span className="admin-status-badge">{statusLabel(tx, u)}</span>
+                  <span className="admin-badges">
+                    {u.payment === "paid" && <span className="admin-premium-badge">⭐ Premium</span>}
+                    {u.payment === "cancelled" && <span className="admin-meta-chip">{tx("Ancien abonné", "Former subscriber")}</span>}
+                    <span className="admin-status-badge">{statusLabel(tx, u)}</span>
+                  </span>
                 </button>
                 <div className="admin-student-meta">
                   <span className="admin-meta-chip">{trackLabel(tx, u.track)}</span>
@@ -267,6 +295,9 @@ export function Admin() {
                     </span>
                   )}
                   <span className="admin-meta-chip">{tx("Inscrit le ", "Registered ")}{formatDate(locale, u.createdAt)}</span>
+                  {(u.payment === "paid" || u.payment === "past_due") && u.subscriptionPeriodEnd && (
+                    <span className="admin-meta-chip">{tx("Prochain renouvellement : ", "Next renewal: ")}{formatDate(locale, u.subscriptionPeriodEnd)}</span>
+                  )}
                 </div>
                 <div className="admin-student-actions">
                   {u.role !== "admin" && (
