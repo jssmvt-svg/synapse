@@ -106,12 +106,12 @@ adminRouter.get("/activity/overview", async (_req, res) => {
   const row = await db
     .prepare(
       `SELECT
-         COUNT(DISTINCT user_id) FILTER (WHERE created_at >= ?) AS active_today,
-         COUNT(DISTINCT user_id) FILTER (WHERE created_at >= ?) AS active_7d,
-         COUNT(DISTINCT user_id) AS active_30d,
-         COUNT(*) FILTER (WHERE kind IN ('register', 'login', 'visit') AND created_at >= ?) AS visits_today,
-         COUNT(*) FILTER (WHERE kind IN ('register', 'login', 'visit') AND created_at >= ?) AS visits_7d,
-         COUNT(*) FILTER (WHERE kind = 'page' AND created_at >= ?) AS pages_7d
+         COUNT(DISTINCT a.user_id) FILTER (WHERE a.created_at >= ?) AS active_today,
+         COUNT(DISTINCT a.user_id) FILTER (WHERE a.created_at >= ?) AS active_7d,
+         COUNT(DISTINCT a.user_id) AS active_30d,
+         COUNT(*) FILTER (WHERE a.kind IN ('register', 'login', 'visit') AND a.created_at >= ?) AS visits_today,
+         COUNT(*) FILTER (WHERE a.kind IN ('register', 'login', 'visit') AND a.created_at >= ?) AS visits_7d,
+         COUNT(*) FILTER (WHERE a.kind = 'page' AND a.created_at >= ?) AS pages_7d
        FROM user_activity a
        JOIN users u ON u.id = a.user_id AND u.role = 'student'
        WHERE a.created_at >= ?`,

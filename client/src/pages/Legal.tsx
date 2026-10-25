@@ -66,8 +66,8 @@ export function Legal() {
         </p>
         <p>
           {tx(
-            "Prestataires techniques : Replit (hébergement du site), Supabase (base de données), Stripe (paiements), Anthropic (analyse par IA des documents que tu importes toi-même pour créer des fiches).",
-            "Technical providers: Replit (website hosting), Supabase (database), Stripe (payments), Anthropic (AI analysis of documents you upload yourself to create flashcards).",
+            "Prestataires techniques : Replit (hébergement du site), Supabase (base de données), Stripe (paiements), Resend (envoi des e-mails), Anthropic (analyse par IA des documents que tu importes toi-même pour créer des fiches).",
+            "Technical providers: Replit (website hosting), Supabase (database), Stripe (payments), Resend (email delivery), Anthropic (AI analysis of documents you upload yourself to create flashcards).",
           )}
         </p>
         <p>

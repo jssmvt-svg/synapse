@@ -18,7 +18,7 @@ function AccountSecurity({ tx, locale }: { tx: Tx; locale: string }) {
     <section className="account-card account-security">
       <h2>{tx("Sécurité du compte", "Account security")}</h2>
       <ul className="account-security-points">
-        <li>{tx("Ton mot de passe est stocké chiffré (bcrypt) : personne, pas même moi, ne peut le lire.", "Your password is stored hashed (bcrypt): nobody, not even me, can read it.")}</li>
+        <li>{tx("Ton mot de passe est stocké haché (bcrypt) : personne, pas même moi, ne peut le lire.", "Your password is stored hashed (bcrypt): nobody, not even me, can read it.")}</li>
         <li>{tx("Une seule session à la fois : te connecter sur un nouvel appareil déconnecte automatiquement les autres.", "One session at a time: logging in on a new device automatically logs out the others.")}</li>
         <li>{tx("Ta carte bancaire est gérée uniquement par Stripe : Synapse ne la voit jamais.", "Your card is handled only by Stripe: Synapse never sees it.")}</li>
       </ul>
