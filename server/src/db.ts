@@ -554,6 +554,37 @@ const SCHEMA = `
     draws INTEGER NOT NULL DEFAULT 0,
     updated_at BIGINT NOT NULL
   );
+
+  -- Journal d'activité (connexions, visites, pages vues) — cf. activity.ts.
+  -- Pas d'adresse IP ; purgé au-delà de 180 jours.
+  ALTER TABLE users ADD COLUMN IF NOT EXISTS last_seen_at BIGINT;
+  CREATE TABLE IF NOT EXISTS user_activity (
+    id BIGSERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    kind TEXT NOT NULL CHECK (kind IN ('register', 'login', 'logout', 'visit', 'page')),
+    path TEXT,
+    device TEXT,
+    created_at BIGINT NOT NULL
+  );
+  CREATE INDEX IF NOT EXISTS user_activity_user_created_idx ON user_activity (user_id, created_at DESC);
+  CREATE INDEX IF NOT EXISTS user_activity_created_idx ON user_activity (created_at);
+
+  -- Supabase expose automatiquement les tables du schéma public via son API
+  -- REST : sans RLS, quiconque obtient la clé « anon » du projet pourrait lire
+  -- la table users. Le serveur se connecte en propriétaire des tables, donc la
+  -- RLS (sans FORCE) ne le gêne pas, et sans aucune policy l'API publique ne
+  -- voit plus rien. Ne JAMAIS passer en FORCE ROW LEVEL SECURITY.
+  DO $$
+  DECLARE t record;
+  BEGIN
+    FOR t IN SELECT tablename FROM pg_tables WHERE schemaname = 'public' AND NOT rowsecurity LOOP
+      BEGIN
+        EXECUTE format('ALTER TABLE public.%I ENABLE ROW LEVEL SECURITY', t.tablename);
+      EXCEPTION WHEN insufficient_privilege THEN
+        RAISE NOTICE 'RLS non activée sur % (pas propriétaire)', t.tablename;
+      END;
+    END LOOP;
+  END $$;
 `;
 
 const MAX_RETRIES = 5;

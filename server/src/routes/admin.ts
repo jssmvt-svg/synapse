@@ -5,6 +5,8 @@ import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 import { TRIAL_DURATION_MS } from "../studyAccessPolicy.js";
 
 export const adminRouter = Router();
+
+const DAY_MS = 24 * 60 * 60 * 1000;
 adminRouter.use(authMiddleware);
 
 async function isAdmin(userId: number | undefined): Promise<boolean> {
@@ -49,10 +51,20 @@ adminRouter.get("/users", async (_req, res) => {
     .prepare(
       `SELECT id, email, first_name, last_name, phone_country_code, phone_number, study_lang, track, role,
               trial_status, trial_requested_at, trial_granted_at, trial_ends_at,
-              subscription_status, subscription_period_end, stripe_customer_id, stripe_subscription_id, created_at
-       FROM users ORDER BY created_at DESC`,
+              subscription_status, subscription_period_end, stripe_customer_id, stripe_subscription_id, users.created_at,
+              last_seen_at, COALESCE(a.visits_7d, 0) AS visits_7d, COALESCE(a.visits_30d, 0) AS visits_30d
+       FROM users
+       LEFT JOIN (
+         SELECT user_id,
+                COUNT(*) FILTER (WHERE created_at >= ?) AS visits_7d,
+                COUNT(*) AS visits_30d
+         FROM user_activity
+         WHERE kind IN ('register', 'login', 'visit') AND created_at >= ?
+         GROUP BY user_id
+       ) a ON a.user_id = users.id
+       ORDER BY users.created_at DESC`,
     )
-    .all();
+    .all(Date.now() - 7 * DAY_MS, Date.now() - 30 * DAY_MS);
   // Paiement Stripe : « paid » = abonnement Stripe en cours, « past_due » = échec
   // de prélèvement en cours de relance, « cancelled » = a déjà payé mais n'est
   // plus abonné, « none » = n'a jamais payé (essai ou accès offert).
@@ -81,8 +93,151 @@ adminRouter.get("/users", async (_req, res) => {
       subscriptionStatus: u.subscription_status,
       subscriptionPeriodEnd: u.subscription_period_end,
       createdAt: u.created_at,
+      lastSeenAt: u.last_seen_at,
+      visits7d: Number(u.visits_7d),
+      visits30d: Number(u.visits_30d),
     })),
   );
+});
+
+/** Chiffres d'ensemble : combien d'étudiants sont venus sur 24 h / 7 jours / 30 jours. */
+adminRouter.get("/activity/overview", async (_req, res) => {
+  const now = Date.now();
+  const row = await db
+    .prepare(
+      `SELECT
+         COUNT(DISTINCT a.user_id) FILTER (WHERE a.created_at >= ?) AS active_today,
+         COUNT(DISTINCT a.user_id) FILTER (WHERE a.created_at >= ?) AS active_7d,
+         COUNT(DISTINCT a.user_id) AS active_30d,
+         COUNT(*) FILTER (WHERE a.kind IN ('register', 'login', 'visit') AND a.created_at >= ?) AS visits_today,
+         COUNT(*) FILTER (WHERE a.kind IN ('register', 'login', 'visit') AND a.created_at >= ?) AS visits_7d,
+         COUNT(*) FILTER (WHERE a.kind = 'page' AND a.created_at >= ?) AS pages_7d
+       FROM user_activity a
+       JOIN users u ON u.id = a.user_id AND u.role = 'student'
+       WHERE a.created_at >= ?`,
+    )
+    .get(
+      now - DAY_MS,
+      now - 7 * DAY_MS,
+      now - DAY_MS,
+      now - 7 * DAY_MS,
+      now - 7 * DAY_MS,
+      now - 30 * DAY_MS,
+    );
+  res.json({
+    activeToday: Number(row?.active_today ?? 0),
+    active7d: Number(row?.active_7d ?? 0),
+    active30d: Number(row?.active_30d ?? 0),
+    visitsToday: Number(row?.visits_today ?? 0),
+    visits7d: Number(row?.visits_7d ?? 0),
+    pages7d: Number(row?.pages_7d ?? 0),
+  });
+});
+
+/** Fiche d'activité d'un étudiant : connexions, pages vues et travail réalisé. */
+adminRouter.get("/users/:id/activity", async (req, res) => {
+  const userId = Number(req.params.id);
+  if (!Number.isInteger(userId)) return res.status(400).json({ error: "Identifiant invalide." });
+  const user = await db.prepare("SELECT id, last_seen_at FROM users WHERE id = ?").get(userId);
+  if (!user) return res.status(404).json({ error: "Étudiant introuvable." });
+
+  const now = Date.now();
+  const [counts, daily, topPages, recent, qcm, exams, courses, flashcards, duel] = await Promise.all([
+    db
+      .prepare(
+        `SELECT
+           COUNT(*) FILTER (WHERE kind IN ('register', 'login', 'visit')) AS visits,
+           COUNT(*) FILTER (WHERE kind IN ('register', 'login')) AS logins,
+           COUNT(*) FILTER (WHERE kind = 'page') AS pages
+         FROM user_activity WHERE user_id = ?`,
+      )
+      .get(userId),
+    db
+      .prepare(
+        `SELECT (created_at / ?)::bigint AS day, COUNT(*) AS n
+         FROM user_activity
+         WHERE user_id = ? AND kind IN ('register', 'login', 'visit', 'page') AND created_at >= ?
+         GROUP BY day`,
+      )
+      .all(DAY_MS, userId, now - 14 * DAY_MS),
+    db
+      .prepare(
+        `SELECT path, COUNT(*) AS n, MAX(created_at) AS last_at
+         FROM user_activity WHERE user_id = ? AND kind = 'page' AND path IS NOT NULL
+         GROUP BY path ORDER BY n DESC, last_at DESC LIMIT 12`,
+      )
+      .all(userId),
+    db
+      .prepare(
+        `SELECT kind, path, device, created_at FROM user_activity
+         WHERE user_id = ? ORDER BY created_at DESC LIMIT 60`,
+      )
+      .all(userId),
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n, COUNT(*) FILTER (WHERE is_correct) AS correct, MAX(attempted_at) AS last_at
+         FROM student_qcm_attempts WHERE user_id = ?`,
+      )
+      .get(userId),
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n, AVG(score) AS avg_score, MAX(completed_at) AS last_at
+         FROM student_exam_attempts WHERE user_id = ?`,
+      )
+      .get(userId),
+    db
+      .prepare(
+        `SELECT COUNT(*) FILTER (WHERE completed_at IS NOT NULL) AS n, MAX(updated_at) AS last_at
+         FROM student_course_progress WHERE user_id = ?`,
+      )
+      .get(userId),
+    db
+      .prepare(
+        `SELECT COUNT(*) AS n, COALESCE(SUM(review_count), 0) AS reviews, MAX(last_reviewed_at) AS last_at
+         FROM student_flashcard_mastery WHERE user_id = ?`,
+      )
+      .get(userId),
+    db.prepare("SELECT wins, losses, draws FROM duel_profiles WHERE user_id = ?").get(userId),
+  ]);
+
+  // /library/chapter/:id → titre du chapitre, pour que Jessica lise « Le rein » et pas « /library/chapter/42 ».
+  const chapterIds = new Set<number>();
+  for (const row of [...topPages, ...recent] as any[]) {
+    const match = /^\/library\/chapter\/(\d+)/.exec(row.path ?? "");
+    if (match) chapterIds.add(Number(match[1]));
+  }
+  const chapters = chapterIds.size
+    ? await db
+        .prepare("SELECT id, matiere, titre_fr, titre_en FROM library_chapters WHERE id = ANY(?::int[])")
+        .all([...chapterIds])
+    : [];
+  const chapterById = new Map(chapters.map((c: any) => [c.id, c]));
+  const chapterOf = (path: string | null) => {
+    const match = /^\/library\/chapter\/(\d+)/.exec(path ?? "");
+    const chapter = match ? chapterById.get(Number(match[1])) : undefined;
+    return chapter ? { matiere: chapter.matiere, titleFr: chapter.titre_fr, titleEn: chapter.titre_en } : null;
+  };
+
+  res.json({
+    lastSeenAt: user.last_seen_at,
+    visits: Number(counts?.visits ?? 0),
+    logins: Number(counts?.logins ?? 0),
+    pageViews: Number(counts?.pages ?? 0),
+    daily: (daily as any[]).map((d) => ({ day: Number(d.day) * DAY_MS, count: Number(d.n) })),
+    topPages: (topPages as any[]).map((p) => ({ path: p.path, count: Number(p.n), lastAt: p.last_at, chapter: chapterOf(p.path) })),
+    recent: (recent as any[]).map((r) => ({ kind: r.kind, path: r.path, device: r.device, at: r.created_at, chapter: chapterOf(r.path) })),
+    study: {
+      qcm: { count: Number(qcm?.n ?? 0), correct: Number(qcm?.correct ?? 0), lastAt: qcm?.last_at ?? null },
+      exams: {
+        count: Number(exams?.n ?? 0),
+        avgScore: exams?.avg_score == null ? null : Number(exams.avg_score),
+        lastAt: exams?.last_at ?? null,
+      },
+      courses: { completed: Number(courses?.n ?? 0), lastAt: courses?.last_at ?? null },
+      flashcards: { cards: Number(flashcards?.n ?? 0), reviews: Number(flashcards?.reviews ?? 0), lastAt: flashcards?.last_at ?? null },
+      duel: duel ? { wins: duel.wins, losses: duel.losses, draws: duel.draws } : null,
+    },
+  });
 });
 
 /** Coupe manuellement l'accès d'un étudiant. */

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api, type AdminChapter, type AdminSemester, type AdminUser } from "../api";
 import { useLang, type Tx } from "../i18n";
+import { ActivityOverview, StudentActivityPanel, timeAgo } from "../components/AdminActivity";
 
 interface ReengagementCandidate {
   id: number;
@@ -240,9 +241,10 @@ export function Admin() {
       <header className="admin-users-header">
         <h1>{tx("Comptes étudiants", "Student accounts")}</h1>
         <p>
-          {tx("L'essai gratuit de 8 jours (semestre 1 uniquement) est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 8 jours d'essai à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier.", "The 8-day free trial (semester 1 only) is granted automatically at signup. From here you can also re-grant an 8-day trial to an account (e.g. after a site outage), cut its access, or open a specific chapter for it.")}
+          {tx("L'essai gratuit de 8 jours (semestre 1 uniquement) est accordé automatiquement à l'inscription. Depuis ici, tu peux aussi réaccorder 8 jours d'essai à un compte (ex : après un bug du site), couper son accès, ou lui ouvrir un chapitre en particulier. Clique sur un étudiant pour voir son activité : visites, pages consultées et travail réalisé.", "The 8-day free trial (semester 1 only) is granted automatically at signup. From here you can also re-grant an 8-day trial to an account (e.g. after a site outage), cut its access, or open a specific chapter for it. Click a student to see their activity: visits, pages viewed and work done.")}
         </p>
       </header>
+      <ActivityOverview tx={tx} />
       {users && (
         <div className="admin-payment-filters" role="group" aria-label={tx("Filtrer les comptes", "Filter accounts")}>
           {([
@@ -295,6 +297,11 @@ export function Admin() {
                     </span>
                   )}
                   <span className="admin-meta-chip">{tx("Inscrit le ", "Registered ")}{formatDate(locale, u.createdAt)}</span>
+                  {u.role !== "admin" && (
+                    <span className="admin-meta-chip admin-meta-activity" title={formatDate(locale, u.lastSeenAt)}>
+                      {tx("Vu ", "Seen ")}{timeAgo(locale, u.lastSeenAt, tx)} · {u.visits7d} {tx("visite(s) sur 7 j", "visit(s) in 7 d")}
+                    </span>
+                  )}
                   {(u.payment === "paid" || u.payment === "past_due") && u.subscriptionPeriodEnd && (
                     <span className="admin-meta-chip">{tx("Prochain renouvellement : ", "Next renewal: ")}{formatDate(locale, u.subscriptionPeriodEnd)}</span>
                   )}
@@ -311,6 +318,9 @@ export function Admin() {
                     </button>
                   )}
                 </div>
+                {expandedUserId === u.id && u.role !== "admin" && (
+                  <StudentActivityPanel userId={u.id} tx={tx} lang={lang} locale={locale} />
+                )}
                 {expandedUserId === u.id && (
                   <div className="admin-student-grants">
                     {!chapters ? (

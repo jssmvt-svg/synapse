@@ -21,6 +21,7 @@ export function Landing() {
           <a href="#method">{t.landingMethod}</a>
           <a href="#prearrival">{tx("Pré-rentrée", "Pre-term")}</a>
           <a href="#pricing">{tx("Tarifs", "Pricing")}</a>
+          <a href="#trust">{tx("Sécurité", "Security")}</a>
         </nav>
         <div className="landing-actions">
           <LanguageSwitcher />
@@ -120,6 +121,50 @@ export function Landing() {
           </ul>
           <Link to="/register" className="landing-primary">{tx("Commencer mes 8 jours gratuits", "Start my 8 free days")} <Fwd /></Link>
         </div>
+      </section>
+
+      <section className="landing-trust" id="trust">
+        <div className="landing-trust-intro">
+          <p className="eyebrow">{tx("Paiement & données", "Payment & data")}</p>
+          <h2>{tx("Ce qui se passe avec ton argent et tes données.", "What happens with your money and your data.")}</h2>
+          <p>
+            {tx(
+              "Synapse est un outil de révision créé par une étudiante, rien d'autre. Voici concrètement comment ton compte et ton paiement sont protégés.",
+              "Synapse is a study tool built by a student, nothing more. Here is exactly how your account and your payment are protected.",
+            )}
+          </p>
+        </div>
+        <ul className="landing-trust-grid">
+          <li>
+            <strong>{tx("Paiement géré par Stripe", "Payment handled by Stripe")}</strong>
+            <span>{tx("Tu paies sur la page sécurisée de Stripe, le prestataire de paiement utilisé par des millions d'entreprises. Synapse ne voit et ne stocke jamais ton numéro de carte ; ta banque peut te demander une validation (3D Secure).", "You pay on Stripe's secure page, the payment provider used by millions of businesses. Synapse never sees or stores your card number; your bank may ask you to confirm (3D Secure).")}</span>
+          </li>
+          <li>
+            <strong>{tx("Essai sans carte bancaire", "Trial without a card")}</strong>
+            <span>{tx("Les 8 jours gratuits ne demandent aucune carte. Tant que tu ne t'abonnes pas, tu ne paies rien.", "The 8 free days need no card. Until you subscribe, you pay nothing.")}</span>
+          </li>
+          <li>
+            <strong>{tx("Sans engagement", "No commitment")}</strong>
+            <span>{tx("Tu résilies toi-même depuis « Mon compte », en deux clics. Ton accès reste ouvert jusqu'à la fin du mois payé, et tes factures sont téléchargeables.", "You cancel yourself from \"My account\" in two clicks. Your access stays open until the end of the paid month, and your invoices can be downloaded.")}</span>
+          </li>
+          <li>
+            <strong>{tx("Compte protégé", "Protected account")}</strong>
+            <span>{tx("Connexion chiffrée (HTTPS), mot de passe stocké haché (bcrypt), une seule session active à la fois et blocage automatique après plusieurs mots de passe faux.", "Encrypted connection (HTTPS), password stored hashed (bcrypt), one active session at a time and automatic lock after several wrong passwords.")}</span>
+          </li>
+          <li>
+            <strong>{tx("Données jamais vendues", "Data never sold")}</strong>
+            <span>{tx("Ton nom, ton email et ton téléphone servent uniquement à gérer ton compte. Tu peux demander la suppression de ton compte à tout moment par email.", "Your name, email and phone are used only to run your account. You can ask for your account to be deleted at any time by email.")}</span>
+          </li>
+          <li>
+            <strong>{tx("Une vraie personne derrière", "A real person behind it")}</strong>
+            <span>
+              {tx("Synapse est édité par Jessica Mvetimbo Tambo (voir les ", "Synapse is published by Jessica Mvetimbo Tambo (see the ")}
+              <Link to="/legal">{tx("mentions légales", "legal notice")}</Link>
+              {tx("). Une question ? Écris-moi : ", "). A question? Email me: ")}
+              <a href="mailto:jessica@medbyjes.com">jessica@medbyjes.com</a>
+            </span>
+          </li>
+        </ul>
       </section>
 
       <section className="landing-method" id="method">

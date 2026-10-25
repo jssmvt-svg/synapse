@@ -482,6 +482,49 @@ export interface AdminUser {
   subscriptionPeriodEnd: number | null;
   payment: "paid" | "past_due" | "cancelled" | "none";
   createdAt: number;
+  lastSeenAt: number | null;
+  visits7d: number;
+  visits30d: number;
+}
+
+export type ActivityKind = "register" | "login" | "logout" | "visit" | "page";
+
+export interface ActivityChapter {
+  matiere: string;
+  titleFr: string;
+  titleEn: string;
+}
+
+export interface AdminActivityOverview {
+  activeToday: number;
+  active7d: number;
+  active30d: number;
+  visitsToday: number;
+  visits7d: number;
+  pages7d: number;
+}
+
+export interface AdminUserActivity {
+  lastSeenAt: number | null;
+  visits: number;
+  logins: number;
+  pageViews: number;
+  daily: { day: number; count: number }[];
+  topPages: { path: string; count: number; lastAt: number; chapter: ActivityChapter | null }[];
+  recent: { kind: ActivityKind; path: string | null; device: string | null; at: number; chapter: ActivityChapter | null }[];
+  study: {
+    qcm: { count: number; correct: number; lastAt: number | null };
+    exams: { count: number; avgScore: number | null; lastAt: number | null };
+    courses: { completed: number; lastAt: number | null };
+    flashcards: { cards: number; reviews: number; lastAt: number | null };
+    duel: { wins: number; losses: number; draws: number } | null;
+  };
+}
+
+export interface MyActivityEvent {
+  kind: ActivityKind;
+  device: string | null;
+  at: number;
 }
 
 export interface AdminChapter {
@@ -570,6 +613,10 @@ export const api = {
       body: JSON.stringify({ email, password }),
     }),
   me: () => request<User>("/auth/me"),
+  logout: () => request<{ ok: boolean }>("/auth/logout", { method: "POST" }),
+  getMyActivity: () => request<MyActivityEvent[]>("/auth/activity"),
+  trackPage: (path: string) =>
+    request<void>("/activity/page", { method: "POST", body: JSON.stringify({ path }) }),
   setLang: (langPref: Lang) =>
     request<{ langPref: string }>("/auth/lang", {
       method: "PATCH",
@@ -630,6 +677,8 @@ export const api = {
       body: JSON.stringify({ isPublished }),
     }),
   getAdminUsers: () => request<AdminUser[]>("/admin/users"),
+  getAdminActivityOverview: () => request<AdminActivityOverview>("/admin/activity/overview"),
+  getAdminUserActivity: (userId: number) => request<AdminUserActivity>(`/admin/users/${userId}/activity`),
   getAdminChapters: () => request<AdminChapter[]>("/admin/chapters"),
   getAdminGrants: (userId: number) =>
     request<{ chapterIds: number[] }>(`/admin/students/${userId}/grants`),

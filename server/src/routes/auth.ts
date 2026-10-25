@@ -16,6 +16,7 @@ import {
   normalizeName,
 } from "../validation.js";
 import { TRIAL_DURATION_MS } from "../studyAccessPolicy.js";
+import { recordActivity, touchUser } from "../activity.js";
 
 const SUPPORTED_LANGS = ["fr", "en", "ar", "it"] as const;
 const isSupportedLang = (value: unknown): value is (typeof SUPPORTED_LANGS)[number] => SUPPORTED_LANGS.some((lang) => lang === value);
@@ -29,6 +30,40 @@ const authLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
+
+// Hash bcrypt factice : comparé quand l'email n'existe pas, pour que le temps de
+// réponse ne révèle pas quelles adresses ont un compte.
+const DUMMY_PASSWORD_HASH = bcrypt.hashSync(randomUUID(), 12);
+
+// Verrouillage par adresse, en plus de la limite par IP : 8 mots de passe faux
+// en 15 min bloquent cette adresse 15 min, même si l'attaquant change d'IP.
+const LOGIN_FAILURE_WINDOW_MS = 15 * 60 * 1000;
+const MAX_LOGIN_FAILURES = 8;
+const loginFailures = new Map<string, { count: number; firstAt: number }>();
+
+function isEmailLocked(email: string, now: number): boolean {
+  const entry = loginFailures.get(email);
+  if (!entry) return false;
+  if (now - entry.firstAt > LOGIN_FAILURE_WINDOW_MS) {
+    loginFailures.delete(email);
+    return false;
+  }
+  return entry.count >= MAX_LOGIN_FAILURES;
+}
+
+function noteLoginFailure(email: string, now: number): void {
+  const entry = loginFailures.get(email);
+  if (!entry || now - entry.firstAt > LOGIN_FAILURE_WINDOW_MS) {
+    loginFailures.set(email, { count: 1, firstAt: now });
+  } else {
+    entry.count += 1;
+  }
+  if (loginFailures.size > 10_000) {
+    for (const [key, value] of loginFailures) {
+      if (now - value.firstAt > LOGIN_FAILURE_WINDOW_MS) loginFailures.delete(key);
+    }
+  }
+}
 
 authRouter.post("/register", authLimiter, async (req, res) => {
   const {
@@ -123,6 +158,8 @@ authRouter.post("/register", authLimiter, async (req, res) => {
     );
 
   const token = signSession(inserted.id, sessionToken);
+  recordActivity(inserted.id, "register", { userAgent: req.get("user-agent") });
+  await db.prepare("UPDATE users SET last_seen_at = ? WHERE id = ?").run(now, inserted.id);
   sendWelcomeEmail({ id: inserted.id, email: cleanEmail, langPref: lang, firstName: cleanFirstName }, trialEndsAt);
   res.status(201).json({
     token,
@@ -147,6 +184,10 @@ authRouter.post("/login", authLimiter, async (req, res) => {
     return res.status(400).json({ error: "Email et mot de passe requis" });
   }
   const cleanEmail = normalizeEmail(email);
+  const now = Date.now();
+  if (isEmailLocked(cleanEmail, now)) {
+    return res.status(429).json({ error: "Trop de tentatives sur ce compte. Réessaie dans 15 minutes." });
+  }
 
   const user = await db
     .prepare(
@@ -156,13 +197,16 @@ authRouter.post("/login", authLimiter, async (req, res) => {
     )
     .get(cleanEmail);
 
-  const valid = user ? await bcrypt.compare(password, user.password_hash) : false;
+  const valid = await bcrypt.compare(password, user?.password_hash ?? DUMMY_PASSWORD_HASH);
   if (!user || !valid) {
+    noteLoginFailure(cleanEmail, now);
     return res.status(401).json({ error: "Email ou mot de passe incorrect" });
   }
 
   const sessionToken = randomUUID();
-  await db.prepare("UPDATE users SET session_token = ? WHERE id = ?").run(sessionToken, user.id);
+  loginFailures.delete(cleanEmail);
+  await db.prepare("UPDATE users SET session_token = ?, last_seen_at = ? WHERE id = ?").run(sessionToken, now, user.id);
+  recordActivity(user.id, "login", { userAgent: req.get("user-agent") });
 
   const token = signSession(user.id, sessionToken);
   res.json({
@@ -193,6 +237,8 @@ authRouter.get("/me", authMiddleware, async (req: AuthedRequest, res) => {
   if (!user) {
     return res.status(404).json({ error: "Utilisateur introuvable" });
   }
+  // /me est appelé à chaque ouverture de l'app : c'est lui qui compte les visites.
+  touchUser(user.id, req.get("user-agent"));
   res.json({
     id: user.id,
     email: user.email,
@@ -216,4 +262,23 @@ authRouter.patch("/lang", authMiddleware, async (req: AuthedRequest, res) => {
   }
   await db.prepare("UPDATE users SET lang_pref = ? WHERE id = ?").run(langPref, req.userId);
   res.json({ langPref });
+});
+
+/** Déconnexion réelle : le jeton en cours (et toute copie volée) devient invalide. */
+authRouter.post("/logout", authMiddleware, async (req: AuthedRequest, res) => {
+  await db.prepare("UPDATE users SET session_token = ? WHERE id = ?").run(randomUUID(), req.userId);
+  recordActivity(req.userId!, "logout", { userAgent: req.get("user-agent") });
+  res.json({ ok: true });
+});
+
+/** Historique de connexion de l'étudiant lui-même (page Mon compte). */
+authRouter.get("/activity", authMiddleware, async (req: AuthedRequest, res) => {
+  const rows = await db
+    .prepare(
+      `SELECT kind, device, created_at FROM user_activity
+       WHERE user_id = ? AND kind IN ('register', 'login', 'logout', 'visit')
+       ORDER BY created_at DESC LIMIT 15`,
+    )
+    .all(req.userId);
+  res.json(rows.map((r: any) => ({ kind: r.kind, device: r.device, at: r.created_at })));
 });

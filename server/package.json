@@ -11,6 +11,7 @@
     "test:auth-policy": "tsx --test src/authPolicy.test.ts src/personalDeck.test.ts",
     "test:translations": "tsx --test src/translations.test.ts",
     "test:duel": "tsx --test src/duelEngine.test.ts",
+    "test:activity": "tsx --test src/activity.test.ts",
     "test:library-navigation": "tsx --test ../tests/libraryNavigation.test.ts",
     "translate": "tsx ../scripts/translate.ts",
     "provision:admin": "tsx ../scripts/provision-admin.ts",
