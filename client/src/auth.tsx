@@ -27,6 +27,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const logout = () => {
+    // Invalide aussi la session côté serveur (le jeton ne pourra plus servir).
+    if (getToken()) void api.logout().catch(() => undefined);
     clearToken();
     setUser(null);
   };

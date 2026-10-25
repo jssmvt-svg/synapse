@@ -1,5 +1,6 @@
-import { lazy, Suspense, type ReactElement } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { lazy, Suspense, useEffect, type ReactElement } from "react";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { api } from "./api";
 import { useAuth } from "./auth";
 import { Landing } from "./pages/Landing";
 import { Legal } from "./pages/Legal";
@@ -33,9 +34,21 @@ function PublicOnly({ children }: { children: ReactElement }) {
   return children;
 }
 
+/** Enregistre les pages vues par un étudiant connecté (consultables dans /admin). */
+function PageViewTracker() {
+  const { user } = useAuth();
+  const { pathname } = useLocation();
+  useEffect(() => {
+    if (!user || user.role === "admin") return;
+    void api.trackPage(pathname).catch(() => undefined);
+  }, [user?.id, user?.role, pathname]);
+  return null;
+}
+
 export function App() {
   return (
     <Suspense fallback={<p>...</p>}>
+    <PageViewTracker />
     <Routes>
       <Route
         path="/"

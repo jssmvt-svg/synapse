@@ -8532,3 +8532,148 @@ img, video { height: auto; }
   .oq-section-card small { grid-column: 2; }
   .oq-rate-row { grid-template-columns: 1fr; }
 }
+
+/* ---- Paiement & données (accueil) ---- */
+.landing-trust {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.landing-trust-intro {
+  max-width: 640px;
+  margin-bottom: 1.6rem;
+}
+.landing-trust-intro h2 { margin: 0.2rem 0 0.6rem; }
+.landing-trust-intro p { color: #4a5670; line-height: 1.6; margin: 0; }
+.landing-trust-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+.landing-trust-grid li {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+.landing-trust-grid strong { font-size: 1rem; color: var(--ink); }
+.landing-trust-grid span { font-size: 0.9rem; line-height: 1.55; color: #4a5670; overflow-wrap: anywhere; }
+.landing-trust-grid a { color: var(--accent); }
+@media (max-width: 900px) {
+  .landing-trust-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .landing-trust { padding: 2rem 1rem; }
+  .landing-trust-grid { grid-template-columns: 1fr; }
+}
+
+/* ---- Activité des étudiants (admin) ---- */
+.admin-activity-overview {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0 0 1rem;
+}
+.admin-activity-tile {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.admin-activity-tile span { font-size: 0.8rem; color: #64748b; }
+.admin-activity-tile strong { font-size: 1.6rem; color: var(--ink); line-height: 1.2; }
+.admin-activity-tile small { font-size: 0.75rem; color: #64748b; }
+.admin-meta-activity { background: #edf0ff; color: #3a2fb0; }
+.admin-activity {
+  margin-top: 0.75rem;
+  border-top: 1px solid var(--border);
+  padding-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.admin-activity h3 { margin: 0; font-size: 0.85rem; text-transform: uppercase; color: #64748b; }
+.admin-activity h4 { margin: 0.4rem 0 0; font-size: 0.9rem; color: var(--ink); }
+.admin-activity-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+.admin-activity-kpis div {
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 0.55rem 0.7rem;
+  display: flex;
+  flex-direction: column;
+}
+.admin-activity-kpis strong { font-size: 1.05rem; color: var(--ink); }
+.admin-activity-kpis span { font-size: 0.75rem; color: #64748b; }
+.admin-activity-days { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.admin-activity-days-label { font-size: 0.75rem; color: #64748b; }
+.admin-activity-days > div { display: flex; gap: 3px; }
+.admin-activity-day {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  background: #e2e8f0;
+}
+.admin-activity-day.is-active { background: var(--accent); }
+.admin-activity-study,
+.admin-activity-pages,
+.admin-activity-log {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.85rem;
+  color: #334155;
+}
+.admin-activity-pages li,
+.admin-activity-log li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px dashed var(--border);
+}
+.admin-activity-pages li span,
+.admin-activity-log li span { min-width: 0; overflow-wrap: anywhere; }
+.admin-activity-pages small,
+.admin-activity-log small { color: #64748b; white-space: nowrap; }
+.admin-activity-log time { color: #64748b; white-space: nowrap; font-size: 0.8rem; }
+.admin-activity-log li { justify-content: flex-start; }
+.admin-activity-empty { font-size: 0.85rem; color: #64748b; margin: 0; }
+.admin-activity > button { align-self: flex-start; }
+@media (max-width: 640px) {
+  .admin-activity-overview,
+  .admin-activity-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .admin-activity-log li { flex-direction: column; gap: 0.1rem; }
+}
+
+/* ---- Sécurité du compte (Mon compte) ---- */
+.account-security h3 { margin: 1rem 0 0.4rem; font-size: 0.95rem; }
+.account-security-points { margin: 0; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; font-size: 0.9rem; color: #334155; }
+.account-security-log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.account-security-log li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+.account-security-log small { color: #64748b; white-space: nowrap; }
+@media (max-width: 520px) {
+  .account-security-log li { flex-direction: column; gap: 0.1rem; }
+}

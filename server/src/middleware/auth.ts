@@ -11,15 +11,36 @@ interface JwtPayload {
   sessionToken: string;
 }
 
+// `npm start` (Replit) ne fixe pas NODE_ENV : le secret de repli n'est donc
+// accepté qu'en développement/test explicite. Sinon, sans JWT_SECRET, n'importe
+// qui pourrait forger un jeton de session valide.
+function isLocalDevOrTest(): boolean {
+  return (
+    process.env.NODE_ENV === "development" ||
+    process.env.NODE_ENV === "test" ||
+    Boolean(process.env.NODE_TEST_CONTEXT)
+  );
+}
+
 function getJwtSecret(): string {
   const secret = process.env.JWT_SECRET;
   if (!secret) {
-    if (process.env.NODE_ENV === "production") {
-      throw new Error("JWT_SECRET is required in production");
+    if (!isLocalDevOrTest()) {
+      throw new Error("JWT_SECRET est obligatoire — à définir dans Replit Secrets");
     }
     return "dev-only-insecure-secret";
   }
   return secret;
+}
+
+/** Vérifié au démarrage pour signaler tout de suite un secret absent ou trop court. */
+export function checkJwtSecretAtBoot(): void {
+  const secret = process.env.JWT_SECRET;
+  if (!secret && !isLocalDevOrTest()) {
+    console.error("[sécurité] JWT_SECRET absent : aucune connexion ne fonctionnera. Ajoute-le dans Replit Secrets.");
+  } else if (secret && secret.length < 32) {
+    console.warn("[sécurité] JWT_SECRET fait moins de 32 caractères : utilise une longue chaîne aléatoire.");
+  }
 }
 
 export function signSession(userId: number, sessionToken: string): string {

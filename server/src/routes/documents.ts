@@ -1,6 +1,7 @@
 import mammoth from "mammoth";
 import { Router } from "express";
 import multer from "multer";
+import rateLimit from "express-rate-limit";
 import pdfParse from "pdf-parse";
 import { db } from "../db.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
@@ -31,7 +32,16 @@ async function extractText(file: Express.Multer.File): Promise<string> {
 
 documentsRouter.use(authMiddleware);
 
-documentsRouter.post("/upload", upload.single("file"), async (req: AuthedRequest, res) => {
+// Envoi + génération (qui appelle l'IA, payante) : on borne le volume par IP.
+const documentAiLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  limit: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Trop d'envois de documents. Réessaie dans une heure." },
+});
+
+documentsRouter.post("/upload", documentAiLimiter, upload.single("file"), async (req: AuthedRequest, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "Aucun fichier reçu" });
   }
@@ -66,7 +76,7 @@ documentsRouter.get("/", async (req: AuthedRequest, res) => {
   res.json(docs);
 });
 
-documentsRouter.post("/:id/generate", async (req: AuthedRequest, res) => {
+documentsRouter.post("/:id/generate", documentAiLimiter, async (req: AuthedRequest, res) => {
   const documentId = Number(req.params.id);
   const doc = await db
     .prepare("SELECT id, extracted_text FROM documents WHERE id = ? AND user_id = ?")

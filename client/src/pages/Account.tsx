@@ -1,7 +1,49 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { api, type AccountOverview } from "../api";
-import { useLang } from "../i18n";
+import { api, type AccountOverview, type MyActivityEvent } from "../api";
+import { useLang, type Tx } from "../i18n";
+
+/** Dernières connexions de l'étudiant : pour repérer un accès qui ne serait pas le sien. */
+function AccountSecurity({ tx, locale }: { tx: Tx; locale: string }) {
+  const [events, setEvents] = useState<MyActivityEvent[] | null>(null);
+  useEffect(() => {
+    api.getMyActivity().then(setEvents).catch(() => setEvents([]));
+  }, []);
+  const label = (kind: MyActivityEvent["kind"]) =>
+    kind === "register" ? tx("Création du compte", "Account created")
+    : kind === "login" ? tx("Connexion", "Log-in")
+    : kind === "logout" ? tx("Déconnexion", "Log-out")
+    : tx("Visite", "Visit");
+  return (
+    <section className="account-card account-security">
+      <h2>{tx("Sécurité du compte", "Account security")}</h2>
+      <ul className="account-security-points">
+        <li>{tx("Ton mot de passe est stocké chiffré (bcrypt) : personne, pas même moi, ne peut le lire.", "Your password is stored hashed (bcrypt): nobody, not even me, can read it.")}</li>
+        <li>{tx("Une seule session à la fois : te connecter sur un nouvel appareil déconnecte automatiquement les autres.", "One session at a time: logging in on a new device automatically logs out the others.")}</li>
+        <li>{tx("Ta carte bancaire est gérée uniquement par Stripe : Synapse ne la voit jamais.", "Your card is handled only by Stripe: Synapse never sees it.")}</li>
+      </ul>
+      <h3>{tx("Dernières connexions", "Recent sign-ins")}</h3>
+      {!events ? (
+        <p className="hint">…</p>
+      ) : events.length === 0 ? (
+        <p className="hint">{tx("L'historique démarre à partir de maintenant.", "History starts from now on.")}</p>
+      ) : (
+        <ul className="account-security-log">
+          {events.map((event, index) => (
+            <li key={`${event.at}-${index}`}>
+              <span>{label(event.kind)}{event.device ? ` · ${event.device}` : ""}</span>
+              <small>{new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeStyle: "short" }).format(event.at)}</small>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p className="hint">
+        {tx("Une activité que tu ne reconnais pas ? Reconnecte-toi (cela coupe toutes les autres sessions) et écris-moi à ", "Activity you don't recognise? Log in again (this ends every other session) and email me at ")}
+        <a href="mailto:jessica@medbyjes.com">jessica@medbyjes.com</a>.
+      </p>
+    </section>
+  );
+}
 
 // Page « Mon compte » de l'étudiant : profil, statut Premium, prochains
 // prélèvements, historique des paiements et résiliation de l'abonnement.
@@ -232,6 +274,8 @@ export function Account() {
           </ul>
         )}
       </section>
+
+      <AccountSecurity tx={tx} locale={locale} />
     </main>
   );
 }

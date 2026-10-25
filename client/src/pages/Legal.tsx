@@ -58,6 +58,35 @@ export function Legal() {
             "Data collected at signup (name, email, phone) is used solely to manage accounts and access to Synapse content. It is never sold or shared with third parties for commercial purposes.",
           )}
         </p>
+        <p>
+          {tx(
+            "Journal d'activité : pour suivre l'utilisation du service et t'aider dans tes révisions, Synapse enregistre les connexions, les visites et les pages consultées de chaque compte (date, page, type d'appareil comme « Chrome · Android »). Aucune adresse IP n'est conservée. Ces données sont visibles par l'éditrice et supprimées automatiquement au bout de 180 jours. Tu retrouves tes propres connexions dans « Mon compte ».",
+            "Activity log: to monitor how the service is used and help you with your revision, Synapse records each account's sign-ins, visits and pages viewed (date, page, device type such as \"Chrome · Android\"). No IP address is kept. This data is visible to the publisher and deleted automatically after 180 days. You can see your own sign-ins under \"My account\".",
+          )}
+        </p>
+        <p>
+          {tx(
+            "Prestataires techniques : Replit (hébergement du site), Supabase (base de données), Stripe (paiements), Anthropic (analyse par IA des documents que tu importes toi-même pour créer des fiches).",
+            "Technical providers: Replit (website hosting), Supabase (database), Stripe (payments), Anthropic (AI analysis of documents you upload yourself to create flashcards).",
+          )}
+        </p>
+        <p>
+          {tx(
+            "Tes droits : tu peux demander à consulter, corriger ou supprimer tes données (y compris la suppression complète de ton compte) en écrivant à jessica@medbyjes.com.",
+            "Your rights: you can ask to access, correct or delete your data (including full deletion of your account) by emailing jessica@medbyjes.com.",
+          )}
+        </p>
+      </section>
+
+      <section>
+        <h2>{tx("Sécurité", "Security")}</h2>
+        <ul>
+          <li>{tx("Connexion chiffrée (HTTPS) sur tout le site.", "Encrypted connection (HTTPS) across the whole site.")}</li>
+          <li>{tx("Mots de passe stockés hachés avec bcrypt : ils ne sont lisibles par personne.", "Passwords stored hashed with bcrypt: nobody can read them.")}</li>
+          <li>{tx("Une seule session active par compte ; la déconnexion invalide la session sur le serveur.", "One active session per account; logging out invalidates the session on the server.")}</li>
+          <li>{tx("Limitation des tentatives de connexion et des requêtes automatisées.", "Rate limiting on sign-in attempts and automated requests.")}</li>
+          <li>{tx("Paiements traités exclusivement par Stripe : aucune donnée de carte ne transite par Synapse.", "Payments processed exclusively by Stripe: no card data goes through Synapse.")}</li>
+        </ul>
       </section>
 
       <section>
