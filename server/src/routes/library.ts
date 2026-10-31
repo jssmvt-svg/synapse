@@ -2,7 +2,9 @@ import { Router } from "express";
 import { db } from "../db.js";
 import { authMiddleware, type AuthedRequest } from "../middleware/auth.js";
 import { canOpenStudyContent } from "../studyAccessPolicy.js";
-import { catalogueSubjects, LIBRARY_SUBJECTS } from "../libraryCatalogue.js";
+import { existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { catalogueSubjects, catalogueSubjectsY2, LIBRARY_SUBJECTS, LIBRARY_SUBJECTS_Y2 } from "../libraryCatalogue.js";
 
 export const libraryRouter = Router();
 
@@ -308,9 +310,45 @@ libraryRouter.get("/subjects", async (req: AuthedRequest, res) => {
   );
 });
 
+async function isAdmin(userId: number): Promise<boolean> {
+  const user = await db.prepare("SELECT role FROM users WHERE id = ?").get(userId);
+  return user?.role === "admin";
+}
+
+// Année 2 : espace de révision personnel de l'admin, invisible pour les élèves.
+libraryRouter.get("/year/2", async (req: AuthedRequest, res) => {
+  if (!(await isAdmin(req.userId!))) return res.status(404).json({ error: "Introuvable" });
+  const chapters = await db
+    .prepare(
+      `SELECT id, annee, semestre, matiere, ordre, titre_fr, titre_en,
+              description_fr, description_en, icone, section
+       FROM library_chapters
+       WHERE annee = 2 AND is_active = true
+       ORDER BY semestre ASC, matiere ASC, ordre ASC`,
+    )
+    .all();
+  res.json({ subjects: catalogueSubjectsY2(chapters as any[]) });
+});
+
+// Captures des cours de l'année 2 : hors de client/public (servi sans
+// authentification), donc lues ici après contrôle du rôle admin.
+const YEAR2_ASSETS_DIR = fileURLToPath(new URL("../../private-assets/year2/", import.meta.url));
+libraryRouter.get("/year/2/images/:file", async (req: AuthedRequest, res) => {
+  if (!(await isAdmin(req.userId!))) return res.status(404).end();
+  const file = String(req.params.file);
+  if (!/^[\w-]+\.(jpg|png)$/.test(file) || !existsSync(YEAR2_ASSETS_DIR + file)) return res.status(404).end();
+  res.setHeader("Cache-Control", "private, max-age=86400");
+  res.sendFile(file, { root: YEAR2_ASSETS_DIR });
+});
+
 libraryRouter.get("/subjects/:slug", async (req: AuthedRequest, res) => {
-  const subject = LIBRARY_SUBJECTS.find((candidate) => candidate.slug === req.params.slug);
+  const subject =
+    LIBRARY_SUBJECTS.find((candidate) => candidate.slug === req.params.slug) ??
+    LIBRARY_SUBJECTS_Y2.find((candidate) => candidate.slug === req.params.slug);
   if (!subject) return res.status(404).json({ error: "Matière introuvable" });
+  if (LIBRARY_SUBJECTS_Y2.some((candidate) => candidate.slug === subject.slug) && !(await isAdmin(req.userId!))) {
+    return res.status(404).json({ error: "Matière introuvable" });
+  }
 
   const chapters = await db
     .prepare(

@@ -1,5 +1,6 @@
 export const libraryRoutes = {
   catalogue: "/library",
+  year2: "/library/year/2",
   semester: (semester: number | string) => `/library/semester/${semester}`,
   subject: (slug: string) => `/library/subject/${encodeURIComponent(slug)}`,
   semesterSubject: (semester: number | string, slug: string) =>
@@ -18,6 +19,7 @@ export const libraryRoutes = {
 export const authenticatedLibraryRoutePatterns = {
   catalogue: "/library",
   chapter: "/library/chapter/:id",
+  year2: "/library/year/2",
   subject: "/library/subject/:slug",
   semester: "/library/semester/:semester",
   semesterSubject: "/library/semester/:semester/subject/:slug",

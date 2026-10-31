@@ -43,6 +43,10 @@ export function LibrarySubjectView() {
 
   const title = lang === "fr" ? subject.titre_fr : subject.titre_en;
   const description = lang === "fr" ? subject.description_fr : subject.description_en;
+  const isYear2 = subject.slug.startsWith("y2-");
+  const backTo = isYear2
+    ? libraryRoutes.year2
+    : semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue;
 
   return (
     <main className="library">
@@ -64,8 +68,8 @@ export function LibrarySubjectView() {
       <SearchBar />
 
       <header className={`subject-header subject-header-${subject.accent}`}>
-        <Link to={semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue} className="back-link">
-          {semesterDetail
+        <Link to={backTo} className="back-link">
+          {semesterDetail || isYear2
             ? (tx("← Retour aux matières", "← Back to subjects"))
             : t.backToSubjects}
         </Link>
@@ -79,7 +83,7 @@ export function LibrarySubjectView() {
           <span className="subject-empty-mark" aria-hidden="true">+</span>
           <h2>{t.subjectEmptyTitle}</h2>
           <p>{t.subjectEmptyCopy(title)}</p>
-          <Link to={semesterDetail ? libraryRoutes.semester(semesterDetail.semester.semester_number) : libraryRoutes.catalogue} className="hero-library-link">
+          <Link to={backTo} className="hero-library-link">
             {semesterDetail ? (tx("Retour aux matières", "Back to subjects")) : t.backToSubjects}
           </Link>
         </section>

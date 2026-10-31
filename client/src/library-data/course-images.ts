@@ -2,6 +2,9 @@
 // Chaque entrée porte sa légende et son crédit : toute image ajoutée ici doit
 // être libre de droits (domaine public ou licence libre) et sa licence vérifiée.
 // Fichiers servis depuis client/public/anatomie/.
+// Exception : les captures de cours de l'année 2 (YEAR2_IMAGES), privées, sont
+// servies par l'API à l'admin seulement — jamais depuis client/public.
+import { YEAR2_IMAGES } from "./year2-images";
 export interface CourseImage {
   src: string;
   caption: string;
@@ -20,6 +23,7 @@ const gray = (n: number, caption: string): CourseImage => ({
 });
 
 export const COURSE_IMAGES: Record<string, CourseImage> = {
+  ...YEAR2_IMAGES,
   "gray-409": gray(409, "Muscles reliant le membre supérieur à la colonne vertébrale (trapèze, grand dorsal, rhomboïdes), vue postérieure"),
   "gray-410": gray(410, "Grand pectoral et muscles de la face antérieure du thorax et de l'épaule"),
   "gray-411": gray(411, "Muscles du thorax et de la face antérieure du bras (biceps brachial, brachial, coracobrachial)"),

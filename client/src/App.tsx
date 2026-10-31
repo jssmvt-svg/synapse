@@ -17,6 +17,7 @@ const LibrarySubjectView = lazy(() => import("./pages/LibrarySubjectView").then(
 const SynthesisView = lazy(() => import("./pages/SynthesisView").then((m) => ({ default: m.SynthesisView })));
 const Statistics = lazy(() => import("./pages/Statistics").then((m) => ({ default: m.Statistics })));
 const LibrarySemesterView = lazy(() => import("./pages/LibrarySemesterView").then((m) => ({ default: m.LibrarySemesterView })));
+const LibraryYear2View = lazy(() => import("./pages/LibraryYear2View").then((m) => ({ default: m.LibraryYear2View })));
 const Admin = lazy(() => import("./pages/Admin").then((m) => ({ default: m.Admin })));
 const Account = lazy(() => import("./pages/Account").then((m) => ({ default: m.Account })));
 
@@ -122,6 +123,10 @@ export function App() {
             <LibrarySubjectView />
           </RequireAuth>
         }
+      />
+      <Route
+        path={authenticatedLibraryRoutePatterns.year2}
+        element={<RequireAuth><LibraryYear2View /></RequireAuth>}
       />
       <Route
         path={authenticatedLibraryRoutePatterns.semester}

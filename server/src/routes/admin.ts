@@ -297,7 +297,7 @@ adminRouter.get("/chapters", async (_req, res) => {
   const chapters = await db
     .prepare(
       `SELECT id, annee, semestre, matiere, titre_fr, titre_en, ordre
-       FROM library_chapters WHERE is_active = true ORDER BY annee ASC, semestre ASC, matiere ASC, ordre ASC`,
+       FROM library_chapters WHERE is_active = true AND annee = 1 ORDER BY annee ASC, semestre ASC, matiere ASC, ordre ASC`,
     )
     .all();
   res.json(chapters);

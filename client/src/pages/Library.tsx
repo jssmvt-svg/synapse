@@ -45,6 +45,7 @@ export function Library() {
           <Link to="/dashboard">{t.dashboard}</Link>
           <Link to={libraryRoutes.catalogue} className="active">{t.libraryTitle}</Link>
           <Link to="/statistics">{t.statistics}</Link>
+          {user?.role === "admin" && <Link to={libraryRoutes.year2}>Year 2</Link>}
           {user?.role === "admin" && <Link to="/admin">{tx("Administration", "Admin")}</Link>}
         </nav>
       </div>
@@ -83,6 +84,18 @@ export function Library() {
             </Link>
           );
         })}
+        {user?.role === "admin" && (
+          <Link to={libraryRoutes.year2} className="semester-card semester-card-open">
+            <span className="semester-card-number">Y2</span>
+            <span className="semester-card-kicker">{tx("Deuxième année · privé", "Year two · private")}</span>
+            <h2>Year 2</h2>
+            <p>{tx("Tes synthèses de 2e année (visible seulement par toi).", "Your year-two summaries (only visible to you).")}</p>
+            <div className="semester-card-footer">
+              <span>Admin</span>
+              <strong>{tx("Ouvrir →", "Open →")}</strong>
+            </div>
+          </Link>
+        )}
       </section>
     </div>
   );

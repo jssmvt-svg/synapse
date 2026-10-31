@@ -5,6 +5,7 @@ import { addMoleculeCards } from "./library-content/biochimie-molecules.js";
 import { PHYSIOLOGIE_S1 } from "./library-content/physiologie-s1.js";
 import { PHYSIOLOGIE_S2 } from "./library-content/physiologie-s2.js";
 import { ANATOMIE_S1 } from "./library-content/anatomie-s1.js";
+import { YEAR2_S1 } from "./library-content/year2.js";
 
 // Les entrées sont mises à jour par leur clé stable (chapitre + ordre). Ainsi,
 // redémarrer le serveur reflète les mises à jour de contenu sans effacer les
@@ -22,6 +23,11 @@ export async function seedLibrary(): Promise<void> {
   console.log(`[seed-library] Physiologie S2 seedee (${PHYSIOLOGIE_S2.length} chapitres).`);
   await seedMatiere(1, 1, "Anatomie", ANATOMIE_S1);
   console.log(`[seed-library] Anatomie S1 seedee (${ANATOMIE_S1.length} chapitres).`);
+  // Année 2 : réservée à l'admin (cf. canOpenStudyContent).
+  for (const [matiere, chapters] of Object.entries(YEAR2_S1)) {
+    await seedMatiere(2, 1, matiere, chapters);
+    console.log(`[seed-library] ${matiere} (année 2) seedee (${chapters.length} chapitres).`);
+  }
   console.log(`[seed-library] Seed termine en ${Math.round((Date.now() - startedAt) / 1000)}s.`);
 }
 

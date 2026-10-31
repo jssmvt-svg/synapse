@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { YEAR2_FIGURES } from "./year2-figures";
 import { MembraneProteinTypesDiagram, MembraneFluidityDiagram, TertiaryQuaternaryDiagram, DisaccharidesDiagram, GlycoconjugatesDiagram, RestrictionEnzymeDiagram } from "../components/BioMore";
 import { DistalTubuleCellsDiagram, RenalAcidBaseDiagram, AmmoniumTrappingDiagram, PancreaticSecretionDiagram, EnterohepaticCycleDiagram, BilirubinMetabolismDiagram, SwallowingStagesDiagram, FibrinolysisDiagram, PlateletPlugDiagram } from "../components/PhysMore";
 import { UpperLimbVeinsDiagram, ThighCompartmentsDiagram, GlutealMusclesDiagram, ThighMusclesDiagram, LowerLimbVeinsDiagram, InguinalRegionDiagram, PeritonealCompartmentsDiagram, RetroperitonealOrgansDiagram, SpleenViewsDiagram, BiliaryTreeDiagram, PortalSystemDiagram, AnatNephronDiagram, FallopianTubeDiagram, BroadLigamentDiagram, ProstateZonesDiagram, TestisEpididymisDiagram } from "../components/AnatMore";
@@ -64,6 +65,7 @@ import { LabGlucoseTransportersDiagram, LabOgttDiagram, LabHba1cDiagram, LabLipi
 
 // Schémas insérables dans un cours via [[visual:clé]] (cf. MarkdownContent).
 export const COURSE_FIGURES: Record<string, () => ReactNode> = {
+  ...YEAR2_FIGURES,
   "bio/lab-glucose-transporters": () => <LabGlucoseTransportersDiagram />,
   "bio/lab-ogtt": () => <LabOgttDiagram />,
   "bio/lab-hba1c": () => <LabHba1cDiagram />,

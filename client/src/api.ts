@@ -667,6 +667,7 @@ export const api = {
   getLibrary: () => request<LibraryAnnee[]>("/library"),
   getLibrarySubjects: () => request<LibrarySubject[]>("/library/subjects"),
   searchLibrary: (q: string) => request<LibrarySearchResult[]>(`/library/search?q=${encodeURIComponent(q)}`),
+  getYear2: () => request<{ subjects: LibrarySubject[] }>("/library/year/2"),
   getLibrarySubject: (slug: string) => request<LibrarySubject>(`/library/subjects/${encodeURIComponent(slug)}`),
   getStudySemesters: () => request<StudySemester[]>("/library/semesters"),
   getStudySemester: (semester: number) => request<StudySemesterDetail>(`/library/semesters/${semester}`),
